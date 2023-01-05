@@ -71,11 +71,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                 _ViewRoles = value;
                 if (Murder4RolesRevealerToggle != null) Murder4RolesRevealerToggle.SetToggleState(value);
                 if (AmongUSRolesRevealerToggle != null) AmongUSRolesRevealerToggle.SetToggleState(value);
-
-                if (IsAmongUsWorld || IsMurder4World)
-                {
-                    ClientEventActions.OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
-                }
+                ClientEventActions.OnViewRolesPropertyChanged.SafetyRaiseWithParams(value);
             }
         }
 
@@ -209,7 +205,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 
             if (IsAmongUsWorld || IsMurder4World)
             {
-                
+                HasSubscribed = true;
                 var PlayerEntries = Finder.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 var GameNodes = Finder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 Il2CppArrayBase<Transform> EntryChilds;
@@ -234,7 +230,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                     Log.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
-                HasSubscribed = true;
+                
                 if (PlayerEntries != null)
                 {
                     for (var i1 = 0; i1 < EntryChilds.Count; i1++)

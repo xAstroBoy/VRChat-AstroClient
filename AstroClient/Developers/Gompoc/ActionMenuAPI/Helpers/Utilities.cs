@@ -139,10 +139,10 @@
             return 0;
         }
 
-        public static GameObject CloneGameObject(string pathToGameObject, string pathToParent)
+        public static GameObject CloneGameObject(GameObject ToClone, GameObject ParentToClone)
         {
             return Object
-                .Instantiate(GameObject.Find(pathToGameObject).transform, GameObject.Find(pathToParent).transform)
+                .Instantiate(ToClone.transform, ParentToClone.transform)
                 .gameObject;
         }
 

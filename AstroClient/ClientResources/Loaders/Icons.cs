@@ -958,5 +958,220 @@
 
         #endregion unlocked.png
 
+        #region Avatar.png
+
+        private static Texture2D _Avatar;
+        private static Sprite _Avatar_sprite;
+
+        /// <summary>
+        ///     Loads Avatar.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D Avatar
+        {
+            get
+            {
+                if (_Avatar == null)
+                {
+                    _Avatar = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}Avatar.png"));
+                    _Avatar.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Avatar.filterMode = FilterMode.Point;
+                    return _Avatar;
+                }
+
+                return _Avatar;
+            }
+        }
+
+        /// <summary>
+        ///     Loads Avatar.png in resources as sprite
+        /// </summary>
+        internal static Sprite Avatar_sprite
+        {
+            get
+            {
+                if (_Avatar_sprite == null)
+                {
+                    _Avatar_sprite = Avatar.ToSprite(true);
+                    return _Avatar_sprite;
+                }
+
+                return _Avatar_sprite;
+            }
+        }
+
+        #endregion Avatar.png
+
+        #region Help.png
+
+        private static Texture2D _Help;
+        private static Sprite _Help_sprite;
+
+        /// <summary>
+        ///     Loads Help.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D Help
+        {
+            get
+            {
+                if (_Help == null)
+                {
+                    _Help = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}Help.png"));
+                    _Help.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Help.filterMode = FilterMode.Point;
+                    return _Help;
+                }
+
+                return _Help;
+            }
+        }
+
+        /// <summary>
+        ///     Loads Help.png in resources as sprite
+        /// </summary>
+        internal static Sprite Help_sprite
+        {
+            get
+            {
+                if (_Help_sprite == null)
+                {
+                    _Help_sprite = Help.ToSprite(true);
+                    return _Help_sprite;
+                }
+
+                return _Help_sprite;
+            }
+        }
+
+        #endregion Help.png
+
+        #region Home.png
+
+        private static Texture2D _Home;
+        private static Sprite _Home_sprite;
+
+        /// <summary>
+        ///     Loads Home.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D Home
+        {
+            get
+            {
+                if (_Home == null)
+                {
+                    _Home = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}Home.png"));
+                    _Home.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Home.filterMode = FilterMode.Point;
+                    return _Home;
+                }
+
+                return _Home;
+            }
+        }
+
+        /// <summary>
+        ///     Loads Home.png in resources as sprite
+        /// </summary>
+        internal static Sprite Home_sprite
+        {
+            get
+            {
+                if (_Home_sprite == null)
+                {
+                    _Home_sprite = Home.ToSprite(true);
+                    return _Home_sprite;
+                }
+
+                return _Home_sprite;
+            }
+        }
+
+        #endregion Home.png
+
+        #region Pin.png
+
+        private static Texture2D _Pin;
+        private static Sprite _Pin_sprite;
+
+        /// <summary>
+        ///     Loads Pin.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D Pin
+        {
+            get
+            {
+                if (_Pin == null)
+                {
+                    _Pin = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}Pin.png"));
+                    _Pin.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Pin.filterMode = FilterMode.Point;
+                    return _Pin;
+                }
+
+                return _Pin;
+            }
+        }
+
+        /// <summary>
+        ///     Loads Pin.png in resources as sprite
+        /// </summary>
+        internal static Sprite Pin_sprite
+        {
+            get
+            {
+                if (_Pin_sprite == null)
+                {
+                    _Pin_sprite = Pin.ToSprite(true);
+                    return _Pin_sprite;
+                }
+
+                return _Pin_sprite;
+            }
+        }
+
+        #endregion Pin.png
+
+        #region Refresh.png
+
+        private static Texture2D _Refresh;
+        private static Sprite _Refresh_sprite;
+
+        /// <summary>
+        ///     Loads Refresh.png in resources as Texture2D
+        /// </summary>
+        internal static Texture2D Refresh
+        {
+            get
+            {
+                if (_Refresh == null)
+                {
+                    _Refresh = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.Icons}Refresh.png"));
+                    _Refresh.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Refresh.filterMode = FilterMode.Point;
+                    return _Refresh;
+                }
+
+                return _Refresh;
+            }
+        }
+
+        /// <summary>
+        ///     Loads Refresh.png in resources as sprite
+        /// </summary>
+        internal static Sprite Refresh_sprite
+        {
+            get
+            {
+                if (_Refresh_sprite == null)
+                {
+                    _Refresh_sprite = Refresh.ToSprite(true);
+                    return _Refresh_sprite;
+                }
+
+                return _Refresh_sprite;
+            }
+        }
+
+        #endregion Refresh.png
+
     }
 }

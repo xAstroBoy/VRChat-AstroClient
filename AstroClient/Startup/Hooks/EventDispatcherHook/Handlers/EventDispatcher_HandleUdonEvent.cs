@@ -4,6 +4,7 @@ using System.Linq;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.Tools.UdonEditor;
+using VRC.Networking;
 using VRC.Udon;
 using VRC.Udon.Serialization.OdinSerializer.Utilities;
 
@@ -125,7 +126,53 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
             }
             return false;
         }
+        internal static bool Handle_UdonEvent_UdonSyncRunProgramAsRPC(UdonSync gameObject, string EventKey, VRC.Player Sender)
+        {
+            try
+            {
+                ClientEventActions.UdonSync_UdonSyncRunProgramAsRPC?.SafetyRaiseWithParams(gameObject, EventKey, Sender);
+            }
+            catch { }
 
+
+            bool isBlocked = Bools.BlockUdon;
+
+
+            bool isEventKeyLoggingIgnored = IsEventLogIgnored(EventKey);
+            try
+            {
+                if (!Bools.BlockUdon)
+                {
+                    isBlocked = RPCFirewallEnforcer.isRPCEventBlocked(Sender, gameObject.gameObject, EventKey);
+                }
+
+
+
+                if (ConfigManager.General.LogUdonProgramRPCvents)
+                {
+                    if (!isEventKeyLoggingIgnored)
+                    {
+                        if (isBlocked)
+                        {
+                            Log.Write($"[UDON RPC Firewall] BLOCKED RunProgramAsRPC : Sender : {Sender.Get_SenderName()} , GameObject : {gameObject.name}, EventKey : {EventKey}", System.Drawing.Color.Orange);
+                        }
+                        else
+                        {
+                            Log.Write($"[RunProgramAsRPC] : Sender : {Sender.Get_SenderName()} , GameObject : {gameObject.name}, Action : {EventKey}");
+                        }
+                    }
+
+                }
+                return !isBlocked;
+            }
+            catch
+            {
+                // Nobody cares lmao
+            }
+            return !isBlocked;
+
+
+        }
         internal static bool Handle_UdonEvent_CustomEvent(UdonBehaviour UdonEvent, string EventKey)
         {
             try
@@ -154,11 +201,11 @@ namespace AstroClient.Startup.Hooks.EventDispatcherHook.Handlers
                     {
                         if (isBlocked)
                         {
-                            Log.Write($"[UDON RPC Firewall] BLOCKED RPC: Sender : {GameInstances.CurrentPlayer.Get_SenderName()} , Event : {UdonEvent.gameObject.name}, EventKey : {EventKey}", System.Drawing.Color.Orange);
+                            Log.Write($"[UDON RPC Firewall] BLOCKED Udon CustomEvent  Event : {UdonEvent.gameObject.name} : {EventKey}", System.Drawing.Color.Orange);
                         }
                         else
                         {
-                            Log.Write($"Udon RPC: Sender : {GameInstances.CurrentPlayer.Get_SenderName()} , Event : {UdonEvent.gameObject.name}, EventKey : {EventKey}");
+                            Log.Write($"[{UdonEvent.gameObject.name}] : {EventKey}", System.Drawing.Color.Orange);
                         }
                     }
 

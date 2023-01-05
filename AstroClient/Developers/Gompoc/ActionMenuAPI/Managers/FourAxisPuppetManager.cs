@@ -1,4 +1,7 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.Gompoc.ActionMenuAPI.Managers
 {
@@ -43,11 +46,9 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Managers
         public static void Setup()
         {
             fourAxisPuppetMenuLeft = Utilities
-                .CloneGameObject("UserInterface/ActionMenu/Container/MenuL/ActionMenu/AxisPuppetMenu",
-                    "UserInterface/ActionMenu/Container/MenuL/ActionMenu").GetComponent<AxisPuppetMenu>();
+                .CloneGameObject(QuickMenuTools.UserInterface.FindObject("ActionMenu/Container/MenuL/ActionMenu/AxisPuppetMenu").gameObject, QuickMenuTools.UserInterface.FindObject("ActionMenu/Container/MenuL/ActionMenu").gameObject).GetComponent<AxisPuppetMenu>();
             fourAxisPuppetMenuRight = Utilities
-                .CloneGameObject("UserInterface/ActionMenu/Container/MenuR/ActionMenu/AxisPuppetMenu",
-                    "UserInterface/ActionMenu/Container/MenuR/ActionMenu").GetComponent<AxisPuppetMenu>();
+                                    .CloneGameObject(QuickMenuTools.UserInterface.FindObject("ActionMenu/Container/MenuR/ActionMenu/AxisPuppetMenu").gameObject, QuickMenuTools.UserInterface.FindObject("ActionMenu/Container/MenuR/ActionMenu").gameObject).GetComponent<AxisPuppetMenu>();
         }
 
         public static void OnUpdate()

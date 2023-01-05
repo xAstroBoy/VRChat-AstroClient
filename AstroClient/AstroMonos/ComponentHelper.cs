@@ -9,7 +9,6 @@ namespace AstroClient.AstroMonos
     using System.Linq;
     using System.Reflection;
     using ClientAttributes;
-    using Components.Cheats.Worlds.JarWorlds;
     using Components.Malicious;
     using Components.Malicious.Orbit;
     using Constants;

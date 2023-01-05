@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 using Cheetah;
 
 namespace AstroClient.Cheetos
@@ -35,6 +37,32 @@ namespace AstroClient.Cheetos
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        private static bool IsOnJoinedRoomSent { get; set; } = false;
+        internal override void RegisterToEvents()
+        {
+            // Temporary workaround for OnJoinedRoom
+            ClientEventActions.OnPlayerJoin += PlayerJoin;
+
+
+        }
+
+        private void PlayerJoin(VRC.Player obj)
+        {
+            if(obj != null)
+            {
+                if(obj.GetAPIUser() != null)
+                {
+                    if(obj.GetAPIUser().IsSelf)
+                    {
+                        if(!IsOnJoinedRoomSent)
+                        {
+                            ClientEventActions.OnRoomJoined?.SafetyRaise();
+                        }
+                    }
+                }
+            }
         }
 
         internal override void ExecutePriorityPatches()
@@ -78,12 +106,12 @@ namespace AstroClient.Cheetos
                 MethodInfo SetupFlagsMethod = typeof(VRCPlayer).GetMethods().First((MethodInfo mi) => mi.Name.StartsWith("Method_Public_Void_Hashtable_Boolean_"));
                 new AstroPatch(SetupFlagsMethod, null, GetPatch(nameof(Internal_OnSetupFlagsReceived)));
 
-                foreach (MethodInfo OnSocialRankChangedMethod in from method in typeof(ProfileWingMenu).GetMethods()
-                                                                 where method.Name.StartsWith("Method_Private_Void_Boolean_")
-                                                                 select method)
-                {
-                    new AstroPatch(OnSocialRankChangedMethod, null, GetPatch(nameof(Internal_OnShowSocialRankChanged)));
-                }
+                //foreach (MethodInfo OnSocialRankChangedMethod in from method in typeof(ProfileWingMenu).GetMethods()
+                //                                                 where method.Name.StartsWith("Method_Private_Void_Boolean_")
+                //                                                 select method)
+                //{
+                //    new AstroPatch(OnSocialRankChangedMethod, null, GetPatch(nameof(Internal_OnShowSocialRankChanged)));
+                //}
                 foreach (MethodInfo OnAvatarDownloadMethod in from mb in typeof(AvatarLoadingBar).GetMethods()
                                                               where mb.Name.Contains("Method_Public_Void_Single_Int64_")
                                                               select mb)
@@ -105,7 +133,8 @@ namespace AstroClient.Cheetos
 
         private static void OnPlayerAwake(VRCPlayer __instance)
         {
-            __instance.Method_Public_add_Void_OnAvatarIsReady_0(new Action(()
+            //Method_Public_add_Void_OnAvatarIsReady_0
+            __instance.Method_Public_add_Void_Action_0(new Action(()
                 => OnAvatarInstantiate(__instance.prop_VRCAvatarManager_0, __instance.field_Private_ApiAvatar_0, __instance.field_Internal_GameObject_0))
             );
         }
@@ -156,9 +185,17 @@ namespace AstroClient.Cheetos
         private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => ClientEventActions.OnUnfriended?.SafetyRaiseWithParams(__0);
 
 
-        private static void OnRoomLeftPatch() => ClientEventActions.OnRoomLeft?.SafetyRaise();
+        private static void OnRoomLeftPatch()
+        {
+            IsOnJoinedRoomSent = false;
+            ClientEventActions.OnRoomLeft?.SafetyRaise();
+        }
 
-        private static void OnRoomJoinedPatch() => ClientEventActions.OnRoomJoined?.SafetyRaise();
+        private static void OnRoomJoinedPatch()
+        {
+            IsOnJoinedRoomSent = true;
+            ClientEventActions.OnRoomJoined?.SafetyRaise();
+        } 
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
         {
@@ -213,7 +250,7 @@ namespace AstroClient.Cheetos
         {
 
             Log.Write($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
-            PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
+            NewHudNotifier.WriteHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             return true;
         }
 

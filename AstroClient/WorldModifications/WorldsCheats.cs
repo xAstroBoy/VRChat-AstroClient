@@ -1,5 +1,11 @@
-﻿using AstroClient.WorldModifications.WorldHacks.BlueKun;
-using AstroClient.WorldModifications.WorldHacks.NoLife1942;
+﻿//using AstroClient.WorldModifications.WorldHacks.BlueKun;
+//using AstroClient.WorldModifications.WorldHacks.NoLife1942;
+
+using AstroClient.WorldModifications.WorldHacks.BlueKun;
+using AstroClient.WorldModifications.WorldHacks.Jar.AmongUS;
+using AstroClient.WorldModifications.WorldHacks.Jar.KitchenCooks;
+using AstroClient.WorldModifications.WorldHacks.Jar.Murder2;
+using AstroClient.WorldModifications.WorldHacks.Jar.Murder4;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo;
 
 namespace AstroClient.WorldModifications
@@ -9,10 +15,10 @@ namespace AstroClient.WorldModifications
     using ClientResources;
     using ClientResources.Loaders;
     using WorldHacks;
-    using WorldHacks.Jar.AmongUS;
-    using WorldHacks.Jar.KitchenCooks;
-    using WorldHacks.Jar.Murder2;
-    using WorldHacks.Jar.Murder4;
+    //using WorldHacks.Jar.AmongUS;
+    //using WorldHacks.Jar.KitchenCooks;
+    //using WorldHacks.Jar.Murder2;
+    //using WorldHacks.Jar.Murder4;
     using xAstroBoy.AstroButtonAPI;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
@@ -35,11 +41,11 @@ namespace AstroClient.WorldModifications
             JustHParty.InitButtons(WorldCheats);
             VoidClub.InitButtons(WorldCheats);
             FBTHeaven.InitButtons(WorldCheats);
-            SuperTowerDefense.InitButtons(WorldCheats);
-            PoolParlor.InitButtons(WorldCheats);
+            //SuperTowerDefense.InitButtons(WorldCheats);
+            //PoolParlor.InitButtons(WorldCheats);
             ClickerGame.InitButtons(WorldCheats);
             PuttPuttPond.InitButtons(WorldCheats);
-            GhostGame.InitButtons(WorldCheats);
+            
         }
     }
 }

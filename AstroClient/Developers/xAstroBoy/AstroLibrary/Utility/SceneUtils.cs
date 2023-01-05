@@ -174,7 +174,7 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        internal static GameObject[] DynamicPrefabs
+        internal static Il2CppSystem.Collections.Generic.List<GameObject> DynamicPrefabs
         {
             get
             {
@@ -182,18 +182,19 @@ namespace AstroClient.xAstroBoy.Utility
                 {
                     if (SDK_2.DynamicPrefabs != null)
                     {
-                        return SDK_2.DynamicPrefabs.ToArray();
+                        return SDK_2.DynamicPrefabs;
                     }
                 }
                 else if (SDK_3 != null)
                 {
                     if (SDK_3.DynamicPrefabs != null)
                     {
-                        return SDK_3.DynamicPrefabs.ToArray();
+                        return SDK_3.DynamicPrefabs;
                     }
                 }
                 return null;
             }
+            
         }
 
 

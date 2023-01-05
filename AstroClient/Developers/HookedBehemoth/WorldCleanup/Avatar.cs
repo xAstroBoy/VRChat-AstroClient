@@ -1,15 +1,35 @@
-namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using UnityEngine;
-    using VRC.Playables;
+/*
+ * Copyright (c) 2021-2022 HookedBehemoth
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms and conditions of the GNU General Public License,
+ * version 3, as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using MelonLoader;
+using Newtonsoft.Json;
+using UnityEngine;
+//using AvatarParameterAccess = AvatarParameterAccess;
+using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+
+namespace AstroClient.HookedBehemoth.WorldCleanup
+{
     internal static class Parameters
     {
         public static readonly string[] DefaultParameterNames = new string[] {
             "Viseme",
+            "Voice",
             "GestureLeft",
             "GestureLeftWeight",
             "GestureRight",
@@ -17,6 +37,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             "TrackingType",
             "VRMode",
             "MuteSelf",
+            "Earmuffs",
             "Grounded",
             "AngularY",
             "Upright",
@@ -33,50 +54,50 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             "VRCFaceBlendV",
         };
 
-        public static List<AvatarParameter> FilterDefaultParameters(IEnumerable<AvatarParameter> src)
+        public static List<AvatarParameterAccess> FilterDefaultParameters(IEnumerable<AvatarParameterAccess> src)
             => src.Where(param => !DefaultParameterNames.Contains(param.field_Private_String_0)).ToList();
 
         class Parameter
         {
             public Parameter() { }
-            public Parameter(AvatarParameter src)
+            public Parameter(AvatarParameterAccess src)
             {
-                type = src.field_Private_ParameterType_0;
+                type = src.GetAvatarParameterType();
                 switch (type)
                 {
-                    case AvatarParameter.ParameterType.Bool:
+                    case AvatarParameterType.Bool:
                         val_bool = src.prop_Boolean_1;
                         break;
 
-                    case AvatarParameter.ParameterType.Int:
+                    case AvatarParameterType.Int:
                         val_int = src.prop_Int32_1;
                         break;
 
-                    case AvatarParameter.ParameterType.Float:
-                        val_float = src.prop_Single_0;
+                    case AvatarParameterType.Float:
+                        val_float = src.prop_Single_1;
                         break;
                 }
             }
-            public void Apply(AvatarParameter dst)
+            public void Apply(AvatarParameterAccess dst)
             {
                 switch (type)
                 {
-                    case AvatarParameter.ParameterType.Bool:
+                    case AvatarParameterType.Bool:
                         dst.SetBoolProperty(val_bool);
                         break;
 
-                    case AvatarParameter.ParameterType.Int:
+                    case AvatarParameterType.Int:
                         dst.SetIntProperty(val_int);
                         break;
 
-                    case AvatarParameter.ParameterType.Float:
+                    case AvatarParameterType.Float:
                         dst.SetFloatProperty(val_float);
                         break;
                 }
 
                 dst.Lock();
             }
-            public AvatarParameter.ParameterType type;
+            public AvatarParameterType type;
             public int val_int = 0;
             public float val_float = 0.0f;
             public bool val_bool = false;
@@ -92,10 +113,10 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 
         static private Dictionary<string, AvatarSettings> settings;
 
-        public static IEnumerable<AvatarParameter> GetAllAvatarParameters(this VRCAvatarManager manager)
+        public static IEnumerable<AvatarParameterAccess> GetAllAvatarParameters(this VRCAvatarManager manager)
         {
-            var parameters = manager.field_Private_AvatarPlayableController_0?
-                                    .field_Private_Dictionary_2_Int32_AvatarParameter_0;
+            var parameters = manager.GetAvatarPlayableController()?
+                                    .GetParameters();
 
             if (parameters == null)
                 yield break;
@@ -104,13 +125,13 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                 yield return param.value;
         }
 
-        public static List<AvatarParameter> GetAvatarParameters(this VRCAvatarManager manager)
+        public static List<AvatarParameterAccess> GetAvatarParameters(this VRCAvatarManager manager)
             => FilterDefaultParameters(manager.GetAllAvatarParameters());
 
         public static bool HasCustomExpressions(this VRCAvatarManager manager)
         {
             return manager &&
-                   manager.field_Private_AvatarPlayableController_0 != null &&
+                   manager.GetAvatarPlayableController() != null &&
                    manager.prop_VRCAvatarDescriptor_0 != null &&
                    manager.prop_VRCAvatarDescriptor_0.customExpressions &&
                    /* Fuck you */
@@ -141,12 +162,12 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             /* Check version */
             if (config.version != api_avatar.version)
             {
-                ModConsole.DebugLog($"Avatar {api_avatar.name} version missmatch ({config.version} != {api_avatar.version}). Removing");
+                MelonLogger.Msg($"Avatar {api_avatar.name} version missmatch ({config.version} != {api_avatar.version}). Removing");
                 settings.Remove(key);
                 return;
             }
 
-            ModConsole.DebugLog($"Applying avatar state to {api_avatar.name}");
+            MelonLogger.Msg($"Applying avatar state to {api_avatar.name}");
 
             /* Apply parameters */
             if (config.parameters != null)
@@ -165,7 +186,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
             if (api_avatar == null)
                 return;
 
-            ModConsole.DebugLog($"Storing avatar state for {api_avatar.name}");
+            MelonLogger.Msg($"Storing avatar state for {api_avatar.name}");
 
             var config = new AvatarSettings
             {
@@ -190,51 +211,51 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
                 parameter.Lock();
         }
 
-        public static void SetValue(this AvatarParameter parameter, float value)
+        public static void SetValue(this AvatarParameterAccess parameter, float value)
         {
             if (parameter == null) return;
             /* Call original delegate to avoid self MITM */
-            switch (parameter.field_Private_ParameterType_0)
+            switch (parameter.GetAvatarParameterType())
             {
-                case AvatarParameter.ParameterType.Bool:
+                case AvatarParameterType.Bool:
                     _boolPropertySetterDelegate(parameter.Pointer, value != 0.0f);
                     break;
 
-                case AvatarParameter.ParameterType.Int:
+                case AvatarParameterType.Int:
                     _intPropertySetterDelegate(parameter.Pointer, (int)value);
                     break;
 
-                case AvatarParameter.ParameterType.Float:
+                case AvatarParameterType.Float:
                     _floatPropertySetterDelegate(parameter.Pointer, value);
                     break;
             }
         }
 
-        public static float GetValue(this AvatarParameter parameter)
+        public static float GetValue(this AvatarParameterAccess parameter)
         {
             if (parameter == null) return 0f;
-            return parameter.field_Private_ParameterType_0 switch
+            return parameter.GetAvatarParameterType() switch
             {
-                AvatarParameter.ParameterType.Bool => parameter.prop_Boolean_1 ? 1f : 0f,
-                AvatarParameter.ParameterType.Int => parameter.prop_Int32_1,
-                AvatarParameter.ParameterType.Float => parameter.prop_Single_0,
+                AvatarParameterType.Bool => parameter.prop_Boolean_1 ? 1f : 0f,
+                AvatarParameterType.Int => parameter.prop_Int32_1,
+                AvatarParameterType.Float => parameter.prop_Single_1,
                 _ => 0f,
             };
         }
 
-        public static void SetBoolProperty(this AvatarParameter parameter, bool value)
+        public static void SetBoolProperty(this AvatarParameterAccess parameter, bool value)
         {
             if (parameter == null) return;
             _boolPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        public static void SetIntProperty(this AvatarParameter parameter, int value)
+        public static void SetIntProperty(this AvatarParameterAccess parameter, int value)
         {
             if (parameter == null) return;
             _intPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        public static void SetFloatProperty(this AvatarParameter parameter, float value)
+        public static void SetFloatProperty(this AvatarParameterAccess parameter, float value)
         {
             if (parameter == null) return;
             _floatPropertySetterDelegate(parameter.Pointer, value);
@@ -262,21 +283,21 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
 
         private static readonly HashSet<IntPtr> s_ParameterOverrideList = new();
 
-        public static void Unlock(this AvatarParameter parameter)
+        public static void Unlock(this AvatarParameterAccess parameter)
         {
             /* Reenable parameter override */
             if (parameter.IsLocked())
                 s_ParameterOverrideList.Remove(parameter.Pointer);
         }
 
-        public static void Lock(this AvatarParameter parameter)
+        public static void Lock(this AvatarParameterAccess parameter)
         {
             /* Disable override parameters */
             if (!parameter.IsLocked())
                 s_ParameterOverrideList.Add(parameter.Pointer);
         }
 
-        public static bool IsLocked(this AvatarParameter parameter)
+        public static bool IsLocked(this AvatarParameterAccess parameter)
         {
             return s_ParameterOverrideList.Contains(parameter.Pointer);
         }
@@ -287,7 +308,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         internal static void BoolPropertySetter(IntPtr @this, bool value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameter(@this);
+            var param = new AvatarParameterAccess(@this);
             if (param.IsLocked())
                 return;
 
@@ -301,7 +322,7 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         internal static void IntPropertySetter(IntPtr @this, int value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameter(@this);
+            var param = new AvatarParameterAccess(@this);
             if (param.IsLocked())
                 return;
 
@@ -315,12 +336,37 @@ namespace AstroClient.ClientUI.ActionMenu.AvatarParametersModule.Menu
         internal static void FloatPropertySetter(IntPtr @this, float value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameter(@this);
+            var param = new AvatarParameterAccess(@this);
             if (param.IsLocked())
                 return;
 
             /* Invoke original function pointer */
             _floatPropertySetterDelegate(@this, value);
+        }
+
+        private static readonly string ConfigFileName = "AvatarParameterConfig.json";
+
+        public static void LoadConfig()
+        {
+            try
+            {
+                var config = Settings.LoadConfigFile(ConfigFileName);
+                settings = JsonConvert.DeserializeObject<Dictionary<string, AvatarSettings>>(config);
+            }
+            catch
+            {
+                MelonLogger.Error("Failed to load parameter config!");
+            }
+
+            /* Note: Newtonsoft Json believes "null" is a valid input */
+            if (settings == null)
+                settings = new Dictionary<string, AvatarSettings>();
+        }
+
+        public static void FlushConfig()
+        {
+            var serialized = JsonConvert.SerializeObject(settings);
+            Settings.StoreConfigFile(ConfigFileName, serialized);
         }
     }
 }

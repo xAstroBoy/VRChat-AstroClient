@@ -1,4 +1,6 @@
-﻿namespace CheetoClient.Utils;
+﻿using VRC.UI.Elements.Tooltips;
+
+namespace CheetoClient.Utils;
 
 #region Imports
 using System.Collections.Generic;
@@ -24,7 +26,7 @@ public static partial class QM
 			typeof(RectTransform).FullName,
 			typeof(CanvasRenderer).FullName,
 			typeof(StyleElement).FullName,
-			typeof(VRC.UI.Elements.Tooltips.UiToggleTooltip).FullName,
+			typeof(UIToggleToolTip).FullName,
 			typeof(VRC.UI.Elements.Tooltips.UiTooltip).FullName,
 			typeof(Toggle).FullName,
 			typeof(UIInvisibleGraphic).FullName,

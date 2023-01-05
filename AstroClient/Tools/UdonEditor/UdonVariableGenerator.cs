@@ -137,10 +137,13 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.UInt16[]": return "ushort[]";
                 case "System.Double": return "double?";
                 case "System.Double[]": return "double[]";
+                case "System.DateTime": return "System.DateTime?";
                 case "UnityEngine.Vector3": return "UnityEngine.Vector3?";
                 case "UnityEngine.Vector2": return "UnityEngine.Vector2?";
                 case "UnityEngine.Quaternion": return "UnityEngine.Quaternion?";
                 case "UnityEngine.Color": return "UnityEngine.Color?";
+                case "UnityEngine.Color32": return "UnityEngine.Color32?";
+                case "UnityEngine.TextureFormat": return "UnityEngine.TextureFormat?";
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget": return "VRC.Udon.Common.Interfaces.NetworkEventTarget?";
                 case "VRC.Udon.Common.Enums.EventTiming": return "VRC.Udon.Common.Enums.EventTiming?";
                 case "UnityEngine.Rect": return "UnityEngine.Rect?";
@@ -169,10 +172,13 @@ namespace AstroClient.Tools.UdonEditor
                 case "System.UInt16":
                 case "System.Double":
                 case "System.Int16":
+                case "System.DateTime":
                 case "UnityEngine.Vector3":
                 case "UnityEngine.Vector2":
                 case "UnityEngine.Quaternion":
                 case "UnityEngine.Color":
+                case "UnityEngine.Color32":
+                case "UnityEngine.TextureFormat":
                 case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
                 case "VRC.Udon.Common.Enums.EventTiming":
                 case "UnityEngine.HumanBodyBones":

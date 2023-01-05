@@ -27,7 +27,7 @@ namespace AstroClient.PlayerList.Entries
         public override void Init(object[] parameters = null)
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
-            AvatarSearch.OnPedestralDumpDone += RefreshInfo;
+            //AvatarSearch.OnPedestralDumpDone += RefreshInfo;
             SceneUtils.OnNoFallHeightLimitToggled += RefreshInfo;
             ClientEventActions.OnRoomLeft += OnRoomLeft;
             Settings_Camera.OnCameraPropertyChanged += RefreshInfo;
@@ -154,7 +154,7 @@ namespace AstroClient.PlayerList.Entries
             {
                 if (Update_Avatars)
                 {
-                    _Avatars = AvatarSearch.worldAvatarsids.Count;
+                    _Avatars = 0; //AvatarSearch.worldAvatarsids.Count;
                     Update_Avatars = false;
                 }
                 return _Avatars;
@@ -175,7 +175,7 @@ namespace AstroClient.PlayerList.Entries
             {
                 if (Update_Prefabs)
                 {
-                    _Prefabs = SceneUtils.DynamicPrefabs.Length;
+                    _Prefabs = SceneUtils.DynamicPrefabs.Count;
                     Update_Prefabs = false;
                 }
                 return _Prefabs;

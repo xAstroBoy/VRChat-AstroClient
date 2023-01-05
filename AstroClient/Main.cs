@@ -29,15 +29,15 @@ namespace AstroClient
 
     public class Main : MelonMod
     {
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
             MelonCoroutines.Start(InitializeClient());
         }
 
         private IEnumerator InitializeClient()
         {
-            //LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
-
+            LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
+            ConsoleInitializer.Initialize();
             // New Cheetah Console/Log Stuff
             WriteBanner();
             ConfigManager.Validate();
@@ -87,7 +87,7 @@ namespace AstroClient
         //    ClientEventActions.OnGui?.SafetyRaiseWithParams();
         //}
 
-        public override void OnApplicationLateStart()
+        public override void OnLateInitializeMelon()
         {
             ClientEventActions.OnApplicationLateStart?.SafetyRaise();
         }
@@ -147,7 +147,7 @@ namespace AstroClient
                         {
                             try
                             {
-                                component.StartPreloadResources(); // NEEDED TO DO PATCHING EVENT
+                                component.StartPreloadResources(); 
                             }
                             catch (System.Exception e)
                             {
@@ -207,7 +207,7 @@ namespace AstroClient
 
         private IEnumerator OnUserInteractMenuInitCoro(Action code)
         {
-            while (QuickMenuTools.SelectedUserMenuQM == null)
+            while (QuickMenuTools.SelectedUserPage_Remote_VerticalLayoutGroup == null)
                 yield return null;
 
             code();
@@ -235,12 +235,12 @@ namespace AstroClient
             code();
         }
 
-        private void Start_VRChat_OnQuickMenuInit()
+        private void  Start_VRChat_OnQuickMenuInit()
         {
             var sw = Stopwatch.StartNew();
             ClientEventActions.VRChat_OnQuickMenuInit?.SafetyRaise();
-            DoAfterUserInteractMenuInit(() => { Start_VRChat_OnUserInteractMenuInit(); });
-            sw.Stop(); Log.Debug($"QuickMenu Init : Took {sw.ElapsedMilliseconds}ms");
+            sw.Stop();
+            Log.Debug($"QuickMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
         private void Start_VRChat_OnActionMenuInit()
@@ -248,13 +248,6 @@ namespace AstroClient
             var sw = Stopwatch.StartNew();
             ClientEventActions.VRChat_OnActionMenuInit?.SafetyRaise();
             sw.Stop(); Log.Debug($"ActionMenu Init : Took {sw.ElapsedMilliseconds}ms");
-        }
-
-        private void Start_VRChat_OnUserInteractMenuInit()
-        {
-            var sw = Stopwatch.StartNew();
-            UserInteractMenuBtns.InitUserButtons(); //UserMenu Main Button
-            sw.Stop(); Log.Debug($"UserInteractMenu Init : Took {sw.ElapsedMilliseconds}ms");
         }
 
         private void Start_VRChat_OnUiManagerInit()

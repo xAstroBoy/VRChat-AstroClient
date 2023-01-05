@@ -1,37 +1,18 @@
-﻿using System;
-using System.Text;
-using AstroClient.AstroMonos.AstroUdons;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
-using AstroClient.AstroMonos.Components.Custom.Items;
-using AstroClient.AstroMonos.Components.Tools;
-using AstroClient.AstroMonos.Prefabs;
+﻿using AstroClient.AstroMonos.Prefabs;
 using AstroClient.ClientActions;
-using AstroClient.Startup.Hooks;
-using AstroClient.Tools;
-using AstroClient.Tools.UdonEditor;
-using AstroClient.Tools.UdonSearcher;
 using AstroClient.xAstroBoy.Extensions;
-using UnityEngine.AI;
+using System.Text;
 using UnityEngine.Animations;
-using VRC.SDKBase;
-using VRC_EventHandler = VRCSDK2.VRC_EventHandler;
-using VRC_Pickup = VRCSDK2.VRC_Pickup;
-using VRC_Trigger = VRCSDK2.VRC_Trigger;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
-    using AstroMonos.Components.Cheats.PatronCrackers;
-    using CustomClasses;
-    using MelonLoader;
     using Tools.Extensions;
-    using Tools.World;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
     internal class TreeHouseInTheShade : AstroEvents
@@ -40,6 +21,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
+
         private static Transform _Jetpack_Panel;
 
         internal static Transform Jetpack_Panel
@@ -55,6 +37,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _Jetpack_Panel;
             }
         }
+
         private static Transform _ShaderSphere;
 
         internal static Transform ShaderSphere
@@ -71,8 +54,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-
         private static Renderer _ShaderSphereRenderer;
+
         internal static Renderer ShaderSphereRenderer
         {
             get
@@ -87,8 +70,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _ShaderSphereRenderer;
             }
         }
-
-
 
         private static Transform _Canvas;
 
@@ -106,6 +87,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _Canvas;
             }
         }
+
         private static Transform _TimerEnableButtons;
 
         internal static Transform TimerEnableButtons
@@ -122,6 +104,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _TimerEnableButtons;
             }
         }
+
         private static Transform _TextCooldown;
 
         internal static Transform TextCooldown
@@ -155,6 +138,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 return _Spawn_Desktop;
             }
         }
+
         private static Transform _Spawn_VR;
 
         internal static Transform Spawn_VR
@@ -173,6 +157,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
         private static bool _HasSubscribed = false;
+
         private static bool HasSubscribed
         {
             get => _HasSubscribed;
@@ -182,13 +167,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUpdate += OnUpdate;
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUpdate -= OnUpdate;
                     }
@@ -197,7 +180,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static  void OnRoomLeft()
+        private static void OnRoomLeft()
         {
             HasSubscribed = false;
         }
@@ -214,7 +197,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             if (Spawn_VR != null)
             {
-                if(!Spawn_VR.gameObject.active)
+                if (!Spawn_VR.gameObject.active)
                 {
                     Spawn_VR.gameObject.SetActive(true);
                 }
@@ -226,16 +209,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Spawn_Desktop.gameObject.SetActive(true);
                 }
             }
-
         }
-
-
 
         private static IEnumerator FixRenderSphere()
         {
             if (!isCurrentWorld) yield return null;
             while (ShaderSphereRenderer == null) yield return null;
-            while(isCurrentWorld)
+            while (isCurrentWorld)
             {
                 ShaderSphereRenderer.bounds.Expand(float.MaxValue);
                 // Log.Debug("Forcing Bounds to be higher than 2000f...");
@@ -245,14 +225,12 @@ namespace AstroClient.WorldModifications.WorldHacks
             yield return null;
         }
 
-
         private static void FindEverything()
         {
-            
-            if(TextCooldown != null)
+            if (TextCooldown != null)
             {
                 var text = TextCooldown.GetComponent<UnityEngine.UI.Text>();
-                if(text != null)
+                if (text != null)
                 {
                     text.supportRichText = true;
                     text.resizeTextForBestFit = true;
@@ -268,7 +246,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             //    MelonCoroutines.Start(FixRenderSphere());
             //}
             var UpdateText = Finder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
-            if(UpdateText != null)
+            if (UpdateText != null)
             {
                 var text = UpdateText.GetComponent<UnityEngine.UI.Text>();
                 if (text != null)
@@ -276,141 +254,31 @@ namespace AstroClient.WorldModifications.WorldHacks
                     text.supportRichText = true;
                     text.text = UpdatedPanelExtraText();
                 }
-
             }
 
-            foreach (var prefab in SceneUtils.DynamicPrefabs)
-            {
-                if (prefab != null)
-                {
-                    GameObject template;
+            //foreach (var prefab in SceneUtils.DynamicPrefabs)
+            //{
+            //    if (prefab != null)
+            //    {
+            //        GameObject template;
 
-                    bool isTwoHanded = prefab.name.isMatch("TBDD_TwoHand");
-                    if(isTwoHanded)
-                    {
-                        template = ClientResources.Loaders.Prefabs.VRJetpack;
-                    }
-                    else
-                    {
-                        template = ClientResources.Loaders.Prefabs.DesktopJetpack;
-                    }
-                    Log.Debug($"{prefab.name} Using Template {template.name}, IsTwoHanded {isTwoHanded}");
-                    var chair = prefab.transform.FindObject("VRCChair");
-                    var collider = chair.FindObject("Collider");
-                    var colliderconstraint = new ConstraintSource
-                    {
-                        m_Weight = 1,
-                        m_SourceTransform = collider
-                    };
-
-
-                    var VRCChairStick_Prefab = prefab.transform.FindObject("VRCChairStick");
-                    if (VRCChairStick_Prefab != null)
-                    {
-                        var VRCChairStick_Template = template.FindObject("VRCChairStick");
-                        if (VRCChairStick_Template != null)
-                        {
-                            var PosConstraint = VRCChairStick_Template.GetComponent<PositionConstraint>();
-
-                            if (PosConstraint != null)
-                            {
-                                var constraint = VRCChairStick_Prefab.AddComponent<PositionConstraint>();
-                                if (constraint != null)
-                                {
-                                    constraint.translationAtRest = PosConstraint.translationAtRest;
-                                    constraint.translationAxis = PosConstraint.translationAxis;
-                                    constraint.translationOffset = PosConstraint.translationOffset;
-                                    constraint.weight = PosConstraint.weight;
-                                    constraint.locked = PosConstraint.locked;
-                                    constraint.constraintActive = true;
-                                    constraint.AddSource(colliderconstraint);
-                                }
-
-                            }
-                            var RotConstraint = VRCChairStick_Template.GetComponent<RotationConstraint>();
-
-                            if (RotConstraint != null)
-                            {
-                                var constraint = VRCChairStick_Prefab.AddComponent<RotationConstraint>();
-                                if (constraint != null)
-                                {
-                                    constraint.rotationAtRest = RotConstraint.rotationAtRest;
-                                    constraint.rotationOffset = RotConstraint.rotationOffset;
-                                    constraint.rotationAxis = RotConstraint.rotationAxis;
-                                    constraint.weight = RotConstraint.weight;
-                                    constraint.locked = RotConstraint.locked;
-                                    constraint.constraintActive = true;
-                                    constraint.AddSource(colliderconstraint);
-                                }
-
-                            }
-
-
-                        }
-
-                        VRCChairStick_Prefab.RemoveComponent<VRC_Pickup>();
-                        VRCChairStick_Prefab.RemoveComponent<VRC_Trigger>();
-                        //JetpackStick.RemoveComponent<VRC_EventHandler>();
-                        //JetpackStick.RemoveComponent<VRC_Trigger>();
-                    }
-                    var ThrusterStick_Prefab = prefab.transform.FindObject("ThrusterStick");
-                    if (ThrusterStick_Prefab != null)
-                    {
-                        var ThrusterStick_Template = template.FindObject("ThrusterStick");
-                        if (ThrusterStick_Template != null)
-                        {
-                            var PosConstraint = ThrusterStick_Template.GetComponent<PositionConstraint>();
-
-                            if (PosConstraint != null)
-                            {
-                                var constraint = ThrusterStick_Prefab.AddComponent<PositionConstraint>();
-                                if (constraint != null)
-                                {
-                                    constraint.translationAtRest = PosConstraint.translationAtRest;
-                                    constraint.translationAxis = PosConstraint.translationAxis;
-                                    constraint.translationOffset = PosConstraint.translationOffset;
-                                    constraint.weight = PosConstraint.weight;
-                                    constraint.locked = PosConstraint.locked;
-                                    constraint.constraintActive = true;
-                                    constraint.AddSource(colliderconstraint);
-                                }
-
-                            }
-                            var RotConstraint = ThrusterStick_Template.GetComponent<RotationConstraint>();
-
-                            if (RotConstraint != null)
-                            {
-                                var constraint = ThrusterStick_Prefab.AddComponent<RotationConstraint>();
-                                if (constraint != null)
-                                {
-                                    constraint.rotationAtRest = RotConstraint.rotationAtRest;
-                                    constraint.rotationOffset = RotConstraint.rotationOffset;
-                                    constraint.rotationAxis = RotConstraint.rotationAxis;
-                                    constraint.weight = RotConstraint.weight;
-                                    constraint.locked = RotConstraint.locked;
-                                    constraint.constraintActive = true;
-                                    constraint.AddSource(colliderconstraint);
-                                }
-
-                            }
-
-
-                        }
-
-                        ThrusterStick_Prefab.RemoveComponent<VRC_Pickup>();
-                        ThrusterStick_Prefab.RemoveComponent<VRC_Trigger>();
-                        //JetpackStick.RemoveComponent<VRC_EventHandler>();
-                        //JetpackStick.RemoveComponent<VRC_Trigger>();
-                    }
-                    prefab.AddComponent<JetpackController>();
-
-                }
-            }
+            //        bool isTwoHanded = prefab.name.isMatch("TBDD_TwoHand");
+            //        if (isTwoHanded)
+            //        {
+            //            template = ClientResources.Loaders.Prefabs.VRJetpack;
+            //        }
+            //        else
+            //        {
+            //            template = ClientResources.Loaders.Prefabs.DesktopJetpack;
+            //        }
+            //        prefab.ReplacePrefabContent(template);
+            //        prefab.GetOrAddComponent<JetpackController>();
+            //    }
+            //}
 
             HasSubscribed = true;
             isCurrentWorld = true;
         }
-
 
         private static string UpdatedPanelExtraText()
         {
@@ -421,7 +289,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             text.AppendLine("- removed kali sunset");
             text.AppendLine("- Removed Jetpack Cooldown (AstroClient)");
             text.AppendLine();
-           // text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
+            // text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
             text.AppendLine();
             text.AppendLine("visit our other worlds too:");
             text.AppendLine("fractal explorer");
@@ -441,21 +309,16 @@ namespace AstroClient.WorldModifications.WorldHacks
             return text.ToString();
         }
 
-
-
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.TreeHouseInTheShade)
             {
-
                 Log.Write($"Recognized {Name} World, Removing Jetpack Panel Cooldown....", System.Drawing.Color.Chartreuse);
                 Log.Write($"This author passed away of heart failure... RIP {WorldUtils.AuthorName}....", System.Drawing.Color.Gold);
                 Log.Write("VRChat should keep the memory alive and keep his quality work alive...", System.Drawing.Color.Gold);
                 Log.Write("Im Bypassing the Jetpack because in his other worlds , the jetpack panel has no delay...", System.Drawing.Color.Gold);
                 Log.Write("And I hope this guy doesn't mind this bypass...", System.Drawing.Color.Gold);
                 Log.Write("If you use munchen, and this world breaks, remove it....", System.Drawing.Color.Gold);
-
-
 
                 isCurrentWorld = true;
                 if (CurrentMenu != null)
@@ -481,6 +344,5 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static bool isCurrentWorld { get; set; } = false;
 
         internal static QMNestedGridMenu CurrentMenu { get; set; }
-
     }
 }

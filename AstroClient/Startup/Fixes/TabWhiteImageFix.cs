@@ -29,7 +29,7 @@ namespace AstroClient.Startup.Fixes
             {
                 if(_ImageBackgroundTransform == null)
                 {
-                    return _ImageBackgroundTransform = GameObjectFinder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Background_QM_PagePanel")?.transform;
+                    return _ImageBackgroundTransform = GameObjectFinder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Background_QM_PagePanel")?.transform;
                 }
                 return _ImageBackgroundTransform;
             }

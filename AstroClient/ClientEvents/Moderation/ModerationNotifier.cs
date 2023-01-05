@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.Moderation
 {
@@ -21,7 +23,7 @@ namespace AstroClient.Moderation
             if (player != null)
             {
                 Log.Write($"{PhotonUtils.GetDisplayName(player)} blocked you!");
-                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} blocked you!");
+                NewHudNotifier.WriteHudMessage($"{PhotonUtils.GetDisplayName(player)} blocked you!");
             }
         }
 
@@ -30,7 +32,7 @@ namespace AstroClient.Moderation
             if (player != null)
             {
                 Log.Write($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
-                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
+                NewHudNotifier.WriteHudMessage($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
             }
         }
 
@@ -39,7 +41,7 @@ namespace AstroClient.Moderation
             if (player != null)
             {
                 Log.Write($"{PhotonUtils.GetDisplayName(player)} muted you!");
-                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} muted you!");
+                NewHudNotifier.WriteHudMessage($"{PhotonUtils.GetDisplayName(player)} muted you!");
             }
         }
 
@@ -48,7 +50,7 @@ namespace AstroClient.Moderation
             if (player != null)
             {
                 Log.Write($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
-                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
+                NewHudNotifier.WriteHudMessage($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
             }
         }
     }

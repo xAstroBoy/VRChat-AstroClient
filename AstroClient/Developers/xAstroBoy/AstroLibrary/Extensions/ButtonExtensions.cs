@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.Extensions
+﻿using UiTooltip = VRC.UI.Elements.Tooltips.UiTooltip;
+
+namespace AstroClient.xAstroBoy.Extensions
 {
     using AstroButtonAPI;
     using AstroButtonAPI.QuickMenuAPI;
@@ -6,7 +8,6 @@
     using UnityEngine.UI;
     using Utility;
     using VRC.UI.Elements.Tooltips;
-    using UiTooltip = UiTooltip;
 
     internal static class ButtonExtensions
     {
@@ -24,7 +25,7 @@
                 tooltip.field_Public_String_1 = text;
             }
         }
-        internal static void SetButtonToolTip(this UiToggleTooltip tooltip, string text)
+        internal static void SetButtonToolTip(this UIToggleTooltip tooltip, string text)
         {
             if (tooltip != null)
             {

@@ -2,6 +2,7 @@
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.AstroMonos.Components.Tools.PickupBlocker;
 using AstroClient.Cheetos;
+using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks;
 using AstroClient.Target;
 using AstroClient.Tools.ObjectEditor;
@@ -13,14 +14,17 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.UserMenu
 {
     internal class UserInteractMenuBtns : AstroEvents
     {
-        internal static void InitUserButtons()
+        internal override void RegisterToEvents()
         {
-            //MelonCoroutines.Start(WaitForCloneBtnInit());
-
-            Init_UserMenu();
-
-            //  NO TOUCH!
+            ClientEventActions.OnQuickMenuOpen += SpawnMenu;
         }
+
+        private void SpawnMenu()
+        {
+            Init_UserMenu();
+            ClientEventActions.OnQuickMenuOpen -= SpawnMenu;
+        }
+
 
         internal static void Init_UserMenu()
         {

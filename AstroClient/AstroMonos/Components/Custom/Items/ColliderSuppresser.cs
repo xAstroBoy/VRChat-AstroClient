@@ -1,3 +1,4 @@
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.Spawnables;
 
 namespace AstroClient.AstroMonos.Components.Custom.Items
@@ -129,7 +130,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             if (collision.collider == null) return;
             if (!ColliderSuppresserSphere.DeactivateCollision(collision.transform)) return;
             Log.Debug($"Deactivated Collider {collision.transform.gameObject.name} from blocking Player collision!");
-            PopupUtils.QueHudMessage($"<color=#FFA500>Deactivated Collider {collision.transform.gameObject.name}</color>");
+            NewHudNotifier.WriteHudMessage($"<color=#FFA500>Deactivated Collider {collision.transform.gameObject.name}</color>");
             Activated = false;
         }
 

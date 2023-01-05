@@ -1,6 +1,11 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Linq;
+using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.ClientActions;
 using AstroClient.Tools.UdonSearcher;
+using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
+using VRC.Udon;
 using Object = UnityEngine.Object;
 
 namespace AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
@@ -34,14 +39,61 @@ public class ImageRenderCameraReader2 : MonoBehaviour
                 if (value)
                 {
                     ClientEventActions.OnRoomLeft += OnRoomLeft;
+                    ClientEventActions.Udon_SendCustomEvent += UdonSendCustomEvent;
                 }
                 else
                 {
                     ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                    ClientEventActions.Udon_SendCustomEvent -= UdonSendCustomEvent;
+
                 }
             }
             _HasSubscribed = value;
         }
+    }
+
+    private void UdonSendCustomEvent(UdonBehaviour arg1, string arg2)
+    {
+        if (arg1 != null)
+        {
+            if (arg1.gameObject.name == gameObject.name)
+            {
+                HijackUdon();
+            }
+        }
+    }
+    private string PatchList(string list, string FieldName)
+    {
+        if (list.IsNotNullOrEmptyOrWhiteSpace())
+        {
+            bool HasBeenModified = false;
+            var result = list.ReadLines().ToList();
+            if (result != null && result.Count != 0)
+            {
+                if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
+                {
+                    Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in {FieldName}..");
+                    result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
+                    result.Insert(result.Count, PlayerSpooferUtils.Original_DisplayName);
+                    HasBeenModified = true;
+                }
+                if (GameInstances.LocalPlayer != null)
+                {
+                    if (!result.Contains(GameInstances.LocalPlayer.displayName))
+                    {
+                        Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in {FieldName}..");
+                        result.Insert(1, GameInstances.LocalPlayer.displayName);
+                        result.Insert(result.Count, GameInstances.LocalPlayer.displayName);
+                        HasBeenModified = true;
+                    }
+                }
+            }
+            if (HasBeenModified)
+            {
+                return string.Join("\n", result); ;
+            }
+        }
+        return list;
     }
 
     private void OnRoomLeft()
@@ -53,7 +105,7 @@ public class ImageRenderCameraReader2 : MonoBehaviour
 
     internal void Start()
     {
-        var cam = UdonSearch.FindUdonEvent(this.gameObject, "ReadPictureStep");
+        var cam = UdonSearch.FindUdonEvent(this.gameObject, "_ReadPictureStep");
         if (cam != null)
         {
             RenderCameraEvent = cam.RawItem;
@@ -62,11 +114,31 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             HasSubscribed = true;
             Initialize_RenderCameraEvent();
+            HijackUdon();
         }
         if (RenderCameraEvent == null)
         {
             Destroy(this);
         }
+    }
+
+    internal void HijackUdon()
+    {
+        if (__intnl_SystemString_15 != null)
+        {
+            var patch = PatchList(__intnl_SystemString_15, "__intnl_SystemString_15");
+            __intnl_SystemString_15 = patch;
+
+        }
+
+        if (outputString != null)
+        {
+            var patch = PatchList(outputString, "outputString");
+            outputString = patch;
+
+        }
+
+
     }
 
     private void OnDestroy()
@@ -77,470 +149,678 @@ public class ImageRenderCameraReader2 : MonoBehaviour
 
     private void Initialize_RenderCameraEvent()
     {
-        Private___3_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__3_intnl_interpolatedStr_String");
+        Private___intnl_SystemBoolean_13 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_13");
+        Private___intnl_SystemBoolean_23 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_23");
+        Private___gintnl_SystemUInt32_16 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_16");
+        Private___gintnl_SystemUInt32_26 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_26");
+        Private___intnl_SystemInt32_15 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_15");
+        Private___intnl_SystemInt32_35 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_35");
+        Private___intnl_SystemInt32_25 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_25");
+        Private___intnl_SystemInt32_55 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_55");
+        Private___intnl_SystemInt32_45 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_45");
+        Private_nextAvatar = new AstroUdonVariable<string>(RenderCameraEvent, "nextAvatar");
+        Private_charIndex = new AstroUdonVariable<int>(RenderCameraEvent, "charIndex");
+        Private_avatarCounter = new AstroUdonVariable<int>(RenderCameraEvent, "avatarCounter");
         Private_renderTexture = new AstroUdonVariable<UnityEngine.CustomRenderTexture>(RenderCameraEvent, "renderTexture");
-        Private___0_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__0_intnl_interpolatedStr_String");
-        Private___15_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__15_intnl_SystemInt32");
-        Private___40_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__40_intnl_SystemString");
-        Private___12_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__12_intnl_SystemInt32");
-        Private___3_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__3_const_intnl_SystemString");
-        Private___6_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__6_intnl_interpolatedStr_String");
-        Private___6_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__6_const_intnl_SystemInt32");
-        Private___3_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__3_const_intnl_exitJumpLoc_UInt32");
-        Private___0_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__0_const_intnl_SystemBoolean");
-        Private___1_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__1_const_intnl_SystemInt32");
-        Private___32_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__32_intnl_SystemString");
-        Private_byteCache = new AstroUdonVariable<byte[]>(RenderCameraEvent, "byteCache");
-        Private___1_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__1_intnl_SystemInt32");
-        Private___15_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__15_intnl_SystemSingle");
-        Private_lastIndex = new AstroUdonVariable<bool>(RenderCameraEvent, "lastIndex");
-        Private___2_intnl_SystemObject = new AstroUdonVariable<TMPro.TextMeshPro>(RenderCameraEvent, "__2_intnl_SystemObject");
-        Private___1_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__1_intnl_SystemString");
-        Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = new AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming>(RenderCameraEvent, "__0_const_intnl_VRCUdonCommonEnumsEventTiming");
-        Private___15_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__15_intnl_SystemString");
-        Private___0_h_Int32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_h_Int32");
-        Private___0_b_Int32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_b_Int32");
-        Private___0_w_Int32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_w_Int32");
+        Private___gintnl_SystemObjectArray_1 = new AstroUdonVariable<System.Object[]>(RenderCameraEvent, "__gintnl_SystemObjectArray_1");
+        Private___intnl_UnityEngineMaterial_0 = new AstroUdonVariable<UnityEngine.Material>(RenderCameraEvent, "__intnl_UnityEngineMaterial_0");
+        Private___intnl_UnityEngineObject_12 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__intnl_UnityEngineObject_12");
+        Private___const_SystemByte_1 = new AstroUdonVariable<byte>(RenderCameraEvent, "__const_SystemByte_1");
+        Private___intnl_SystemSingle_0 = new AstroUdonVariable<float>(RenderCameraEvent, "__intnl_SystemSingle_0");
+        Private___intnl_SystemChar_1 = new AstroUdonVariable<char>(RenderCameraEvent, "__intnl_SystemChar_1");
+        Private_pedestalMaterial = new AstroUdonVariable<UnityEngine.Material>(RenderCameraEvent, "pedestalMaterial");
+        Private___const_SystemString_0 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_0");
+        Private___intnl_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "__intnl_UnityEngineTransform_0");
+        Private___lcl_value_SystemByte_0 = new AstroUdonVariable<byte>(RenderCameraEvent, "__lcl_value_SystemByte_0");
+        Private___const_SystemSingle_0 = new AstroUdonVariable<float>(RenderCameraEvent, "__const_SystemSingle_0");
         Private_hasRun = new AstroUdonVariable<bool>(RenderCameraEvent, "hasRun");
-        Private___34_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__34_intnl_SystemString");
-        Private___0_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__0_const_intnl_SystemString");
-        Private___21_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__21_intnl_SystemSingle");
-        Private___7_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__7_intnl_SystemByte");
-        Private___1_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__1_intnl_SystemSingle");
-        Private___5_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__5_intnl_SystemBoolean");
-        Private___31_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__31_intnl_SystemString");
-        Private___10_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__10_const_intnl_exitJumpLoc_UInt32");
-        Private___5_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__5_intnl_SystemInt32");
-        Private___0_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__0_const_intnl_exitJumpLoc_UInt32");
-        Private___15_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__15_intnl_SystemBoolean");
+        Private___lcl_isNew_UnityEngineColor32_0 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__lcl_isNew_UnityEngineColor32_0");
+        Private_dataMode = new AstroUdonVariable<int>(RenderCameraEvent, "dataMode");
+        Private___intnl_SystemBoolean_16 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_16");
+        Private___intnl_SystemBoolean_26 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_26");
+        Private_debugTMP = new AstroUdonVariable<bool>(RenderCameraEvent, "debugTMP");
+        Private___const_SystemInt32_11 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_11");
+        Private___const_SystemInt32_21 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_21");
+        Private___intnl_SystemInt32_12 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_12");
+        Private___intnl_SystemInt32_32 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_32");
+        Private___intnl_SystemInt32_22 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_22");
+        Private___intnl_SystemInt32_52 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_52");
+        Private___intnl_SystemInt32_42 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_42");
+        Private___lcl_now_SystemDateTime_0 = new AstroUdonVariable<System.DateTime>(RenderCameraEvent, "__lcl_now_SystemDateTime_0");
+        Private___intnl_SystemString_9 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_9");
+        Private___lcl_idColor_UnityEngineColor32_0 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__lcl_idColor_UnityEngineColor32_0");
+        Private___intnl_SystemByte_3 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_3");
+        Private___gintnl_SystemUInt32_9 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_9");
+        Private___gintnl_SystemUInt32_8 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_8");
+        Private___gintnl_SystemUInt32_5 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_5");
+        Private___gintnl_SystemUInt32_4 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_4");
+        Private___gintnl_SystemUInt32_7 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_7");
+        Private___gintnl_SystemUInt32_6 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_6");
+        Private___gintnl_SystemUInt32_1 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_1");
+        Private___gintnl_SystemUInt32_0 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_0");
+        Private___gintnl_SystemUInt32_3 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_3");
+        Private___gintnl_SystemUInt32_2 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_2");
+        Private___const_SystemBoolean_0 = new AstroUdonVariable<bool>(RenderCameraEvent, "__const_SystemBoolean_0");
+        Private___const_SystemBoolean_1 = new AstroUdonVariable<bool>(RenderCameraEvent, "__const_SystemBoolean_1");
+        Private___const_SystemByte_2 = new AstroUdonVariable<byte>(RenderCameraEvent, "__const_SystemByte_2");
         Private_dataLength = new AstroUdonVariable<int>(RenderCameraEvent, "dataLength");
-        Private___20_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__20_intnl_SystemString");
-        Private___6_intnl_SystemObject = new AstroUdonVariable<bool>(RenderCameraEvent, "__6_intnl_SystemObject");
-        Private___5_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__5_intnl_SystemString");
-        Private___28_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__28_const_intnl_SystemString");
-        Private___6_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__6_const_intnl_SystemString");
-        Private___21_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__21_intnl_SystemBoolean");
-        Private___5_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__5_const_intnl_exitJumpLoc_UInt32");
-        Private___13_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__13_intnl_SystemBoolean");
-        Private___2_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__2_intnl_SystemByte");
-        Private___1_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__1_const_intnl_SystemString");
-        Private___4_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__4_const_intnl_SystemInt32");
-        Private___29_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__29_const_intnl_SystemString");
-        Private___5_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__5_intnl_SystemSingle");
-        Private___2_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__2_const_intnl_exitJumpLoc_UInt32");
-        Private___0_mp_picture_Texture2D = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "__0_mp_picture_Texture2D");
-        Private___16_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__16_intnl_SystemBoolean");
-        Private___14_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__14_const_intnl_SystemString");
-        Private___39_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__39_intnl_SystemString");
-        Private___0_firstColor_Color = new AstroUdonVariable<UnityEngine.Color>(RenderCameraEvent, "__0_firstColor_Color");
-        Private___19_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__19_intnl_SystemSingle");
-        Private___7_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__7_intnl_SystemBoolean");
-        Private___1_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__1_intnl_SystemByte");
-        Private_colors = new AstroUdonVariable<UnityEngine.Color[]>(RenderCameraEvent, "colors");
-        Private___7_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__7_const_intnl_exitJumpLoc_UInt32");
-        Private___28_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__28_intnl_SystemString");
-        Private___2_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__2_intnl_interpolatedStr_String");
-        Private___7_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__7_const_intnl_SystemString");
-        Private___15_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__15_const_intnl_SystemString");
-        Private___0_tempString_String = new AstroUdonVariable<string>(RenderCameraEvent, "__0_tempString_String");
-        Private___27_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__27_intnl_SystemSingle");
-        Private___5_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__5_const_intnl_SystemInt32");
-        Private___refl_const_intnl_udonTypeID = new AstroUdonVariable<long>(RenderCameraEvent, "__refl_const_intnl_udonTypeID");
-        Private___4_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__4_intnl_SystemBoolean");
-        Private___11_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__11_intnl_SystemSingle");
-        Private___4_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__4_intnl_SystemByte");
-        Private___19_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__19_intnl_SystemBoolean");
-        Private___refl_const_intnl_udonTypeName = new AstroUdonVariable<string>(RenderCameraEvent, "__refl_const_intnl_udonTypeName");
-        Private___0_intnl_SystemObject = new AstroUdonVariable<bool>(RenderCameraEvent, "__0_intnl_SystemObject");
-        Private___1_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__1_intnl_SystemBoolean");
-        Private___14_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__14_intnl_SystemInt32");
-        Private___17_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__17_const_intnl_SystemString");
-        Private___11_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__11_intnl_SystemInt32");
-        Private___4_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__4_const_intnl_SystemString");
-        Private___10_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__10_intnl_SystemString");
-        Private___20_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__20_const_intnl_SystemString");
-        Private___0_intnl_UnityEngineTextureFormat = new AstroUdonVariable<UnityEngine.TextureFormat>(RenderCameraEvent, "__0_intnl_UnityEngineTextureFormat");
-        Private___0_c_Color = new AstroUdonVariable<UnityEngine.Color>(RenderCameraEvent, "__0_c_Color");
-        Private___11_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__11_intnl_SystemBoolean");
-        Private___2_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__2_intnl_SystemInt32");
-        Private___26_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__26_intnl_SystemSingle");
-        Private___4_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__4_const_intnl_exitJumpLoc_UInt32");
-        Private___2_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__2_intnl_SystemString");
-        Private___21_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__21_const_intnl_SystemString");
-        Private___26_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__26_const_intnl_SystemString");
-        Private___23_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__23_intnl_SystemString");
-        Private___4_intnl_SystemObject = new AstroUdonVariable<bool>(RenderCameraEvent, "__4_intnl_SystemObject");
-        Private___9_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__9_const_intnl_exitJumpLoc_UInt32");
-        Private___0_mp_bytes_ByteArray = new AstroUdonVariable<byte[]>(RenderCameraEvent, "__0_mp_bytes_ByteArray");
-        Private___9_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__9_intnl_SystemInt32");
-        Private___2_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__2_intnl_SystemSingle");
-        Private___5_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__5_const_intnl_SystemString");
-        Private___3_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__3_intnl_SystemBoolean");
-        Private___12_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__12_intnl_SystemBoolean");
-        Private___9_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__9_intnl_SystemString");
-        Private___6_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__6_const_intnl_exitJumpLoc_UInt32");
-        Private___18_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__18_intnl_SystemString");
-        Private___23_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__23_const_intnl_SystemString");
-        Private___6_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__6_intnl_SystemInt32");
-        Private___0_intnl_SystemByteArray = new AstroUdonVariable<byte[]>(RenderCameraEvent, "__0_intnl_SystemByteArray");
-        Private___17_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__17_intnl_SystemSingle");
-        Private___0_intnl_UnityEngineRect = new AstroUdonVariable<UnityEngine.Rect>(RenderCameraEvent, "__0_intnl_UnityEngineRect");
-        Private___6_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__6_intnl_SystemString");
-        Private___0_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__0_intnl_SystemBoolean");
+        Private___intnl_UnityEngineMeshRenderer_0 = new AstroUdonVariable<UnityEngine.MeshRenderer>(RenderCameraEvent, "__intnl_UnityEngineMeshRenderer_0");
+        Private___intnl_UnityEngineMeshRenderer_1 = new AstroUdonVariable<UnityEngine.MeshRenderer>(RenderCameraEvent, "__intnl_UnityEngineMeshRenderer_1");
+        Private___const_SystemString_5 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_5");
+        Private___intnl_UnityEngineColor32_0 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__intnl_UnityEngineColor32_0");
+        Private___const_SystemInt32_19 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_19");
+        Private___gintnl_SystemUInt32_13 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_13");
+        Private___gintnl_SystemUInt32_23 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_23");
+        Private___intnl_UnityEngineObject_8 = new AstroUdonVariable<UnityEngine.CustomRenderTexture>(RenderCameraEvent, "__intnl_UnityEngineObject_8");
+        Private___intnl_UnityEngineObject_4 = new AstroUdonVariable<UnityEngine.MeshRenderer>(RenderCameraEvent, "__intnl_UnityEngineObject_4");
+        Private___intnl_UnityEngineObject_2 = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "__intnl_UnityEngineObject_2");
+        Private___intnl_UnityEngineObject_0 = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "__intnl_UnityEngineObject_0");
+        Private___const_SystemInt32_16 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_16");
+        Private_decodeSpeedUTF8 = new AstroUdonVariable<int>(RenderCameraEvent, "decodeSpeedUTF8");
+        Private___intnl_SystemString_6 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_6");
+        Private___const_SystemString_16 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_16");
+        Private___const_SystemString_17 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_17");
+        Private___const_SystemString_14 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_14");
+        Private___const_SystemString_15 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_15");
+        Private___const_SystemString_12 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_12");
+        Private___const_SystemString_13 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_13");
+        Private___const_SystemString_10 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_10");
+        Private___const_SystemString_11 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_11");
+        Private___const_SystemString_18 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_18");
+        Private___const_SystemString_19 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_19");
+        Private___intnl_SystemByte_4 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_4");
+        Private_color = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "color");
+        Private_pixelIndex = new AstroUdonVariable<int>(RenderCameraEvent, "pixelIndex");
+        Private___intnl_UnityEngineObject_14 = new AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal>(RenderCameraEvent, "__intnl_UnityEngineObject_14");
+        Private___refl_typeid = new AstroUdonVariable<long>(RenderCameraEvent, "__refl_typeid");
+        Private_lastInput = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "lastInput");
+        Private_colors = new AstroUdonVariable<UnityEngine.Color32[]>(RenderCameraEvent, "colors");
+        Private_autoFillTMP = new AstroUdonVariable<bool>(RenderCameraEvent, "autoFillTMP");
+        Private___lcl_toIterate_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_toIterate_SystemInt32_0");
+        Private___lcl_toIterate_SystemInt32_1 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_toIterate_SystemInt32_1");
+        Private___lcl_toIterate_SystemInt32_2 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_toIterate_SystemInt32_2");
+        Private_bytesCount = new AstroUdonVariable<int>(RenderCameraEvent, "bytesCount");
+        Private___const_SystemUInt32_0 = new AstroUdonVariable<uint>(RenderCameraEvent, "__const_SystemUInt32_0");
+        Private___intnl_UnityEngineComponent_0 = new AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal>(RenderCameraEvent, "__intnl_UnityEngineComponent_0");
+        Private___intnl_SystemBoolean_11 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_11");
+        Private___intnl_SystemBoolean_21 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_21");
+        Private_callbackEventName = new AstroUdonVariable<string>(RenderCameraEvent, "callbackEventName");
+        Private___intnl_UnityEngineColor32_3 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__intnl_UnityEngineColor32_3");
+        Private___gintnl_SystemUInt32_14 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_14");
+        Private___gintnl_SystemUInt32_24 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_24");
+        Private___intnl_SystemInt32_17 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_17");
+        Private___intnl_SystemInt32_37 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_37");
+        Private___intnl_SystemInt32_27 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_27");
+        Private___intnl_SystemInt32_57 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_57");
+        Private___intnl_SystemInt32_47 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_47");
+        Private___intnl_SystemString_3 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_3");
+        Private___0__intnlparam = new AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal>(RenderCameraEvent, "__0__intnlparam");
+        Private___const_SystemString_2 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_2");
+        Private___const_SystemSingle_2 = new AstroUdonVariable<float>(RenderCameraEvent, "__const_SystemSingle_2");
+        Private___intnl_SystemBoolean_19 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_19");
+        Private___intnl_UnityEngineGameObject_1 = new AstroUdonVariable<UnityEngine.GameObject>(RenderCameraEvent, "__intnl_UnityEngineGameObject_1");
+        Private___intnl_SystemBoolean_14 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_14");
+        Private___intnl_SystemBoolean_24 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_24");
+        Private___const_SystemInt32_13 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_13");
+        Private___const_SystemInt32_23 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_23");
+        Private_pedestalTexture = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "pedestalTexture");
+        Private___0_text__param = new AstroUdonVariable<string>(RenderCameraEvent, "__0_text__param");
+        Private___intnl_SystemInt32_14 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_14");
+        Private___intnl_SystemInt32_34 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_34");
+        Private___intnl_SystemInt32_24 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_24");
+        Private___intnl_SystemInt32_54 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_54");
+        Private___intnl_SystemInt32_44 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_44");
+        Private_pedestal = new AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal>(RenderCameraEvent, "pedestal");
+        Private_currentTry = new AstroUdonVariable<int>(RenderCameraEvent, "currentTry");
+        Private___lcl_maxDataLength_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_maxDataLength_SystemInt32_0");
+        Private___intnl_SystemInt32_19 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_19");
+        Private___intnl_SystemInt32_39 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_39");
+        Private___intnl_SystemInt32_29 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_29");
+        Private___intnl_SystemInt32_59 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_59");
+        Private___intnl_SystemInt32_49 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_49");
+        Private___intnl_SystemString_0 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_0");
+        Private___intnl_SystemByte_1 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_1");
+        Private___const_SystemByte_0 = new AstroUdonVariable<byte>(RenderCameraEvent, "__const_SystemByte_0");
+        Private___0_picture__param = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "__0_picture__param");
+        Private___intnl_UnityEngineRect_0 = new AstroUdonVariable<UnityEngine.Rect>(RenderCameraEvent, "__intnl_UnityEngineRect_0");
+        Private___intnl_SystemSingle_1 = new AstroUdonVariable<float>(RenderCameraEvent, "__intnl_SystemSingle_1");
+        Private___lcl_headerInfo_UnityEngineColor32_0 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__lcl_headerInfo_UnityEngineColor32_0");
+        Private__utf8Chars = new AstroUdonVariable<string[]>(RenderCameraEvent, "_utf8Chars");
+        Private___intnl_SystemChar_0 = new AstroUdonVariable<char>(RenderCameraEvent, "__intnl_SystemChar_0");
+        Private___const_SystemString_7 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_7");
+        Private_linkedAvatars = new AstroUdonVariable<string[]>(RenderCameraEvent, "linkedAvatars");
+        Private___const_SystemSingle_1 = new AstroUdonVariable<float>(RenderCameraEvent, "__const_SystemSingle_1");
         Private_byteIndex = new AstroUdonVariable<int>(RenderCameraEvent, "byteIndex");
-        Private___9_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__9_intnl_SystemSingle");
-        Private___22_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__22_intnl_SystemString");
-        Private___12_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__12_const_intnl_SystemString");
-        Private___3_intnl_SystemObject = new AstroUdonVariable<int>(RenderCameraEvent, "__3_intnl_SystemObject");
-        Private___23_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__23_intnl_SystemSingle");
-        Private___0_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(RenderCameraEvent, "__0_intnl_UnityEngineGameObject");
-        Private___8_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__8_const_intnl_SystemString");
-        Private___6_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__6_intnl_SystemSingle");
-        Private___24_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__24_intnl_SystemSingle");
-        Private___24_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__24_intnl_SystemString");
-        Private___16_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__16_intnl_SystemSingle");
-        Private___21_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__21_intnl_SystemString");
-        Private___13_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__13_intnl_SystemString");
-        Private___5_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__5_intnl_interpolatedStr_String");
-        Private___8_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__8_const_intnl_exitJumpLoc_UInt32");
-        Private___22_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__22_intnl_SystemSingle");
-        Private___9_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__9_const_intnl_SystemString");
-        Private___0_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_intnl_SystemInt32");
-        Private___0_intnl_returnTarget_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__0_intnl_returnTarget_UInt32");
-        Private___0_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__0_intnl_SystemString");
-        Private_empty = new AstroUdonVariable<string>(RenderCameraEvent, "empty");
-        Private___10_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__10_intnl_SystemInt32");
+        Private___gintnl_SystemUInt32_11 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_11");
+        Private___gintnl_SystemUInt32_21 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_21");
+        Private___intnl_SystemBoolean_17 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_17");
+        Private___intnl_SystemBoolean_27 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_27");
+        Private_callBackOnFinish = new AstroUdonVariable<bool>(RenderCameraEvent, "callBackOnFinish");
+        Private___const_SystemInt32_10 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_10");
+        Private___const_SystemInt32_20 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_20");
+        Private___const_VRCUdonCommonEnumsEventTiming_0 = new AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming>(RenderCameraEvent, "__const_VRCUdonCommonEnumsEventTiming_0");
+        Private___intnl_SystemInt32_11 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_11");
+        Private___intnl_SystemInt32_31 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_31");
+        Private___intnl_SystemInt32_21 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_21");
+        Private___intnl_SystemInt32_51 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_51");
+        Private___intnl_SystemInt32_41 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_41");
+        Private___lcl_temp_SystemByteArray_0 = new AstroUdonVariable<byte[]>(RenderCameraEvent, "__lcl_temp_SystemByteArray_0");
+        Private___intnl_SystemString_8 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_8");
+        Private___intnl_SystemByte_9 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_9");
+        Private_debugLogging = new AstroUdonVariable<bool>(RenderCameraEvent, "debugLogging");
+        Private___const_SystemString_34 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_34");
+        Private___const_SystemString_32 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_32");
+        Private___const_SystemString_33 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_33");
+        Private___const_SystemString_30 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_30");
+        Private___const_SystemString_31 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_31");
+        Private___intnl_SystemByte_2 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_2");
+        Private_transferSpeed = new AstroUdonVariable<int>(RenderCameraEvent, "transferSpeed");
+        Private___intnl_returnJump_SystemUInt32_0 = new AstroUdonVariable<uint>(RenderCameraEvent, "__intnl_returnJump_SystemUInt32_0");
+        Private_character = new AstroUdonVariable<int>(RenderCameraEvent, "character");
+        Private_avatarBytes = new AstroUdonVariable<byte[]>(RenderCameraEvent, "avatarBytes");
+        Private___const_SystemString_4 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_4");
+        Private_imageMode = new AstroUdonVariable<int>(RenderCameraEvent, "imageMode");
+        Private___gintnl_SystemUInt32_19 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_19");
+        Private___gintnl_SystemUInt32_29 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_29");
+        Private___intnl_UnityEngineColor32_1 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__intnl_UnityEngineColor32_1");
+        Private___const_SystemInt32_18 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_18");
+        Private___gintnl_SystemUInt32_12 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_12");
+        Private___gintnl_SystemUInt32_22 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_22");
+        Private___lcl_child_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "__lcl_child_UnityEngineTransform_0");
+        Private___lcl_i_SystemInt32_1 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_i_SystemInt32_1");
+        Private___lcl_i_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_i_SystemInt32_0");
+        Private___const_SystemInt32_15 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_15");
+        Private_charCounter = new AstroUdonVariable<byte>(RenderCameraEvent, "charCounter");
+        Private_patronMode = new AstroUdonVariable<bool>(RenderCameraEvent, "patronMode");
+        Private___intnl_SystemByte_17 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_17");
+        Private___intnl_SystemByte_16 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_16");
+        Private___intnl_SystemByte_15 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_15");
+        Private___intnl_SystemByte_14 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_14");
+        Private___intnl_SystemByte_13 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_13");
+        Private___intnl_SystemByte_12 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_12");
+        Private___intnl_SystemByte_11 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_11");
+        Private___intnl_SystemByte_10 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_10");
+        Private___intnl_SystemString_5 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_5");
+        Private___intnl_SystemByte_7 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_7");
+        Private___1__intnlparam = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "__1__intnlparam");
+        Private___intnl_UnityEngineObject_15 = new AstroUdonVariable<UnityEngine.GameObject>(RenderCameraEvent, "__intnl_UnityEngineObject_15");
         Private_pedestalReady = new AstroUdonVariable<bool>(RenderCameraEvent, "pedestalReady");
-        Private_patreon = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "patreon");
-        Private___0_const_intnl_SystemUInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__0_const_intnl_SystemUInt32");
-        Private_stopwatch = new AstroUdonVariable<System.Diagnostics.Stopwatch>(RenderCameraEvent, "stopwatch");
-        Private___9_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__9_intnl_SystemBoolean");
-        Private___13_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__13_intnl_SystemInt32");
-        Private___3_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__3_intnl_SystemByte");
-        Private___0_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__0_intnl_SystemSingle");
-        Private___29_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__29_intnl_SystemString");
-        Private___12_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__12_intnl_SystemString");
-        Private___18_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__18_const_intnl_SystemString");
-        Private___13_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__13_intnl_SystemSingle");
-        Private___4_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__4_intnl_SystemInt32");
-        Private_colorBytes = new AstroUdonVariable<byte[]>(RenderCameraEvent, "colorBytes");
-        Private___6_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__6_intnl_SystemByte");
-        Private___14_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__14_intnl_SystemSingle");
-        Private___4_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__4_intnl_SystemString");
-        Private___14_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__14_intnl_SystemString");
-        Private___19_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__19_const_intnl_SystemString");
-        Private___0_mp_text_String = new AstroUdonVariable<string>(RenderCameraEvent, "__0_mp_text_String");
-        Private___6_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__6_intnl_SystemBoolean");
-        Private___20_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__20_intnl_SystemSingle");
-        Private___4_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__4_intnl_SystemSingle");
-        Private___11_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__11_intnl_SystemString");
-        Private_prefab = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "prefab");
-        Private___5_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__5_intnl_SystemByte");
-        Private___24_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__24_const_intnl_SystemString");
-        Private___27_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__27_intnl_SystemString");
-        Private___12_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__12_intnl_SystemSingle");
-        Private___30_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__30_intnl_SystemString");
-        Private___14_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__14_intnl_SystemBoolean");
+        Private_frameSkip = new AstroUdonVariable<bool>(RenderCameraEvent, "frameSkip");
+        Private_outputBytes = new AstroUdonVariable<byte[]>(RenderCameraEvent, "outputBytes");
+        Private___0_IsSame__ret = new AstroUdonVariable<bool>(RenderCameraEvent, "__0_IsSame__ret");
+        Private___const_SystemString_9 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_9");
+        Private___intnl_UnityEngineTextureFormat_0 = new AstroUdonVariable<UnityEngine.TextureFormat>(RenderCameraEvent, "__intnl_UnityEngineTextureFormat_0");
+        Private___intnl_SystemBoolean_12 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_12");
+        Private___intnl_SystemBoolean_22 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_22");
+        Private___gintnl_SystemUInt32_17 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_17");
+        Private___gintnl_SystemUInt32_27 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_27");
+        Private___intnl_SystemInt32_16 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_16");
+        Private___intnl_SystemInt32_36 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_36");
+        Private___intnl_SystemInt32_26 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_26");
+        Private___intnl_SystemInt32_56 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_56");
+        Private___intnl_SystemInt32_46 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_46");
+        Private___refl_typename = new AstroUdonVariable<string>(RenderCameraEvent, "__refl_typename");
+        Private___gintnl_SystemObjectArray_0 = new AstroUdonVariable<System.Object[]>(RenderCameraEvent, "__gintnl_SystemObjectArray_0");
+        Private___intnl_SystemInt32_1 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_1");
+        Private___intnl_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_0");
+        Private___intnl_SystemInt32_3 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_3");
+        Private___intnl_SystemInt32_2 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_2");
+        Private___intnl_SystemInt32_5 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_5");
+        Private___intnl_SystemInt32_4 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_4");
+        Private___intnl_SystemInt32_7 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_7");
+        Private___intnl_SystemInt32_6 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_6");
+        Private___intnl_SystemInt32_9 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_9");
+        Private___intnl_SystemInt32_8 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_8");
+        Private_outputToText = new AstroUdonVariable<bool>(RenderCameraEvent, "outputToText");
+        Private_pedestalClone = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "pedestalClone");
+        Private___this_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.Transform>(RenderCameraEvent, "__this_UnityEngineTransform_0");
+        Private___const_SystemString_1 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_1");
+        Private___intnl_SystemString_19 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_19");
+        Private___intnl_SystemString_14 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_14");
+        Private___intnl_SystemString_15 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_15");
+        Private___intnl_SystemString_12 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_12");
+        Private___intnl_SystemString_13 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_13");
+        Private___intnl_SystemString_10 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_10");
+        Private___intnl_SystemString_11 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_11");
+        Private___intnl_SystemBoolean_15 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_15");
+        Private___intnl_SystemBoolean_25 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_25");
+        Private___const_SystemInt32_12 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_12");
+        Private___const_SystemInt32_22 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_22");
+        Private___intnl_SystemInt32_13 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_13");
+        Private___intnl_SystemInt32_33 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_33");
+        Private___intnl_SystemInt32_23 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_23");
+        Private___intnl_SystemInt32_53 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_53");
+        Private___intnl_SystemInt32_43 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_43");
+        Private_waitForNew = new AstroUdonVariable<bool>(RenderCameraEvent, "waitForNew");
+        Private___intnl_SystemInt32_18 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_18");
+        Private___intnl_SystemInt32_38 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_38");
+        Private___intnl_SystemInt32_28 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_28");
+        Private___intnl_SystemInt32_58 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_58");
+        Private___intnl_SystemInt32_48 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_48");
         Private_donorInput = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "donorInput");
-        Private___0_intnl_SystemInt64 = new AstroUdonVariable<long>(RenderCameraEvent, "__0_intnl_SystemInt64");
-        Private___3_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__3_intnl_SystemInt32");
-        Private___25_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__25_const_intnl_SystemString");
-        Private___11_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__11_const_intnl_exitJumpLoc_UInt32");
-        Private___8_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__8_intnl_SystemBoolean");
-        Private___1_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__1_intnl_interpolatedStr_String");
-        Private___20_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__20_intnl_SystemBoolean");
-        Private___3_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__3_intnl_SystemString");
-        Private___8_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__8_intnl_SystemByte");
-        Private___1_intnl_SystemObject = new AstroUdonVariable<bool>(RenderCameraEvent, "__1_intnl_SystemObject");
-        Private_renderQuad = new AstroUdonVariable<UnityEngine.GameObject>(RenderCameraEvent, "renderQuad");
-        Private___0_intnl_SystemByte = new AstroUdonVariable<byte>(RenderCameraEvent, "__0_intnl_SystemByte");
-        Private___1_intnl_TMProTextMeshPro = new AstroUdonVariable<TMPro.TextMeshPro>(RenderCameraEvent, "__1_intnl_TMProTextMeshPro");
-        Private___4_intnl_interpolatedStr_String = new AstroUdonVariable<string>(RenderCameraEvent, "__4_intnl_interpolatedStr_String");
-        Private___19_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__19_intnl_SystemString");
-        Private___2_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__2_const_intnl_SystemInt32");
-        Private___3_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__3_intnl_SystemSingle");
-        Private___26_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__26_intnl_SystemString");
-        Private___27_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__27_const_intnl_SystemString");
-        Private___10_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__10_const_intnl_SystemString");
-        Private_index = new AstroUdonVariable<int>(RenderCameraEvent, "index");
-        Private___18_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__18_intnl_SystemSingle");
-        Private___7_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__7_intnl_SystemInt32");
-        Private___1_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__1_const_intnl_SystemBoolean");
-        Private___7_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__7_intnl_SystemString");
-        Private___11_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__11_const_intnl_SystemString");
-        Private___16_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__16_const_intnl_SystemString");
-        Private___5_intnl_SystemObject = new AstroUdonVariable<TMPro.TextMeshPro>(RenderCameraEvent, "__5_intnl_SystemObject");
-        Private___0_intnl_UnityEngineTexture2D = new AstroUdonVariable<UnityEngine.Texture2D>(RenderCameraEvent, "__0_intnl_UnityEngineTexture2D");
-        Private___18_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__18_intnl_SystemBoolean");
-        Private___2_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__2_intnl_SystemBoolean");
-        Private___10_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__10_intnl_SystemSingle");
-        Private___25_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__25_intnl_SystemSingle");
-        Private___0_stepLength_Int32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_stepLength_Int32");
-        Private___0_step_Int32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_step_Int32");
-        Private___3_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__3_const_intnl_SystemInt32");
-        Private___7_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__7_intnl_SystemSingle");
-        Private___0_this_intnl_AvatarImageReaderReadRenderTexture = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__0_this_intnl_AvatarImageReaderReadRenderTexture");
-        Private___25_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__25_intnl_SystemString");
-        Private___3_intnl_TMProTextMeshPro = new AstroUdonVariable<TMPro.TextMeshPro>(RenderCameraEvent, "__3_intnl_TMProTextMeshPro");
-        Private___17_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__17_intnl_SystemString");
-        Private___0_intnl_returnValSymbol_String = new AstroUdonVariable<string>(RenderCameraEvent, "__0_intnl_returnValSymbol_String");
-        Private___30_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__30_const_intnl_SystemString");
+        Private_callbackBehaviour = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "callbackBehaviour");
+        Private___lcl_textLength_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__lcl_textLength_SystemInt32_0");
+        Private___intnl_SystemByte_0 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_0");
+        Private___const_SystemByte_3 = new AstroUdonVariable<byte>(RenderCameraEvent, "__const_SystemByte_3");
+        Private___const_SystemString_6 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_6");
+        Private___gintnl_SystemUInt32_10 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_10");
+        Private___gintnl_SystemUInt32_30 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_30");
+        Private___gintnl_SystemUInt32_20 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_20");
+        Private___const_SystemInt32_17 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_17");
+        Private___intnl_SystemInt32_10 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_10");
+        Private___intnl_SystemInt32_30 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_30");
+        Private___intnl_SystemInt32_20 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_20");
+        Private___intnl_SystemInt32_50 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_50");
+        Private___intnl_SystemInt32_40 = new AstroUdonVariable<int>(RenderCameraEvent, "__intnl_SystemInt32_40");
+        Private___intnl_SystemString_7 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_7");
+        Private___intnl_SystemByte_8 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_8");
+        Private___const_SystemString_26 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_26");
+        Private___const_SystemString_27 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_27");
+        Private___const_SystemString_24 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_24");
+        Private___const_SystemString_25 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_25");
+        Private___const_SystemString_22 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_22");
+        Private___const_SystemString_23 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_23");
+        Private___const_SystemString_20 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_20");
+        Private___const_SystemString_21 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_21");
+        Private___const_SystemString_28 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_28");
+        Private___const_SystemString_29 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_29");
+        Private___intnl_SystemByte_5 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_5");
+        Private_frameCounter = new AstroUdonVariable<int>(RenderCameraEvent, "frameCounter");
+        Private___gintnl_SystemUInt32_18 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_18");
+        Private___gintnl_SystemUInt32_28 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_28");
+        Private___intnl_SystemBoolean_10 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_10");
+        Private___intnl_SystemBoolean_20 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_20");
+        Private___intnl_UnityEngineColor32_2 = new AstroUdonVariable<UnityEngine.Color32>(RenderCameraEvent, "__intnl_UnityEngineColor32_2");
+        Private___gintnl_SystemUInt32_15 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_15");
+        Private___gintnl_SystemUInt32_25 = new AstroUdonVariable<uint>(RenderCameraEvent, "__gintnl_SystemUInt32_25");
         Private_outputString = new AstroUdonVariable<string>(RenderCameraEvent, "outputString");
-        Private___13_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__13_const_intnl_SystemString");
-        Private___8_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__8_intnl_SystemInt32");
-        Private___8_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__8_intnl_SystemString");
-        Private___10_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__10_intnl_SystemBoolean");
-        Private___2_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__2_const_intnl_SystemString");
-        Private___31_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__31_const_intnl_SystemString");
-        Private___0_const_intnl_SystemInt32 = new AstroUdonVariable<int>(RenderCameraEvent, "__0_const_intnl_SystemInt32");
-        Private___33_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__33_intnl_SystemString");
-        Private___0_intnl_SystemChar = new AstroUdonVariable<char>(RenderCameraEvent, "__0_intnl_SystemChar");
-        Private___1_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(RenderCameraEvent, "__1_const_intnl_exitJumpLoc_UInt32");
-        Private___22_const_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__22_const_intnl_SystemString");
-        Private___8_intnl_SystemSingle = new AstroUdonVariable<float>(RenderCameraEvent, "__8_intnl_SystemSingle");
-        Private___17_intnl_SystemBoolean = new AstroUdonVariable<bool>(RenderCameraEvent, "__17_intnl_SystemBoolean");
-        Private___16_intnl_SystemString = new AstroUdonVariable<string>(RenderCameraEvent, "__16_intnl_SystemString");
+        Private_decodeSpeedUTF16 = new AstroUdonVariable<int>(RenderCameraEvent, "decodeSpeedUTF16");
+        Private___const_SystemInt32_9 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_9");
+        Private___const_SystemInt32_8 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_8");
+        Private___const_SystemInt32_1 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_1");
+        Private___const_SystemInt32_0 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_0");
+        Private___const_SystemInt32_3 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_3");
+        Private___const_SystemInt32_2 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_2");
+        Private___const_SystemInt32_5 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_5");
+        Private___const_SystemInt32_4 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_4");
+        Private___const_SystemInt32_7 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_7");
+        Private___const_SystemInt32_6 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_6");
+        Private___const_SystemInt32_14 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_14");
+        Private___const_SystemInt32_24 = new AstroUdonVariable<int>(RenderCameraEvent, "__const_SystemInt32_24");
+        Private___intnl_SystemBoolean_8 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_8");
+        Private___intnl_SystemBoolean_9 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_9");
+        Private___intnl_SystemBoolean_0 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_0");
+        Private___intnl_SystemBoolean_1 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_1");
+        Private___intnl_SystemBoolean_2 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_2");
+        Private___intnl_SystemBoolean_3 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_3");
+        Private___intnl_SystemBoolean_4 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_4");
+        Private___intnl_SystemBoolean_5 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_5");
+        Private___intnl_SystemBoolean_6 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_6");
+        Private___intnl_SystemBoolean_7 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_7");
+        Private___intnl_SystemString_4 = new AstroUdonVariable<string>(RenderCameraEvent, "__intnl_SystemString_4");
+        Private_renderQuadRenderer = new AstroUdonVariable<UnityEngine.MeshRenderer>(RenderCameraEvent, "renderQuadRenderer");
+        Private_avatarPedestal = new AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal>(RenderCameraEvent, "avatarPedestal");
+        Private___intnl_SystemByte_6 = new AstroUdonVariable<byte>(RenderCameraEvent, "__intnl_SystemByte_6");
+        Private_pedestalAssetsReady = new AstroUdonVariable<bool>(RenderCameraEvent, "pedestalAssetsReady");
+        Private_decodeIndex = new AstroUdonVariable<int>(RenderCameraEvent, "decodeIndex");
+        Private_maxIndex = new AstroUdonVariable<int>(RenderCameraEvent, "maxIndex");
+        Private___const_SystemString_3 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_3");
+        Private___this_VRCUdonUdonBehaviour_8 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_8");
+        Private___this_VRCUdonUdonBehaviour_3 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_3");
+        Private___this_VRCUdonUdonBehaviour_2 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_2");
+        Private___this_VRCUdonUdonBehaviour_1 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_1");
+        Private___this_VRCUdonUdonBehaviour_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_0");
+        Private___this_VRCUdonUdonBehaviour_7 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_7");
+        Private___this_VRCUdonUdonBehaviour_6 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_6");
+        Private___this_VRCUdonUdonBehaviour_5 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_5");
+        Private___this_VRCUdonUdonBehaviour_4 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(RenderCameraEvent, "__this_VRCUdonUdonBehaviour_4");
+        Private___const_SystemString_8 = new AstroUdonVariable<string>(RenderCameraEvent, "__const_SystemString_8");
+        Private___intnl_SystemBoolean_18 = new AstroUdonVariable<bool>(RenderCameraEvent, "__intnl_SystemBoolean_18");
         Private_renderCamera = new AstroUdonVariable<UnityEngine.Camera>(RenderCameraEvent, "renderCamera");
     }
 
     private void Cleanup_RenderCameraEvent()
     {
-        Private___3_intnl_interpolatedStr_String = null;
+        Private___intnl_SystemBoolean_13 = null;
+        Private___intnl_SystemBoolean_23 = null;
+        Private___gintnl_SystemUInt32_16 = null;
+        Private___gintnl_SystemUInt32_26 = null;
+        Private___intnl_SystemInt32_15 = null;
+        Private___intnl_SystemInt32_35 = null;
+        Private___intnl_SystemInt32_25 = null;
+        Private___intnl_SystemInt32_55 = null;
+        Private___intnl_SystemInt32_45 = null;
+        Private_nextAvatar = null;
+        Private_charIndex = null;
+        Private_avatarCounter = null;
         Private_renderTexture = null;
-        Private___0_intnl_interpolatedStr_String = null;
-        Private___15_intnl_SystemInt32 = null;
-        Private___40_intnl_SystemString = null;
-        Private___12_intnl_SystemInt32 = null;
-        Private___3_const_intnl_SystemString = null;
-        Private___6_intnl_interpolatedStr_String = null;
-        Private___6_const_intnl_SystemInt32 = null;
-        Private___3_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___0_const_intnl_SystemBoolean = null;
-        Private___1_const_intnl_SystemInt32 = null;
-        Private___32_intnl_SystemString = null;
-        Private_byteCache = null;
-        Private___1_intnl_SystemInt32 = null;
-        Private___15_intnl_SystemSingle = null;
-        Private_lastIndex = null;
-        Private___2_intnl_SystemObject = null;
-        Private___1_intnl_SystemString = null;
-        Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = null;
-        Private___15_intnl_SystemString = null;
-        Private___0_h_Int32 = null;
-        Private___0_b_Int32 = null;
-        Private___0_w_Int32 = null;
+        Private___gintnl_SystemObjectArray_1 = null;
+        Private___intnl_UnityEngineMaterial_0 = null;
+        Private___intnl_UnityEngineObject_12 = null;
+        Private___const_SystemByte_1 = null;
+        Private___intnl_SystemSingle_0 = null;
+        Private___intnl_SystemChar_1 = null;
+        Private_pedestalMaterial = null;
+        Private___const_SystemString_0 = null;
+        Private___intnl_UnityEngineTransform_0 = null;
+        Private___lcl_value_SystemByte_0 = null;
+        Private___const_SystemSingle_0 = null;
         Private_hasRun = null;
-        Private___34_intnl_SystemString = null;
-        Private___0_const_intnl_SystemString = null;
-        Private___21_intnl_SystemSingle = null;
-        Private___7_intnl_SystemByte = null;
-        Private___1_intnl_SystemSingle = null;
-        Private___5_intnl_SystemBoolean = null;
-        Private___31_intnl_SystemString = null;
-        Private___10_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___5_intnl_SystemInt32 = null;
-        Private___0_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___15_intnl_SystemBoolean = null;
+        Private___lcl_isNew_UnityEngineColor32_0 = null;
+        Private_dataMode = null;
+        Private___intnl_SystemBoolean_16 = null;
+        Private___intnl_SystemBoolean_26 = null;
+        Private_debugTMP = null;
+        Private___const_SystemInt32_11 = null;
+        Private___const_SystemInt32_21 = null;
+        Private___intnl_SystemInt32_12 = null;
+        Private___intnl_SystemInt32_32 = null;
+        Private___intnl_SystemInt32_22 = null;
+        Private___intnl_SystemInt32_52 = null;
+        Private___intnl_SystemInt32_42 = null;
+        Private___lcl_now_SystemDateTime_0 = null;
+        Private___intnl_SystemString_9 = null;
+        Private___lcl_idColor_UnityEngineColor32_0 = null;
+        Private___intnl_SystemByte_3 = null;
+        Private___gintnl_SystemUInt32_9 = null;
+        Private___gintnl_SystemUInt32_8 = null;
+        Private___gintnl_SystemUInt32_5 = null;
+        Private___gintnl_SystemUInt32_4 = null;
+        Private___gintnl_SystemUInt32_7 = null;
+        Private___gintnl_SystemUInt32_6 = null;
+        Private___gintnl_SystemUInt32_1 = null;
+        Private___gintnl_SystemUInt32_0 = null;
+        Private___gintnl_SystemUInt32_3 = null;
+        Private___gintnl_SystemUInt32_2 = null;
+        Private___const_SystemBoolean_0 = null;
+        Private___const_SystemBoolean_1 = null;
+        Private___const_SystemByte_2 = null;
         Private_dataLength = null;
-        Private___20_intnl_SystemString = null;
-        Private___6_intnl_SystemObject = null;
-        Private___5_intnl_SystemString = null;
-        Private___28_const_intnl_SystemString = null;
-        Private___6_const_intnl_SystemString = null;
-        Private___21_intnl_SystemBoolean = null;
-        Private___5_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___13_intnl_SystemBoolean = null;
-        Private___2_intnl_SystemByte = null;
-        Private___1_const_intnl_SystemString = null;
-        Private___4_const_intnl_SystemInt32 = null;
-        Private___29_const_intnl_SystemString = null;
-        Private___5_intnl_SystemSingle = null;
-        Private___2_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___0_mp_picture_Texture2D = null;
-        Private___16_intnl_SystemBoolean = null;
-        Private___14_const_intnl_SystemString = null;
-        Private___39_intnl_SystemString = null;
-        Private___0_firstColor_Color = null;
-        Private___19_intnl_SystemSingle = null;
-        Private___7_intnl_SystemBoolean = null;
-        Private___1_intnl_SystemByte = null;
+        Private___intnl_UnityEngineMeshRenderer_0 = null;
+        Private___intnl_UnityEngineMeshRenderer_1 = null;
+        Private___const_SystemString_5 = null;
+        Private___intnl_UnityEngineColor32_0 = null;
+        Private___const_SystemInt32_19 = null;
+        Private___gintnl_SystemUInt32_13 = null;
+        Private___gintnl_SystemUInt32_23 = null;
+        Private___intnl_UnityEngineObject_8 = null;
+        Private___intnl_UnityEngineObject_4 = null;
+        Private___intnl_UnityEngineObject_2 = null;
+        Private___intnl_UnityEngineObject_0 = null;
+        Private___const_SystemInt32_16 = null;
+        Private_decodeSpeedUTF8 = null;
+        Private___intnl_SystemString_6 = null;
+        Private___const_SystemString_16 = null;
+        Private___const_SystemString_17 = null;
+        Private___const_SystemString_14 = null;
+        Private___const_SystemString_15 = null;
+        Private___const_SystemString_12 = null;
+        Private___const_SystemString_13 = null;
+        Private___const_SystemString_10 = null;
+        Private___const_SystemString_11 = null;
+        Private___const_SystemString_18 = null;
+        Private___const_SystemString_19 = null;
+        Private___intnl_SystemByte_4 = null;
+        Private_color = null;
+        Private_pixelIndex = null;
+        Private___intnl_UnityEngineObject_14 = null;
+        Private___refl_typeid = null;
+        Private_lastInput = null;
         Private_colors = null;
-        Private___7_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___28_intnl_SystemString = null;
-        Private___2_intnl_interpolatedStr_String = null;
-        Private___7_const_intnl_SystemString = null;
-        Private___15_const_intnl_SystemString = null;
-        Private___0_tempString_String = null;
-        Private___27_intnl_SystemSingle = null;
-        Private___5_const_intnl_SystemInt32 = null;
-        Private___refl_const_intnl_udonTypeID = null;
-        Private___4_intnl_SystemBoolean = null;
-        Private___11_intnl_SystemSingle = null;
-        Private___4_intnl_SystemByte = null;
-        Private___19_intnl_SystemBoolean = null;
-        Private___refl_const_intnl_udonTypeName = null;
-        Private___0_intnl_SystemObject = null;
-        Private___1_intnl_SystemBoolean = null;
-        Private___14_intnl_SystemInt32 = null;
-        Private___17_const_intnl_SystemString = null;
-        Private___11_intnl_SystemInt32 = null;
-        Private___4_const_intnl_SystemString = null;
-        Private___10_intnl_SystemString = null;
-        Private___20_const_intnl_SystemString = null;
-        Private___0_intnl_UnityEngineTextureFormat = null;
-        Private___0_c_Color = null;
-        Private___11_intnl_SystemBoolean = null;
-        Private___2_intnl_SystemInt32 = null;
-        Private___26_intnl_SystemSingle = null;
-        Private___4_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___2_intnl_SystemString = null;
-        Private___21_const_intnl_SystemString = null;
-        Private___26_const_intnl_SystemString = null;
-        Private___23_intnl_SystemString = null;
-        Private___4_intnl_SystemObject = null;
-        Private___9_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___0_mp_bytes_ByteArray = null;
-        Private___9_intnl_SystemInt32 = null;
-        Private___2_intnl_SystemSingle = null;
-        Private___5_const_intnl_SystemString = null;
-        Private___3_intnl_SystemBoolean = null;
-        Private___12_intnl_SystemBoolean = null;
-        Private___9_intnl_SystemString = null;
-        Private___6_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___18_intnl_SystemString = null;
-        Private___23_const_intnl_SystemString = null;
-        Private___6_intnl_SystemInt32 = null;
-        Private___0_intnl_SystemByteArray = null;
-        Private___17_intnl_SystemSingle = null;
-        Private___0_intnl_UnityEngineRect = null;
-        Private___6_intnl_SystemString = null;
-        Private___0_intnl_SystemBoolean = null;
+        Private_autoFillTMP = null;
+        Private___lcl_toIterate_SystemInt32_0 = null;
+        Private___lcl_toIterate_SystemInt32_1 = null;
+        Private___lcl_toIterate_SystemInt32_2 = null;
+        Private_bytesCount = null;
+        Private___const_SystemUInt32_0 = null;
+        Private___intnl_UnityEngineComponent_0 = null;
+        Private___intnl_SystemBoolean_11 = null;
+        Private___intnl_SystemBoolean_21 = null;
+        Private_callbackEventName = null;
+        Private___intnl_UnityEngineColor32_3 = null;
+        Private___gintnl_SystemUInt32_14 = null;
+        Private___gintnl_SystemUInt32_24 = null;
+        Private___intnl_SystemInt32_17 = null;
+        Private___intnl_SystemInt32_37 = null;
+        Private___intnl_SystemInt32_27 = null;
+        Private___intnl_SystemInt32_57 = null;
+        Private___intnl_SystemInt32_47 = null;
+        Private___intnl_SystemString_3 = null;
+        Private___0__intnlparam = null;
+        Private___const_SystemString_2 = null;
+        Private___const_SystemSingle_2 = null;
+        Private___intnl_SystemBoolean_19 = null;
+        Private___intnl_UnityEngineGameObject_1 = null;
+        Private___intnl_SystemBoolean_14 = null;
+        Private___intnl_SystemBoolean_24 = null;
+        Private___const_SystemInt32_13 = null;
+        Private___const_SystemInt32_23 = null;
+        Private_pedestalTexture = null;
+        Private___0_text__param = null;
+        Private___intnl_SystemInt32_14 = null;
+        Private___intnl_SystemInt32_34 = null;
+        Private___intnl_SystemInt32_24 = null;
+        Private___intnl_SystemInt32_54 = null;
+        Private___intnl_SystemInt32_44 = null;
+        Private_pedestal = null;
+        Private_currentTry = null;
+        Private___lcl_maxDataLength_SystemInt32_0 = null;
+        Private___intnl_SystemInt32_19 = null;
+        Private___intnl_SystemInt32_39 = null;
+        Private___intnl_SystemInt32_29 = null;
+        Private___intnl_SystemInt32_59 = null;
+        Private___intnl_SystemInt32_49 = null;
+        Private___intnl_SystemString_0 = null;
+        Private___intnl_SystemByte_1 = null;
+        Private___const_SystemByte_0 = null;
+        Private___0_picture__param = null;
+        Private___intnl_UnityEngineRect_0 = null;
+        Private___intnl_SystemSingle_1 = null;
+        Private___lcl_headerInfo_UnityEngineColor32_0 = null;
+        Private__utf8Chars = null;
+        Private___intnl_SystemChar_0 = null;
+        Private___const_SystemString_7 = null;
+        Private_linkedAvatars = null;
+        Private___const_SystemSingle_1 = null;
         Private_byteIndex = null;
-        Private___9_intnl_SystemSingle = null;
-        Private___22_intnl_SystemString = null;
-        Private___12_const_intnl_SystemString = null;
-        Private___3_intnl_SystemObject = null;
-        Private___23_intnl_SystemSingle = null;
-        Private___0_intnl_UnityEngineGameObject = null;
-        Private___8_const_intnl_SystemString = null;
-        Private___6_intnl_SystemSingle = null;
-        Private___24_intnl_SystemSingle = null;
-        Private___24_intnl_SystemString = null;
-        Private___16_intnl_SystemSingle = null;
-        Private___21_intnl_SystemString = null;
-        Private___13_intnl_SystemString = null;
-        Private___5_intnl_interpolatedStr_String = null;
-        Private___8_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___22_intnl_SystemSingle = null;
-        Private___9_const_intnl_SystemString = null;
-        Private___0_intnl_SystemInt32 = null;
-        Private___0_intnl_returnTarget_UInt32 = null;
-        Private___0_intnl_SystemString = null;
-        Private_empty = null;
-        Private___10_intnl_SystemInt32 = null;
+        Private___gintnl_SystemUInt32_11 = null;
+        Private___gintnl_SystemUInt32_21 = null;
+        Private___intnl_SystemBoolean_17 = null;
+        Private___intnl_SystemBoolean_27 = null;
+        Private_callBackOnFinish = null;
+        Private___const_SystemInt32_10 = null;
+        Private___const_SystemInt32_20 = null;
+        Private___const_VRCUdonCommonEnumsEventTiming_0 = null;
+        Private___intnl_SystemInt32_11 = null;
+        Private___intnl_SystemInt32_31 = null;
+        Private___intnl_SystemInt32_21 = null;
+        Private___intnl_SystemInt32_51 = null;
+        Private___intnl_SystemInt32_41 = null;
+        Private___lcl_temp_SystemByteArray_0 = null;
+        Private___intnl_SystemString_8 = null;
+        Private___intnl_SystemByte_9 = null;
+        Private_debugLogging = null;
+        Private___const_SystemString_34 = null;
+        Private___const_SystemString_32 = null;
+        Private___const_SystemString_33 = null;
+        Private___const_SystemString_30 = null;
+        Private___const_SystemString_31 = null;
+        Private___intnl_SystemByte_2 = null;
+        Private_transferSpeed = null;
+        Private___intnl_returnJump_SystemUInt32_0 = null;
+        Private_character = null;
+        Private_avatarBytes = null;
+        Private___const_SystemString_4 = null;
+        Private_imageMode = null;
+        Private___gintnl_SystemUInt32_19 = null;
+        Private___gintnl_SystemUInt32_29 = null;
+        Private___intnl_UnityEngineColor32_1 = null;
+        Private___const_SystemInt32_18 = null;
+        Private___gintnl_SystemUInt32_12 = null;
+        Private___gintnl_SystemUInt32_22 = null;
+        Private___lcl_child_UnityEngineTransform_0 = null;
+        Private___lcl_i_SystemInt32_1 = null;
+        Private___lcl_i_SystemInt32_0 = null;
+        Private___const_SystemInt32_15 = null;
+        Private_charCounter = null;
+        Private_patronMode = null;
+        Private___intnl_SystemByte_17 = null;
+        Private___intnl_SystemByte_16 = null;
+        Private___intnl_SystemByte_15 = null;
+        Private___intnl_SystemByte_14 = null;
+        Private___intnl_SystemByte_13 = null;
+        Private___intnl_SystemByte_12 = null;
+        Private___intnl_SystemByte_11 = null;
+        Private___intnl_SystemByte_10 = null;
+        Private___intnl_SystemString_5 = null;
+        Private___intnl_SystemByte_7 = null;
+        Private___1__intnlparam = null;
+        Private___intnl_UnityEngineObject_15 = null;
         Private_pedestalReady = null;
-        Private_patreon = null;
-        Private___0_const_intnl_SystemUInt32 = null;
-        Private_stopwatch = null;
-        Private___9_intnl_SystemBoolean = null;
-        Private___13_intnl_SystemInt32 = null;
-        Private___3_intnl_SystemByte = null;
-        Private___0_intnl_SystemSingle = null;
-        Private___29_intnl_SystemString = null;
-        Private___12_intnl_SystemString = null;
-        Private___18_const_intnl_SystemString = null;
-        Private___13_intnl_SystemSingle = null;
-        Private___4_intnl_SystemInt32 = null;
-        Private_colorBytes = null;
-        Private___6_intnl_SystemByte = null;
-        Private___14_intnl_SystemSingle = null;
-        Private___4_intnl_SystemString = null;
-        Private___14_intnl_SystemString = null;
-        Private___19_const_intnl_SystemString = null;
-        Private___0_mp_text_String = null;
-        Private___6_intnl_SystemBoolean = null;
-        Private___20_intnl_SystemSingle = null;
-        Private___4_intnl_SystemSingle = null;
-        Private___11_intnl_SystemString = null;
-        Private_prefab = null;
-        Private___5_intnl_SystemByte = null;
-        Private___24_const_intnl_SystemString = null;
-        Private___27_intnl_SystemString = null;
-        Private___12_intnl_SystemSingle = null;
-        Private___30_intnl_SystemString = null;
-        Private___14_intnl_SystemBoolean = null;
+        Private_frameSkip = null;
+        Private_outputBytes = null;
+        Private___0_IsSame__ret = null;
+        Private___const_SystemString_9 = null;
+        Private___intnl_UnityEngineTextureFormat_0 = null;
+        Private___intnl_SystemBoolean_12 = null;
+        Private___intnl_SystemBoolean_22 = null;
+        Private___gintnl_SystemUInt32_17 = null;
+        Private___gintnl_SystemUInt32_27 = null;
+        Private___intnl_SystemInt32_16 = null;
+        Private___intnl_SystemInt32_36 = null;
+        Private___intnl_SystemInt32_26 = null;
+        Private___intnl_SystemInt32_56 = null;
+        Private___intnl_SystemInt32_46 = null;
+        Private___refl_typename = null;
+        Private___gintnl_SystemObjectArray_0 = null;
+        Private___intnl_SystemInt32_1 = null;
+        Private___intnl_SystemInt32_0 = null;
+        Private___intnl_SystemInt32_3 = null;
+        Private___intnl_SystemInt32_2 = null;
+        Private___intnl_SystemInt32_5 = null;
+        Private___intnl_SystemInt32_4 = null;
+        Private___intnl_SystemInt32_7 = null;
+        Private___intnl_SystemInt32_6 = null;
+        Private___intnl_SystemInt32_9 = null;
+        Private___intnl_SystemInt32_8 = null;
+        Private_outputToText = null;
+        Private_pedestalClone = null;
+        Private___this_UnityEngineTransform_0 = null;
+        Private___const_SystemString_1 = null;
+        Private___intnl_SystemString_19 = null;
+        Private___intnl_SystemString_14 = null;
+        Private___intnl_SystemString_15 = null;
+        Private___intnl_SystemString_12 = null;
+        Private___intnl_SystemString_13 = null;
+        Private___intnl_SystemString_10 = null;
+        Private___intnl_SystemString_11 = null;
+        Private___intnl_SystemBoolean_15 = null;
+        Private___intnl_SystemBoolean_25 = null;
+        Private___const_SystemInt32_12 = null;
+        Private___const_SystemInt32_22 = null;
+        Private___intnl_SystemInt32_13 = null;
+        Private___intnl_SystemInt32_33 = null;
+        Private___intnl_SystemInt32_23 = null;
+        Private___intnl_SystemInt32_53 = null;
+        Private___intnl_SystemInt32_43 = null;
+        Private_waitForNew = null;
+        Private___intnl_SystemInt32_18 = null;
+        Private___intnl_SystemInt32_38 = null;
+        Private___intnl_SystemInt32_28 = null;
+        Private___intnl_SystemInt32_58 = null;
+        Private___intnl_SystemInt32_48 = null;
         Private_donorInput = null;
-        Private___0_intnl_SystemInt64 = null;
-        Private___3_intnl_SystemInt32 = null;
-        Private___25_const_intnl_SystemString = null;
-        Private___11_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___8_intnl_SystemBoolean = null;
-        Private___1_intnl_interpolatedStr_String = null;
-        Private___20_intnl_SystemBoolean = null;
-        Private___3_intnl_SystemString = null;
-        Private___8_intnl_SystemByte = null;
-        Private___1_intnl_SystemObject = null;
-        Private_renderQuad = null;
-        Private___0_intnl_SystemByte = null;
-        Private___1_intnl_TMProTextMeshPro = null;
-        Private___4_intnl_interpolatedStr_String = null;
-        Private___19_intnl_SystemString = null;
-        Private___2_const_intnl_SystemInt32 = null;
-        Private___3_intnl_SystemSingle = null;
-        Private___26_intnl_SystemString = null;
-        Private___27_const_intnl_SystemString = null;
-        Private___10_const_intnl_SystemString = null;
-        Private_index = null;
-        Private___18_intnl_SystemSingle = null;
-        Private___7_intnl_SystemInt32 = null;
-        Private___1_const_intnl_SystemBoolean = null;
-        Private___7_intnl_SystemString = null;
-        Private___11_const_intnl_SystemString = null;
-        Private___16_const_intnl_SystemString = null;
-        Private___5_intnl_SystemObject = null;
-        Private___0_intnl_UnityEngineTexture2D = null;
-        Private___18_intnl_SystemBoolean = null;
-        Private___2_intnl_SystemBoolean = null;
-        Private___10_intnl_SystemSingle = null;
-        Private___25_intnl_SystemSingle = null;
-        Private___0_stepLength_Int32 = null;
-        Private___0_step_Int32 = null;
-        Private___3_const_intnl_SystemInt32 = null;
-        Private___7_intnl_SystemSingle = null;
-        Private___0_this_intnl_AvatarImageReaderReadRenderTexture = null;
-        Private___25_intnl_SystemString = null;
-        Private___3_intnl_TMProTextMeshPro = null;
-        Private___17_intnl_SystemString = null;
-        Private___0_intnl_returnValSymbol_String = null;
-        Private___30_const_intnl_SystemString = null;
+        Private_callbackBehaviour = null;
+        Private___lcl_textLength_SystemInt32_0 = null;
+        Private___intnl_SystemByte_0 = null;
+        Private___const_SystemByte_3 = null;
+        Private___const_SystemString_6 = null;
+        Private___gintnl_SystemUInt32_10 = null;
+        Private___gintnl_SystemUInt32_30 = null;
+        Private___gintnl_SystemUInt32_20 = null;
+        Private___const_SystemInt32_17 = null;
+        Private___intnl_SystemInt32_10 = null;
+        Private___intnl_SystemInt32_30 = null;
+        Private___intnl_SystemInt32_20 = null;
+        Private___intnl_SystemInt32_50 = null;
+        Private___intnl_SystemInt32_40 = null;
+        Private___intnl_SystemString_7 = null;
+        Private___intnl_SystemByte_8 = null;
+        Private___const_SystemString_26 = null;
+        Private___const_SystemString_27 = null;
+        Private___const_SystemString_24 = null;
+        Private___const_SystemString_25 = null;
+        Private___const_SystemString_22 = null;
+        Private___const_SystemString_23 = null;
+        Private___const_SystemString_20 = null;
+        Private___const_SystemString_21 = null;
+        Private___const_SystemString_28 = null;
+        Private___const_SystemString_29 = null;
+        Private___intnl_SystemByte_5 = null;
+        Private_frameCounter = null;
+        Private___gintnl_SystemUInt32_18 = null;
+        Private___gintnl_SystemUInt32_28 = null;
+        Private___intnl_SystemBoolean_10 = null;
+        Private___intnl_SystemBoolean_20 = null;
+        Private___intnl_UnityEngineColor32_2 = null;
+        Private___gintnl_SystemUInt32_15 = null;
+        Private___gintnl_SystemUInt32_25 = null;
         Private_outputString = null;
-        Private___13_const_intnl_SystemString = null;
-        Private___8_intnl_SystemInt32 = null;
-        Private___8_intnl_SystemString = null;
-        Private___10_intnl_SystemBoolean = null;
-        Private___2_const_intnl_SystemString = null;
-        Private___31_const_intnl_SystemString = null;
-        Private___0_const_intnl_SystemInt32 = null;
-        Private___33_intnl_SystemString = null;
-        Private___0_intnl_SystemChar = null;
-        Private___1_const_intnl_exitJumpLoc_UInt32 = null;
-        Private___22_const_intnl_SystemString = null;
-        Private___8_intnl_SystemSingle = null;
-        Private___17_intnl_SystemBoolean = null;
-        Private___16_intnl_SystemString = null;
+        Private_decodeSpeedUTF16 = null;
+        Private___const_SystemInt32_9 = null;
+        Private___const_SystemInt32_8 = null;
+        Private___const_SystemInt32_1 = null;
+        Private___const_SystemInt32_0 = null;
+        Private___const_SystemInt32_3 = null;
+        Private___const_SystemInt32_2 = null;
+        Private___const_SystemInt32_5 = null;
+        Private___const_SystemInt32_4 = null;
+        Private___const_SystemInt32_7 = null;
+        Private___const_SystemInt32_6 = null;
+        Private___const_SystemInt32_14 = null;
+        Private___const_SystemInt32_24 = null;
+        Private___intnl_SystemBoolean_8 = null;
+        Private___intnl_SystemBoolean_9 = null;
+        Private___intnl_SystemBoolean_0 = null;
+        Private___intnl_SystemBoolean_1 = null;
+        Private___intnl_SystemBoolean_2 = null;
+        Private___intnl_SystemBoolean_3 = null;
+        Private___intnl_SystemBoolean_4 = null;
+        Private___intnl_SystemBoolean_5 = null;
+        Private___intnl_SystemBoolean_6 = null;
+        Private___intnl_SystemBoolean_7 = null;
+        Private___intnl_SystemString_4 = null;
+        Private_renderQuadRenderer = null;
+        Private_avatarPedestal = null;
+        Private___intnl_SystemByte_6 = null;
+        Private_pedestalAssetsReady = null;
+        Private_decodeIndex = null;
+        Private_maxIndex = null;
+        Private___const_SystemString_3 = null;
+        Private___this_VRCUdonUdonBehaviour_8 = null;
+        Private___this_VRCUdonUdonBehaviour_3 = null;
+        Private___this_VRCUdonUdonBehaviour_2 = null;
+        Private___this_VRCUdonUdonBehaviour_1 = null;
+        Private___this_VRCUdonUdonBehaviour_0 = null;
+        Private___this_VRCUdonUdonBehaviour_7 = null;
+        Private___this_VRCUdonUdonBehaviour_6 = null;
+        Private___this_VRCUdonUdonBehaviour_5 = null;
+        Private___this_VRCUdonUdonBehaviour_4 = null;
+        Private___const_SystemString_8 = null;
+        Private___intnl_SystemBoolean_18 = null;
         Private_renderCamera = null;
     }
 
     #region Getter / Setters AstroUdonVariables  of RenderCameraEvent
 
-    internal string __3_intnl_interpolatedStr_String
+    internal bool? __intnl_SystemBoolean_13
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_interpolatedStr_String != null)
+            if (Private___intnl_SystemBoolean_13 != null)
             {
-                return Private___3_intnl_interpolatedStr_String.Value;
+                return Private___intnl_SystemBoolean_13.Value;
             }
 
             return null;
@@ -548,9 +828,284 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___3_intnl_interpolatedStr_String != null)
+            if (value.HasValue)
             {
-                Private___3_intnl_interpolatedStr_String.Value = value;
+                if (Private___intnl_SystemBoolean_13 != null)
+                {
+                    Private___intnl_SystemBoolean_13.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_23
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_23 != null)
+            {
+                return Private___intnl_SystemBoolean_23.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_23 != null)
+                {
+                    Private___intnl_SystemBoolean_23.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_16
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_16 != null)
+            {
+                return Private___gintnl_SystemUInt32_16.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_16 != null)
+                {
+                    Private___gintnl_SystemUInt32_16.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_26
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_26 != null)
+            {
+                return Private___gintnl_SystemUInt32_26.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_26 != null)
+                {
+                    Private___gintnl_SystemUInt32_26.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_15 != null)
+            {
+                return Private___intnl_SystemInt32_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_15 != null)
+                {
+                    Private___intnl_SystemInt32_15.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_35
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_35 != null)
+            {
+                return Private___intnl_SystemInt32_35.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_35 != null)
+                {
+                    Private___intnl_SystemInt32_35.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_25
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_25 != null)
+            {
+                return Private___intnl_SystemInt32_25.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_25 != null)
+                {
+                    Private___intnl_SystemInt32_25.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_55
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_55 != null)
+            {
+                return Private___intnl_SystemInt32_55.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_55 != null)
+                {
+                    Private___intnl_SystemInt32_55.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_45
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_45 != null)
+            {
+                return Private___intnl_SystemInt32_45.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_45 != null)
+                {
+                    Private___intnl_SystemInt32_45.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string nextAvatar
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_nextAvatar != null)
+            {
+                return Private_nextAvatar.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_nextAvatar != null)
+            {
+                Private_nextAvatar.Value = value;
+            }
+        }
+    }
+
+    internal int? charIndex
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_charIndex != null)
+            {
+                return Private_charIndex.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_charIndex != null)
+                {
+                    Private_charIndex.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? avatarCounter
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_avatarCounter != null)
+            {
+                return Private_avatarCounter.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_avatarCounter != null)
+                {
+                    Private_avatarCounter.Value = value.Value;
+                }
             }
         }
     }
@@ -577,14 +1132,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal string __0_intnl_interpolatedStr_String
+    internal System.Object[] __gintnl_SystemObjectArray_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_interpolatedStr_String != null)
+            if (Private___gintnl_SystemObjectArray_1 != null)
             {
-                return Private___0_intnl_interpolatedStr_String.Value;
+                return Private___gintnl_SystemObjectArray_1.Value;
             }
 
             return null;
@@ -592,21 +1147,65 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___0_intnl_interpolatedStr_String != null)
+            if (Private___gintnl_SystemObjectArray_1 != null)
             {
-                Private___0_intnl_interpolatedStr_String.Value = value;
+                Private___gintnl_SystemObjectArray_1.Value = value;
             }
         }
     }
 
-    internal int? __15_intnl_SystemInt32
+    internal UnityEngine.Material __intnl_UnityEngineMaterial_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___15_intnl_SystemInt32 != null)
+            if (Private___intnl_UnityEngineMaterial_0 != null)
             {
-                return Private___15_intnl_SystemInt32.Value;
+                return Private___intnl_UnityEngineMaterial_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineMaterial_0 != null)
+            {
+                Private___intnl_UnityEngineMaterial_0.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __intnl_UnityEngineObject_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineObject_12 != null)
+            {
+                return Private___intnl_UnityEngineObject_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_12 != null)
+            {
+                Private___intnl_UnityEngineObject_12.Value = value;
+            }
+        }
+    }
+
+    internal byte? __const_SystemByte_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemByte_1 != null)
+            {
+                return Private___const_SystemByte_1.Value;
             }
 
             return null;
@@ -616,44 +1215,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___15_intnl_SystemInt32 != null)
+                if (Private___const_SystemByte_1 != null)
                 {
-                    Private___15_intnl_SystemInt32.Value = value.Value;
+                    Private___const_SystemByte_1.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __40_intnl_SystemString
+    internal float? __intnl_SystemSingle_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___40_intnl_SystemString != null)
+            if (Private___intnl_SystemSingle_0 != null)
             {
-                return Private___40_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___40_intnl_SystemString != null)
-            {
-                Private___40_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __12_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___12_intnl_SystemInt32 != null)
-            {
-                return Private___12_intnl_SystemInt32.Value;
+                return Private___intnl_SystemSingle_0.Value;
             }
 
             return null;
@@ -663,66 +1240,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___12_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemSingle_0 != null)
                 {
-                    Private___12_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemSingle_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __3_const_intnl_SystemString
+    internal char? __intnl_SystemChar_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_const_intnl_SystemString != null)
+            if (Private___intnl_SystemChar_1 != null)
             {
-                return Private___3_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___3_const_intnl_SystemString != null)
-            {
-                Private___3_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __6_intnl_interpolatedStr_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_intnl_interpolatedStr_String != null)
-            {
-                return Private___6_intnl_interpolatedStr_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___6_intnl_interpolatedStr_String != null)
-            {
-                Private___6_intnl_interpolatedStr_String.Value = value;
-            }
-        }
-    }
-
-    internal int? __6_const_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_const_intnl_SystemInt32 != null)
-            {
-                return Private___6_const_intnl_SystemInt32.Value;
+                return Private___intnl_SystemChar_1.Value;
             }
 
             return null;
@@ -732,22 +1265,88 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemChar_1 != null)
                 {
-                    Private___6_const_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemChar_1.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __3_const_intnl_exitJumpLoc_UInt32
+    internal UnityEngine.Material pedestalMaterial
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private_pedestalMaterial != null)
             {
-                return Private___3_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private_pedestalMaterial.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_pedestalMaterial != null)
+            {
+                Private_pedestalMaterial.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_0 != null)
+            {
+                return Private___const_SystemString_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_0 != null)
+            {
+                Private___const_SystemString_0.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __intnl_UnityEngineTransform_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineTransform_0 != null)
+            {
+                return Private___intnl_UnityEngineTransform_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineTransform_0 != null)
+            {
+                Private___intnl_UnityEngineTransform_0.Value = value;
+            }
+        }
+    }
+
+    internal byte? __lcl_value_SystemByte_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_value_SystemByte_0 != null)
+            {
+                return Private___lcl_value_SystemByte_0.Value;
             }
 
             return null;
@@ -757,22 +1356,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___lcl_value_SystemByte_0 != null)
                 {
-                    Private___3_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___lcl_value_SystemByte_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __0_const_intnl_SystemBoolean
+    internal float? __const_SystemSingle_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_const_intnl_SystemBoolean != null)
+            if (Private___const_SystemSingle_0 != null)
             {
-                return Private___0_const_intnl_SystemBoolean.Value;
+                return Private___const_SystemSingle_0.Value;
             }
 
             return null;
@@ -782,319 +1381,9 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_const_intnl_SystemBoolean != null)
+                if (Private___const_SystemSingle_0 != null)
                 {
-                    Private___0_const_intnl_SystemBoolean.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal int? __1_const_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___1_const_intnl_SystemInt32 != null)
-            {
-                return Private___1_const_intnl_SystemInt32.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___1_const_intnl_SystemInt32 != null)
-                {
-                    Private___1_const_intnl_SystemInt32.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal string __32_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___32_intnl_SystemString != null)
-            {
-                return Private___32_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___32_intnl_SystemString != null)
-            {
-                Private___32_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal byte[] byteCache
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private_byteCache != null)
-            {
-                return Private_byteCache.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private_byteCache != null)
-            {
-                Private_byteCache.Value = value;
-            }
-        }
-    }
-
-    internal int? __1_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___1_intnl_SystemInt32 != null)
-            {
-                return Private___1_intnl_SystemInt32.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___1_intnl_SystemInt32 != null)
-                {
-                    Private___1_intnl_SystemInt32.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal float? __15_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___15_intnl_SystemSingle != null)
-            {
-                return Private___15_intnl_SystemSingle.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___15_intnl_SystemSingle != null)
-                {
-                    Private___15_intnl_SystemSingle.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal bool? lastIndex
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private_lastIndex != null)
-            {
-                return Private_lastIndex.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private_lastIndex != null)
-                {
-                    Private_lastIndex.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal TMPro.TextMeshPro __2_intnl_SystemObject
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___2_intnl_SystemObject != null)
-            {
-                return Private___2_intnl_SystemObject.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___2_intnl_SystemObject != null)
-            {
-                Private___2_intnl_SystemObject.Value = value;
-            }
-        }
-    }
-
-    internal string __1_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___1_intnl_SystemString != null)
-            {
-                return Private___1_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___1_intnl_SystemString != null)
-            {
-                Private___1_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal VRC.Udon.Common.Enums.EventTiming? __0_const_intnl_VRCUdonCommonEnumsEventTiming
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
-            {
-                return Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
-                {
-                    Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal string __15_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___15_intnl_SystemString != null)
-            {
-                return Private___15_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___15_intnl_SystemString != null)
-            {
-                Private___15_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __0_h_Int32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_h_Int32 != null)
-            {
-                return Private___0_h_Int32.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___0_h_Int32 != null)
-                {
-                    Private___0_h_Int32.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal int? __0_b_Int32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_b_Int32 != null)
-            {
-                return Private___0_b_Int32.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___0_b_Int32 != null)
-                {
-                    Private___0_b_Int32.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal int? __0_w_Int32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_w_Int32 != null)
-            {
-                return Private___0_w_Int32.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___0_w_Int32 != null)
-                {
-                    Private___0_w_Int32.Value = value.Value;
+                    Private___const_SystemSingle_0.Value = value.Value;
                 }
             }
         }
@@ -1125,58 +1414,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal string __34_intnl_SystemString
+    internal UnityEngine.Color32? __lcl_isNew_UnityEngineColor32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___34_intnl_SystemString != null)
+            if (Private___lcl_isNew_UnityEngineColor32_0 != null)
             {
-                return Private___34_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___34_intnl_SystemString != null)
-            {
-                Private___34_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __0_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_const_intnl_SystemString != null)
-            {
-                return Private___0_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_const_intnl_SystemString != null)
-            {
-                Private___0_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __21_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___21_intnl_SystemSingle != null)
-            {
-                return Private___21_intnl_SystemSingle.Value;
+                return Private___lcl_isNew_UnityEngineColor32_0.Value;
             }
 
             return null;
@@ -1186,22 +1431,23 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___21_intnl_SystemSingle != null)
+
+                if (Private___lcl_isNew_UnityEngineColor32_0 != null)
                 {
-                    Private___21_intnl_SystemSingle.Value = value.Value;
+                    Private___lcl_isNew_UnityEngineColor32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte? __7_intnl_SystemByte
+    internal int? dataMode
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_intnl_SystemByte != null)
+            if (Private_dataMode != null)
             {
-                return Private___7_intnl_SystemByte.Value;
+                return Private_dataMode.Value;
             }
 
             return null;
@@ -1211,22 +1457,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___7_intnl_SystemByte != null)
+                if (Private_dataMode != null)
                 {
-                    Private___7_intnl_SystemByte.Value = value.Value;
+                    Private_dataMode.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __1_intnl_SystemSingle
+    internal bool? __intnl_SystemBoolean_16
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_intnl_SystemSingle != null)
+            if (Private___intnl_SystemBoolean_16 != null)
             {
-                return Private___1_intnl_SystemSingle.Value;
+                return Private___intnl_SystemBoolean_16.Value;
             }
 
             return null;
@@ -1236,22 +1482,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___1_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_16 != null)
                 {
-                    Private___1_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemBoolean_16.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __5_intnl_SystemBoolean
+    internal bool? __intnl_SystemBoolean_26
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_intnl_SystemBoolean != null)
+            if (Private___intnl_SystemBoolean_26 != null)
             {
-                return Private___5_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemBoolean_26.Value;
             }
 
             return null;
@@ -1261,44 +1507,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_26 != null)
                 {
-                    Private___5_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemBoolean_26.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __31_intnl_SystemString
+    internal bool? debugTMP
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___31_intnl_SystemString != null)
+            if (Private_debugTMP != null)
             {
-                return Private___31_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___31_intnl_SystemString != null)
-            {
-                Private___31_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal uint? __10_const_intnl_exitJumpLoc_UInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
-            {
-                return Private___10_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private_debugTMP.Value;
             }
 
             return null;
@@ -1308,22 +1532,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private_debugTMP != null)
                 {
-                    Private___10_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private_debugTMP.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __5_intnl_SystemInt32
+    internal int? __const_SystemInt32_11
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_intnl_SystemInt32 != null)
+            if (Private___const_SystemInt32_11 != null)
             {
-                return Private___5_intnl_SystemInt32.Value;
+                return Private___const_SystemInt32_11.Value;
             }
 
             return null;
@@ -1333,22 +1557,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_11 != null)
                 {
-                    Private___5_intnl_SystemInt32.Value = value.Value;
+                    Private___const_SystemInt32_11.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __0_const_intnl_exitJumpLoc_UInt32
+    internal int? __const_SystemInt32_21
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___const_SystemInt32_21 != null)
             {
-                return Private___0_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___const_SystemInt32_21.Value;
             }
 
             return null;
@@ -1358,22 +1582,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_21 != null)
                 {
-                    Private___0_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___const_SystemInt32_21.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __15_intnl_SystemBoolean
+    internal int? __intnl_SystemInt32_12
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___15_intnl_SystemBoolean != null)
+            if (Private___intnl_SystemInt32_12 != null)
             {
-                return Private___15_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemInt32_12.Value;
             }
 
             return null;
@@ -1383,9 +1607,532 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___15_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_12 != null)
                 {
-                    Private___15_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_12.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_32
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_32 != null)
+            {
+                return Private___intnl_SystemInt32_32.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_32 != null)
+                {
+                    Private___intnl_SystemInt32_32.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_22
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_22 != null)
+            {
+                return Private___intnl_SystemInt32_22.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_22 != null)
+                {
+                    Private___intnl_SystemInt32_22.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_52
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_52 != null)
+            {
+                return Private___intnl_SystemInt32_52.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_52 != null)
+                {
+                    Private___intnl_SystemInt32_52.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_42
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_42 != null)
+            {
+                return Private___intnl_SystemInt32_42.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_42 != null)
+                {
+                    Private___intnl_SystemInt32_42.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal System.DateTime? __lcl_now_SystemDateTime_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_now_SystemDateTime_0 != null)
+            {
+                return Private___lcl_now_SystemDateTime_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+
+                if (Private___lcl_now_SystemDateTime_0 != null)
+                {
+                    Private___lcl_now_SystemDateTime_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_9
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_9 != null)
+            {
+                return Private___intnl_SystemString_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_9 != null)
+            {
+                Private___intnl_SystemString_9.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Color32? __lcl_idColor_UnityEngineColor32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_idColor_UnityEngineColor32_0 != null)
+            {
+                return Private___lcl_idColor_UnityEngineColor32_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___lcl_idColor_UnityEngineColor32_0 != null)
+                {
+                    Private___lcl_idColor_UnityEngineColor32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_3
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_3 != null)
+            {
+                return Private___intnl_SystemByte_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_3 != null)
+                {
+                    Private___intnl_SystemByte_3.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_9
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_9 != null)
+            {
+                return Private___gintnl_SystemUInt32_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_9 != null)
+                {
+                    Private___gintnl_SystemUInt32_9.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_8 != null)
+            {
+                return Private___gintnl_SystemUInt32_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_8 != null)
+                {
+                    Private___gintnl_SystemUInt32_8.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_5 != null)
+            {
+                return Private___gintnl_SystemUInt32_5.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_5 != null)
+                {
+                    Private___gintnl_SystemUInt32_5.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_4 != null)
+            {
+                return Private___gintnl_SystemUInt32_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_4 != null)
+                {
+                    Private___gintnl_SystemUInt32_4.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_7 != null)
+            {
+                return Private___gintnl_SystemUInt32_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_7 != null)
+                {
+                    Private___gintnl_SystemUInt32_7.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_6 != null)
+            {
+                return Private___gintnl_SystemUInt32_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_6 != null)
+                {
+                    Private___gintnl_SystemUInt32_6.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_1 != null)
+            {
+                return Private___gintnl_SystemUInt32_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_1 != null)
+                {
+                    Private___gintnl_SystemUInt32_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_0 != null)
+            {
+                return Private___gintnl_SystemUInt32_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_0 != null)
+                {
+                    Private___gintnl_SystemUInt32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_3
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_3 != null)
+            {
+                return Private___gintnl_SystemUInt32_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_3 != null)
+                {
+                    Private___gintnl_SystemUInt32_3.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_2 != null)
+            {
+                return Private___gintnl_SystemUInt32_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_2 != null)
+                {
+                    Private___gintnl_SystemUInt32_2.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __const_SystemBoolean_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemBoolean_0 != null)
+            {
+                return Private___const_SystemBoolean_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemBoolean_0 != null)
+                {
+                    Private___const_SystemBoolean_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __const_SystemBoolean_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemBoolean_1 != null)
+            {
+                return Private___const_SystemBoolean_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemBoolean_1 != null)
+                {
+                    Private___const_SystemBoolean_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __const_SystemByte_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemByte_2 != null)
+            {
+                return Private___const_SystemByte_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemByte_2 != null)
+                {
+                    Private___const_SystemByte_2.Value = value.Value;
                 }
             }
         }
@@ -1416,14 +2163,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal string __20_intnl_SystemString
+    internal UnityEngine.MeshRenderer __intnl_UnityEngineMeshRenderer_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___20_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineMeshRenderer_0 != null)
             {
-                return Private___20_intnl_SystemString.Value;
+                return Private___intnl_UnityEngineMeshRenderer_0.Value;
             }
 
             return null;
@@ -1431,21 +2178,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___20_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineMeshRenderer_0 != null)
             {
-                Private___20_intnl_SystemString.Value = value;
+                Private___intnl_UnityEngineMeshRenderer_0.Value = value;
             }
         }
     }
 
-    internal bool? __6_intnl_SystemObject
+    internal UnityEngine.MeshRenderer __intnl_UnityEngineMeshRenderer_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___6_intnl_SystemObject != null)
+            if (Private___intnl_UnityEngineMeshRenderer_1 != null)
             {
-                return Private___6_intnl_SystemObject.Value;
+                return Private___intnl_UnityEngineMeshRenderer_1.Value;
             }
 
             return null;
@@ -1453,24 +2200,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (value.HasValue)
+            if (Private___intnl_UnityEngineMeshRenderer_1 != null)
             {
-                if (Private___6_intnl_SystemObject != null)
-                {
-                    Private___6_intnl_SystemObject.Value = value.Value;
-                }
+                Private___intnl_UnityEngineMeshRenderer_1.Value = value;
             }
         }
     }
 
-    internal string __5_intnl_SystemString
+    internal string __const_SystemString_5
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_intnl_SystemString != null)
+            if (Private___const_SystemString_5 != null)
             {
-                return Private___5_intnl_SystemString.Value;
+                return Private___const_SystemString_5.Value;
             }
 
             return null;
@@ -1478,65 +2222,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___5_intnl_SystemString != null)
+            if (Private___const_SystemString_5 != null)
             {
-                Private___5_intnl_SystemString.Value = value;
+                Private___const_SystemString_5.Value = value;
             }
         }
     }
 
-    internal string __28_const_intnl_SystemString
+    internal UnityEngine.Color32? __intnl_UnityEngineColor32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___28_const_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineColor32_0 != null)
             {
-                return Private___28_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___28_const_intnl_SystemString != null)
-            {
-                Private___28_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __6_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_const_intnl_SystemString != null)
-            {
-                return Private___6_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___6_const_intnl_SystemString != null)
-            {
-                Private___6_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal bool? __21_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___21_intnl_SystemBoolean != null)
-            {
-                return Private___21_intnl_SystemBoolean.Value;
+                return Private___intnl_UnityEngineColor32_0.Value;
             }
 
             return null;
@@ -1546,22 +2246,23 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___21_intnl_SystemBoolean != null)
+
+                if (Private___intnl_UnityEngineColor32_0 != null)
                 {
-                    Private___21_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_UnityEngineColor32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __5_const_intnl_exitJumpLoc_UInt32
+    internal int? __const_SystemInt32_19
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___const_SystemInt32_19 != null)
             {
-                return Private___5_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___const_SystemInt32_19.Value;
             }
 
             return null;
@@ -1571,22 +2272,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_19 != null)
                 {
-                    Private___5_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___const_SystemInt32_19.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __13_intnl_SystemBoolean
+    internal uint? __gintnl_SystemUInt32_13
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___13_intnl_SystemBoolean != null)
+            if (Private___gintnl_SystemUInt32_13 != null)
             {
-                return Private___13_intnl_SystemBoolean.Value;
+                return Private___gintnl_SystemUInt32_13.Value;
             }
 
             return null;
@@ -1596,22 +2297,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___13_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_13 != null)
                 {
-                    Private___13_intnl_SystemBoolean.Value = value.Value;
+                    Private___gintnl_SystemUInt32_13.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte? __2_intnl_SystemByte
+    internal uint? __gintnl_SystemUInt32_23
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_intnl_SystemByte != null)
+            if (Private___gintnl_SystemUInt32_23 != null)
             {
-                return Private___2_intnl_SystemByte.Value;
+                return Private___gintnl_SystemUInt32_23.Value;
             }
 
             return null;
@@ -1621,22 +2322,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_intnl_SystemByte != null)
+                if (Private___gintnl_SystemUInt32_23 != null)
                 {
-                    Private___2_intnl_SystemByte.Value = value.Value;
+                    Private___gintnl_SystemUInt32_23.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __1_const_intnl_SystemString
+    internal UnityEngine.CustomRenderTexture __intnl_UnityEngineObject_8
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_const_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineObject_8 != null)
             {
-                return Private___1_const_intnl_SystemString.Value;
+                return Private___intnl_UnityEngineObject_8.Value;
             }
 
             return null;
@@ -1644,21 +2345,87 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___1_const_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineObject_8 != null)
             {
-                Private___1_const_intnl_SystemString.Value = value;
+                Private___intnl_UnityEngineObject_8.Value = value;
             }
         }
     }
 
-    internal int? __4_const_intnl_SystemInt32
+    internal UnityEngine.MeshRenderer __intnl_UnityEngineObject_4
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_const_intnl_SystemInt32 != null)
+            if (Private___intnl_UnityEngineObject_4 != null)
             {
-                return Private___4_const_intnl_SystemInt32.Value;
+                return Private___intnl_UnityEngineObject_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_4 != null)
+            {
+                Private___intnl_UnityEngineObject_4.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Texture2D __intnl_UnityEngineObject_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineObject_2 != null)
+            {
+                return Private___intnl_UnityEngineObject_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_2 != null)
+            {
+                Private___intnl_UnityEngineObject_2.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __intnl_UnityEngineObject_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineObject_0 != null)
+            {
+                return Private___intnl_UnityEngineObject_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_0 != null)
+            {
+                Private___intnl_UnityEngineObject_0.Value = value;
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_16
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_16 != null)
+            {
+                return Private___const_SystemInt32_16.Value;
             }
 
             return null;
@@ -1668,44 +2435,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_const_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_16 != null)
                 {
-                    Private___4_const_intnl_SystemInt32.Value = value.Value;
+                    Private___const_SystemInt32_16.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __29_const_intnl_SystemString
+    internal int? decodeSpeedUTF8
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___29_const_intnl_SystemString != null)
+            if (Private_decodeSpeedUTF8 != null)
             {
-                return Private___29_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___29_const_intnl_SystemString != null)
-            {
-                Private___29_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __5_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___5_intnl_SystemSingle != null)
-            {
-                return Private___5_intnl_SystemSingle.Value;
+                return Private_decodeSpeedUTF8.Value;
             }
 
             return null;
@@ -1715,22 +2460,264 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_intnl_SystemSingle != null)
+                if (Private_decodeSpeedUTF8 != null)
                 {
-                    Private___5_intnl_SystemSingle.Value = value.Value;
+                    Private_decodeSpeedUTF8.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __2_const_intnl_exitJumpLoc_UInt32
+    internal string __intnl_SystemString_6
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___intnl_SystemString_6 != null)
             {
-                return Private___2_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___intnl_SystemString_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_6 != null)
+            {
+                Private___intnl_SystemString_6.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_16
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_16 != null)
+            {
+                return Private___const_SystemString_16.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_16 != null)
+            {
+                Private___const_SystemString_16.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_17
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_17 != null)
+            {
+                return Private___const_SystemString_17.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_17 != null)
+            {
+                Private___const_SystemString_17.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_14
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_14 != null)
+            {
+                return Private___const_SystemString_14.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_14 != null)
+            {
+                Private___const_SystemString_14.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_15 != null)
+            {
+                return Private___const_SystemString_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_15 != null)
+            {
+                Private___const_SystemString_15.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_12 != null)
+            {
+                return Private___const_SystemString_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_12 != null)
+            {
+                Private___const_SystemString_12.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_13
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_13 != null)
+            {
+                return Private___const_SystemString_13.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_13 != null)
+            {
+                Private___const_SystemString_13.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_10
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_10 != null)
+            {
+                return Private___const_SystemString_10.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_10 != null)
+            {
+                Private___const_SystemString_10.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_11
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_11 != null)
+            {
+                return Private___const_SystemString_11.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_11 != null)
+            {
+                Private___const_SystemString_11.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_18
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_18 != null)
+            {
+                return Private___const_SystemString_18.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_18 != null)
+            {
+                Private___const_SystemString_18.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_19
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_19 != null)
+            {
+                return Private___const_SystemString_19.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_19 != null)
+            {
+                Private___const_SystemString_19.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_4 != null)
+            {
+                return Private___intnl_SystemByte_4.Value;
             }
 
             return null;
@@ -1740,44 +2727,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemByte_4 != null)
                 {
-                    Private___2_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___intnl_SystemByte_4.Value = value.Value;
                 }
             }
         }
     }
 
-    internal UnityEngine.Texture2D __0_mp_picture_Texture2D
+    internal UnityEngine.Color32? color
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_mp_picture_Texture2D != null)
+            if (Private_color != null)
             {
-                return Private___0_mp_picture_Texture2D.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_mp_picture_Texture2D != null)
-            {
-                Private___0_mp_picture_Texture2D.Value = value;
-            }
-        }
-    }
-
-    internal bool? __16_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___16_intnl_SystemBoolean != null)
-            {
-                return Private___16_intnl_SystemBoolean.Value;
+                return Private_color.Value;
             }
 
             return null;
@@ -1787,66 +2752,23 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___16_intnl_SystemBoolean != null)
+
+                if (Private_color != null)
                 {
-                    Private___16_intnl_SystemBoolean.Value = value.Value;
+                    Private_color.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __14_const_intnl_SystemString
+    internal int? pixelIndex
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___14_const_intnl_SystemString != null)
+            if (Private_pixelIndex != null)
             {
-                return Private___14_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___14_const_intnl_SystemString != null)
-            {
-                Private___14_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __39_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___39_intnl_SystemString != null)
-            {
-                return Private___39_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___39_intnl_SystemString != null)
-            {
-                Private___39_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal UnityEngine.Color? __0_firstColor_Color
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_firstColor_Color != null)
-            {
-                return Private___0_firstColor_Color.Value;
+                return Private_pixelIndex.Value;
             }
 
             return null;
@@ -1856,22 +2778,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_firstColor_Color != null)
+                if (Private_pixelIndex != null)
                 {
-                    Private___0_firstColor_Color.Value = value.Value;
+                    Private_pixelIndex.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __19_intnl_SystemSingle
+    internal VRC.SDK3.Components.VRCAvatarPedestal __intnl_UnityEngineObject_14
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___19_intnl_SystemSingle != null)
+            if (Private___intnl_UnityEngineObject_14 != null)
             {
-                return Private___19_intnl_SystemSingle.Value;
+                return Private___intnl_UnityEngineObject_14.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_14 != null)
+            {
+                Private___intnl_UnityEngineObject_14.Value = value;
+            }
+        }
+    }
+
+    internal long? __refl_typeid
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___refl_typeid != null)
+            {
+                return Private___refl_typeid.Value;
             }
 
             return null;
@@ -1881,22 +2825,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___19_intnl_SystemSingle != null)
+                if (Private___refl_typeid != null)
                 {
-                    Private___19_intnl_SystemSingle.Value = value.Value;
+                    Private___refl_typeid.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __7_intnl_SystemBoolean
+    internal UnityEngine.Texture2D lastInput
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_intnl_SystemBoolean != null)
+            if (Private_lastInput != null)
             {
-                return Private___7_intnl_SystemBoolean.Value;
+                return Private_lastInput.Value;
             }
 
             return null;
@@ -1904,42 +2848,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (value.HasValue)
+            if (Private_lastInput != null)
             {
-                if (Private___7_intnl_SystemBoolean != null)
-                {
-                    Private___7_intnl_SystemBoolean.Value = value.Value;
-                }
+                Private_lastInput.Value = value;
             }
         }
     }
 
-    internal byte? __1_intnl_SystemByte
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___1_intnl_SystemByte != null)
-            {
-                return Private___1_intnl_SystemByte.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (value.HasValue)
-            {
-                if (Private___1_intnl_SystemByte != null)
-                {
-                    Private___1_intnl_SystemByte.Value = value.Value;
-                }
-            }
-        }
-    }
-
-    internal UnityEngine.Color[] colors
+    internal UnityEngine.Color32[] colors
     {
         [HideFromIl2Cpp]
         get
@@ -1961,14 +2877,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal uint? __7_const_intnl_exitJumpLoc_UInt32
+    internal bool? autoFillTMP
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private_autoFillTMP != null)
             {
-                return Private___7_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private_autoFillTMP.Value;
             }
 
             return null;
@@ -1978,132 +2894,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private_autoFillTMP != null)
                 {
-                    Private___7_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private_autoFillTMP.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __28_intnl_SystemString
+    internal int? __lcl_toIterate_SystemInt32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___28_intnl_SystemString != null)
+            if (Private___lcl_toIterate_SystemInt32_0 != null)
             {
-                return Private___28_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___28_intnl_SystemString != null)
-            {
-                Private___28_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __2_intnl_interpolatedStr_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___2_intnl_interpolatedStr_String != null)
-            {
-                return Private___2_intnl_interpolatedStr_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___2_intnl_interpolatedStr_String != null)
-            {
-                Private___2_intnl_interpolatedStr_String.Value = value;
-            }
-        }
-    }
-
-    internal string __7_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___7_const_intnl_SystemString != null)
-            {
-                return Private___7_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___7_const_intnl_SystemString != null)
-            {
-                Private___7_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __15_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___15_const_intnl_SystemString != null)
-            {
-                return Private___15_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___15_const_intnl_SystemString != null)
-            {
-                Private___15_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __0_tempString_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_tempString_String != null)
-            {
-                return Private___0_tempString_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_tempString_String != null)
-            {
-                Private___0_tempString_String.Value = value;
-            }
-        }
-    }
-
-    internal float? __27_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___27_intnl_SystemSingle != null)
-            {
-                return Private___27_intnl_SystemSingle.Value;
+                return Private___lcl_toIterate_SystemInt32_0.Value;
             }
 
             return null;
@@ -2113,22 +2919,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___27_intnl_SystemSingle != null)
+                if (Private___lcl_toIterate_SystemInt32_0 != null)
                 {
-                    Private___27_intnl_SystemSingle.Value = value.Value;
+                    Private___lcl_toIterate_SystemInt32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __5_const_intnl_SystemInt32
+    internal int? __lcl_toIterate_SystemInt32_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_const_intnl_SystemInt32 != null)
+            if (Private___lcl_toIterate_SystemInt32_1 != null)
             {
-                return Private___5_const_intnl_SystemInt32.Value;
+                return Private___lcl_toIterate_SystemInt32_1.Value;
             }
 
             return null;
@@ -2138,22 +2944,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_const_intnl_SystemInt32 != null)
+                if (Private___lcl_toIterate_SystemInt32_1 != null)
                 {
-                    Private___5_const_intnl_SystemInt32.Value = value.Value;
+                    Private___lcl_toIterate_SystemInt32_1.Value = value.Value;
                 }
             }
         }
     }
 
-    internal long? __refl_const_intnl_udonTypeID
+    internal int? __lcl_toIterate_SystemInt32_2
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___refl_const_intnl_udonTypeID != null)
+            if (Private___lcl_toIterate_SystemInt32_2 != null)
             {
-                return Private___refl_const_intnl_udonTypeID.Value;
+                return Private___lcl_toIterate_SystemInt32_2.Value;
             }
 
             return null;
@@ -2163,22 +2969,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___refl_const_intnl_udonTypeID != null)
+                if (Private___lcl_toIterate_SystemInt32_2 != null)
                 {
-                    Private___refl_const_intnl_udonTypeID.Value = value.Value;
+                    Private___lcl_toIterate_SystemInt32_2.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __4_intnl_SystemBoolean
+    internal int? bytesCount
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_intnl_SystemBoolean != null)
+            if (Private_bytesCount != null)
             {
-                return Private___4_intnl_SystemBoolean.Value;
+                return Private_bytesCount.Value;
             }
 
             return null;
@@ -2188,22 +2994,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_intnl_SystemBoolean != null)
+                if (Private_bytesCount != null)
                 {
-                    Private___4_intnl_SystemBoolean.Value = value.Value;
+                    Private_bytesCount.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __11_intnl_SystemSingle
+    internal uint? __const_SystemUInt32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___11_intnl_SystemSingle != null)
+            if (Private___const_SystemUInt32_0 != null)
             {
-                return Private___11_intnl_SystemSingle.Value;
+                return Private___const_SystemUInt32_0.Value;
             }
 
             return null;
@@ -2213,22 +3019,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___11_intnl_SystemSingle != null)
+                if (Private___const_SystemUInt32_0 != null)
                 {
-                    Private___11_intnl_SystemSingle.Value = value.Value;
+                    Private___const_SystemUInt32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte? __4_intnl_SystemByte
+    internal VRC.SDK3.Components.VRCAvatarPedestal __intnl_UnityEngineComponent_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_intnl_SystemByte != null)
+            if (Private___intnl_UnityEngineComponent_0 != null)
             {
-                return Private___4_intnl_SystemByte.Value;
+                return Private___intnl_UnityEngineComponent_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineComponent_0 != null)
+            {
+                Private___intnl_UnityEngineComponent_0.Value = value;
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_11
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_11 != null)
+            {
+                return Private___intnl_SystemBoolean_11.Value;
             }
 
             return null;
@@ -2238,22 +3066,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_intnl_SystemByte != null)
+                if (Private___intnl_SystemBoolean_11 != null)
                 {
-                    Private___4_intnl_SystemByte.Value = value.Value;
+                    Private___intnl_SystemBoolean_11.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __19_intnl_SystemBoolean
+    internal bool? __intnl_SystemBoolean_21
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___19_intnl_SystemBoolean != null)
+            if (Private___intnl_SystemBoolean_21 != null)
             {
-                return Private___19_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemBoolean_21.Value;
             }
 
             return null;
@@ -2263,22 +3091,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___19_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_21 != null)
                 {
-                    Private___19_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemBoolean_21.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __refl_const_intnl_udonTypeName
+    internal string callbackEventName
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___refl_const_intnl_udonTypeName != null)
+            if (Private_callbackEventName != null)
             {
-                return Private___refl_const_intnl_udonTypeName.Value;
+                return Private_callbackEventName.Value;
             }
 
             return null;
@@ -2286,21 +3114,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___refl_const_intnl_udonTypeName != null)
+            if (Private_callbackEventName != null)
             {
-                Private___refl_const_intnl_udonTypeName.Value = value;
+                Private_callbackEventName.Value = value;
             }
         }
     }
 
-    internal bool? __0_intnl_SystemObject
+    internal UnityEngine.Color32? __intnl_UnityEngineColor32_3
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_SystemObject != null)
+            if (Private___intnl_UnityEngineColor32_3 != null)
             {
-                return Private___0_intnl_SystemObject.Value;
+                return Private___intnl_UnityEngineColor32_3.Value;
             }
 
             return null;
@@ -2310,22 +3138,23 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemObject != null)
+
+                if (Private___intnl_UnityEngineColor32_3 != null)
                 {
-                    Private___0_intnl_SystemObject.Value = value.Value;
+                    Private___intnl_UnityEngineColor32_3.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __1_intnl_SystemBoolean
+    internal uint? __gintnl_SystemUInt32_14
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_intnl_SystemBoolean != null)
+            if (Private___gintnl_SystemUInt32_14 != null)
             {
-                return Private___1_intnl_SystemBoolean.Value;
+                return Private___gintnl_SystemUInt32_14.Value;
             }
 
             return null;
@@ -2335,22 +3164,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___1_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_14 != null)
                 {
-                    Private___1_intnl_SystemBoolean.Value = value.Value;
+                    Private___gintnl_SystemUInt32_14.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __14_intnl_SystemInt32
+    internal uint? __gintnl_SystemUInt32_24
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___14_intnl_SystemInt32 != null)
+            if (Private___gintnl_SystemUInt32_24 != null)
             {
-                return Private___14_intnl_SystemInt32.Value;
+                return Private___gintnl_SystemUInt32_24.Value;
             }
 
             return null;
@@ -2360,44 +3189,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___14_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_24 != null)
                 {
-                    Private___14_intnl_SystemInt32.Value = value.Value;
+                    Private___gintnl_SystemUInt32_24.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __17_const_intnl_SystemString
+    internal int? __intnl_SystemInt32_17
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___17_const_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_17 != null)
             {
-                return Private___17_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___17_const_intnl_SystemString != null)
-            {
-                Private___17_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __11_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___11_intnl_SystemInt32 != null)
-            {
-                return Private___11_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_17.Value;
             }
 
             return null;
@@ -2407,88 +3214,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___11_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_17 != null)
                 {
-                    Private___11_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_17.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __4_const_intnl_SystemString
+    internal int? __intnl_SystemInt32_37
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_const_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_37 != null)
             {
-                return Private___4_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___4_const_intnl_SystemString != null)
-            {
-                Private___4_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __10_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___10_intnl_SystemString != null)
-            {
-                return Private___10_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___10_intnl_SystemString != null)
-            {
-                Private___10_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __20_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___20_const_intnl_SystemString != null)
-            {
-                return Private___20_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___20_const_intnl_SystemString != null)
-            {
-                Private___20_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal UnityEngine.TextureFormat? __0_intnl_UnityEngineTextureFormat
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_UnityEngineTextureFormat != null)
-            {
-                return Private___0_intnl_UnityEngineTextureFormat.Value;
+                return Private___intnl_SystemInt32_37.Value;
             }
 
             return null;
@@ -2498,22 +3239,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_UnityEngineTextureFormat != null)
+                if (Private___intnl_SystemInt32_37 != null)
                 {
-                    Private___0_intnl_UnityEngineTextureFormat.Value = value.Value;
+                    Private___intnl_SystemInt32_37.Value = value.Value;
                 }
             }
         }
     }
 
-    internal UnityEngine.Color? __0_c_Color
+    internal int? __intnl_SystemInt32_27
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_c_Color != null)
+            if (Private___intnl_SystemInt32_27 != null)
             {
-                return Private___0_c_Color.Value;
+                return Private___intnl_SystemInt32_27.Value;
             }
 
             return null;
@@ -2523,22 +3264,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_c_Color != null)
+                if (Private___intnl_SystemInt32_27 != null)
                 {
-                    Private___0_c_Color.Value = value.Value;
+                    Private___intnl_SystemInt32_27.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __11_intnl_SystemBoolean
+    internal int? __intnl_SystemInt32_57
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___11_intnl_SystemBoolean != null)
+            if (Private___intnl_SystemInt32_57 != null)
             {
-                return Private___11_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemInt32_57.Value;
             }
 
             return null;
@@ -2548,22 +3289,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___11_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_57 != null)
                 {
-                    Private___11_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_57.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __2_intnl_SystemInt32
+    internal int? __intnl_SystemInt32_47
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_intnl_SystemInt32 != null)
+            if (Private___intnl_SystemInt32_47 != null)
             {
-                return Private___2_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_47.Value;
             }
 
             return null;
@@ -2573,22 +3314,88 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_47 != null)
                 {
-                    Private___2_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_47.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __26_intnl_SystemSingle
+    internal string __intnl_SystemString_3
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___26_intnl_SystemSingle != null)
+            if (Private___intnl_SystemString_3 != null)
             {
-                return Private___26_intnl_SystemSingle.Value;
+                return Private___intnl_SystemString_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_3 != null)
+            {
+                Private___intnl_SystemString_3.Value = value;
+            }
+        }
+    }
+
+    internal VRC.SDK3.Components.VRCAvatarPedestal __0__intnlparam
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___0__intnlparam != null)
+            {
+                return Private___0__intnlparam.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___0__intnlparam != null)
+            {
+                Private___0__intnlparam.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_2 != null)
+            {
+                return Private___const_SystemString_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_2 != null)
+            {
+                Private___const_SystemString_2.Value = value;
+            }
+        }
+    }
+
+    internal float? __const_SystemSingle_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemSingle_2 != null)
+            {
+                return Private___const_SystemSingle_2.Value;
             }
 
             return null;
@@ -2598,22 +3405,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___26_intnl_SystemSingle != null)
+                if (Private___const_SystemSingle_2 != null)
                 {
-                    Private___26_intnl_SystemSingle.Value = value.Value;
+                    Private___const_SystemSingle_2.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __4_const_intnl_exitJumpLoc_UInt32
+    internal bool? __intnl_SystemBoolean_19
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___intnl_SystemBoolean_19 != null)
             {
-                return Private___4_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___intnl_SystemBoolean_19.Value;
             }
 
             return null;
@@ -2623,22 +3430,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_19 != null)
                 {
-                    Private___4_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___intnl_SystemBoolean_19.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __2_intnl_SystemString
+    internal UnityEngine.GameObject __intnl_UnityEngineGameObject_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineGameObject_1 != null)
             {
-                return Private___2_intnl_SystemString.Value;
+                return Private___intnl_UnityEngineGameObject_1.Value;
             }
 
             return null;
@@ -2646,87 +3453,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___2_intnl_SystemString != null)
+            if (Private___intnl_UnityEngineGameObject_1 != null)
             {
-                Private___2_intnl_SystemString.Value = value;
+                Private___intnl_UnityEngineGameObject_1.Value = value;
             }
         }
     }
 
-    internal string __21_const_intnl_SystemString
+    internal bool? __intnl_SystemBoolean_14
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___21_const_intnl_SystemString != null)
+            if (Private___intnl_SystemBoolean_14 != null)
             {
-                return Private___21_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___21_const_intnl_SystemString != null)
-            {
-                Private___21_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __26_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___26_const_intnl_SystemString != null)
-            {
-                return Private___26_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___26_const_intnl_SystemString != null)
-            {
-                Private___26_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __23_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___23_intnl_SystemString != null)
-            {
-                return Private___23_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___23_intnl_SystemString != null)
-            {
-                Private___23_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal bool? __4_intnl_SystemObject
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___4_intnl_SystemObject != null)
-            {
-                return Private___4_intnl_SystemObject.Value;
+                return Private___intnl_SystemBoolean_14.Value;
             }
 
             return null;
@@ -2736,22 +3477,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_intnl_SystemObject != null)
+                if (Private___intnl_SystemBoolean_14 != null)
                 {
-                    Private___4_intnl_SystemObject.Value = value.Value;
+                    Private___intnl_SystemBoolean_14.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __9_const_intnl_exitJumpLoc_UInt32
+    internal bool? __intnl_SystemBoolean_24
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___intnl_SystemBoolean_24 != null)
             {
-                return Private___9_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___intnl_SystemBoolean_24.Value;
             }
 
             return null;
@@ -2761,44 +3502,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_24 != null)
                 {
-                    Private___9_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___intnl_SystemBoolean_24.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte[] __0_mp_bytes_ByteArray
+    internal int? __const_SystemInt32_13
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_mp_bytes_ByteArray != null)
+            if (Private___const_SystemInt32_13 != null)
             {
-                return Private___0_mp_bytes_ByteArray.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_mp_bytes_ByteArray != null)
-            {
-                Private___0_mp_bytes_ByteArray.Value = value;
-            }
-        }
-    }
-
-    internal int? __9_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___9_intnl_SystemInt32 != null)
-            {
-                return Private___9_intnl_SystemInt32.Value;
+                return Private___const_SystemInt32_13.Value;
             }
 
             return null;
@@ -2808,22 +3527,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___9_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_13 != null)
                 {
-                    Private___9_intnl_SystemInt32.Value = value.Value;
+                    Private___const_SystemInt32_13.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __2_intnl_SystemSingle
+    internal int? __const_SystemInt32_23
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_intnl_SystemSingle != null)
+            if (Private___const_SystemInt32_23 != null)
             {
-                return Private___2_intnl_SystemSingle.Value;
+                return Private___const_SystemInt32_23.Value;
             }
 
             return null;
@@ -2833,22 +3552,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_intnl_SystemSingle != null)
+                if (Private___const_SystemInt32_23 != null)
                 {
-                    Private___2_intnl_SystemSingle.Value = value.Value;
+                    Private___const_SystemInt32_23.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __5_const_intnl_SystemString
+    internal UnityEngine.Texture2D pedestalTexture
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_const_intnl_SystemString != null)
+            if (Private_pedestalTexture != null)
             {
-                return Private___5_const_intnl_SystemString.Value;
+                return Private_pedestalTexture.Value;
             }
 
             return null;
@@ -2856,21 +3575,43 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___5_const_intnl_SystemString != null)
+            if (Private_pedestalTexture != null)
             {
-                Private___5_const_intnl_SystemString.Value = value;
+                Private_pedestalTexture.Value = value;
             }
         }
     }
 
-    internal bool? __3_intnl_SystemBoolean
+    internal string __0_text__param
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_SystemBoolean != null)
+            if (Private___0_text__param != null)
             {
-                return Private___3_intnl_SystemBoolean.Value;
+                return Private___0_text__param.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___0_text__param != null)
+            {
+                Private___0_text__param.Value = value;
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_14
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_14 != null)
+            {
+                return Private___intnl_SystemInt32_14.Value;
             }
 
             return null;
@@ -2880,22 +3621,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_14 != null)
                 {
-                    Private___3_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_14.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __12_intnl_SystemBoolean
+    internal int? __intnl_SystemInt32_34
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___12_intnl_SystemBoolean != null)
+            if (Private___intnl_SystemInt32_34 != null)
             {
-                return Private___12_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemInt32_34.Value;
             }
 
             return null;
@@ -2905,44 +3646,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___12_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_34 != null)
                 {
-                    Private___12_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_34.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __9_intnl_SystemString
+    internal int? __intnl_SystemInt32_24
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___9_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_24 != null)
             {
-                return Private___9_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___9_intnl_SystemString != null)
-            {
-                Private___9_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal uint? __6_const_intnl_exitJumpLoc_UInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
-            {
-                return Private___6_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___intnl_SystemInt32_24.Value;
             }
 
             return null;
@@ -2952,66 +3671,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemInt32_24 != null)
                 {
-                    Private___6_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_24.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __18_intnl_SystemString
+    internal int? __intnl_SystemInt32_54
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___18_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_54 != null)
             {
-                return Private___18_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___18_intnl_SystemString != null)
-            {
-                Private___18_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __23_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___23_const_intnl_SystemString != null)
-            {
-                return Private___23_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___23_const_intnl_SystemString != null)
-            {
-                Private___23_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __6_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_intnl_SystemInt32 != null)
-            {
-                return Private___6_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_54.Value;
             }
 
             return null;
@@ -3021,44 +3696,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_54 != null)
                 {
-                    Private___6_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_54.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte[] __0_intnl_SystemByteArray
+    internal int? __intnl_SystemInt32_44
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_SystemByteArray != null)
+            if (Private___intnl_SystemInt32_44 != null)
             {
-                return Private___0_intnl_SystemByteArray.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_intnl_SystemByteArray != null)
-            {
-                Private___0_intnl_SystemByteArray.Value = value;
-            }
-        }
-    }
-
-    internal float? __17_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___17_intnl_SystemSingle != null)
-            {
-                return Private___17_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_44.Value;
             }
 
             return null;
@@ -3068,22 +3721,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___17_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_44 != null)
                 {
-                    Private___17_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_44.Value = value.Value;
                 }
             }
         }
     }
 
-    internal UnityEngine.Rect? __0_intnl_UnityEngineRect
+    internal VRC.SDK3.Components.VRCAvatarPedestal pedestal
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_UnityEngineRect != null)
+            if (Private_pedestal != null)
             {
-                return Private___0_intnl_UnityEngineRect.Value;
+                return Private_pedestal.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_pedestal != null)
+            {
+                Private_pedestal.Value = value;
+            }
+        }
+    }
+
+    internal int? currentTry
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_currentTry != null)
+            {
+                return Private_currentTry.Value;
             }
 
             return null;
@@ -3093,44 +3768,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_UnityEngineRect != null)
+                if (Private_currentTry != null)
                 {
-                    Private___0_intnl_UnityEngineRect.Value = value.Value;
+                    Private_currentTry.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __6_intnl_SystemString
+    internal int? __lcl_maxDataLength_SystemInt32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___6_intnl_SystemString != null)
+            if (Private___lcl_maxDataLength_SystemInt32_0 != null)
             {
-                return Private___6_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___6_intnl_SystemString != null)
-            {
-                Private___6_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal bool? __0_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_SystemBoolean != null)
-            {
-                return Private___0_intnl_SystemBoolean.Value;
+                return Private___lcl_maxDataLength_SystemInt32_0.Value;
             }
 
             return null;
@@ -3140,9 +3793,420 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemBoolean != null)
+                if (Private___lcl_maxDataLength_SystemInt32_0 != null)
                 {
-                    Private___0_intnl_SystemBoolean.Value = value.Value;
+                    Private___lcl_maxDataLength_SystemInt32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_19
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_19 != null)
+            {
+                return Private___intnl_SystemInt32_19.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_19 != null)
+                {
+                    Private___intnl_SystemInt32_19.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_39
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_39 != null)
+            {
+                return Private___intnl_SystemInt32_39.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_39 != null)
+                {
+                    Private___intnl_SystemInt32_39.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_29
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_29 != null)
+            {
+                return Private___intnl_SystemInt32_29.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_29 != null)
+                {
+                    Private___intnl_SystemInt32_29.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_59
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_59 != null)
+            {
+                return Private___intnl_SystemInt32_59.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_59 != null)
+                {
+                    Private___intnl_SystemInt32_59.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_49
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_49 != null)
+            {
+                return Private___intnl_SystemInt32_49.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_49 != null)
+                {
+                    Private___intnl_SystemInt32_49.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_0 != null)
+            {
+                return Private___intnl_SystemString_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_0 != null)
+            {
+                Private___intnl_SystemString_0.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_1 != null)
+            {
+                return Private___intnl_SystemByte_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_1 != null)
+                {
+                    Private___intnl_SystemByte_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __const_SystemByte_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemByte_0 != null)
+            {
+                return Private___const_SystemByte_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemByte_0 != null)
+                {
+                    Private___const_SystemByte_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Texture2D __0_picture__param
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___0_picture__param != null)
+            {
+                return Private___0_picture__param.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___0_picture__param != null)
+            {
+                Private___0_picture__param.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Rect? __intnl_UnityEngineRect_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineRect_0 != null)
+            {
+                return Private___intnl_UnityEngineRect_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_UnityEngineRect_0 != null)
+                {
+                    Private___intnl_UnityEngineRect_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal float? __intnl_SystemSingle_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemSingle_1 != null)
+            {
+                return Private___intnl_SystemSingle_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemSingle_1 != null)
+                {
+                    Private___intnl_SystemSingle_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Color32? __lcl_headerInfo_UnityEngineColor32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_headerInfo_UnityEngineColor32_0 != null)
+            {
+                return Private___lcl_headerInfo_UnityEngineColor32_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+
+                if (Private___lcl_headerInfo_UnityEngineColor32_0 != null)
+                {
+                    Private___lcl_headerInfo_UnityEngineColor32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string[] _utf8Chars
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private__utf8Chars != null)
+            {
+                return Private__utf8Chars.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private__utf8Chars != null)
+            {
+                Private__utf8Chars.Value = value;
+            }
+        }
+    }
+
+    internal char? __intnl_SystemChar_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemChar_0 != null)
+            {
+                return Private___intnl_SystemChar_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemChar_0 != null)
+                {
+                    Private___intnl_SystemChar_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __const_SystemString_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_7 != null)
+            {
+                return Private___const_SystemString_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_7 != null)
+            {
+                Private___const_SystemString_7.Value = value;
+            }
+        }
+    }
+
+    internal string[] linkedAvatars
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_linkedAvatars != null)
+            {
+                return Private_linkedAvatars.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_linkedAvatars != null)
+            {
+                Private_linkedAvatars.Value = value;
+            }
+        }
+    }
+
+    internal float? __const_SystemSingle_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemSingle_1 != null)
+            {
+                return Private___const_SystemSingle_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemSingle_1 != null)
+                {
+                    Private___const_SystemSingle_1.Value = value.Value;
                 }
             }
         }
@@ -3173,14 +4237,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal float? __9_intnl_SystemSingle
+    internal uint? __gintnl_SystemUInt32_11
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___9_intnl_SystemSingle != null)
+            if (Private___gintnl_SystemUInt32_11 != null)
             {
-                return Private___9_intnl_SystemSingle.Value;
+                return Private___gintnl_SystemUInt32_11.Value;
             }
 
             return null;
@@ -3190,66 +4254,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___9_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_11 != null)
                 {
-                    Private___9_intnl_SystemSingle.Value = value.Value;
+                    Private___gintnl_SystemUInt32_11.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __22_intnl_SystemString
+    internal uint? __gintnl_SystemUInt32_21
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___22_intnl_SystemString != null)
+            if (Private___gintnl_SystemUInt32_21 != null)
             {
-                return Private___22_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___22_intnl_SystemString != null)
-            {
-                Private___22_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __12_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___12_const_intnl_SystemString != null)
-            {
-                return Private___12_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___12_const_intnl_SystemString != null)
-            {
-                Private___12_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __3_intnl_SystemObject
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___3_intnl_SystemObject != null)
-            {
-                return Private___3_intnl_SystemObject.Value;
+                return Private___gintnl_SystemUInt32_21.Value;
             }
 
             return null;
@@ -3259,22 +4279,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_intnl_SystemObject != null)
+                if (Private___gintnl_SystemUInt32_21 != null)
                 {
-                    Private___3_intnl_SystemObject.Value = value.Value;
+                    Private___gintnl_SystemUInt32_21.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __23_intnl_SystemSingle
+    internal bool? __intnl_SystemBoolean_17
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___23_intnl_SystemSingle != null)
+            if (Private___intnl_SystemBoolean_17 != null)
             {
-                return Private___23_intnl_SystemSingle.Value;
+                return Private___intnl_SystemBoolean_17.Value;
             }
 
             return null;
@@ -3284,66 +4304,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___23_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_17 != null)
                 {
-                    Private___23_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemBoolean_17.Value = value.Value;
                 }
             }
         }
     }
 
-    internal UnityEngine.GameObject __0_intnl_UnityEngineGameObject
+    internal bool? __intnl_SystemBoolean_27
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_UnityEngineGameObject != null)
+            if (Private___intnl_SystemBoolean_27 != null)
             {
-                return Private___0_intnl_UnityEngineGameObject.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_intnl_UnityEngineGameObject != null)
-            {
-                Private___0_intnl_UnityEngineGameObject.Value = value;
-            }
-        }
-    }
-
-    internal string __8_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___8_const_intnl_SystemString != null)
-            {
-                return Private___8_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___8_const_intnl_SystemString != null)
-            {
-                Private___8_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __6_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_intnl_SystemSingle != null)
-            {
-                return Private___6_intnl_SystemSingle.Value;
+                return Private___intnl_SystemBoolean_27.Value;
             }
 
             return null;
@@ -3353,22 +4329,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_27 != null)
                 {
-                    Private___6_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemBoolean_27.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __24_intnl_SystemSingle
+    internal bool? callBackOnFinish
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___24_intnl_SystemSingle != null)
+            if (Private_callBackOnFinish != null)
             {
-                return Private___24_intnl_SystemSingle.Value;
+                return Private_callBackOnFinish.Value;
             }
 
             return null;
@@ -3378,44 +4354,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___24_intnl_SystemSingle != null)
+                if (Private_callBackOnFinish != null)
                 {
-                    Private___24_intnl_SystemSingle.Value = value.Value;
+                    Private_callBackOnFinish.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __24_intnl_SystemString
+    internal int? __const_SystemInt32_10
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___24_intnl_SystemString != null)
+            if (Private___const_SystemInt32_10 != null)
             {
-                return Private___24_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___24_intnl_SystemString != null)
-            {
-                Private___24_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __16_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___16_intnl_SystemSingle != null)
-            {
-                return Private___16_intnl_SystemSingle.Value;
+                return Private___const_SystemInt32_10.Value;
             }
 
             return null;
@@ -3425,88 +4379,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___16_intnl_SystemSingle != null)
+                if (Private___const_SystemInt32_10 != null)
                 {
-                    Private___16_intnl_SystemSingle.Value = value.Value;
+                    Private___const_SystemInt32_10.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __21_intnl_SystemString
+    internal int? __const_SystemInt32_20
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___21_intnl_SystemString != null)
+            if (Private___const_SystemInt32_20 != null)
             {
-                return Private___21_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___21_intnl_SystemString != null)
-            {
-                Private___21_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __13_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___13_intnl_SystemString != null)
-            {
-                return Private___13_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___13_intnl_SystemString != null)
-            {
-                Private___13_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __5_intnl_interpolatedStr_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___5_intnl_interpolatedStr_String != null)
-            {
-                return Private___5_intnl_interpolatedStr_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___5_intnl_interpolatedStr_String != null)
-            {
-                Private___5_intnl_interpolatedStr_String.Value = value;
-            }
-        }
-    }
-
-    internal uint? __8_const_intnl_exitJumpLoc_UInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
-            {
-                return Private___8_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___const_SystemInt32_20.Value;
             }
 
             return null;
@@ -3516,22 +4404,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_20 != null)
                 {
-                    Private___8_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___const_SystemInt32_20.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __22_intnl_SystemSingle
+    internal VRC.Udon.Common.Enums.EventTiming? __const_VRCUdonCommonEnumsEventTiming_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___22_intnl_SystemSingle != null)
+            if (Private___const_VRCUdonCommonEnumsEventTiming_0 != null)
             {
-                return Private___22_intnl_SystemSingle.Value;
+                return Private___const_VRCUdonCommonEnumsEventTiming_0.Value;
             }
 
             return null;
@@ -3541,44 +4429,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___22_intnl_SystemSingle != null)
+                if (Private___const_VRCUdonCommonEnumsEventTiming_0 != null)
                 {
-                    Private___22_intnl_SystemSingle.Value = value.Value;
+                    Private___const_VRCUdonCommonEnumsEventTiming_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __9_const_intnl_SystemString
+    internal int? __intnl_SystemInt32_11
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___9_const_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_11 != null)
             {
-                return Private___9_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___9_const_intnl_SystemString != null)
-            {
-                Private___9_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __0_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_SystemInt32 != null)
-            {
-                return Private___0_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_11.Value;
             }
 
             return null;
@@ -3588,22 +4454,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_11 != null)
                 {
-                    Private___0_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_11.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __0_intnl_returnTarget_UInt32
+    internal int? __intnl_SystemInt32_31
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_returnTarget_UInt32 != null)
+            if (Private___intnl_SystemInt32_31 != null)
             {
-                return Private___0_intnl_returnTarget_UInt32.Value;
+                return Private___intnl_SystemInt32_31.Value;
             }
 
             return null;
@@ -3613,66 +4479,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_returnTarget_UInt32 != null)
+                if (Private___intnl_SystemInt32_31 != null)
                 {
-                    Private___0_intnl_returnTarget_UInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_31.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __0_intnl_SystemString
+    internal int? __intnl_SystemInt32_21
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_21 != null)
             {
-                return Private___0_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_intnl_SystemString != null)
-            {
-                Private___0_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string empty
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private_empty != null)
-            {
-                return Private_empty.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private_empty != null)
-            {
-                Private_empty.Value = value;
-            }
-        }
-    }
-
-    internal int? __10_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___10_intnl_SystemInt32 != null)
-            {
-                return Private___10_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_21.Value;
             }
 
             return null;
@@ -3682,10 +4504,1022 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___10_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_21 != null)
                 {
-                    Private___10_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_21.Value = value.Value;
                 }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_51
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_51 != null)
+            {
+                return Private___intnl_SystemInt32_51.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_51 != null)
+                {
+                    Private___intnl_SystemInt32_51.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_41
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_41 != null)
+            {
+                return Private___intnl_SystemInt32_41.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_41 != null)
+                {
+                    Private___intnl_SystemInt32_41.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte[] __lcl_temp_SystemByteArray_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_temp_SystemByteArray_0 != null)
+            {
+                return Private___lcl_temp_SystemByteArray_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___lcl_temp_SystemByteArray_0 != null)
+            {
+                Private___lcl_temp_SystemByteArray_0.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_8 != null)
+            {
+                return Private___intnl_SystemString_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_8 != null)
+            {
+                Private___intnl_SystemString_8.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_9
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_9 != null)
+            {
+                return Private___intnl_SystemByte_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_9 != null)
+                {
+                    Private___intnl_SystemByte_9.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? debugLogging
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_debugLogging != null)
+            {
+                return Private_debugLogging.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_debugLogging != null)
+                {
+                    Private_debugLogging.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __const_SystemString_34
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_34 != null)
+            {
+                return Private___const_SystemString_34.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_34 != null)
+            {
+                Private___const_SystemString_34.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_32
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_32 != null)
+            {
+                return Private___const_SystemString_32.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_32 != null)
+            {
+                Private___const_SystemString_32.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_33
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_33 != null)
+            {
+                return Private___const_SystemString_33.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_33 != null)
+            {
+                Private___const_SystemString_33.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_30
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_30 != null)
+            {
+                return Private___const_SystemString_30.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_30 != null)
+            {
+                Private___const_SystemString_30.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_31
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_31 != null)
+            {
+                return Private___const_SystemString_31.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_31 != null)
+            {
+                Private___const_SystemString_31.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_2 != null)
+            {
+                return Private___intnl_SystemByte_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_2 != null)
+                {
+                    Private___intnl_SystemByte_2.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? transferSpeed
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_transferSpeed != null)
+            {
+                return Private_transferSpeed.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_transferSpeed != null)
+                {
+                    Private_transferSpeed.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __intnl_returnJump_SystemUInt32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_returnJump_SystemUInt32_0 != null)
+            {
+                return Private___intnl_returnJump_SystemUInt32_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_returnJump_SystemUInt32_0 != null)
+                {
+                    Private___intnl_returnJump_SystemUInt32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? character
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_character != null)
+            {
+                return Private_character.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_character != null)
+                {
+                    Private_character.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte[] avatarBytes
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_avatarBytes != null)
+            {
+                return Private_avatarBytes.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_avatarBytes != null)
+            {
+                Private_avatarBytes.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_4 != null)
+            {
+                return Private___const_SystemString_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_4 != null)
+            {
+                Private___const_SystemString_4.Value = value;
+            }
+        }
+    }
+
+    internal int? imageMode
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_imageMode != null)
+            {
+                return Private_imageMode.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_imageMode != null)
+                {
+                    Private_imageMode.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_19
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_19 != null)
+            {
+                return Private___gintnl_SystemUInt32_19.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_19 != null)
+                {
+                    Private___gintnl_SystemUInt32_19.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_29
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_29 != null)
+            {
+                return Private___gintnl_SystemUInt32_29.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_29 != null)
+                {
+                    Private___gintnl_SystemUInt32_29.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Color32? __intnl_UnityEngineColor32_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineColor32_1 != null)
+            {
+                return Private___intnl_UnityEngineColor32_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+
+                if (Private___intnl_UnityEngineColor32_1 != null)
+                {
+                    Private___intnl_UnityEngineColor32_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_18
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_18 != null)
+            {
+                return Private___const_SystemInt32_18.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_18 != null)
+                {
+                    Private___const_SystemInt32_18.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_12 != null)
+            {
+                return Private___gintnl_SystemUInt32_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_12 != null)
+                {
+                    Private___gintnl_SystemUInt32_12.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_22
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_22 != null)
+            {
+                return Private___gintnl_SystemUInt32_22.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___gintnl_SystemUInt32_22 != null)
+                {
+                    Private___gintnl_SystemUInt32_22.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __lcl_child_UnityEngineTransform_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_child_UnityEngineTransform_0 != null)
+            {
+                return Private___lcl_child_UnityEngineTransform_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___lcl_child_UnityEngineTransform_0 != null)
+            {
+                Private___lcl_child_UnityEngineTransform_0.Value = value;
+            }
+        }
+    }
+
+    internal int? __lcl_i_SystemInt32_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_i_SystemInt32_1 != null)
+            {
+                return Private___lcl_i_SystemInt32_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___lcl_i_SystemInt32_1 != null)
+                {
+                    Private___lcl_i_SystemInt32_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __lcl_i_SystemInt32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_i_SystemInt32_0 != null)
+            {
+                return Private___lcl_i_SystemInt32_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___lcl_i_SystemInt32_0 != null)
+                {
+                    Private___lcl_i_SystemInt32_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_15 != null)
+            {
+                return Private___const_SystemInt32_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_15 != null)
+                {
+                    Private___const_SystemInt32_15.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? charCounter
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_charCounter != null)
+            {
+                return Private_charCounter.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_charCounter != null)
+                {
+                    Private_charCounter.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? patronMode
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_patronMode != null)
+            {
+                return Private_patronMode.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_patronMode != null)
+                {
+                    Private_patronMode.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_17
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_17 != null)
+            {
+                return Private___intnl_SystemByte_17.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_17 != null)
+                {
+                    Private___intnl_SystemByte_17.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_16
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_16 != null)
+            {
+                return Private___intnl_SystemByte_16.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_16 != null)
+                {
+                    Private___intnl_SystemByte_16.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_15 != null)
+            {
+                return Private___intnl_SystemByte_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_15 != null)
+                {
+                    Private___intnl_SystemByte_15.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_14
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_14 != null)
+            {
+                return Private___intnl_SystemByte_14.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_14 != null)
+                {
+                    Private___intnl_SystemByte_14.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_13
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_13 != null)
+            {
+                return Private___intnl_SystemByte_13.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_13 != null)
+                {
+                    Private___intnl_SystemByte_13.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_12 != null)
+            {
+                return Private___intnl_SystemByte_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_12 != null)
+                {
+                    Private___intnl_SystemByte_12.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_11
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_11 != null)
+            {
+                return Private___intnl_SystemByte_11.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_11 != null)
+                {
+                    Private___intnl_SystemByte_11.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_10
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_10 != null)
+            {
+                return Private___intnl_SystemByte_10.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_10 != null)
+                {
+                    Private___intnl_SystemByte_10.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_5 != null)
+            {
+                return Private___intnl_SystemString_5.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_5 != null)
+            {
+                Private___intnl_SystemString_5.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_7 != null)
+            {
+                return Private___intnl_SystemByte_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_7 != null)
+                {
+                    Private___intnl_SystemByte_7.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __1__intnlparam
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___1__intnlparam != null)
+            {
+                return Private___1__intnlparam.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___1__intnlparam != null)
+            {
+                Private___1__intnlparam.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.GameObject __intnl_UnityEngineObject_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineObject_15 != null)
+            {
+                return Private___intnl_UnityEngineObject_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_UnityEngineObject_15 != null)
+            {
+                Private___intnl_UnityEngineObject_15.Value = value;
             }
         }
     }
@@ -3715,36 +5549,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal VRC.Udon.UdonBehaviour patreon
+    internal bool? frameSkip
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_patreon != null)
+            if (Private_frameSkip != null)
             {
-                return Private_patreon.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private_patreon != null)
-            {
-                Private_patreon.Value = value;
-            }
-        }
-    }
-
-    internal uint? __0_const_intnl_SystemUInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_const_intnl_SystemUInt32 != null)
-            {
-                return Private___0_const_intnl_SystemUInt32.Value;
+                return Private_frameSkip.Value;
             }
 
             return null;
@@ -3754,22 +5566,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_const_intnl_SystemUInt32 != null)
+                if (Private_frameSkip != null)
                 {
-                    Private___0_const_intnl_SystemUInt32.Value = value.Value;
+                    Private_frameSkip.Value = value.Value;
                 }
             }
         }
     }
 
-    internal System.Diagnostics.Stopwatch stopwatch
+    internal byte[] outputBytes
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_stopwatch != null)
+            if (Private_outputBytes != null)
             {
-                return Private_stopwatch.Value;
+                return Private_outputBytes.Value;
             }
 
             return null;
@@ -3777,21 +5589,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private_stopwatch != null)
+            if (Private_outputBytes != null)
             {
-                Private_stopwatch.Value = value;
+                Private_outputBytes.Value = value;
             }
         }
     }
 
-    internal bool? __9_intnl_SystemBoolean
+    internal bool? __0_IsSame__ret
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___9_intnl_SystemBoolean != null)
+            if (Private___0_IsSame__ret != null)
             {
-                return Private___9_intnl_SystemBoolean.Value;
+                return Private___0_IsSame__ret.Value;
             }
 
             return null;
@@ -3801,22 +5613,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___9_intnl_SystemBoolean != null)
+                if (Private___0_IsSame__ret != null)
                 {
-                    Private___9_intnl_SystemBoolean.Value = value.Value;
+                    Private___0_IsSame__ret.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __13_intnl_SystemInt32
+    internal string __const_SystemString_9
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___13_intnl_SystemInt32 != null)
+            if (Private___const_SystemString_9 != null)
             {
-                return Private___13_intnl_SystemInt32.Value;
+                return Private___const_SystemString_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_9 != null)
+            {
+                Private___const_SystemString_9.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.TextureFormat? __intnl_UnityEngineTextureFormat_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_UnityEngineTextureFormat_0 != null)
+            {
+                return Private___intnl_UnityEngineTextureFormat_0.Value;
             }
 
             return null;
@@ -3826,22 +5660,23 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___13_intnl_SystemInt32 != null)
+
+                if (Private___intnl_UnityEngineTextureFormat_0 != null)
                 {
-                    Private___13_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_UnityEngineTextureFormat_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte? __3_intnl_SystemByte
+    internal bool? __intnl_SystemBoolean_12
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_SystemByte != null)
+            if (Private___intnl_SystemBoolean_12 != null)
             {
-                return Private___3_intnl_SystemByte.Value;
+                return Private___intnl_SystemBoolean_12.Value;
             }
 
             return null;
@@ -3851,22 +5686,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_intnl_SystemByte != null)
+                if (Private___intnl_SystemBoolean_12 != null)
                 {
-                    Private___3_intnl_SystemByte.Value = value.Value;
+                    Private___intnl_SystemBoolean_12.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __0_intnl_SystemSingle
+    internal bool? __intnl_SystemBoolean_22
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_SystemSingle != null)
+            if (Private___intnl_SystemBoolean_22 != null)
             {
-                return Private___0_intnl_SystemSingle.Value;
+                return Private___intnl_SystemBoolean_22.Value;
             }
 
             return null;
@@ -3876,88 +5711,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_22 != null)
                 {
-                    Private___0_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemBoolean_22.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __29_intnl_SystemString
+    internal uint? __gintnl_SystemUInt32_17
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___29_intnl_SystemString != null)
+            if (Private___gintnl_SystemUInt32_17 != null)
             {
-                return Private___29_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___29_intnl_SystemString != null)
-            {
-                Private___29_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __12_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___12_intnl_SystemString != null)
-            {
-                return Private___12_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___12_intnl_SystemString != null)
-            {
-                Private___12_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __18_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___18_const_intnl_SystemString != null)
-            {
-                return Private___18_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___18_const_intnl_SystemString != null)
-            {
-                Private___18_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __13_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___13_intnl_SystemSingle != null)
-            {
-                return Private___13_intnl_SystemSingle.Value;
+                return Private___gintnl_SystemUInt32_17.Value;
             }
 
             return null;
@@ -3967,22 +5736,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___13_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_17 != null)
                 {
-                    Private___13_intnl_SystemSingle.Value = value.Value;
+                    Private___gintnl_SystemUInt32_17.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __4_intnl_SystemInt32
+    internal uint? __gintnl_SystemUInt32_27
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_intnl_SystemInt32 != null)
+            if (Private___gintnl_SystemUInt32_27 != null)
             {
-                return Private___4_intnl_SystemInt32.Value;
+                return Private___gintnl_SystemUInt32_27.Value;
             }
 
             return null;
@@ -3992,44 +5761,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_27 != null)
                 {
-                    Private___4_intnl_SystemInt32.Value = value.Value;
+                    Private___gintnl_SystemUInt32_27.Value = value.Value;
                 }
             }
         }
     }
 
-    internal byte[] colorBytes
+    internal int? __intnl_SystemInt32_16
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_colorBytes != null)
+            if (Private___intnl_SystemInt32_16 != null)
             {
-                return Private_colorBytes.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private_colorBytes != null)
-            {
-                Private_colorBytes.Value = value;
-            }
-        }
-    }
-
-    internal byte? __6_intnl_SystemByte
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_intnl_SystemByte != null)
-            {
-                return Private___6_intnl_SystemByte.Value;
+                return Private___intnl_SystemInt32_16.Value;
             }
 
             return null;
@@ -4039,22 +5786,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_intnl_SystemByte != null)
+                if (Private___intnl_SystemInt32_16 != null)
                 {
-                    Private___6_intnl_SystemByte.Value = value.Value;
+                    Private___intnl_SystemInt32_16.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __14_intnl_SystemSingle
+    internal int? __intnl_SystemInt32_36
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___14_intnl_SystemSingle != null)
+            if (Private___intnl_SystemInt32_36 != null)
             {
-                return Private___14_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_36.Value;
             }
 
             return null;
@@ -4064,110 +5811,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___14_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_36 != null)
                 {
-                    Private___14_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_36.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __4_intnl_SystemString
+    internal int? __intnl_SystemInt32_26
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_26 != null)
             {
-                return Private___4_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___4_intnl_SystemString != null)
-            {
-                Private___4_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __14_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___14_intnl_SystemString != null)
-            {
-                return Private___14_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___14_intnl_SystemString != null)
-            {
-                Private___14_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __19_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___19_const_intnl_SystemString != null)
-            {
-                return Private___19_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___19_const_intnl_SystemString != null)
-            {
-                Private___19_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __0_mp_text_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_mp_text_String != null)
-            {
-                return Private___0_mp_text_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_mp_text_String != null)
-            {
-                Private___0_mp_text_String.Value = value;
-            }
-        }
-    }
-
-    internal bool? __6_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___6_intnl_SystemBoolean != null)
-            {
-                return Private___6_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemInt32_26.Value;
             }
 
             return null;
@@ -4177,22 +5836,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___6_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_26 != null)
                 {
-                    Private___6_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_26.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __20_intnl_SystemSingle
+    internal int? __intnl_SystemInt32_56
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___20_intnl_SystemSingle != null)
+            if (Private___intnl_SystemInt32_56 != null)
             {
-                return Private___20_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_56.Value;
             }
 
             return null;
@@ -4202,22 +5861,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___20_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_56 != null)
                 {
-                    Private___20_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_56.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __4_intnl_SystemSingle
+    internal int? __intnl_SystemInt32_46
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___4_intnl_SystemSingle != null)
+            if (Private___intnl_SystemInt32_46 != null)
             {
-                return Private___4_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_46.Value;
             }
 
             return null;
@@ -4227,22 +5886,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___4_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_46 != null)
                 {
-                    Private___4_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_46.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __11_intnl_SystemString
+    internal string __refl_typename
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___11_intnl_SystemString != null)
+            if (Private___refl_typename != null)
             {
-                return Private___11_intnl_SystemString.Value;
+                return Private___refl_typename.Value;
             }
 
             return null;
@@ -4250,21 +5909,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___11_intnl_SystemString != null)
+            if (Private___refl_typename != null)
             {
-                Private___11_intnl_SystemString.Value = value;
+                Private___refl_typename.Value = value;
             }
         }
     }
 
-    internal VRC.Udon.UdonBehaviour prefab
+    internal System.Object[] __gintnl_SystemObjectArray_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_prefab != null)
+            if (Private___gintnl_SystemObjectArray_0 != null)
             {
-                return Private_prefab.Value;
+                return Private___gintnl_SystemObjectArray_0.Value;
             }
 
             return null;
@@ -4272,21 +5931,21 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private_prefab != null)
+            if (Private___gintnl_SystemObjectArray_0 != null)
             {
-                Private_prefab.Value = value;
+                Private___gintnl_SystemObjectArray_0.Value = value;
             }
         }
     }
 
-    internal byte? __5_intnl_SystemByte
+    internal int? __intnl_SystemInt32_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___5_intnl_SystemByte != null)
+            if (Private___intnl_SystemInt32_1 != null)
             {
-                return Private___5_intnl_SystemByte.Value;
+                return Private___intnl_SystemInt32_1.Value;
             }
 
             return null;
@@ -4296,66 +5955,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___5_intnl_SystemByte != null)
+                if (Private___intnl_SystemInt32_1 != null)
                 {
-                    Private___5_intnl_SystemByte.Value = value.Value;
+                    Private___intnl_SystemInt32_1.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __24_const_intnl_SystemString
+    internal int? __intnl_SystemInt32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___24_const_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_0 != null)
             {
-                return Private___24_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___24_const_intnl_SystemString != null)
-            {
-                Private___24_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __27_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___27_intnl_SystemString != null)
-            {
-                return Private___27_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___27_intnl_SystemString != null)
-            {
-                Private___27_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __12_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___12_intnl_SystemSingle != null)
-            {
-                return Private___12_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_0.Value;
             }
 
             return null;
@@ -4365,44 +5980,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___12_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_0 != null)
                 {
-                    Private___12_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __30_intnl_SystemString
+    internal int? __intnl_SystemInt32_3
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___30_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_3 != null)
             {
-                return Private___30_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___30_intnl_SystemString != null)
-            {
-                Private___30_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal bool? __14_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___14_intnl_SystemBoolean != null)
-            {
-                return Private___14_intnl_SystemBoolean.Value;
+                return Private___intnl_SystemInt32_3.Value;
             }
 
             return null;
@@ -4412,9 +6005,804 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___14_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_3 != null)
                 {
-                    Private___14_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemInt32_3.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_2 != null)
+            {
+                return Private___intnl_SystemInt32_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_2 != null)
+                {
+                    Private___intnl_SystemInt32_2.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_5 != null)
+            {
+                return Private___intnl_SystemInt32_5.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_5 != null)
+                {
+                    Private___intnl_SystemInt32_5.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_4 != null)
+            {
+                return Private___intnl_SystemInt32_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_4 != null)
+                {
+                    Private___intnl_SystemInt32_4.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_7 != null)
+            {
+                return Private___intnl_SystemInt32_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_7 != null)
+                {
+                    Private___intnl_SystemInt32_7.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_6 != null)
+            {
+                return Private___intnl_SystemInt32_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_6 != null)
+                {
+                    Private___intnl_SystemInt32_6.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_9
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_9 != null)
+            {
+                return Private___intnl_SystemInt32_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_9 != null)
+                {
+                    Private___intnl_SystemInt32_9.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_8 != null)
+            {
+                return Private___intnl_SystemInt32_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_8 != null)
+                {
+                    Private___intnl_SystemInt32_8.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? outputToText
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_outputToText != null)
+            {
+                return Private_outputToText.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_outputToText != null)
+                {
+                    Private_outputToText.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal UnityEngine.Transform pedestalClone
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_pedestalClone != null)
+            {
+                return Private_pedestalClone.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_pedestalClone != null)
+            {
+                Private_pedestalClone.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.Transform __this_UnityEngineTransform_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_UnityEngineTransform_0 != null)
+            {
+                return Private___this_UnityEngineTransform_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_UnityEngineTransform_0 != null)
+            {
+                Private___this_UnityEngineTransform_0.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_1 != null)
+            {
+                return Private___const_SystemString_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_1 != null)
+            {
+                Private___const_SystemString_1.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_19
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_19 != null)
+            {
+                return Private___intnl_SystemString_19.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_19 != null)
+            {
+                Private___intnl_SystemString_19.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_14
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_14 != null)
+            {
+                return Private___intnl_SystemString_14.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_14 != null)
+            {
+                Private___intnl_SystemString_14.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_15 != null)
+            {
+                return Private___intnl_SystemString_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_15 != null)
+            {
+                Private___intnl_SystemString_15.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_12 != null)
+            {
+                return Private___intnl_SystemString_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_12 != null)
+            {
+                Private___intnl_SystemString_12.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_13
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_13 != null)
+            {
+                return Private___intnl_SystemString_13.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_13 != null)
+            {
+                Private___intnl_SystemString_13.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_10
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_10 != null)
+            {
+                return Private___intnl_SystemString_10.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_10 != null)
+            {
+                Private___intnl_SystemString_10.Value = value;
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_11
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_11 != null)
+            {
+                return Private___intnl_SystemString_11.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_11 != null)
+            {
+                Private___intnl_SystemString_11.Value = value;
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_15
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_15 != null)
+            {
+                return Private___intnl_SystemBoolean_15.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_15 != null)
+                {
+                    Private___intnl_SystemBoolean_15.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_25
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_25 != null)
+            {
+                return Private___intnl_SystemBoolean_25.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_25 != null)
+                {
+                    Private___intnl_SystemBoolean_25.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_12
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_12 != null)
+            {
+                return Private___const_SystemInt32_12.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_12 != null)
+                {
+                    Private___const_SystemInt32_12.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_22
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_22 != null)
+            {
+                return Private___const_SystemInt32_22.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_22 != null)
+                {
+                    Private___const_SystemInt32_22.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_13
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_13 != null)
+            {
+                return Private___intnl_SystemInt32_13.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_13 != null)
+                {
+                    Private___intnl_SystemInt32_13.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_33
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_33 != null)
+            {
+                return Private___intnl_SystemInt32_33.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_33 != null)
+                {
+                    Private___intnl_SystemInt32_33.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_23
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_23 != null)
+            {
+                return Private___intnl_SystemInt32_23.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_23 != null)
+                {
+                    Private___intnl_SystemInt32_23.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_53
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_53 != null)
+            {
+                return Private___intnl_SystemInt32_53.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_53 != null)
+                {
+                    Private___intnl_SystemInt32_53.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_43
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_43 != null)
+            {
+                return Private___intnl_SystemInt32_43.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_43 != null)
+                {
+                    Private___intnl_SystemInt32_43.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? waitForNew
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_waitForNew != null)
+            {
+                return Private_waitForNew.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_waitForNew != null)
+                {
+                    Private_waitForNew.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_18
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_18 != null)
+            {
+                return Private___intnl_SystemInt32_18.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_18 != null)
+                {
+                    Private___intnl_SystemInt32_18.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_38
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_38 != null)
+            {
+                return Private___intnl_SystemInt32_38.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_38 != null)
+                {
+                    Private___intnl_SystemInt32_38.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_28
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_28 != null)
+            {
+                return Private___intnl_SystemInt32_28.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_28 != null)
+                {
+                    Private___intnl_SystemInt32_28.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_58
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_58 != null)
+            {
+                return Private___intnl_SystemInt32_58.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_58 != null)
+                {
+                    Private___intnl_SystemInt32_58.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __intnl_SystemInt32_48
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemInt32_48 != null)
+            {
+                return Private___intnl_SystemInt32_48.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemInt32_48 != null)
+                {
+                    Private___intnl_SystemInt32_48.Value = value.Value;
                 }
             }
         }
@@ -4442,14 +6830,36 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal long? __0_intnl_SystemInt64
+    internal VRC.Udon.UdonBehaviour callbackBehaviour
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_intnl_SystemInt64 != null)
+            if (Private_callbackBehaviour != null)
             {
-                return Private___0_intnl_SystemInt64.Value;
+                return Private_callbackBehaviour.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_callbackBehaviour != null)
+            {
+                Private_callbackBehaviour.Value = value;
+            }
+        }
+    }
+
+    internal int? __lcl_textLength_SystemInt32_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___lcl_textLength_SystemInt32_0 != null)
+            {
+                return Private___lcl_textLength_SystemInt32_0.Value;
             }
 
             return null;
@@ -4459,22 +6869,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemInt64 != null)
+                if (Private___lcl_textLength_SystemInt32_0 != null)
                 {
-                    Private___0_intnl_SystemInt64.Value = value.Value;
+                    Private___lcl_textLength_SystemInt32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __3_intnl_SystemInt32
+    internal byte? __intnl_SystemByte_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_SystemInt32 != null)
+            if (Private___intnl_SystemByte_0 != null)
             {
-                return Private___3_intnl_SystemInt32.Value;
+                return Private___intnl_SystemByte_0.Value;
             }
 
             return null;
@@ -4484,44 +6894,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemByte_0 != null)
                 {
-                    Private___3_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemByte_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __25_const_intnl_SystemString
+    internal byte? __const_SystemByte_3
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___25_const_intnl_SystemString != null)
+            if (Private___const_SystemByte_3 != null)
             {
-                return Private___25_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___25_const_intnl_SystemString != null)
-            {
-                Private___25_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal uint? __11_const_intnl_exitJumpLoc_UInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
-            {
-                return Private___11_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___const_SystemByte_3.Value;
             }
 
             return null;
@@ -4531,22 +6919,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemByte_3 != null)
                 {
-                    Private___11_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___const_SystemByte_3.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __8_intnl_SystemBoolean
+    internal string __const_SystemString_6
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___8_intnl_SystemBoolean != null)
+            if (Private___const_SystemString_6 != null)
             {
-                return Private___8_intnl_SystemBoolean.Value;
+                return Private___const_SystemString_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_6 != null)
+            {
+                Private___const_SystemString_6.Value = value;
+            }
+        }
+    }
+
+    internal uint? __gintnl_SystemUInt32_10
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___gintnl_SystemUInt32_10 != null)
+            {
+                return Private___gintnl_SystemUInt32_10.Value;
             }
 
             return null;
@@ -4556,44 +6966,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___8_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_10 != null)
                 {
-                    Private___8_intnl_SystemBoolean.Value = value.Value;
+                    Private___gintnl_SystemUInt32_10.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __1_intnl_interpolatedStr_String
+    internal uint? __gintnl_SystemUInt32_30
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_intnl_interpolatedStr_String != null)
+            if (Private___gintnl_SystemUInt32_30 != null)
             {
-                return Private___1_intnl_interpolatedStr_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___1_intnl_interpolatedStr_String != null)
-            {
-                Private___1_intnl_interpolatedStr_String.Value = value;
-            }
-        }
-    }
-
-    internal bool? __20_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___20_intnl_SystemBoolean != null)
-            {
-                return Private___20_intnl_SystemBoolean.Value;
+                return Private___gintnl_SystemUInt32_30.Value;
             }
 
             return null;
@@ -4603,44 +6991,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___20_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_30 != null)
                 {
-                    Private___20_intnl_SystemBoolean.Value = value.Value;
+                    Private___gintnl_SystemUInt32_30.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __3_intnl_SystemString
+    internal uint? __gintnl_SystemUInt32_20
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_SystemString != null)
+            if (Private___gintnl_SystemUInt32_20 != null)
             {
-                return Private___3_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___3_intnl_SystemString != null)
-            {
-                Private___3_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal byte? __8_intnl_SystemByte
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___8_intnl_SystemByte != null)
-            {
-                return Private___8_intnl_SystemByte.Value;
+                return Private___gintnl_SystemUInt32_20.Value;
             }
 
             return null;
@@ -4650,22 +7016,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___8_intnl_SystemByte != null)
+                if (Private___gintnl_SystemUInt32_20 != null)
                 {
-                    Private___8_intnl_SystemByte.Value = value.Value;
+                    Private___gintnl_SystemUInt32_20.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __1_intnl_SystemObject
+    internal int? __const_SystemInt32_17
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_intnl_SystemObject != null)
+            if (Private___const_SystemInt32_17 != null)
             {
-                return Private___1_intnl_SystemObject.Value;
+                return Private___const_SystemInt32_17.Value;
             }
 
             return null;
@@ -4675,44 +7041,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___1_intnl_SystemObject != null)
+                if (Private___const_SystemInt32_17 != null)
                 {
-                    Private___1_intnl_SystemObject.Value = value.Value;
+                    Private___const_SystemInt32_17.Value = value.Value;
                 }
             }
         }
     }
 
-    internal UnityEngine.GameObject renderQuad
+    internal int? __intnl_SystemInt32_10
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private_renderQuad != null)
+            if (Private___intnl_SystemInt32_10 != null)
             {
-                return Private_renderQuad.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private_renderQuad != null)
-            {
-                Private_renderQuad.Value = value;
-            }
-        }
-    }
-
-    internal byte? __0_intnl_SystemByte
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_SystemByte != null)
-            {
-                return Private___0_intnl_SystemByte.Value;
+                return Private___intnl_SystemInt32_10.Value;
             }
 
             return null;
@@ -4722,88 +7066,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemByte != null)
+                if (Private___intnl_SystemInt32_10 != null)
                 {
-                    Private___0_intnl_SystemByte.Value = value.Value;
+                    Private___intnl_SystemInt32_10.Value = value.Value;
                 }
             }
         }
     }
 
-    internal TMPro.TextMeshPro __1_intnl_TMProTextMeshPro
+    internal int? __intnl_SystemInt32_30
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_intnl_TMProTextMeshPro != null)
+            if (Private___intnl_SystemInt32_30 != null)
             {
-                return Private___1_intnl_TMProTextMeshPro.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___1_intnl_TMProTextMeshPro != null)
-            {
-                Private___1_intnl_TMProTextMeshPro.Value = value;
-            }
-        }
-    }
-
-    internal string __4_intnl_interpolatedStr_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___4_intnl_interpolatedStr_String != null)
-            {
-                return Private___4_intnl_interpolatedStr_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___4_intnl_interpolatedStr_String != null)
-            {
-                Private___4_intnl_interpolatedStr_String.Value = value;
-            }
-        }
-    }
-
-    internal string __19_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___19_intnl_SystemString != null)
-            {
-                return Private___19_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___19_intnl_SystemString != null)
-            {
-                Private___19_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __2_const_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___2_const_intnl_SystemInt32 != null)
-            {
-                return Private___2_const_intnl_SystemInt32.Value;
+                return Private___intnl_SystemInt32_30.Value;
             }
 
             return null;
@@ -4813,22 +7091,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_30 != null)
                 {
-                    Private___2_const_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemInt32_30.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __3_intnl_SystemSingle
+    internal int? __intnl_SystemInt32_20
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_intnl_SystemSingle != null)
+            if (Private___intnl_SystemInt32_20 != null)
             {
-                return Private___3_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_20.Value;
             }
 
             return null;
@@ -4838,88 +7116,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_20 != null)
                 {
-                    Private___3_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_20.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __26_intnl_SystemString
+    internal int? __intnl_SystemInt32_50
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___26_intnl_SystemString != null)
+            if (Private___intnl_SystemInt32_50 != null)
             {
-                return Private___26_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___26_intnl_SystemString != null)
-            {
-                Private___26_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __27_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___27_const_intnl_SystemString != null)
-            {
-                return Private___27_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___27_const_intnl_SystemString != null)
-            {
-                Private___27_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __10_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___10_const_intnl_SystemString != null)
-            {
-                return Private___10_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___10_const_intnl_SystemString != null)
-            {
-                Private___10_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? index
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private_index != null)
-            {
-                return Private_index.Value;
+                return Private___intnl_SystemInt32_50.Value;
             }
 
             return null;
@@ -4929,22 +7141,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private_index != null)
+                if (Private___intnl_SystemInt32_50 != null)
                 {
-                    Private_index.Value = value.Value;
+                    Private___intnl_SystemInt32_50.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __18_intnl_SystemSingle
+    internal int? __intnl_SystemInt32_40
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___18_intnl_SystemSingle != null)
+            if (Private___intnl_SystemInt32_40 != null)
             {
-                return Private___18_intnl_SystemSingle.Value;
+                return Private___intnl_SystemInt32_40.Value;
             }
 
             return null;
@@ -4954,22 +7166,44 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___18_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_40 != null)
                 {
-                    Private___18_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemInt32_40.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __7_intnl_SystemInt32
+    internal string __intnl_SystemString_7
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_intnl_SystemInt32 != null)
+            if (Private___intnl_SystemString_7 != null)
             {
-                return Private___7_intnl_SystemInt32.Value;
+                return Private___intnl_SystemString_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_7 != null)
+            {
+                Private___intnl_SystemString_7.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_8 != null)
+            {
+                return Private___intnl_SystemByte_8.Value;
             }
 
             return null;
@@ -4979,22 +7213,242 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___7_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemByte_8 != null)
                 {
-                    Private___7_intnl_SystemInt32.Value = value.Value;
+                    Private___intnl_SystemByte_8.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __1_const_intnl_SystemBoolean
+    internal string __const_SystemString_26
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_const_intnl_SystemBoolean != null)
+            if (Private___const_SystemString_26 != null)
             {
-                return Private___1_const_intnl_SystemBoolean.Value;
+                return Private___const_SystemString_26.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_26 != null)
+            {
+                Private___const_SystemString_26.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_27
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_27 != null)
+            {
+                return Private___const_SystemString_27.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_27 != null)
+            {
+                Private___const_SystemString_27.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_24
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_24 != null)
+            {
+                return Private___const_SystemString_24.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_24 != null)
+            {
+                Private___const_SystemString_24.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_25
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_25 != null)
+            {
+                return Private___const_SystemString_25.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_25 != null)
+            {
+                Private___const_SystemString_25.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_22
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_22 != null)
+            {
+                return Private___const_SystemString_22.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_22 != null)
+            {
+                Private___const_SystemString_22.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_23
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_23 != null)
+            {
+                return Private___const_SystemString_23.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_23 != null)
+            {
+                Private___const_SystemString_23.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_20
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_20 != null)
+            {
+                return Private___const_SystemString_20.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_20 != null)
+            {
+                Private___const_SystemString_20.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_21
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_21 != null)
+            {
+                return Private___const_SystemString_21.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_21 != null)
+            {
+                Private___const_SystemString_21.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_28
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_28 != null)
+            {
+                return Private___const_SystemString_28.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_28 != null)
+            {
+                Private___const_SystemString_28.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_29
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_29 != null)
+            {
+                return Private___const_SystemString_29.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_29 != null)
+            {
+                Private___const_SystemString_29.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_5 != null)
+            {
+                return Private___intnl_SystemByte_5.Value;
             }
 
             return null;
@@ -5004,132 +7458,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___1_const_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemByte_5 != null)
                 {
-                    Private___1_const_intnl_SystemBoolean.Value = value.Value;
+                    Private___intnl_SystemByte_5.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __7_intnl_SystemString
+    internal int? frameCounter
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_intnl_SystemString != null)
+            if (Private_frameCounter != null)
             {
-                return Private___7_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___7_intnl_SystemString != null)
-            {
-                Private___7_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __11_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___11_const_intnl_SystemString != null)
-            {
-                return Private___11_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___11_const_intnl_SystemString != null)
-            {
-                Private___11_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __16_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___16_const_intnl_SystemString != null)
-            {
-                return Private___16_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___16_const_intnl_SystemString != null)
-            {
-                Private___16_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal TMPro.TextMeshPro __5_intnl_SystemObject
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___5_intnl_SystemObject != null)
-            {
-                return Private___5_intnl_SystemObject.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___5_intnl_SystemObject != null)
-            {
-                Private___5_intnl_SystemObject.Value = value;
-            }
-        }
-    }
-
-    internal UnityEngine.Texture2D __0_intnl_UnityEngineTexture2D
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_UnityEngineTexture2D != null)
-            {
-                return Private___0_intnl_UnityEngineTexture2D.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_intnl_UnityEngineTexture2D != null)
-            {
-                Private___0_intnl_UnityEngineTexture2D.Value = value;
-            }
-        }
-    }
-
-    internal bool? __18_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___18_intnl_SystemBoolean != null)
-            {
-                return Private___18_intnl_SystemBoolean.Value;
+                return Private_frameCounter.Value;
             }
 
             return null;
@@ -5139,22 +7483,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___18_intnl_SystemBoolean != null)
+                if (Private_frameCounter != null)
                 {
-                    Private___18_intnl_SystemBoolean.Value = value.Value;
+                    Private_frameCounter.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __2_intnl_SystemBoolean
+    internal uint? __gintnl_SystemUInt32_18
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_intnl_SystemBoolean != null)
+            if (Private___gintnl_SystemUInt32_18 != null)
             {
-                return Private___2_intnl_SystemBoolean.Value;
+                return Private___gintnl_SystemUInt32_18.Value;
             }
 
             return null;
@@ -5164,22 +7508,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___2_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_18 != null)
                 {
-                    Private___2_intnl_SystemBoolean.Value = value.Value;
+                    Private___gintnl_SystemUInt32_18.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __10_intnl_SystemSingle
+    internal uint? __gintnl_SystemUInt32_28
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___10_intnl_SystemSingle != null)
+            if (Private___gintnl_SystemUInt32_28 != null)
             {
-                return Private___10_intnl_SystemSingle.Value;
+                return Private___gintnl_SystemUInt32_28.Value;
             }
 
             return null;
@@ -5189,22 +7533,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___10_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_28 != null)
                 {
-                    Private___10_intnl_SystemSingle.Value = value.Value;
+                    Private___gintnl_SystemUInt32_28.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __25_intnl_SystemSingle
+    internal bool? __intnl_SystemBoolean_10
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___25_intnl_SystemSingle != null)
+            if (Private___intnl_SystemBoolean_10 != null)
             {
-                return Private___25_intnl_SystemSingle.Value;
+                return Private___intnl_SystemBoolean_10.Value;
             }
 
             return null;
@@ -5214,22 +7558,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___25_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_10 != null)
                 {
-                    Private___25_intnl_SystemSingle.Value = value.Value;
+                    Private___intnl_SystemBoolean_10.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __0_stepLength_Int32
+    internal bool? __intnl_SystemBoolean_20
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_stepLength_Int32 != null)
+            if (Private___intnl_SystemBoolean_20 != null)
             {
-                return Private___0_stepLength_Int32.Value;
+                return Private___intnl_SystemBoolean_20.Value;
             }
 
             return null;
@@ -5239,22 +7583,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_stepLength_Int32 != null)
+                if (Private___intnl_SystemBoolean_20 != null)
                 {
-                    Private___0_stepLength_Int32.Value = value.Value;
+                    Private___intnl_SystemBoolean_20.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __0_step_Int32
+    internal UnityEngine.Color32? __intnl_UnityEngineColor32_2
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___0_step_Int32 != null)
+            if (Private___intnl_UnityEngineColor32_2 != null)
             {
-                return Private___0_step_Int32.Value;
+                return Private___intnl_UnityEngineColor32_2.Value;
             }
 
             return null;
@@ -5264,22 +7608,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_step_Int32 != null)
+                if (Private___intnl_UnityEngineColor32_2 != null)
                 {
-                    Private___0_step_Int32.Value = value.Value;
+                    Private___intnl_UnityEngineColor32_2.Value = value.Value;
                 }
             }
         }
     }
 
-    internal int? __3_const_intnl_SystemInt32
+    internal uint? __gintnl_SystemUInt32_15
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___3_const_intnl_SystemInt32 != null)
+            if (Private___gintnl_SystemUInt32_15 != null)
             {
-                return Private___3_const_intnl_SystemInt32.Value;
+                return Private___gintnl_SystemUInt32_15.Value;
             }
 
             return null;
@@ -5289,22 +7633,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___3_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_15 != null)
                 {
-                    Private___3_const_intnl_SystemInt32.Value = value.Value;
+                    Private___gintnl_SystemUInt32_15.Value = value.Value;
                 }
             }
         }
     }
 
-    internal float? __7_intnl_SystemSingle
+    internal uint? __gintnl_SystemUInt32_25
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___7_intnl_SystemSingle != null)
+            if (Private___gintnl_SystemUInt32_25 != null)
             {
-                return Private___7_intnl_SystemSingle.Value;
+                return Private___gintnl_SystemUInt32_25.Value;
             }
 
             return null;
@@ -5314,142 +7658,10 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___7_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_25 != null)
                 {
-                    Private___7_intnl_SystemSingle.Value = value.Value;
+                    Private___gintnl_SystemUInt32_25.Value = value.Value;
                 }
-            }
-        }
-    }
-
-    internal VRC.Udon.UdonBehaviour __0_this_intnl_AvatarImageReaderReadRenderTexture
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_this_intnl_AvatarImageReaderReadRenderTexture != null)
-            {
-                return Private___0_this_intnl_AvatarImageReaderReadRenderTexture.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_this_intnl_AvatarImageReaderReadRenderTexture != null)
-            {
-                Private___0_this_intnl_AvatarImageReaderReadRenderTexture.Value = value;
-            }
-        }
-    }
-
-    internal string __25_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___25_intnl_SystemString != null)
-            {
-                return Private___25_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___25_intnl_SystemString != null)
-            {
-                Private___25_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal TMPro.TextMeshPro __3_intnl_TMProTextMeshPro
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___3_intnl_TMProTextMeshPro != null)
-            {
-                return Private___3_intnl_TMProTextMeshPro.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___3_intnl_TMProTextMeshPro != null)
-            {
-                Private___3_intnl_TMProTextMeshPro.Value = value;
-            }
-        }
-    }
-
-    internal string __17_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___17_intnl_SystemString != null)
-            {
-                return Private___17_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___17_intnl_SystemString != null)
-            {
-                Private___17_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __0_intnl_returnValSymbol_String
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_returnValSymbol_String != null)
-            {
-                return Private___0_intnl_returnValSymbol_String.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___0_intnl_returnValSymbol_String != null)
-            {
-                Private___0_intnl_returnValSymbol_String.Value = value;
-            }
-        }
-    }
-
-    internal string __30_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___30_const_intnl_SystemString != null)
-            {
-                return Private___30_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___30_const_intnl_SystemString != null)
-            {
-                Private___30_const_intnl_SystemString.Value = value;
             }
         }
     }
@@ -5476,36 +7688,14 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         }
     }
 
-    internal string __13_const_intnl_SystemString
+    internal int? decodeSpeedUTF16
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___13_const_intnl_SystemString != null)
+            if (Private_decodeSpeedUTF16 != null)
             {
-                return Private___13_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___13_const_intnl_SystemString != null)
-            {
-                Private___13_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __8_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___8_intnl_SystemInt32 != null)
-            {
-                return Private___8_intnl_SystemInt32.Value;
+                return Private_decodeSpeedUTF16.Value;
             }
 
             return null;
@@ -5515,44 +7705,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___8_intnl_SystemInt32 != null)
+                if (Private_decodeSpeedUTF16 != null)
                 {
-                    Private___8_intnl_SystemInt32.Value = value.Value;
+                    Private_decodeSpeedUTF16.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __8_intnl_SystemString
+    internal int? __const_SystemInt32_9
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___8_intnl_SystemString != null)
+            if (Private___const_SystemInt32_9 != null)
             {
-                return Private___8_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___8_intnl_SystemString != null)
-            {
-                Private___8_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal bool? __10_intnl_SystemBoolean
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___10_intnl_SystemBoolean != null)
-            {
-                return Private___10_intnl_SystemBoolean.Value;
+                return Private___const_SystemInt32_9.Value;
             }
 
             return null;
@@ -5562,66 +7730,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___10_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_9 != null)
                 {
-                    Private___10_intnl_SystemBoolean.Value = value.Value;
+                    Private___const_SystemInt32_9.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __2_const_intnl_SystemString
+    internal int? __const_SystemInt32_8
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___2_const_intnl_SystemString != null)
+            if (Private___const_SystemInt32_8 != null)
             {
-                return Private___2_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___2_const_intnl_SystemString != null)
-            {
-                Private___2_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal string __31_const_intnl_SystemString
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___31_const_intnl_SystemString != null)
-            {
-                return Private___31_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___31_const_intnl_SystemString != null)
-            {
-                Private___31_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal int? __0_const_intnl_SystemInt32
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_const_intnl_SystemInt32 != null)
-            {
-                return Private___0_const_intnl_SystemInt32.Value;
+                return Private___const_SystemInt32_8.Value;
             }
 
             return null;
@@ -5631,44 +7755,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_const_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_8 != null)
                 {
-                    Private___0_const_intnl_SystemInt32.Value = value.Value;
+                    Private___const_SystemInt32_8.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __33_intnl_SystemString
+    internal int? __const_SystemInt32_1
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___33_intnl_SystemString != null)
+            if (Private___const_SystemInt32_1 != null)
             {
-                return Private___33_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___33_intnl_SystemString != null)
-            {
-                Private___33_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal char? __0_intnl_SystemChar
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___0_intnl_SystemChar != null)
-            {
-                return Private___0_intnl_SystemChar.Value;
+                return Private___const_SystemInt32_1.Value;
             }
 
             return null;
@@ -5678,22 +7780,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___0_intnl_SystemChar != null)
+                if (Private___const_SystemInt32_1 != null)
                 {
-                    Private___0_intnl_SystemChar.Value = value.Value;
+                    Private___const_SystemInt32_1.Value = value.Value;
                 }
             }
         }
     }
 
-    internal uint? __1_const_intnl_exitJumpLoc_UInt32
+    internal int? __const_SystemInt32_0
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
+            if (Private___const_SystemInt32_0 != null)
             {
-                return Private___1_const_intnl_exitJumpLoc_UInt32.Value;
+                return Private___const_SystemInt32_0.Value;
             }
 
             return null;
@@ -5703,44 +7805,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_0 != null)
                 {
-                    Private___1_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                    Private___const_SystemInt32_0.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __22_const_intnl_SystemString
+    internal int? __const_SystemInt32_3
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___22_const_intnl_SystemString != null)
+            if (Private___const_SystemInt32_3 != null)
             {
-                return Private___22_const_intnl_SystemString.Value;
-            }
-
-            return null;
-        }
-        [HideFromIl2Cpp]
-        set
-        {
-            if (Private___22_const_intnl_SystemString != null)
-            {
-                Private___22_const_intnl_SystemString.Value = value;
-            }
-        }
-    }
-
-    internal float? __8_intnl_SystemSingle
-    {
-        [HideFromIl2Cpp]
-        get
-        {
-            if (Private___8_intnl_SystemSingle != null)
-            {
-                return Private___8_intnl_SystemSingle.Value;
+                return Private___const_SystemInt32_3.Value;
             }
 
             return null;
@@ -5750,22 +7830,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___8_intnl_SystemSingle != null)
+                if (Private___const_SystemInt32_3 != null)
                 {
-                    Private___8_intnl_SystemSingle.Value = value.Value;
+                    Private___const_SystemInt32_3.Value = value.Value;
                 }
             }
         }
     }
 
-    internal bool? __17_intnl_SystemBoolean
+    internal int? __const_SystemInt32_2
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___17_intnl_SystemBoolean != null)
+            if (Private___const_SystemInt32_2 != null)
             {
-                return Private___17_intnl_SystemBoolean.Value;
+                return Private___const_SystemInt32_2.Value;
             }
 
             return null;
@@ -5775,22 +7855,22 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         {
             if (value.HasValue)
             {
-                if (Private___17_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_2 != null)
                 {
-                    Private___17_intnl_SystemBoolean.Value = value.Value;
+                    Private___const_SystemInt32_2.Value = value.Value;
                 }
             }
         }
     }
 
-    internal string __16_intnl_SystemString
+    internal int? __const_SystemInt32_5
     {
         [HideFromIl2Cpp]
         get
         {
-            if (Private___16_intnl_SystemString != null)
+            if (Private___const_SystemInt32_5 != null)
             {
-                return Private___16_intnl_SystemString.Value;
+                return Private___const_SystemInt32_5.Value;
             }
 
             return null;
@@ -5798,9 +7878,820 @@ public class ImageRenderCameraReader2 : MonoBehaviour
         [HideFromIl2Cpp]
         set
         {
-            if (Private___16_intnl_SystemString != null)
+            if (value.HasValue)
             {
-                Private___16_intnl_SystemString.Value = value;
+                if (Private___const_SystemInt32_5 != null)
+                {
+                    Private___const_SystemInt32_5.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_4 != null)
+            {
+                return Private___const_SystemInt32_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_4 != null)
+                {
+                    Private___const_SystemInt32_4.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_7 != null)
+            {
+                return Private___const_SystemInt32_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_7 != null)
+                {
+                    Private___const_SystemInt32_7.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_6 != null)
+            {
+                return Private___const_SystemInt32_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_6 != null)
+                {
+                    Private___const_SystemInt32_6.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_14
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_14 != null)
+            {
+                return Private___const_SystemInt32_14.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_14 != null)
+                {
+                    Private___const_SystemInt32_14.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? __const_SystemInt32_24
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemInt32_24 != null)
+            {
+                return Private___const_SystemInt32_24.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___const_SystemInt32_24 != null)
+                {
+                    Private___const_SystemInt32_24.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_8 != null)
+            {
+                return Private___intnl_SystemBoolean_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_8 != null)
+                {
+                    Private___intnl_SystemBoolean_8.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_9
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_9 != null)
+            {
+                return Private___intnl_SystemBoolean_9.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_9 != null)
+                {
+                    Private___intnl_SystemBoolean_9.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_0 != null)
+            {
+                return Private___intnl_SystemBoolean_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_0 != null)
+                {
+                    Private___intnl_SystemBoolean_0.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_1 != null)
+            {
+                return Private___intnl_SystemBoolean_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_1 != null)
+                {
+                    Private___intnl_SystemBoolean_1.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_2 != null)
+            {
+                return Private___intnl_SystemBoolean_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_2 != null)
+                {
+                    Private___intnl_SystemBoolean_2.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_3
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_3 != null)
+            {
+                return Private___intnl_SystemBoolean_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_3 != null)
+                {
+                    Private___intnl_SystemBoolean_3.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_4 != null)
+            {
+                return Private___intnl_SystemBoolean_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_4 != null)
+                {
+                    Private___intnl_SystemBoolean_4.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_5 != null)
+            {
+                return Private___intnl_SystemBoolean_5.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_5 != null)
+                {
+                    Private___intnl_SystemBoolean_5.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_6 != null)
+            {
+                return Private___intnl_SystemBoolean_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_6 != null)
+                {
+                    Private___intnl_SystemBoolean_6.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_7 != null)
+            {
+                return Private___intnl_SystemBoolean_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_7 != null)
+                {
+                    Private___intnl_SystemBoolean_7.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __intnl_SystemString_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemString_4 != null)
+            {
+                return Private___intnl_SystemString_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___intnl_SystemString_4 != null)
+            {
+                Private___intnl_SystemString_4.Value = value;
+            }
+        }
+    }
+
+    internal UnityEngine.MeshRenderer renderQuadRenderer
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_renderQuadRenderer != null)
+            {
+                return Private_renderQuadRenderer.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_renderQuadRenderer != null)
+            {
+                Private_renderQuadRenderer.Value = value;
+            }
+        }
+    }
+
+    internal VRC.SDK3.Components.VRCAvatarPedestal avatarPedestal
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_avatarPedestal != null)
+            {
+                return Private_avatarPedestal.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private_avatarPedestal != null)
+            {
+                Private_avatarPedestal.Value = value;
+            }
+        }
+    }
+
+    internal byte? __intnl_SystemByte_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemByte_6 != null)
+            {
+                return Private___intnl_SystemByte_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemByte_6 != null)
+                {
+                    Private___intnl_SystemByte_6.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal bool? pedestalAssetsReady
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_pedestalAssetsReady != null)
+            {
+                return Private_pedestalAssetsReady.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_pedestalAssetsReady != null)
+                {
+                    Private_pedestalAssetsReady.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? decodeIndex
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_decodeIndex != null)
+            {
+                return Private_decodeIndex.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_decodeIndex != null)
+                {
+                    Private_decodeIndex.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal int? maxIndex
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private_maxIndex != null)
+            {
+                return Private_maxIndex.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private_maxIndex != null)
+                {
+                    Private_maxIndex.Value = value.Value;
+                }
+            }
+        }
+    }
+
+    internal string __const_SystemString_3
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_3 != null)
+            {
+                return Private___const_SystemString_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_3 != null)
+            {
+                Private___const_SystemString_3.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_8 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_8 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_8.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_3
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_3 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_3.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_3 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_3.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_2
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_2 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_2.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_2 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_2.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_1
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_1 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_1.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_1 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_1.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_0
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_0 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_0.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_0 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_0.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_7
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_7 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_7.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_7 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_7.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_6
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_6 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_6.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_6 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_6.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_5
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_5 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_5.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_5 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_5.Value = value;
+            }
+        }
+    }
+
+    internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_4
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___this_VRCUdonUdonBehaviour_4 != null)
+            {
+                return Private___this_VRCUdonUdonBehaviour_4.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___this_VRCUdonUdonBehaviour_4 != null)
+            {
+                Private___this_VRCUdonUdonBehaviour_4.Value = value;
+            }
+        }
+    }
+
+    internal string __const_SystemString_8
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___const_SystemString_8 != null)
+            {
+                return Private___const_SystemString_8.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (Private___const_SystemString_8 != null)
+            {
+                Private___const_SystemString_8.Value = value;
+            }
+        }
+    }
+
+    internal bool? __intnl_SystemBoolean_18
+    {
+        [HideFromIl2Cpp]
+        get
+        {
+            if (Private___intnl_SystemBoolean_18 != null)
+            {
+                return Private___intnl_SystemBoolean_18.Value;
+            }
+
+            return null;
+        }
+        [HideFromIl2Cpp]
+        set
+        {
+            if (value.HasValue)
+            {
+                if (Private___intnl_SystemBoolean_18 != null)
+                {
+                    Private___intnl_SystemBoolean_18.Value = value.Value;
+                }
             }
         }
     }
@@ -5831,233 +8722,335 @@ public class ImageRenderCameraReader2 : MonoBehaviour
 
     #region AstroUdonVariables  of RenderCameraEvent
 
-    private AstroUdonVariable<string> Private___3_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private_nextAvatar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_charIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_avatarCounter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.CustomRenderTexture> Private_renderTexture { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___15_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___40_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___12_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___3_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___6_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___6_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___3_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___0_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___1_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___32_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte[]> Private_byteCache { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___1_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___15_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private_lastIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<TMPro.TextMeshPro> Private___2_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___1_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming> Private___0_const_intnl_VRCUdonCommonEnumsEventTiming { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___15_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_h_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_b_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_w_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<System.Object[]> Private___gintnl_SystemObjectArray_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Material> Private___intnl_UnityEngineMaterial_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineObject_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___const_SystemByte_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<float> Private___intnl_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<char> Private___intnl_SystemChar_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Material> Private_pedestalMaterial { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___lcl_value_SystemByte_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<float> Private___const_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private_hasRun { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___34_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___21_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___7_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___1_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___5_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___31_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___10_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___5_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___0_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___15_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___lcl_isNew_UnityEngineColor32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_dataMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_debugTMP { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<System.DateTime> Private___lcl_now_SystemDateTime_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___lcl_idColor_UnityEngineColor32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___const_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___const_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___const_SystemByte_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private_dataLength { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___20_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___6_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___5_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___28_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___6_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___21_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___5_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___13_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___2_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___1_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___4_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___29_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___5_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___2_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Texture2D> Private___0_mp_picture_Texture2D { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___16_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___14_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___39_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Color> Private___0_firstColor_Color { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___19_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___7_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___1_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Color[]> Private_colors { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___7_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___28_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___2_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___7_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___15_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_tempString_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___27_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___5_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<long> Private___refl_const_intnl_udonTypeID { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___4_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___11_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___4_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___19_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___refl_const_intnl_udonTypeName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___0_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___1_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___14_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___17_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___11_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___4_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___10_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___20_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.TextureFormat> Private___0_intnl_UnityEngineTextureFormat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Color> Private___0_c_Color { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___11_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___2_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___26_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___4_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___2_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___21_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___26_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___23_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___4_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___9_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte[]> Private___0_mp_bytes_ByteArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___9_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___2_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___5_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___3_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___12_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___9_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___6_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___18_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___23_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___6_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte[]> Private___0_intnl_SystemByteArray { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___17_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Rect> Private___0_intnl_UnityEngineRect { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___6_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___0_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.MeshRenderer> Private___intnl_UnityEngineMeshRenderer_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.MeshRenderer> Private___intnl_UnityEngineMeshRenderer_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___intnl_UnityEngineColor32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.CustomRenderTexture> Private___intnl_UnityEngineObject_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.MeshRenderer> Private___intnl_UnityEngineObject_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Texture2D> Private___intnl_UnityEngineObject_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_decodeSpeedUTF8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private_color { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_pixelIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal> Private___intnl_UnityEngineObject_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<long> Private___refl_typeid { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Texture2D> Private_lastInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32[]> Private_colors { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_autoFillTMP { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_toIterate_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_toIterate_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_toIterate_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_bytesCount { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___const_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal> Private___intnl_UnityEngineComponent_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private_callbackEventName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___intnl_UnityEngineColor32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal> Private___0__intnlparam { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<float> Private___const_SystemSingle_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Texture2D> Private_pedestalTexture { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___0_text__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal> Private_pedestal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_currentTry { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_maxDataLength_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___const_SystemByte_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Texture2D> Private___0_picture__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Rect> Private___intnl_UnityEngineRect_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<float> Private___intnl_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___lcl_headerInfo_UnityEngineColor32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string[]> Private__utf8Chars { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<char> Private___intnl_SystemChar_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string[]> Private_linkedAvatars { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<float> Private___const_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<int> Private_byteIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___9_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___22_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___12_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___3_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___23_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.GameObject> Private___0_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___8_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___6_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___24_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___24_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___16_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___21_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___13_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___5_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___8_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___22_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___9_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___0_intnl_returnTarget_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private_empty { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___10_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_callBackOnFinish { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming> Private___const_VRCUdonCommonEnumsEventTiming_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte[]> Private___lcl_temp_SystemByteArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_debugLogging { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_transferSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___intnl_returnJump_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_character { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte[]> Private_avatarBytes { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_imageMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___intnl_UnityEngineColor32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___lcl_child_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_i_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_i_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private_charCounter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_patronMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___1__intnlparam { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineObject_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<bool> Private_pedestalReady { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_patreon { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___0_const_intnl_SystemUInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<System.Diagnostics.Stopwatch> Private_stopwatch { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___9_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___13_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___3_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___0_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___29_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___12_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___18_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___13_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___4_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte[]> Private_colorBytes { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___6_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___14_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___4_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___14_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___19_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_mp_text_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___20_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___4_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___11_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_prefab { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___5_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___24_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___27_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___12_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___30_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___14_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_frameSkip { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte[]> Private_outputBytes { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___0_IsSame__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.TextureFormat> Private___intnl_UnityEngineTextureFormat_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___refl_typename { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<System.Object[]> Private___gintnl_SystemObjectArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_outputToText { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private_pedestalClone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Transform> Private___this_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_waitForNew { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Texture2D> Private_donorInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<long> Private___0_intnl_SystemInt64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___3_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___25_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___11_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___8_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___1_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___20_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___3_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___8_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___1_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.GameObject> Private_renderQuad { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<byte> Private___0_intnl_SystemByte { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<TMPro.TextMeshPro> Private___1_intnl_TMProTextMeshPro { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___4_intnl_interpolatedStr_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___19_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___2_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___3_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___26_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___27_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___10_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private_index { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___18_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___7_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___1_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___7_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___11_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___16_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<TMPro.TextMeshPro> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<UnityEngine.Texture2D> Private___0_intnl_UnityEngineTexture2D { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___18_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___2_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___10_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___25_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_stepLength_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_step_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___3_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___7_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_this_intnl_AvatarImageReaderReadRenderTexture { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___25_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<TMPro.TextMeshPro> Private___3_intnl_TMProTextMeshPro { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___17_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___0_intnl_returnValSymbol_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___30_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_callbackBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___lcl_textLength_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___const_SystemByte_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___intnl_SystemInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_frameCounter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.Color32> Private___intnl_UnityEngineColor32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<string> Private_outputString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___13_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___8_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___8_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___10_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___2_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___31_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<int> Private___0_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___33_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<char> Private___0_intnl_SystemChar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<uint> Private___1_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___22_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<float> Private___8_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<bool> Private___17_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-    private AstroUdonVariable<string> Private___16_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_decodeSpeedUTF16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private___const_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___intnl_SystemString_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<UnityEngine.MeshRenderer> Private_renderQuadRenderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.SDK3.Components.VRCAvatarPedestal> Private_avatarPedestal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<byte> Private___intnl_SystemByte_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private_pedestalAssetsReady { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_decodeIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<int> Private_maxIndex { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<string> Private___const_SystemString_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+    private AstroUdonVariable<bool> Private___intnl_SystemBoolean_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     private AstroUdonVariable<UnityEngine.Camera> Private_renderCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
     #endregion AstroUdonVariables  of RenderCameraEvent
-
-
 
     // Use this for initialization
 }

@@ -1,4 +1,7 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using AstroClient.CheetoLibrary;
+using VRC.UI.Elements.Menus;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using AstroClient.Tools.Extensions;
     using PageGenerators;
@@ -7,11 +10,11 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
-    using CameraMenu = MonoBehaviour1PublicBuToBuGaTMBuGaBuGaBuUnique;
     using Object = UnityEngine.Object;
 
     internal class QMNestedButton
     {
+        internal GameObject Header { get; set; }
         internal GameObject NestedPart { get; set; }
 
         internal GameObject backButton { get; set; }
@@ -31,6 +34,8 @@
 
         internal Action Wing_OnCloseAction { get; set; }
         internal Action Wing_OnOpenAction { get; set; }
+        internal GameObject Title_Header { get; set; }
+        internal TextMeshProUGUIPublicBoUnique TitleText { get; set; }
 
 
         internal QMNestedButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -99,72 +104,42 @@
             menuName = $"Page_{btnType}_{Title}_{btnXLocation}_{btnYLocation}_{btnText}_{btnToolTip}_{Guid.NewGuid().ToString()}";
 
             NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
-            ButtonsMenu = NestedPart.FindUIObject("Buttons");
+            try
+            {
+                Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
+            }
+            catch { }
+            ButtonsMenu = NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup/Buttons (1)");
+            NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup").gameObject.CleanCameraMenu();
+            ButtonsMenu.name = "Buttons";
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             try
             {
                 Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             }
             catch { }
-            try
-            {
-                Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            }
-            catch { }
-            try
-            {
-                Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
-            }
-            catch { }
-            try
-            {
-                Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
-            }
-            catch { }
-            try
-            {
-                Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
-            }
-            catch { }
-            try
-            {
-                Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
-            }
-            catch { }
 
-            foreach (var item in ButtonsMenu.transform.Get_Childs())
-            {
-                UnityEngine.Object.Destroy(item);
-            }
 
             page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
-            NestedPart.name = menuName;
-            NestedPart.NewText("Text_Title").text = Title;
+            Header = NestedPart.FindObject("Header_Camera");
+            Header.name = "Header";
+            Title_Header = Header.FindObject("LeftItemContainer/Text_Title");
+            TitleText = Title_Header.GetComponent<TextMeshProUGUIPublicBoUnique>();
+            TitleText.text = Title;
             NestedPart.SetActive(false);
-            NestedPart.CleanButtonsNestedMenu();
             string TextColorHTML = null;
             if (btnTextColor.HasValue)
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(btnTextColor.Value);
             else
                 TextColorHTML = "#" + ColorUtility.ToHtmlStringRGB(System.Drawing.Color.White.ToUnityEngineColor());
-            if (Parent != null)
+
+            mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
             {
-                mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
-                {
-                    QuickMenuTools.ShowQuickmenuPage(menuName);
-                    Wing_OnOpenAction.SafetyRaise();
-                    OnOpenAction.SafetyRaise();
-                }, btnToolTip, TextColorHTML, btnHalf);
-            }
-            else
-            {
-                mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
-                {
-                    QuickMenuTools.ShowQuickmenuPage(menuName);
-                    Wing_OnOpenAction.SafetyRaise();
-                    OnOpenAction.SafetyRaise();
-                }, btnToolTip, TextColorHTML, btnHalf);
-            }
+                QuickMenuTools.ShowQuickmenuPage(menuName);
+                Wing_OnOpenAction.SafetyRaise();
+                OnOpenAction.SafetyRaise();
+                NestedPart.SetActive(true);
+            }, btnToolTip, TextColorHTML, btnHalf);
 
             switch (Title)
             {
@@ -190,6 +165,7 @@
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
                 Wing_OnCloseAction.SafetyRaise();
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false);
             });
         }
 
@@ -200,6 +176,7 @@
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
                 Wing_OnCloseAction.SafetyRaise();
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false);
             });
         }
 
@@ -210,6 +187,7 @@
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
                 Wing_OnCloseAction.SafetyRaise();
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false); 
             });
         }
 
@@ -220,6 +198,7 @@
                 QuickMenuTools.ShowQuickmenuPage(menu.GetMenuName());
                 Wing_OnCloseAction.SafetyRaise();
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false);
             });
         }
 
@@ -230,6 +209,7 @@
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                 Wing_OnCloseAction.SafetyRaise();
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false);
             });
         }
 

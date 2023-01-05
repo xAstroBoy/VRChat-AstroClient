@@ -18,11 +18,11 @@ namespace Apollo.Utils.API.Wings
             ProfileButton = WingButtons.Find("Button_Profile");
         }
 
-        public Transform Wing; //        UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left
-        public Transform WingOpen; //    UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Button
-        public Transform WingPages; //   UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer
-        public Transform WingMenu; //    UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu
-        public Transform WingButtons; // UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup
+        public Transform Wing; //        UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left
+        public Transform WingOpen; //    UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Button
+        public Transform WingPages; //   UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer
+        public Transform WingMenu; //    UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu
+        public Transform WingButtons; // UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup
 
         public Transform ProfilePage;
         public Transform ProfileButton;

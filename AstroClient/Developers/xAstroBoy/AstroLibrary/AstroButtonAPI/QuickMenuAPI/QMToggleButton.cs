@@ -148,8 +148,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal GameObject btnOff { get; set; }
         internal RectTransform btnOn_Rect { get; set; }
         internal RectTransform btnOff_Rect { get; set; }
-        internal Image btnOn_Image { get; set; }
-        internal Image btnOff_Image { get; set; }
+        internal UIWidgets.ImageAdvanced btnOn_Image { get; set; }
+        internal UIWidgets.ImageAdvanced btnOff_Image { get; set; }
 
         internal bool State { get; set; }
         internal string BtnType { get; set; }
@@ -164,16 +164,16 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal string CurrentColor { get; set; }
         internal string ButtonText_On { get; set; }
         internal string ButtonText_Off { get; set; }
-        private UiToggleTooltip _ButtonToolTip;
+        private UIToggleTooltip _ButtonToolTip;
         internal GameObject ButtonObject { get; set; }
 
-        internal UiToggleTooltip ButtonToolTip
+        internal UIToggleTooltip ButtonToolTip
         {
             get
             {
                 if (_ButtonToolTip == null)
                 {
-                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<UiToggleTooltip>(true);
+                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<UIToggleTooltip>(true);
                 }
 
                 return _ButtonToolTip;
@@ -182,8 +182,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
         internal string ToolTipText { get; set; }
 
-        internal TextMeshProUGUI ButtonTitleMesh { get; set; }
-        internal TextMeshProUGUI ButtonText { get; set; }
+        internal TextMeshProUGUIPublicBoUnique ButtonTitleMesh { get; set; }
+        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
@@ -196,11 +196,27 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             }
 
             ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
+            var analytics = ButtonObject.GetComponent<VRC.UI.Elements.Analytics.AnalyticsController>();
+            if (analytics != null)
+            {
+                UnityEngine.Object.DestroyImmediate(analytics);
+            }
+            foreach (var oldtooltip in ButtonObject.GetComponents<UiTooltip>())
+            {
+                UnityEngine.Object.DestroyImmediate(oldtooltip);
+
+            }
+            foreach (var oldtooltip2 in ButtonObject.GetComponents<UIToggleTooltip>())
+            {
+                UnityEngine.Object.DestroyImmediate(oldtooltip2);
+
+            }
+
             ButtonObject.EnableComponents(); // FUCK YOU VRCHAT
             ButtonTitleMesh = Extensions.NewText(ButtonObject, "Text_H4");
             ButtonTitleMesh.text = Title;
             ButtonObject.name = id;
-            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
             ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
             btnOn = ButtonObject.FindUIObject("Icon_On");
             btnOff = ButtonObject.FindUIObject("Icon_Off");
@@ -208,8 +224,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             btnOn.SetActive(false);
             btnOff_Rect = btnOff.GetComponentInChildren<RectTransform>();
             btnOn_Rect = btnOn.GetComponentInChildren<RectTransform>();
-            btnOff_Image = btnOff.GetComponentInChildren<Image>();
-            btnOn_Image = btnOn.GetComponentInChildren<Image>();
+            btnOff_Image = btnOff.GetComponentInChildren<UIWidgets.ImageAdvanced>();
+            btnOn_Image = btnOn.GetComponentInChildren<UIWidgets.ImageAdvanced>();
 
             OnColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.GreenYellow.ToUnityEngineColor());
             OffColor = btnOffColor.GetValueOrDefault(System.Drawing.Color.Red.ToUnityEngineColor());

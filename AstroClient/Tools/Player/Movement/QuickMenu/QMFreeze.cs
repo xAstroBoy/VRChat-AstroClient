@@ -23,6 +23,10 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
         private void OnRoomLeft()
         {
             Frozen = false;
+            if (CurrentPlayerController != null)
+            {
+                CurrentPlayerController.enabled = true;
+            }
         }
 
         private void OnQuickMenuOpen()
@@ -66,7 +70,8 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                     if (Frozen)
                     {
                         Frozen = false;
-                        GameInstances.LocalPlayer.Immobilize(false);
+                        CurrentPlayerController.enabled = true;
+                        
                     }
                 }
             }
@@ -83,7 +88,7 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                     if (!Frozen)
                     {
                         Frozen = true;
-                        Networking.LocalPlayer.Immobilize(true);
+                        CurrentPlayerController.enabled = false; 
                     }
                 }
             } catch{}
@@ -99,6 +104,35 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 {
                     FreezePlayerOnQMOpenToggle.SetToggleState(value);
                 }
+            }
+        }
+    
+        internal static GamelikeInputController _CurrentMovement { get; set; }
+        internal static GamelikeInputController CurrentMovement
+        {
+            get
+            {
+                if (Networking.LocalPlayer == null) return null;
+                if (Networking.LocalPlayer.gameObject == null) return null;
+                if (_CurrentMovement == null)
+                {
+                    return _CurrentMovement = Networking.LocalPlayer.gameObject.GetComponent<GamelikeInputController>();
+                }
+                return _CurrentMovement;
+            }
+        }
+        internal static CharacterController _CurrentPlayerController { get; set; }
+        internal static CharacterController CurrentPlayerController
+        {
+            get
+            {
+                if (Networking.LocalPlayer == null) return null;
+                if (Networking.LocalPlayer.gameObject == null) return null;
+                if (_CurrentPlayerController == null)
+                {
+                    return _CurrentPlayerController = Networking.LocalPlayer.gameObject.GetComponent<CharacterController>();
+                }
+                return _CurrentPlayerController;
             }
         }
 

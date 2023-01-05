@@ -115,7 +115,13 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\Infested\Infested_GameManager.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS\AmongUS_PatronCreditsReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarCreditReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleController.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Murder4_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\SpiritsOfSeas\SpiritsOfSeas_PlayerPermissionReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_PlayerPermissionReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_MakiKeyboardReader.cs" />
@@ -123,13 +129,31 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_CueReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_PoolParlorModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_DoorAssister.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_WantedDetector.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\RespawnerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\PickupChair.cs" />
+    <Compile Include="ClientUI\ActionMenu\ActionMenuUtils.cs" />
+    <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
+    <Compile Include="ClientUI\Hud\Notifier\NewHudNotifier.cs" />
+    <Compile Include="Developers\Cheetos\ConsoleInitializer.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\Avatar.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\Polyfill.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\RefCountedObject.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\Settings.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\Sigh.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\UI\UiExpansion.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\UI\Updater.cs" />
+    <Compile Include="Developers\HookedBehemoth\WorldCleanup\WorldCleanup.cs" />
+    <Compile Include="ClientUI\Hud\Notifier\HudNotifier.cs" />
     <Compile Include="AstroMonos\Prefabs\JetpackController.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Randomizer.cs" />
     <Compile Include="AstroMonos\Components\Tools\OnPrefabSpawn.cs" />
@@ -137,14 +161,8 @@
     <Compile Include="AstroMonos\Components\Tools\DontDestroyFlag.cs" />
     <Compile Include="AstroMonos\Components\Tools\Respawner.cs" />
     <Compile Include="AstroMonos\Components\Tools\LaserPointer.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CollisionDetector.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\MakiMaki_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_HighlightItem.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\AmongUS_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_AutoStarter.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerCollisionFixer.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerPickupEditor.cs" />
@@ -182,10 +200,11 @@
     <Compile Include="Developers\Cheetos\LogLevel.cs" />
     <Compile Include="Developers\Cheetos\Mathf.cs" />
     <Compile Include="Developers\Cheetos\Randomizer.cs" />
-    <Compile Include="Developers\Cheetos\Utils\QM.cs" />
-    <Compile Include="Developers\Cheetos\Utils\QM.Fixer.cs" />
-    <Compile Include="Developers\Cheetos\Utils\QM.Templates.cs" />
     <Compile Include="Developers\Cheetos\WindowsUtils.cs" />
+    <Compile Include="Developers\DragonPlayerX\Config\Configuration.cs" />
+    <Compile Include="Developers\DragonPlayerX\TabExtensionMod.cs" />
+    <Compile Include="Developers\DragonPlayerX\UI\LayoutListener.cs" />
+    <Compile Include="Developers\DragonPlayerX\UI\TabLayout.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Api\ActionMenuPage.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Api\AMUtils.cs" />
     <Compile Include="Developers\Gompoc\ActionMenuAPI\Api\CustomSubMenu.cs" />
@@ -268,6 +287,9 @@
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
     <Compile Include="Spawnables\AstroJetPack.cs" />
     <Compile Include="Spawnables\RespawnerSphere.cs" />
+    <Compile Include="Startup\Fixes\KillAnalyticsOnMenus.cs" />
+    <Compile Include="Startup\Fixes\RemoveAds.cs" />
+    <Compile Include="Startup\Fixes\KillCringeNewButtonOnBigUI.cs" />
     <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
@@ -276,9 +298,6 @@
     <Compile Include="AstroMonos\Components\Tools\PickupBlocker\PickupBlocker_Tools.cs" />
     <Compile Include="PlayerList\MenuManager.cs" />
     <Compile Include="PlayerList\Utilities\PlayerList_OwnerCountHelper.cs" />
-    <Compile Include="SnaxyTagsV3\SnaxyTagListener.cs" />
-    <Compile Include="Startup\Fixes\AvatarPageDeclutterer.cs" />
-    <Compile Include="Startup\Fixes\KeyboardPopupDeclutterer.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleRPCEvents.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleTeleportRPC.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Handlers\EventDispatcher_HandleUdonEvent.cs" />
@@ -301,6 +320,7 @@
     <Compile Include="Startup\Hooks\WorldTriggerHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\Hooks\UnityMessagesHook.cs" />
+    <Compile Include="Startup\Patches\UserEventCellPatches.cs" />
     <Compile Include="Startup\UnityLogger.cs" />
     <Compile Include="Streamer\AbyssalGodDetector.cs" />
     <Compile Include="Tools\Bruteforcer\TextBruteforcer.cs" />
@@ -316,13 +336,13 @@
     <Compile Include="Tools\TextureTools\Il2CppTextureHelper.cs" />
     <Compile Include="Tools\TextureTools\TextureHelper.cs" />
     <Compile Include="Tools\TextureTools\Texture_Ext.cs" />
+    <Compile Include="Startup\Hooks\HeapVariablePatcher.cs" />
     <Compile Include="Tools\UdonEditor\UdonCustomEventsLists.cs" />
     <Compile Include="Tools\UdonEditor\UdonDumper.cs" />
     <Compile Include="Tools\UdonEditor\UdonAPIExtensions.cs" />
     <Compile Include="Tools\UnityCameraUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\ItemTweakerModule.cs" />
     <Compile Include="ClientUI\ActionMenu\ExploitModule.cs" />
-    <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoadingScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\Assets\LoginScreenAssets.cs" />
     <Compile Include="ClientUI\LoadingScreen\BetterLoadingScreen.cs" />
@@ -344,7 +364,6 @@
     <Compile Include="ClientResources\Helpers\ResourceHelper.cs" />
     <Compile Include="Developers\Blaze\SerializationUtils.cs" />
     <Compile Include="Developers\Unreal\openvr_api.cs" />
-    <Compile Include="Developers\Unreal\SteamVR_Controller.cs" />
     <Compile Include="Developers\Unreal\SteamVR_Utils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\MenuAPI_New.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\PageGenerators\UIPageGenerator.cs" />
@@ -365,15 +384,6 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\WingsAPI\QMWings.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\Tools\QuickMenuTools.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\Tools\UiMethods.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuArrow.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuButtonAPI.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuButtonType.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuCheckbox.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuSocialText.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuText.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\MenuType.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\VRCList.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\MenuMethods\NewMenuXrefsSystem.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\UiManager.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\QuickMenuUtils.cs" />
@@ -417,19 +427,15 @@
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\AssetsManager.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\ConversionManager.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\CustomJsonTypes.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Managers\ExploitManager_Old.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\UnityUIUtils.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\Api\Object\VRChatAPIObjects.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\Api\Object\WebSocketObject.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\ColorUtility\HSBColor.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\ColorUtility\NamePlates.cs" />
-    <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\ColorUtility\UIColor.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\MiscFunc.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Misc\MiscUtility.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AudioUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\AvatarUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\BonesUtils.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\CameraUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\ComponentUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\GameObjectUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\MiscUtils.cs" />
@@ -439,7 +445,6 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\PopupUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\GameInstances.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\WorldUtils.cs" />
-    <Compile Include="Developers\xAstroBoy\AstroLibrary\UIPaths\UIObjects.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\XrefTesting.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Extensions.cs" />
     <Compile Include="Developers\Cheetos\CheetoLibrary\Utility\CheetoUtils.cs" />
@@ -456,7 +461,6 @@
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\StretchyCheese.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronUnlocker.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitBehaviour.cs" />
     <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitManager_Old.cs" />
@@ -512,7 +516,6 @@
     <Compile Include="Startup\Hooks\UdonEventsHook.cs" />
     <Compile Include="Startup\Hooks\EventDispatcherHook\Startup\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
-    <Compile Include="Startup\Hooks\RiskyFunctionHook.cs" />
     <Compile Include="Startup\Patches\UnchainedMelonLoader.cs" />
     <Compile Include="Streamer\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
@@ -543,7 +546,6 @@
     <Compile Include="ClientEvents\Moderation\PhotonModerationHandler.cs" />
     <Compile Include="Tools\Extensions\Reflections_ext.cs" />
     <Compile Include="Tools\Input\InputUtils.cs" />
-    <Compile Include="Tools\Instance\History\WorldManager.cs" />
     <Compile Include="Tools\AvatarPreviewer.cs" />
     <Compile Include="Tools\PedestralImageEditor\AvatarImageEncoder.cs" />
     <Compile Include="Tools\PedestralImageEditor\ReadRenderTextureAlpha.cs" />
@@ -573,7 +575,6 @@
     <Compile Include="Startup\Hooks\PerformanceScannerHook.cs" />
     <Compile Include="Startup\Patches\InputPatches.cs" />
     <Compile Include="Startup\Patches\SerializerPatches.cs" />
-    <Compile Include="Startup\UiModifier.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\JoinLeaveNotifierVRC.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
@@ -586,30 +587,39 @@
     <Compile Include="Tools\UdonEditor\AstroUdonVariable.cs" />
     <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
+    <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub1.cs" />
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
+    <Compile Include="WorldModifications\WorldHacks\BOMBERio.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\AmongUSCheats.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_FilteredNodes.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_GameLogic.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_RoleSwapper.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_SabotageAndRepair.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_UnfilteredNodes.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_Utils.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\KitchenCooks\KitchenCooksCheats.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder2\Murder2Cheats.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\Murder4Cheats.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_FilteredNodes.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_GameLogic.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_RoleSwapper.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_UnfilteredNodes.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\VRChat_Kmart.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\SuperKmartCenter.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Maki_SpiritOfSeas.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Tanks.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\QuickDraws.cs" />
+    <Compile Include="WorldModifications\WorldHacks\NoLife1942\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\NoLife1942\Infested.cs" />
-    <Compile Include="WorldModifications\WorldHacks\SakuraIsland.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />
+    <Compile Include="WorldModifications\WorldHacks\PoolParlor.cs" />
+    <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\TreeHouseInTheShade.cs" />
     <Compile Include="WorldModifications\WorldHacks\DrinkingNight.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_KillPlayers.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceEjectPlayer.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_ForceVotePlayer.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_SabotageAndRepair.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_UnfilteredNodes.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_FilteredNodes.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_Utils.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_GameLogic.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\UdonCheats\AmongUS_RoleSwapper.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\KitchenCooks\KitchenCooksCheats.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_RoleSwapper.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_UnfilteredNodes.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_FilteredNodes.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_GameLogic.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\RandomSubmenus\GlobalUdonExploits.cs" />
     <Compile Include="Tools\Decompiler\DecompilerUtils.cs" />
     <Compile Include="Tools\Decompiler\IL2CPPDecompiler.cs" />
@@ -651,7 +661,6 @@
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\UserInteractMenuBtns.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ESP\VRChat_Map_ESP_Menu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\WorldPickupsBtn.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\AvatarSearch.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\CheetosHooks.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
@@ -679,8 +688,6 @@
     <Compile Include="AstroMonos\ComponentsBtn.cs" />
     <Compile Include="AstroMonos\Components\ESP\EspHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Inflater.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleController.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Murder4_ESP.cs" />
     <Compile Include="AstroMonos\Components\Tools\PickupController.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Rocket.cs" />
     <Compile Include="AstroMonos\Components\ESP\PlayerESP.cs" />
@@ -741,31 +748,21 @@
     <Compile Include="Constants\GlobalLists.cs" />
     <Compile Include="Constants\InstanceBuilder.cs" />
     <Compile Include="WorldModifications\WorldHacks\ClickerGame.cs" />
-    <Compile Include="WorldModifications\WorldHacks\NoLife1942\GhostGame.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\GeoLocator.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\KmartExpress_1.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\Enums\PrisonEscape_Roles.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttQuest.cs" />
     <Compile Include="WorldModifications\WorldHacks\Ostinyo\PuttPuttPond.cs" />
     <Compile Include="CustomClasses\UdonBehaviour_Cached.cs" />
     <Compile Include="WorldModifications\WorldHacks\FrameOfReference.cs" />
     <Compile Include="WorldModifications\WorldHacks\EvolvantArcade.cs" />
-    <Compile Include="WorldModifications\WorldHacks\PoolParlor.cs" />
-    <Compile Include="WorldModifications\WorldHacks\TierLand.cs" />
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Ostinyo\Prison Escape\PrisonEscape.cs" />
     <Compile Include="WorldModifications\WorldHacks\SovrenChillHome.cs" />
     <Compile Include="WorldModifications\WorldHacks\VRWare.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldModifications\WorldHacks\VoidClub.cs" />
     <Compile Include="WorldModifications\WorldHacks\JustHParty.cs" />
     <Compile Include="WorldModifications\WorldHacks\AimFactory.cs" />
-    <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub1.cs" />
-    <Compile Include="WorldModifications\WorldHacks\BOMBERio.cs" />
     <Compile Include="WorldModifications\WorldHacks\FBTHeaven.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\AmongUS\AmongUSCheats.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder2\Murder2Cheats.cs" />
-    <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\Murder4Cheats.cs" />
     <Compile Include="WorldModifications\WorldHacks\ChuckECheeseExperience.cs" />
     <Compile Include="WorldModifications\WorldHacks\MeRooms\Meroom_939.cs" />
     <Compile Include="WorldModifications\WorldHacks\SnoozeScaryMaze5.cs" />
@@ -773,6 +770,237 @@
     <Compile Include="WorldModifications\WorldHacks\ClubMisfitAfterParty.cs" />
     <Compile Include="WorldModifications\WorldHacks\TheGreatPug.cs" />
     <Compile Include="WorldModifications\WorldsCheats.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <EmbeddedResource Include="ClientResources\FigletsArchive\Larry3D.flf" />
+    <None Include="app.config" />
+    <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\chocolate.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\crystal_003.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coral_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coffee_grains_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\coin_stack_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\fabric_padded_005.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\metal_gold_001.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry_milkshake_foam.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\Jetpacks.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\8Ball.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\WorldCleanup.assetbundle" />
+    <None Include="packages.config" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
+    <None Include="PlayerList\PlayerListUI.unitypackage" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\shuttle.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\box.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\planet.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\thief.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\save.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\unlocked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\blank.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\1.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\2.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\3.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\4.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\5.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\6.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\7.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\locked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\history.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\repair.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\badge.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\button.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
+    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Accessibility.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.Timeline.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.UnityUI.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.VisualEffectGraph.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Runtime.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\BeeByteObfuscator.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\BlobHandles.Runtime.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Compiler.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Extensions.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Parser.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.PatternMatching.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.Useful.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Cinemachine.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\clipper_library.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Collections.Pooled.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Commons.Xml.Relaxng.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\cscompmgd.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\CustomMarshalers.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DataModel.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.Modules.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Epic.OnlineServices.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.CJK.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.MidEast.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Other.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.Rare.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\I18N.West.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\IBM.Data.DB2.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Iced.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppMono.Security.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppNewtonsoft.Json.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Buffers.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Collections.Immutable.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Configuration.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Core.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Diagnostics.StackTrace.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Globalization.Extensions.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.IO.Compression.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Memory.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Numerics.Vectors.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.CompilerServices.Unsafe.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.Serialization.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Threading.Tasks.Extensions.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.ValueTuple.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.CSharp.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.Web.Infrastructure.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CompilerServices.SymbolWriter.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.CSharp.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Sqlite.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Data.Tds.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Messaging.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Posix.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Security.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\netstandard.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.Platform.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.VR.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\OscCore.Runtime.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\RenderHeads.AVProMovieCapture.Runtime.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Sigtrap.VrTunnellingPro.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\SMDiagnostics.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.ComponentModel.Composition.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.ComponentModel.DataAnnotations.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Configuration.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Configuration.Install.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.DataSetExtensions.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.Entity.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.Linq.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.OracleClient.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.Services.Client.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Data.Services.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Design.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.DirectoryServices.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.DirectoryServices.Protocols.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Drawing.Design.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Drawing.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.EnterpriseServices.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.IdentityModel.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.IdentityModel.Selectors.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.IO.Compression.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.IO.Compression.FileSystem.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Json.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Management.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Messaging.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Net.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Net.Http.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Net.Http.Formatting.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Net.Http.WebRequest.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Numerics.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Numerics.Vectors.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Reflection.Context.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Runtime.Caching.dll" />
+    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Runtime.DurableInstancing.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\cancel.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientResources\IconsArchive\check.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AstroMonos\Components\Cheats\Worlds\PuttPuttPond\" />
+    <Folder Include="AstroMonos\Components\Player\Fly\" />
+    <Folder Include="ClientResources\ProgramsArchive\" />
+    <Folder Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
+    <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
+    <Folder Include="Developers\Cheetos\Utils\" />
+    <Folder Include="Tools\Instance\History\" />
+    <Folder Include="Tools\QPens\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ClientResources\IconsArchive\cheetos.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
@@ -794,6 +1022,34 @@
     </Reference>
     <Reference Include="AssetsTools.NET">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AVProVideo.Extensions.Timeline">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.Timeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AVProVideo.Extensions.UnityUI">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.UnityUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AVProVideo.Extensions.VisualEffectGraph">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Extensions.VisualEffectGraph.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AVProVideo.Runtime">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\AVProVideo.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BeeByteObfuscator">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\BeeByteObfuscator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="bHapticsLib">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\bHapticsLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BlobHandles.Runtime">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\BlobHandles.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang">
@@ -824,6 +1080,10 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Cinemachine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\clipper_library.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Collections.Pooled">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Collections.Pooled.dll</HintPath>
       <Private>False</Private>
@@ -850,13 +1110,12 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\DOTween.Modules.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Facepunch.Steamworks.Win64">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
+    <Reference Include="Epic.OnlineServices">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Epic.OnlineServices.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FavCat-merged, Version=1.1.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\FavCat-merged.dll</HintPath>
+    <Reference Include="Facepunch.Steamworks.Win64">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="I18N">
@@ -899,6 +1158,10 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Il2CppNewtonsoft.Json">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppNewtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Il2CppSystem">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.dll</HintPath>
       <Private>False</Private>
@@ -935,6 +1198,10 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Memory.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Il2CppSystem.Numerics.Vectors">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Il2CppSystem.Runtime">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -945,6 +1212,10 @@
     </Reference>
     <Reference Include="Il2CppSystem.Runtime.Serialization">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Runtime.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Il2CppSystem.Threading.Tasks.Extensions">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Threading.Tasks.Extensions.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem.ValueTuple">
@@ -959,23 +1230,20 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Xml.Linq.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="IndexRange">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\IndexRange.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.Win32.Registry, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Win32.Registry.6.0.0-preview.5.21301.5\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Mono.Cecil, Version=0.10.4.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Mono.Cecil">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -1011,7 +1279,8 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Messaging.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Mono.Posix">
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Posix.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -1023,22 +1292,25 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MonoMod.RuntimeDetour, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoMod.RuntimeDetour">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MonoMod.Utils, Version=20.1.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MonoMod.Utils">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="netstandard">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\UserLibs\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\UserLibs\Newtonsoft.Json.Bson.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Novell.Directory.Ldap">
@@ -1053,12 +1325,20 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.VR.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="OscCore.Runtime">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\OscCore.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Photon-DotNet">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Photon-DotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SharpCompress, Version=0.30.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.30.0\lib\net461\SharpCompress.dll</HintPath>
+    <Reference Include="RenderHeads.AVProMovieCapture.Runtime">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\RenderHeads.AVProMovieCapture.Runtime.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Sigtrap.VrTunnellingPro">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Sigtrap.VrTunnellingPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SMDiagnostics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -1067,10 +1347,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -1090,11 +1366,6 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
-    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
-      <Private>False</Private>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Json">
@@ -1102,72 +1373,23 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Management" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Messaging" />
     <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
-      <Private>False</Private>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\System.Numerics.Vectors.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Reflection.Context" />
-    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
-      <Private>True</Private>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0-rc.2.21480.5\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Runtime.DurableInstancing" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-      <Private>False</Private>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.6.0.0-rc.2.21480.5\lib\net461\System.Security.AccessControl.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
-      <Private>True</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
-      <Private>False</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
-      <Private>False</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
-      <Private>True</Private>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.6.0.0-preview.5.21301.5\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Discovery" />
@@ -1179,15 +1401,7 @@
     <Reference Include="System.ServiceModel.Routing" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0-rc.2.21480.5\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1246,16 +1460,48 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Transmtn.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UIExpansionKit">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\UIExpansionKit.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnhollowerBaseLib">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerBaseLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnhollowerRuntimeLib">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnhollowerRuntimeLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UniTask.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.Addressables">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UniTask.Addressables.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.DOTween">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UniTask.DOTween.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.Linq">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UniTask.Linq.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UniTask.TextMeshPro">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UniTask.TextMeshPro.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Burst.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Burst.Unsafe.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.InputSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Mathematics.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
@@ -1266,16 +1512,32 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Unity.Timeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AccessibilityModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AccessibilityModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AndroidJNIModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AndroidJNIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.AnimationModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.AnimationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ARModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ARModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
@@ -1290,6 +1552,14 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ClothModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ClusterInputModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ClusterInputModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ClusterRendererModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ClusterRendererModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
@@ -1302,8 +1572,20 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.DirectorModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.DSPGraphModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.DSPGraphModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.GameCenterModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.GameCenterModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.GridModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.GridModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.HotReloadModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.HotReloadModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Il2CppAssetBundleManager">
@@ -1334,8 +1616,16 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.LocalizationModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.LocalizationModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.ParticleSystemModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PerformanceReportingModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PerformanceReportingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
@@ -1346,12 +1636,36 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.PhysicsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ProfilerModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ProfilerModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.ScreenCaptureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SharedInternalsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.SpriteMaskModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StreamingModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.StreamingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubstanceModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SubstanceModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SubsystemsModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.SubsystemsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TerrainModule">
@@ -1374,6 +1688,10 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TilemapModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.TLSModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TLSModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -1386,12 +1704,32 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UmbraModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UmbraModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UNETModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UNETModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UnityAnalyticsModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityAnalyticsModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.UnityConnectModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityConnectModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityTestProtocolModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityTestProtocolModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
@@ -1432,6 +1770,22 @@
     </Reference>
     <Reference Include="ValueTupleBridge">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\ValueTupleBridge.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.Collections">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Collections.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.Dynamics">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.Dynamics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.SDK3.Dynamics.Contact">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDK3.Dynamics.Contact.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VRC.SDK3.Dynamics.PhysBone">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRC.SDK3.Dynamics.PhysBone.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.SDKBase.Editor.BuildPipeline">
@@ -1518,132 +1872,30 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+    <Reference Include="websocket-sharp">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\websocket-sharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WebSocketDotNet">
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\WebSocketDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
-    <EmbeddedResource Include="ClientResources\FigletsArchive\Larry3D.flf" />
-    <None Include="app.config" />
-    <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\chocolate.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\crystal_003.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\coral_001.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\coffee_grains_001.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\coin_stack_001.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\fabric_padded_005.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\metal_gold_001.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\strawberry_milkshake_foam.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\flashlights.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\waffle.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\NewLoadingScreen.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\WorldButton.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\Jetpacks.assetbundle" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\8Ball.assetbundle" />
-    <None Include="packages.config" />
-    <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
-    <None Include="PlayerList\PlayerListUI.unitypackage" />
-    <Compile Include="Startup\Fixes\BigUserInfoDeclutterer.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\shuttle.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\Avatar.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\box.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\Help.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\planet.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\Home.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\thief.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\Pin.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\save.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\unlocked.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\blank.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\1.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\2.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\3.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\4.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\5.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\6.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\7.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\locked.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\history.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\repair.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\badge.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\button.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
-    <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\cancel.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ClientResources\IconsArchive\check.png">
-      <CustomToolNamespace>AstroClient</CustomToolNamespace>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AstroMonos\Components\Cheats\Worlds\PuttPuttPond\" />
-    <Folder Include="AstroMonos\Components\Cheats\Worlds\TreeHouseInTheShade\" />
-    <Folder Include="AstroMonos\Components\Player\Fly\" />
-    <Folder Include="ClientResources\ProgramsArchive\" />
-    <Folder Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
-    <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
-    <Folder Include="Tools\QPens\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\ImageArchive\EnderPearl.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ClientResources\IconsArchive\cheetos.png">
+    <EmbeddedResource Include="ClientResources\IconsArchive\Refresh.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

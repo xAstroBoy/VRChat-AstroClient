@@ -1056,7 +1056,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        private bool _isPublic = false;
+        private bool _isPublic = true;
 
         internal bool isPublic
         {

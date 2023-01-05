@@ -1,4 +1,6 @@
 ﻿using System;
+using AstroClient.CheetoLibrary;
+using VRC.UI.Elements.Menus;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -8,7 +10,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.UI.Elements;
-    using CameraMenu = MonoBehaviour1PublicBuToBuGaTMBuGaBuGaBuUnique;
+    ///using CameraMenu = MonoBehaviour1PublicBuToBuGaReBuGaTMVeBuUnique;
 
     internal class QMTabMenu
     {
@@ -22,6 +24,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal GameObject backButton { get; set; }
         internal Action OnCloseAction { get; set; }
         internal Action OnOpenAction { get; set; }
+        internal GameObject Title_Header { get; set; }
+        internal TextMeshProUGUIPublicBoUnique TitleText { get; set; }
 
         internal QMTabMenu(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
         {
@@ -34,30 +38,27 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             menuName = QMButtonAPI.identifier + btnQMLoc + "_" + index + "_" + btnToolTip;
 
             NestedPart = Object.Instantiate(QuickMenuTools.NestedMenuTemplate.gameObject, QuickMenuTools.NestedPages, true);
-            ButtonsMenu = NestedPart.FindUIObject("Buttons");
-            NestedPart.ToggleScrollRectOnExistingMenu(true);
-            Object.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
-            Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
-            Object.Destroy(NestedPart.FindUIObject("Panel_Info"));
-            Object.Destroy(NestedPart.FindUIObject("Button_PhotosFolder"));
-			Object.Destroy(NestedPart.FindUIObject("Button_PanoramaMain"));
-            Object.Destroy(NestedPart.FindUIObject("Button_PanoramaStream"));
-
-            System.Collections.Generic.List<Transform> list = ButtonsMenu.transform.Get_Childs();
-            for (int i = 0; i < list.Count; i++)
+            try
             {
-                Transform item = list[i];
-                UnityEngine.Object.Destroy(item.gameObject);
+                Object.DestroyImmediate(NestedPart.GetComponentInChildren<CameraMenu>());
             }
+            catch { }
+            ButtonsMenu = NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup/Buttons (1)");
+            NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup").gameObject.CleanCameraMenu();
+            ButtonsMenu.name = "Buttons";
+            NestedPart.ToggleScrollRectOnExistingMenu(true);
+            Object.DestroyImmediate(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
             page = NestedPart.GenerateQuickMenuPage(QuickMenuTools.QuickMenuController, menuName);
             NestedPart.name = menuName;
-            NestedPart.NewText("Text_Title").text = btnToolTip;
+            Title_Header = NestedPart.FindObject("Header_Camera/LeftItemContainer/Text_Title");
+            TitleText = Title_Header.GetComponent<TextMeshProUGUIPublicBoUnique>();
+            TitleText.text = btnToolTip;
             NestedPart.SetActive(false);
-            NestedPart.CleanButtonsNestedMenu();
             mainButton = new QMTabButton(index, () =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
                 OnOpenAction.SafetyRaise();
+                NestedPart.SetActive(true);
             }, btnToolTip, btnBackgroundColor, icon);
             mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateMainBackButton();
@@ -69,6 +70,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                 OnCloseAction.SafetyRaise();
+                NestedPart.SetActive(false);
             });
         }
 

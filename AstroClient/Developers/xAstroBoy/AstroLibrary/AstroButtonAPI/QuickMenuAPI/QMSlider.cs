@@ -7,13 +7,14 @@
     using UnityEngine.UI;
     using VRC.UI.Elements.Tooltips;
     using Object = UnityEngine.Object;
-
+     
+    // TODO : NOT WORKING (I DONT KNOW WHY ) :C 
     public class QMSlider
     {
         public readonly GameObject gameObject;
-        private readonly TextMeshProUGUI sliderPercentText;
+        private readonly TextMeshProUGUIPublicBoUnique sliderPercentText;
         private readonly Slider sliderSlider;
-        private readonly TextMeshProUGUI sliderText;
+        private readonly TextMeshProUGUIPublicBoUnique sliderText;
         private readonly UiTooltip sliderTooltip;
         private bool _floor;
         private bool _percent;
@@ -22,9 +23,9 @@
         {
             var slider = this;
             gameObject = Object.Instantiate(QuickMenuTools.SliderTemplate.gameObject, parent);
-            sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>(true);
+            sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUIPublicBoUnique>(true);
             sliderText.text = text;
-            sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>(true);
+            sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUIPublicBoUnique>(true);
             sliderPercentText.text = "0" + (percent ? "%" : "");
             sliderSlider = gameObject.GetComponentInChildren<Slider>();
             sliderSlider.onValueChanged = new Slider.SliderEvent();

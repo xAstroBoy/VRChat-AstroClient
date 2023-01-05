@@ -1,4 +1,5 @@
-﻿using ActionMenuPage = ActionMenu.Page; //Will this change?, ¯\_(ツ)_/¯x2
+﻿using VRC.SDK.Internal.ModularPieces;
+using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique; //Will this change?, ¯\_(ツ)_/¯x2
 
 namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
 {
@@ -11,6 +12,8 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
     using Object = UnityEngine.Object;
+    using Hand = ActionMenuOpener.EnumNPublicSealedvaLeRi3vUnique;
+
 
     internal static class ExtensionMethods
     {
@@ -82,7 +85,7 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
                 if (addOptionDelegate != null) return addOptionDelegate;
                 var addOptionMethod = typeof(ActionMenu).GetMethods(BindingFlags.Public | BindingFlags.Instance)
                     .First(
-                        m => m.GetParameters().Length == 0 && m.Name.StartsWith("Method_Private_PedalOption_") &&
+                        m => m.GetParameters().Length == 0 && m.Name.StartsWith("Method_Public_PedalOption_") &&
                              !m.Name.Contains("PDM"));
 
                 addOptionDelegate = (AddOptionDelegate) Delegate.CreateDelegate(
@@ -240,15 +243,15 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
 
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver)
         {
-            if (actionMenuDriver.field_Public_ActionMenuOpener_0.field_Public_Hand_0 ==
-                ActionMenuOpener.Hand.Left)
+            if (actionMenuDriver.field_Public_ActionMenuOpener_0.field_Public_EnumNPublicSealedvaLeRi3vUnique_0 ==
+                ActionMenuOpener.EnumNPublicSealedvaLeRi3vUnique.Left)
                 return actionMenuDriver.field_Public_ActionMenuOpener_0;
             return actionMenuDriver.field_Public_ActionMenuOpener_1;
         }
 
         public static ActionMenuOpener GetRightOpener(this ActionMenuDriver actionMenuDriver)
         {
-            if (actionMenuDriver.field_Public_ActionMenuOpener_1.field_Public_Hand_0 == ActionMenuOpener.Hand.Right)
+            if (actionMenuDriver.field_Public_ActionMenuOpener_1.field_Public_EnumNPublicSealedvaLeRi3vUnique_0 == ActionMenuOpener.EnumNPublicSealedvaLeRi3vUnique.Right)
                 return actionMenuDriver.field_Public_ActionMenuOpener_1;
             return actionMenuDriver.field_Public_ActionMenuOpener_0;
         }
@@ -330,9 +333,9 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
 
         public static TextMeshProUGUI GetTitle(this RadialPuppetMenu radialPuppetMenu)
         {
-            return ((PuppetMenu) radialPuppetMenu).field_Public_TextMeshProUGUI_0; //only one
+            return ((ConveyorBelt)radialPuppetMenu).field_Public_TextMeshProUGUI_0; //only one
         }
-
+        
         public static TextMeshProUGUI GetTitle(this AxisPuppetMenu axisPuppetMenu)
         {
             return axisPuppetMenu.field_Public_TextMeshProUGUI_0; //only one
@@ -549,17 +552,6 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Helpers
         public static void DestroyPage(this ActionMenu actionMenu, ActionMenuPage page)
         {
             GetDestroyPageDelegate(actionMenu, page);
-        }
-
-        public static void ResetMenu(this ActionMenu actionMenu)
-        {
-            RadialPuppetManager.CloseRadialMenu();
-            FourAxisPuppetManager.CloseFourAxisMenu();
-            actionMenu.ClosePuppetMenus(true);
-            for (var i = 0; i < actionMenu.field_Private_List_1_Page_0.Count; i++)
-                actionMenu.DestroyPage(actionMenu.field_Private_List_1_Page_0._items[i]);
-            actionMenu.field_Private_List_1_Page_0?.Clear();
-            //actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
         }
 
         public static List<List<T>> Split<T>(this List<T> ourList, int chunkSize)

@@ -211,19 +211,33 @@
                 return _WorldButton;
             }
         }
-        private static AssetBundle _JetpacksBundle;
-        internal static AssetBundle JetpacksBundle
+        private static AssetBundle _Jetpacks;
+        internal static AssetBundle Jetpacks
         {
             get
             {
-                if (_JetpacksBundle == null)
+                if (_Jetpacks == null)
                 {
-                    _JetpacksBundle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}Jetpacks.assetbundle"), 0u);
-                    _JetpacksBundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _Jetpacks = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}Jetpacks.assetbundle"), 0u);
+                    _Jetpacks.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 }
-                return _JetpacksBundle;
+                return _Jetpacks;
             }
         }
+        private static AssetBundle _WorldCleanup;
+        internal static AssetBundle WorldCleanup
+        {
+            get
+            {
+                if (_WorldCleanup == null)
+                {
+                    _WorldCleanup = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}WorldCleanup.assetbundle"), 0u);
+                    _WorldCleanup.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _WorldCleanup;
+            }
+        }
+
         //private static AssetBundle _EightBall;
         //internal static AssetBundle EightBall
         //{

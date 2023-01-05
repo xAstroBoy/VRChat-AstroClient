@@ -7,6 +7,12 @@ namespace AstroClient.Tools
 
     internal static class XrefScannerUtils
     {
+        public static bool XRefScanFor(this MethodBase methodBase, string searchTerm)
+        {
+            return XrefScanner.XrefScan(methodBase).Any(
+                xref => xref.Type == XrefType.Global && xref.ReadAsObject()?.ToString().IndexOf(searchTerm, StringComparison.OrdinalIgnoreCase) >= 0);
+        }
+
         /// <summary>
         ///     Scans global instances for the specific search-term
         /// </summary>

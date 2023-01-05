@@ -4,8 +4,21 @@ using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
+using VRC.Networking;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Cysharp.Threading.Tasks.Linq;
+using MelonLoader;
+using UnityEngine;
+using VRC;
+using VRC.Networking;
+using VRC.SDKBase;
+using VRC.Udon;
+
 
 namespace AstroClient.Startup.Hooks
 {
@@ -40,10 +53,25 @@ namespace AstroClient.Startup.Hooks
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.OnDrop)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnDrop)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.Interact)), GetPatch(nameof(Hook_UdonBehaviour_Event_OnInteract)));
             new AstroPatch(typeof(UdonBehaviour).GetMethod(nameof(UdonBehaviour.SendCustomEvent)), GetPatch(nameof(Hook_UdonBehaviour_Event_SendCustomEvent)));
+
+            new AstroPatch(typeof(UdonSync).GetMethod(nameof(UdonSync.UdonSyncRunProgramAsRPC)), GetPatch(nameof(Hook_UdonSync_UdonSyncRunProgramAsRPC)));
+
+           // PatchMethod(typeof(UdonSync).GetMethod("UdonSyncRunProgramAsRPC"), GetLocalPatch("PreOnUdonRPCReceivedPatch"), GetLocalPatch("PostOnUdonRPCReceivedPatch"));
+            var RunProgramString = (from m in typeof(UdonBehaviour).GetMethods()
+                                   where m.Name.Equals("RunProgram") && m.GetParameters()[0].ParameterType == typeof(string)
+                                   select m).First();
+            var RunProgramUint = (from m in typeof(UdonBehaviour).GetMethods()
+                                  where m.Name.Equals("RunProgram") && m.GetParameters()[0].ParameterType == typeof(uint)
+                                  select m).First();
+
+
             //ClientEventActions.VRChat_OnQuickMenuInit += VrChatOnQuickMenuInit;
 
 
         }
+
+
+
 
         //private void VrChatOnQuickMenuInit()
         //{
@@ -85,14 +113,14 @@ namespace AstroClient.Startup.Hooks
 
             ClientEventActions.Udon_OnInteract.SafetyRaiseWithParams(__instance);
         }
-        private static void Hook_Udon_OnInit(UdonBehaviour instance, IUdonProgram program)
-        {
-            if (instance == null) return;
 
-            ClientEventActions.Udon_OnInit.SafetyRaiseWithParams(instance);
+        private static bool Hook_UdonSync_UdonSyncRunProgramAsRPC(UdonSync __instance, string __0, Player __1)
+        {
+            if (__instance == null) return true;
+            if (__0.IsNullOrEmptyOrWhiteSpace()) return true;
+            return EventDispatcher_HandleUdonEvent.Handle_UdonEvent_UdonSyncRunProgramAsRPC(__instance, __0, __1);
 
         }
-
 
         private static bool Hook_UdonBehaviour_Event_SendCustomEvent(UdonBehaviour __instance, string __0)
         {

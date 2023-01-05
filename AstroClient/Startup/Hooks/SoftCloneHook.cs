@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -123,7 +125,7 @@ namespace AstroClient.Startup.Hooks
                     PacketCounter = 0;
                     _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
                     Log.Debug("Local Clone Avatar");
-                    PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
+                    NewHudNotifier.WriteHudMessage($"This avatar is Local Cloned!!");
                 }
             }
         }
@@ -157,7 +159,7 @@ namespace AstroClient.Startup.Hooks
                     PacketCounter = 0;
                     _loadAvatarMethod.Invoke(GameInstances.CurrentUser, new object[] { true }); // Invoke refresh and Hook should locally clone it!
                     Log.Debug("Local Clone Avatar");
-                    PopupUtils.QueHudMessage($"This avatar is Local Cloned!!");
+                    NewHudNotifier.WriteHudMessage($"This avatar is Local Cloned!!");
 
                 }
 

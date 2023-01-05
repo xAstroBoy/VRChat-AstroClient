@@ -53,6 +53,8 @@
 
         public bool LogUdonCustomEvents = true;
 
+        public bool LogUdonProgramRPCvents = true;
+
         public bool LogUnityMessages = false;
 
         public bool LogUnityWarnings = false;

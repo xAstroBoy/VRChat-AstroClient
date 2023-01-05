@@ -38,6 +38,8 @@ namespace AstroClient.ClientUI.ActionMenu
                 //{
                 //    EightBall.Spawn();
                 //}, null);
+                CustomSubMenu.AddToggle("Adjust Based of avatar size", AstroJetPack.AdjustBasedOffAvatarSize, value => AstroJetPack.AdjustBasedOffAvatarSize = value);
+                CustomSubMenu.AddToggle("Disable Thruster Slowdown", AstroJetPack.DisableThrusterSlowDown, value => AstroJetPack.DisableThrusterSlowDown = value);
 
 
             });

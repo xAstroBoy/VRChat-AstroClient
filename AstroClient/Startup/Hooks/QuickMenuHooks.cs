@@ -1,4 +1,7 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Elements;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -27,13 +30,15 @@ namespace AstroClient.Startup.Hooks
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
+            //QuickMenu.Method_Public_Virtual_Void_Boolean_IUser_0
+        //MonoBehaviourPublicObBoAuGaBoTrGaObReAnUnique
+        new AstroPatch(typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.Method_Public_Virtual_Void_Boolean_IUser_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
         }
 
 
-        private static void OnSelectedPlayerPatch(ref VRC.Player __0)
+        private static void OnSelectedPlayerPatch(ref bool __0, ref IUser __1)
         {
-            ClientEventActions.OnPlayerSelected.SafetyRaiseWithParams(__0);
+            ClientEventActions.OnPlayerSelected.SafetyRaiseWithParams(__1.ToAPIUser().GetPlayer());
         }
 
     }

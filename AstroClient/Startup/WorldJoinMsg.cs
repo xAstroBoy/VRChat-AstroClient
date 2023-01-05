@@ -19,17 +19,7 @@ namespace AstroClient.Startup
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Log.Write("Joined World : " + Name, System.Drawing.Color.Goldenrod);
-            if (tags != null)
-            {
-                if (!RiskyFunctionHook.IsWorldTagPatched)
-                {
-                    Log.Write("World Tags : " + CurrentWorldTags(tags), System.Drawing.Color.Goldenrod);
-                }
-                else
-                {
-                    Log.Write("[P]: World Tags : " + CurrentWorldTags(RiskyFunctionHook.OriginalWorldTags), System.Drawing.Color.Goldenrod);
-                }
-            }
+            Log.Write("World Tags : " + CurrentWorldTags(tags), System.Drawing.Color.Goldenrod);
             Log.Write("World ID : " + id, System.Drawing.Color.Goldenrod);
             Log.Write("World author : " + AuthorName, System.Drawing.Color.Goldenrod);
             Log.Write("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);

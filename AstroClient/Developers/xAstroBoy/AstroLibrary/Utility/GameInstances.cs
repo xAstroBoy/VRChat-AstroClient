@@ -67,7 +67,7 @@ namespace AstroClient.xAstroBoy.Utility
 
         public static VRCVrCamera VRCVrCamera => VRCVrCamera.field_Private_Static_VRCVrCamera_0;
 
-        public static UserCameraController UserCameraController => UserCameraController.field_Internal_Static_UserCameraController_0;
+        //public static UserCameraController UserCameraController => UserCameraController.field_Internal_Static_UserCameraController_0;
 
         public static VRCTrackingManager VRCTrackingManager => VRCTrackingManager.field_Private_Static_VRCTrackingManager_0;
     }

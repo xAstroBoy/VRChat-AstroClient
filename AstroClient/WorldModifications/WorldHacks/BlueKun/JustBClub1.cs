@@ -28,6 +28,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
     #endregion Imports
 
+    // TODO: Update the patron bypass with the new system.
     internal class JustBClub1 : AstroEvents
     {
         internal override void RegisterToEvents()

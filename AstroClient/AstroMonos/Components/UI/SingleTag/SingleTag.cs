@@ -1,5 +1,6 @@
 ﻿using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.AstroMonos.Components.UI.SingleTag
@@ -17,8 +18,6 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRC.SDK.Internal.ModularPieces;
-    using xAstroBoy.Extensions;
 
     [RegisterComponent]
     public class SingleTag : MonoBehaviour
@@ -78,20 +77,19 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
             #endregion
 
             #region Find and Build a tag!
-
             // FIND ESSENTIALS TO GENERATE A TAG.
             if (Player_content == null)
             {
                 if (Player != null)
                 {
-                    Player_content = Player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents");
+                    Player_content = Player.GetVRCPlayer().field_Public_PlayerNameplate_0.transform.FindObject("Contents");
                     //if (Player_content != null) Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
                 }
             }
 
             if (Player_QuickStats == null && Player_content != null)
             {
-                Player_QuickStats = Player_content.Find("Quick Stats");
+                Player_QuickStats = Player_content.FindObject("Quick Stats");
                 //if (Player_QuickStats != null) Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
             }
 

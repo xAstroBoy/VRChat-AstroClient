@@ -1,5 +1,7 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
+using TMPro;
+
 namespace AstroClient.xAstroBoy.Utility
 {
     using System;
@@ -37,57 +39,29 @@ namespace AstroClient.xAstroBoy.Utility
         {
             GameInstances.VRCUiManager.HideScreen("POPUP");
         }
-
-        public static void QueHudMessage(string message)
+        public static void AskInGameInput(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string placeholder = null)
         {
-            //Log.Write($"[HudMessage] {message}");
-            if (!WorldUtils.IsInWorld) return;
-            if (HudMessage1 == null)
-            {
-                HudMessage1 = CreateTextNear(CreateImage("yes", 100f), 110f, TextAnchor.LowerCenter);
-                HudMessage1.supportRichText = true;
-            }
-            MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, message));
-        }
-
-        public static void ClearHudMessages(this VRCUiManager instance)
-        {
-            instance.field_Private_List_1_String_0.Clear();
-            instance.field_Public_Text_0.text = "";
-            MessagesList.Clear();
-        }
-
-        public static bool IsTyping = false;
-
-        public static void AskInGameInput(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string def = null)
-        {
-            IsTyping = true;
-            MiscUtils.DelayFunction(15, delegate { IsTyping = false; });
             instance.InputPopUp(title, okButtonName, new Action<string>((g) =>
             {
                 onSuccess(g);
-                instance.HideCurrentPopUp();
-                IsTyping = false;
+            }), placeholder);
+        }
+
+        private static void InputPopUp(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string placeholder = null)
+        {
+            instance.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(title, "", TMP_InputField.InputType.Standard, false, okButtonName, new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>((g, l, t) =>
+            {
+                if (string.Empty == g) g = placeholder;
+                onSuccess(g);
             }), new Action(() =>
             {
-                instance.HideCurrentPopUp();
-                IsTyping = false;
-            }), def);
+
+            }), placeholder ?? "");
         }
 
-        public static List<string> MessagesList = new List<string>();
 
-        private static void InputPopUp(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, Action Button2, string def = null)
-        {
-            ShowUiInputPopup(title, "", InputField.InputType.Standard, false, okButtonName, new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>((g, l, t) =>
-            {
-                if (string.Empty == g)
-                {
-                    g = def;
-                }
-                onSuccess(g);
-            }), Button2, def ?? "");
-        }
+        public static bool IsTyping = false;
+
 
         internal static void NumericInputPopup(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string def = null)
         {
@@ -280,49 +254,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        public static Image CreateImage(string name, float offset)
-        {
-            var hudRoot = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud");
-            var requestedParent = hudRoot.transform.Find("NotificationDotParent");
-            var indicator = UnityEngine.Object.Instantiate(hudRoot.transform.Find("NotificationDotParent/NotificationDot").gameObject, requestedParent, false).Cast<GameObject>();
-            indicator.name = "NotifyDot-" + name;
-            indicator.SetActive(true);
-            indicator.transform.localPosition += Vector3.right * offset;
-            var image = indicator.GetComponent<Image>();
-            image.enabled = false;
-            return image;
-        }
-
-        public static Text CreateTextNear(Image image, float offset, TextAnchor alignment)
-        {
-            var gameObject = new GameObject(image.gameObject.name + "-text");
-            gameObject.AddComponent<Text>();
-            gameObject.transform.SetParent(image.transform, false);
-            gameObject.transform.localScale = Vector3.one;
-            gameObject.transform.localPosition = Vector3.up * offset + Vector3.right * 300f;
-            var text = gameObject.GetComponent<Text>();
-            text.color = Color.white;
-            text.fontStyle = FontStyle.Bold;
-            text.horizontalOverflow = HorizontalWrapMode.Overflow;
-            text.verticalOverflow = VerticalWrapMode.Overflow;
-            text.alignment = alignment;
-            text.fontSize = 30;
-            text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            text.supportRichText = true;
-
-            gameObject.SetActive(true);
-            return text;
-        }
-
-        public static Text HudMessage1;
-
-        public static System.Collections.IEnumerator ShowMessage(Text text, List<string> MessagesList, string message)
-        {
-            MessagesList.Add(message);
-            text.text = string.Join("\n", MessagesList);
-            yield return new WaitForSeconds(5f);
-            MessagesList.Remove(message);
-            text.text = string.Join("\n", MessagesList);
-        }
+        
     }
 }

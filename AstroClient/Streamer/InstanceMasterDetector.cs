@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.Constants;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
@@ -24,8 +26,6 @@ namespace AstroClient.Streamer
             ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
-        private static bool DoOnce;
-
         private void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
@@ -34,12 +34,12 @@ namespace AstroClient.Streamer
             {
                 if (PlayerSpooferUtils.IsSpooferActive)
                 {
-                    PopupUtils.QueHudMessage($"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
+                    NewHudNotifier.WriteHudMessage($"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
                 }
             }
             else
             {
-                PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
+                NewHudNotifier.WriteHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
             }
 
             player.GetVRCPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
@@ -62,12 +62,6 @@ namespace AstroClient.Streamer
         {
             //VRC.Player player = PlayerUtils.GetPlayer();
             //if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
-
-            if (Bools.IsDeveloper && !DoOnce)
-            {
-                PopupUtils.QueHudMessage("Developer Mode!".RainbowRichText());
-                DoOnce = true;
-            }
 
             WorldUtils.InstanceMaster.GetPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
         }

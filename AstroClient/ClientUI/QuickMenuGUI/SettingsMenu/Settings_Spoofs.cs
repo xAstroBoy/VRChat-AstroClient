@@ -1,6 +1,7 @@
 ﻿using AstroClient.CheetoLibrary.Utility;
 using AstroClient.Config;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 {
@@ -29,7 +30,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
 
             _ = new QMSingleButton(sub, 2, 1, "Set\nFPS\nValue", () =>
             {
-                CheetoUtils.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
+                GameInstances.VRCUiPopupManager.AskInGameInput("Set FPS Value", "Done", delegate (string text)
                 {
                     float value = 0f;
 
@@ -45,12 +46,13 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
                     {
                         ConfigManager.General.SpoofedFPS = value;
                     }
-                });
+
+                }, "Enter FPS. . .");
             }, "Input an FPS value");
 
             _ = new QMSingleButton(sub, 3, 1, "Set\nPing\nValue", () =>
             {
-                CheetoUtils.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
+                GameInstances.VRCUiPopupManager.AskInGameInput("Set Ping Value", "Done", delegate (string text)
                 {
                     short value = 0;
 
@@ -66,7 +68,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
                     {
                         ConfigManager.General.SpoofedPing = value;
                     }
-                });
+                },  "Enter Ping. . .");
             }, "Input a Ping value");
         }
     }

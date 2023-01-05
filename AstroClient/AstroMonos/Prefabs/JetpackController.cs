@@ -12,6 +12,7 @@ using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using UnityEngine.Animations;
 using VRCSDK2;
+using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using VRCStation = VRC.SDKBase.VRCStation;
 
 namespace AstroClient.AstroMonos.Prefabs
@@ -28,8 +29,7 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
-        private GameObject CurrentAvatar { get; set; } = null;
-
+        internal bool IgnoreQuickBoostAnim { get; set; } = false;
         private bool _HasSubscribed = false;
         private bool HasSubscribed
         {
@@ -74,6 +74,10 @@ namespace AstroClient.AstroMonos.Prefabs
                         CleanConstraint();
                     }
                 }
+                if (JetpackScaleConstraint != null)
+                {
+                    JetpackScaleConstraint.enabled = value;
+                }
                 _AdjustScaleBasedOffAvatar = value;
             }
         }
@@ -90,26 +94,22 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
-        private  void ActivateConstraint()
+
+        private void ActivateConstraint()
         {
             if(JetpackScaleConstraint != null)
             {
                 CleanConstraint();
             }
-            
-            transform.localScale = Vector3.one;
-            if (CurrentAvatar == null)
-            {
-                CurrentAvatar = GameInstances.CurrentAvatar;
-            }
-
             // Let's make a new source
-            if (CurrentAvatar != null)
+            if (GameInstances.CurrentAvatar != null)
             {
-                JetpackScaleConstraint.constraintActive = true;
-                var source = GenerateSource(CurrentAvatar);
-                JetpackScaleConstraint.AddSource(source);
-
+                if (JetpackScaleConstraint != null)
+                {
+                    JetpackScaleConstraint.AddSource(GenerateSource(GameInstances.CurrentAvatar.transform));
+                    JetpackScaleConstraint.constraintActive = true;
+                    //JetpackScaleConstraint.scaleOffset = Vector3.one;
+                }
             }
 
         }
@@ -119,7 +119,6 @@ namespace AstroClient.AstroMonos.Prefabs
         private void OnLocalAvatarLoaded(GameObject avatar)
         {
             if(avatar == null) return; 
-            CurrentAvatar = GameInstances.CurrentAvatar;
             if(AdjustScaleBasedOffAvatar)
             {
                 ActivateConstraint();
@@ -135,47 +134,50 @@ namespace AstroClient.AstroMonos.Prefabs
 
             // For better manageability, correct the jetpack size to avatar size.
             HasSubscribed = true;
-            
-            
 
-
-            if (VRCChairStick != null)
+            if (Movement_Joypad != null)
             {
-                JetstickPickup = VRCChairStick.GetOrAddComponent<VRC_AstroPickup>();
+                JetstickPickup = Movement_Joypad.GetOrAddComponent<VRC_AstroPickup>();
                 if (JetstickPickup != null)
                 {
                     JetstickPickup.ForcePickupComponent = true;
                     JetstickPickup.PickupController.pickupable = true;
-                    JetstickPickup.OnPickup = VRCChairStick_OnPickup;
-                    JetstickPickup.OnPickupUseDown = VRCChairStick_OnPickupUseDown;
-                    JetstickPickup.OnPickupUseUp = VRCChairStick_OnPickupUseUp;
-                    JetstickPickup.OnDrop = VRCChairStick_OnDrop;
-                    JetstickPickup.interactText = "Jet";
-                    JetstickPickup.InteractionText = "Jet";
+                    JetstickPickup.OnPickup = Movement_Joypad_OnPickup;
+                    JetstickPickup.OnPickupUseDown = Movement_Joypad_OnPickupUseDown;
+                    JetstickPickup.OnPickupUseUp = Movement_Joypad_OnPickupUseUp;
+                    JetstickPickup.OnDrop = Movement_Joypad_OnDrop;
+                    JetstickPickup.interactText = "Movement";
+                    JetstickPickup.InteractionText = "Movement";
+                    //Movement_Joypad_Grip.localRotation = new Quaternion(0, 0, 0, 0);
+                    JetstickPickup.PickupController.ExactGrip = Movement_Joypad_Grip;
+                    JetstickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Grip;
                 }
             }
 
-            if (ThrusterStick != null)
+            if (Thruster_Joypad != null)
             {
-                ThrusterStickPickup = ThrusterStick.GetOrAddComponent<VRC_AstroPickup>();
-                if (ThrusterStickPickup != null)
+                Thruster_JoypadPickup = Thruster_Joypad.GetOrAddComponent<VRC_AstroPickup>();
+                if (Thruster_JoypadPickup != null)
                 {
-                    ThrusterStickPickup.ForcePickupComponent = true;
-                    ThrusterStickPickup.PickupController.pickupable = true;
-                    ThrusterStickPickup.OnPickup = ThrusterStick_OnPickup;
-                    ThrusterStickPickup.OnPickupUseDown = ThrusterStick_OnPickupUseDown;
-                    ThrusterStickPickup.OnPickupUseUp = ThrusterStick_OnPickupUseUp;
-                    ThrusterStickPickup.OnDrop = ThrusterStick_OnDrop;
-                    ThrusterStickPickup.interactText = "Thruster";
-                    ThrusterStickPickup.InteractionText = "Thruster";
+                    Thruster_JoypadPickup.ForcePickupComponent = true;
+                    Thruster_JoypadPickup.PickupController.pickupable = true;
+                    Thruster_JoypadPickup.OnPickup = Thruster_Joypad_OnPickup;
+                    Thruster_JoypadPickup.OnPickupUseDown = Thruster_Joypad_OnPickupUseDown;
+                    Thruster_JoypadPickup.OnPickupUseUp = Thruster_Joypad_OnPickupUseUp;
+                    Thruster_JoypadPickup.OnDrop = Thruster_Joypad_OnDrop;
+                    Thruster_JoypadPickup.interactText = "Thruster";
+                    Thruster_JoypadPickup.InteractionText = "Thruster";
+                    //Thruster_Joypad_Grip.localRotation = new Quaternion(0,0,0,0);
+                    Thruster_JoypadPickup.PickupController.ExactGrip = Thruster_Joypad_Grip;
+                    Thruster_JoypadPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Grip;
                 }
             }
             
-            if(VRCChair != null)
+            if(Chair != null)
             {
                 // Check if Chair is present
-                bool isPresent = VRCChair.GetComponent<VRC_Station>() != null || VRCChair.GetComponent<VRCStation>() != null;
-                CurrentChair = VRCChair.GetOrAddComponent<VRC_AstroStation>();
+                bool isPresent = Chair.GetComponent<VRC_Station>() != null || Chair.GetComponent<VRCStation>() != null;
+                CurrentChair = Chair.GetOrAddComponent<VRC_AstroStation>();
                 if(CurrentChair != null)
                 {
                         MiscUtils.DelayFunction(0.1f, () =>
@@ -189,7 +191,7 @@ namespace AstroClient.AstroMonos.Prefabs
                                 //CurrentChair.Station.canUseStationFromStation = false;
                                 //CurrentChair.Station.disableStationExit = true;
                             }
-                            if (ThrusterStick != null)
+                            if (Thruster_Joypad != null)
                             {
                                 CurrentChair.BlockVanillaStationExit = true;
                             }
@@ -203,11 +205,11 @@ namespace AstroClient.AstroMonos.Prefabs
 
 
 
-        private ConstraintSource GenerateSource(GameObject avatar)
+        private ConstraintSource GenerateSource(Transform avatar)
         {
             return new ConstraintSource
             {
-                m_SourceTransform = CurrentAvatar.transform,
+                m_SourceTransform = avatar,
                 m_Weight = 1,
 
             };
@@ -220,7 +222,7 @@ namespace AstroClient.AstroMonos.Prefabs
                 CurrentChair.ExitStation();
             }
         }
-        private void VRCChairStick_OnPickupUseDown()
+        private void Movement_Joypad_OnPickupUseDown()
         {
             JetpackForce.enabled = true;
             ParticleThrustParticles.Play();
@@ -229,19 +231,21 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
-        private void VRCChairStick_OnPickupUseUp()
+        private void Movement_Joypad_OnPickupUseUp()
         {
             JetpackForce.enabled = false;
-            //ParticleThrustParticles.Play();
             UpperJet_ON.gameObject.SetActive(false);
             UpperJet_OFF.gameObject.SetActive(true);
 
         }
 
-        private void ThrusterStick_OnPickupUseDown()
+        private void Thruster_Joypad_OnPickupUseDown()
         {
             ThrusterForce.enabled = true;
-            QuickBoost.Play("quickboost");
+            if (!IgnoreQuickBoostAnim)
+            {
+                QuickBoost.Play("quickboost");
+            }
             QuickBoostParticles.Play();
             LowerJet_OFF.gameObject.SetActive(false);
             LowerJet_ON.gameObject.SetActive(true);
@@ -255,64 +259,62 @@ namespace AstroClient.AstroMonos.Prefabs
             Destroy(this.gameObject);
         }
 
-        private void ThrusterStick_OnPickup()
+        private void Thruster_Joypad_OnPickup()
         {
-            if (ThrusterStick_PositionConstraint != null)
+            if (Thruster_Joypad_PositionConstraint != null)
             {
-                ThrusterStick_PositionConstraint.enabled = false;
+                Thruster_Joypad_PositionConstraint.enabled = false;
             }
-            if (ThrusterStick_RotationConstraint != null)
+            if (Thruster_Joypad_RotationConstraint != null)
             {
-                ThrusterStick_RotationConstraint.enabled = false;
+                Thruster_Joypad_RotationConstraint.enabled = false;
             }
 
 
         }
 
-        private void ThrusterStick_OnDrop()
+        private void Thruster_Joypad_OnDrop()
         {
-            if (ThrusterStick_PositionConstraint != null)
+            if (Thruster_Joypad_PositionConstraint != null)
             {
-                ThrusterStick_PositionConstraint.enabled = true;
+                Thruster_Joypad_PositionConstraint.enabled = true;
             }
-            if (ThrusterStick_RotationConstraint != null)
+            if (Thruster_Joypad_RotationConstraint != null)
             {
-                ThrusterStick_RotationConstraint.enabled = true;
+                Thruster_Joypad_RotationConstraint.enabled = true;
             }
         }
 
 
-        private void VRCChairStick_OnPickup()
+        private void Movement_Joypad_OnPickup()
         {
-            if (VRCChairStick_PositionConstraint != null)
+            if (Movement_Joypad_PositionConstraint != null)
             {
-                VRCChairStick_PositionConstraint.enabled = false;
+                Movement_Joypad_PositionConstraint.enabled = false;
             }
-            if (VRCChairStick_RotationConstraint != null)
+            if (Movement_Joypad_RotationConstraint != null)
             {
-                VRCChairStick_RotationConstraint.enabled = false;
+                Movement_Joypad_RotationConstraint.enabled = false;
             }
 
 
         }
 
-        private void VRCChairStick_OnDrop()
+        private void Movement_Joypad_OnDrop()
         {
-            if (VRCChairStick_PositionConstraint != null)
+            if (Movement_Joypad_PositionConstraint != null)
             {
-                VRCChairStick_PositionConstraint.enabled = true;
+                Movement_Joypad_PositionConstraint.enabled = true;
             }
-            if (VRCChairStick_RotationConstraint != null)
+            if (Movement_Joypad_RotationConstraint != null)
             {
-                VRCChairStick_RotationConstraint.enabled = true;
+                Movement_Joypad_RotationConstraint.enabled = true;
             }
         }
 
-        private void ThrusterStick_OnPickupUseUp()
+        private void Thruster_Joypad_OnPickupUseUp()
         {
             ThrusterForce.enabled = false;
-            //QuickBoost.Play("quickboost");
-            //QuickBoostParticles.Play();
             LowerJet_OFF.gameObject.SetActive(true);
             LowerJet_ON.gameObject.SetActive(false);
 
@@ -333,17 +335,17 @@ namespace AstroClient.AstroMonos.Prefabs
         }
 
 
-        private Transform _VRCChair {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
-        private Transform VRCChair
+        private Transform _Chair {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
+        private Transform Chair
         {
             [HideFromIl2Cpp]
             get
             {
-                if(_VRCChair == null)
+                if(_Chair == null)
                 {
-                    _VRCChair = gameObject.transform.root.FindObject("VRCChair");
+                    _Chair = transform.FindObject("Chair");
                 }
-                return _VRCChair;
+                return _Chair;
             }
         }
 
@@ -353,10 +355,10 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
                 if (_Collider == null)
                 {
-                    _Collider = VRCChair.FindObject("Collider");
+                    _Collider = Chair.FindObject("Collider");
                 }
                 return _Collider;
             }
@@ -368,10 +370,10 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
                 if (_Enter_Point == null)
                 {
-                    _Enter_Point = VRCChair.FindObject("Enter Point");
+                    _Enter_Point = Chair.FindObject("Enter Point");
                 }
                 return _Enter_Point;
             }
@@ -382,10 +384,10 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
                 if (_Exit_Point == null)
                 {
-                    _Exit_Point = VRCChair.FindObject("Exit Point");
+                    _Exit_Point = Chair.FindObject("Exit Point");
                 }
                 return _Exit_Point;
             }
@@ -399,10 +401,10 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
                 if (_UpperJet == null)
                 {
-                    _UpperJet = VRCChair.FindObject("UpperJet");
+                    _UpperJet = Chair.FindObject("UpperJet");
                 }
                 return _UpperJet;
             }
@@ -413,7 +415,7 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
 
                 if (_UpperJet_ON == null)
                 {
@@ -428,7 +430,7 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
 
                 if (_UpperJet_OFF == null)
                 {
@@ -438,46 +440,63 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
-        private Transform _VRCChairStick {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
-        private Transform VRCChairStick
+        private Transform _Movement_Joypad {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
+        private Transform Movement_Joypad
         {
             [HideFromIl2Cpp]
             get
             {
-                if (_VRCChairStick == null)
+                if (_Movement_Joypad == null)
                 {
-                    _VRCChairStick = gameObject.transform.root.FindObject("VRCChairStick");
+                    _Movement_Joypad = transform.FindObject("Movement_Joypad");
                 }
-                return _VRCChairStick;
+                return _Movement_Joypad;
             }
         }
 
-        private PositionConstraint _VRCChairStick_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private PositionConstraint VRCChairStick_PositionConstraint
+        private Transform _Movement_Joypad_Grip { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform Movement_Joypad_Grip
         {
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChairStick == null) return null;
-                if (_VRCChairStick_PositionConstraint == null)
+                if (Movement_Joypad == null) return null;
+                if (_Movement_Joypad_Grip == null)
                 {
-                    _VRCChairStick_PositionConstraint = VRCChairStick.GetComponent<PositionConstraint>();
+                    _Movement_Joypad_Grip = Movement_Joypad.FindObject("Grip");
                 }
-                return _VRCChairStick_PositionConstraint;
+                return _Movement_Joypad_Grip;
             }
         }
-        private RotationConstraint _VRCChairStick_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RotationConstraint VRCChairStick_RotationConstraint
+
+
+
+        private PositionConstraint _Movement_Joypad_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PositionConstraint Movement_Joypad_PositionConstraint
         {
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChairStick == null) return null;
-                if (_VRCChairStick_RotationConstraint == null)
+                if (Movement_Joypad == null) return null;
+                if (_Movement_Joypad_PositionConstraint == null)
                 {
-                    _VRCChairStick_RotationConstraint = VRCChairStick.GetComponent<RotationConstraint>();
+                    _Movement_Joypad_PositionConstraint = Movement_Joypad.GetComponent<PositionConstraint>();
                 }
-                return _VRCChairStick_RotationConstraint;
+                return _Movement_Joypad_PositionConstraint;
+            }
+        }
+        private RotationConstraint _Movement_Joypad_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RotationConstraint Movement_Joypad_RotationConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Movement_Joypad == null) return null;
+                if (_Movement_Joypad_RotationConstraint == null)
+                {
+                    _Movement_Joypad_RotationConstraint = Movement_Joypad.GetComponent<RotationConstraint>();
+                }
+                return _Movement_Joypad_RotationConstraint;
             }
         }
 
@@ -487,10 +506,10 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
                 if (_JetpackForce == null)
                 {
-                    _JetpackForce = VRCChair.GetComponent<UnityEngine.ConstantForce>();
+                    _JetpackForce = Chair.GetComponent<UnityEngine.ConstantForce>();
                 }
                 return _JetpackForce;
             }
@@ -505,52 +524,68 @@ namespace AstroClient.AstroMonos.Prefabs
             {
                 if (_Thruster == null)
                 {
-                    _Thruster = gameObject.transform.root.FindObject("Thruster");
+                    _Thruster = transform.FindObject("Thruster");
                 }
                 return _Thruster;
             }
         }
 
-        private Transform _ThrusterStick { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Transform ThrusterStick
+        private Transform _Thruster_Joypad { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform Thruster_Joypad
         {
             [HideFromIl2Cpp]
             get
             {
-                if (_ThrusterStick == null)
+                if (_Thruster_Joypad == null)
                 {
-                    _ThrusterStick = gameObject.transform.root.FindObject("ThrusterStick");
+                    _Thruster_Joypad = transform.FindObject("Thruster_Joypad");
                 }
-                return _ThrusterStick;
+                return _Thruster_Joypad;
             }
         }
 
-        private PositionConstraint _ThrusterStick_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private PositionConstraint ThrusterStick_PositionConstraint
+        private Transform _Thruster_Joypad_Grip { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform Thruster_Joypad_Grip
         {
             [HideFromIl2Cpp]
             get
             {
-                if (ThrusterStick == null) return null;
-                if (_ThrusterStick_PositionConstraint == null)
+                if (Thruster_Joypad == null) return null;
+                if (_Thruster_Joypad_Grip == null)
                 {
-                    _ThrusterStick_PositionConstraint = ThrusterStick.GetComponent<PositionConstraint>();
+                    _Thruster_Joypad_Grip = Thruster_Joypad.FindObject("Grip");
                 }
-                return _ThrusterStick_PositionConstraint;
+                return _Thruster_Joypad_Grip;
             }
         }
-        private RotationConstraint _ThrusterStick_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private RotationConstraint ThrusterStick_RotationConstraint
+
+
+        private PositionConstraint _Thruster_Joypad_PositionConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PositionConstraint Thruster_Joypad_PositionConstraint
         {
             [HideFromIl2Cpp]
             get
             {
-                if (ThrusterStick == null) return null;
-                if (_ThrusterStick_RotationConstraint == null)
+                if (Thruster_Joypad == null) return null;
+                if (_Thruster_Joypad_PositionConstraint == null)
                 {
-                    _ThrusterStick_RotationConstraint = ThrusterStick.GetComponent<RotationConstraint>();
+                    _Thruster_Joypad_PositionConstraint = Thruster_Joypad.GetComponent<PositionConstraint>();
                 }
-                return _ThrusterStick_RotationConstraint;
+                return _Thruster_Joypad_PositionConstraint;
+            }
+        }
+        private RotationConstraint _Thruster_Joypad_RotationConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RotationConstraint Thruster_Joypad_RotationConstraint
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Thruster_Joypad == null) return null;
+                if (_Thruster_Joypad_RotationConstraint == null)
+                {
+                    _Thruster_Joypad_RotationConstraint = Thruster_Joypad.GetComponent<RotationConstraint>();
+                }
+                return _Thruster_Joypad_RotationConstraint;
             }
         }
 
@@ -664,11 +699,11 @@ namespace AstroClient.AstroMonos.Prefabs
             [HideFromIl2Cpp]
             get
             {
-                if (VRCChair == null) return null;
+                if (Chair == null) return null;
 
                 if (_ParticleThrust == null)
                 {
-                    _ParticleThrust = VRCChair.FindObject("ParticleThrust");
+                    _ParticleThrust = Chair.FindObject("ParticleThrust");
                 }
                 return _ParticleThrust;
             }
@@ -691,7 +726,7 @@ namespace AstroClient.AstroMonos.Prefabs
 
         internal VRC_AstroPickup JetstickPickup {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
 
-        internal VRC_AstroPickup ThrusterStickPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup Thruster_JoypadPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal VRC_AstroStation CurrentChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 

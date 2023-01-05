@@ -128,6 +128,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                     {
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                        ClientEventActions.OnPlayerLeft -= OnPlayerLeft;
+                        ClientEventActions.OnUdonSyncRPC -= OnUdonSyncRPCEvent;
+                        ClientEventActions.OnViewRolesPropertyChanged -= OnViewRolesPropertyChanged;
 
                     }
                 }

@@ -241,7 +241,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                 Player = p;
             else
                 Destroy(this);
-
+            HasSubscribed = true;
             if (GameRoleTag != null)
             {
                 GameRoleTag.ShowTag = false;
@@ -291,7 +291,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUdonSyncRPC += OnUdonSyncRPC;
                         ClientEventActions.OnViewRolesPropertyChanged += OnViewRolesPropertyChanged;
-
                     }
                     else
                     {
@@ -311,6 +310,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
             if (GameRoleTag != null) Destroy(GameRoleTag);
             if (AmongUSVoteRevealTag != null) Destroy(AmongUSVoteRevealTag);
             AmongUS_ESPs.Remove(this);
+            HasSubscribed = false;
         }
 
         [HideFromIl2Cpp]

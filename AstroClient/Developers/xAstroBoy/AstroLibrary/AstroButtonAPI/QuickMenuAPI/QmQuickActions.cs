@@ -9,8 +9,7 @@
     {
         internal GameObject Header { get; set; }
         internal GameObject QuickActions { get; set; }
-        internal TextMeshProUGUI HeaderText { get; set; }
-        internal GameObject VerticalLayoutGroup { get; set; }
+        internal TextMeshProUGUIPublicBoUnique HeaderText { get; set; }
 
         internal string menuName { get; set; }
         internal string btnType { get; set; }
@@ -20,7 +19,6 @@
             UnityEngine.Object.Destroy(Header);
             UnityEngine.Object.Destroy(QuickActions);
             UnityEngine.Object.Destroy(HeaderText);
-            UnityEngine.Object.Destroy(VerticalLayoutGroup);
         }
 
         internal QmQuickActions(int Index, string Menu, string Title, Color32 TextColor)
@@ -50,49 +48,51 @@
             switch (Menu)
             {
                 case "MainMenu":
-                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.MenuDashboard_VerticalLayoutGroup, true);
+                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.MenuDashboard_VerticalLayoutGroup);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
                     HeaderText = Header.NewText("Text_Title");
                     HeaderText.text = Title;
                     HeaderText.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                    QuickActions = Object.Instantiate(QuickMenuTools.MenuDashboard_ButtonsSection.gameObject, QuickMenuTools.MenuDashboard_VerticalLayoutGroup, true);
+                    QuickActions = Object.Instantiate(QuickMenuTools.MenuDashboard_ButtonsSection.gameObject, QuickMenuTools.MenuDashboard_VerticalLayoutGroup);
                     QuickActions.CleanButtonsQuickActions();
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";
                     break;
 
-                case "SelectedUser_Remote":
+                case "Menu_SelectedUser_Remote":
                     Index += 5;
-                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.SelectedUserPage_Remote_VerticalLayoutGroup, true);
+                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.SelectedUserPage_Remote_VerticalLayoutGroup);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
                     HeaderText = Header.NewText("Text_Title");
                     HeaderText.text = Title;
                     HeaderText.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                    QuickActions = Object.Instantiate(QuickMenuTools.SelectedUserPage_ButtonsSection.gameObject, QuickMenuTools.SelectedUserPage_Remote_VerticalLayoutGroup, true);
+                    QuickActions = Object.Instantiate(QuickMenuTools.SelectedUserPage_ButtonsSection.gameObject, QuickMenuTools.SelectedUserPage_Remote_VerticalLayoutGroup);
                     QuickActions.CleanButtonsQuickActions();
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";
                     break;
 
-                case "SelectedUser_Local":
+                case "Menu_SelectedUser_Local":
                     Index += 5;
-                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.SelectedUserPage_Local_VerticalLayoutGroup, true);
+                    Header = Object.Instantiate(QuickMenuTools.Header_DashboardTemplate.gameObject, QuickMenuTools.SelectedUserPage_Local_VerticalLayoutGroup);
                     Header.name = QMButtonAPI.identifier + btnType + Title + "_Header";
                     HeaderText = Header.NewText("Text_Title");
                     HeaderText.text = Title;
                     HeaderText.SetFaceColor(TextColor);
                     Header.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
 
-                    QuickActions = Object.Instantiate(QuickMenuTools.SelectedUserPage_ButtonsSection.gameObject, QuickMenuTools.SelectedUserPage_Local_VerticalLayoutGroup, true);
+                    QuickActions = Object.Instantiate(QuickMenuTools.SelectedUserPage_ButtonsSection.gameObject, QuickMenuTools.SelectedUserPage_Local_VerticalLayoutGroup);
                     QuickActions.CleanButtonsQuickActions();
                     QuickActions.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index + 1);
                     QuickActions.name = QMButtonAPI.identifier + btnType + Title + "_Buttons";
                     break;
             }
+            Header.SetActive(true);
+            QuickActions.SetActive(true);
         }
     }
 }

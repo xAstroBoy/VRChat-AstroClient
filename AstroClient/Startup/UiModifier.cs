@@ -17,19 +17,10 @@ namespace AstroClient.Startup
 
         private void VRChat_OnQuickMenuInit()
         {
-            if (UserInterfaceObjects.ScreenFade != null)
-            {
-                UserInterfaceObjects.ScreenFade.GetOrAddComponent<Disabler>();
-            }
-
-            if (UserInterfaceObjects.VoiceDotDisabled != null)
-            {
-                var annoyingblink = UserInterfaceObjects.VoiceDotDisabled.GetComponent<FadeCycleEffect>();
-                if (annoyingblink != null)
-                {
-                    annoyingblink.DestroyMeLocal();
-                }
-            }
+            //if (UserInterfaceObjects.ScreenFade != null)
+            //{
+            //    UserInterfaceObjects.ScreenFade.GetOrAddComponent<Disabler>();
+            //}
         }
     }
 }

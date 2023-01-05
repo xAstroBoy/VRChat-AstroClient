@@ -8,20 +8,8 @@ namespace AstroClient.xAstroBoy.UIPaths
     {
 
 
-        private static Transform _VoiceDotDisabled;
 
-        internal static Transform VoiceDotDisabled
-        {
-            get
-            {
-                if (_VoiceDotDisabled == null)
-                {
-                    _VoiceDotDisabled = GameObject.Find("UserInterface/UnscaledUI/HudContent_Old/Hud/VoiceDotParent/VoiceDotDisabled").transform;
-                }
 
-                return _VoiceDotDisabled;
-            }
-        }
         private static Transform _ScreenFade;
 
         internal static Transform ScreenFade
@@ -50,20 +38,7 @@ namespace AstroClient.xAstroBoy.UIPaths
                 return _MainAvatar_Pedestral;
             }
         }
-        private static SimpleAvatarPedestal _FallbackAvatar_Pedestral;
 
-        internal static SimpleAvatarPedestal FallbackAvatar_Pedestral
-        {
-            get
-            {
-                if (_FallbackAvatar_Pedestral == null)
-                {
-                    _FallbackAvatar_Pedestral = AvatarPreviewBase_FallbackAvatar.GetComponentInChildren<SimpleAvatarPedestal>(true);
-                }
-
-                return _FallbackAvatar_Pedestral;
-            }
-        }
         private static Transform _AvatarPreviewBase_MainAvatar;
 
         internal static Transform AvatarPreviewBase_MainAvatar
@@ -72,25 +47,10 @@ namespace AstroClient.xAstroBoy.UIPaths
             {
                 if (_AvatarPreviewBase_MainAvatar == null)
                 {
-                    _AvatarPreviewBase_MainAvatar = Finder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/MainRoot").transform;
+                    _AvatarPreviewBase_MainAvatar = Finder.Find("Canvas_MainMenu(Clone)/Container/MMParent/Menu_Avatars/Menu_MM_DynamicSidePanel/Panel_SectionList/ScrollRect_Navigation/ScrollRect_Content/Panel_SelectedAvatar/Panel_MM_AvatarViewer/").transform;
                 }
 
                 return _AvatarPreviewBase_MainAvatar;
-            }
-        }
-
-        private static Transform _AvatarPreviewBase_FallbackAvatar;
-
-        internal static Transform AvatarPreviewBase_FallbackAvatar
-        {
-            get
-            {
-                if (_AvatarPreviewBase_FallbackAvatar == null)
-                {
-                    _AvatarPreviewBase_FallbackAvatar = Finder.Find("UserInterface/MenuContent/Screens/Avatar/AvatarPreviewBase/FallbackRoot").transform;
-                }
-
-                return _AvatarPreviewBase_FallbackAvatar;
             }
         }
 

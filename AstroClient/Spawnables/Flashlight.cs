@@ -3,6 +3,7 @@ using AstroClient.AstroMonos.Components.Custom.Items;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.ClientResources.Loaders;
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Holders;
 using AstroClient.Tools.Player;
@@ -150,7 +151,7 @@ namespace AstroClient.Spawnables
                 if (light != null)
                 {
                     Log.Debug("Found a template light!");
-                    PopupUtils.QueHudMessage($"<color=#FFA500>Using Light from {pickup.name} as template!</color>");
+                    NewHudNotifier.WriteHudMessage($"<color=#FFA500>Using Light from {pickup.name} as template!</color>");
                     CurrentLightTemplate = light;
                 }
 
@@ -159,7 +160,7 @@ namespace AstroClient.Spawnables
         internal static void ClearTemplate()
         {
             CurrentLightTemplate = null;
-            PopupUtils.QueHudMessage($"<color=#FFA500>Cleared Light Template!</color>");
+            NewHudNotifier.WriteHudMessage($"<color=#FFA500>Cleared Light Template!</color>");
         }
 
         private static List<GameObject> flashlights = new List<GameObject>();

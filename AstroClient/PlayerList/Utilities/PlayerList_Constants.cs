@@ -1,4 +1,7 @@
-﻿namespace AstroClient.PlayerList.Utilities
+﻿using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
+
+namespace AstroClient.PlayerList.Utilities
 {
     using ClientResources.Loaders;
     using UnityEngine;
@@ -17,7 +20,7 @@
             {
                 if (_playerListLayout == null)
                 {
-                    return _playerListLayout = playerList.FindObject("PlayerList Viewport/PlayerList").GetComponent<VerticalLayoutGroup>();
+                    return _playerListLayout = playerList.FindObject("PlayerList Viewport/PlayerList").GetOrAddComponent<VerticalLayoutGroup>();
                 }
 
                 return _playerListLayout;
@@ -33,7 +36,7 @@
             {
                 if (_generalInfoLayout == null)
                 {
-                    return _generalInfoLayout = playerList.FindObject("GeneralInfo Viewport/GeneralInfo").GetComponent<VerticalLayoutGroup>();
+                    return _generalInfoLayout = playerList.FindObject("GeneralInfo Viewport/GeneralInfo").GetOrAddComponent<VerticalLayoutGroup>();
                 }
 
                 return _generalInfoLayout;
@@ -41,23 +44,16 @@
         }
 
 
-        public static Vector2 quickMenuColliderSize
-        {
-            get
-            {
-                return quickMenu.GetComponent<BoxCollider>().size;
-            }
-        }
 
-        private static GameObject _playerList;
+        private static Transform _playerList;
 
-        public static GameObject playerList
+        public static Transform playerList
         {
             get
             {
                 if (_playerList == null)
                 {
-                    return _playerList = UnityEngine.Object.Instantiate(Prefabs.PlayerListMod, PlayerList_Constants.WingLeft.transform);
+                    return _playerList = UnityEngine.Object.Instantiate(Prefabs.PlayerListMod, PlayerList_Constants.WingLeft.transform).transform;
                 }
 
                 return _playerList;
@@ -88,7 +84,7 @@
             {
                 if (_qmDashboard == null)
                 {
-                    return _qmDashboard = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard").gameObject.GetComponent<UIPage>();
+                    return _qmDashboard = QuickMenuTools.UserInterface.transform.FindObject("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard").gameObject.GetComponent<UIPage>();
                 }
 
                 return _qmDashboard;
@@ -102,7 +98,7 @@
             {
                 if (_selectedUserLocal == null)
                 {
-                    return _selectedUserLocal = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Local").gameObject.GetComponent<UIPage>();
+                    return _selectedUserLocal = QuickMenuTools.UserInterface.transform.FindObject("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Local").gameObject.GetComponent<UIPage>();
                 }
 
                 return _selectedUserLocal;
@@ -116,7 +112,7 @@
             {
                 if (_selectedUserRemote == null)
                 {
-                    return _selectedUserRemote = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_SelectedUser_Remote").gameObject.GetComponent<UIPage>();
+                    return _selectedUserRemote = QuickMenuTools.UserInterface.transform.FindObject("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_SelectedUser_Remote").gameObject.GetComponent<UIPage>();
                 }
 
                 return _selectedUserRemote;
@@ -125,20 +121,6 @@
 
 
 
-        private static GameObject _quickMenu;
-
-        public static GameObject quickMenu
-        {
-            get
-            {
-                if (_quickMenu == null)
-                {
-                    return _quickMenu = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window").gameObject;
-                }
-
-                return _quickMenu;
-            }
-        }
         private static GameObject _WingLeft;
 
         public static GameObject WingLeft
@@ -147,7 +129,7 @@
             {
                 if (_WingLeft == null)
                 {
-                    return _WingLeft = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Button").gameObject;
+                    return _WingLeft = QuickMenuTools.UserInterface.transform.FindObject("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Button").gameObject;
                 }
 
                 return _WingLeft;
@@ -162,7 +144,7 @@
             {
                 if (_checkSprite == null)
                 {
-                    return _checkSprite = GameObject.Find("UserInterface").transform.FindObject("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Modal_AddWorldToPlaylist/MenuPanel/ScrollRect/Viewport/VerticalLayoutGroup/Cell_QM_WorldPlaylistToggle 1/ButtonElement_CheckBox/Checkmark").GetComponent<Image>().activeSprite;
+                    return _checkSprite = QuickMenuTools.UserInterface.transform.FindObject("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Modal_AddWorldToPlaylist/MenuPanel/ScrollRect/Viewport/VerticalLayoutGroup/Cell_QM_WorldPlaylistToggle 1/ButtonElement_CheckBox/Checkmark").GetComponent<Image>().activeSprite;
                 }
 
                 return _checkSprite;

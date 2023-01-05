@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.Cheetos
 {
@@ -82,7 +84,7 @@ namespace AstroClient.Cheetos
                     var HudTag = GenerateTags(apiuser, true);
                     var consoletag = GenerateTags(apiuser, false);
                     {
-                        PopupUtils.QueHudMessage($"{HudTag} {player.GetDisplayName()} <color=green>Joined</color>!");
+                        HudNotifier.WriteHudMessage($"{HudTag} {player.GetDisplayName()} <color=green>Joined</color>!");
                         Log.Write($"{consoletag} {player.GetDisplayName()} Joined!");
                     }
                 }
@@ -101,7 +103,7 @@ namespace AstroClient.Cheetos
                     if (apiuser.IsSelf) return;
                     var HudTag = GenerateTags(apiuser, true);
                     var consoletag = GenerateTags(apiuser, false);
-                    PopupUtils.QueHudMessage($"{HudTag} {player.GetDisplayName()} <color=red>Left</color>!");
+                    HudNotifier.WriteHudMessage($"{HudTag} {player.GetDisplayName()} <color=red>Left</color>!");
                     Log.Write($"{consoletag} {player.GetDisplayName()} Left!");
                 }
             }

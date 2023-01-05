@@ -186,18 +186,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        public static void JoinWorld(string worldID, string instanceID)
-        {
-            if (!worldID.ToLower().StartsWith("wrld_"))
-            {
-                Log.Error("INVALID WORLD ID!");
-                return;
-            }
-            else
-            {
-                new PortalInternal().Method_Private_Void_String_String_PDM_0(worldID, instanceID);
-            }
-        }
 
 
         public static Player GetPlayerByDisplayName(string name)

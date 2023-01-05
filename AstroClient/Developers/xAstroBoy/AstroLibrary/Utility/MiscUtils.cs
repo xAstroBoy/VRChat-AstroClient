@@ -1,5 +1,8 @@
 ﻿// Credits to Blaze and DayOfThePlay
 
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientUI.Hud.Notifier;
+
 namespace AstroClient.xAstroBoy.Utility
 {
     using System;
@@ -259,7 +262,7 @@ namespace AstroClient.xAstroBoy.Utility
             };
             textEditor.SelectAll();
             textEditor.Copy();
-            PopupUtils.QueHudMessage("Copied to Clipboard");
+            HudNotifier.WriteHudMessage("Copied to Clipboard");
         }
     }
 }

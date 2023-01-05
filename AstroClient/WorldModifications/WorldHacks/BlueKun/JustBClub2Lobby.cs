@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonSearcher;
@@ -16,15 +14,16 @@ using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VRC.Core;
 using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 {
-    #region Imports
-
-    #endregion Imports
+    // TODO: Update the patron bypass with the new system.
 
     internal class JustBClub2Lobby : AstroEvents
     {
@@ -38,24 +37,140 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         {
             if (world == null) return;
 
-
             if (world.id.Equals(WorldIds.JustBClub2Lobby) || world.id.Equals(WorldIds.JustBClub2))
             {
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("IsOnGround");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_CheckLocation");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("CheckIfLocalPlayerIsInRange");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EndConvo");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__GetAnon");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__ResetRoom");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Resize");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetOccupantsCount");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateLists");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Seek");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetLock");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_Init");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_RegsiterAdapter");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnInteraction");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("RequestSerialization");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__ChangeVolume");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__GetGlassType");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__GetHitType");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__GetTargetType");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__Log");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__MainMat");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__OnPlayerAssigned");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__Press");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__PressTo");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterMimicButton");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterObjectAssigner");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterSlowObjectSyncUpdate");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterSnailUpdate");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterSubscription");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__RegisterUdonSharpEventReceiverWithPriority");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetBedroom");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetInteractable");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetMasterScript");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__SetTV");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__TryPlayDefaultSongForArea");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__Unique");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__UnregisterSubscription");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0__UpdateButtonTo");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_GetBallSpawn");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_GetCup");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_GetPlayerColor");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_ItsYourTurn");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_ResetGlassesIfOwner");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_SetActivePlayerColor");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("__0_SetColor");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_AssignRoom");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Cycle");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_DestroySpawn");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Disable");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_DisableCans");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_DisableLayoutGroup");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_DisableObjects");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EnableAnimator");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EnableAudio");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EnableAudioSource");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetBoardSize");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetGameState");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Init");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_InitAreas");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_InitDesktop");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_OnDelayRequestSerialization");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_OnDelayUpdateAssignment");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_OneHandedMode");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_OnOwnerSet");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_OnVideoPlayerReady");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Page");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_PlayParam");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_PlayRandom");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Press");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Rain");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_ReEnableIsKinematic");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_RegisterMimicButtonWithOriginal");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_RequestSync");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Respawn");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_SetColor");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_SetJoinNotificationActiveTrue");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_SetShowerParam");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Show");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Snow");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_SyncGlass");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_ToggleColliders");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_ToggleMaxPerformance");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_ToggleNPCParam");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TogglePerformanceUi");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TogglePickupable");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TryDisableVipOnlyToggleButtons");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvLoading");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvLoadingEnd");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvMediaChange");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvMediaStart");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvPlay");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_TvReady");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UnMute");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateButton");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateButtons");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateFlairAndPlayerList");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateGameState");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_UpdateMarkerObjects");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Video");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_WalkAway");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Check");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("CheckForceRefresh");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("EndTargetLocalPlayer");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("get_IsSad");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Init");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("InitPrefab");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("IsReady");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Refresh");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("Respawn");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("SetAdapterBool");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("SetAdapterFloat");
 
-                UnityDestroyBlock.AddBlock("Udon 3rd Party/Decoder_Debug");
-                UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system 
+
+                UnityDestroyBlock.AddBlock("Udon 3rd Party");
+                UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system
                 UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
-                BlockPatronProcessor = true;
+                //BlockPatronProcessor = true;
                 _ = MelonCoroutines.Start(ForcePatronReader());
                 _ = MelonCoroutines.Start(ForceEnableRenderCamera());
                 HasSubscribed = true;
+                InterceptUdonCustomEvent = true;
                 isCurrentWorld = true;
-
             }
         }
 
-
         private static bool _HasSubscribed = false;
+
         private static bool HasSubscribed
         {
             get => _HasSubscribed;
@@ -65,25 +180,39 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUnityLog += OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent += Udon_SendCustomEvent;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUnityLog -= OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent -= Udon_SendCustomEvent;
-
                     }
                 }
                 _HasSubscribed = value;
             }
         }
+        private static bool _InterceptUdonCustomEvent = false;
 
+        private static bool InterceptUdonCustomEvent
+        {
+            get => _InterceptUdonCustomEvent;
+            set
+            {
+                if (_InterceptUdonCustomEvent != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.Udon_SendCustomEvent += Udon_SendCustomEvent;
+                    }
+                    else
+                    {
+                        ClientEventActions.Udon_SendCustomEvent -= Udon_SendCustomEvent;
+                    }
+                }
+                _InterceptUdonCustomEvent = value;
+            }
+        }
         #region World Paths
 
         private static GameObject _Special;
@@ -100,6 +229,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 return _Special;
             }
         }
+
         private static GameObject _Udon_third_Party;
 
         internal static GameObject Udon_third_Party
@@ -114,38 +244,22 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 return _Udon_third_Party;
             }
         }
-        private static GameObject _Decoder_Debug;
 
-        internal static GameObject Decoder_Debug
+        private static GameObject _ImageReader;
+
+        internal static GameObject ImageReader
         {
             get
             {
                 if (!isCurrentWorld) return null;
                 if (Udon_third_Party == null) return null;
-                if (_Decoder_Debug == null)
+                if (_ImageReader == null)
                 {
-                    return _Decoder_Debug = Udon_third_Party.FindObject("Decoder_Debug");
+                    return _ImageReader = Udon_third_Party.transform.FindObject("New avatar image reader (TMP)").gameObject;
                 }
-                return _Decoder_Debug;
+                return _ImageReader;
             }
         }
-
-        private static GameObject _ReadRenderTexture;
-
-        internal static GameObject ReadRenderTexture
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Decoder_Debug == null) return null;
-                if (_ReadRenderTexture == null)
-                {
-                    return _ReadRenderTexture = Decoder_Debug.transform.FindObject("ReadRenderTexture").gameObject;
-                }
-                return _ReadRenderTexture;
-            }
-        }
-
 
         private static GameObject _Cancer_Spawn;
 
@@ -172,24 +286,20 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Decoder_Debug == null) return null;
+                if (ImageReader == null) return null;
                 else
                 {
-                    Decoder_Debug.SetActive(true);
-                }
-                if (ReadRenderTexture == null) return null;
-                else
-                {
-                    ReadRenderTexture.SetActive(true);
+                    ImageReader.SetActive(true);
                 }
 
                 if (_RenderCameraReader == null)
                 {
-                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader2>(ReadRenderTexture);
+                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader2>(ImageReader);
                 }
                 return _RenderCameraReader;
             }
         }
+
         private static BClub2PatronReader _PatronSystemReader;
 
         internal static BClub2PatronReader PatronSystemReader
@@ -206,7 +316,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 return _PatronSystemReader;
             }
         }
-
 
         #region Udon Behaviours Cached and other random stuff
 
@@ -254,6 +363,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 return _ProcessPatrons;
             }
         }
+
         private static UdonBehaviour_Cached _ProcessPatronsTest;
 
         internal static UdonBehaviour_Cached ProcessPatronsTest
@@ -269,21 +379,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-
-        private static UdonBehaviour_Cached _ReadPictureStep;
-
-        internal static UdonBehaviour_Cached ReadPictureStep
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_ReadPictureStep == null)
-                {
-                    return _ReadPictureStep = UdonSearch.FindUdonEvent("ReadRenderTexture", "ReadPictureStep");
-                }
-                return _ReadPictureStep;
-            }
-        }
         //private static UdonBehaviour_Cached _EjectNonVips;
 
         //internal static UdonBehaviour_Cached EjectNonVips
@@ -385,12 +480,10 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         //                TeleportToBedroomOutside7.Remove_UdonFirewall_Rule();
         //            }
 
-
         //            _BlockVIPRoom_Kick = value;
         //        }
         //    }
         //}
-        
 
         #endregion Udon Behaviours Cached and other random stuff
 
@@ -407,7 +500,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         private static object RainbowSpam_CancellationToken;
 
         internal static QMNestedGridMenu BClubExploitsPage;
-
 
         private static QMToggleButton ToggleRainbowBtn;
         private static QMToggleButton ToggleMoanSpamBtn;
@@ -432,17 +524,13 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     IsMoanSpamEnabled = false;
                     IsFallSpamEnabled = false;
                     _isLocalPlayerSupporter = false;
-
-                   // Bells.Clear();
-                   // Chairs.Clear();
+                    InterceptUdonCustomEvent = false;
+                    // Bells.Clear();
+                    // Chairs.Clear();
                     ColorActions.Clear();
-
-                  
-
                     _MoanSpamBehaviour = null;
                     _FallSpamBehaviour = null;
                     _ProcessPatrons = null;
-                    _ReadPictureStep = null;
                     _RenderCameraReader = null;
                     MoanSpam_CancellationToken = null;
                     FallSpam_CancellationToken = null;
@@ -452,7 +540,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 }
             }
         }
-
 
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
 
@@ -473,9 +560,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 _isLocalPlayerSupporter = value;
             }
         }
-
-
- 
 
         internal static bool IsRainbowEnabled
         {
@@ -576,27 +660,49 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         #endregion FallSpam
 
         private static bool _BlockPatronProcessor = false;
+
         internal static bool BlockPatronProcessor
         {
             get => _BlockPatronProcessor;
             set
             {
-                if(_BlockPatronProcessor != value)
+                if (_BlockPatronProcessor != value)
                 {
-                    if(value)
+                    if (value)
                     {
-                        GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatrons", false, false, true);
-                        GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatronsTest", false, false, true);
+                        //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatrons", false, false, true);
+                        //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatronsTest", false, false, true);
+                        //GameObject_RPC_Firewall.EditRule("Patreon", "__0__ProcessPatrons", false, false, true);
+                        GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF16", false, false, true);
+                        GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF8", false, false, true);
 
+                        
                     }
                     else
                     {
-                        GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatrons");
-                        GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatronsTest");
+                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatrons");
+                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatronsTest");
+                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "__0__ProcessPatrons");
+                        GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF16");
+                        GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF8");
 
                     }
                 }
                 _BlockPatronProcessor = value;
+            }
+        }
+        private static UdonBehaviour_Cached _DecodeStep;
+
+        internal static UdonBehaviour_Cached DecodeStep
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_DecodeStep == null)
+                {
+                    return _DecodeStep = UdonSearch.FindUdonEvent("New avatar image reader (TMP)", "_DecodeStepUTF16");
+                }
+                return _DecodeStep;
             }
         }
 
@@ -609,62 +715,15 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
                     return;
                 }
-                if (ProcessPatrons == null)
-                {
-                    Log.Warn($"Unable to Force Elite Tier due to ProcessPatrons Event being Null!");
-                    return;
-                }
+
                 
-
-                // First let's edit the results of the rendercamera.
-
-                // Split the results.
-                bool HasBeenModified = false;
-                var result = RenderCameraReader.outputString.ReadLines().ToList();
-                if (result != null && result.Count != 0)
-                {
-                    if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
-                    {
-                        Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                        result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
-                        HasBeenModified = true;
-                    }
-                    if (GameInstances.LocalPlayer != null)
-                    {
-                        if (!result.Contains(GameInstances.LocalPlayer.displayName))
-                        {
-                            Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                            result.Insert(1, GameInstances.LocalPlayer.displayName);
-                            HasBeenModified = true;
-                        }
-                    }
-                }
-
-                if (HasBeenModified)
-                {
-                    // if that's so, let's force a new reading.
-
-                    // First replace the output with the modified one
-                    RenderCameraReader.outputString = string.Join("\n", result);
-                    MiscUtils.DelayFunction(3f, () =>
-                    {
-                        BlockPatronProcessor = false;
-
-                        //Secondly invoke again the Reading event.
-                        ProcessPatrons.InvokeBehaviour();
-                        //ProcessPatronsTest.InvokeBehaviour();
-
-                    });
-                }
             }
             catch { } // SHUT UP
         }
 
-
         internal static void InitButtons(QMGridTab main)
         {
             BClubExploitsPage = new QMNestedGridMenu(main, "BClub 2 Lobby Exploits", "BClub Exploits");
-
 
             // Freeze Locks
 
@@ -679,12 +738,11 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             ToggleFallSpamBtn.SetToggleState(IsFallSpamEnabled, false);
 
             // VIP
-
         }
 
         internal static void OnBlockedDestroy(string path)
         {
-            if(path == "/Udon 3rd Party/Decoder_Debug")
+            if (path == "Udon 3rd Party/New avatar image reader (TMP)")
             {
                 UnityDestroyBlock.MonitorDestroyingEvent = false;
             }
@@ -700,11 +758,10 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     BClubExploitsPage.SetTextColor(Color.green);
                 }
 
-
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 var VIPPath = Finder.Find("Just B Club 2/Bedroom/Udon Bedroom/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
-                foreach(var item in VIPPath.Get_Childs())
+                foreach (var item in VIPPath.Get_Childs())
                 {
                     if (item != null)
                     {
@@ -737,7 +794,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             {
                                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -1010);
                             }
-
                         }
                     }
                 }
@@ -773,13 +829,9 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     Cancer_Spawn.DestroyMeLocal();
                 }
 
-
                 if (isLocalPlayerSupporter)
                 {
-                    MiscUtils.DelayFunction(4f, () =>
-                    {
-                        Decoder_Debug.DestroyMeLocal(true);
-                    });
+                    //
                 }
             }
             else
@@ -816,7 +868,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     {
                         isLocalPlayerSupporter = false;
                     }
-
                 }
             }
         }
@@ -856,7 +907,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             FallSpam_CancellationToken = MelonCoroutines.Start(FallSpamLoop());
         }
 
-
         private static IEnumerator MoanSpamLoop()
         {
             for (; ; )
@@ -887,14 +937,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-        
-
-        
-        
-        
-        
-        
-
         private static void OnRoomLeft()
         {
             if (isCurrentWorld)
@@ -905,7 +947,6 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-        
         //private static IEnumerator BypassElevator()
         //{
         //    Log.Debug("Elevator Bypass Started", System.Drawing.Color.Aquamarine);
@@ -944,22 +985,16 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             if (!isCurrentWorld) return;
             if (item == null) return;
             if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
-            if (item.name.Equals("ReadRenderTexture") && EventName.Equals("ReadPictureStep"))
+            if (item.name.Equals("New avatar image reader (TMP)"))
             {
-                ForceEliteTier();
+                RenderCameraReader.HijackUdon();
             }
-
-            if (item.name.Equals("Patreon") && EventName.Equals("_ProcessPatrons"))
+            if(item.name.Equals("Patreon"))
             {
-                ForceEliteTier();
-            }
-            if (item.name.Equals("Patreon") && EventName.Equals("_ProcessPatronsTest"))
-            {
-                ForceEliteTier();
+                PatronSystemReader.HijackUdon();
             }
 
         }
-
 
         private static IEnumerator ForcePatronReader()
         {
@@ -974,9 +1009,5 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             Log.Debug("RenderCamera Reader Installed!");
             yield break;
         }
-
-
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
+﻿
+namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using QuickMenuAPI;
     using UnityEngine;
@@ -7,15 +8,15 @@
     using VRC.UI.Elements;
     using VRC.UI.Elements.Menus;
     using Color = System.Drawing.Color;
-
+    
     internal static class QuickMenuTools
     {
         //Templates and references
         internal static bool SelectSelf = false;
         private static Transform _UnscaledUI;
+        private static Transform _Application;
 
         private static Transform _UserInterface;
-        private static BoxCollider _QuickMenuBackground = null;
         private static Transform SingleButtonReference = null;
         private static Vector3? _SingleButtonTemplatePosition;
         private static Transform _ToggleButtonTemplate;
@@ -25,7 +26,7 @@
         private static Transform _NestedPages;
         private static Transform _MenuDashboard_ButtonsSection;
         private static Transform _TabButtonTemplate;
-        private static Transform _QuickMenuTransform;
+        
         private static Transform _Header_DashboardTemplate;
         private static Transform _SliderTemplate;
         private static Transform _ToolTipPanel;
@@ -50,9 +51,9 @@
 
         private static UIPage _UIPageTemplate_Right;
         private static UIPage _UIPageTemplate_Left;
-        private static Wing WingmenuInstance = null;
-        private static Wing _Wing_Right;
-        private static Wing _Wing_Left;
+        private static WingMenu WingmenuInstance = null;
+        private static WingMenu _Wing_Right;
+        private static WingMenu _Wing_Left;
         private static GameObject _WingButtonTemplate_Right;
         private static GameObject _WingButtonTemplate_Left;
         private static GameObject _WingPageButtonTemplate;
@@ -63,41 +64,40 @@
         private static UIPage _QuickMenuPage;
 
         private static GameObject _DebugPanelTemplate;
-
-        internal static Transform QuickMenuTransform
+        private static Transform _Canvas_QuickMenu;
+        internal static Transform Canvas_QuickMenu
         {
             get
             {
                 if (UserInterface == null) return null;
-                if (_QuickMenuTransform == null) return _QuickMenuTransform = UserInterface.Find("Canvas_QuickMenu(Clone)");
-
-                return _QuickMenuTransform;
+                if (_Canvas_QuickMenu == null)  _Canvas_QuickMenu = UserInterface.Find("Canvas_QuickMenu(Clone)");
+                return _Canvas_QuickMenu;
             }
         }
-
+        private static Transform _Canvas_MainMenu;
+        internal static Transform Canvas_MainMenu
+        {
+            get
+            {
+                if (UserInterface == null) return null;
+                if (_Canvas_MainMenu == null) _Canvas_MainMenu = UserInterface.Find("Canvas_MainMenu(Clone)");
+                return _Canvas_MainMenu;
+            }
+        }
         internal static QuickMenu QuickMenuInstance
         {
             get
             {
+                if (Canvas_QuickMenu == null) return null;
                 if (_QuickMenuInstance == null)
                 {
-                    var test = UnityUtils.FindInactiveObjectInActiveRoot("UserInterface/Canvas_QuickMenu(Clone)")?.GetComponent<QuickMenu>();
+                    var test = Canvas_QuickMenu.GetComponent<QuickMenu>();
                     if (test != null) Log.Debug("Found QuickMenu Instance!", Color.Chartreuse);
 
                     return _QuickMenuInstance = test;
                 }
 
                 return _QuickMenuInstance;
-            }
-        }
-
-        internal static BoxCollider QuickMenuBackground
-        {
-            get
-            {
-                if (_QuickMenuBackground == null)
-                    _QuickMenuBackground = QuickMenuTransform.transform.Find("Container/Button_Worlds").GetComponent<BoxCollider>();
-                return _QuickMenuBackground;
             }
         }
 
@@ -111,7 +111,7 @@
             {
                 if (_SingleButtonTemplate == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Button>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Button button = Buttons[i];
@@ -138,10 +138,19 @@
         {
             get
             {
-                if (_UserInterface == null) return _UserInterface = Finder.Find("UserInterface").transform;
+                if (_UserInterface == null) return _UserInterface = Resources.FindObjectsOfTypeAll<MonoBehaviour1PublicVo0>()[0].gameObject.transform;
                 return _UserInterface;
             }
         }
+        internal static Transform Application
+        {
+            get
+            {
+                if (_Application == null) return _Application = Resources.FindObjectsOfTypeAll<VRC.FeaturePermissionManager>()[0].gameObject.transform;
+                return _Application;
+            }
+        }
+
         internal static Transform UnscaledUI
         {
             get
@@ -263,9 +272,9 @@
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Transform button = Buttons[i];
-                        if (button.name == "Button_ToggleTooltips")
+                        if (button.name == "Button_ShowGroupNameplateBanners")
                         {
-                            Log.Debug("Found ToolTips button!", Color.Chartreuse);
+                            Log.Debug("Found ShowGroupNameplateBanners button!", Color.Chartreuse);
                             return _ToggleButtonTemplate = button;
                         }
                     }
@@ -279,7 +288,7 @@
         {
             get
             {
-                if (QuickMenuTransform == null) return null;
+                if (Canvas_QuickMenu == null) return null;
                 if (_NestedMenuTemplate == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
@@ -288,7 +297,7 @@
                         Transform button = Buttons[i];
                         if (button.name == "Menu_Camera")
                         {
-                            Log.Debug("Found Camera Page!", Color.Chartreuse);
+                            Log.Debug("Found Menu_Camera Page!", Color.Chartreuse);
                             return _NestedMenuTemplate = button;
                         }
                     }
@@ -302,7 +311,7 @@
         {
             get
             {
-                if (QuickMenuTransform == null) return null;
+                if (Canvas_QuickMenu == null) return null;
                 if (_MenuDashboard == null)
                 {
                     var Buttons = QuickMenuInstance.GetComponentsInChildren<Transform>(true);
@@ -325,7 +334,7 @@
         {
             get
             {
-                if (QuickMenuTransform == null) return null;
+                if (Canvas_QuickMenu == null) return null;
                 if (_MenuDashboard_VerticalLayoutGroup == null)
                 {
                     return _MenuDashboard_VerticalLayoutGroup = MenuDashboard.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
@@ -342,16 +351,8 @@
             {
                 if (_NestedPages == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        Transform button = Buttons[i];
-                        if (button.name == "QMParent")
-                        {
-                            return _NestedPages = button;
-                            break;
-                        }
-                    }
+                    _NestedPages = NestedMenuTemplate.transform.parent;
+                    
                 }
 
                 return _NestedPages;
@@ -363,7 +364,7 @@
         {
             get
             {
-                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = QuickMenuTransform.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = Canvas_QuickMenu.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
                 return _SelectedUserMenuQM;
             }
         }
@@ -418,7 +419,7 @@
             {
                 if (_DebugPanelTemplate == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<DebugInfoPanel>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<DebugInfoPanel>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         DebugInfoPanel button = Buttons[i];
@@ -440,7 +441,7 @@
             {
                 if (_WingMenuStateControllerRight == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<MenuStateController>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         MenuStateController button = Buttons[i];
@@ -478,16 +479,16 @@
             }
         }
 
-        internal static Wing Wing_Left
+        internal static WingMenu Wing_Left
         {
             get
             {
                 if (_Wing_Left == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<WingMenu>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
-                        Wing button = Buttons[i];
+                        WingMenu button = Buttons[i];
                         if (button.name == "Wing_Left")
                         {
                             _Wing_Left = button;
@@ -500,16 +501,16 @@
             }
         }
 
-        internal static Wing Wing_Right
+        internal static WingMenu Wing_Right
         {
             get
             {
                 if (_Wing_Right == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Wing>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<WingMenu>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
-                        Wing button = Buttons[i];
+                        WingMenu button = Buttons[i];
                         if (button.name == "Wing_Right")
                         {
                             _Wing_Right = button;
@@ -528,7 +529,7 @@
             {
                 if (_QuickMenuController == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<MenuStateController>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<MenuStateController>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         MenuStateController button = Buttons[i];
@@ -550,7 +551,7 @@
             {
                 if (_Carousel_Banners == null)
                 {
-                    var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Transforms = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Transforms.Count; i++)
                     {
                         Transform transform = Transforms[i];
@@ -572,7 +573,7 @@
             {
                 if (_Header_DashboardTemplate == null)
                 {
-                    var Transforms = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Transforms = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Transforms.Count; i++)
                     {
                         Transform transform = Transforms[i];
@@ -591,7 +592,7 @@
             {
                 if (_WingPageButtonTemplate == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Button>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Button>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Button button = Buttons[i];
@@ -684,7 +685,7 @@
             {
                 if (_SelectedUserPage_Remote == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Transform button = Buttons[i];
@@ -707,7 +708,7 @@
             {
                 if (_SelectedUserPage_Local == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Transform button = Buttons[i];
@@ -730,7 +731,7 @@
             {
                 if (_SelectedUserPage_ButtonsSection == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Transform button = Buttons[i];
@@ -752,7 +753,7 @@
             {
                 if (_MenuDashboard_ButtonsSection == null)
                 {
-                    var Buttons = QuickMenuTransform.GetComponentsInChildren<Transform>(true);
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<Transform>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Transform button = Buttons[i];

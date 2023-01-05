@@ -50,12 +50,13 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             if (player == null || !player.prop_VRCPlayerApi_0.isLocal) yield break;
            // Log.Debug("Player is Local!");
            // Log.Debug("Hooking into Avatar creation callback system..");
-            player.field_Private_VRCAvatarManager_0.field_Private_AvatarCreationCallback_0 += new Action<GameObject, VRC_AvatarDescriptor, bool>(OnLocalPlayerAvatarCreated);
+           // field_Private_AvatarCreationCallback_0
+            player.field_Private_VRCAvatarManager_0.field_Private_Action_2_GameObject_VRC_AvatarDescriptor_0 += new Action<GameObject, VRC_AvatarDescriptor>(OnLocalPlayerAvatarCreated);
             var avatar = player.transform.FindObject("ForwardDirection/Avatar");
             if (avatar != null)
             {
               //  Log.Debug("Starting Coroutine on avatar..");
-                OnLocalPlayerAvatarCreated(avatar.gameObject, null, false);
+                OnLocalPlayerAvatarCreated(avatar.gameObject, null);
 
             }
         }
@@ -96,7 +97,7 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
         }
 
 
-        private static void OnLocalPlayerAvatarCreated(GameObject go, VRC_AvatarDescriptor descriptor, bool unknown)
+        private static void OnLocalPlayerAvatarCreated(GameObject go, VRC_AvatarDescriptor descriptor)
         {
             if(go == null)
             {
@@ -104,7 +105,6 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
             }
             if (go != null)
             {
-                ClientEventActions.OnLocalAvatarLoaded.SafetyRaise(go);
                 if (go.GetComponent<VRCAvatarDescriptor>() != null)
                 {
                     //Log.Debug("Initializing Avatar Scaling support....");
@@ -116,6 +116,8 @@ namespace AstroClient.LocalAvatar.ScaleAdjuster
                     AddSettingsToPlayerExpressions = false;
                     Log.Write("Current avatar is SDK2, ignoring rescaling support");
                 }
+
+                ClientEventActions.OnLocalAvatarLoaded.SafetyRaise(go);
             }
         }
 

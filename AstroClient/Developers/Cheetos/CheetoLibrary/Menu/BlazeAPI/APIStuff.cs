@@ -61,7 +61,7 @@ namespace Apollo.Utils.API
         {
             if (SingleButtonReference == null)
             {
-                SingleButtonReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Respawn").gameObject;
+                SingleButtonReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions/Button_Respawn").gameObject;
             }
             return SingleButtonReference;
         }
@@ -70,7 +70,7 @@ namespace Apollo.Utils.API
         {
             if (ToggleButtonReference == null)
             {
-                ToggleButtonReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo").gameObject;
+                ToggleButtonReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo").gameObject;
             }
             return ToggleButtonReference;
         }
@@ -79,7 +79,7 @@ namespace Apollo.Utils.API
         {
             if (ButtonGroupReference == null)
             {
-                ButtonGroupReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions").gameObject;
+                ButtonGroupReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickActions").gameObject;
             }
             return ButtonGroupReference;
         }
@@ -88,7 +88,7 @@ namespace Apollo.Utils.API
         {
             if (ButtonGroupHeaderReference == null)
             {
-                ButtonGroupHeaderReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions").gameObject;
+                ButtonGroupHeaderReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickActions").gameObject;
             }
             return ButtonGroupHeaderReference;
         }
@@ -106,7 +106,7 @@ namespace Apollo.Utils.API
         {
             if (SliderReference == null)
             {
-                SliderReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_AudioSettings/Content/Audio/VolumeSlider_Master").gameObject;
+                SliderReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_AudioSettings/Content/Audio/VolumeSlider_Master").gameObject;
             }
             return SliderReference;
         }
@@ -115,7 +115,7 @@ namespace Apollo.Utils.API
         {
             if (MenuPageReference == null)
             {
-                MenuPageReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard").gameObject;
+                MenuPageReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Dashboard").gameObject;
             }
             return MenuPageReference;
         }
@@ -124,7 +124,7 @@ namespace Apollo.Utils.API
         {
             if (MenuTabReference == null)
             {
-                MenuTabReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject;
+                MenuTabReference = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings").gameObject;
             }
             return MenuTabReference;
         }
@@ -133,7 +133,7 @@ namespace Apollo.Utils.API
         {
             if (onIconSprite == null)
             {
-                onIconSprite = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
+                onIconSprite = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Notifications/Panel_NoNotifications_Message/Icon").GetComponent<Image>().sprite;
             }
             return onIconSprite;
         }
@@ -142,7 +142,7 @@ namespace Apollo.Utils.API
         {
             if (offIconSprite == null)
             {
-                offIconSprite = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
+                offIconSprite = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_Settings/Panel_QM_ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UI_Elements_Row_1/Button_ToggleQMInfo/Icon_Off").GetComponent<Image>().sprite;
             }
             return offIconSprite;
         }
@@ -151,7 +151,7 @@ namespace Apollo.Utils.API
         {
             if (personIconSprite == null)
             {
-                personIconSprite = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile/Container/Icon").gameObject.GetComponent<Image>().sprite;
+                personIconSprite = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile/Container/Icon").gameObject.GetComponent<Image>().sprite;
             }
             return personIconSprite;
         }

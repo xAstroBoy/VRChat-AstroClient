@@ -1,4 +1,5 @@
 ﻿using AstroClient.ClientActions;
+using AstroClient.xAstroBoy;
 using VRC.SDKBase;
 using VRC.SDKBase.Validation.Performance;
 
@@ -121,20 +122,20 @@ namespace AstroClient.PlayerList
                 if (localPlayerEntry != null)
                     return;
 
-                GameObject template = Object.Instantiate(PlayerList_Constants.playerListLayout.transform.Find("Template").gameObject, PlayerList_Constants.playerListLayout.transform);
+                GameObject template = Object.Instantiate(PlayerList_Constants.playerListLayout.transform.FindObject("Template").gameObject, PlayerList_Constants.playerListLayout.transform);
                 template.SetActive(true);
 
-                LeftSidePlayerEntry leftSidePlayerEntry = EntryBase.CreateInstance<LeftSidePlayerEntry>(template.transform.Find("LeftPart").gameObject);
-                EntryBase.CreateInstance<LocalPlayerEntry>(template.transform.Find("RightPart").gameObject);
+                LeftSidePlayerEntry leftSidePlayerEntry = EntryBase.CreateInstance<LeftSidePlayerEntry>(template.transform.FindObject("LeftPart").gameObject);
+                EntryBase.CreateInstance<LocalPlayerEntry>(template.transform.FindObject("RightPart").gameObject);
                 AddPlayerLeftPairEntry(EntryBase.CreateInstance<PlayerLeftPairEntry>(template, new object[] { leftSidePlayerEntry, localPlayerEntry }));
             }
             else
             {
-                GameObject template = Object.Instantiate(PlayerList_Constants.playerListLayout.transform.Find("Template").gameObject, PlayerList_Constants.playerListLayout.transform);
+                GameObject template = Object.Instantiate(PlayerList_Constants.playerListLayout.transform.FindObject("Template").gameObject, PlayerList_Constants.playerListLayout.transform);
                 template.SetActive(true);
 
-                LeftSidePlayerEntry leftSidePlayerEntry = EntryBase.CreateInstance<LeftSidePlayerEntry>(template.transform.Find("LeftPart").gameObject);
-                PlayerEntry playerEntry = EntryBase.CreateInstance<PlayerEntry>(template.transform.Find("RightPart").gameObject, new object[] { player });
+                LeftSidePlayerEntry leftSidePlayerEntry = EntryBase.CreateInstance<LeftSidePlayerEntry>(template.transform.FindObject("LeftPart").gameObject);
+                PlayerEntry playerEntry = EntryBase.CreateInstance<PlayerEntry>(template.transform.FindObject("RightPart").gameObject, new object[] { player });
                 AddPlayerLeftPairEntry(EntryBase.CreateInstance<PlayerLeftPairEntry>(template, new object[] { leftSidePlayerEntry, playerEntry }));
             }
         }
@@ -314,17 +315,30 @@ namespace AstroClient.PlayerList
         public static void AddGeneralInfoEntries()
         {
             Log.Write("Adding List Entries...");
-            AddGeneralInfoEntry(EntryBase.CreateInstance<PlayerListHeaderEntry>(PlayerList_Constants.playerListLayout.transform.Find("Header").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<RoomTimeEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RoomTime").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime12HrEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("SystemTime12Hr").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime24HrEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("SystemTime24Hr").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<GameVersionEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("GameVersion").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<CoordinatePositionEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("CoordinatePosition").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldNameEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("WorldName").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldAuthorEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("WorldAuthor").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceMasterEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("InstanceMaster").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceCreatorEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("InstanceCreator").gameObject, includeConfig: true));
-            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldInfoEntry>(PlayerList_Constants.generalInfoLayout.transform.Find("RiskyFuncAllowed").gameObject, includeConfig: true));
+
+            Log.Debug("Adding PlayerList Header.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<PlayerListHeaderEntry>(PlayerList_Constants.playerListLayout.transform.FindObject("Header").gameObject, includeConfig: true));
+
+            Log.Debug("Adding PlayerList RoomTime.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<RoomTimeEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("RoomTime").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList SystemTime12Hr.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime12HrEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("SystemTime12Hr").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList SystemTime24Hr.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<SystemTime24HrEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("SystemTime24Hr").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList GameVersion.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<GameVersionEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("GameVersion").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList CoordinatePosition.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<CoordinatePositionEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("CoordinatePosition").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList WorldName.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldNameEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("WorldName").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList WorldAuthor.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldAuthorEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("WorldAuthor").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList InstanceMaster.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceMasterEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("InstanceMaster").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList InstanceCreator.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<InstanceCreatorEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("InstanceCreator").gameObject, includeConfig: true));
+            Log.Debug("Adding PlayerList WorldInfo.");
+            AddGeneralInfoEntry(EntryBase.CreateInstance<WorldInfoEntry>(PlayerList_Constants.generalInfoLayout.transform.FindObject("RiskyFuncAllowed").gameObject, includeConfig: true));
         }
         public static void AddEntry(EntryBase entry)
         {

@@ -1,3 +1,4 @@
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 
 namespace AstroClient.AstroMonos.Components.Custom.Items
@@ -143,7 +144,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
             }
             Tweaker_Object.SetObjectToEdit(collision.transform.gameObject, true);
-            PopupUtils.QueHudMessage($"<color=#FFA500>Set Object {collision.transform.gameObject.name} In Item Tweaker</color>");
+            NewHudNotifier.WriteHudMessage($"<color=#FFA500>Set Object {collision.transform.gameObject.name} In Item Tweaker</color>");
             Activated = false;
         }
 

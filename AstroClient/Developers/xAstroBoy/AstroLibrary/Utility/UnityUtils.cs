@@ -29,9 +29,26 @@ namespace AstroClient.xAstroBoy.Utility
             }
 
             // White
-            image.color = new Color(1, 1, 1, 1);
+            MiscUtils.DelayFunction(0.5f, () =>
+            {
+                image.color = new Color(1, 1, 1, 1);
+            });
         }
 
+        public static void MakeBackgroundMoreSolid(this UIWidgets.ImageAdvanced image)
+        {
+            var StyleElement = image.GetComponent<VRC.UI.Core.Styles.StyleElement>();
+            if (StyleElement != null)
+            {
+                UnityEngine.Object.DestroyImmediate(StyleElement);
+            }
+
+            // White
+            MiscUtils.DelayFunction(0.5f, () =>
+            {
+                image.color = new Color(1, 1, 1, 1);
+            });
+        }
 
     }
 }

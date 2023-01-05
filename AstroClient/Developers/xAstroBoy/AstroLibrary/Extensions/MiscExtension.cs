@@ -1,4 +1,8 @@
 ﻿/// Original Credit to DayOfThePlay
+
+using TMPro;
+using VRC.UI.Elements.Tooltips;
+
 namespace AstroClient.xAstroBoy.Extensions
 {
     #region Imports
@@ -29,21 +33,21 @@ namespace AstroClient.xAstroBoy.Extensions
             return null;
         }
 
-        public static void SetToolTipBasedOnToggle(this UiTooltip tooltip)
-        {
-            UiToggleButton componentInChildren = tooltip.gameObject.GetComponentInChildren<UiToggleButton>();
+        //public static void SetToolTipBasedOnToggle(this UiTooltip tooltip)
+        //{
+        //    UiToggleButton componentInChildren = tooltip.gameObject.GetComponentInChildren<UiToggleButton>();
 
-            if (componentInChildren != null && !string.IsNullOrEmpty(tooltip.GetAlternateText()))
-            {
-                string displayText = (!componentInChildren.field_Public_Boolean_0) ? tooltip.GetAlternateText() : tooltip.GetText();
-                if (TooltipManager.field_Private_Static_Text_0 != null) //Only return type field of text
-                    TooltipManager.Method_Public_Static_Void_String_0(displayText); //Last function to take string parameter
-                if (tooltip.GetToolTip() != null)
-                    tooltip.GetToolTip().text = displayText;
-            }
-        }
+        //    if (componentInChildren != null && !string.IsNullOrEmpty(tooltip.GetAlternateText()))
+        //    {
+        //        string displayText = (!componentInChildren.field_Public_Boolean_0) ? tooltip.GetAlternateText() : tooltip.GetText();
+        //        if (TooltipManager.field_Private_Static_Text_0 != null) //Only return type field of text
+        //            TooltipManager.Method_Public_Static_Void_String_0(displayText); //Last function to take string parameter
+        //        if (tooltip.GetToolTip() != null)
+        //            tooltip.GetToolTip().text = displayText;
+        //    }
+        //}
 
-        public static Text GetToolTip(this UiTooltip Instance) => Instance.field_Public_Text_0;
+        //public static Text GetToolTip(this UiTooltip Instance) => Instance.field_Public_Text_0;
 
         public static string GetText(this UiTooltip Instance) => Instance.field_Public_String_0;
 
@@ -51,7 +55,7 @@ namespace AstroClient.xAstroBoy.Extensions
 
         public static bool GetToggledOn(this UiTooltip Instance) => Instance.field_Private_Boolean_0;
 
-        public static void EnterPortal(this PortalInternal Instance, string WorldID, string InstanceID) => Instance.Method_Private_Void_String_String_PDM_0(WorldID, InstanceID);
+        public static void EnterPortal(this PortalInternal Instance, string WorldID, string InstanceID) => Instance.Method_Private_Void_String_String_TextMeshProUGUI_PDM_0(WorldID, InstanceID, new TextMeshProUGUI());
 
         public static void Start(this IEnumerator e) => MelonCoroutines.Start(e);
 
@@ -156,5 +160,7 @@ namespace AstroClient.xAstroBoy.Extensions
             bool _return = Assembly.GetExecutingAssembly().GetType("Notorious") != null;
             return _return;
         }
+
+
     }
 }

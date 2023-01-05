@@ -44,7 +44,7 @@ public static partial class QM
 			{
 				if (_nestedPages == null)
 				{
-					_nestedPages = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent").transform;
+					_nestedPages = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent").transform;
 					if (_nestedPages == null)
 					{
 						Log.Warn("Failed to find QMParent");
@@ -82,7 +82,7 @@ public static partial class QM
 			{
 				if (_wingButton == null)
 				{
-					_wingButton = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Emotes").transform;;
+					_wingButton = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Emotes").transform;;
 					if (_wingButton == null)
 					{
 						Log.Warn("Failed to find Wing Button");
@@ -113,25 +113,7 @@ public static partial class QM
 			}
 		}
 
-		private static Transform _foldOut;
-		public static Transform FoldOut
-		{
-			get
-			{
-				if (_foldOut == null)
-				{
-					var foldouts = Transform.GetComponentsInChildren<QMFoldout>(true);
-					for (int i = 0; i < foldouts.Count; i++)
-					{
-						QMFoldout foldout = foldouts[i];
-						if (foldout.name == "QM_Foldout_UI_Elements")
-							_foldOut = foldout.transform;
-					}
-				}
 
-				return _foldOut;
-			}
-		}
 
 		private static Transform _gridLayoutGroup;
 		public static Transform GridLayoutGroup
@@ -241,7 +223,7 @@ public static partial class QM
 			{
 				if (_volumeLabel == null)
 				{
-					_volumeLabel = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_AudioSettings/Content/Header_H2").transform;
+					_volumeLabel = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_AudioSettings/Content/Header_H2").transform;
 					if (_volumeLabel == null)
 					{
 						Log.Warn("Failed to find Volume Label");
@@ -259,7 +241,7 @@ public static partial class QM
 			{
 				if (_slider == null)
 				{
-					_slider = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_AudioSettings/Content/Audio/VolumeSlider_World").transform;
+					_slider = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMParent/Menu_AudioSettings/Content/Audio/VolumeSlider_World").transform;
 					if (_slider == null)
 					{
 						Log.Warn("Failed to find Slider");

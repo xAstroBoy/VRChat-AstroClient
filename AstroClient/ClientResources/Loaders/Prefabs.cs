@@ -139,7 +139,7 @@
             {
                 if (_VRJetpack == null)
                 {
-                    _VRJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_twohand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _VRJetpack = Bundles.Jetpacks.LoadAsset_Internal("assets/drivesystem/tbdd_twohand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _VRJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _VRJetpack;
                 }
@@ -158,7 +158,7 @@
             {
                 if (_DesktopJetpack == null)
                 {
-                    _DesktopJetpack = Bundles.JetpacksBundle.LoadAsset_Internal("assets/drivesystem/tbdd_onehand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _DesktopJetpack = Bundles.Jetpacks.LoadAsset_Internal("assets/drivesystem/tbdd_onehand.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
                     _DesktopJetpack.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                     return _DesktopJetpack;
                 }

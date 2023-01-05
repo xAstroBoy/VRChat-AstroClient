@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.AstroMonos.Components.Player.Movement
 {
@@ -279,7 +281,7 @@ namespace AstroClient.AstroMonos.Components.Player.Movement
                 if (JumpImpulse == 0f)
                 {
                     Log.Warn("This World has Jump disabled by default.");
-                    PopupUtils.QueHudMessage($"This World has Jump disabled by default!");
+                    NewHudNotifier.WriteHudMessage($"This World has Jump disabled by default!");
                     JumpImpulse = 4f;
                 }
             }

@@ -98,27 +98,33 @@
         }
 
 
-        public static GameObject FindObject(this GameObject obj, string path)
+        public static GameObject FindObject(this GameObject gameobject, string path, bool DontWarn = false)
         {
-            if (obj != null)
+            if (gameobject == null) return null;
+            var obj = gameobject.transform.Find(path);
+            if (obj == null)
             {
-                var result = obj.transform.FindObject(path);
-                if (result != null)
+                if (!DontWarn)
                 {
-                    return result.gameObject;
+                    Log.Warn($"[WARNING (FindObject) ]  Transform {gameobject.name} Doesnt have a object in path [ {path} ] !");
                 }
+                return null;
             }
-            return null;
+
+            return obj.gameObject;
         }
 
 
-        public static Transform FindObject(this Transform transform, string path)
+        public static Transform FindObject(this Transform transform, string path, bool DontWarn = false)
         {
-            Transform obj = transform.Find(path);
-
+            if (transform == null) return null;
+            var obj = transform.Find(path);
             if (obj == null)
             {
-                Log.Warn($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+                if (!DontWarn)
+                {
+                    Log.Warn($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+                }
                 return null;
             }
 

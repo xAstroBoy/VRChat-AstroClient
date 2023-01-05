@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.Tools.Skybox.SkyboxClasses;
 using AstroClient.Tools.Skybox.SkyboxStructs;
 using AstroClient.Tools.TextureTools;
@@ -103,7 +105,7 @@ namespace AstroClient.Tools.Skybox
                 Log.Debug("This Skybox can be Exported!");
                 if (Bools.IsDeveloper)
                 {
-                    PopupUtils.QueHudMessage("This Skybox can Be Exported!".RainbowRichText());
+                    NewHudNotifier.WriteHudMessage("<rainb>This Skybox can Be Exported!</rainb>");
                 }
             }
 

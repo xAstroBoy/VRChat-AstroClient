@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Experiments
+﻿using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+
+namespace AstroClient.Experiments
 {
     #region Usings
 
@@ -21,7 +23,7 @@
             {
                 if (_UserCamera == null)
                 {
-                    var camerapath1 = Finder.Find("_Application/TrackingVolume/PlayerObjects/UserCamera").transform;
+                    var camerapath1 = Finder.Find($"{QuickMenuTools.Application.name}/TrackingVolume/PlayerObjects/UserCamera").transform;
                     if (camerapath1 != null)
                     {
                         return _UserCamera = camerapath1;
@@ -73,7 +75,7 @@
                 }
                 else
                 {
-                    var item = Finder.Find("_Application/TrackingVolume/PlayerObjects").transform;
+                    var item = Finder.Find($"{QuickMenuTools.Application.name}/TrackingVolume/PlayerObjects").transform;
                     if (item != null)
                     {
                         return _UserCameraParent = item;

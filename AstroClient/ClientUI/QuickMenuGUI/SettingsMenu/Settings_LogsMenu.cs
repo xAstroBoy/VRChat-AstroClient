@@ -42,6 +42,9 @@ namespace AstroClient.ClientUI.QuickMenuGUI.SettingsMenu
             QMToggleButton UdonCustomEventsToggle = new QMToggleButton(sub, "Udon Custom Events Log", () => { ConfigManager.General.LogUdonCustomEvents = true; }, () => { ConfigManager.General.LogUdonCustomEvents = false; }, "Log Udon Custom Events to the console");
             UdonCustomEventsToggle.SetToggleState(ConfigManager.General.LogUdonCustomEvents, false);
 
+            QMToggleButton UdonCustomRPCToggle = new QMToggleButton(sub, "Udon Custom Program RPC Log", () => { ConfigManager.General.LogUdonProgramRPCvents = true; }, () => { ConfigManager.General.LogUdonProgramRPCvents = false; }, "Log Udon Custom RPC to the console");
+            UdonCustomRPCToggle.SetToggleState(ConfigManager.General.LogUdonProgramRPCvents, false);
+
             QMToggleButton UnityLogsToggle = new QMToggleButton(sub, "Unity Messages", () => { ConfigManager.General.LogUnityMessages = true; }, () => { ConfigManager.General.LogUnityMessages = false; }, "Log Unity Messages to the console");
             UnityLogsToggle.SetToggleState(ConfigManager.General.LogUnityMessages, false);
 

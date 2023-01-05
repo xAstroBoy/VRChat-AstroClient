@@ -12,7 +12,6 @@ namespace AstroClient.Tools.World
     using System.Collections.Generic;
     using System.Linq;
     using Experiments;
-    using FavCat.Database.Stored;
     using UdonSearcher;
     using UnityEngine;
     using VRC;
@@ -325,7 +324,7 @@ namespace AstroClient.Tools.World
                     i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
                     i.field_Internal_ApiAvatar_0.id.IsAvatarID()
                     && !i.transform.IsChildOf(UserInterfaceObjects.AvatarPreviewBase_MainAvatar)
-                    && !i.transform.IsChildOf(UserInterfaceObjects.AvatarPreviewBase_FallbackAvatar)
+                    //&& !i.transform.IsChildOf(UserInterfaceObjects.AvatarPreviewBase_FallbackAvatar)
                     && i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
                     ).ToList();
 

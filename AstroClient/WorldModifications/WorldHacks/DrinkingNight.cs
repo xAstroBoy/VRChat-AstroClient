@@ -1,5 +1,4 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
-using AstroClient.AstroMonos.Components.Tools;
+﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.Tools.UdonSearcher;
@@ -21,6 +20,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy.AstroButtonAPI.Tools;
     using xAstroBoy.Utility;
 
+    // TODO: Fix the bug where the VIP Room kicks you.
     internal class DrinkingNight : AstroEvents
     {
         internal override void RegisterToEvents()

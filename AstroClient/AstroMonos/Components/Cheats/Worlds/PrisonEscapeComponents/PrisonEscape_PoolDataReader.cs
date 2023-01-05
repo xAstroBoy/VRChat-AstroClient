@@ -5,16 +5,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 {
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.UdonEditor;
-    using AstroClient.Tools.UdonSearcher;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
     using VRC.Udon;
-    using WorldModifications.WorldHacks;
     using WorldModifications.WorldsIds;
     using xAstroBoy.Utility;
     using IntPtr = System.IntPtr;
-    using UnityEngine;
 
     [RegisterComponent]
     public class PrisonEscape_PoolDataReader : MonoBehaviour
@@ -30,7 +28,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             Destroy(this);
         }
+
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             [HideFromIl2Cpp]
@@ -42,15 +42,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -61,7 +57,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
         {
             if (WorldUtils.WorldID.Equals(WorldIds.PrisonEscape))
             {
-                var obj = gameObject.FindUdonEvent("_SetWantedSynced");
+                var obj = gameObject.FindUdonEvent("__0__SetWantedSynced");
                 if (obj != null)
                 {
                     PlayerData = obj.RawItem;
@@ -85,9 +81,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             HasSubscribed = false;
             Cleanup_PlayerData();
         }
-
-
-
 
         [HideFromIl2Cpp]
         private bool isNotPoolOrThisBehaviour(UdonBehaviour behaviour)
@@ -116,189 +109,189 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 #region PlayerData Zone
 
-                if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
-                {
-                    return __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__0_intnl_PlayerData))
-                {
-                    return __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__1_intnl_PlayerData))
-                {
-                    return __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__2_intnl_PlayerData))
-                {
-                    return __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__3_intnl_PlayerData))
-                {
-                    return __3_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__4_intnl_PlayerData))
-                {
-                    return __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__5_intnl_PlayerData))
-                {
-                    return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                //else if (isNotPoolOrThisBehaviour(__6_intnl_PlayerData))
+                //if (isNotPoolOrThisBehaviour(__0_this_intnl_PlayerData))
                 //{
-                //    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __0_this_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__7_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__0_intnl_PlayerData))
                 //{
-                //    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __0_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__8_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__1_intnl_PlayerData))
                 //{
-                //    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __1_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__9_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__2_intnl_PlayerData))
                 //{
-                //    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __2_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__10_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__3_intnl_PlayerData))
                 //{
-                //    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __3_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__11_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__4_intnl_PlayerData))
                 //{
-                //    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __4_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__12_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__5_intnl_PlayerData))
                 //{
-                //    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __5_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__13_intnl_PlayerData))
+                ////else if (isNotPoolOrThisBehaviour(__6_intnl_PlayerData))
+                ////{
+                ////    return __6_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__7_intnl_PlayerData))
+                ////{
+                ////    return __7_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__8_intnl_PlayerData))
+                ////{
+                ////    return __8_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__9_intnl_PlayerData))
+                ////{
+                ////    return __9_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__10_intnl_PlayerData))
+                ////{
+                ////    return __10_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__11_intnl_PlayerData))
+                ////{
+                ////    return __11_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__12_intnl_PlayerData))
+                ////{
+                ////    return __12_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__13_intnl_PlayerData))
+                ////{
+                ////    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__14_intnl_PlayerData))
+                ////{
+                ////    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__15_intnl_PlayerData))
+                ////{
+                ////    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__16_intnl_PlayerData))
+                ////{
+                ////    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__17_intnl_PlayerData))
+                ////{
+                ////    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__18_intnl_PlayerData))
+                ////{
+                ////    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__19_intnl_PlayerData))
+                ////{
+                ////    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+                ////else if (isNotPoolOrThisBehaviour(__20_intnl_PlayerData))
+                ////{
+                ////    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                ////}
+
+                //#endregion PlayerData Zone
+
+                //#region SystemObject Zone
+
+                //else if (isNotPoolOrThisBehaviour(__0_intnl_SystemObject))
                 //{
-                //    return __13_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __0_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__14_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__1_intnl_SystemObject))
                 //{
-                //    return __14_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__15_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__5_intnl_SystemObject))
                 //{
-                //    return __15_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __5_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__16_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__7_intnl_SystemObject))
                 //{
-                //    return __16_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __7_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__17_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__9_intnl_SystemObject))
                 //{
-                //    return __17_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __9_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__18_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__10_intnl_SystemObject))
                 //{
-                //    return __18_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__19_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__11_intnl_SystemObject))
                 //{
-                //    return __19_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __11_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
-                //else if (isNotPoolOrThisBehaviour(__20_intnl_PlayerData))
+                //else if (isNotPoolOrThisBehaviour(__12_intnl_SystemObject))
                 //{
-                //    return __20_intnl_PlayerData.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //    return __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__13_intnl_SystemObject))
+                //{
+                //    return __13_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__14_intnl_SystemObject))
+                //{
+                //    return __14_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__15_intnl_SystemObject))
+                //{
+                //    return __15_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__16_intnl_SystemObject))
+                //{
+                //    return __16_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__17_intnl_SystemObject))
+                //{
+                //    return __17_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__18_intnl_SystemObject))
+                //{
+                //    return __18_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__19_intnl_SystemObject))
+                //{
+                //    return __19_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__20_intnl_SystemObject))
+                //{
+                //    return __20_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__22_intnl_SystemObject))
+                //{
+                //    return __22_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__23_intnl_SystemObject))
+                //{
+                //    return __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__25_intnl_SystemObject))
+                //{
+                //    return __25_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__29_intnl_SystemObject))
+                //{
+                //    return __29_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
+                //}
+                //else if (isNotPoolOrThisBehaviour(__30_intnl_SystemObject))
+                //{
+                //    return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
                 //}
 
-                #endregion PlayerData Zone
-
-                #region SystemObject Zone
-
-                else if (isNotPoolOrThisBehaviour(__0_intnl_SystemObject))
-                {
-                    return __0_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__1_intnl_SystemObject))
-                {
-                    return __1_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__5_intnl_SystemObject))
-                {
-                    return __5_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__7_intnl_SystemObject))
-                {
-                    return __7_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__9_intnl_SystemObject))
-                {
-                    return __9_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__10_intnl_SystemObject))
-                {
-                    return __10_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__11_intnl_SystemObject))
-                {
-                    return __11_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__12_intnl_SystemObject))
-                {
-                    return __12_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__13_intnl_SystemObject))
-                {
-                    return __13_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__14_intnl_SystemObject))
-                {
-                    return __14_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__15_intnl_SystemObject))
-                {
-                    return __15_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__16_intnl_SystemObject))
-                {
-                    return __16_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__17_intnl_SystemObject))
-                {
-                    return __17_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__18_intnl_SystemObject))
-                {
-                    return __18_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__19_intnl_SystemObject))
-                {
-                    return __19_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__20_intnl_SystemObject))
-                {
-                    return __20_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__22_intnl_SystemObject))
-                {
-                    return __22_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__23_intnl_SystemObject))
-                {
-                    return __23_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__25_intnl_SystemObject))
-                {
-                    return __25_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__29_intnl_SystemObject))
-                {
-                    return __29_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                else if (isNotPoolOrThisBehaviour(__30_intnl_SystemObject))
-                {
-                    return __30_intnl_SystemObject.gameObject.GetOrAddComponent<PrisonEscape_PoolDataReader>();
-                }
-                #endregion SystemObject Zone
+                //#endregion SystemObject Zone
 
                 return this;
             }
         }
-
 
         internal bool isLocal
         {
@@ -308,21 +301,915 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 return GameInstances.CurrentPlayer.GetDisplayName().Equals(playerName);
             }
         }
+         #endregion
+        private void Initialize_PlayerData()
+        {
+            Private___intnl_SystemBoolean_13 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_13");
+            Private___intnl_SystemBoolean_23 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_23");
+            Private___intnl_SystemBoolean_33 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_33");
+            Private___intnl_SystemBoolean_43 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_43");
+            Private___intnl_SystemBoolean_53 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_53");
+            Private_cachedTimesWanted = new AstroUdonVariable<ushort>(PlayerData, "cachedTimesWanted");
+            Private_isWanted = new AstroUdonVariable<bool>(PlayerData, "isWanted");
+            Private___gintnl_SystemUInt32_56 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_56");
+            Private___gintnl_SystemUInt32_46 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_46");
+            Private___gintnl_SystemUInt32_76 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_76");
+            Private___gintnl_SystemUInt32_66 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_66");
+            Private___gintnl_SystemUInt32_16 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_16");
+            Private___gintnl_SystemUInt32_36 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_36");
+            Private___gintnl_SystemUInt32_26 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_26");
+            Private___intnl_SystemInt32_15 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_15");
+            Private___intnl_SystemInt32_35 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_35");
+            Private___intnl_SystemInt32_25 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_25");
+            Private___lcl_wasActive_SystemBoolean_0 = new AstroUdonVariable<bool>(PlayerData, "__lcl_wasActive_SystemBoolean_0");
+            Private___const_SystemString_46 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_46");
+            Private___const_SystemString_47 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_47");
+            Private___const_SystemString_44 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_44");
+            Private___const_SystemString_45 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_45");
+            Private___const_SystemString_42 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_42");
+            Private___const_SystemString_43 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_43");
+            Private___const_SystemString_40 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_40");
+            Private___const_SystemString_41 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_41");
+            Private___const_SystemString_48 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_48");
+            Private___const_SystemString_49 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_49");
+            Private___intnl_SystemSingle_0 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_0");
+            Private___intnl_SystemObject_0 = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__intnl_SystemObject_0");
+            Private___const_SystemString_0 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_0");
+            Private_cachedIsSuspicious = new AstroUdonVariable<bool>(PlayerData, "cachedIsSuspicious");
+            Private_timesWanted = new AstroUdonVariable<ushort>(PlayerData, "timesWanted");
+            Private___const_SystemSingle_0 = new AstroUdonVariable<float>(PlayerData, "__const_SystemSingle_0");
+            Private_taken = new AstroUdonVariable<bool>(PlayerData, "taken");
+            Private___intnl_SystemBoolean_16 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_16");
+            Private___intnl_SystemBoolean_26 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_26");
+            Private___intnl_SystemBoolean_36 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_36");
+            Private___intnl_SystemBoolean_46 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_46");
+            Private___intnl_SystemBoolean_56 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_56");
+            Private___const_SystemInt32_11 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_11");
+            Private___const_SystemInt32_31 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_31");
+            Private___const_SystemInt32_21 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_21");
+            Private___const_SystemInt32_41 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_41");
+            Private_doublePoints = new AstroUdonVariable<bool>(PlayerData, "doublePoints");
+            Private___intnl_SystemSingle_10 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_10");
+            Private___intnl_SystemSingle_11 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_11");
+            Private___intnl_SystemSingle_12 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_12");
+            Private___intnl_SystemInt32_12 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_12");
+            Private___intnl_SystemInt32_32 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_32");
+            Private___intnl_SystemInt32_22 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_22");
+            Private___intnl_SystemInt32_42 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_42");
+            Private___this_VRCUdonUdonBehaviour_22 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_22");
+            Private___this_VRCUdonUdonBehaviour_12 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_12");
+            Private_tagHeightScalar = new AstroUdonVariable<float>(PlayerData, "tagHeightScalar");
+            Private___intnl_SystemSingle_8 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_8");
+            Private___gintnl_SystemUInt32_9 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_9");
+            Private___gintnl_SystemUInt32_8 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_8");
+            Private___gintnl_SystemUInt32_5 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_5");
+            Private___gintnl_SystemUInt32_4 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_4");
+            Private___gintnl_SystemUInt32_7 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_7");
+            Private___gintnl_SystemUInt32_6 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_6");
+            Private___gintnl_SystemUInt32_1 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_1");
+            Private___gintnl_SystemUInt32_0 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_0");
+            Private___gintnl_SystemUInt32_3 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_3");
+            Private___gintnl_SystemUInt32_2 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_2");
+            Private___const_SystemBoolean_0 = new AstroUdonVariable<bool>(PlayerData, "__const_SystemBoolean_0");
+            Private___const_SystemBoolean_1 = new AstroUdonVariable<bool>(PlayerData, "__const_SystemBoolean_1");
+            Private___const_SystemUInt16_0 = new AstroUdonVariable<ushort>(PlayerData, "__const_SystemUInt16_0");
+            Private_hitbox = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "hitbox");
+            Private___0_count__param = new AstroUdonVariable<int>(PlayerData, "__0_count__param");
+            Private___const_SystemString_5 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_5");
+            Private___0_damage__param = new AstroUdonVariable<int>(PlayerData, "__0_damage__param");
+            Private_maxHealth = new AstroUdonVariable<int>(PlayerData, "maxHealth");
+            Private_cachedIsWanted = new AstroUdonVariable<bool>(PlayerData, "cachedIsWanted");
+            Private___const_SystemInt32_19 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_19");
+            Private___const_SystemInt32_39 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_39");
+            Private___const_SystemInt32_29 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_29");
+            Private___gintnl_SystemUInt32_53 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_53");
+            Private___gintnl_SystemUInt32_43 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_43");
+            Private___gintnl_SystemUInt32_73 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_73");
+            Private___gintnl_SystemUInt32_63 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_63");
+            Private___gintnl_SystemUInt32_13 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_13");
+            Private___gintnl_SystemUInt32_33 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_33");
+            Private___gintnl_SystemUInt32_23 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_23");
+            Private___const_SystemInt32_16 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_16");
+            Private___const_SystemInt32_36 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_36");
+            Private___const_SystemInt32_26 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_26");
+            Private___const_SystemInt32_46 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_46");
+            Private_hitboxHead = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "hitboxHead");
+            Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0 = new AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget>(PlayerData, "__const_VRCUdonCommonInterfacesNetworkEventTarget_0");
+            Private___this_VRCUdonUdonBehaviour_27 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_27");
+            Private___this_VRCUdonUdonBehaviour_17 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_17");
+            Private_goldGuns = new AstroUdonVariable<bool>(PlayerData, "goldGuns");
+            Private___0_enabled__param = new AstroUdonVariable<bool>(PlayerData, "__0_enabled__param");
+            Private___0_get_IsInnocent__ret = new AstroUdonVariable<bool>(PlayerData, "__0_get_IsInnocent__ret");
+            Private___const_SystemString_16 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_16");
+            Private___const_SystemString_17 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_17");
+            Private___const_SystemString_14 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_14");
+            Private___const_SystemString_15 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_15");
+            Private___const_SystemString_12 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_12");
+            Private___const_SystemString_13 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_13");
+            Private___const_SystemString_10 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_10");
+            Private___const_SystemString_11 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_11");
+            Private___const_SystemString_18 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_18");
+            Private___const_SystemString_19 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_19");
+            Private___intnl_SystemSingle_7 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_7");
+            Private___refl_typeid = new AstroUdonVariable<long>(PlayerData, "__refl_typeid");
+            Private___const_SystemUInt32_0 = new AstroUdonVariable<uint>(PlayerData, "__const_SystemUInt32_0");
+            Private___0_dead__param = new AstroUdonVariable<bool>(PlayerData, "__0_dead__param");
+            Private___intnl_SystemBoolean_11 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_11");
+            Private___intnl_SystemBoolean_21 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_21");
+            Private___intnl_SystemBoolean_31 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_31");
+            Private___intnl_SystemBoolean_41 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_41");
+            Private___intnl_SystemBoolean_51 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_51");
+            Private___intnl_SystemBoolean_61 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_61");
+            Private___gintnl_SystemUInt32_54 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_54");
+            Private___gintnl_SystemUInt32_44 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_44");
+            Private___gintnl_SystemUInt32_74 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_74");
+            Private___gintnl_SystemUInt32_64 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_64");
+            Private___gintnl_SystemUInt32_14 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_14");
+            Private___gintnl_SystemUInt32_34 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_34");
+            Private___gintnl_SystemUInt32_24 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_24");
+            Private___const_UnityEngineVector3_0 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__const_UnityEngineVector3_0");
+            Private___intnl_SystemInt32_17 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_17");
+            Private___intnl_SystemInt32_37 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_37");
+            Private___intnl_SystemInt32_27 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_27");
+            Private_health = new AstroUdonVariable<ushort>(PlayerData, "health");
+            Private_healthRegenDelay = new AstroUdonVariable<float>(PlayerData, "healthRegenDelay");
+            Private_canDealDamage = new AstroUdonVariable<bool>(PlayerData, "canDealDamage");
+            Private___this_VRCUdonUdonBehaviour_24 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_24");
+            Private___this_VRCUdonUdonBehaviour_14 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_14");
+            Private___0_newName__param = new AstroUdonVariable<string>(PlayerData, "__0_newName__param");
+            Private___const_SystemString_66 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_66");
+            Private___const_SystemString_67 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_67");
+            Private___const_SystemString_64 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_64");
+            Private___const_SystemString_65 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_65");
+            Private___const_SystemString_62 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_62");
+            Private___const_SystemString_63 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_63");
+            Private___const_SystemString_60 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_60");
+            Private___const_SystemString_61 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_61");
+            Private___const_SystemString_68 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_68");
+            Private___const_SystemString_69 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_69");
+            Private___intnl_SystemSingle_2 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_2");
+            Private___const_SystemString_2 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_2");
+            Private___0__InstaHeal__ret = new AstroUdonVariable<bool>(PlayerData, "__0__InstaHeal__ret");
+            Private___const_SystemSingle_2 = new AstroUdonVariable<float>(PlayerData, "__const_SystemSingle_2");
+            Private_lastInstaHealTime = new AstroUdonVariable<float>(PlayerData, "lastInstaHealTime");
+            Private___intnl_SystemBoolean_19 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_19");
+            Private___intnl_SystemBoolean_29 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_29");
+            Private___intnl_SystemBoolean_39 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_39");
+            Private___intnl_SystemBoolean_49 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_49");
+            Private___intnl_SystemBoolean_59 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_59");
+            Private___intnl_UnityEngineVector3_0 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__intnl_UnityEngineVector3_0");
+            Private___intnl_UnityEngineGameObject_2 = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__intnl_UnityEngineGameObject_2");
+            Private___intnl_UnityEngineGameObject_1 = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__intnl_UnityEngineGameObject_1");
+            Private___intnl_UnityEngineGameObject_0 = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__intnl_UnityEngineGameObject_0");
+            Private_cachedArmor = new AstroUdonVariable<ushort>(PlayerData, "cachedArmor");
+            Private___intnl_SystemBoolean_14 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_14");
+            Private___intnl_SystemBoolean_24 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_24");
+            Private___intnl_SystemBoolean_34 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_34");
+            Private___intnl_SystemBoolean_44 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_44");
+            Private___intnl_SystemBoolean_54 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_54");
+            Private___const_SystemInt32_13 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_13");
+            Private___const_SystemInt32_33 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_33");
+            Private___const_SystemInt32_23 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_23");
+            Private___const_SystemInt32_43 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_43");
+            Private___intnl_SystemInt32_14 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_14");
+            Private___intnl_SystemInt32_34 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_34");
+            Private___intnl_SystemInt32_24 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_24");
+            Private___0_guard__param = new AstroUdonVariable<bool>(PlayerData, "__0_guard__param");
+            Private_damagedInFrame = new AstroUdonVariable<bool>(PlayerData, "damagedInFrame");
+            Private___intnl_SystemInt32_19 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_19");
+            Private___intnl_SystemInt32_39 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_39");
+            Private___intnl_SystemInt32_29 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_29");
+            Private___intnl_SystemString_0 = new AstroUdonVariable<string>(PlayerData, "__intnl_SystemString_0");
+            Private___this_VRCUdonUdonBehaviour_19 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_19");
+            Private___intnl_SystemSingle_1 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_1");
+            Private___intnl_SystemObject_1 = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__intnl_SystemObject_1");
+            Private___const_SystemString_7 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_7");
+            Private___const_SystemSingle_1 = new AstroUdonVariable<float>(PlayerData, "__const_SystemSingle_1");
+            Private___gintnl_SystemUInt32_51 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_51");
+            Private___gintnl_SystemUInt32_41 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_41");
+            Private___gintnl_SystemUInt32_71 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_71");
+            Private___gintnl_SystemUInt32_61 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_61");
+            Private___gintnl_SystemUInt32_11 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_11");
+            Private___gintnl_SystemUInt32_31 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_31");
+            Private___gintnl_SystemUInt32_21 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_21");
+            Private_cachedIsDead = new AstroUdonVariable<bool>(PlayerData, "cachedIsDead");
+            Private___intnl_SystemBoolean_17 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_17");
+            Private___intnl_SystemBoolean_27 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_27");
+            Private___intnl_SystemBoolean_37 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_37");
+            Private___intnl_SystemBoolean_47 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_47");
+            Private___intnl_SystemBoolean_57 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_57");
+            Private___const_SystemInt32_10 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_10");
+            Private___const_SystemInt32_30 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_30");
+            Private___const_SystemInt32_20 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_20");
+            Private___const_SystemInt32_40 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_40");
+            Private___const_VRCUdonCommonEnumsEventTiming_0 = new AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming>(PlayerData, "__const_VRCUdonCommonEnumsEventTiming_0");
+            Private_isGuard = new AstroUdonVariable<bool>(PlayerData, "isGuard");
+            Private___intnl_SystemInt32_11 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_11");
+            Private___intnl_SystemInt32_31 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_31");
+            Private___intnl_SystemInt32_21 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_21");
+            Private___intnl_SystemInt32_41 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_41");
+            Private___0_sus__param = new AstroUdonVariable<bool>(PlayerData, "__0_sus__param");
+            Private___this_VRCUdonUdonBehaviour_21 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_21");
+            Private___this_VRCUdonUdonBehaviour_11 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_11");
+            Private___const_SystemString_36 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_36");
+            Private___const_SystemString_37 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_37");
+            Private___const_SystemString_34 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_34");
+            Private___const_SystemString_35 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_35");
+            Private___const_SystemString_32 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_32");
+            Private___const_SystemString_33 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_33");
+            Private___const_SystemString_30 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_30");
+            Private___const_SystemString_31 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_31");
+            Private___const_SystemString_38 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_38");
+            Private___const_SystemString_39 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_39");
+            Private___intnl_SystemSingle_9 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_9");
+            Private___intnl_UnityEngineObject_16 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_UnityEngineObject_16");
+            Private_maxArmor = new AstroUdonVariable<int>(PlayerData, "maxArmor");
+            Private_armor = new AstroUdonVariable<ushort>(PlayerData, "armor");
+            Private___1_hp__param = new AstroUdonVariable<int>(PlayerData, "__1_hp__param");
+            Private___intnl_returnJump_SystemUInt32_0 = new AstroUdonVariable<uint>(PlayerData, "__intnl_returnJump_SystemUInt32_0");
+            Private___0_hp__param = new AstroUdonVariable<int>(PlayerData, "__0_hp__param");
+            Private___const_SystemString_4 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_4");
+            Private_instaHealDelay = new AstroUdonVariable<float>(PlayerData, "instaHealDelay");
+            Private___gintnl_SystemUInt32_59 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_59");
+            Private___gintnl_SystemUInt32_49 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_49");
+            Private___gintnl_SystemUInt32_69 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_69");
+            Private___gintnl_SystemUInt32_19 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_19");
+            Private___gintnl_SystemUInt32_39 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_39");
+            Private___gintnl_SystemUInt32_29 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_29");
+            Private___const_SystemSingle_4 = new AstroUdonVariable<float>(PlayerData, "__const_SystemSingle_4");
+            Private___2_hp__param = new AstroUdonVariable<int>(PlayerData, "__2_hp__param");
+            Private___const_SystemInt32_18 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_18");
+            Private___const_SystemInt32_38 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_38");
+            Private___const_SystemInt32_28 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_28");
+            Private___gintnl_SystemUInt32_52 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_52");
+            Private___gintnl_SystemUInt32_42 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_42");
+            Private___gintnl_SystemUInt32_72 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_72");
+            Private___gintnl_SystemUInt32_62 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_62");
+            Private___gintnl_SystemUInt32_12 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_12");
+            Private___gintnl_SystemUInt32_32 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_32");
+            Private___gintnl_SystemUInt32_22 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_22");
+            Private___intnl_SystemObject_63 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_SystemObject_63");
+            Private___intnl_SystemObject_62 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_SystemObject_62");
+            Private___const_SystemInt32_15 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_15");
+            Private___const_SystemInt32_35 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_35");
+            Private___const_SystemInt32_25 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_25");
+            Private___const_SystemInt32_45 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_45");
+            Private___lcl_tagHeight_SystemSingle_0 = new AstroUdonVariable<float>(PlayerData, "__lcl_tagHeight_SystemSingle_0");
+            Private___this_VRCUdonUdonBehaviour_26 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_26");
+            Private___this_VRCUdonUdonBehaviour_16 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_16");
+            Private___intnl_SystemSingle_4 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_4");
+            Private_scorecard = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "scorecard");
+            Private_cachedHealth = new AstroUdonVariable<ushort>(PlayerData, "cachedHealth");
+            Private___const_SystemString_9 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_9");
+            Private___intnl_UnityEngineVector3_2 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__intnl_UnityEngineVector3_2");
+            Private___intnl_SystemBoolean_12 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_12");
+            Private___intnl_SystemBoolean_22 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_22");
+            Private___intnl_SystemBoolean_32 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_32");
+            Private___intnl_SystemBoolean_42 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_42");
+            Private___intnl_SystemBoolean_52 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_52");
+            Private___gintnl_SystemUInt32_57 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_57");
+            Private___gintnl_SystemUInt32_47 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_47");
+            Private___gintnl_SystemUInt32_77 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_77");
+            Private___gintnl_SystemUInt32_67 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_67");
+            Private___gintnl_SystemUInt32_17 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_17");
+            Private___gintnl_SystemUInt32_37 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_37");
+            Private___gintnl_SystemUInt32_27 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_27");
+            Private_spectateCamera = new AstroUdonVariable<UnityEngine.Camera>(PlayerData, "spectateCamera");
+            Private___intnl_SystemInt32_16 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_16");
+            Private___intnl_SystemInt32_36 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_36");
+            Private___intnl_SystemInt32_26 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_26");
+            Private___refl_typename = new AstroUdonVariable<string>(PlayerData, "__refl_typename");
+            Private_lastDamageTime = new AstroUdonVariable<float>(PlayerData, "lastDamageTime");
+            Private_photoCamera = new AstroUdonVariable<UnityEngine.Camera>(PlayerData, "photoCamera");
+            Private_killedByLocal = new AstroUdonVariable<bool>(PlayerData, "killedByLocal");
+            Private___intnl_SystemInt32_1 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_1");
+            Private___intnl_SystemInt32_0 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_0");
+            Private___intnl_SystemInt32_3 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_3");
+            Private___intnl_SystemInt32_2 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_2");
+            Private___intnl_SystemInt32_5 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_5");
+            Private___intnl_SystemInt32_4 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_4");
+            Private___intnl_SystemInt32_7 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_7");
+            Private___intnl_SystemInt32_6 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_6");
+            Private___intnl_SystemInt32_9 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_9");
+            Private___intnl_SystemInt32_8 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_8");
+            Private_isPlaying = new AstroUdonVariable<bool>(PlayerData, "isPlaying");
+            Private___const_SystemString_56 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_56");
+            Private___const_SystemString_57 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_57");
+            Private___const_SystemString_54 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_54");
+            Private___const_SystemString_55 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_55");
+            Private___const_SystemString_52 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_52");
+            Private___const_SystemString_53 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_53");
+            Private___const_SystemString_50 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_50");
+            Private___const_SystemString_51 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_51");
+            Private___const_SystemString_58 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_58");
+            Private___const_SystemString_59 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_59");
+            Private___0_t__param = new AstroUdonVariable<bool>(PlayerData, "__0_t__param");
+            Private___intnl_SystemSingle_3 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_3");
+            Private___intnl_SystemUInt16_0 = new AstroUdonVariable<ushort>(PlayerData, "__intnl_SystemUInt16_0");
+            Private_isSuspicious = new AstroUdonVariable<bool>(PlayerData, "isSuspicious");
+            Private___const_SystemString_1 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_1");
+            Private___const_SystemSingle_3 = new AstroUdonVariable<float>(PlayerData, "__const_SystemSingle_3");
+            Private___intnl_UnityEngineVector3_1 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__intnl_UnityEngineVector3_1");
+            Private___intnl_SystemBoolean_15 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_15");
+            Private___intnl_SystemBoolean_25 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_25");
+            Private___intnl_SystemBoolean_35 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_35");
+            Private___intnl_SystemBoolean_45 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_45");
+            Private___intnl_SystemBoolean_55 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_55");
+            Private___const_SystemInt32_12 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_12");
+            Private___const_SystemInt32_32 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_32");
+            Private___const_SystemInt32_22 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_22");
+            Private___const_SystemInt32_42 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_42");
+            Private___intnl_SystemInt32_13 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_13");
+            Private___intnl_SystemInt32_33 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_33");
+            Private___intnl_SystemInt32_23 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_23");
+            Private_cachedIsPlaying = new AstroUdonVariable<bool>(PlayerData, "cachedIsPlaying");
+            Private___intnl_SystemInt32_18 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_18");
+            Private___intnl_SystemInt32_38 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_38");
+            Private___intnl_SystemInt32_28 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_28");
+            Private_cachedHasKeycard = new AstroUdonVariable<bool>(PlayerData, "cachedHasKeycard");
+            Private___this_VRCUdonUdonBehaviour_23 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_23");
+            Private___this_VRCUdonUdonBehaviour_13 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_13");
+            Private___this_VRCUdonUdonBehaviour_18 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_18");
+            Private___intnl_VRCUdonUdonBehaviour_53 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_VRCUdonUdonBehaviour_53");
+            Private___intnl_VRCUdonUdonBehaviour_55 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_VRCUdonUdonBehaviour_55");
+            Private___intnl_VRCUdonUdonBehaviour_56 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_VRCUdonUdonBehaviour_56");
+            Private___const_SystemString_6 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_6");
+            Private___intnl_UnityEngineVector3_4 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__intnl_UnityEngineVector3_4");
+            Private___gintnl_SystemUInt32_50 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_50");
+            Private___gintnl_SystemUInt32_40 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_40");
+            Private___gintnl_SystemUInt32_70 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_70");
+            Private___gintnl_SystemUInt32_60 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_60");
+            Private___gintnl_SystemUInt32_10 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_10");
+            Private___gintnl_SystemUInt32_30 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_30");
+            Private___gintnl_SystemUInt32_20 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_20");
+            Private___const_SystemInt32_17 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_17");
+            Private___const_SystemInt32_37 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_37");
+            Private___const_SystemInt32_27 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_27");
+            Private___const_SystemInt32_47 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_47");
+            Private___intnl_SystemInt32_10 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_10");
+            Private___intnl_SystemInt32_30 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_30");
+            Private___intnl_SystemInt32_20 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_20");
+            Private___intnl_SystemInt32_40 = new AstroUdonVariable<int>(PlayerData, "__intnl_SystemInt32_40");
+            Private___1_damage__param = new AstroUdonVariable<int>(PlayerData, "__1_damage__param");
+            Private___this_UnityEngineGameObject_0 = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__this_UnityEngineGameObject_0");
+            Private___this_VRCUdonUdonBehaviour_20 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_20");
+            Private___this_VRCUdonUdonBehaviour_10 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_10");
+            Private___const_SystemString_26 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_26");
+            Private___const_SystemString_27 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_27");
+            Private___const_SystemString_24 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_24");
+            Private___const_SystemString_25 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_25");
+            Private___const_SystemString_22 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_22");
+            Private___const_SystemString_23 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_23");
+            Private___const_SystemString_20 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_20");
+            Private___const_SystemString_21 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_21");
+            Private___const_SystemString_28 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_28");
+            Private___const_SystemString_29 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_29");
+            Private___intnl_SystemSingle_6 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_6");
+            Private___intnl_UnityEngineObject_17 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__intnl_UnityEngineObject_17");
+            Private_healthRegenAmt = new AstroUdonVariable<int>(PlayerData, "healthRegenAmt");
+            Private___0_playing__param = new AstroUdonVariable<bool>(PlayerData, "__0_playing__param");
+            Private_hitboxRoot = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "hitboxRoot");
+            Private_joinedRound = new AstroUdonVariable<bool>(PlayerData, "joinedRound");
+            Private_tagHeightMin = new AstroUdonVariable<float>(PlayerData, "tagHeightMin");
+            Private___gintnl_SystemUInt32_58 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_58");
+            Private___gintnl_SystemUInt32_48 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_48");
+            Private___gintnl_SystemUInt32_78 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_78");
+            Private___gintnl_SystemUInt32_68 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_68");
+            Private___gintnl_SystemUInt32_18 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_18");
+            Private___gintnl_SystemUInt32_38 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_38");
+            Private___gintnl_SystemUInt32_28 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_28");
+            Private_teamTagObj = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "teamTagObj");
+            Private_isDead = new AstroUdonVariable<bool>(PlayerData, "isDead");
+            Private___intnl_SystemBoolean_10 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_10");
+            Private___intnl_SystemBoolean_20 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_20");
+            Private___intnl_SystemBoolean_30 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_30");
+            Private___intnl_SystemBoolean_40 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_40");
+            Private___intnl_SystemBoolean_50 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_50");
+            Private___intnl_SystemBoolean_60 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_60");
+            Private___gintnl_SystemUInt32_55 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_55");
+            Private___gintnl_SystemUInt32_45 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_45");
+            Private___gintnl_SystemUInt32_75 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_75");
+            Private___gintnl_SystemUInt32_65 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_65");
+            Private___gintnl_SystemUInt32_15 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_15");
+            Private___gintnl_SystemUInt32_35 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_35");
+            Private___gintnl_SystemUInt32_25 = new AstroUdonVariable<uint>(PlayerData, "__gintnl_SystemUInt32_25");
+            Private_gameManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "gameManager");
+            Private_permaSuspicious = new AstroUdonVariable<bool>(PlayerData, "permaSuspicious");
+            Private___const_SystemInt32_9 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_9");
+            Private___const_SystemInt32_8 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_8");
+            Private___const_SystemInt32_1 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_1");
+            Private___const_SystemInt32_0 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_0");
+            Private___const_SystemInt32_3 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_3");
+            Private___const_SystemInt32_2 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_2");
+            Private___const_SystemInt32_5 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_5");
+            Private___const_SystemInt32_4 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_4");
+            Private___const_SystemInt32_7 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_7");
+            Private___const_SystemInt32_6 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_6");
+            Private___const_SystemInt32_14 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_14");
+            Private___const_SystemInt32_34 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_34");
+            Private___const_SystemInt32_24 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_24");
+            Private___const_SystemInt32_44 = new AstroUdonVariable<int>(PlayerData, "__const_SystemInt32_44");
+            Private_deathLoc = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "deathLoc");
+            Private___lcl_startArmor_SystemUInt16_0 = new AstroUdonVariable<ushort>(PlayerData, "__lcl_startArmor_SystemUInt16_0");
+            Private___intnl_SystemBoolean_8 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_8");
+            Private___intnl_SystemBoolean_9 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_9");
+            Private___intnl_SystemBoolean_0 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_0");
+            Private___intnl_SystemBoolean_1 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_1");
+            Private___intnl_SystemBoolean_2 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_2");
+            Private___intnl_SystemBoolean_3 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_3");
+            Private___intnl_SystemBoolean_4 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_4");
+            Private___intnl_SystemBoolean_5 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_5");
+            Private___intnl_SystemBoolean_6 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_6");
+            Private___intnl_SystemBoolean_7 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_7");
+            Private___this_VRCUdonUdonBehaviour_25 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_25");
+            Private___this_VRCUdonUdonBehaviour_15 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_15");
+            Private___0_wanted__param = new AstroUdonVariable<bool>(PlayerData, "__0_wanted__param");
+            Private___const_SystemString_72 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_72");
+            Private___const_SystemString_70 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_70");
+            Private___const_SystemString_71 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_71");
+            Private___intnl_SystemSingle_5 = new AstroUdonVariable<float>(PlayerData, "__intnl_SystemSingle_5");
+            Private_playerName = new AstroUdonVariable<string>(PlayerData, "playerName");
+            Private___const_SystemString_3 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_3");
+            Private___this_VRCUdonUdonBehaviour_9 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_9");
+            Private___this_VRCUdonUdonBehaviour_8 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_8");
+            Private___this_VRCUdonUdonBehaviour_3 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_3");
+            Private___this_VRCUdonUdonBehaviour_2 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_2");
+            Private___this_VRCUdonUdonBehaviour_1 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_1");
+            Private___this_VRCUdonUdonBehaviour_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_0");
+            Private___this_VRCUdonUdonBehaviour_7 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_7");
+            Private___this_VRCUdonUdonBehaviour_6 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_6");
+            Private___this_VRCUdonUdonBehaviour_5 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_5");
+            Private___this_VRCUdonUdonBehaviour_4 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__this_VRCUdonUdonBehaviour_4");
+            Private_teamTag = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "teamTag");
+            Private___const_SystemString_8 = new AstroUdonVariable<string>(PlayerData, "__const_SystemString_8");
+            Private___intnl_SystemBoolean_18 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_18");
+            Private___intnl_SystemBoolean_28 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_28");
+            Private___intnl_SystemBoolean_38 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_38");
+            Private___intnl_SystemBoolean_48 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_48");
+            Private___intnl_SystemBoolean_58 = new AstroUdonVariable<bool>(PlayerData, "__intnl_SystemBoolean_58");
+            Private_hasKeycard = new AstroUdonVariable<bool>(PlayerData, "hasKeycard");
+            Private___intnl_UnityEngineVector3_3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__intnl_UnityEngineVector3_3");
+        }
 
+        private void Cleanup_PlayerData()
+        {
+            Private___intnl_SystemBoolean_13 = null;
+            Private___intnl_SystemBoolean_23 = null;
+            Private___intnl_SystemBoolean_33 = null;
+            Private___intnl_SystemBoolean_43 = null;
+            Private___intnl_SystemBoolean_53 = null;
+            Private_cachedTimesWanted = null;
+            Private_isWanted = null;
+            Private___gintnl_SystemUInt32_56 = null;
+            Private___gintnl_SystemUInt32_46 = null;
+            Private___gintnl_SystemUInt32_76 = null;
+            Private___gintnl_SystemUInt32_66 = null;
+            Private___gintnl_SystemUInt32_16 = null;
+            Private___gintnl_SystemUInt32_36 = null;
+            Private___gintnl_SystemUInt32_26 = null;
+            Private___intnl_SystemInt32_15 = null;
+            Private___intnl_SystemInt32_35 = null;
+            Private___intnl_SystemInt32_25 = null;
+            Private___lcl_wasActive_SystemBoolean_0 = null;
+            Private___const_SystemString_46 = null;
+            Private___const_SystemString_47 = null;
+            Private___const_SystemString_44 = null;
+            Private___const_SystemString_45 = null;
+            Private___const_SystemString_42 = null;
+            Private___const_SystemString_43 = null;
+            Private___const_SystemString_40 = null;
+            Private___const_SystemString_41 = null;
+            Private___const_SystemString_48 = null;
+            Private___const_SystemString_49 = null;
+            Private___intnl_SystemSingle_0 = null;
+            Private___intnl_SystemObject_0 = null;
+            Private___const_SystemString_0 = null;
+            Private_cachedIsSuspicious = null;
+            Private_timesWanted = null;
+            Private___const_SystemSingle_0 = null;
+            Private_taken = null;
+            Private___intnl_SystemBoolean_16 = null;
+            Private___intnl_SystemBoolean_26 = null;
+            Private___intnl_SystemBoolean_36 = null;
+            Private___intnl_SystemBoolean_46 = null;
+            Private___intnl_SystemBoolean_56 = null;
+            Private___const_SystemInt32_11 = null;
+            Private___const_SystemInt32_31 = null;
+            Private___const_SystemInt32_21 = null;
+            Private___const_SystemInt32_41 = null;
+            Private_doublePoints = null;
+            Private___intnl_SystemSingle_10 = null;
+            Private___intnl_SystemSingle_11 = null;
+            Private___intnl_SystemSingle_12 = null;
+            Private___intnl_SystemInt32_12 = null;
+            Private___intnl_SystemInt32_32 = null;
+            Private___intnl_SystemInt32_22 = null;
+            Private___intnl_SystemInt32_42 = null;
+            Private___this_VRCUdonUdonBehaviour_22 = null;
+            Private___this_VRCUdonUdonBehaviour_12 = null;
+            Private_tagHeightScalar = null;
+            Private___intnl_SystemSingle_8 = null;
+            Private___gintnl_SystemUInt32_9 = null;
+            Private___gintnl_SystemUInt32_8 = null;
+            Private___gintnl_SystemUInt32_5 = null;
+            Private___gintnl_SystemUInt32_4 = null;
+            Private___gintnl_SystemUInt32_7 = null;
+            Private___gintnl_SystemUInt32_6 = null;
+            Private___gintnl_SystemUInt32_1 = null;
+            Private___gintnl_SystemUInt32_0 = null;
+            Private___gintnl_SystemUInt32_3 = null;
+            Private___gintnl_SystemUInt32_2 = null;
+            Private___const_SystemBoolean_0 = null;
+            Private___const_SystemBoolean_1 = null;
+            Private___const_SystemUInt16_0 = null;
+            Private_hitbox = null;
+            Private___0_count__param = null;
+            Private___const_SystemString_5 = null;
+            Private___0_damage__param = null;
+            Private_maxHealth = null;
+            Private_cachedIsWanted = null;
+            Private___const_SystemInt32_19 = null;
+            Private___const_SystemInt32_39 = null;
+            Private___const_SystemInt32_29 = null;
+            Private___gintnl_SystemUInt32_53 = null;
+            Private___gintnl_SystemUInt32_43 = null;
+            Private___gintnl_SystemUInt32_73 = null;
+            Private___gintnl_SystemUInt32_63 = null;
+            Private___gintnl_SystemUInt32_13 = null;
+            Private___gintnl_SystemUInt32_33 = null;
+            Private___gintnl_SystemUInt32_23 = null;
+            Private___const_SystemInt32_16 = null;
+            Private___const_SystemInt32_36 = null;
+            Private___const_SystemInt32_26 = null;
+            Private___const_SystemInt32_46 = null;
+            Private_hitboxHead = null;
+            Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0 = null;
+            Private___this_VRCUdonUdonBehaviour_27 = null;
+            Private___this_VRCUdonUdonBehaviour_17 = null;
+            Private_goldGuns = null;
+            Private___0_enabled__param = null;
+            Private___0_get_IsInnocent__ret = null;
+            Private___const_SystemString_16 = null;
+            Private___const_SystemString_17 = null;
+            Private___const_SystemString_14 = null;
+            Private___const_SystemString_15 = null;
+            Private___const_SystemString_12 = null;
+            Private___const_SystemString_13 = null;
+            Private___const_SystemString_10 = null;
+            Private___const_SystemString_11 = null;
+            Private___const_SystemString_18 = null;
+            Private___const_SystemString_19 = null;
+            Private___intnl_SystemSingle_7 = null;
+            Private___refl_typeid = null;
+            Private___const_SystemUInt32_0 = null;
+            Private___0_dead__param = null;
+            Private___intnl_SystemBoolean_11 = null;
+            Private___intnl_SystemBoolean_21 = null;
+            Private___intnl_SystemBoolean_31 = null;
+            Private___intnl_SystemBoolean_41 = null;
+            Private___intnl_SystemBoolean_51 = null;
+            Private___intnl_SystemBoolean_61 = null;
+            Private___gintnl_SystemUInt32_54 = null;
+            Private___gintnl_SystemUInt32_44 = null;
+            Private___gintnl_SystemUInt32_74 = null;
+            Private___gintnl_SystemUInt32_64 = null;
+            Private___gintnl_SystemUInt32_14 = null;
+            Private___gintnl_SystemUInt32_34 = null;
+            Private___gintnl_SystemUInt32_24 = null;
+            Private___const_UnityEngineVector3_0 = null;
+            Private___intnl_SystemInt32_17 = null;
+            Private___intnl_SystemInt32_37 = null;
+            Private___intnl_SystemInt32_27 = null;
+            Private_health = null;
+            Private_healthRegenDelay = null;
+            Private_canDealDamage = null;
+            Private___this_VRCUdonUdonBehaviour_24 = null;
+            Private___this_VRCUdonUdonBehaviour_14 = null;
+            Private___0_newName__param = null;
+            Private___const_SystemString_66 = null;
+            Private___const_SystemString_67 = null;
+            Private___const_SystemString_64 = null;
+            Private___const_SystemString_65 = null;
+            Private___const_SystemString_62 = null;
+            Private___const_SystemString_63 = null;
+            Private___const_SystemString_60 = null;
+            Private___const_SystemString_61 = null;
+            Private___const_SystemString_68 = null;
+            Private___const_SystemString_69 = null;
+            Private___intnl_SystemSingle_2 = null;
+            Private___const_SystemString_2 = null;
+            Private___0__InstaHeal__ret = null;
+            Private___const_SystemSingle_2 = null;
+            Private_lastInstaHealTime = null;
+            Private___intnl_SystemBoolean_19 = null;
+            Private___intnl_SystemBoolean_29 = null;
+            Private___intnl_SystemBoolean_39 = null;
+            Private___intnl_SystemBoolean_49 = null;
+            Private___intnl_SystemBoolean_59 = null;
+            Private___intnl_UnityEngineVector3_0 = null;
+            Private___intnl_UnityEngineGameObject_2 = null;
+            Private___intnl_UnityEngineGameObject_1 = null;
+            Private___intnl_UnityEngineGameObject_0 = null;
+            Private_cachedArmor = null;
+            Private___intnl_SystemBoolean_14 = null;
+            Private___intnl_SystemBoolean_24 = null;
+            Private___intnl_SystemBoolean_34 = null;
+            Private___intnl_SystemBoolean_44 = null;
+            Private___intnl_SystemBoolean_54 = null;
+            Private___const_SystemInt32_13 = null;
+            Private___const_SystemInt32_33 = null;
+            Private___const_SystemInt32_23 = null;
+            Private___const_SystemInt32_43 = null;
+            Private___intnl_SystemInt32_14 = null;
+            Private___intnl_SystemInt32_34 = null;
+            Private___intnl_SystemInt32_24 = null;
+            Private___0_guard__param = null;
+            Private_damagedInFrame = null;
+            Private___intnl_SystemInt32_19 = null;
+            Private___intnl_SystemInt32_39 = null;
+            Private___intnl_SystemInt32_29 = null;
+            Private___intnl_SystemString_0 = null;
+            Private___this_VRCUdonUdonBehaviour_19 = null;
+            Private___intnl_SystemSingle_1 = null;
+            Private___intnl_SystemObject_1 = null;
+            Private___const_SystemString_7 = null;
+            Private___const_SystemSingle_1 = null;
+            Private___gintnl_SystemUInt32_51 = null;
+            Private___gintnl_SystemUInt32_41 = null;
+            Private___gintnl_SystemUInt32_71 = null;
+            Private___gintnl_SystemUInt32_61 = null;
+            Private___gintnl_SystemUInt32_11 = null;
+            Private___gintnl_SystemUInt32_31 = null;
+            Private___gintnl_SystemUInt32_21 = null;
+            Private_cachedIsDead = null;
+            Private___intnl_SystemBoolean_17 = null;
+            Private___intnl_SystemBoolean_27 = null;
+            Private___intnl_SystemBoolean_37 = null;
+            Private___intnl_SystemBoolean_47 = null;
+            Private___intnl_SystemBoolean_57 = null;
+            Private___const_SystemInt32_10 = null;
+            Private___const_SystemInt32_30 = null;
+            Private___const_SystemInt32_20 = null;
+            Private___const_SystemInt32_40 = null;
+            Private___const_VRCUdonCommonEnumsEventTiming_0 = null;
+            Private_isGuard = null;
+            Private___intnl_SystemInt32_11 = null;
+            Private___intnl_SystemInt32_31 = null;
+            Private___intnl_SystemInt32_21 = null;
+            Private___intnl_SystemInt32_41 = null;
+            Private___0_sus__param = null;
+            Private___this_VRCUdonUdonBehaviour_21 = null;
+            Private___this_VRCUdonUdonBehaviour_11 = null;
+            Private___const_SystemString_36 = null;
+            Private___const_SystemString_37 = null;
+            Private___const_SystemString_34 = null;
+            Private___const_SystemString_35 = null;
+            Private___const_SystemString_32 = null;
+            Private___const_SystemString_33 = null;
+            Private___const_SystemString_30 = null;
+            Private___const_SystemString_31 = null;
+            Private___const_SystemString_38 = null;
+            Private___const_SystemString_39 = null;
+            Private___intnl_SystemSingle_9 = null;
+            Private___intnl_UnityEngineObject_16 = null;
+            Private_maxArmor = null;
+            Private_armor = null;
+            Private___1_hp__param = null;
+            Private___intnl_returnJump_SystemUInt32_0 = null;
+            Private___0_hp__param = null;
+            Private___const_SystemString_4 = null;
+            Private_instaHealDelay = null;
+            Private___gintnl_SystemUInt32_59 = null;
+            Private___gintnl_SystemUInt32_49 = null;
+            Private___gintnl_SystemUInt32_69 = null;
+            Private___gintnl_SystemUInt32_19 = null;
+            Private___gintnl_SystemUInt32_39 = null;
+            Private___gintnl_SystemUInt32_29 = null;
+            Private___const_SystemSingle_4 = null;
+            Private___2_hp__param = null;
+            Private___const_SystemInt32_18 = null;
+            Private___const_SystemInt32_38 = null;
+            Private___const_SystemInt32_28 = null;
+            Private___gintnl_SystemUInt32_52 = null;
+            Private___gintnl_SystemUInt32_42 = null;
+            Private___gintnl_SystemUInt32_72 = null;
+            Private___gintnl_SystemUInt32_62 = null;
+            Private___gintnl_SystemUInt32_12 = null;
+            Private___gintnl_SystemUInt32_32 = null;
+            Private___gintnl_SystemUInt32_22 = null;
+            Private___intnl_SystemObject_63 = null;
+            Private___intnl_SystemObject_62 = null;
+            Private___const_SystemInt32_15 = null;
+            Private___const_SystemInt32_35 = null;
+            Private___const_SystemInt32_25 = null;
+            Private___const_SystemInt32_45 = null;
+            Private___lcl_tagHeight_SystemSingle_0 = null;
+            Private___this_VRCUdonUdonBehaviour_26 = null;
+            Private___this_VRCUdonUdonBehaviour_16 = null;
+            Private___intnl_SystemSingle_4 = null;
+            Private_scorecard = null;
+            Private_cachedHealth = null;
+            Private___const_SystemString_9 = null;
+            Private___intnl_UnityEngineVector3_2 = null;
+            Private___intnl_SystemBoolean_12 = null;
+            Private___intnl_SystemBoolean_22 = null;
+            Private___intnl_SystemBoolean_32 = null;
+            Private___intnl_SystemBoolean_42 = null;
+            Private___intnl_SystemBoolean_52 = null;
+            Private___gintnl_SystemUInt32_57 = null;
+            Private___gintnl_SystemUInt32_47 = null;
+            Private___gintnl_SystemUInt32_77 = null;
+            Private___gintnl_SystemUInt32_67 = null;
+            Private___gintnl_SystemUInt32_17 = null;
+            Private___gintnl_SystemUInt32_37 = null;
+            Private___gintnl_SystemUInt32_27 = null;
+            Private_spectateCamera = null;
+            Private___intnl_SystemInt32_16 = null;
+            Private___intnl_SystemInt32_36 = null;
+            Private___intnl_SystemInt32_26 = null;
+            Private___refl_typename = null;
+            Private_lastDamageTime = null;
+            Private_photoCamera = null;
+            Private_killedByLocal = null;
+            Private___intnl_SystemInt32_1 = null;
+            Private___intnl_SystemInt32_0 = null;
+            Private___intnl_SystemInt32_3 = null;
+            Private___intnl_SystemInt32_2 = null;
+            Private___intnl_SystemInt32_5 = null;
+            Private___intnl_SystemInt32_4 = null;
+            Private___intnl_SystemInt32_7 = null;
+            Private___intnl_SystemInt32_6 = null;
+            Private___intnl_SystemInt32_9 = null;
+            Private___intnl_SystemInt32_8 = null;
+            Private_isPlaying = null;
+            Private___const_SystemString_56 = null;
+            Private___const_SystemString_57 = null;
+            Private___const_SystemString_54 = null;
+            Private___const_SystemString_55 = null;
+            Private___const_SystemString_52 = null;
+            Private___const_SystemString_53 = null;
+            Private___const_SystemString_50 = null;
+            Private___const_SystemString_51 = null;
+            Private___const_SystemString_58 = null;
+            Private___const_SystemString_59 = null;
+            Private___0_t__param = null;
+            Private___intnl_SystemSingle_3 = null;
+            Private___intnl_SystemUInt16_0 = null;
+            Private_isSuspicious = null;
+            Private___const_SystemString_1 = null;
+            Private___const_SystemSingle_3 = null;
+            Private___intnl_UnityEngineVector3_1 = null;
+            Private___intnl_SystemBoolean_15 = null;
+            Private___intnl_SystemBoolean_25 = null;
+            Private___intnl_SystemBoolean_35 = null;
+            Private___intnl_SystemBoolean_45 = null;
+            Private___intnl_SystemBoolean_55 = null;
+            Private___const_SystemInt32_12 = null;
+            Private___const_SystemInt32_32 = null;
+            Private___const_SystemInt32_22 = null;
+            Private___const_SystemInt32_42 = null;
+            Private___intnl_SystemInt32_13 = null;
+            Private___intnl_SystemInt32_33 = null;
+            Private___intnl_SystemInt32_23 = null;
+            Private_cachedIsPlaying = null;
+            Private___intnl_SystemInt32_18 = null;
+            Private___intnl_SystemInt32_38 = null;
+            Private___intnl_SystemInt32_28 = null;
+            Private_cachedHasKeycard = null;
+            Private___this_VRCUdonUdonBehaviour_23 = null;
+            Private___this_VRCUdonUdonBehaviour_13 = null;
+            Private___this_VRCUdonUdonBehaviour_18 = null;
+            Private___intnl_VRCUdonUdonBehaviour_53 = null;
+            Private___intnl_VRCUdonUdonBehaviour_55 = null;
+            Private___intnl_VRCUdonUdonBehaviour_56 = null;
+            Private___const_SystemString_6 = null;
+            Private___intnl_UnityEngineVector3_4 = null;
+            Private___gintnl_SystemUInt32_50 = null;
+            Private___gintnl_SystemUInt32_40 = null;
+            Private___gintnl_SystemUInt32_70 = null;
+            Private___gintnl_SystemUInt32_60 = null;
+            Private___gintnl_SystemUInt32_10 = null;
+            Private___gintnl_SystemUInt32_30 = null;
+            Private___gintnl_SystemUInt32_20 = null;
+            Private___const_SystemInt32_17 = null;
+            Private___const_SystemInt32_37 = null;
+            Private___const_SystemInt32_27 = null;
+            Private___const_SystemInt32_47 = null;
+            Private___intnl_SystemInt32_10 = null;
+            Private___intnl_SystemInt32_30 = null;
+            Private___intnl_SystemInt32_20 = null;
+            Private___intnl_SystemInt32_40 = null;
+            Private___1_damage__param = null;
+            Private___this_UnityEngineGameObject_0 = null;
+            Private___this_VRCUdonUdonBehaviour_20 = null;
+            Private___this_VRCUdonUdonBehaviour_10 = null;
+            Private___const_SystemString_26 = null;
+            Private___const_SystemString_27 = null;
+            Private___const_SystemString_24 = null;
+            Private___const_SystemString_25 = null;
+            Private___const_SystemString_22 = null;
+            Private___const_SystemString_23 = null;
+            Private___const_SystemString_20 = null;
+            Private___const_SystemString_21 = null;
+            Private___const_SystemString_28 = null;
+            Private___const_SystemString_29 = null;
+            Private___intnl_SystemSingle_6 = null;
+            Private___intnl_UnityEngineObject_17 = null;
+            Private_healthRegenAmt = null;
+            Private___0_playing__param = null;
+            Private_hitboxRoot = null;
+            Private_joinedRound = null;
+            Private_tagHeightMin = null;
+            Private___gintnl_SystemUInt32_58 = null;
+            Private___gintnl_SystemUInt32_48 = null;
+            Private___gintnl_SystemUInt32_78 = null;
+            Private___gintnl_SystemUInt32_68 = null;
+            Private___gintnl_SystemUInt32_18 = null;
+            Private___gintnl_SystemUInt32_38 = null;
+            Private___gintnl_SystemUInt32_28 = null;
+            Private_teamTagObj = null;
+            Private_isDead = null;
+            Private___intnl_SystemBoolean_10 = null;
+            Private___intnl_SystemBoolean_20 = null;
+            Private___intnl_SystemBoolean_30 = null;
+            Private___intnl_SystemBoolean_40 = null;
+            Private___intnl_SystemBoolean_50 = null;
+            Private___intnl_SystemBoolean_60 = null;
+            Private___gintnl_SystemUInt32_55 = null;
+            Private___gintnl_SystemUInt32_45 = null;
+            Private___gintnl_SystemUInt32_75 = null;
+            Private___gintnl_SystemUInt32_65 = null;
+            Private___gintnl_SystemUInt32_15 = null;
+            Private___gintnl_SystemUInt32_35 = null;
+            Private___gintnl_SystemUInt32_25 = null;
+            Private_gameManager = null;
+            Private_permaSuspicious = null;
+            Private___const_SystemInt32_9 = null;
+            Private___const_SystemInt32_8 = null;
+            Private___const_SystemInt32_1 = null;
+            Private___const_SystemInt32_0 = null;
+            Private___const_SystemInt32_3 = null;
+            Private___const_SystemInt32_2 = null;
+            Private___const_SystemInt32_5 = null;
+            Private___const_SystemInt32_4 = null;
+            Private___const_SystemInt32_7 = null;
+            Private___const_SystemInt32_6 = null;
+            Private___const_SystemInt32_14 = null;
+            Private___const_SystemInt32_34 = null;
+            Private___const_SystemInt32_24 = null;
+            Private___const_SystemInt32_44 = null;
+            Private_deathLoc = null;
+            Private___lcl_startArmor_SystemUInt16_0 = null;
+            Private___intnl_SystemBoolean_8 = null;
+            Private___intnl_SystemBoolean_9 = null;
+            Private___intnl_SystemBoolean_0 = null;
+            Private___intnl_SystemBoolean_1 = null;
+            Private___intnl_SystemBoolean_2 = null;
+            Private___intnl_SystemBoolean_3 = null;
+            Private___intnl_SystemBoolean_4 = null;
+            Private___intnl_SystemBoolean_5 = null;
+            Private___intnl_SystemBoolean_6 = null;
+            Private___intnl_SystemBoolean_7 = null;
+            Private___this_VRCUdonUdonBehaviour_25 = null;
+            Private___this_VRCUdonUdonBehaviour_15 = null;
+            Private___0_wanted__param = null;
+            Private___const_SystemString_72 = null;
+            Private___const_SystemString_70 = null;
+            Private___const_SystemString_71 = null;
+            Private___intnl_SystemSingle_5 = null;
+            Private_playerName = null;
+            Private___const_SystemString_3 = null;
+            Private___this_VRCUdonUdonBehaviour_9 = null;
+            Private___this_VRCUdonUdonBehaviour_8 = null;
+            Private___this_VRCUdonUdonBehaviour_3 = null;
+            Private___this_VRCUdonUdonBehaviour_2 = null;
+            Private___this_VRCUdonUdonBehaviour_1 = null;
+            Private___this_VRCUdonUdonBehaviour_0 = null;
+            Private___this_VRCUdonUdonBehaviour_7 = null;
+            Private___this_VRCUdonUdonBehaviour_6 = null;
+            Private___this_VRCUdonUdonBehaviour_5 = null;
+            Private___this_VRCUdonUdonBehaviour_4 = null;
+            Private_teamTag = null;
+            Private___const_SystemString_8 = null;
+            Private___intnl_SystemBoolean_18 = null;
+            Private___intnl_SystemBoolean_28 = null;
+            Private___intnl_SystemBoolean_38 = null;
+            Private___intnl_SystemBoolean_48 = null;
+            Private___intnl_SystemBoolean_58 = null;
+            Private_hasKeycard = null;
+            Private___intnl_UnityEngineVector3_3 = null;
+        }
 
-        private static RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        #region Getter / Setters AstroUdonVariables  of PlayerData
 
-
-        #region Getter / Setters UdonVariables  of PlayerData
-
-        internal int? __18_const_intnl_SystemInt32
+        internal bool? __intnl_SystemBoolean_13
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___18_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemBoolean_13 != null)
                 {
-                    return Private___18_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemBoolean_13.Value;
                 }
 
                 return null;
@@ -332,9 +1219,134 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___18_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemBoolean_13 != null)
                     {
-                        Private___18_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_13.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_23
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_23 != null)
+                {
+                    return Private___intnl_SystemBoolean_23.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_23 != null)
+                    {
+                        Private___intnl_SystemBoolean_23.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_33
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_33 != null)
+                {
+                    return Private___intnl_SystemBoolean_33.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_33 != null)
+                    {
+                        Private___intnl_SystemBoolean_33.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_43
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_43 != null)
+                {
+                    return Private___intnl_SystemBoolean_43.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_43 != null)
+                    {
+                        Private___intnl_SystemBoolean_43.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_53
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_53 != null)
+                {
+                    return Private___intnl_SystemBoolean_53.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_53 != null)
+                    {
+                        Private___intnl_SystemBoolean_53.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal ushort? cachedTimesWanted
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedTimesWanted != null)
+                {
+                    return Private_cachedTimesWanted.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private_cachedTimesWanted != null)
+                    {
+                        Private_cachedTimesWanted.Value = value.Value;
                     }
                 }
             }
@@ -365,14 +1377,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __43_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_56
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___43_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_56 != null)
                 {
-                    return Private___43_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_56.Value;
                 }
 
                 return null;
@@ -382,44 +1394,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___43_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_56 != null)
                     {
-                        Private___43_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_56.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __33_const_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_46
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___33_const_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_46 != null)
                 {
-                    return Private___33_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___33_const_intnl_SystemString != null)
-                {
-                    Private___33_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __20_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___20_const_intnl_SystemInt32 != null)
-                {
-                    return Private___20_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_46.Value;
                 }
 
                 return null;
@@ -429,22 +1419,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___20_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_46 != null)
                     {
-                        Private___20_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_46.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __23_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_76
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___23_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_76 != null)
                 {
-                    return Private___23_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_76.Value;
                 }
 
                 return null;
@@ -454,44 +1444,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___23_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_76 != null)
                     {
-                        Private___23_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_76.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.GameObject __1_intnl_UnityEngineGameObject
+        internal uint? __gintnl_SystemUInt32_66
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_UnityEngineGameObject != null)
+                if (Private___gintnl_SystemUInt32_66 != null)
                 {
-                    return Private___1_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_UnityEngineGameObject != null)
-                {
-                    Private___1_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __21_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___21_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___21_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_66.Value;
                 }
 
                 return null;
@@ -501,22 +1469,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___21_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_66 != null)
                     {
-                        Private___21_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_66.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __52_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_16
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___52_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_16 != null)
                 {
-                    return Private___52_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_16.Value;
                 }
 
                 return null;
@@ -526,44 +1494,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___52_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_16 != null)
                     {
-                        Private___52_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_16.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __3_const_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_36
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___3_const_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_36 != null)
                 {
-                    return Private___3_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___3_const_intnl_SystemString != null)
-                {
-                    Private___3_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __6_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___6_const_intnl_SystemInt32 != null)
-                {
-                    return Private___6_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_36.Value;
                 }
 
                 return null;
@@ -573,44 +1519,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___6_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_36 != null)
                     {
-                        Private___6_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_36.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __0_intnl_PlayerData
+        internal uint? __gintnl_SystemUInt32_26
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_PlayerData != null)
+                if (Private___gintnl_SystemUInt32_26 != null)
                 {
-                    return Private___0_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_PlayerData != null)
-                {
-                    Private___0_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal uint? __3_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___3_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_26.Value;
                 }
 
                 return null;
@@ -620,22 +1544,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___3_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_26 != null)
                     {
-                        Private___3_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_26.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __26_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_15
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___26_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_15 != null)
                 {
-                    return Private___26_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_15.Value;
                 }
 
                 return null;
@@ -645,22 +1569,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___26_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_15 != null)
                     {
-                        Private___26_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_15.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __0_const_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_35
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_35 != null)
                 {
-                    return Private___0_const_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_35.Value;
                 }
 
                 return null;
@@ -670,22 +1594,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_const_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_35 != null)
                     {
-                        Private___0_const_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_35.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __41_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_25
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___41_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_25 != null)
                 {
-                    return Private___41_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_25.Value;
                 }
 
                 return null;
@@ -695,44 +1619,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___41_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_25 != null)
                     {
-                        Private___41_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_25.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Transform __1_intnl_UnityEngineTransform
+        internal bool? __lcl_wasActive_SystemBoolean_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_UnityEngineTransform != null)
+                if (Private___lcl_wasActive_SystemBoolean_0 != null)
                 {
-                    return Private___1_intnl_UnityEngineTransform.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_UnityEngineTransform != null)
-                {
-                    Private___1_intnl_UnityEngineTransform.Value = value;
-                }
-            }
-        }
-
-        internal int? __1_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_const_intnl_SystemInt32 != null)
-                {
-                    return Private___1_const_intnl_SystemInt32.Value;
+                    return Private___lcl_wasActive_SystemBoolean_0.Value;
                 }
 
                 return null;
@@ -742,22 +1644,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_const_intnl_SystemInt32 != null)
+                    if (Private___lcl_wasActive_SystemBoolean_0 != null)
                     {
-                        Private___1_const_intnl_SystemInt32.Value = value.Value;
+                        Private___lcl_wasActive_SystemBoolean_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __0_intnl_PlayerObjectPool
+        internal string __const_SystemString_46
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_PlayerObjectPool != null)
+                if (Private___const_SystemString_46 != null)
                 {
-                    return Private___0_intnl_PlayerObjectPool.Value;
+                    return Private___const_SystemString_46.Value;
                 }
 
                 return null;
@@ -765,21 +1667,219 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___0_intnl_PlayerObjectPool != null)
+                if (Private___const_SystemString_46 != null)
                 {
-                    Private___0_intnl_PlayerObjectPool.Value = value;
+                    Private___const_SystemString_46.Value = value;
                 }
             }
         }
 
-        internal int? __1_intnl_SystemInt32
+        internal string __const_SystemString_47
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_SystemInt32 != null)
+                if (Private___const_SystemString_47 != null)
                 {
-                    return Private___1_intnl_SystemInt32.Value;
+                    return Private___const_SystemString_47.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_47 != null)
+                {
+                    Private___const_SystemString_47.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_44
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_44 != null)
+                {
+                    return Private___const_SystemString_44.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_44 != null)
+                {
+                    Private___const_SystemString_44.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_45
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_45 != null)
+                {
+                    return Private___const_SystemString_45.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_45 != null)
+                {
+                    Private___const_SystemString_45.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_42
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_42 != null)
+                {
+                    return Private___const_SystemString_42.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_42 != null)
+                {
+                    Private___const_SystemString_42.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_43
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_43 != null)
+                {
+                    return Private___const_SystemString_43.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_43 != null)
+                {
+                    Private___const_SystemString_43.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_40
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_40 != null)
+                {
+                    return Private___const_SystemString_40.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_40 != null)
+                {
+                    Private___const_SystemString_40.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_41
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_41 != null)
+                {
+                    return Private___const_SystemString_41.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_41 != null)
+                {
+                    Private___const_SystemString_41.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_48
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_48 != null)
+                {
+                    return Private___const_SystemString_48.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_48 != null)
+                {
+                    Private___const_SystemString_48.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_49
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_49 != null)
+                {
+                    return Private___const_SystemString_49.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_49 != null)
+                {
+                    Private___const_SystemString_49.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_0 != null)
+                {
+                    return Private___intnl_SystemSingle_0.Value;
                 }
 
                 return null;
@@ -789,22 +1889,66 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemSingle_0 != null)
                     {
-                        Private___1_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemSingle_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __16_const_intnl_exitJumpLoc_UInt32
+        internal UnityEngine.Transform __intnl_SystemObject_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___16_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemObject_0 != null)
                 {
-                    return Private___16_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemObject_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_0 != null)
+                {
+                    Private___intnl_SystemObject_0.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_0 != null)
+                {
+                    return Private___const_SystemString_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_0 != null)
+                {
+                    Private___const_SystemString_0.Value = value;
+                }
+            }
+        }
+
+        internal bool? cachedIsSuspicious
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedIsSuspicious != null)
+                {
+                    return Private_cachedIsSuspicious.Value;
                 }
 
                 return null;
@@ -814,44 +1958,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___16_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private_cachedIsSuspicious != null)
                     {
-                        Private___16_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private_cachedIsSuspicious.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Transform __2_intnl_SystemObject
+        internal ushort? timesWanted
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_intnl_SystemObject != null)
+                if (Private_timesWanted != null)
                 {
-                    return Private___2_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_intnl_SystemObject != null)
-                {
-                    Private___2_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.Common.Enums.EventTiming? __0_const_intnl_VRCUdonCommonEnumsEventTiming
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
-                {
-                    return Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value;
+                    return Private_timesWanted.Value;
                 }
 
                 return null;
@@ -861,22 +1983,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_const_intnl_VRCUdonCommonEnumsEventTiming != null)
+                    if (Private_timesWanted != null)
                     {
-                        Private___0_const_intnl_VRCUdonCommonEnumsEventTiming.Value = value.Value;
+                        Private_timesWanted.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __35_const_intnl_exitJumpLoc_UInt32
+        internal float? __const_SystemSingle_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___35_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemSingle_0 != null)
                 {
-                    return Private___35_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemSingle_0.Value;
                 }
 
                 return null;
@@ -886,22 +2008,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___35_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemSingle_0 != null)
                     {
-                        Private___35_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemSingle_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __39_const_intnl_exitJumpLoc_UInt32
+        internal bool? taken
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___39_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private_taken != null)
                 {
-                    return Private___39_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private_taken.Value;
                 }
 
                 return null;
@@ -911,9 +2033,234 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___39_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private_taken != null)
                     {
-                        Private___39_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private_taken.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_16
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_16 != null)
+                {
+                    return Private___intnl_SystemBoolean_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_16 != null)
+                    {
+                        Private___intnl_SystemBoolean_16.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_26
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_26 != null)
+                {
+                    return Private___intnl_SystemBoolean_26.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_26 != null)
+                    {
+                        Private___intnl_SystemBoolean_26.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_36
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_36 != null)
+                {
+                    return Private___intnl_SystemBoolean_36.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_36 != null)
+                    {
+                        Private___intnl_SystemBoolean_36.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_46
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_46 != null)
+                {
+                    return Private___intnl_SystemBoolean_46.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_46 != null)
+                    {
+                        Private___intnl_SystemBoolean_46.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_56
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_56 != null)
+                {
+                    return Private___intnl_SystemBoolean_56.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_56 != null)
+                    {
+                        Private___intnl_SystemBoolean_56.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_11 != null)
+                {
+                    return Private___const_SystemInt32_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_11 != null)
+                    {
+                        Private___const_SystemInt32_11.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_31
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_31 != null)
+                {
+                    return Private___const_SystemInt32_31.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_31 != null)
+                    {
+                        Private___const_SystemInt32_31.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_21
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_21 != null)
+                {
+                    return Private___const_SystemInt32_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_21 != null)
+                    {
+                        Private___const_SystemInt32_21.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_41
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_41 != null)
+                {
+                    return Private___const_SystemInt32_41.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_41 != null)
+                    {
+                        Private___const_SystemInt32_41.Value = value.Value;
                     }
                 }
             }
@@ -944,36 +2291,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __0_const_intnl_SystemString
+        internal float? __intnl_SystemSingle_10
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_SystemString != null)
+                if (Private___intnl_SystemSingle_10 != null)
                 {
-                    return Private___0_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_const_intnl_SystemString != null)
-                {
-                    Private___0_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __56_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___56_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___56_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemSingle_10.Value;
                 }
 
                 return null;
@@ -983,22 +2308,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___56_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemSingle_10 != null)
                     {
-                        Private___56_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemSingle_10.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __42_intnl_SystemBoolean
+        internal float? __intnl_SystemSingle_11
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___42_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemSingle_11 != null)
                 {
-                    return Private___42_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemSingle_11.Value;
                 }
 
                 return null;
@@ -1008,22 +2333,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___42_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemSingle_11 != null)
                     {
-                        Private___42_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemSingle_11.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __0_const_intnl_SystemSingle
+        internal float? __intnl_SystemSingle_12
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_SystemSingle != null)
+                if (Private___intnl_SystemSingle_12 != null)
                 {
-                    return Private___0_const_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemSingle_12.Value;
                 }
 
                 return null;
@@ -1033,22 +2358,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_const_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemSingle_12 != null)
                     {
-                        Private___0_const_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemSingle_12.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __29_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_12
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___29_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_12 != null)
                 {
-                    return Private___29_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_12.Value;
                 }
 
                 return null;
@@ -1058,22 +2383,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___29_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_12 != null)
                     {
-                        Private___29_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_12.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __1_intnl_SystemSingle
+        internal int? __intnl_SystemInt32_32
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_SystemSingle != null)
+                if (Private___intnl_SystemInt32_32 != null)
                 {
-                    return Private___1_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemInt32_32.Value;
                 }
 
                 return null;
@@ -1083,22 +2408,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemInt32_32 != null)
                     {
-                        Private___1_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemInt32_32.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __7_const_intnl_SystemInt32
+        internal int? __intnl_SystemInt32_22
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___7_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_22 != null)
                 {
-                    return Private___7_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemInt32_22.Value;
                 }
 
                 return null;
@@ -1108,44 +2433,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___7_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemInt32_22 != null)
                     {
-                        Private___7_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_22.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __9_intnl_SystemObject
+        internal int? __intnl_SystemInt32_42
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___9_intnl_SystemObject != null)
+                if (Private___intnl_SystemInt32_42 != null)
                 {
-                    return Private___9_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___9_intnl_SystemObject != null)
-                {
-                    Private___9_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __5_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_intnl_SystemBoolean != null)
-                {
-                    return Private___5_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_42.Value;
                 }
 
                 return null;
@@ -1155,10 +2458,54 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___5_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_42 != null)
                     {
-                        Private___5_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_42.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_22
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_22 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_22.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_22 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_22.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_12
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_12 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_12.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_12 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_12.Value = value;
                 }
             }
         }
@@ -1188,14 +2535,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __46_const_intnl_exitJumpLoc_UInt32
+        internal float? __intnl_SystemSingle_8
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___46_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemSingle_8 != null)
                 {
-                    return Private___46_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemSingle_8.Value;
                 }
 
                 return null;
@@ -1205,22 +2552,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___46_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemSingle_8 != null)
                     {
-                        Private___46_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemSingle_8.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __35_const_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_9
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___35_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_9 != null)
                 {
-                    return Private___35_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_9.Value;
                 }
 
                 return null;
@@ -1230,9 +2577,309 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___35_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_9 != null)
                     {
-                        Private___35_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_9.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_8 != null)
+                {
+                    return Private___gintnl_SystemUInt32_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_8 != null)
+                    {
+                        Private___gintnl_SystemUInt32_8.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_5 != null)
+                {
+                    return Private___gintnl_SystemUInt32_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_5 != null)
+                    {
+                        Private___gintnl_SystemUInt32_5.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_4 != null)
+                {
+                    return Private___gintnl_SystemUInt32_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_4 != null)
+                    {
+                        Private___gintnl_SystemUInt32_4.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_7 != null)
+                {
+                    return Private___gintnl_SystemUInt32_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_7 != null)
+                    {
+                        Private___gintnl_SystemUInt32_7.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_6 != null)
+                {
+                    return Private___gintnl_SystemUInt32_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_6 != null)
+                    {
+                        Private___gintnl_SystemUInt32_6.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_1 != null)
+                {
+                    return Private___gintnl_SystemUInt32_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_1 != null)
+                    {
+                        Private___gintnl_SystemUInt32_1.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_0 != null)
+                {
+                    return Private___gintnl_SystemUInt32_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_0 != null)
+                    {
+                        Private___gintnl_SystemUInt32_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_3 != null)
+                {
+                    return Private___gintnl_SystemUInt32_3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_3 != null)
+                    {
+                        Private___gintnl_SystemUInt32_3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_2 != null)
+                {
+                    return Private___gintnl_SystemUInt32_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_2 != null)
+                    {
+                        Private___gintnl_SystemUInt32_2.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __const_SystemBoolean_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemBoolean_0 != null)
+                {
+                    return Private___const_SystemBoolean_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemBoolean_0 != null)
+                    {
+                        Private___const_SystemBoolean_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __const_SystemBoolean_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemBoolean_1 != null)
+                {
+                    return Private___const_SystemBoolean_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemBoolean_1 != null)
+                    {
+                        Private___const_SystemBoolean_1.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal ushort? __const_SystemUInt16_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemUInt16_0 != null)
+                {
+                    return Private___const_SystemUInt16_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemUInt16_0 != null)
+                    {
+                        Private___const_SystemUInt16_0.Value = value.Value;
                     }
                 }
             }
@@ -1260,14 +2907,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __10_const_intnl_exitJumpLoc_UInt32
+        internal int? __0_count__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___0_count__param != null)
                 {
-                    return Private___10_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___0_count__param.Value;
                 }
 
                 return null;
@@ -1277,22 +2924,44 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___10_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___0_count__param != null)
                     {
-                        Private___10_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___0_count__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __11_const_intnl_SystemInt32
+        internal string __const_SystemString_5
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___11_const_intnl_SystemInt32 != null)
+                if (Private___const_SystemString_5 != null)
                 {
-                    return Private___11_const_intnl_SystemInt32.Value;
+                    return Private___const_SystemString_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_5 != null)
+                {
+                    Private___const_SystemString_5.Value = value;
+                }
+            }
+        }
+
+        internal int? __0_damage__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_damage__param != null)
+                {
+                    return Private___0_damage__param.Value;
                 }
 
                 return null;
@@ -1302,200 +2971,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___11_const_intnl_SystemInt32 != null)
+                    if (Private___0_damage__param != null)
                     {
-                        Private___11_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal uint? __0_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___0_const_intnl_exitJumpLoc_UInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___0_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___0_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __2_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_intnl_PlayerObjectPool != null)
-                {
-                    return Private___2_intnl_PlayerObjectPool.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_intnl_PlayerObjectPool != null)
-                {
-                    Private___2_intnl_PlayerObjectPool.Value = value;
-                }
-            }
-        }
-
-        internal bool? __15_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___15_intnl_SystemBoolean != null)
-                {
-                    return Private___15_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___15_intnl_SystemBoolean != null)
-                    {
-                        Private___15_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal uint? __24_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___24_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___24_const_intnl_exitJumpLoc_UInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___24_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___24_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __34_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___34_intnl_SystemBoolean != null)
-                {
-                    return Private___34_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___34_intnl_SystemBoolean != null)
-                    {
-                        Private___34_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal string __28_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___28_const_intnl_SystemString != null)
-                {
-                    return Private___28_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___28_const_intnl_SystemString != null)
-                {
-                    Private___28_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.Transform __2_intnl_UnityEngineTransform
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_intnl_UnityEngineTransform != null)
-                {
-                    return Private___2_intnl_UnityEngineTransform.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_intnl_UnityEngineTransform != null)
-                {
-                    Private___2_intnl_UnityEngineTransform.Value = value;
-                }
-            }
-        }
-
-        internal uint? __28_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___28_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___28_const_intnl_exitJumpLoc_UInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___28_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___28_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___0_damage__param.Value = value.Value;
                     }
                 }
             }
@@ -1526,53 +3004,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __6_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___6_const_intnl_SystemString != null)
-                {
-                    return Private___6_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___6_const_intnl_SystemString != null)
-                {
-                    Private___6_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __21_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___21_intnl_SystemBoolean != null)
-                {
-                    return Private___21_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___21_intnl_SystemBoolean != null)
-                    {
-                        Private___21_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal bool? cachedIsWanted
         {
             [HideFromIl2Cpp]
@@ -1598,36 +3029,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __5_intnl_PlayerObjectPool
+        internal int? __const_SystemInt32_19
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___5_intnl_PlayerObjectPool != null)
+                if (Private___const_SystemInt32_19 != null)
                 {
-                    return Private___5_intnl_PlayerObjectPool.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___5_intnl_PlayerObjectPool != null)
-                {
-                    Private___5_intnl_PlayerObjectPool.Value = value;
-                }
-            }
-        }
-
-        internal uint? __5_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___5_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_19.Value;
                 }
 
                 return null;
@@ -1637,22 +3046,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___5_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_19 != null)
                     {
-                        Private___5_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_19.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __13_intnl_SystemBoolean
+        internal int? __const_SystemInt32_39
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___13_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_39 != null)
                 {
-                    return Private___13_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_39.Value;
                 }
 
                 return null;
@@ -1662,22 +3071,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___13_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_39 != null)
                     {
-                        Private___13_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_39.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __50_const_intnl_exitJumpLoc_UInt32
+        internal int? __const_SystemInt32_29
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___50_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_29 != null)
                 {
-                    return Private___50_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_29.Value;
                 }
 
                 return null;
@@ -1687,44 +3096,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___50_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_29 != null)
                     {
-                        Private___50_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_29.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __1_const_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_53
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_const_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_53 != null)
                 {
-                    return Private___1_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_const_intnl_SystemString != null)
-                {
-                    Private___1_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __4_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_const_intnl_SystemInt32 != null)
-                {
-                    return Private___4_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_53.Value;
                 }
 
                 return null;
@@ -1734,22 +3121,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___4_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_53 != null)
                     {
-                        Private___4_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_53.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __64_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_43
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___64_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_43 != null)
                 {
-                    return Private___64_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_43.Value;
                 }
 
                 return null;
@@ -1759,66 +3146,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___64_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_43 != null)
                     {
-                        Private___64_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_43.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __40_const_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_73
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___40_const_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_73 != null)
                 {
-                    return Private___40_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___40_const_intnl_SystemString != null)
-                {
-                    Private___40_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __29_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___29_const_intnl_SystemString != null)
-                {
-                    return Private___29_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___29_const_intnl_SystemString != null)
-                {
-                    Private___29_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal float? __1_const_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_const_intnl_SystemSingle != null)
-                {
-                    return Private___1_const_intnl_SystemSingle.Value;
+                    return Private___gintnl_SystemUInt32_73.Value;
                 }
 
                 return null;
@@ -1828,22 +3171,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_const_intnl_SystemSingle != null)
+                    if (Private___gintnl_SystemUInt32_73 != null)
                     {
-                        Private___1_const_intnl_SystemSingle.Value = value.Value;
+                        Private___gintnl_SystemUInt32_73.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __23_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_63
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___23_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_63 != null)
                 {
-                    return Private___23_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_63.Value;
                 }
 
                 return null;
@@ -1853,22 +3196,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___23_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_63 != null)
                     {
-                        Private___23_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_63.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __5_intnl_SystemSingle
+        internal uint? __gintnl_SystemUInt32_13
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___5_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_13 != null)
                 {
-                    return Private___5_intnl_SystemSingle.Value;
+                    return Private___gintnl_SystemUInt32_13.Value;
                 }
 
                 return null;
@@ -1878,22 +3221,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___5_intnl_SystemSingle != null)
+                    if (Private___gintnl_SystemUInt32_13 != null)
                     {
-                        Private___5_intnl_SystemSingle.Value = value.Value;
+                        Private___gintnl_SystemUInt32_13.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __25_const_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_33
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___25_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_33 != null)
                 {
-                    return Private___25_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_33.Value;
                 }
 
                 return null;
@@ -1903,22 +3246,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___25_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_33 != null)
                     {
-                        Private___25_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_33.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __40_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_23
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___40_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_23 != null)
                 {
-                    return Private___40_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_23.Value;
                 }
 
                 return null;
@@ -1928,22 +3271,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___40_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_23 != null)
                     {
-                        Private___40_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_23.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __2_const_intnl_exitJumpLoc_UInt32
+        internal int? __const_SystemInt32_16
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_16 != null)
                 {
-                    return Private___2_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_16.Value;
                 }
 
                 return null;
@@ -1953,22 +3296,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___2_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_16 != null)
                     {
-                        Private___2_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_16.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __16_intnl_SystemBoolean
+        internal int? __const_SystemInt32_36
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___16_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_36 != null)
                 {
-                    return Private___16_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_36.Value;
                 }
 
                 return null;
@@ -1978,10 +3321,151 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___16_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_36 != null)
                     {
-                        Private___16_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_36.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_26
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_26 != null)
+                {
+                    return Private___const_SystemInt32_26.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_26 != null)
+                    {
+                        Private___const_SystemInt32_26.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_46
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_46 != null)
+                {
+                    return Private___const_SystemInt32_46.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_46 != null)
+                    {
+                        Private___const_SystemInt32_46.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Transform hitboxHead
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_hitboxHead != null)
+                {
+                    return Private_hitboxHead.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_hitboxHead != null)
+                {
+                    Private_hitboxHead.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.Common.Interfaces.NetworkEventTarget? __const_VRCUdonCommonInterfacesNetworkEventTarget_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0 != null)
+                {
+                    return Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0 != null)
+                    {
+                        Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_27 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_27 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_27.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_17 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_17 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_17.Value = value;
                 }
             }
         }
@@ -2011,36 +3495,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __14_const_intnl_SystemString
+        internal bool? __0_enabled__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___14_const_intnl_SystemString != null)
+                if (Private___0_enabled__param != null)
                 {
-                    return Private___14_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___14_const_intnl_SystemString != null)
-                {
-                    Private___14_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __1_mp_hp_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_mp_hp_Int32 != null)
-                {
-                    return Private___1_mp_hp_Int32.Value;
+                    return Private___0_enabled__param.Value;
                 }
 
                 return null;
@@ -2050,22 +3512,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_mp_hp_Int32 != null)
+                    if (Private___0_enabled__param != null)
                     {
-                        Private___1_mp_hp_Int32.Value = value.Value;
+                        Private___0_enabled__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __7_intnl_SystemBoolean
+        internal bool? __0_get_IsInnocent__ret
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___7_intnl_SystemBoolean != null)
+                if (Private___0_get_IsInnocent__ret != null)
                 {
-                    return Private___7_intnl_SystemBoolean.Value;
+                    return Private___0_get_IsInnocent__ret.Value;
                 }
 
                 return null;
@@ -2075,22 +3537,242 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___7_intnl_SystemBoolean != null)
+                    if (Private___0_get_IsInnocent__ret != null)
                     {
-                        Private___7_intnl_SystemBoolean.Value = value.Value;
+                        Private___0_get_IsInnocent__ret.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __22_intnl_SystemBoolean
+        internal string __const_SystemString_16
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___22_intnl_SystemBoolean != null)
+                if (Private___const_SystemString_16 != null)
                 {
-                    return Private___22_intnl_SystemBoolean.Value;
+                    return Private___const_SystemString_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_16 != null)
+                {
+                    Private___const_SystemString_16.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_17 != null)
+                {
+                    return Private___const_SystemString_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_17 != null)
+                {
+                    Private___const_SystemString_17.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_14 != null)
+                {
+                    return Private___const_SystemString_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_14 != null)
+                {
+                    Private___const_SystemString_14.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_15 != null)
+                {
+                    return Private___const_SystemString_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_15 != null)
+                {
+                    Private___const_SystemString_15.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_12
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_12 != null)
+                {
+                    return Private___const_SystemString_12.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_12 != null)
+                {
+                    Private___const_SystemString_12.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_13
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_13 != null)
+                {
+                    return Private___const_SystemString_13.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_13 != null)
+                {
+                    Private___const_SystemString_13.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_10 != null)
+                {
+                    return Private___const_SystemString_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_10 != null)
+                {
+                    Private___const_SystemString_10.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_11 != null)
+                {
+                    return Private___const_SystemString_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_11 != null)
+                {
+                    Private___const_SystemString_11.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_18 != null)
+                {
+                    return Private___const_SystemString_18.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_18 != null)
+                {
+                    Private___const_SystemString_18.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_19
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_19 != null)
+                {
+                    return Private___const_SystemString_19.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_19 != null)
+                {
+                    Private___const_SystemString_19.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_7 != null)
+                {
+                    return Private___intnl_SystemSingle_7.Value;
                 }
 
                 return null;
@@ -2100,22 +3782,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___22_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemSingle_7 != null)
                     {
-                        Private___22_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemSingle_7.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __38_const_intnl_SystemInt32
+        internal long? __refl_typeid
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___38_const_intnl_SystemInt32 != null)
+                if (Private___refl_typeid != null)
                 {
-                    return Private___38_const_intnl_SystemInt32.Value;
+                    return Private___refl_typeid.Value;
                 }
 
                 return null;
@@ -2125,44 +3807,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___38_const_intnl_SystemInt32 != null)
+                    if (Private___refl_typeid != null)
                     {
-                        Private___38_const_intnl_SystemInt32.Value = value.Value;
+                        Private___refl_typeid.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __20_intnl_SystemObject
+        internal uint? __const_SystemUInt32_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___20_intnl_SystemObject != null)
+                if (Private___const_SystemUInt32_0 != null)
                 {
-                    return Private___20_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___20_intnl_SystemObject != null)
-                {
-                    Private___20_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __7_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___7_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemUInt32_0.Value;
                 }
 
                 return null;
@@ -2172,22 +3832,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___7_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemUInt32_0 != null)
                     {
-                        Private___7_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemUInt32_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __37_const_intnl_exitJumpLoc_UInt32
+        internal bool? __0_dead__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___37_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___0_dead__param != null)
                 {
-                    return Private___37_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___0_dead__param.Value;
                 }
 
                 return null;
@@ -2197,88 +3857,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___37_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___0_dead__param != null)
                     {
-                        Private___37_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___0_dead__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __7_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_11
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___7_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_11 != null)
                 {
-                    return Private___7_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___7_const_intnl_SystemString != null)
-                {
-                    Private___7_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __15_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___15_const_intnl_SystemString != null)
-                {
-                    return Private___15_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___15_const_intnl_SystemString != null)
-                {
-                    Private___15_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerObjectPool
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_intnl_PlayerObjectPool != null)
-                {
-                    return Private___4_intnl_PlayerObjectPool.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_PlayerObjectPool != null)
-                {
-                    Private___4_intnl_PlayerObjectPool.Value = value;
-                }
-            }
-        }
-
-        internal bool? __0_mp_playing_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_mp_playing_Boolean != null)
-                {
-                    return Private___0_mp_playing_Boolean.Value;
+                    return Private___intnl_SystemBoolean_11.Value;
                 }
 
                 return null;
@@ -2288,22 +3882,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_playing_Boolean != null)
+                    if (Private___intnl_SystemBoolean_11 != null)
                     {
-                        Private___0_mp_playing_Boolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_11.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __5_const_intnl_SystemInt32
+        internal bool? __intnl_SystemBoolean_21
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___5_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemBoolean_21 != null)
                 {
-                    return Private___5_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemBoolean_21.Value;
                 }
 
                 return null;
@@ -2313,22 +3907,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___5_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemBoolean_21 != null)
                     {
-                        Private___5_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_21.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal long? __refl_const_intnl_udonTypeID
+        internal bool? __intnl_SystemBoolean_31
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___refl_const_intnl_udonTypeID != null)
+                if (Private___intnl_SystemBoolean_31 != null)
                 {
-                    return Private___refl_const_intnl_udonTypeID.Value;
+                    return Private___intnl_SystemBoolean_31.Value;
                 }
 
                 return null;
@@ -2338,22 +3932,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___refl_const_intnl_udonTypeID != null)
+                    if (Private___intnl_SystemBoolean_31 != null)
                     {
-                        Private___refl_const_intnl_udonTypeID.Value = value.Value;
+                        Private___intnl_SystemBoolean_31.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __4_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_41
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_41 != null)
                 {
-                    return Private___4_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_41.Value;
                 }
 
                 return null;
@@ -2363,22 +3957,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___4_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_41 != null)
                     {
-                        Private___4_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_41.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __16_const_intnl_SystemInt32
+        internal bool? __intnl_SystemBoolean_51
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___16_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemBoolean_51 != null)
                 {
-                    return Private___16_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemBoolean_51.Value;
                 }
 
                 return null;
@@ -2388,22 +3982,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___16_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemBoolean_51 != null)
                     {
-                        Private___16_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_51.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __19_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_61
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___19_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_61 != null)
                 {
-                    return Private___19_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_61.Value;
                 }
 
                 return null;
@@ -2413,22 +4007,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___19_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_61 != null)
                     {
-                        Private___19_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_61.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __refl_const_intnl_udonTypeName
+        internal uint? __gintnl_SystemUInt32_54
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___refl_const_intnl_udonTypeName != null)
+                if (Private___gintnl_SystemUInt32_54 != null)
                 {
-                    return Private___refl_const_intnl_udonTypeName.Value;
+                    return Private___gintnl_SystemUInt32_54.Value;
                 }
 
                 return null;
@@ -2436,14 +4030,267 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___refl_const_intnl_udonTypeName != null)
+                if (value.HasValue)
                 {
-                    Private___refl_const_intnl_udonTypeName.Value = value;
+                    if (Private___gintnl_SystemUInt32_54 != null)
+                    {
+                        Private___gintnl_SystemUInt32_54.Value = value.Value;
+                    }
                 }
             }
         }
 
-        internal System.UInt16? health
+        internal uint? __gintnl_SystemUInt32_44
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_44 != null)
+                {
+                    return Private___gintnl_SystemUInt32_44.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_44 != null)
+                    {
+                        Private___gintnl_SystemUInt32_44.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_74
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_74 != null)
+                {
+                    return Private___gintnl_SystemUInt32_74.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_74 != null)
+                    {
+                        Private___gintnl_SystemUInt32_74.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_64
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_64 != null)
+                {
+                    return Private___gintnl_SystemUInt32_64.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_64 != null)
+                    {
+                        Private___gintnl_SystemUInt32_64.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_14 != null)
+                {
+                    return Private___gintnl_SystemUInt32_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_14 != null)
+                    {
+                        Private___gintnl_SystemUInt32_14.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_34
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_34 != null)
+                {
+                    return Private___gintnl_SystemUInt32_34.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_34 != null)
+                    {
+                        Private___gintnl_SystemUInt32_34.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_24
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_24 != null)
+                {
+                    return Private___gintnl_SystemUInt32_24.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_24 != null)
+                    {
+                        Private___gintnl_SystemUInt32_24.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __const_UnityEngineVector3_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_UnityEngineVector3_0 != null)
+                {
+                    return Private___const_UnityEngineVector3_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_UnityEngineVector3_0 != null)
+                    {
+                        Private___const_UnityEngineVector3_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_17 != null)
+                {
+                    return Private___intnl_SystemInt32_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_17 != null)
+                    {
+                        Private___intnl_SystemInt32_17.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_37
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_37 != null)
+                {
+                    return Private___intnl_SystemInt32_37.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_37 != null)
+                    {
+                        Private___intnl_SystemInt32_37.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_27 != null)
+                {
+                    return Private___intnl_SystemInt32_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_27 != null)
+                    {
+                        Private___intnl_SystemInt32_27.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal ushort? health
         {
             [HideFromIl2Cpp]
             get
@@ -2493,36 +4340,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __0_intnl_SystemObject
+        internal bool? canDealDamage
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_SystemObject != null)
+                if (Private_canDealDamage != null)
                 {
-                    return Private___0_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_SystemObject != null)
-                {
-                    Private___0_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __1_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_intnl_SystemBoolean != null)
-                {
-                    return Private___1_intnl_SystemBoolean.Value;
+                    return Private_canDealDamage.Value;
                 }
 
                 return null;
@@ -2532,22 +4357,308 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_intnl_SystemBoolean != null)
+                    if (Private_canDealDamage != null)
                     {
-                        Private___1_intnl_SystemBoolean.Value = value.Value;
+                        Private_canDealDamage.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __38_intnl_SystemBoolean
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_24
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___38_intnl_SystemBoolean != null)
+                if (Private___this_VRCUdonUdonBehaviour_24 != null)
                 {
-                    return Private___38_intnl_SystemBoolean.Value;
+                    return Private___this_VRCUdonUdonBehaviour_24.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_24 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_24.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_14 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_14 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_14.Value = value;
+                }
+            }
+        }
+
+        internal string __0_newName__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_newName__param != null)
+                {
+                    return Private___0_newName__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_newName__param != null)
+                {
+                    Private___0_newName__param.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_66
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_66 != null)
+                {
+                    return Private___const_SystemString_66.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_66 != null)
+                {
+                    Private___const_SystemString_66.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_67
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_67 != null)
+                {
+                    return Private___const_SystemString_67.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_67 != null)
+                {
+                    Private___const_SystemString_67.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_64
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_64 != null)
+                {
+                    return Private___const_SystemString_64.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_64 != null)
+                {
+                    Private___const_SystemString_64.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_65
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_65 != null)
+                {
+                    return Private___const_SystemString_65.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_65 != null)
+                {
+                    Private___const_SystemString_65.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_62
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_62 != null)
+                {
+                    return Private___const_SystemString_62.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_62 != null)
+                {
+                    Private___const_SystemString_62.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_63
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_63 != null)
+                {
+                    return Private___const_SystemString_63.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_63 != null)
+                {
+                    Private___const_SystemString_63.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_60
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_60 != null)
+                {
+                    return Private___const_SystemString_60.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_60 != null)
+                {
+                    Private___const_SystemString_60.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_61
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_61 != null)
+                {
+                    return Private___const_SystemString_61.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_61 != null)
+                {
+                    Private___const_SystemString_61.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_68
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_68 != null)
+                {
+                    return Private___const_SystemString_68.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_68 != null)
+                {
+                    Private___const_SystemString_68.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_69
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_69 != null)
+                {
+                    return Private___const_SystemString_69.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_69 != null)
+                {
+                    Private___const_SystemString_69.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_2 != null)
+                {
+                    return Private___intnl_SystemSingle_2.Value;
                 }
 
                 return null;
@@ -2557,22 +4668,44 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___38_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemSingle_2 != null)
                     {
-                        Private___38_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemSingle_2.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __12_const_intnl_exitJumpLoc_UInt32
+        internal string __const_SystemString_2
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___12_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemString_2 != null)
                 {
-                    return Private___12_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemString_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_2 != null)
+                {
+                    Private___const_SystemString_2.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0__InstaHeal__ret
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0__InstaHeal__ret != null)
+                {
+                    return Private___0__InstaHeal__ret.Value;
                 }
 
                 return null;
@@ -2582,66 +4715,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___12_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___0__InstaHeal__ret != null)
                     {
-                        Private___12_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___0__InstaHeal__ret.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __34_const_intnl_SystemString
+        internal float? __const_SystemSingle_2
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___34_const_intnl_SystemString != null)
+                if (Private___const_SystemSingle_2 != null)
                 {
-                    return Private___34_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___34_const_intnl_SystemString != null)
-                {
-                    Private___34_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __17_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___17_const_intnl_SystemString != null)
-                {
-                    return Private___17_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___17_const_intnl_SystemString != null)
-                {
-                    Private___17_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __28_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___28_const_intnl_SystemInt32 != null)
-                {
-                    return Private___28_const_intnl_SystemInt32.Value;
+                    return Private___const_SystemSingle_2.Value;
                 }
 
                 return null;
@@ -2651,22 +4740,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___28_const_intnl_SystemInt32 != null)
+                    if (Private___const_SystemSingle_2 != null)
                     {
-                        Private___28_const_intnl_SystemInt32.Value = value.Value;
+                        Private___const_SystemSingle_2.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __17_const_intnl_SystemInt32
+        internal float? lastInstaHealTime
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___17_const_intnl_SystemInt32 != null)
+                if (Private_lastInstaHealTime != null)
                 {
-                    return Private___17_const_intnl_SystemInt32.Value;
+                    return Private_lastInstaHealTime.Value;
                 }
 
                 return null;
@@ -2676,22 +4765,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___17_const_intnl_SystemInt32 != null)
+                    if (Private_lastInstaHealTime != null)
                     {
-                        Private___17_const_intnl_SystemInt32.Value = value.Value;
+                        Private_lastInstaHealTime.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __26_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_19
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___26_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_19 != null)
                 {
-                    return Private___26_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_19.Value;
                 }
 
                 return null;
@@ -2701,44 +4790,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___26_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_19 != null)
                     {
-                        Private___26_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_19.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __4_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_29
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_29 != null)
                 {
-                    return Private___4_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_const_intnl_SystemString != null)
-                {
-                    Private___4_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __31_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___31_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___31_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_29.Value;
                 }
 
                 return null;
@@ -2748,22 +4815,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___31_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_29 != null)
                     {
-                        Private___31_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_29.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __68_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_39
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___68_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_39 != null)
                 {
-                    return Private___68_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_39.Value;
                 }
 
                 return null;
@@ -2773,66 +4840,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___68_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_39 != null)
                     {
-                        Private___68_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_39.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __20_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_49
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___20_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_49 != null)
                 {
-                    return Private___20_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___20_const_intnl_SystemString != null)
-                {
-                    Private___20_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __35_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___35_const_intnl_SystemString != null)
-                {
-                    return Private___35_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___35_const_intnl_SystemString != null)
-                {
-                    Private___35_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __11_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___11_intnl_SystemBoolean != null)
-                {
-                    return Private___11_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_49.Value;
                 }
 
                 return null;
@@ -2842,22 +4865,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___11_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_49 != null)
                     {
-                        Private___11_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_49.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __2_intnl_SystemInt32
+        internal bool? __intnl_SystemBoolean_59
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemBoolean_59 != null)
                 {
-                    return Private___2_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemBoolean_59.Value;
                 }
 
                 return null;
@@ -2867,22 +4890,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___2_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemBoolean_59 != null)
                     {
-                        Private___2_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_59.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __8_const_intnl_SystemInt32
+        internal UnityEngine.Vector3? __intnl_UnityEngineVector3_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___8_const_intnl_SystemInt32 != null)
+                if (Private___intnl_UnityEngineVector3_0 != null)
                 {
-                    return Private___8_const_intnl_SystemInt32.Value;
+                    return Private___intnl_UnityEngineVector3_0.Value;
                 }
 
                 return null;
@@ -2892,22 +4915,88 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___8_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_UnityEngineVector3_0 != null)
                     {
-                        Private___8_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_UnityEngineVector3_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __52_const_intnl_exitJumpLoc_UInt32
+        internal UnityEngine.GameObject __intnl_UnityEngineGameObject_2
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___52_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_UnityEngineGameObject_2 != null)
                 {
-                    return Private___52_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_UnityEngineGameObject_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineGameObject_2 != null)
+                {
+                    Private___intnl_UnityEngineGameObject_2.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __intnl_UnityEngineGameObject_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineGameObject_1 != null)
+                {
+                    return Private___intnl_UnityEngineGameObject_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineGameObject_1 != null)
+                {
+                    Private___intnl_UnityEngineGameObject_1.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __intnl_UnityEngineGameObject_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineGameObject_0 != null)
+                {
+                    return Private___intnl_UnityEngineGameObject_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineGameObject_0 != null)
+                {
+                    Private___intnl_UnityEngineGameObject_0.Value = value;
+                }
+            }
+        }
+
+        internal ushort? cachedArmor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_cachedArmor != null)
+                {
+                    return Private_cachedArmor.Value;
                 }
 
                 return null;
@@ -2917,22 +5006,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___52_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private_cachedArmor != null)
                     {
-                        Private___52_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private_cachedArmor.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __4_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_14
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_14 != null)
                 {
-                    return Private___4_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_14.Value;
                 }
 
                 return null;
@@ -2942,22 +5031,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___4_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_14 != null)
                     {
-                        Private___4_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_14.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __30_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_24
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___30_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_24 != null)
                 {
-                    return Private___30_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_24.Value;
                 }
 
                 return null;
@@ -2967,22 +5056,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___30_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_24 != null)
                     {
-                        Private___30_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_24.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __0_mp_wanted_Boolean
+        internal bool? __intnl_SystemBoolean_34
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_mp_wanted_Boolean != null)
+                if (Private___intnl_SystemBoolean_34 != null)
                 {
-                    return Private___0_mp_wanted_Boolean.Value;
+                    return Private___intnl_SystemBoolean_34.Value;
                 }
 
                 return null;
@@ -2992,22 +5081,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_wanted_Boolean != null)
+                    if (Private___intnl_SystemBoolean_34 != null)
                     {
-                        Private___0_mp_wanted_Boolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_34.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __54_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_44
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___54_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_44 != null)
                 {
-                    return Private___54_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_44.Value;
                 }
 
                 return null;
@@ -3017,66 +5106,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___54_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_44 != null)
                     {
-                        Private___54_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_44.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __21_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_54
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___21_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_54 != null)
                 {
-                    return Private___21_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___21_const_intnl_SystemString != null)
-                {
-                    Private___21_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __26_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___26_const_intnl_SystemString != null)
-                {
-                    return Private___26_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___26_const_intnl_SystemString != null)
-                {
-                    Private___26_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __42_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___42_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___42_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_54.Value;
                 }
 
                 return null;
@@ -3086,22 +5131,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___42_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_54 != null)
                     {
-                        Private___42_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_54.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __71_intnl_SystemBoolean
+        internal int? __const_SystemInt32_13
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___71_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_13 != null)
                 {
-                    return Private___71_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_13.Value;
                 }
 
                 return null;
@@ -3111,22 +5156,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___71_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_13 != null)
                     {
-                        Private___71_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_13.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __31_const_intnl_SystemInt32
+        internal int? __const_SystemInt32_33
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___31_const_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_33 != null)
                 {
-                    return Private___31_const_intnl_SystemInt32.Value;
+                    return Private___const_SystemInt32_33.Value;
                 }
 
                 return null;
@@ -3136,44 +5181,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___31_const_intnl_SystemInt32 != null)
+                    if (Private___const_SystemInt32_33 != null)
                     {
-                        Private___31_const_intnl_SystemInt32.Value = value.Value;
+                        Private___const_SystemInt32_33.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Transform __4_intnl_SystemObject
+        internal int? __const_SystemInt32_23
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_intnl_SystemObject != null)
+                if (Private___const_SystemInt32_23 != null)
                 {
-                    return Private___4_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_SystemObject != null)
-                {
-                    Private___4_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __9_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___9_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_23.Value;
                 }
 
                 return null;
@@ -3183,22 +5206,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___9_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_23 != null)
                     {
-                        Private___9_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_23.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __60_intnl_SystemBoolean
+        internal int? __const_SystemInt32_43
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___60_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_43 != null)
                 {
-                    return Private___60_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_43.Value;
                 }
 
                 return null;
@@ -3208,22 +5231,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___60_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_43 != null)
                     {
-                        Private___60_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_43.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __37_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_14
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___37_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_14 != null)
                 {
-                    return Private___37_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_14.Value;
                 }
 
                 return null;
@@ -3233,22 +5256,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___37_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_14 != null)
                     {
-                        Private___37_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_14.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __20_const_intnl_exitJumpLoc_UInt32
+        internal int? __intnl_SystemInt32_34
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___20_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemInt32_34 != null)
                 {
-                    return Private___20_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemInt32_34.Value;
                 }
 
                 return null;
@@ -3258,44 +5281,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___20_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemInt32_34 != null)
                     {
-                        Private___20_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_34.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __37_const_intnl_SystemString
+        internal int? __intnl_SystemInt32_24
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___37_const_intnl_SystemString != null)
+                if (Private___intnl_SystemInt32_24 != null)
                 {
-                    return Private___37_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___37_const_intnl_SystemString != null)
-                {
-                    Private___37_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal float? __2_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_intnl_SystemSingle != null)
-                {
-                    return Private___2_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemInt32_24.Value;
                 }
 
                 return null;
@@ -3305,66 +5306,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___2_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemInt32_24 != null)
                     {
-                        Private___2_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemInt32_24.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __0_this_intnl_PlayerData
+        internal bool? __0_guard__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_this_intnl_PlayerData != null)
+                if (Private___0_guard__param != null)
                 {
-                    return Private___0_this_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_this_intnl_PlayerData != null)
-                {
-                    Private___0_this_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal string __5_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_const_intnl_SystemString != null)
-                {
-                    return Private___5_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___5_const_intnl_SystemString != null)
-                {
-                    Private___5_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __3_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_SystemBoolean != null)
-                {
-                    return Private___3_intnl_SystemBoolean.Value;
+                    return Private___0_guard__param.Value;
                 }
 
                 return null;
@@ -3374,22 +5331,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___3_intnl_SystemBoolean != null)
+                    if (Private___0_guard__param != null)
                     {
-                        Private___3_intnl_SystemBoolean.Value = value.Value;
+                        Private___0_guard__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __12_intnl_SystemBoolean
+        internal bool? damagedInFrame
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___12_intnl_SystemBoolean != null)
+                if (Private_damagedInFrame != null)
                 {
-                    return Private___12_intnl_SystemBoolean.Value;
+                    return Private_damagedInFrame.Value;
                 }
 
                 return null;
@@ -3399,44 +5356,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___12_intnl_SystemBoolean != null)
+                    if (Private_damagedInFrame != null)
                     {
-                        Private___12_intnl_SystemBoolean.Value = value.Value;
+                        Private_damagedInFrame.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __10_intnl_SystemObject
+        internal int? __intnl_SystemInt32_19
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___10_intnl_SystemObject != null)
+                if (Private___intnl_SystemInt32_19 != null)
                 {
-                    return Private___10_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___10_intnl_SystemObject != null)
-                {
-                    Private___10_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __6_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___6_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemInt32_19.Value;
                 }
 
                 return null;
@@ -3446,44 +5381,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___6_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemInt32_19 != null)
                     {
-                        Private___6_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_19.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __2_intnl_PlayerData
+        internal int? __intnl_SystemInt32_39
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_intnl_PlayerData != null)
+                if (Private___intnl_SystemInt32_39 != null)
                 {
-                    return Private___2_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_intnl_PlayerData != null)
-                {
-                    Private___2_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal bool? __67_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___67_intnl_SystemBoolean != null)
-                {
-                    return Private___67_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_39.Value;
                 }
 
                 return null;
@@ -3493,44 +5406,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___67_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_39 != null)
                     {
-                        Private___67_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_39.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __23_const_intnl_SystemString
+        internal int? __intnl_SystemInt32_29
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___23_const_intnl_SystemString != null)
+                if (Private___intnl_SystemInt32_29 != null)
                 {
-                    return Private___23_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___23_const_intnl_SystemString != null)
-                {
-                    Private___23_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.Vector3? __5_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_intnl_UnityEngineVector3 != null)
-                {
-                    return Private___5_intnl_UnityEngineVector3.Value;
+                    return Private___intnl_SystemInt32_29.Value;
                 }
 
                 return null;
@@ -3540,22 +5431,66 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___5_intnl_UnityEngineVector3 != null)
+                    if (Private___intnl_SystemInt32_29 != null)
                     {
-                        Private___5_intnl_UnityEngineVector3.Value = value.Value;
+                        Private___intnl_SystemInt32_29.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __14_const_intnl_SystemInt32
+        internal string __intnl_SystemString_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___14_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemString_0 != null)
                 {
-                    return Private___14_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemString_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_0 != null)
+                {
+                    Private___intnl_SystemString_0.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_19
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_19 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_19.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_19 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_19.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_1 != null)
+                {
+                    return Private___intnl_SystemSingle_1.Value;
                 }
 
                 return null;
@@ -3565,22 +5500,66 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___14_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemSingle_1 != null)
                     {
-                        Private___14_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemSingle_1.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __9_const_intnl_SystemInt32
+        internal UnityEngine.Transform __intnl_SystemObject_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___9_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemObject_1 != null)
                 {
-                    return Private___9_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemObject_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_1 != null)
+                {
+                    Private___intnl_SystemObject_1.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_7 != null)
+                {
+                    return Private___const_SystemString_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_7 != null)
+                {
+                    Private___const_SystemString_7.Value = value;
+                }
+            }
+        }
+
+        internal float? __const_SystemSingle_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemSingle_1 != null)
+                {
+                    return Private___const_SystemSingle_1.Value;
                 }
 
                 return null;
@@ -3590,22 +5569,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___9_const_intnl_SystemInt32 != null)
+                    if (Private___const_SystemSingle_1 != null)
                     {
-                        Private___9_const_intnl_SystemInt32.Value = value.Value;
+                        Private___const_SystemSingle_1.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __44_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_51
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___44_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_51 != null)
                 {
-                    return Private___44_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_51.Value;
                 }
 
                 return null;
@@ -3615,44 +5594,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___44_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_51 != null)
                     {
-                        Private___44_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_51.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __29_intnl_SystemObject
+        internal uint? __gintnl_SystemUInt32_41
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___29_intnl_SystemObject != null)
+                if (Private___gintnl_SystemUInt32_41 != null)
                 {
-                    return Private___29_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___29_intnl_SystemObject != null)
-                {
-                    Private___29_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __72_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___72_intnl_SystemBoolean != null)
-                {
-                    return Private___72_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_41.Value;
                 }
 
                 return null;
@@ -3662,22 +5619,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___72_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_41 != null)
                     {
-                        Private___72_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_41.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __19_const_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_71
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___19_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_71 != null)
                 {
-                    return Private___19_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_71.Value;
                 }
 
                 return null;
@@ -3687,22 +5644,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___19_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_71 != null)
                     {
-                        Private___19_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_71.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __0_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_61
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_61 != null)
                 {
-                    return Private___0_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_61.Value;
                 }
 
                 return null;
@@ -3712,22 +5669,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_61 != null)
                     {
-                        Private___0_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_61.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __34_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_11
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___34_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_11 != null)
                 {
-                    return Private___34_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_11.Value;
                 }
 
                 return null;
@@ -3737,22 +5694,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___34_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_11 != null)
                     {
-                        Private___34_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_11.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Vector3? __4_intnl_UnityEngineVector3
+        internal uint? __gintnl_SystemUInt32_31
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_intnl_UnityEngineVector3 != null)
+                if (Private___gintnl_SystemUInt32_31 != null)
                 {
-                    return Private___4_intnl_UnityEngineVector3.Value;
+                    return Private___gintnl_SystemUInt32_31.Value;
                 }
 
                 return null;
@@ -3762,22 +5719,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___4_intnl_UnityEngineVector3 != null)
+                    if (Private___gintnl_SystemUInt32_31 != null)
                     {
-                        Private___4_intnl_UnityEngineVector3.Value = value.Value;
+                        Private___gintnl_SystemUInt32_31.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __9_intnl_SystemSingle
+        internal uint? __gintnl_SystemUInt32_21
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___9_intnl_SystemSingle != null)
+                if (Private___gintnl_SystemUInt32_21 != null)
                 {
-                    return Private___9_intnl_SystemSingle.Value;
+                    return Private___gintnl_SystemUInt32_21.Value;
                 }
 
                 return null;
@@ -3787,34 +5744,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___9_intnl_SystemSingle != null)
+                    if (Private___gintnl_SystemUInt32_21 != null)
                     {
-                        Private___9_intnl_SystemSingle.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __21_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___21_const_intnl_SystemInt32 != null)
-                {
-                    return Private___21_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___21_const_intnl_SystemInt32 != null)
-                    {
-                        Private___21_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_21.Value = value.Value;
                     }
                 }
             }
@@ -3845,6 +5777,256 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
+        internal bool? __intnl_SystemBoolean_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_17 != null)
+                {
+                    return Private___intnl_SystemBoolean_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_17 != null)
+                    {
+                        Private___intnl_SystemBoolean_17.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_27 != null)
+                {
+                    return Private___intnl_SystemBoolean_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_27 != null)
+                    {
+                        Private___intnl_SystemBoolean_27.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_37
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_37 != null)
+                {
+                    return Private___intnl_SystemBoolean_37.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_37 != null)
+                    {
+                        Private___intnl_SystemBoolean_37.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_47
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_47 != null)
+                {
+                    return Private___intnl_SystemBoolean_47.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_47 != null)
+                    {
+                        Private___intnl_SystemBoolean_47.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_57
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_57 != null)
+                {
+                    return Private___intnl_SystemBoolean_57.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_57 != null)
+                    {
+                        Private___intnl_SystemBoolean_57.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_10 != null)
+                {
+                    return Private___const_SystemInt32_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_10 != null)
+                    {
+                        Private___const_SystemInt32_10.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_30
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_30 != null)
+                {
+                    return Private___const_SystemInt32_30.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_30 != null)
+                    {
+                        Private___const_SystemInt32_30.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_20
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_20 != null)
+                {
+                    return Private___const_SystemInt32_20.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_20 != null)
+                    {
+                        Private___const_SystemInt32_20.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_40
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_40 != null)
+                {
+                    return Private___const_SystemInt32_40.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_40 != null)
+                    {
+                        Private___const_SystemInt32_40.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.Common.Enums.EventTiming? __const_VRCUdonCommonEnumsEventTiming_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_VRCUdonCommonEnumsEventTiming_0 != null)
+                {
+                    return Private___const_VRCUdonCommonEnumsEventTiming_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_VRCUdonCommonEnumsEventTiming_0 != null)
+                    {
+                        Private___const_VRCUdonCommonEnumsEventTiming_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal bool? isGuard
         {
             [HideFromIl2Cpp]
@@ -3870,36 +6052,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __12_const_intnl_SystemString
+        internal int? __intnl_SystemInt32_11
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___12_const_intnl_SystemString != null)
+                if (Private___intnl_SystemInt32_11 != null)
                 {
-                    return Private___12_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___12_const_intnl_SystemString != null)
-                {
-                    Private___12_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __38_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___38_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___38_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemInt32_11.Value;
                 }
 
                 return null;
@@ -3909,66 +6069,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___38_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemInt32_11 != null)
                     {
-                        Private___38_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_11.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerData
+        internal int? __intnl_SystemInt32_31
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_PlayerData != null)
+                if (Private___intnl_SystemInt32_31 != null)
                 {
-                    return Private___1_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_PlayerData != null)
-                {
-                    Private___1_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.GameObject __0_this_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_this_intnl_UnityEngineGameObject != null)
-                {
-                    return Private___0_this_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_this_intnl_UnityEngineGameObject != null)
-                {
-                    Private___0_this_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal float? __3_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_SystemObject != null)
-                {
-                    return Private___3_intnl_SystemObject.Value;
+                    return Private___intnl_SystemInt32_31.Value;
                 }
 
                 return null;
@@ -3978,66 +6094,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___3_intnl_SystemObject != null)
+                    if (Private___intnl_SystemInt32_31 != null)
                     {
-                        Private___3_intnl_SystemObject.Value = value.Value;
+                        Private___intnl_SystemInt32_31.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.GameObject __0_intnl_UnityEngineGameObject
+        internal int? __intnl_SystemInt32_21
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_UnityEngineGameObject != null)
+                if (Private___intnl_SystemInt32_21 != null)
                 {
-                    return Private___0_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_UnityEngineGameObject != null)
-                {
-                    Private___0_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal string __8_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___8_const_intnl_SystemString != null)
-                {
-                    return Private___8_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___8_const_intnl_SystemString != null)
-                {
-                    Private___8_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal float? __6_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___6_intnl_SystemSingle != null)
-                {
-                    return Private___6_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemInt32_21.Value;
                 }
 
                 return null;
@@ -4047,22 +6119,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___6_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemInt32_21 != null)
                     {
-                        Private___6_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemInt32_21.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __33_const_intnl_exitJumpLoc_UInt32
+        internal int? __intnl_SystemInt32_41
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___33_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemInt32_41 != null)
                 {
-                    return Private___33_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemInt32_41.Value;
                 }
 
                 return null;
@@ -4072,22 +6144,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___33_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemInt32_41 != null)
                     {
-                        Private___33_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_41.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __58_intnl_SystemBoolean
+        internal bool? __0_sus__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___58_intnl_SystemBoolean != null)
+                if (Private___0_sus__param != null)
                 {
-                    return Private___58_intnl_SystemBoolean.Value;
+                    return Private___0_sus__param.Value;
                 }
 
                 return null;
@@ -4097,22 +6169,286 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___58_intnl_SystemBoolean != null)
+                    if (Private___0_sus__param != null)
                     {
-                        Private___58_intnl_SystemBoolean.Value = value.Value;
+                        Private___0_sus__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __15_const_intnl_exitJumpLoc_UInt32
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_21
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___15_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___this_VRCUdonUdonBehaviour_21 != null)
                 {
-                    return Private___15_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___this_VRCUdonUdonBehaviour_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_21 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_21.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_11 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_11 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_11.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_36
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_36 != null)
+                {
+                    return Private___const_SystemString_36.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_36 != null)
+                {
+                    Private___const_SystemString_36.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_37
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_37 != null)
+                {
+                    return Private___const_SystemString_37.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_37 != null)
+                {
+                    Private___const_SystemString_37.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_34
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_34 != null)
+                {
+                    return Private___const_SystemString_34.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_34 != null)
+                {
+                    Private___const_SystemString_34.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_35
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_35 != null)
+                {
+                    return Private___const_SystemString_35.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_35 != null)
+                {
+                    Private___const_SystemString_35.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_32
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_32 != null)
+                {
+                    return Private___const_SystemString_32.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_32 != null)
+                {
+                    Private___const_SystemString_32.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_33
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_33 != null)
+                {
+                    return Private___const_SystemString_33.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_33 != null)
+                {
+                    Private___const_SystemString_33.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_30
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_30 != null)
+                {
+                    return Private___const_SystemString_30.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_30 != null)
+                {
+                    Private___const_SystemString_30.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_31
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_31 != null)
+                {
+                    return Private___const_SystemString_31.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_31 != null)
+                {
+                    Private___const_SystemString_31.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_38
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_38 != null)
+                {
+                    return Private___const_SystemString_38.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_38 != null)
+                {
+                    Private___const_SystemString_38.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_39
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_39 != null)
+                {
+                    return Private___const_SystemString_39.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_39 != null)
+                {
+                    Private___const_SystemString_39.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_9 != null)
+                {
+                    return Private___intnl_SystemSingle_9.Value;
                 }
 
                 return null;
@@ -4122,22 +6458,44 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___15_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemSingle_9 != null)
                     {
-                        Private___15_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemSingle_9.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __36_const_intnl_SystemInt32
+        internal VRC.Udon.UdonBehaviour __intnl_UnityEngineObject_16
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___36_const_intnl_SystemInt32 != null)
+                if (Private___intnl_UnityEngineObject_16 != null)
                 {
-                    return Private___36_const_intnl_SystemInt32.Value;
+                    return Private___intnl_UnityEngineObject_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineObject_16 != null)
+                {
+                    Private___intnl_UnityEngineObject_16.Value = value;
+                }
+            }
+        }
+
+        internal int? maxArmor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_maxArmor != null)
+                {
+                    return Private_maxArmor.Value;
                 }
 
                 return null;
@@ -4147,66 +6505,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___36_const_intnl_SystemInt32 != null)
+                    if (Private_maxArmor != null)
                     {
-                        Private___36_const_intnl_SystemInt32.Value = value.Value;
+                        Private_maxArmor.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string cachedPlayerName
+        internal ushort? armor
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private_cachedPlayerName != null)
+                if (Private_armor != null)
                 {
-                    return Private_cachedPlayerName.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private_cachedPlayerName != null)
-                {
-                    Private_cachedPlayerName.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __11_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___11_intnl_SystemObject != null)
-                {
-                    return Private___11_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___11_intnl_SystemObject != null)
-                {
-                    Private___11_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __19_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___19_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___19_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private_armor.Value;
                 }
 
                 return null;
@@ -4216,22 +6530,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___19_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private_armor != null)
                     {
-                        Private___19_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private_armor.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __12_const_intnl_SystemInt32
+        internal int? __1_hp__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___12_const_intnl_SystemInt32 != null)
+                if (Private___1_hp__param != null)
                 {
-                    return Private___12_const_intnl_SystemInt32.Value;
+                    return Private___1_hp__param.Value;
                 }
 
                 return null;
@@ -4241,66 +6555,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___12_const_intnl_SystemInt32 != null)
+                    if (Private___1_hp__param != null)
                     {
-                        Private___12_const_intnl_SystemInt32.Value = value.Value;
+                        Private___1_hp__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __22_intnl_SystemObject
+        internal uint? __intnl_returnJump_SystemUInt32_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___22_intnl_SystemObject != null)
+                if (Private___intnl_returnJump_SystemUInt32_0 != null)
                 {
-                    return Private___22_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___22_intnl_SystemObject != null)
-                {
-                    Private___22_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal string __32_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___32_const_intnl_SystemString != null)
-                {
-                    return Private___32_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___32_const_intnl_SystemString != null)
-                {
-                    Private___32_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal float? __0_tagHeight_Single
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_tagHeight_Single != null)
-                {
-                    return Private___0_tagHeight_Single.Value;
+                    return Private___intnl_returnJump_SystemUInt32_0.Value;
                 }
 
                 return null;
@@ -4310,22 +6580,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_tagHeight_Single != null)
+                    if (Private___intnl_returnJump_SystemUInt32_0 != null)
                     {
-                        Private___0_tagHeight_Single.Value = value.Value;
+                        Private___intnl_returnJump_SystemUInt32_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __35_intnl_SystemBoolean
+        internal int? __0_hp__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___35_intnl_SystemBoolean != null)
+                if (Private___0_hp__param != null)
                 {
-                    return Private___35_intnl_SystemBoolean.Value;
+                    return Private___0_hp__param.Value;
                 }
 
                 return null;
@@ -4335,22 +6605,44 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___35_intnl_SystemBoolean != null)
+                    if (Private___0_hp__param != null)
                     {
-                        Private___35_intnl_SystemBoolean.Value = value.Value;
+                        Private___0_hp__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __8_const_intnl_exitJumpLoc_UInt32
+        internal string __const_SystemString_4
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemString_4 != null)
                 {
-                    return Private___8_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemString_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_4 != null)
+                {
+                    Private___const_SystemString_4.Value = value;
+                }
+            }
+        }
+
+        internal float? instaHealDelay
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_instaHealDelay != null)
+                {
+                    return Private_instaHealDelay.Value;
                 }
 
                 return null;
@@ -4360,22 +6652,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___8_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private_instaHealDelay != null)
                     {
-                        Private___8_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private_instaHealDelay.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __37_const_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_59
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___37_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_59 != null)
                 {
-                    return Private___37_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_59.Value;
                 }
 
                 return null;
@@ -4385,22 +6677,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___37_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_59 != null)
                     {
-                        Private___37_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_59.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __50_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_49
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___50_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_49 != null)
                 {
-                    return Private___50_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_49.Value;
                 }
 
                 return null;
@@ -4410,22 +6702,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___50_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_49 != null)
                     {
-                        Private___50_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_49.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __0_mp_hp_Int32
+        internal uint? __gintnl_SystemUInt32_69
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_mp_hp_Int32 != null)
+                if (Private___gintnl_SystemUInt32_69 != null)
                 {
-                    return Private___0_mp_hp_Int32.Value;
+                    return Private___gintnl_SystemUInt32_69.Value;
                 }
 
                 return null;
@@ -4435,22 +6727,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_hp_Int32 != null)
+                    if (Private___gintnl_SystemUInt32_69 != null)
                     {
-                        Private___0_mp_hp_Int32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_69.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __55_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_19
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___55_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_19 != null)
                 {
-                    return Private___55_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_19.Value;
                 }
 
                 return null;
@@ -4460,22 +6752,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___55_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_19 != null)
                     {
-                        Private___55_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_19.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __22_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_39
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___22_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_39 != null)
                 {
-                    return Private___22_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_39.Value;
                 }
 
                 return null;
@@ -4485,22 +6777,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___22_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_39 != null)
                     {
-                        Private___22_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_39.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __24_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_29
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___24_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_29 != null)
                 {
-                    return Private___24_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_29.Value;
                 }
 
                 return null;
@@ -4510,44 +6802,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___24_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_29 != null)
                     {
-                        Private___24_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_29.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __9_const_intnl_SystemString
+        internal float? __const_SystemSingle_4
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___9_const_intnl_SystemString != null)
+                if (Private___const_SystemSingle_4 != null)
                 {
-                    return Private___9_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___9_const_intnl_SystemString != null)
-                {
-                    Private___9_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __13_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___13_const_intnl_SystemInt32 != null)
-                {
-                    return Private___13_const_intnl_SystemInt32.Value;
+                    return Private___const_SystemSingle_4.Value;
                 }
 
                 return null;
@@ -4557,22 +6827,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___13_const_intnl_SystemInt32 != null)
+                    if (Private___const_SystemSingle_4 != null)
                     {
-                        Private___13_const_intnl_SystemInt32.Value = value.Value;
+                        Private___const_SystemSingle_4.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __0_intnl_SystemInt32
+        internal int? __2_hp__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_SystemInt32 != null)
+                if (Private___2_hp__param != null)
                 {
-                    return Private___0_intnl_SystemInt32.Value;
+                    return Private___2_hp__param.Value;
                 }
 
                 return null;
@@ -4582,22 +6852,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_intnl_SystemInt32 != null)
+                    if (Private___2_hp__param != null)
                     {
-                        Private___0_intnl_SystemInt32.Value = value.Value;
+                        Private___2_hp__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __0_intnl_returnTarget_UInt32
+        internal int? __const_SystemInt32_18
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_returnTarget_UInt32 != null)
+                if (Private___const_SystemInt32_18 != null)
                 {
-                    return Private___0_intnl_returnTarget_UInt32.Value;
+                    return Private___const_SystemInt32_18.Value;
                 }
 
                 return null;
@@ -4607,22 +6877,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_intnl_returnTarget_UInt32 != null)
+                    if (Private___const_SystemInt32_18 != null)
                     {
-                        Private___0_intnl_returnTarget_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_18.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __48_intnl_SystemBoolean
+        internal int? __const_SystemInt32_38
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___48_intnl_SystemBoolean != null)
+                if (Private___const_SystemInt32_38 != null)
                 {
-                    return Private___48_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_38.Value;
                 }
 
                 return null;
@@ -4632,22 +6902,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___48_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_38 != null)
                     {
-                        Private___48_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_38.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __59_const_intnl_exitJumpLoc_UInt32
+        internal int? __const_SystemInt32_28
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___59_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_28 != null)
                 {
-                    return Private___59_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_28.Value;
                 }
 
                 return null;
@@ -4657,22 +6927,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___59_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_28 != null)
                     {
-                        Private___59_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_28.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __45_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_52
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___45_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_52 != null)
                 {
-                    return Private___45_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_52.Value;
                 }
 
                 return null;
@@ -4682,22 +6952,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___45_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_52 != null)
                     {
-                        Private___45_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_52.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __65_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_42
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___65_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_42 != null)
                 {
-                    return Private___65_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_42.Value;
                 }
 
                 return null;
@@ -4707,44 +6977,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___65_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_42 != null)
                     {
-                        Private___65_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_42.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __0_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_72
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_72 != null)
                 {
-                    return Private___0_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_SystemString != null)
-                {
-                    Private___0_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __33_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___33_intnl_SystemBoolean != null)
-                {
-                    return Private___33_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_72.Value;
                 }
 
                 return null;
@@ -4754,22 +7002,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___33_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_72 != null)
                     {
-                        Private___33_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_72.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __57_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_62
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___57_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_62 != null)
                 {
-                    return Private___57_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_62.Value;
                 }
 
                 return null;
@@ -4779,22 +7027,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___57_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_62 != null)
                     {
-                        Private___57_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_62.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __26_const_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_12
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___26_const_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_12 != null)
                 {
-                    return Private___26_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_12.Value;
                 }
 
                 return null;
@@ -4804,44 +7052,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___26_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_12 != null)
                     {
-                        Private___26_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_12.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.GameObject __3_intnl_UnityEngineGameObject
+        internal uint? __gintnl_SystemUInt32_32
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___3_intnl_UnityEngineGameObject != null)
+                if (Private___gintnl_SystemUInt32_32 != null)
                 {
-                    return Private___3_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___3_intnl_UnityEngineGameObject != null)
-                {
-                    Private___3_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __49_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___49_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___49_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_32.Value;
                 }
 
                 return null;
@@ -4851,22 +7077,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___49_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_32 != null)
                     {
-                        Private___49_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_32.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __0_const_intnl_SystemUInt32
+        internal uint? __gintnl_SystemUInt32_22
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_SystemUInt32 != null)
+                if (Private___gintnl_SystemUInt32_22 != null)
                 {
-                    return Private___0_const_intnl_SystemUInt32.Value;
+                    return Private___gintnl_SystemUInt32_22.Value;
                 }
 
                 return null;
@@ -4876,9 +7102,247 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_const_intnl_SystemUInt32 != null)
+                    if (Private___gintnl_SystemUInt32_22 != null)
                     {
-                        Private___0_const_intnl_SystemUInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_22.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_63
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_63 != null)
+                {
+                    return Private___intnl_SystemObject_63.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_63 != null)
+                {
+                    Private___intnl_SystemObject_63.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_62
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_62 != null)
+                {
+                    return Private___intnl_SystemObject_62.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_62 != null)
+                {
+                    Private___intnl_SystemObject_62.Value = value;
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_15 != null)
+                {
+                    return Private___const_SystemInt32_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_15 != null)
+                    {
+                        Private___const_SystemInt32_15.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_35
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_35 != null)
+                {
+                    return Private___const_SystemInt32_35.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_35 != null)
+                    {
+                        Private___const_SystemInt32_35.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_25
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_25 != null)
+                {
+                    return Private___const_SystemInt32_25.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_25 != null)
+                    {
+                        Private___const_SystemInt32_25.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_45
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_45 != null)
+                {
+                    return Private___const_SystemInt32_45.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_45 != null)
+                    {
+                        Private___const_SystemInt32_45.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __lcl_tagHeight_SystemSingle_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_tagHeight_SystemSingle_0 != null)
+                {
+                    return Private___lcl_tagHeight_SystemSingle_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___lcl_tagHeight_SystemSingle_0 != null)
+                    {
+                        Private___lcl_tagHeight_SystemSingle_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_26
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_26 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_26.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_26 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_26.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_16
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_16 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_16 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_16.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_4 != null)
+                {
+                    return Private___intnl_SystemSingle_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemSingle_4 != null)
+                    {
+                        Private___intnl_SystemSingle_4.Value = value.Value;
                     }
                 }
             }
@@ -4906,7 +7370,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal int? cachedHealth
+        internal ushort? cachedHealth
         {
             [HideFromIl2Cpp]
             get
@@ -4931,14 +7395,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal bool? __9_intnl_SystemBoolean
+        internal string __const_SystemString_9
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___9_intnl_SystemBoolean != null)
+                if (Private___const_SystemString_9 != null)
                 {
-                    return Private___9_intnl_SystemBoolean.Value;
+                    return Private___const_SystemString_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_9 != null)
+                {
+                    Private___const_SystemString_9.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __intnl_UnityEngineVector3_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineVector3_2 != null)
+                {
+                    return Private___intnl_UnityEngineVector3_2.Value;
                 }
 
                 return null;
@@ -4948,44 +7434,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___9_intnl_SystemBoolean != null)
+                    if (Private___intnl_UnityEngineVector3_2 != null)
                     {
-                        Private___9_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_UnityEngineVector3_2.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __19_intnl_SystemObject
+        internal bool? __intnl_SystemBoolean_12
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___19_intnl_SystemObject != null)
+                if (Private___intnl_SystemBoolean_12 != null)
                 {
-                    return Private___19_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___19_intnl_SystemObject != null)
-                {
-                    Private___19_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal uint? __36_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___36_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___36_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_12.Value;
                 }
 
                 return null;
@@ -4995,22 +7459,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___36_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_12 != null)
                     {
-                        Private___36_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_12.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __63_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_22
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___63_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_22 != null)
                 {
-                    return Private___63_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_22.Value;
                 }
 
                 return null;
@@ -5020,22 +7484,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___63_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_22 != null)
                     {
-                        Private___63_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_22.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __36_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_32
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___36_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_32 != null)
                 {
-                    return Private___36_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_32.Value;
                 }
 
                 return null;
@@ -5045,22 +7509,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___36_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_32 != null)
                     {
-                        Private___36_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_32.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __0_intnl_SystemSingle
+        internal bool? __intnl_SystemBoolean_42
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_42 != null)
                 {
-                    return Private___0_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemBoolean_42.Value;
                 }
 
                 return null;
@@ -5070,22 +7534,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemBoolean_42 != null)
                     {
-                        Private___0_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemBoolean_42.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __27_const_intnl_SystemInt32
+        internal bool? __intnl_SystemBoolean_52
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___27_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemBoolean_52 != null)
                 {
-                    return Private___27_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemBoolean_52.Value;
                 }
 
                 return null;
@@ -5095,22 +7559,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___27_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemBoolean_52 != null)
                     {
-                        Private___27_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_52.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __40_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_57
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___40_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_57 != null)
                 {
-                    return Private___40_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_57.Value;
                 }
 
                 return null;
@@ -5120,9 +7584,159 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___40_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_57 != null)
                     {
-                        Private___40_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_57.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_47
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_47 != null)
+                {
+                    return Private___gintnl_SystemUInt32_47.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_47 != null)
+                    {
+                        Private___gintnl_SystemUInt32_47.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_77
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_77 != null)
+                {
+                    return Private___gintnl_SystemUInt32_77.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_77 != null)
+                    {
+                        Private___gintnl_SystemUInt32_77.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_67
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_67 != null)
+                {
+                    return Private___gintnl_SystemUInt32_67.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_67 != null)
+                    {
+                        Private___gintnl_SystemUInt32_67.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_17 != null)
+                {
+                    return Private___gintnl_SystemUInt32_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_17 != null)
+                    {
+                        Private___gintnl_SystemUInt32_17.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_37
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_37 != null)
+                {
+                    return Private___gintnl_SystemUInt32_37.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_37 != null)
+                    {
+                        Private___gintnl_SystemUInt32_37.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_27 != null)
+                {
+                    return Private___gintnl_SystemUInt32_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_27 != null)
+                    {
+                        Private___gintnl_SystemUInt32_27.Value = value.Value;
                     }
                 }
             }
@@ -5150,14 +7764,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __18_const_intnl_SystemString
+        internal int? __intnl_SystemInt32_16
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___18_const_intnl_SystemString != null)
+                if (Private___intnl_SystemInt32_16 != null)
                 {
-                    return Private___18_const_intnl_SystemString.Value;
+                    return Private___intnl_SystemInt32_16.Value;
                 }
 
                 return null;
@@ -5165,9 +7779,84 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___18_const_intnl_SystemString != null)
+                if (value.HasValue)
                 {
-                    Private___18_const_intnl_SystemString.Value = value;
+                    if (Private___intnl_SystemInt32_16 != null)
+                    {
+                        Private___intnl_SystemInt32_16.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_36
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_36 != null)
+                {
+                    return Private___intnl_SystemInt32_36.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_36 != null)
+                    {
+                        Private___intnl_SystemInt32_36.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_26
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_26 != null)
+                {
+                    return Private___intnl_SystemInt32_26.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_26 != null)
+                    {
+                        Private___intnl_SystemInt32_26.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __refl_typename
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___refl_typename != null)
+                {
+                    return Private___refl_typename.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___refl_typename != null)
+                {
+                    Private___refl_typename.Value = value;
                 }
             }
         }
@@ -5197,6 +7886,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
+        internal UnityEngine.Camera photoCamera
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_photoCamera != null)
+                {
+                    return Private_photoCamera.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_photoCamera != null)
+                {
+                    Private_photoCamera.Value = value;
+                }
+            }
+        }
+
         internal bool? killedByLocal
         {
             [HideFromIl2Cpp]
@@ -5222,14 +7933,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal bool? __66_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___66_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_1 != null)
                 {
-                    return Private___66_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_1.Value;
                 }
 
                 return null;
@@ -5239,22 +7950,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___66_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_1 != null)
                     {
-                        Private___66_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_1.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __0_mp_damage_Int32
+        internal int? __intnl_SystemInt32_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_mp_damage_Int32 != null)
+                if (Private___intnl_SystemInt32_0 != null)
                 {
-                    return Private___0_mp_damage_Int32.Value;
+                    return Private___intnl_SystemInt32_0.Value;
                 }
 
                 return null;
@@ -5264,9 +7975,209 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_damage_Int32 != null)
+                    if (Private___intnl_SystemInt32_0 != null)
                     {
-                        Private___0_mp_damage_Int32.Value = value.Value;
+                        Private___intnl_SystemInt32_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_3 != null)
+                {
+                    return Private___intnl_SystemInt32_3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_3 != null)
+                    {
+                        Private___intnl_SystemInt32_3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_2 != null)
+                {
+                    return Private___intnl_SystemInt32_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_2 != null)
+                    {
+                        Private___intnl_SystemInt32_2.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_5 != null)
+                {
+                    return Private___intnl_SystemInt32_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_5 != null)
+                    {
+                        Private___intnl_SystemInt32_5.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_4 != null)
+                {
+                    return Private___intnl_SystemInt32_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_4 != null)
+                    {
+                        Private___intnl_SystemInt32_4.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_7 != null)
+                {
+                    return Private___intnl_SystemInt32_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_7 != null)
+                    {
+                        Private___intnl_SystemInt32_7.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_6 != null)
+                {
+                    return Private___intnl_SystemInt32_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_6 != null)
+                    {
+                        Private___intnl_SystemInt32_6.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_9 != null)
+                {
+                    return Private___intnl_SystemInt32_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_9 != null)
+                    {
+                        Private___intnl_SystemInt32_9.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_8 != null)
+                {
+                    return Private___intnl_SystemInt32_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_8 != null)
+                    {
+                        Private___intnl_SystemInt32_8.Value = value.Value;
                     }
                 }
             }
@@ -5297,14 +8208,234 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal UnityEngine.Vector3? __3_intnl_UnityEngineVector3
+        internal string __const_SystemString_56
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___3_intnl_UnityEngineVector3 != null)
+                if (Private___const_SystemString_56 != null)
                 {
-                    return Private___3_intnl_UnityEngineVector3.Value;
+                    return Private___const_SystemString_56.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_56 != null)
+                {
+                    Private___const_SystemString_56.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_57
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_57 != null)
+                {
+                    return Private___const_SystemString_57.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_57 != null)
+                {
+                    Private___const_SystemString_57.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_54
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_54 != null)
+                {
+                    return Private___const_SystemString_54.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_54 != null)
+                {
+                    Private___const_SystemString_54.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_55
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_55 != null)
+                {
+                    return Private___const_SystemString_55.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_55 != null)
+                {
+                    Private___const_SystemString_55.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_52
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_52 != null)
+                {
+                    return Private___const_SystemString_52.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_52 != null)
+                {
+                    Private___const_SystemString_52.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_53
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_53 != null)
+                {
+                    return Private___const_SystemString_53.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_53 != null)
+                {
+                    Private___const_SystemString_53.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_50
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_50 != null)
+                {
+                    return Private___const_SystemString_50.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_50 != null)
+                {
+                    Private___const_SystemString_50.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_51
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_51 != null)
+                {
+                    return Private___const_SystemString_51.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_51 != null)
+                {
+                    Private___const_SystemString_51.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_58
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_58 != null)
+                {
+                    return Private___const_SystemString_58.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_58 != null)
+                {
+                    Private___const_SystemString_58.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_59
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_59 != null)
+                {
+                    return Private___const_SystemString_59.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_59 != null)
+                {
+                    Private___const_SystemString_59.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0_t__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_t__param != null)
+                {
+                    return Private___0_t__param.Value;
                 }
 
                 return null;
@@ -5314,22 +8445,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___3_intnl_UnityEngineVector3 != null)
+                    if (Private___0_t__param != null)
                     {
-                        Private___3_intnl_UnityEngineVector3.Value = value.Value;
+                        Private___0_t__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __47_intnl_SystemBoolean
+        internal float? __intnl_SystemSingle_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___47_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemSingle_3 != null)
                 {
-                    return Private___47_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemSingle_3.Value;
                 }
 
                 return null;
@@ -5339,22 +8470,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___47_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemSingle_3 != null)
                     {
-                        Private___47_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemSingle_3.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __34_const_intnl_SystemInt32
+        internal ushort? __intnl_SystemUInt16_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___34_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemUInt16_0 != null)
                 {
-                    return Private___34_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemUInt16_0.Value;
                 }
 
                 return null;
@@ -5364,44 +8495,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___34_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemUInt16_0 != null)
                     {
-                        Private___34_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemUInt16_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Transform __4_intnl_UnityEngineTransform
+        internal bool? isSuspicious
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_intnl_UnityEngineTransform != null)
+                if (Private_isSuspicious != null)
                 {
-                    return Private___4_intnl_UnityEngineTransform.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_UnityEngineTransform != null)
-                {
-                    Private___4_intnl_UnityEngineTransform.Value = value;
-                }
-            }
-        }
-
-        internal int? __10_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___10_const_intnl_SystemInt32 != null)
-                {
-                    return Private___10_const_intnl_SystemInt32.Value;
+                    return Private_isSuspicious.Value;
                 }
 
                 return null;
@@ -5411,22 +8520,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___10_const_intnl_SystemInt32 != null)
+                    if (Private_isSuspicious != null)
                     {
-                        Private___10_const_intnl_SystemInt32.Value = value.Value;
+                        Private_isSuspicious.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __19_const_intnl_SystemString
+        internal string __const_SystemString_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___19_const_intnl_SystemString != null)
+                if (Private___const_SystemString_1 != null)
                 {
-                    return Private___19_const_intnl_SystemString.Value;
+                    return Private___const_SystemString_1.Value;
                 }
 
                 return null;
@@ -5434,21 +8543,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___19_const_intnl_SystemString != null)
+                if (Private___const_SystemString_1 != null)
                 {
-                    Private___19_const_intnl_SystemString.Value = value;
+                    Private___const_SystemString_1.Value = value;
                 }
             }
         }
 
-        internal uint? __17_const_intnl_exitJumpLoc_UInt32
+        internal float? __const_SystemSingle_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___17_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemSingle_3 != null)
                 {
-                    return Private___17_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemSingle_3.Value;
                 }
 
                 return null;
@@ -5458,22 +8567,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___17_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemSingle_3 != null)
                     {
-                        Private___17_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemSingle_3.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __30_const_intnl_exitJumpLoc_UInt32
+        internal UnityEngine.Vector3? __intnl_UnityEngineVector3_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___30_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_UnityEngineVector3_1 != null)
                 {
-                    return Private___30_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_UnityEngineVector3_1.Value;
                 }
 
                 return null;
@@ -5483,22 +8592,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___30_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_UnityEngineVector3_1 != null)
                     {
-                        Private___30_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_UnityEngineVector3_1.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __39_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_15
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___39_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_15 != null)
                 {
-                    return Private___39_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_15.Value;
                 }
 
                 return null;
@@ -5508,22 +8617,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___39_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_15 != null)
                     {
-                        Private___39_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_15.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __28_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_25
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___28_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_25 != null)
                 {
-                    return Private___28_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_25.Value;
                 }
 
                 return null;
@@ -5533,22 +8642,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___28_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_25 != null)
                     {
-                        Private___28_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_25.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __6_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_35
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___6_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_35 != null)
                 {
-                    return Private___6_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_35.Value;
                 }
 
                 return null;
@@ -5558,22 +8667,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___6_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_35 != null)
                     {
-                        Private___6_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_35.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal float? __4_intnl_SystemSingle
+        internal bool? __intnl_SystemBoolean_45
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___4_intnl_SystemSingle != null)
+                if (Private___intnl_SystemBoolean_45 != null)
                 {
-                    return Private___4_intnl_SystemSingle.Value;
+                    return Private___intnl_SystemBoolean_45.Value;
                 }
 
                 return null;
@@ -5583,66 +8692,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___4_intnl_SystemSingle != null)
+                    if (Private___intnl_SystemBoolean_45 != null)
                     {
-                        Private___4_intnl_SystemSingle.Value = value.Value;
+                        Private___intnl_SystemBoolean_45.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __12_intnl_SystemObject
+        internal bool? __intnl_SystemBoolean_55
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___12_intnl_SystemObject != null)
+                if (Private___intnl_SystemBoolean_55 != null)
                 {
-                    return Private___12_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___12_intnl_SystemObject != null)
-                {
-                    Private___12_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal string __24_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___24_const_intnl_SystemString != null)
-                {
-                    return Private___24_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___24_const_intnl_SystemString != null)
-                {
-                    Private___24_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __69_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___69_intnl_SystemBoolean != null)
-                {
-                    return Private___69_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_55.Value;
                 }
 
                 return null;
@@ -5652,22 +8717,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___69_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_55 != null)
                     {
-                        Private___69_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_55.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __57_const_intnl_exitJumpLoc_UInt32
+        internal int? __const_SystemInt32_12
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___57_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_12 != null)
                 {
-                    return Private___57_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_12.Value;
                 }
 
                 return null;
@@ -5677,44 +8742,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___57_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_12 != null)
                     {
-                        Private___57_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_12.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __38_const_intnl_SystemString
+        internal int? __const_SystemInt32_32
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___38_const_intnl_SystemString != null)
+                if (Private___const_SystemInt32_32 != null)
                 {
-                    return Private___38_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___38_const_intnl_SystemString != null)
-                {
-                    Private___38_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __14_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___14_intnl_SystemBoolean != null)
-                {
-                    return Private___14_intnl_SystemBoolean.Value;
+                    return Private___const_SystemInt32_32.Value;
                 }
 
                 return null;
@@ -5724,9 +8767,134 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___14_intnl_SystemBoolean != null)
+                    if (Private___const_SystemInt32_32 != null)
                     {
-                        Private___14_intnl_SystemBoolean.Value = value.Value;
+                        Private___const_SystemInt32_32.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_22
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_22 != null)
+                {
+                    return Private___const_SystemInt32_22.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_22 != null)
+                    {
+                        Private___const_SystemInt32_22.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_42
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_42 != null)
+                {
+                    return Private___const_SystemInt32_42.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_42 != null)
+                    {
+                        Private___const_SystemInt32_42.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_13
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_13 != null)
+                {
+                    return Private___intnl_SystemInt32_13.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_13 != null)
+                    {
+                        Private___intnl_SystemInt32_13.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_33
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_33 != null)
+                {
+                    return Private___intnl_SystemInt32_33.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_33 != null)
+                    {
+                        Private___intnl_SystemInt32_33.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_23
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_23 != null)
+                {
+                    return Private___intnl_SystemInt32_23.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_23 != null)
+                    {
+                        Private___intnl_SystemInt32_23.Value = value.Value;
                     }
                 }
             }
@@ -5757,14 +8925,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal int? __24_const_intnl_SystemInt32
+        internal int? __intnl_SystemInt32_18
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___24_const_intnl_SystemInt32 != null)
+                if (Private___intnl_SystemInt32_18 != null)
                 {
-                    return Private___24_const_intnl_SystemInt32.Value;
+                    return Private___intnl_SystemInt32_18.Value;
                 }
 
                 return null;
@@ -5774,9 +8942,59 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___24_const_intnl_SystemInt32 != null)
+                    if (Private___intnl_SystemInt32_18 != null)
                     {
-                        Private___24_const_intnl_SystemInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_18.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_38
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_38 != null)
+                {
+                    return Private___intnl_SystemInt32_38.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_38 != null)
+                    {
+                        Private___intnl_SystemInt32_38.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_28
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_28 != null)
+                {
+                    return Private___intnl_SystemInt32_28.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_28 != null)
+                    {
+                        Private___intnl_SystemInt32_28.Value = value.Value;
                     }
                 }
             }
@@ -5807,14 +9025,168 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __47_const_intnl_exitJumpLoc_UInt32
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_23
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___47_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___this_VRCUdonUdonBehaviour_23 != null)
                 {
-                    return Private___47_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___this_VRCUdonUdonBehaviour_23.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_23 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_23.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_13
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_13 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_13.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_13 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_13.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_18 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_18.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_18 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_18.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_53
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_53 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_53.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_53 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_53.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_55
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_55 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_55.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_55 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_55.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_56
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_56 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_56.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_56 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_56.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_6 != null)
+                {
+                    return Private___const_SystemString_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_6 != null)
+                {
+                    Private___const_SystemString_6.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Vector3? __intnl_UnityEngineVector3_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineVector3_4 != null)
+                {
+                    return Private___intnl_UnityEngineVector3_4.Value;
                 }
 
                 return null;
@@ -5824,22 +9196,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___47_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_UnityEngineVector3_4 != null)
                     {
-                        Private___47_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_UnityEngineVector3_4.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __3_intnl_SystemInt32
+        internal uint? __gintnl_SystemUInt32_50
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___3_intnl_SystemInt32 != null)
+                if (Private___gintnl_SystemUInt32_50 != null)
                 {
-                    return Private___3_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_50.Value;
                 }
 
                 return null;
@@ -5849,22 +9221,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___3_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_50 != null)
                     {
-                        Private___3_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_50.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __31_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_40
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___31_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_40 != null)
                 {
-                    return Private___31_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_40.Value;
                 }
 
                 return null;
@@ -5874,22 +9246,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___31_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_40 != null)
                     {
-                        Private___31_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_40.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __55_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_70
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___55_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_70 != null)
                 {
-                    return Private___55_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_70.Value;
                 }
 
                 return null;
@@ -5899,44 +9271,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___55_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_70 != null)
                     {
-                        Private___55_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_70.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __25_const_intnl_SystemString
+        internal uint? __gintnl_SystemUInt32_60
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___25_const_intnl_SystemString != null)
+                if (Private___gintnl_SystemUInt32_60 != null)
                 {
-                    return Private___25_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___25_const_intnl_SystemString != null)
-                {
-                    Private___25_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal int? __29_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___29_const_intnl_SystemInt32 != null)
-                {
-                    return Private___29_const_intnl_SystemInt32.Value;
+                    return Private___gintnl_SystemUInt32_60.Value;
                 }
 
                 return null;
@@ -5946,22 +9296,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___29_const_intnl_SystemInt32 != null)
+                    if (Private___gintnl_SystemUInt32_60 != null)
                     {
-                        Private___29_const_intnl_SystemInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_60.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __11_const_intnl_exitJumpLoc_UInt32
+        internal uint? __gintnl_SystemUInt32_10
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___gintnl_SystemUInt32_10 != null)
                 {
-                    return Private___11_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___gintnl_SystemUInt32_10.Value;
                 }
 
                 return null;
@@ -5971,22 +9321,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___11_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___gintnl_SystemUInt32_10 != null)
                     {
-                        Private___11_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___gintnl_SystemUInt32_10.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __8_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_30
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___8_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_30 != null)
                 {
-                    return Private___8_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_30.Value;
                 }
 
                 return null;
@@ -5996,22 +9346,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___8_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_30 != null)
                     {
-                        Private___8_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_30.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __20_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_20
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___20_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_20 != null)
                 {
-                    return Private___20_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_20.Value;
                 }
 
                 return null;
@@ -6021,22 +9371,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___20_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_20 != null)
                     {
-                        Private___20_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_20.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Vector3? __2_intnl_UnityEngineVector3
+        internal int? __const_SystemInt32_17
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_intnl_UnityEngineVector3 != null)
+                if (Private___const_SystemInt32_17 != null)
                 {
-                    return Private___2_intnl_UnityEngineVector3.Value;
+                    return Private___const_SystemInt32_17.Value;
                 }
 
                 return null;
@@ -6046,66 +9396,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___2_intnl_UnityEngineVector3 != null)
+                    if (Private___const_SystemInt32_17 != null)
                     {
-                        Private___2_intnl_UnityEngineVector3.Value = value.Value;
+                        Private___const_SystemInt32_17.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __39_const_intnl_SystemString
+        internal int? __const_SystemInt32_37
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___39_const_intnl_SystemString != null)
+                if (Private___const_SystemInt32_37 != null)
                 {
-                    return Private___39_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___39_const_intnl_SystemString != null)
-                {
-                    Private___39_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_intnl_SystemObject != null)
-                {
-                    return Private___1_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_SystemObject != null)
-                {
-                    Private___1_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __0_mp_enabled_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_mp_enabled_Boolean != null)
-                {
-                    return Private___0_mp_enabled_Boolean.Value;
+                    return Private___const_SystemInt32_37.Value;
                 }
 
                 return null;
@@ -6115,22 +9421,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_enabled_Boolean != null)
+                    if (Private___const_SystemInt32_37 != null)
                     {
-                        Private___0_mp_enabled_Boolean.Value = value.Value;
+                        Private___const_SystemInt32_37.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __25_const_intnl_exitJumpLoc_UInt32
+        internal int? __const_SystemInt32_27
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___25_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___const_SystemInt32_27 != null)
                 {
-                    return Private___25_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___const_SystemInt32_27.Value;
                 }
 
                 return null;
@@ -6140,22 +9446,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___25_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___const_SystemInt32_27 != null)
                     {
-                        Private___25_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___const_SystemInt32_27.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal int? __32_const_intnl_SystemInt32
+        internal int? __const_SystemInt32_47
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___32_const_intnl_SystemInt32 != null)
+                if (Private___const_SystemInt32_47 != null)
                 {
-                    return Private___32_const_intnl_SystemInt32.Value;
+                    return Private___const_SystemInt32_47.Value;
                 }
 
                 return null;
@@ -6165,22 +9471,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___32_const_intnl_SystemInt32 != null)
+                    if (Private___const_SystemInt32_47 != null)
                     {
-                        Private___32_const_intnl_SystemInt32.Value = value.Value;
+                        Private___const_SystemInt32_47.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __61_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_10
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___61_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_10 != null)
                 {
-                    return Private___61_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_10.Value;
                 }
 
                 return null;
@@ -6190,22 +9496,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___61_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_10 != null)
                     {
-                        Private___61_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_10.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __29_const_intnl_exitJumpLoc_UInt32
+        internal int? __intnl_SystemInt32_30
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___29_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemInt32_30 != null)
                 {
-                    return Private___29_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemInt32_30.Value;
                 }
 
                 return null;
@@ -6215,22 +9521,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___29_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemInt32_30 != null)
                     {
-                        Private___29_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemInt32_30.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.Vector3? __1_intnl_UnityEngineVector3
+        internal int? __intnl_SystemInt32_20
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_UnityEngineVector3 != null)
+                if (Private___intnl_SystemInt32_20 != null)
                 {
-                    return Private___1_intnl_UnityEngineVector3.Value;
+                    return Private___intnl_SystemInt32_20.Value;
                 }
 
                 return null;
@@ -6240,22 +9546,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___1_intnl_UnityEngineVector3 != null)
+                    if (Private___intnl_SystemInt32_20 != null)
                     {
-                        Private___1_intnl_UnityEngineVector3.Value = value.Value;
+                        Private___intnl_SystemInt32_20.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __53_intnl_SystemBoolean
+        internal int? __intnl_SystemInt32_40
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___53_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemInt32_40 != null)
                 {
-                    return Private___53_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemInt32_40.Value;
                 }
 
                 return null;
@@ -6265,22 +9571,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___53_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemInt32_40 != null)
                     {
-                        Private___53_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemInt32_40.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __27_intnl_SystemBoolean
+        internal int? __1_damage__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___27_intnl_SystemBoolean != null)
+                if (Private___1_damage__param != null)
                 {
-                    return Private___27_intnl_SystemBoolean.Value;
+                    return Private___1_damage__param.Value;
                 }
 
                 return null;
@@ -6290,22 +9596,308 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___27_intnl_SystemBoolean != null)
+                    if (Private___1_damage__param != null)
                     {
-                        Private___27_intnl_SystemBoolean.Value = value.Value;
+                        Private___1_damage__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __0_mp_dead_Boolean
+        internal UnityEngine.GameObject __this_UnityEngineGameObject_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_mp_dead_Boolean != null)
+                if (Private___this_UnityEngineGameObject_0 != null)
                 {
-                    return Private___0_mp_dead_Boolean.Value;
+                    return Private___this_UnityEngineGameObject_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_UnityEngineGameObject_0 != null)
+                {
+                    Private___this_UnityEngineGameObject_0.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_20
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_20 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_20.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_20 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_20.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_10 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_10 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_10.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_26
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_26 != null)
+                {
+                    return Private___const_SystemString_26.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_26 != null)
+                {
+                    Private___const_SystemString_26.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_27 != null)
+                {
+                    return Private___const_SystemString_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_27 != null)
+                {
+                    Private___const_SystemString_27.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_24
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_24 != null)
+                {
+                    return Private___const_SystemString_24.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_24 != null)
+                {
+                    Private___const_SystemString_24.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_25
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_25 != null)
+                {
+                    return Private___const_SystemString_25.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_25 != null)
+                {
+                    Private___const_SystemString_25.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_22
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_22 != null)
+                {
+                    return Private___const_SystemString_22.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_22 != null)
+                {
+                    Private___const_SystemString_22.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_23
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_23 != null)
+                {
+                    return Private___const_SystemString_23.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_23 != null)
+                {
+                    Private___const_SystemString_23.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_20
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_20 != null)
+                {
+                    return Private___const_SystemString_20.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_20 != null)
+                {
+                    Private___const_SystemString_20.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_21
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_21 != null)
+                {
+                    return Private___const_SystemString_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_21 != null)
+                {
+                    Private___const_SystemString_21.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_28
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_28 != null)
+                {
+                    return Private___const_SystemString_28.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_28 != null)
+                {
+                    Private___const_SystemString_28.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_29
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_29 != null)
+                {
+                    return Private___const_SystemString_29.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_29 != null)
+                {
+                    Private___const_SystemString_29.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_6 != null)
+                {
+                    return Private___intnl_SystemSingle_6.Value;
                 }
 
                 return null;
@@ -6315,22 +9907,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_dead_Boolean != null)
+                    if (Private___intnl_SystemSingle_6 != null)
                     {
-                        Private___0_mp_dead_Boolean.Value = value.Value;
+                        Private___intnl_SystemSingle_6.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __51_const_intnl_exitJumpLoc_UInt32
+        internal VRC.Udon.UdonBehaviour __intnl_UnityEngineObject_17
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___51_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_UnityEngineObject_17 != null)
                 {
-                    return Private___51_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_UnityEngineObject_17.Value;
                 }
 
                 return null;
@@ -6338,419 +9930,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___intnl_UnityEngineObject_17 != null)
                 {
-                    if (Private___51_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___51_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __2_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_const_intnl_SystemInt32 != null)
-                {
-                    return Private___2_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___2_const_intnl_SystemInt32 != null)
-                    {
-                        Private___2_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal float? __3_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_SystemSingle != null)
-                {
-                    return Private___3_intnl_SystemSingle.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___3_intnl_SystemSingle != null)
-                    {
-                        Private___3_intnl_SystemSingle.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __33_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___33_const_intnl_SystemInt32 != null)
-                {
-                    return Private___33_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___33_const_intnl_SystemInt32 != null)
-                    {
-                        Private___33_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal string __27_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___27_const_intnl_SystemString != null)
-                {
-                    return Private___27_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___27_const_intnl_SystemString != null)
-                {
-                    Private___27_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.Vector3? __0_intnl_UnityEngineVector3
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_UnityEngineVector3 != null)
-                {
-                    return Private___0_intnl_UnityEngineVector3.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___0_intnl_UnityEngineVector3 != null)
-                    {
-                        Private___0_intnl_UnityEngineVector3.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal string __10_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___10_const_intnl_SystemString != null)
-                {
-                    return Private___10_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___10_const_intnl_SystemString != null)
-                {
-                    Private___10_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __32_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___32_intnl_SystemBoolean != null)
-                {
-                    return Private___32_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___32_intnl_SystemBoolean != null)
-                    {
-                        Private___32_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __30_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___30_intnl_SystemObject != null)
-                {
-                    return Private___30_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___30_intnl_SystemObject != null)
-                {
-                    Private___30_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __56_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___56_intnl_SystemBoolean != null)
-                {
-                    return Private___56_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___56_intnl_SystemBoolean != null)
-                    {
-                        Private___56_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal uint? __41_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___41_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___41_const_intnl_exitJumpLoc_UInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___41_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___41_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __45_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___45_intnl_SystemBoolean != null)
-                {
-                    return Private___45_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___45_intnl_SystemBoolean != null)
-                    {
-                        Private___45_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __1_const_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_const_intnl_SystemBoolean != null)
-                {
-                    return Private___1_const_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___1_const_intnl_SystemBoolean != null)
-                    {
-                        Private___1_const_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __22_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___22_const_intnl_SystemInt32 != null)
-                {
-                    return Private___22_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___22_const_intnl_SystemInt32 != null)
-                    {
-                        Private___22_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerData
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_PlayerData != null)
-                {
-                    return Private___3_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___3_intnl_PlayerData != null)
-                {
-                    Private___3_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal bool? __62_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___62_intnl_SystemBoolean != null)
-                {
-                    return Private___62_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___62_intnl_SystemBoolean != null)
-                    {
-                        Private___62_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal string __11_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___11_const_intnl_SystemString != null)
-                {
-                    return Private___11_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___11_const_intnl_SystemString != null)
-                {
-                    Private___11_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __16_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___16_const_intnl_SystemString != null)
-                {
-                    return Private___16_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___16_const_intnl_SystemString != null)
-                {
-                    Private___16_const_intnl_SystemString.Value = value;
+                    Private___intnl_UnityEngineObject_17.Value = value;
                 }
             }
         }
@@ -6780,14 +9962,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __32_const_intnl_exitJumpLoc_UInt32
+        internal bool? __0_playing__param
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___32_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___0_playing__param != null)
                 {
-                    return Private___32_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___0_playing__param.Value;
                 }
 
                 return null;
@@ -6797,22 +9979,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___32_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___0_playing__param != null)
                     {
-                        Private___32_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___0_playing__param.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __43_intnl_SystemBoolean
+        internal UnityEngine.Transform hitboxRoot
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___43_intnl_SystemBoolean != null)
+                if (Private_hitboxRoot != null)
                 {
-                    return Private___43_intnl_SystemBoolean.Value;
+                    return Private_hitboxRoot.Value;
                 }
 
                 return null;
@@ -6820,212 +10002,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private_hitboxRoot != null)
                 {
-                    if (Private___43_intnl_SystemBoolean != null)
-                    {
-                        Private___43_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __15_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___15_const_intnl_SystemInt32 != null)
-                {
-                    return Private___15_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___15_const_intnl_SystemInt32 != null)
-                    {
-                        Private___15_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __18_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___18_intnl_SystemBoolean != null)
-                {
-                    return Private___18_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___18_intnl_SystemBoolean != null)
-                    {
-                        Private___18_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __0_mp_t_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_mp_t_Boolean != null)
-                {
-                    return Private___0_mp_t_Boolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___0_mp_t_Boolean != null)
-                    {
-                        Private___0_mp_t_Boolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal bool? __2_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_intnl_SystemBoolean != null)
-                {
-                    return Private___2_intnl_SystemBoolean.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___2_intnl_SystemBoolean != null)
-                    {
-                        Private___2_intnl_SystemBoolean.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal float? __10_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___10_intnl_SystemSingle != null)
-                {
-                    return Private___10_intnl_SystemSingle.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___10_intnl_SystemSingle != null)
-                    {
-                        Private___10_intnl_SystemSingle.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __1_mp_damage_Int32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_mp_damage_Int32 != null)
-                {
-                    return Private___1_mp_damage_Int32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___1_mp_damage_Int32 != null)
-                    {
-                        Private___1_mp_damage_Int32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal uint? __14_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___14_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___14_const_intnl_exitJumpLoc_UInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___14_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___14_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __23_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___23_const_intnl_SystemInt32 != null)
-                {
-                    return Private___23_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___23_const_intnl_SystemInt32 != null)
-                    {
-                        Private___23_const_intnl_SystemInt32.Value = value.Value;
-                    }
+                    Private_hitboxRoot.Value = value;
                 }
             }
         }
@@ -7050,56 +10029,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                     if (Private_joinedRound != null)
                     {
                         Private_joinedRound.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __3_const_intnl_SystemInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_const_intnl_SystemInt32 != null)
-                {
-                    return Private___3_const_intnl_SystemInt32.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___3_const_intnl_SystemInt32 != null)
-                    {
-                        Private___3_const_intnl_SystemInt32.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal float? __7_intnl_SystemSingle
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___7_intnl_SystemSingle != null)
-                {
-                    return Private___7_intnl_SystemSingle.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___7_intnl_SystemSingle != null)
-                    {
-                        Private___7_intnl_SystemSingle.Value = value.Value;
                     }
                 }
             }
@@ -7130,14 +10059,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.Common.Interfaces.NetworkEventTarget? __0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget
+        internal uint? __gintnl_SystemUInt32_58
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget != null)
+                if (Private___gintnl_SystemUInt32_58 != null)
                 {
-                    return Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget.Value;
+                    return Private___gintnl_SystemUInt32_58.Value;
                 }
 
                 return null;
@@ -7147,22 +10076,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget != null)
+                    if (Private___gintnl_SystemUInt32_58 != null)
                     {
-                        Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget.Value = value.Value;
+                        Private___gintnl_SystemUInt32_58.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __59_intnl_SystemBoolean
+        internal uint? __gintnl_SystemUInt32_48
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___59_intnl_SystemBoolean != null)
+                if (Private___gintnl_SystemUInt32_48 != null)
                 {
-                    return Private___59_intnl_SystemBoolean.Value;
+                    return Private___gintnl_SystemUInt32_48.Value;
                 }
 
                 return null;
@@ -7172,10 +10101,157 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___59_intnl_SystemBoolean != null)
+                    if (Private___gintnl_SystemUInt32_48 != null)
                     {
-                        Private___59_intnl_SystemBoolean.Value = value.Value;
+                        Private___gintnl_SystemUInt32_48.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_78
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_78 != null)
+                {
+                    return Private___gintnl_SystemUInt32_78.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_78 != null)
+                    {
+                        Private___gintnl_SystemUInt32_78.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_68
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_68 != null)
+                {
+                    return Private___gintnl_SystemUInt32_68.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_68 != null)
+                    {
+                        Private___gintnl_SystemUInt32_68.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_18 != null)
+                {
+                    return Private___gintnl_SystemUInt32_18.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_18 != null)
+                    {
+                        Private___gintnl_SystemUInt32_18.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_38
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_38 != null)
+                {
+                    return Private___gintnl_SystemUInt32_38.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_38 != null)
+                    {
+                        Private___gintnl_SystemUInt32_38.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_28
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_28 != null)
+                {
+                    return Private___gintnl_SystemUInt32_28.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_28 != null)
+                    {
+                        Private___gintnl_SystemUInt32_28.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject teamTagObj
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_teamTagObj != null)
+                {
+                    return Private_teamTagObj.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_teamTagObj != null)
+                {
+                    Private_teamTagObj.Value = value;
                 }
             }
         }
@@ -7205,14 +10281,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal uint? __18_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_10
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___18_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_10 != null)
                 {
-                    return Private___18_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_10.Value;
                 }
 
                 return null;
@@ -7222,22 +10298,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___18_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_10 != null)
                     {
-                        Private___18_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_10.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __46_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_20
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___46_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_20 != null)
                 {
-                    return Private___46_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_20.Value;
                 }
 
                 return null;
@@ -7247,22 +10323,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___46_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_20 != null)
                     {
-                        Private___46_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_20.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __30_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_30
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___30_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_30 != null)
                 {
-                    return Private___30_const_intnl_SystemString.Value;
+                    return Private___intnl_SystemBoolean_30.Value;
                 }
 
                 return null;
@@ -7270,9 +10346,262 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___30_const_intnl_SystemString != null)
+                if (value.HasValue)
                 {
-                    Private___30_const_intnl_SystemString.Value = value;
+                    if (Private___intnl_SystemBoolean_30 != null)
+                    {
+                        Private___intnl_SystemBoolean_30.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_40
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_40 != null)
+                {
+                    return Private___intnl_SystemBoolean_40.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_40 != null)
+                    {
+                        Private___intnl_SystemBoolean_40.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_50
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_50 != null)
+                {
+                    return Private___intnl_SystemBoolean_50.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_50 != null)
+                    {
+                        Private___intnl_SystemBoolean_50.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_60
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_60 != null)
+                {
+                    return Private___intnl_SystemBoolean_60.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_60 != null)
+                    {
+                        Private___intnl_SystemBoolean_60.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_55
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_55 != null)
+                {
+                    return Private___gintnl_SystemUInt32_55.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_55 != null)
+                    {
+                        Private___gintnl_SystemUInt32_55.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_45
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_45 != null)
+                {
+                    return Private___gintnl_SystemUInt32_45.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_45 != null)
+                    {
+                        Private___gintnl_SystemUInt32_45.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_75
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_75 != null)
+                {
+                    return Private___gintnl_SystemUInt32_75.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_75 != null)
+                    {
+                        Private___gintnl_SystemUInt32_75.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_65
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_65 != null)
+                {
+                    return Private___gintnl_SystemUInt32_65.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_65 != null)
+                    {
+                        Private___gintnl_SystemUInt32_65.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_15 != null)
+                {
+                    return Private___gintnl_SystemUInt32_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_15 != null)
+                    {
+                        Private___gintnl_SystemUInt32_15.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_35
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_35 != null)
+                {
+                    return Private___gintnl_SystemUInt32_35.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_35 != null)
+                    {
+                        Private___gintnl_SystemUInt32_35.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_25
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_25 != null)
+                {
+                    return Private___gintnl_SystemUInt32_25.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_25 != null)
+                    {
+                        Private___gintnl_SystemUInt32_25.Value = value.Value;
+                    }
                 }
             }
         }
@@ -7299,36 +10628,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal string __13_const_intnl_SystemString
+        internal bool? permaSuspicious
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___13_const_intnl_SystemString != null)
+                if (Private_permaSuspicious != null)
                 {
-                    return Private___13_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___13_const_intnl_SystemString != null)
-                {
-                    Private___13_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal bool? __0_mp_guard_Boolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_mp_guard_Boolean != null)
-                {
-                    return Private___0_mp_guard_Boolean.Value;
+                    return Private_permaSuspicious.Value;
                 }
 
                 return null;
@@ -7338,9 +10645,359 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___0_mp_guard_Boolean != null)
+                    if (Private_permaSuspicious != null)
                     {
-                        Private___0_mp_guard_Boolean.Value = value.Value;
+                        Private_permaSuspicious.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_9 != null)
+                {
+                    return Private___const_SystemInt32_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_9 != null)
+                    {
+                        Private___const_SystemInt32_9.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_8 != null)
+                {
+                    return Private___const_SystemInt32_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_8 != null)
+                    {
+                        Private___const_SystemInt32_8.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_1 != null)
+                {
+                    return Private___const_SystemInt32_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_1 != null)
+                    {
+                        Private___const_SystemInt32_1.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_0 != null)
+                {
+                    return Private___const_SystemInt32_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_0 != null)
+                    {
+                        Private___const_SystemInt32_0.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_3 != null)
+                {
+                    return Private___const_SystemInt32_3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_3 != null)
+                    {
+                        Private___const_SystemInt32_3.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_2 != null)
+                {
+                    return Private___const_SystemInt32_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_2 != null)
+                    {
+                        Private___const_SystemInt32_2.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_5 != null)
+                {
+                    return Private___const_SystemInt32_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_5 != null)
+                    {
+                        Private___const_SystemInt32_5.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_4 != null)
+                {
+                    return Private___const_SystemInt32_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_4 != null)
+                    {
+                        Private___const_SystemInt32_4.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_7 != null)
+                {
+                    return Private___const_SystemInt32_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_7 != null)
+                    {
+                        Private___const_SystemInt32_7.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_6 != null)
+                {
+                    return Private___const_SystemInt32_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_6 != null)
+                    {
+                        Private___const_SystemInt32_6.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_14 != null)
+                {
+                    return Private___const_SystemInt32_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_14 != null)
+                    {
+                        Private___const_SystemInt32_14.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_34
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_34 != null)
+                {
+                    return Private___const_SystemInt32_34.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_34 != null)
+                    {
+                        Private___const_SystemInt32_34.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_24
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_24 != null)
+                {
+                    return Private___const_SystemInt32_24.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_24 != null)
+                    {
+                        Private___const_SystemInt32_24.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __const_SystemInt32_44
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_44 != null)
+                {
+                    return Private___const_SystemInt32_44.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_44 != null)
+                    {
+                        Private___const_SystemInt32_44.Value = value.Value;
                     }
                 }
             }
@@ -7371,14 +11028,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal int? __30_const_intnl_SystemInt32
+        internal ushort? __lcl_startArmor_SystemUInt16_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___30_const_intnl_SystemInt32 != null)
+                if (Private___lcl_startArmor_SystemUInt16_0 != null)
                 {
-                    return Private___30_const_intnl_SystemInt32.Value;
+                    return Private___lcl_startArmor_SystemUInt16_0.Value;
                 }
 
                 return null;
@@ -7388,22 +11045,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___30_const_intnl_SystemInt32 != null)
+                    if (Private___lcl_startArmor_SystemUInt16_0 != null)
                     {
-                        Private___30_const_intnl_SystemInt32.Value = value.Value;
+                        Private___lcl_startArmor_SystemUInt16_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __54_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_8
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___54_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_8 != null)
                 {
-                    return Private___54_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_8.Value;
                 }
 
                 return null;
@@ -7413,22 +11070,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___54_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_8 != null)
                     {
-                        Private___54_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_8.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __13_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_9
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___13_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_9 != null)
                 {
-                    return Private___13_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_9.Value;
                 }
 
                 return null;
@@ -7438,44 +11095,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___13_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_9 != null)
                     {
-                        Private___13_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_9.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal UnityEngine.GameObject __2_intnl_UnityEngineGameObject
+        internal bool? __intnl_SystemBoolean_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_intnl_UnityEngineGameObject != null)
+                if (Private___intnl_SystemBoolean_0 != null)
                 {
-                    return Private___2_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_intnl_UnityEngineGameObject != null)
-                {
-                    Private___2_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal bool? __10_intnl_SystemBoolean
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___10_intnl_SystemBoolean != null)
-                {
-                    return Private___10_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_0.Value;
                 }
 
                 return null;
@@ -7485,66 +11120,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___10_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_0 != null)
                     {
-                        Private___10_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_0.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __2_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___2_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_1 != null)
                 {
-                    return Private___2_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_const_intnl_SystemString != null)
-                {
-                    Private___2_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal string __31_const_intnl_SystemString
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___31_const_intnl_SystemString != null)
-                {
-                    return Private___31_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___31_const_intnl_SystemString != null)
-                {
-                    Private___31_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __27_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___27_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___27_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_1.Value;
                 }
 
                 return null;
@@ -7554,44 +11145,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___27_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_1 != null)
                     {
-                        Private___27_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_1.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal string __36_const_intnl_SystemString
+        internal bool? __intnl_SystemBoolean_2
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___36_const_intnl_SystemString != null)
+                if (Private___intnl_SystemBoolean_2 != null)
                 {
-                    return Private___36_const_intnl_SystemString.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___36_const_intnl_SystemString != null)
-                {
-                    Private___36_const_intnl_SystemString.Value = value;
-                }
-            }
-        }
-
-        internal uint? __58_const_intnl_exitJumpLoc_UInt32
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___58_const_intnl_exitJumpLoc_UInt32 != null)
-                {
-                    return Private___58_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_2.Value;
                 }
 
                 return null;
@@ -7601,22 +11170,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___58_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_2 != null)
                     {
-                        Private___58_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_2.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __44_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___44_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_3 != null)
                 {
-                    return Private___44_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_3.Value;
                 }
 
                 return null;
@@ -7626,22 +11195,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___44_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_3 != null)
                     {
-                        Private___44_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_3.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __5_intnl_PlayerData
+        internal bool? __intnl_SystemBoolean_4
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___5_intnl_PlayerData != null)
+                if (Private___intnl_SystemBoolean_4 != null)
                 {
-                    return Private___5_intnl_PlayerData.Value;
+                    return Private___intnl_SystemBoolean_4.Value;
                 }
 
                 return null;
@@ -7649,9 +11218,247 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___5_intnl_PlayerData != null)
+                if (value.HasValue)
                 {
-                    Private___5_intnl_PlayerData.Value = value;
+                    if (Private___intnl_SystemBoolean_4 != null)
+                    {
+                        Private___intnl_SystemBoolean_4.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_5 != null)
+                {
+                    return Private___intnl_SystemBoolean_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_5 != null)
+                    {
+                        Private___intnl_SystemBoolean_5.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_6 != null)
+                {
+                    return Private___intnl_SystemBoolean_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_6 != null)
+                    {
+                        Private___intnl_SystemBoolean_6.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_7 != null)
+                {
+                    return Private___intnl_SystemBoolean_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_7 != null)
+                    {
+                        Private___intnl_SystemBoolean_7.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_25
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_25 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_25.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_25 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_25.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___this_VRCUdonUdonBehaviour_15 != null)
+                {
+                    return Private___this_VRCUdonUdonBehaviour_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___this_VRCUdonUdonBehaviour_15 != null)
+                {
+                    Private___this_VRCUdonUdonBehaviour_15.Value = value;
+                }
+            }
+        }
+
+        internal bool? __0_wanted__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_wanted__param != null)
+                {
+                    return Private___0_wanted__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_wanted__param != null)
+                    {
+                        Private___0_wanted__param.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal string __const_SystemString_72
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_72 != null)
+                {
+                    return Private___const_SystemString_72.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_72 != null)
+                {
+                    Private___const_SystemString_72.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_70
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_70 != null)
+                {
+                    return Private___const_SystemString_70.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_70 != null)
+                {
+                    Private___const_SystemString_70.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_71
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_71 != null)
+                {
+                    return Private___const_SystemString_71.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_71 != null)
+                {
+                    Private___const_SystemString_71.Value = value;
+                }
+            }
+        }
+
+        internal float? __intnl_SystemSingle_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemSingle_5 != null)
+                {
+                    return Private___intnl_SystemSingle_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemSingle_5 != null)
+                    {
+                        Private___intnl_SystemSingle_5.Value = value.Value;
+                    }
                 }
             }
         }
@@ -7678,14 +11485,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __3_intnl_PlayerObjectPool
+        internal string __const_SystemString_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___3_intnl_PlayerObjectPool != null)
+                if (Private___const_SystemString_3 != null)
                 {
-                    return Private___3_intnl_PlayerObjectPool.Value;
+                    return Private___const_SystemString_3.Value;
                 }
 
                 return null;
@@ -7693,21 +11500,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___3_intnl_PlayerObjectPool != null)
+                if (Private___const_SystemString_3 != null)
                 {
-                    Private___3_intnl_PlayerObjectPool.Value = value;
+                    Private___const_SystemString_3.Value = value;
                 }
             }
         }
 
-        internal bool? __51_intnl_SystemBoolean
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_9
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___51_intnl_SystemBoolean != null)
+                if (Private___this_VRCUdonUdonBehaviour_9 != null)
                 {
-                    return Private___51_intnl_SystemBoolean.Value;
+                    return Private___this_VRCUdonUdonBehaviour_9.Value;
                 }
 
                 return null;
@@ -7715,24 +11522,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_9 != null)
                 {
-                    if (Private___51_intnl_SystemBoolean != null)
-                    {
-                        Private___51_intnl_SystemBoolean.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_9.Value = value;
                 }
             }
         }
 
-        internal int? __0_const_intnl_SystemInt32
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_8
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_const_intnl_SystemInt32 != null)
+                if (Private___this_VRCUdonUdonBehaviour_8 != null)
                 {
-                    return Private___0_const_intnl_SystemInt32.Value;
+                    return Private___this_VRCUdonUdonBehaviour_8.Value;
                 }
 
                 return null;
@@ -7740,24 +11544,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_8 != null)
                 {
-                    if (Private___0_const_intnl_SystemInt32 != null)
-                    {
-                        Private___0_const_intnl_SystemInt32.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_8.Value = value;
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __1_intnl_PlayerObjectPool
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_intnl_PlayerObjectPool != null)
+                if (Private___this_VRCUdonUdonBehaviour_3 != null)
                 {
-                    return Private___1_intnl_PlayerObjectPool.Value;
+                    return Private___this_VRCUdonUdonBehaviour_3.Value;
                 }
 
                 return null;
@@ -7765,21 +11566,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___1_intnl_PlayerObjectPool != null)
+                if (Private___this_VRCUdonUdonBehaviour_3 != null)
                 {
-                    Private___1_intnl_PlayerObjectPool.Value = value;
+                    Private___this_VRCUdonUdonBehaviour_3.Value = value;
                 }
             }
         }
 
-        internal uint? __1_const_intnl_exitJumpLoc_UInt32
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_2
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___this_VRCUdonUdonBehaviour_2 != null)
                 {
-                    return Private___1_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___this_VRCUdonUdonBehaviour_2.Value;
                 }
 
                 return null;
@@ -7787,24 +11588,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_2 != null)
                 {
-                    if (Private___1_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___1_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_2.Value = value;
                 }
             }
         }
 
-        internal bool? __25_intnl_SystemBoolean
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_1
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___25_intnl_SystemBoolean != null)
+                if (Private___this_VRCUdonUdonBehaviour_1 != null)
                 {
-                    return Private___25_intnl_SystemBoolean.Value;
+                    return Private___this_VRCUdonUdonBehaviour_1.Value;
                 }
 
                 return null;
@@ -7812,24 +11610,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_1 != null)
                 {
-                    if (Private___25_intnl_SystemBoolean != null)
-                    {
-                        Private___25_intnl_SystemBoolean.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_1.Value = value;
                 }
             }
         }
 
-        internal uint? __48_const_intnl_exitJumpLoc_UInt32
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_0
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___48_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___this_VRCUdonUdonBehaviour_0 != null)
                 {
-                    return Private___48_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___this_VRCUdonUdonBehaviour_0.Value;
                 }
 
                 return null;
@@ -7837,24 +11632,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_0 != null)
                 {
-                    if (Private___48_const_intnl_exitJumpLoc_UInt32 != null)
-                    {
-                        Private___48_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_0.Value = value;
                 }
             }
         }
 
-        internal string __22_const_intnl_SystemString
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_7
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___22_const_intnl_SystemString != null)
+                if (Private___this_VRCUdonUdonBehaviour_7 != null)
                 {
-                    return Private___22_const_intnl_SystemString.Value;
+                    return Private___this_VRCUdonUdonBehaviour_7.Value;
                 }
 
                 return null;
@@ -7862,21 +11654,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___22_const_intnl_SystemString != null)
+                if (Private___this_VRCUdonUdonBehaviour_7 != null)
                 {
-                    Private___22_const_intnl_SystemString.Value = value;
+                    Private___this_VRCUdonUdonBehaviour_7.Value = value;
                 }
             }
         }
 
-        internal float? __8_intnl_SystemSingle
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_6
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___8_intnl_SystemSingle != null)
+                if (Private___this_VRCUdonUdonBehaviour_6 != null)
                 {
-                    return Private___8_intnl_SystemSingle.Value;
+                    return Private___this_VRCUdonUdonBehaviour_6.Value;
                 }
 
                 return null;
@@ -7884,24 +11676,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_6 != null)
                 {
-                    if (Private___8_intnl_SystemSingle != null)
-                    {
-                        Private___8_intnl_SystemSingle.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_6.Value = value;
                 }
             }
         }
 
-        internal string __0_mp_newName_String
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_5
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___0_mp_newName_String != null)
+                if (Private___this_VRCUdonUdonBehaviour_5 != null)
                 {
-                    return Private___0_mp_newName_String.Value;
+                    return Private___this_VRCUdonUdonBehaviour_5.Value;
                 }
 
                 return null;
@@ -7909,21 +11698,21 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (Private___0_mp_newName_String != null)
+                if (Private___this_VRCUdonUdonBehaviour_5 != null)
                 {
-                    Private___0_mp_newName_String.Value = value;
+                    Private___this_VRCUdonUdonBehaviour_5.Value = value;
                 }
             }
         }
 
-        internal bool? __70_intnl_SystemBoolean
+        internal VRC.Udon.UdonBehaviour __this_VRCUdonUdonBehaviour_4
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___70_intnl_SystemBoolean != null)
+                if (Private___this_VRCUdonUdonBehaviour_4 != null)
                 {
-                    return Private___70_intnl_SystemBoolean.Value;
+                    return Private___this_VRCUdonUdonBehaviour_4.Value;
                 }
 
                 return null;
@@ -7931,12 +11720,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___this_VRCUdonUdonBehaviour_4 != null)
                 {
-                    if (Private___70_intnl_SystemBoolean != null)
-                    {
-                        Private___70_intnl_SystemBoolean.Value = value.Value;
-                    }
+                    Private___this_VRCUdonUdonBehaviour_4.Value = value;
                 }
             }
         }
@@ -7963,14 +11749,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal bool? __17_intnl_SystemBoolean
+        internal string __const_SystemString_8
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___17_intnl_SystemBoolean != null)
+                if (Private___const_SystemString_8 != null)
                 {
-                    return Private___17_intnl_SystemBoolean.Value;
+                    return Private___const_SystemString_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_8 != null)
+                {
+                    Private___const_SystemString_8.Value = value;
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_18 != null)
+                {
+                    return Private___intnl_SystemBoolean_18.Value;
                 }
 
                 return null;
@@ -7980,22 +11788,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___17_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_18 != null)
                     {
-                        Private___17_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_18.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal bool? __49_intnl_SystemBoolean
+        internal bool? __intnl_SystemBoolean_28
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___49_intnl_SystemBoolean != null)
+                if (Private___intnl_SystemBoolean_28 != null)
                 {
-                    return Private___49_intnl_SystemBoolean.Value;
+                    return Private___intnl_SystemBoolean_28.Value;
                 }
 
                 return null;
@@ -8005,22 +11813,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___49_intnl_SystemBoolean != null)
+                    if (Private___intnl_SystemBoolean_28 != null)
                     {
-                        Private___49_intnl_SystemBoolean.Value = value.Value;
+                        Private___intnl_SystemBoolean_28.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal uint? __53_const_intnl_exitJumpLoc_UInt32
+        internal bool? __intnl_SystemBoolean_38
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___53_const_intnl_exitJumpLoc_UInt32 != null)
+                if (Private___intnl_SystemBoolean_38 != null)
                 {
-                    return Private___53_const_intnl_exitJumpLoc_UInt32.Value;
+                    return Private___intnl_SystemBoolean_38.Value;
                 }
 
                 return null;
@@ -8030,9 +11838,59 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___53_const_intnl_exitJumpLoc_UInt32 != null)
+                    if (Private___intnl_SystemBoolean_38 != null)
                     {
-                        Private___53_const_intnl_exitJumpLoc_UInt32.Value = value.Value;
+                        Private___intnl_SystemBoolean_38.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_48
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_48 != null)
+                {
+                    return Private___intnl_SystemBoolean_48.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_48 != null)
+                    {
+                        Private___intnl_SystemBoolean_48.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_58
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_58 != null)
+                {
+                    return Private___intnl_SystemBoolean_58.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_58 != null)
+                    {
+                        Private___intnl_SystemBoolean_58.Value = value.Value;
                     }
                 }
             }
@@ -8063,58 +11921,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __23_intnl_SystemObject
+        internal UnityEngine.Vector3? __intnl_UnityEngineVector3_3
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___23_intnl_SystemObject != null)
+                if (Private___intnl_UnityEngineVector3_3 != null)
                 {
-                    return Private___23_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___23_intnl_SystemObject != null)
-                {
-                    Private___23_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __4_intnl_PlayerData
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_intnl_PlayerData != null)
-                {
-                    return Private___4_intnl_PlayerData.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_PlayerData != null)
-                {
-                    Private___4_intnl_PlayerData.Value = value;
-                }
-            }
-        }
-
-        internal int? __28_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___28_intnl_SystemObject != null)
-                {
-                    return Private___28_intnl_SystemObject.Value;
+                    return Private___intnl_UnityEngineVector3_3.Value;
                 }
 
                 return null;
@@ -8124,1695 +11938,466 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (value.HasValue)
                 {
-                    if (Private___28_intnl_SystemObject != null)
+                    if (Private___intnl_UnityEngineVector3_3 != null)
                     {
-                        Private___28_intnl_SystemObject.Value = value.Value;
+                        Private___intnl_UnityEngineVector3_3.Value = value.Value;
                     }
                 }
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __3_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_GameEffects != null)
-                {
-                    return Private___3_intnl_GameEffects.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___3_intnl_GameEffects != null)
-                {
-                    Private___3_intnl_GameEffects.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.UI.Slider __3_intnl_UnityEngineUISlider
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___3_intnl_UnityEngineUISlider != null)
-                {
-                    return Private___3_intnl_UnityEngineUISlider.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___3_intnl_UnityEngineUISlider != null)
-                {
-                    Private___3_intnl_UnityEngineUISlider.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.UI.Slider __32_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___32_intnl_SystemObject != null)
-                {
-                    return Private___32_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___32_intnl_SystemObject != null)
-                {
-                    Private___32_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.SDKBase.VRCPlayerApi __1_intnl_VRCSDKBaseVRCPlayerApi
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_intnl_VRCSDKBaseVRCPlayerApi != null)
-                {
-                    return Private___1_intnl_VRCSDKBaseVRCPlayerApi.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_VRCSDKBaseVRCPlayerApi != null)
-                {
-                    Private___1_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
-                }
-            }
-        }
-
-        internal bool? __6_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___6_intnl_SystemObject != null)
-                {
-                    return Private___6_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___6_intnl_SystemObject != null)
-                    {
-                        Private___6_intnl_SystemObject.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal UnityEngine.GameObject __4_intnl_UnityEngineGameObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_intnl_UnityEngineGameObject != null)
-                {
-                    return Private___4_intnl_UnityEngineGameObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_UnityEngineGameObject != null)
-                {
-                    Private___4_intnl_UnityEngineGameObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_ItemControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_ItemControl != null)
-                {
-                    return Private___0_intnl_ItemControl.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_ItemControl != null)
-                {
-                    Private___0_intnl_ItemControl.Value = value;
-                }
-            }
-        }
-
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_intnl_GameEffects != null)
-                {
-                    return Private___1_intnl_GameEffects.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_GameEffects != null)
-                {
-                    Private___1_intnl_GameEffects.Value = value;
-                }
-            }
-        }
-
-        internal bool? __24_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___24_intnl_SystemObject != null)
-                {
-                    return Private___24_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___24_intnl_SystemObject != null)
-                    {
-                        Private___24_intnl_SystemObject.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __5_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_intnl_GameEffects != null)
-                {
-                    return Private___5_intnl_GameEffects.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___5_intnl_GameEffects != null)
-                {
-                    Private___5_intnl_GameEffects.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __13_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___13_intnl_SystemObject != null)
-                {
-                    return Private___13_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___13_intnl_SystemObject != null)
-                {
-                    Private___13_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_ScoreboardDisplay
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_ScoreboardDisplay != null)
-                {
-                    return Private___0_intnl_ScoreboardDisplay.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_ScoreboardDisplay != null)
-                {
-                    Private___0_intnl_ScoreboardDisplay.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __25_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___25_intnl_SystemObject != null)
-                {
-                    return Private___25_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___25_intnl_SystemObject != null)
-                {
-                    Private___25_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __17_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___17_intnl_SystemObject != null)
-                {
-                    return Private___17_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___17_intnl_SystemObject != null)
-                {
-                    Private___17_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __18_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___18_intnl_SystemObject != null)
-                {
-                    return Private___18_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___18_intnl_SystemObject != null)
-                {
-                    Private___18_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __14_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___14_intnl_SystemObject != null)
-                {
-                    return Private___14_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___14_intnl_SystemObject != null)
-                {
-                    Private___14_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __7_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___7_intnl_SystemObject != null)
-                {
-                    return Private___7_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___7_intnl_SystemObject != null)
-                {
-                    Private___7_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_PatronControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_PatronControl != null)
-                {
-                    return Private___0_intnl_PatronControl.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_PatronControl != null)
-                {
-                    Private___0_intnl_PatronControl.Value = value;
-                }
-            }
-        }
-
-        internal bool? __8_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___8_intnl_SystemObject != null)
-                {
-                    return Private___8_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___8_intnl_SystemObject != null)
-                    {
-                        Private___8_intnl_SystemObject.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __15_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___15_intnl_SystemObject != null)
-                {
-                    return Private___15_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___15_intnl_SystemObject != null)
-                {
-                    Private___15_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __1_intnl_PatronControl
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_intnl_PatronControl != null)
-                {
-                    return Private___1_intnl_PatronControl.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___1_intnl_PatronControl != null)
-                {
-                    Private___1_intnl_PatronControl.Value = value;
-                }
-            }
-        }
-
-        internal VRC.SDKBase.VRCPlayerApi __4_intnl_VRCSDKBaseVRCPlayerApi
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
-                {
-                    return Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___4_intnl_VRCSDKBaseVRCPlayerApi != null)
-                {
-                    Private___4_intnl_VRCSDKBaseVRCPlayerApi.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __16_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___16_intnl_SystemObject != null)
-                {
-                    return Private___16_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___16_intnl_SystemObject != null)
-                {
-                    Private___16_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __5_intnl_SystemObject
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___5_intnl_SystemObject != null)
-                {
-                    return Private___5_intnl_SystemObject.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___5_intnl_SystemObject != null)
-                {
-                    Private___5_intnl_SystemObject.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_GameEffects
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_GameEffects != null)
-                {
-                    return Private___0_intnl_GameEffects.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_GameEffects != null)
-                {
-                    Private___0_intnl_GameEffects.Value = value;
-                }
-            }
-        }
-
-        internal VRC.Udon.UdonBehaviour __0_intnl_AFKDetector
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0_intnl_AFKDetector != null)
-                {
-                    return Private___0_intnl_AFKDetector.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___0_intnl_AFKDetector != null)
-                {
-                    Private___0_intnl_AFKDetector.Value = value;
-                }
-            }
-        }
-
-        internal bool? isSuspicious
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private_isSuspicious != null)
-                {
-                    return Private_isSuspicious.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private_isSuspicious != null)
-                    {
-                        Private_isSuspicious.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-
-
-        #endregion Getter / Setters UdonVariables  of PlayerData
-
-
-
-        internal void Initialize_PlayerData()
-        {
-            Private___18_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__18_const_intnl_SystemInt32");
-            Private_isWanted = new AstroUdonVariable<bool>(PlayerData, "isWanted");
-            Private___43_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__43_const_intnl_exitJumpLoc_UInt32");
-            Private___33_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__33_const_intnl_SystemString");
-            Private___20_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__20_const_intnl_SystemInt32");
-            Private___23_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__23_intnl_SystemBoolean");
-            Private___1_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__1_intnl_UnityEngineGameObject");
-            Private___21_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__21_const_intnl_exitJumpLoc_UInt32");
-            Private___52_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__52_intnl_SystemBoolean");
-            Private___3_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__3_const_intnl_SystemString");
-            Private___6_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__6_const_intnl_SystemInt32");
-            Private___0_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PlayerData");
-            Private___3_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__3_const_intnl_exitJumpLoc_UInt32");
-            Private___26_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__26_intnl_SystemBoolean");
-            Private___0_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__0_const_intnl_SystemBoolean");
-            Private___41_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__41_intnl_SystemBoolean");
-            Private___1_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__1_intnl_UnityEngineTransform");
-            Private___1_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__1_const_intnl_SystemInt32");
-            Private___0_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PlayerObjectPool");
-            Private___1_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__1_intnl_SystemInt32");
-            Private___16_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__16_const_intnl_exitJumpLoc_UInt32");
-            Private___2_intnl_SystemObject = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__2_intnl_SystemObject");
-            Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = new AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming>(PlayerData, "__0_const_intnl_VRCUdonCommonEnumsEventTiming");
-            Private___35_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__35_const_intnl_exitJumpLoc_UInt32");
-            Private___39_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__39_const_intnl_exitJumpLoc_UInt32");
-            Private_doublePoints = new AstroUdonVariable<bool>(PlayerData, "doublePoints");
-            Private___0_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__0_const_intnl_SystemString");
-            Private___56_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__56_const_intnl_exitJumpLoc_UInt32");
-            Private___42_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__42_intnl_SystemBoolean");
-            Private___0_const_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__0_const_intnl_SystemSingle");
-            Private___29_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__29_intnl_SystemBoolean");
-            Private___1_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__1_intnl_SystemSingle");
-            Private___7_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__7_const_intnl_SystemInt32");
-            Private___9_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__9_intnl_SystemObject");
-            Private___5_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__5_intnl_SystemBoolean");
-            Private_tagHeightScalar = new AstroUdonVariable<float>(PlayerData, "tagHeightScalar");
-            Private___46_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__46_const_intnl_exitJumpLoc_UInt32");
-            Private___35_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__35_const_intnl_SystemInt32");
-            Private_hitbox = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "hitbox");
-            Private___10_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__10_const_intnl_exitJumpLoc_UInt32");
-            Private___11_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__11_const_intnl_SystemInt32");
-            Private___0_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__0_const_intnl_exitJumpLoc_UInt32");
-            Private___2_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__2_intnl_PlayerObjectPool");
-            Private___15_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__15_intnl_SystemBoolean");
-            Private___24_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__24_const_intnl_exitJumpLoc_UInt32");
-            Private___34_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__34_intnl_SystemBoolean");
-            Private___28_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__28_const_intnl_SystemString");
-            Private___2_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__2_intnl_UnityEngineTransform");
-            Private___28_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__28_const_intnl_exitJumpLoc_UInt32");
-            Private_maxHealth = new AstroUdonVariable<int>(PlayerData, "maxHealth");
-            Private___6_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__6_const_intnl_SystemString");
-            Private___21_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__21_intnl_SystemBoolean");
-            Private_cachedIsWanted = new AstroUdonVariable<bool>(PlayerData, "cachedIsWanted");
-            Private___5_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_PlayerObjectPool");
-            Private___5_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__5_const_intnl_exitJumpLoc_UInt32");
-            Private___13_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__13_intnl_SystemBoolean");
-            Private___50_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__50_const_intnl_exitJumpLoc_UInt32");
-            Private___1_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__1_const_intnl_SystemString");
-            Private___4_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__4_const_intnl_SystemInt32");
-            Private___64_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__64_intnl_SystemBoolean");
-            Private___40_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__40_const_intnl_SystemString");
-            Private___29_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__29_const_intnl_SystemString");
-            Private___1_const_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__1_const_intnl_SystemSingle");
-            Private___23_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__23_const_intnl_exitJumpLoc_UInt32");
-            Private___5_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__5_intnl_SystemSingle");
-            Private___25_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__25_const_intnl_SystemInt32");
-            Private___40_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__40_const_intnl_exitJumpLoc_UInt32");
-            Private___2_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__2_const_intnl_exitJumpLoc_UInt32");
-            Private___16_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__16_intnl_SystemBoolean");
-            Private_goldGuns = new AstroUdonVariable<bool>(PlayerData, "goldGuns");
-            Private___14_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__14_const_intnl_SystemString");
-            Private___1_mp_hp_Int32 = new AstroUdonVariable<int>(PlayerData, "__1_mp_hp_Int32");
-            Private___7_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__7_intnl_SystemBoolean");
-            Private___22_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__22_intnl_SystemBoolean");
-            Private___38_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__38_const_intnl_SystemInt32");
-            Private___20_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__20_intnl_SystemObject");
-            Private___7_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__7_const_intnl_exitJumpLoc_UInt32");
-            Private___37_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__37_const_intnl_exitJumpLoc_UInt32");
-            Private___7_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__7_const_intnl_SystemString");
-            Private___15_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__15_const_intnl_SystemString");
-            Private___4_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__4_intnl_PlayerObjectPool");
-            Private___0_mp_playing_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_playing_Boolean");
-            Private___5_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__5_const_intnl_SystemInt32");
-            Private___refl_const_intnl_udonTypeID = new AstroUdonVariable<long>(PlayerData, "__refl_const_intnl_udonTypeID");
-            Private___4_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__4_intnl_SystemBoolean");
-            Private___16_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__16_const_intnl_SystemInt32");
-            Private___19_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__19_intnl_SystemBoolean");
-            Private___refl_const_intnl_udonTypeName = new AstroUdonVariable<string>(PlayerData, "__refl_const_intnl_udonTypeName");
-            Private_health = new AstroUdonVariable<System.UInt16>(PlayerData, "health");
-            Private_healthRegenDelay = new AstroUdonVariable<float>(PlayerData, "healthRegenDelay");
-            Private___0_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_SystemObject");
-            Private___1_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__1_intnl_SystemBoolean");
-            Private___38_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__38_intnl_SystemBoolean");
-            Private___12_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__12_const_intnl_exitJumpLoc_UInt32");
-            Private___34_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__34_const_intnl_SystemString");
-            Private___17_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__17_const_intnl_SystemString");
-            Private___28_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__28_const_intnl_SystemInt32");
-            Private___17_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__17_const_intnl_SystemInt32");
-            Private___26_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__26_const_intnl_exitJumpLoc_UInt32");
-            Private___4_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__4_const_intnl_SystemString");
-            Private___31_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__31_const_intnl_exitJumpLoc_UInt32");
-            Private___68_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__68_intnl_SystemBoolean");
-            Private___20_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__20_const_intnl_SystemString");
-            Private___35_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__35_const_intnl_SystemString");
-            Private___11_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__11_intnl_SystemBoolean");
-            Private___2_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__2_intnl_SystemInt32");
-            Private___8_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__8_const_intnl_SystemInt32");
-            Private___52_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__52_const_intnl_exitJumpLoc_UInt32");
-            Private___4_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__4_const_intnl_exitJumpLoc_UInt32");
-            Private___30_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__30_intnl_SystemBoolean");
-            Private___0_mp_wanted_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_wanted_Boolean");
-            Private___54_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__54_intnl_SystemBoolean");
-            Private___21_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__21_const_intnl_SystemString");
-            Private___26_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__26_const_intnl_SystemString");
-            Private___42_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__42_const_intnl_exitJumpLoc_UInt32");
-            Private___71_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__71_intnl_SystemBoolean");
-            Private___31_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__31_const_intnl_SystemInt32");
-            Private___4_intnl_SystemObject = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__4_intnl_SystemObject");
-            Private___9_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__9_const_intnl_exitJumpLoc_UInt32");
-            Private___60_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__60_intnl_SystemBoolean");
-            Private___37_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__37_intnl_SystemBoolean");
-            Private___20_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__20_const_intnl_exitJumpLoc_UInt32");
-            Private___37_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__37_const_intnl_SystemString");
-            Private___2_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__2_intnl_SystemSingle");
-            Private___0_this_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_this_intnl_PlayerData");
-            Private___5_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__5_const_intnl_SystemString");
-            Private___3_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__3_intnl_SystemBoolean");
-            Private___12_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__12_intnl_SystemBoolean");
-            Private___10_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__10_intnl_SystemObject");
-            Private___6_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__6_const_intnl_exitJumpLoc_UInt32");
-            Private___2_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__2_intnl_PlayerData");
-            Private___67_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__67_intnl_SystemBoolean");
-            Private___23_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__23_const_intnl_SystemString");
-            Private___5_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__5_intnl_UnityEngineVector3");
-            Private___14_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__14_const_intnl_SystemInt32");
-            Private___9_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__9_const_intnl_SystemInt32");
-            Private___44_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__44_intnl_SystemBoolean");
-            Private___29_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__29_intnl_SystemObject");
-            Private___72_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__72_intnl_SystemBoolean");
-            Private___19_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__19_const_intnl_SystemInt32");
-            Private___0_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__0_intnl_SystemBoolean");
-            Private___34_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__34_const_intnl_exitJumpLoc_UInt32");
-            Private___4_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__4_intnl_UnityEngineVector3");
-            Private___9_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__9_intnl_SystemSingle");
-            Private___21_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__21_const_intnl_SystemInt32");
-            Private_cachedIsDead = new AstroUdonVariable<bool>(PlayerData, "cachedIsDead");
-            Private_isGuard = new AstroUdonVariable<bool>(PlayerData, "isGuard");
-            Private___12_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__12_const_intnl_SystemString");
-            Private___38_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__38_const_intnl_exitJumpLoc_UInt32");
-            Private___1_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PlayerData");
-            Private___0_this_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__0_this_intnl_UnityEngineGameObject");
-            Private___3_intnl_SystemObject = new AstroUdonVariable<float>(PlayerData, "__3_intnl_SystemObject");
-            Private___0_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__0_intnl_UnityEngineGameObject");
-            Private___8_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__8_const_intnl_SystemString");
-            Private___6_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__6_intnl_SystemSingle");
-            Private___33_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__33_const_intnl_exitJumpLoc_UInt32");
-            Private___58_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__58_intnl_SystemBoolean");
-            Private___15_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__15_const_intnl_exitJumpLoc_UInt32");
-            Private___36_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__36_const_intnl_SystemInt32");
-            Private_cachedPlayerName = new AstroUdonVariable<string>(PlayerData, "cachedPlayerName");
-            Private___11_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__11_intnl_SystemObject");
-            Private___19_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__19_const_intnl_exitJumpLoc_UInt32");
-            Private___12_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__12_const_intnl_SystemInt32");
-            Private___22_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__22_intnl_SystemObject");
-            Private___32_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__32_const_intnl_SystemString");
-            Private___0_tagHeight_Single = new AstroUdonVariable<float>(PlayerData, "__0_tagHeight_Single");
-            Private___35_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__35_intnl_SystemBoolean");
-            Private___8_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__8_const_intnl_exitJumpLoc_UInt32");
-            Private___37_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__37_const_intnl_SystemInt32");
-            Private___50_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__50_intnl_SystemBoolean");
-            Private___0_mp_hp_Int32 = new AstroUdonVariable<int>(PlayerData, "__0_mp_hp_Int32");
-            Private___55_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__55_const_intnl_exitJumpLoc_UInt32");
-            Private___22_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__22_const_intnl_exitJumpLoc_UInt32");
-            Private___24_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__24_intnl_SystemBoolean");
-            Private___9_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__9_const_intnl_SystemString");
-            Private___13_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__13_const_intnl_SystemInt32");
-            Private___0_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__0_intnl_SystemInt32");
-            Private___0_intnl_returnTarget_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__0_intnl_returnTarget_UInt32");
-            Private___48_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__48_intnl_SystemBoolean");
-            Private___59_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__59_const_intnl_exitJumpLoc_UInt32");
-            Private___45_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__45_const_intnl_exitJumpLoc_UInt32");
-            Private___65_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__65_intnl_SystemBoolean");
-            Private___0_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__0_intnl_SystemString");
-            Private___33_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__33_intnl_SystemBoolean");
-            Private___57_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__57_intnl_SystemBoolean");
-            Private___26_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__26_const_intnl_SystemInt32");
-            Private___3_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__3_intnl_UnityEngineGameObject");
-            Private___49_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__49_const_intnl_exitJumpLoc_UInt32");
-            Private___0_const_intnl_SystemUInt32 = new AstroUdonVariable<uint>(PlayerData, "__0_const_intnl_SystemUInt32");
-            Private_scorecard = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "scorecard");
-            Private_cachedHealth = new AstroUdonVariable<int>(PlayerData, "cachedHealth");
-            Private___9_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__9_intnl_SystemBoolean");
-            Private___19_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__19_intnl_SystemObject");
-            Private___36_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__36_const_intnl_exitJumpLoc_UInt32");
-            Private___63_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__63_intnl_SystemBoolean");
-            Private___36_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__36_intnl_SystemBoolean");
-            Private___0_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__0_intnl_SystemSingle");
-            Private___27_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__27_const_intnl_SystemInt32");
-            Private___40_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__40_intnl_SystemBoolean");
-            Private_spectateCamera = new AstroUdonVariable<UnityEngine.Camera>(PlayerData, "spectateCamera");
-            Private___18_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__18_const_intnl_SystemString");
-            Private_lastDamageTime = new AstroUdonVariable<float>(PlayerData, "lastDamageTime");
-            Private_killedByLocal = new AstroUdonVariable<bool>(PlayerData, "killedByLocal");
-            Private___66_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__66_intnl_SystemBoolean");
-            Private___0_mp_damage_Int32 = new AstroUdonVariable<int>(PlayerData, "__0_mp_damage_Int32");
-            Private_isPlaying = new AstroUdonVariable<bool>(PlayerData, "isPlaying");
-            Private___3_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__3_intnl_UnityEngineVector3");
-            Private___47_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__47_intnl_SystemBoolean");
-            Private___34_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__34_const_intnl_SystemInt32");
-            Private___4_intnl_UnityEngineTransform = new AstroUdonVariable<UnityEngine.Transform>(PlayerData, "__4_intnl_UnityEngineTransform");
-            Private___10_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__10_const_intnl_SystemInt32");
-            Private___19_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__19_const_intnl_SystemString");
-            Private___17_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__17_const_intnl_exitJumpLoc_UInt32");
-            Private___30_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__30_const_intnl_exitJumpLoc_UInt32");
-            Private___39_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__39_intnl_SystemBoolean");
-            Private___28_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__28_intnl_SystemBoolean");
-            Private___6_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__6_intnl_SystemBoolean");
-            Private___4_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__4_intnl_SystemSingle");
-            Private___12_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__12_intnl_SystemObject");
-            Private___24_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__24_const_intnl_SystemString");
-            Private___69_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__69_intnl_SystemBoolean");
-            Private___57_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__57_const_intnl_exitJumpLoc_UInt32");
-            Private___38_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__38_const_intnl_SystemString");
-            Private___14_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__14_intnl_SystemBoolean");
-            Private_cachedIsPlaying = new AstroUdonVariable<bool>(PlayerData, "cachedIsPlaying");
-            Private___24_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__24_const_intnl_SystemInt32");
-            Private_cachedHasKeycard = new AstroUdonVariable<bool>(PlayerData, "cachedHasKeycard");
-            Private___47_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__47_const_intnl_exitJumpLoc_UInt32");
-            Private___3_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__3_intnl_SystemInt32");
-            Private___31_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__31_intnl_SystemBoolean");
-            Private___55_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__55_intnl_SystemBoolean");
-            Private___25_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__25_const_intnl_SystemString");
-            Private___29_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__29_const_intnl_SystemInt32");
-            Private___11_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__11_const_intnl_exitJumpLoc_UInt32");
-            Private___8_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__8_intnl_SystemBoolean");
-            Private___20_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__20_intnl_SystemBoolean");
-            Private___2_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__2_intnl_UnityEngineVector3");
-            Private___39_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__39_const_intnl_SystemString");
-            Private___1_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_SystemObject");
-            Private___0_mp_enabled_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_enabled_Boolean");
-            Private___25_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__25_const_intnl_exitJumpLoc_UInt32");
-            Private___32_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__32_const_intnl_SystemInt32");
-            Private___61_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__61_intnl_SystemBoolean");
-            Private___29_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__29_const_intnl_exitJumpLoc_UInt32");
-            Private___1_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__1_intnl_UnityEngineVector3");
-            Private___53_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__53_intnl_SystemBoolean");
-            Private___27_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__27_intnl_SystemBoolean");
-            Private___0_mp_dead_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_dead_Boolean");
-            Private___51_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__51_const_intnl_exitJumpLoc_UInt32");
-            Private___2_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__2_const_intnl_SystemInt32");
-            Private___3_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__3_intnl_SystemSingle");
-            Private___33_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__33_const_intnl_SystemInt32");
-            Private___27_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__27_const_intnl_SystemString");
-            Private___0_intnl_UnityEngineVector3 = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "__0_intnl_UnityEngineVector3");
-            Private___10_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__10_const_intnl_SystemString");
-            Private___32_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__32_intnl_SystemBoolean");
-            Private___30_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__30_intnl_SystemObject");
-            Private___56_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__56_intnl_SystemBoolean");
-            Private___41_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__41_const_intnl_exitJumpLoc_UInt32");
-            Private___45_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__45_intnl_SystemBoolean");
-            Private___1_const_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__1_const_intnl_SystemBoolean");
-            Private___22_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__22_const_intnl_SystemInt32");
-            Private___3_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_PlayerData");
-            Private___62_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__62_intnl_SystemBoolean");
-            Private___11_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__11_const_intnl_SystemString");
-            Private___16_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__16_const_intnl_SystemString");
-            Private_healthRegenAmt = new AstroUdonVariable<int>(PlayerData, "healthRegenAmt");
-            Private___32_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__32_const_intnl_exitJumpLoc_UInt32");
-            Private___43_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__43_intnl_SystemBoolean");
-            Private___15_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__15_const_intnl_SystemInt32");
-            Private___18_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__18_intnl_SystemBoolean");
-            Private___0_mp_t_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_t_Boolean");
-            Private___2_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__2_intnl_SystemBoolean");
-            Private___10_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__10_intnl_SystemSingle");
-            Private___1_mp_damage_Int32 = new AstroUdonVariable<int>(PlayerData, "__1_mp_damage_Int32");
-            Private___14_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__14_const_intnl_exitJumpLoc_UInt32");
-            Private___23_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__23_const_intnl_SystemInt32");
-            Private_joinedRound = new AstroUdonVariable<bool>(PlayerData, "joinedRound");
-            Private___3_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__3_const_intnl_SystemInt32");
-            Private___7_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__7_intnl_SystemSingle");
-            Private_tagHeightMin = new AstroUdonVariable<float>(PlayerData, "tagHeightMin");
-            Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = new AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget>(PlayerData, "__0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget");
-            Private___59_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__59_intnl_SystemBoolean");
-            Private_isDead = new AstroUdonVariable<bool>(PlayerData, "isDead");
-            Private___18_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__18_const_intnl_exitJumpLoc_UInt32");
-            Private___46_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__46_intnl_SystemBoolean");
-            Private___30_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__30_const_intnl_SystemString");
-            Private_gameManager = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "gameManager");
-            Private___13_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__13_const_intnl_SystemString");
-            Private___0_mp_guard_Boolean = new AstroUdonVariable<bool>(PlayerData, "__0_mp_guard_Boolean");
-            Private_deathLoc = new AstroUdonVariable<UnityEngine.Vector3>(PlayerData, "deathLoc");
-            Private___30_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__30_const_intnl_SystemInt32");
-            Private___54_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__54_const_intnl_exitJumpLoc_UInt32");
-            Private___13_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__13_const_intnl_exitJumpLoc_UInt32");
-            Private___2_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__2_intnl_UnityEngineGameObject");
-            Private___10_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__10_intnl_SystemBoolean");
-            Private___2_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__2_const_intnl_SystemString");
-            Private___31_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__31_const_intnl_SystemString");
-            Private___27_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__27_const_intnl_exitJumpLoc_UInt32");
-            Private___36_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__36_const_intnl_SystemString");
-            Private___58_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__58_const_intnl_exitJumpLoc_UInt32");
-            Private___44_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__44_const_intnl_exitJumpLoc_UInt32");
-            Private___5_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_PlayerData");
-            Private_playerName = new AstroUdonVariable<string>(PlayerData, "playerName");
-            Private___3_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_PlayerObjectPool");
-            Private___51_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__51_intnl_SystemBoolean");
-            Private___0_const_intnl_SystemInt32 = new AstroUdonVariable<int>(PlayerData, "__0_const_intnl_SystemInt32");
-            Private___1_intnl_PlayerObjectPool = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PlayerObjectPool");
-            Private___1_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__1_const_intnl_exitJumpLoc_UInt32");
-            Private___25_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__25_intnl_SystemBoolean");
-            Private___48_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__48_const_intnl_exitJumpLoc_UInt32");
-            Private___22_const_intnl_SystemString = new AstroUdonVariable<string>(PlayerData, "__22_const_intnl_SystemString");
-            Private___8_intnl_SystemSingle = new AstroUdonVariable<float>(PlayerData, "__8_intnl_SystemSingle");
-            Private___0_mp_newName_String = new AstroUdonVariable<string>(PlayerData, "__0_mp_newName_String");
-            Private___70_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__70_intnl_SystemBoolean");
-            Private_teamTag = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "teamTag");
-            Private___17_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__17_intnl_SystemBoolean");
-            Private___49_intnl_SystemBoolean = new AstroUdonVariable<bool>(PlayerData, "__49_intnl_SystemBoolean");
-            Private___53_const_intnl_exitJumpLoc_UInt32 = new AstroUdonVariable<uint>(PlayerData, "__53_const_intnl_exitJumpLoc_UInt32");
-            Private_hasKeycard = new AstroUdonVariable<bool>(PlayerData, "hasKeycard");
-            Private___23_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__23_intnl_SystemObject");
-            Private___4_intnl_PlayerData = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__4_intnl_PlayerData");
-            Private___28_intnl_SystemObject = new AstroUdonVariable<int>(PlayerData, "__28_intnl_SystemObject");
-            Private___3_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__3_intnl_GameEffects");
-            Private___3_intnl_UnityEngineUISlider = new AstroUdonVariable<UnityEngine.UI.Slider>(PlayerData, "__3_intnl_UnityEngineUISlider");
-            Private___32_intnl_SystemObject = new AstroUdonVariable<UnityEngine.UI.Slider>(PlayerData, "__32_intnl_SystemObject");
-            Private___1_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PlayerData, "__1_intnl_VRCSDKBaseVRCPlayerApi");
-            Private___6_intnl_SystemObject = new AstroUdonVariable<bool>(PlayerData, "__6_intnl_SystemObject");
-            Private___4_intnl_UnityEngineGameObject = new AstroUdonVariable<UnityEngine.GameObject>(PlayerData, "__4_intnl_UnityEngineGameObject");
-            Private___0_intnl_ItemControl = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_ItemControl");
-            Private___0_intnl_GameJoinTrigger = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameJoinTrigger");
-            Private___1_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_GameEffects");
-            Private___24_intnl_SystemObject = new AstroUdonVariable<bool>(PlayerData, "__24_intnl_SystemObject");
-            Private___5_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_GameEffects");
-            Private___13_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__13_intnl_SystemObject");
-            Private___0_intnl_ScoreboardDisplay = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_ScoreboardDisplay");
-            Private___25_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__25_intnl_SystemObject");
-            Private___17_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__17_intnl_SystemObject");
-            Private___18_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__18_intnl_SystemObject");
-            Private___14_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__14_intnl_SystemObject");
-            Private___7_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__7_intnl_SystemObject");
-            Private___0_intnl_PatronControl = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_PatronControl");
-            Private___8_intnl_SystemObject = new AstroUdonVariable<bool>(PlayerData, "__8_intnl_SystemObject");
-            Private___15_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__15_intnl_SystemObject");
-            Private___1_intnl_PatronControl = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__1_intnl_PatronControl");
-            Private___4_intnl_VRCSDKBaseVRCPlayerApi = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PlayerData, "__4_intnl_VRCSDKBaseVRCPlayerApi");
-            Private___16_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__16_intnl_SystemObject");
-            Private___5_intnl_SystemObject = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__5_intnl_SystemObject");
-            Private___0_intnl_GameEffects = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_GameEffects");
-            Private___0_intnl_AFKDetector = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PlayerData, "__0_intnl_AFKDetector");
-            Private_isSuspicious = new AstroUdonVariable<bool>(PlayerData, "isSuspicious");
-
-
-
-        }
-
-        internal void Cleanup_PlayerData()
-        {
-            Private___18_const_intnl_SystemInt32 = null;
-            Private_isWanted = null;
-            Private___43_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___33_const_intnl_SystemString = null;
-            Private___20_const_intnl_SystemInt32 = null;
-            Private___23_intnl_SystemBoolean = null;
-            Private___1_intnl_UnityEngineGameObject = null;
-            Private___21_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___52_intnl_SystemBoolean = null;
-            Private___3_const_intnl_SystemString = null;
-            Private___6_const_intnl_SystemInt32 = null;
-            Private___0_intnl_PlayerData = null;
-            Private___3_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___26_intnl_SystemBoolean = null;
-            Private___0_const_intnl_SystemBoolean = null;
-            Private___41_intnl_SystemBoolean = null;
-            Private___1_intnl_UnityEngineTransform = null;
-            Private___1_const_intnl_SystemInt32 = null;
-            Private___0_intnl_PlayerObjectPool = null;
-            Private___1_intnl_SystemInt32 = null;
-            Private___16_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_intnl_SystemObject = null;
-            Private___0_const_intnl_VRCUdonCommonEnumsEventTiming = null;
-            Private___35_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___39_const_intnl_exitJumpLoc_UInt32 = null;
-            Private_doublePoints = null;
-            Private___0_const_intnl_SystemString = null;
-            Private___56_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___42_intnl_SystemBoolean = null;
-            Private___0_const_intnl_SystemSingle = null;
-            Private___29_intnl_SystemBoolean = null;
-            Private___1_intnl_SystemSingle = null;
-            Private___7_const_intnl_SystemInt32 = null;
-            Private___9_intnl_SystemObject = null;
-            Private___5_intnl_SystemBoolean = null;
-            Private_tagHeightScalar = null;
-            Private___46_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___35_const_intnl_SystemInt32 = null;
-            Private_hitbox = null;
-            Private___10_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___11_const_intnl_SystemInt32 = null;
-            Private___0_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_intnl_PlayerObjectPool = null;
-            Private___15_intnl_SystemBoolean = null;
-            Private___24_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___34_intnl_SystemBoolean = null;
-            Private___28_const_intnl_SystemString = null;
-            Private___2_intnl_UnityEngineTransform = null;
-            Private___28_const_intnl_exitJumpLoc_UInt32 = null;
-            Private_maxHealth = null;
-            Private___6_const_intnl_SystemString = null;
-            Private___21_intnl_SystemBoolean = null;
-            Private_cachedIsWanted = null;
-            Private___5_intnl_PlayerObjectPool = null;
-            Private___5_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___13_intnl_SystemBoolean = null;
-            Private___50_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___1_const_intnl_SystemString = null;
-            Private___4_const_intnl_SystemInt32 = null;
-            Private___64_intnl_SystemBoolean = null;
-            Private___40_const_intnl_SystemString = null;
-            Private___29_const_intnl_SystemString = null;
-            Private___1_const_intnl_SystemSingle = null;
-            Private___23_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___5_intnl_SystemSingle = null;
-            Private___25_const_intnl_SystemInt32 = null;
-            Private___40_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___16_intnl_SystemBoolean = null;
-            Private_goldGuns = null;
-            Private___14_const_intnl_SystemString = null;
-            Private___1_mp_hp_Int32 = null;
-            Private___7_intnl_SystemBoolean = null;
-            Private___22_intnl_SystemBoolean = null;
-            Private___38_const_intnl_SystemInt32 = null;
-            Private___20_intnl_SystemObject = null;
-            Private___7_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___37_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___7_const_intnl_SystemString = null;
-            Private___15_const_intnl_SystemString = null;
-            Private___4_intnl_PlayerObjectPool = null;
-            Private___0_mp_playing_Boolean = null;
-            Private___5_const_intnl_SystemInt32 = null;
-            Private___refl_const_intnl_udonTypeID = null;
-            Private___4_intnl_SystemBoolean = null;
-            Private___16_const_intnl_SystemInt32 = null;
-            Private___19_intnl_SystemBoolean = null;
-            Private___refl_const_intnl_udonTypeName = null;
-            Private_health = null;
-            Private_healthRegenDelay = null;
-            Private___0_intnl_SystemObject = null;
-            Private___1_intnl_SystemBoolean = null;
-            Private___38_intnl_SystemBoolean = null;
-            Private___12_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___34_const_intnl_SystemString = null;
-            Private___17_const_intnl_SystemString = null;
-            Private___28_const_intnl_SystemInt32 = null;
-            Private___17_const_intnl_SystemInt32 = null;
-            Private___26_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___4_const_intnl_SystemString = null;
-            Private___31_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___68_intnl_SystemBoolean = null;
-            Private___20_const_intnl_SystemString = null;
-            Private___35_const_intnl_SystemString = null;
-            Private___11_intnl_SystemBoolean = null;
-            Private___2_intnl_SystemInt32 = null;
-            Private___8_const_intnl_SystemInt32 = null;
-            Private___52_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___4_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___30_intnl_SystemBoolean = null;
-            Private___0_mp_wanted_Boolean = null;
-            Private___54_intnl_SystemBoolean = null;
-            Private___21_const_intnl_SystemString = null;
-            Private___26_const_intnl_SystemString = null;
-            Private___42_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___71_intnl_SystemBoolean = null;
-            Private___31_const_intnl_SystemInt32 = null;
-            Private___4_intnl_SystemObject = null;
-            Private___9_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___60_intnl_SystemBoolean = null;
-            Private___37_intnl_SystemBoolean = null;
-            Private___20_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___37_const_intnl_SystemString = null;
-            Private___2_intnl_SystemSingle = null;
-            Private___0_this_intnl_PlayerData = null;
-            Private___5_const_intnl_SystemString = null;
-            Private___3_intnl_SystemBoolean = null;
-            Private___12_intnl_SystemBoolean = null;
-            Private___10_intnl_SystemObject = null;
-            Private___6_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_intnl_PlayerData = null;
-            Private___67_intnl_SystemBoolean = null;
-            Private___23_const_intnl_SystemString = null;
-            Private___5_intnl_UnityEngineVector3 = null;
-            Private___14_const_intnl_SystemInt32 = null;
-            Private___9_const_intnl_SystemInt32 = null;
-            Private___44_intnl_SystemBoolean = null;
-            Private___29_intnl_SystemObject = null;
-            Private___72_intnl_SystemBoolean = null;
-            Private___19_const_intnl_SystemInt32 = null;
-            Private___0_intnl_SystemBoolean = null;
-            Private___34_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___4_intnl_UnityEngineVector3 = null;
-            Private___9_intnl_SystemSingle = null;
-            Private___21_const_intnl_SystemInt32 = null;
-            Private_cachedIsDead = null;
-            Private_isGuard = null;
-            Private___12_const_intnl_SystemString = null;
-            Private___38_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___1_intnl_PlayerData = null;
-            Private___0_this_intnl_UnityEngineGameObject = null;
-            Private___3_intnl_SystemObject = null;
-            Private___0_intnl_UnityEngineGameObject = null;
-            Private___8_const_intnl_SystemString = null;
-            Private___6_intnl_SystemSingle = null;
-            Private___33_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___58_intnl_SystemBoolean = null;
-            Private___15_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___36_const_intnl_SystemInt32 = null;
-            Private_cachedPlayerName = null;
-            Private___11_intnl_SystemObject = null;
-            Private___19_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___12_const_intnl_SystemInt32 = null;
-            Private___22_intnl_SystemObject = null;
-            Private___32_const_intnl_SystemString = null;
-            Private___0_tagHeight_Single = null;
-            Private___35_intnl_SystemBoolean = null;
-            Private___8_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___37_const_intnl_SystemInt32 = null;
-            Private___50_intnl_SystemBoolean = null;
-            Private___0_mp_hp_Int32 = null;
-            Private___55_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___22_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___24_intnl_SystemBoolean = null;
-            Private___9_const_intnl_SystemString = null;
-            Private___13_const_intnl_SystemInt32 = null;
-            Private___0_intnl_SystemInt32 = null;
-            Private___0_intnl_returnTarget_UInt32 = null;
-            Private___48_intnl_SystemBoolean = null;
-            Private___59_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___45_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___65_intnl_SystemBoolean = null;
-            Private___0_intnl_SystemString = null;
-            Private___33_intnl_SystemBoolean = null;
-            Private___57_intnl_SystemBoolean = null;
-            Private___26_const_intnl_SystemInt32 = null;
-            Private___3_intnl_UnityEngineGameObject = null;
-            Private___49_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___0_const_intnl_SystemUInt32 = null;
-            Private_scorecard = null;
-            Private_cachedHealth = null;
-            Private___9_intnl_SystemBoolean = null;
-            Private___19_intnl_SystemObject = null;
-            Private___36_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___63_intnl_SystemBoolean = null;
-            Private___36_intnl_SystemBoolean = null;
-            Private___0_intnl_SystemSingle = null;
-            Private___27_const_intnl_SystemInt32 = null;
-            Private___40_intnl_SystemBoolean = null;
-            Private_spectateCamera = null;
-            Private___18_const_intnl_SystemString = null;
-            Private_lastDamageTime = null;
-            Private_killedByLocal = null;
-            Private___66_intnl_SystemBoolean = null;
-            Private___0_mp_damage_Int32 = null;
-            Private_isPlaying = null;
-            Private___3_intnl_UnityEngineVector3 = null;
-            Private___47_intnl_SystemBoolean = null;
-            Private___34_const_intnl_SystemInt32 = null;
-            Private___4_intnl_UnityEngineTransform = null;
-            Private___10_const_intnl_SystemInt32 = null;
-            Private___19_const_intnl_SystemString = null;
-            Private___17_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___30_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___39_intnl_SystemBoolean = null;
-            Private___28_intnl_SystemBoolean = null;
-            Private___6_intnl_SystemBoolean = null;
-            Private___4_intnl_SystemSingle = null;
-            Private___12_intnl_SystemObject = null;
-            Private___24_const_intnl_SystemString = null;
-            Private___69_intnl_SystemBoolean = null;
-            Private___57_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___38_const_intnl_SystemString = null;
-            Private___14_intnl_SystemBoolean = null;
-            Private_cachedIsPlaying = null;
-            Private___24_const_intnl_SystemInt32 = null;
-            Private_cachedHasKeycard = null;
-            Private___47_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___3_intnl_SystemInt32 = null;
-            Private___31_intnl_SystemBoolean = null;
-            Private___55_intnl_SystemBoolean = null;
-            Private___25_const_intnl_SystemString = null;
-            Private___29_const_intnl_SystemInt32 = null;
-            Private___11_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___8_intnl_SystemBoolean = null;
-            Private___20_intnl_SystemBoolean = null;
-            Private___2_intnl_UnityEngineVector3 = null;
-            Private___39_const_intnl_SystemString = null;
-            Private___1_intnl_SystemObject = null;
-            Private___0_mp_enabled_Boolean = null;
-            Private___25_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___32_const_intnl_SystemInt32 = null;
-            Private___61_intnl_SystemBoolean = null;
-            Private___29_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___1_intnl_UnityEngineVector3 = null;
-            Private___53_intnl_SystemBoolean = null;
-            Private___27_intnl_SystemBoolean = null;
-            Private___0_mp_dead_Boolean = null;
-            Private___51_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_const_intnl_SystemInt32 = null;
-            Private___3_intnl_SystemSingle = null;
-            Private___33_const_intnl_SystemInt32 = null;
-            Private___27_const_intnl_SystemString = null;
-            Private___0_intnl_UnityEngineVector3 = null;
-            Private___10_const_intnl_SystemString = null;
-            Private___32_intnl_SystemBoolean = null;
-            Private___30_intnl_SystemObject = null;
-            Private___56_intnl_SystemBoolean = null;
-            Private___41_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___45_intnl_SystemBoolean = null;
-            Private___1_const_intnl_SystemBoolean = null;
-            Private___22_const_intnl_SystemInt32 = null;
-            Private___3_intnl_PlayerData = null;
-            Private___62_intnl_SystemBoolean = null;
-            Private___11_const_intnl_SystemString = null;
-            Private___16_const_intnl_SystemString = null;
-            Private_healthRegenAmt = null;
-            Private___32_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___43_intnl_SystemBoolean = null;
-            Private___15_const_intnl_SystemInt32 = null;
-            Private___18_intnl_SystemBoolean = null;
-            Private___0_mp_t_Boolean = null;
-            Private___2_intnl_SystemBoolean = null;
-            Private___10_intnl_SystemSingle = null;
-            Private___1_mp_damage_Int32 = null;
-            Private___14_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___23_const_intnl_SystemInt32 = null;
-            Private_joinedRound = null;
-            Private___3_const_intnl_SystemInt32 = null;
-            Private___7_intnl_SystemSingle = null;
-            Private_tagHeightMin = null;
-            Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget = null;
-            Private___59_intnl_SystemBoolean = null;
-            Private_isDead = null;
-            Private___18_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___46_intnl_SystemBoolean = null;
-            Private___30_const_intnl_SystemString = null;
-            Private_gameManager = null;
-            Private___13_const_intnl_SystemString = null;
-            Private___0_mp_guard_Boolean = null;
-            Private_deathLoc = null;
-            Private___30_const_intnl_SystemInt32 = null;
-            Private___54_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___13_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___2_intnl_UnityEngineGameObject = null;
-            Private___10_intnl_SystemBoolean = null;
-            Private___2_const_intnl_SystemString = null;
-            Private___31_const_intnl_SystemString = null;
-            Private___27_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___36_const_intnl_SystemString = null;
-            Private___58_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___44_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___5_intnl_PlayerData = null;
-            Private_playerName = null;
-            Private___3_intnl_PlayerObjectPool = null;
-            Private___51_intnl_SystemBoolean = null;
-            Private___0_const_intnl_SystemInt32 = null;
-            Private___1_intnl_PlayerObjectPool = null;
-            Private___1_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___25_intnl_SystemBoolean = null;
-            Private___48_const_intnl_exitJumpLoc_UInt32 = null;
-            Private___22_const_intnl_SystemString = null;
-            Private___8_intnl_SystemSingle = null;
-            Private___0_mp_newName_String = null;
-            Private___70_intnl_SystemBoolean = null;
-            Private_teamTag = null;
-            Private___17_intnl_SystemBoolean = null;
-            Private___49_intnl_SystemBoolean = null;
-            Private___53_const_intnl_exitJumpLoc_UInt32 = null;
-            Private_hasKeycard = null;
-            Private___23_intnl_SystemObject = null;
-            Private___4_intnl_PlayerData = null;
-            Private___28_intnl_SystemObject = null;
-            Private___3_intnl_GameEffects = null;
-            Private___3_intnl_UnityEngineUISlider = null;
-            Private___32_intnl_SystemObject = null;
-            Private___1_intnl_VRCSDKBaseVRCPlayerApi = null;
-            Private___6_intnl_SystemObject = null;
-            Private___4_intnl_UnityEngineGameObject = null;
-            Private___0_intnl_ItemControl = null;
-            Private___0_intnl_GameJoinTrigger = null;
-            Private___1_intnl_GameEffects = null;
-            Private___24_intnl_SystemObject = null;
-            Private___5_intnl_GameEffects = null;
-            Private___13_intnl_SystemObject = null;
-            Private___0_intnl_ScoreboardDisplay = null;
-            Private___25_intnl_SystemObject = null;
-            Private___17_intnl_SystemObject = null;
-            Private___18_intnl_SystemObject = null;
-            Private___14_intnl_SystemObject = null;
-            Private___7_intnl_SystemObject = null;
-            Private___0_intnl_PatronControl = null;
-            Private___8_intnl_SystemObject = null;
-            Private___15_intnl_SystemObject = null;
-            Private___1_intnl_PatronControl = null;
-            Private___4_intnl_VRCSDKBaseVRCPlayerApi = null;
-            Private___16_intnl_SystemObject = null;
-            Private___5_intnl_SystemObject = null;
-            Private___0_intnl_GameEffects = null;
-            Private___0_intnl_AFKDetector = null;
-            Private_isSuspicious = null;
-        }
-
-        #region UdonVariables  of PlayerData
-
-        private AstroUdonVariable<int> Private___18_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        #endregion Getter / Setters AstroUdonVariables  of PlayerData
+
+        #region AstroUdonVariables  of PlayerData
+
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_cachedTimesWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___43_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___33_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___20_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___23_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___1_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___21_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___52_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___3_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___6_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___3_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___26_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___41_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Transform> Private___1_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___1_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___1_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___16_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Transform> Private___2_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming> Private___0_const_intnl_VRCUdonCommonEnumsEventTiming { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___35_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___39_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___lcl_wasActive_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_SystemObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_cachedIsSuspicious { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_timesWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___const_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_taken { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_doublePoints { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___0_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___56_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___42_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___0_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___29_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___1_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___7_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___9_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___5_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_tagHeightScalar { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___46_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___35_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___const_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___const_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private___const_SystemUInt16_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_hitbox { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___10_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___11_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___0_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___15_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___24_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___34_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___28_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Transform> Private___2_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___28_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___0_count__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___0_damage__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_maxHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___6_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___21_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_cachedIsWanted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___5_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___13_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___50_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___1_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___4_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___64_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___40_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___29_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___1_const_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___23_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___5_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___25_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___40_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___2_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___16_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Transform> Private_hitboxHead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget> Private___const_VRCUdonCommonInterfacesNetworkEventTarget_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_goldGuns { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___14_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___1_mp_hp_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___7_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___22_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___38_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___20_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___7_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___37_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___7_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___15_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_playing_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___5_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<long> Private___refl_const_intnl_udonTypeID { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___4_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___16_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___19_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___refl_const_intnl_udonTypeName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<System.UInt16> Private_health { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_enabled__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_get_IsInnocent__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<long> Private___refl_typeid { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___const_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_dead__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___const_UnityEngineVector3_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_health { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_healthRegenDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___1_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___38_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___12_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___34_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___17_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___28_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___17_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___26_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___4_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___31_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___68_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___20_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___35_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___11_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___2_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___8_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___52_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___4_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___30_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_wanted_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___54_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___21_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___26_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___42_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___71_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___31_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Transform> Private___4_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___9_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___60_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___37_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___20_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___37_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___2_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_this_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___5_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___3_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___12_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___10_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___6_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___2_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___67_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___23_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___5_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___14_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___9_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___44_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___29_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___72_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___19_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___34_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___4_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___9_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___21_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_canDealDamage { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___0_newName__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0__InstaHeal__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___const_SystemSingle_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private_lastInstaHealTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___intnl_UnityEngineVector3_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_cachedArmor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_guard__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_damagedInFrame { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___intnl_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_SystemObject_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___const_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_cachedIsDead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.Common.Enums.EventTiming> Private___const_VRCUdonCommonEnumsEventTiming_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isGuard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___12_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___38_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___0_this_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___3_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___0_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___8_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___6_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___33_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___58_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___15_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___36_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private_cachedPlayerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___11_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___19_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___12_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___22_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___32_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___0_tagHeight_Single { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___35_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___8_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___37_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___50_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___0_mp_hp_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___55_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___22_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___24_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___9_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___13_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___0_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___0_intnl_returnTarget_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___48_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___59_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___45_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___65_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___0_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___33_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___57_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___26_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___3_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___49_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___0_const_intnl_SystemUInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_sus__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineObject_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private_maxArmor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_armor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___1_hp__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___intnl_returnJump_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___0_hp__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private_instaHealDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___const_SystemSingle_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___2_hp__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___lcl_tagHeight_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_scorecard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private_cachedHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___9_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___19_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___36_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___63_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___36_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___0_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___27_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___40_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private_cachedHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___intnl_UnityEngineVector3_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Camera> Private_spectateCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___18_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___refl_typename { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private_lastDamageTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Camera> Private_photoCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_killedByLocal { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___66_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___0_mp_damage_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isPlaying { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___3_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___47_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___34_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Transform> Private___4_intnl_UnityEngineTransform { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___10_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___19_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___17_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___30_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___39_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___28_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___6_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___4_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___12_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___24_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___69_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___57_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___38_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___14_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private_cachedIsPlaying { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___24_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private_cachedHasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___47_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___3_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___31_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___55_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___25_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___29_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___11_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___8_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___20_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___2_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___39_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_enabled_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___25_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___32_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___61_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___29_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___1_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___53_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___27_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_dead_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___51_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___2_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___3_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___33_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___27_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private___0_intnl_UnityEngineVector3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___10_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___32_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___30_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___56_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___41_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___45_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___1_const_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___22_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___62_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___11_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___16_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private_healthRegenAmt { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___32_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___43_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___15_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___18_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_t_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___2_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___10_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___1_mp_damage_Int32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___14_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___23_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private_joinedRound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___3_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___7_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private_tagHeightMin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.Common.Interfaces.NetworkEventTarget> Private___0_const_intnl_VRCUdonCommonInterfacesNetworkEventTarget { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___59_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private_isDead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___18_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___46_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___30_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_gameManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___13_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___0_mp_guard_Boolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.Vector3> Private_deathLoc { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___30_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___54_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___13_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___2_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___10_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___2_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___31_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___27_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___36_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___58_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___44_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private_playerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___51_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___0_const_intnl_SystemInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PlayerObjectPool { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___1_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___25_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___48_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___22_const_intnl_SystemString { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<float> Private___8_intnl_SystemSingle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<string> Private___0_mp_newName_String { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___70_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_teamTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___17_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___49_intnl_SystemBoolean { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<uint> Private___53_const_intnl_exitJumpLoc_UInt32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private_hasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___23_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___4_intnl_PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<int> Private___28_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___3_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.UI.Slider> Private___3_intnl_UnityEngineUISlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.UI.Slider> Private___32_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___1_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___6_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<UnityEngine.GameObject> Private___4_intnl_UnityEngineGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_ItemControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameJoinTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___24_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___13_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_ScoreboardDisplay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___25_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___17_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___18_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___14_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___7_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<bool> Private___8_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___15_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___1_intnl_PatronControl { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___4_intnl_VRCSDKBaseVRCPlayerApi { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___16_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___5_intnl_SystemObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_GameEffects { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0_intnl_AFKDetector { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_t__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private___intnl_SystemUInt16_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isSuspicious { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___const_SystemSingle_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___intnl_UnityEngineVector3_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_cachedIsPlaying { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_cachedHasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___intnl_UnityEngineVector3_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___1_damage__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___this_UnityEngineGameObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineObject_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private_healthRegenAmt { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_playing__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Transform> Private_hitboxRoot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_joinedRound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private_tagHeightMin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private_teamTagObj { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_isDead { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_gameManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_permaSuspicious { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<int> Private___const_SystemInt32_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private_deathLoc { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<ushort> Private___lcl_startArmor_SystemUInt16_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___0_wanted__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<float> Private___intnl_SystemSingle_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private_playerName { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_teamTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private_hasKeycard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Vector3> Private___intnl_UnityEngineVector3_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        #endregion AstroUdonVariables  of PlayerData
 
-        #endregion UdonVariables  of PlayerData
-
+        private static RawUdonBehaviour PlayerData { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+       
     }
 }

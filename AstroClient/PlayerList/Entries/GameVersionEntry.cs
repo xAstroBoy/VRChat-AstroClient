@@ -1,4 +1,7 @@
-﻿namespace AstroClient.PlayerList.Entries
+﻿using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+
+namespace AstroClient.PlayerList.Entries
 {
     using System;
     using ClientAttributes;
@@ -19,7 +22,7 @@
         [HideFromIl2Cpp]
         public override void Init(object[] parameters = null)
         {
-            Il2CppArrayBase<MonoBehaviour> components = GameObject.Find("_Application/ApplicationSetup").GetComponents<MonoBehaviour>();
+            Il2CppArrayBase<MonoBehaviour> components = QuickMenuTools.Application.FindObject("ApplicationSetup").GetComponents<MonoBehaviour>();
             foreach (MonoBehaviour component in components)
             {
                 if (component.TryCast<Transform>() != null || component.TryCast<ApiCache>() != null)

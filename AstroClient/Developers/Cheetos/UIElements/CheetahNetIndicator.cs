@@ -17,8 +17,8 @@ public class CheetahNetIndicator // TODO: Inherit from CheetoElement
 
 	public CheetahNetIndicator()
 	{
-		var window = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window").gameObject;
-		var go = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMNotificationsArea/DebugInfoPanel").gameObject;
+		var window = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window").gameObject;
+		var go = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/QMNotificationsArea/DebugInfoPanel").gameObject;
 		_self = Object.Instantiate(go);
 		_panel = _self.transform.Find("Panel").gameObject;
 		var rect = _panel.GetComponent<RectTransform>();

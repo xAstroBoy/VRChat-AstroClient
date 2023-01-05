@@ -4,6 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using VRC;
 using VRC.Core;
+using VRC.Networking;
 using VRC.SDKBase;
 using VRC.Udon;
 using VRC.UI.Elements;
@@ -183,10 +184,10 @@ namespace AstroClient.ClientActions
 
         /// <summary>
         /// This Gets called when a UdonBehaviour is initializing.
-        /// <para>Params : UdonBehaviour instance</para>
+        /// <para>Params : UdonBehaviour instance, string Event, VRC.Player Sender</para>
         /// </summary>
 
-        internal static Action<UdonBehaviour> Udon_OnInit { get; set; }
+        internal static Action<UdonSync, string, VRC.Player> UdonSync_UdonSyncRunProgramAsRPC { get; set; }
 
         /// <summary>
         /// This listens to all VRC_Pickups IsHeld properties.

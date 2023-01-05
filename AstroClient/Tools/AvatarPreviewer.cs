@@ -51,7 +51,7 @@ namespace AstroClient.Tools
                 if (PreviewedAvatar != null)
                 {
                     PreviewedAvatar.GetComponentInChildren<AutoMoveAndRotate>().DestroyMeLocal();
-                    PreviewedAvatar.GetComponentInChildren<MonoBehaviourPrivateObUnique>().DestroyMeLocal();
+                    //PreviewedAvatar.GetComponentInChildren<AvatarDownloadHandleDestroySentinel>().DestroyMeLocal();
                     PreviewedAvatar.GetComponentInChildren<PipelineManager>().DestroyMeLocal();
                     PreviewedAvatar.GetComponentInChildren<VRCAvatarDescriptor>().DestroyMeLocal();
                     PreviewedAvatar.GetComponentInChildren<VRC_AvatarDescriptor>().DestroyMeLocal();

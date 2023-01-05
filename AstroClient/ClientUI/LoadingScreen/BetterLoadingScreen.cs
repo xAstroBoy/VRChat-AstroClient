@@ -1,6 +1,7 @@
 ﻿//using System.Threading.Tasks;
 
 using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 
 namespace AstroClient.ClientUI.LoadingScreen
 {
@@ -35,9 +36,9 @@ namespace AstroClient.ClientUI.LoadingScreen
 
                 Log.Debug("Creating new Loading Screen!");
                 step = 1;
-                LoadingScreenAssets.CurrentLoadingScreen = CreateGameObject(LoadScreenPrefabs.loadScreenPrefab, new Vector3(400, 400, 400), "UserInterface/MenuContent/Popups/", "LoadingPopup");
+                LoadingScreenAssets.CurrentLoadingScreen = CreateGameObject(LoadScreenPrefabs.loadScreenPrefab, new Vector3(400, 400, 400), $"{QuickMenuTools.UserInterface.name}/MenuContent/Popups/", "LoadingPopup");
                 step = 2;
-                LoginScreenAssets.CurrentLoginScreen = CreateGameObject(LoadScreenPrefabs.loginPrefab, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
+                LoginScreenAssets.CurrentLoginScreen = CreateGameObject(LoadScreenPrefabs.loginPrefab, new Vector3(0.5f, 0.5f, 0.5f), $"{QuickMenuTools.UserInterface.name}/", "LoadingBackground_TealGradient_Music");
                 // newCube = CreateGameObject(newCube, new Vector3(0.5f, 0.5f, 0.5f), "UserInterface/", "LoadingBackground_TealGradient_Music");
 
                 Log.Debug("Disabling original GameObjects");

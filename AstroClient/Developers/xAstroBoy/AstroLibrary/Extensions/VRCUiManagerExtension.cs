@@ -192,18 +192,18 @@ namespace AstroClient.xAstroBoy.Extensions
             response.Close();
         }
 
-        public static void RefreshMenu()
-        {
-            UiVRCList[] userLists = GameInstances.VRCUiManager.GetComponentsInChildren<UiVRCList>(true);
+        //public static void RefreshMenu()
+        //{
+        //    UiVRCList[] userLists = GameInstances.VRCUiManager.GetComponentsInChildren<UiVRCList>(true);
 
-            foreach (UiVRCList userList in userLists)
-            {
-                userList.Method_Public_Void_0();
-                userList.Method_Public_Void_1();
-                //userList.Method_Public_Void_2();
-            }
-            Log.Write("Refreshed social lists!");
-        }
+        //    foreach (UiVRCList userList in userLists)
+        //    {
+        //        userList.Method_Public_Void_0();
+        //        userList.Method_Public_Void_1();
+        //        //userList.Method_Public_Void_2();
+        //    }
+        //    Log.Write("Refreshed social lists!");
+        //}
 
         public static GameObject GetMenuContent(this VRCUiManager Instance)
         {

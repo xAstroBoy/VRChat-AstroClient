@@ -1,4 +1,7 @@
-﻿namespace AstroClient.CheetoLibrary.Misc
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientUI.Hud.Notifier;
+
+namespace AstroClient.CheetoLibrary.Misc
 {
     #region Imports
 
@@ -589,16 +592,16 @@
                 if (videoPlayers[0].Videos.Count > 0)
                 {
                     System.Windows.Forms.Clipboard.SetText(videoPlayers[0].Videos[0].URL);
-                    PopupUtils.QueHudMessage("Copied video player url to clipboard");
+                    HudNotifier.WriteHudMessage("Copied video player url to clipboard");
                 }
                 else
                 {
-                    PopupUtils.QueHudMessage("Video player does not contain any videos");
+                    HudNotifier.WriteHudMessage("Video player does not contain any videos");
                 }
             }
             else
             {
-                PopupUtils.QueHudMessage("There are no video players in the world");
+                HudNotifier.WriteHudMessage("There are no video players in the world");
             }
         }
 

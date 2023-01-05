@@ -1,4 +1,5 @@
 ﻿using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Elements.Tooltips;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -11,7 +12,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
     using UnityEngine.UI;
     using Object = UnityEngine.Object;
 
-    [Obsolete("Use GridNestedMenu and new QMSingleToggles instead, this class will be removed In future!")]
     internal class QMSingleToggleButton
     {
         internal QMSingleToggleButton(QMNestedGridMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
@@ -48,6 +48,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
+            ButtonsMenu = btnMenu.GetButtonsMenu();
             if (btnHalf) btnYLocation -= 0.25f;
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
@@ -78,7 +79,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal Action OffAction { get; set; }
         internal Action OnAction { get; set; }
         internal GameObject ButtonsMenu { get; set; }
-        internal TextMeshProUGUI ButtonText { get; set; }
+        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
         internal GameObject ButtonObject { get; set; }
 
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
@@ -134,9 +135,24 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
+            var analytics = ButtonObject.GetComponent<VRC.UI.Elements.Analytics.AnalyticsController>();
+            if (analytics != null)
+            {
+                UnityEngine.Object.DestroyImmediate(analytics);
+            }
+            foreach (var oldtooltip in ButtonObject.GetComponents<UiTooltip>())
+            {
+                UnityEngine.Object.DestroyImmediate(oldtooltip);
 
-            ButtonObject.transform.Find("Icon").GetComponentInChildren<Image>().gameObject.SetActive(false);
-            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUI>();
+            }
+            foreach (var oldtooltip2 in ButtonObject.GetComponents<UIToggleTooltip>())
+            {
+                UnityEngine.Object.DestroyImmediate(oldtooltip2);
+
+            }
+
+            ButtonObject.transform.Find("Icon").GetComponentInChildren<UIWidgets.ImageAdvanced>().gameObject.SetActive(false);
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
             SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;
             OffText = btnOffText;

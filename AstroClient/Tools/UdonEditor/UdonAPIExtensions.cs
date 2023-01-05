@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using VRC.Udon.Common.Interfaces;
+using Enumerable = Il2CppSystem.Linq.Enumerable;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -130,30 +131,41 @@ namespace AstroClient.Tools.UdonEditor
                 var table = behaviour.Get_EventTable();
                 if (table != null)
                 {
-                    var entries = table.Get_Entries();
-                    if (entries != null)
+                    //var entries = table.entries;
+                    //if (entries != null)
+                    //{
+                    //    for (var index = 0; index < entries.Count; index++)
+                    //    {
+                    //        var Event = entries[index];
+                    //        if (Event != null)
+                    //        {
+                    //            if (Event.key.IsNotNullOrEmptyOrWhiteSpace())
+                    //            {
+                    //                if (!keys.Contains(Event.key))
+                    //                {
+                    //                    keys.Add(Event.key);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    foreach(var item in table.Keys)
                     {
-                        for (var index = 0; index < entries.Count; index++)
+                        if (item.IsNotNullOrEmptyOrWhiteSpace())
                         {
-                            var entry = entries[index];
-                            if (entry != null)
+                            if (!keys.Contains(item))
                             {
-                                var key = entry.key;
-                                if (key.IsNotNullOrEmptyOrWhiteSpace())
-                                {
-                                    if (!keys.Contains(entry.key))
-                                    {
-                                        keys.Add(entry.key);
-                                    }
-                                }
+                                keys.Add(item);
                             }
                         }
-                        if (keys.Count() != 0)
-                        {
-                            return keys.ToArray();
-                        }
+
                     }
                 }
+                if (keys.Count() != 0)
+                {
+                    return keys.ToArray();
+                }
+
             }
             return null;
         }
@@ -187,15 +199,6 @@ namespace AstroClient.Tools.UdonEditor
             return behaviour._eventTable;
         }
 
-        /// <summary>
-        /// Shortcut to access Udon EventTable
-        /// </summary>
-        /// <param name="eventtable"></param>
-        /// <returns></returns>
-        internal static Il2CppReferenceArray<Dictionary<string, List<uint>>.Entry> Get_Entries(this Dictionary<string, List<uint>> eventtable)
-        {
-            return eventtable.entries;
-        }
 
         /// <summary>
         /// Shortcut to access Udon Entries

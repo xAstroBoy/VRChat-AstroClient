@@ -11,6 +11,9 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+    // TODO: update (patreon bypass doesn't work)
+    // Possibly update and changes.
+
     internal class SovrenChillHome : AstroEvents
     {
         internal override void RegisterToEvents()

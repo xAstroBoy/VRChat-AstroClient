@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using MelonLoader;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
@@ -26,6 +27,22 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
     internal static class Extensions
     {
+        public static void DestroyChildren(this Transform transform)
+        {
+            transform.DestroyChildren(null);
+        }
+
+        public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
+        {
+            for (var i = transform.childCount - 1; i >= 0; i--)
+            {
+                if (exclude == null || exclude(transform.GetChild(i)))
+                {
+                    UnityEngine.Object.DestroyImmediate(transform.GetChild(i).gameObject);
+                }
+            }
+        }
+
         internal static void ToggleScrollRectOnExistingMenu(this GameObject NestedPart, bool active)
         {
             try
@@ -82,21 +99,47 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         internal static void LoadSprite(this GameObject Parent, Sprite sprite, string name)
         {
             var list = Parent.GetComponentsInChildren<Image>(true);
-            for (int i = 0; i < list.Count; i++)
+            if (list != null && list.Count != 0)
             {
-                Image image = list[i];
-                if (image.name == name) // allows background image change
+
+                for (int i = 0; i < list.Count; i++)
                 {
-                    if (sprite != null)
+                    Image image = list[i];
+                    if (image.name == name) // allows background image change
                     {
-                        image.gameObject.SetActive(true);
-                        image.overrideSprite = sprite;
-                        image.MakeBackgroundMoreSolid();
+                        if (sprite != null)
+                        {
+                            image.gameObject.SetActive(true);
+                            image.overrideSprite = sprite;
+                            image.MakeBackgroundMoreSolid();
+                        }
+                        else
+                        {
+                            image.gameObject.SetActive(false);
+                            image.overrideSprite = null;
+                        }
                     }
-                    else
+                }
+            }
+            var list2 = Parent.GetComponentsInChildren<UIWidgets.ImageAdvanced>(true);
+            if (list2 != null && list2.Count != 0)
+            {
+                for (int i = 0; i < list2.Count; i++)
+                {
+                    UIWidgets.ImageAdvanced image = list2[i];
+                    if (image.name == name) // allows background image change
                     {
-                        image.gameObject.SetActive(false);
-                        image.overrideSprite = null;
+                        if (sprite != null)
+                        {
+                            image.gameObject.SetActive(true);
+                            image.overrideSprite = sprite;
+                            image.MakeBackgroundMoreSolid();
+                        }
+                        else
+                        {
+                            image.gameObject.SetActive(false);
+                            image.overrideSprite = null;
+                        }
                     }
                 }
             }
@@ -112,7 +155,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
         public static IUser ToIUser(this APIUser value)
         {
+            //return ((Object)UiMethods._apiUserToIUser.Invoke(MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique.field_Private_Static_MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique_0.field_Private_ObjectPublicDi2StObUnique_0, new object[3] { value.id, value, false })).Cast<IUser>();
             return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
+
         }
 
         /// <summary>
@@ -126,8 +171,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             return value.Cast<DataModel<APIUser>>().field_Protected_TYPE_0;
         }
 
-
-        internal static void ShowWingPage(this Wing instance, string pagename)
+        internal static void ShowWingPage(this WingMenu instance, string pagename)
         {
             instance.field_Private_MenuStateController_0.ShowTabContent(pagename);
         }
@@ -195,10 +239,13 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             typeof(RectTransform).FullName,
             typeof(CanvasRenderer).FullName,
             typeof(VRC.UI.Core.Styles.StyleElement).FullName,
-            typeof(VRC.UI.Elements.Tooltips.UiToggleTooltip).FullName,
+            typeof(UIToggleTooltip).FullName, 
             typeof(VRC.UI.Elements.Tooltips.UiTooltip).FullName,
             typeof(UnityEngine.UI.Toggle).FullName,
             typeof(UIInvisibleGraphic).FullName,
+            typeof(TextMeshProUGUIPublicBoUnique).FullName,
+            typeof(MonoBehaviourPublicLi1ObUnique).FullName, // BindingComponent
+            typeof(UIWidgets.ImageAdvanced).FullName,
 
         };
 
@@ -300,6 +347,24 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
             #endregion
             #region TextMeshProUGUI
+            var TextMeshProUGUIPublicBoUnique = parent.GetComponent<TextMeshProUGUIPublicBoUnique>();
+            if (TextMeshProUGUIPublicBoUnique != null)
+            {
+                TextMeshProUGUIPublicBoUnique.enabled = true;
+            }
+
+            var TextMeshProUGUIPublicBoUnique_List = parent.GetComponentsInChildren<TextMeshProUGUIPublicBoUnique>(true);
+            for (var i = 0; i < TextMeshProUGUIPublicBoUnique_List.Count; i++)
+            {
+                var item = TextMeshProUGUIPublicBoUnique_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
+            #endregion
+
+            #region TextMeshProUGUI
             var TextMeshProUGUI = parent.GetComponent<TextMeshProUGUI>();
             if (TextMeshProUGUI != null)
             {
@@ -379,40 +444,47 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
 
 
-
-
-            var parentcomps = parent.GetComponents<Component>();
-            for (int i = 0; i < parentcomps.Count; i++)
-            {
-                var name = parentcomps[i].GetIl2CppType().FullName;
-                //Log.Debug($"Found {name}");
-                if (!ComponentsToNotDelete.Contains(name))
-                {
-                    UnityEngine.Object.DestroyImmediate(parentcomps[i]);
-                }
-            }
-
-
-            var childs = parent.GetComponentsInChildren<Component>(true);
+            var childs = parent.GetComponentsInChildren<VRC.UI.Elements.Analytics.AnalyticsController>(true);
             for (int i = 0; i < childs.Count; i++)
             {
                 var name = childs[i].GetIl2CppType().FullName;
                 //Log.Debug($"Found {name}");
-                if (!ComponentsToNotDelete.Contains(name))
-                {
-                    UnityEngine.Object.DestroyImmediate(childs[i]);
-                }
+                UnityEngine.Object.DestroyImmediate(childs[i]);
             }
+            
+
+            //var parentcomps = parent.GetComponents<Component>();
+            //for (int i = 0; i < parentcomps.Count; i++)
+            //{
+            //    var name = parentcomps[i].GetIl2CppType().FullName;
+            //    //Log.Debug($"Found {name}");
+            //    if (!ComponentsToNotDelete.Contains(name))
+            //    {
+            //        UnityEngine.Object.DestroyImmediate(parentcomps[i]);
+            //    }
+            //}
+
+            
+            //var childs = parent.GetComponentsInChildren<Component>(true);
+            //for (int i = 0; i < childs.Count; i++)
+            //{
+            //    var name = childs[i].GetIl2CppType().FullName;
+            //    //Log.Debug($"Found {name}");
+            //    if (!ComponentsToNotDelete.Contains(name))
+            //    {
+            //        UnityEngine.Object.DestroyImmediate(childs[i]);
+            //    }
+            //}
         }
 
-        public static TextMeshProUGUI NewText(this GameObject Parent, string search)
+        public static TextMeshProUGUIPublicBoUnique NewText(this GameObject Parent, string search)
         {
-            var text = new TextMeshProUGUI();
+            var text = new TextMeshProUGUIPublicBoUnique();
 
-            var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUI>();
+            var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUIPublicBoUnique>();
             for (int i = 0; i < TextTop.Count; i++)
             {
-                TextMeshProUGUI texto = TextTop[i];
+                TextMeshProUGUIPublicBoUnique texto = TextTop[i];
                 if (texto.name == search)
                     text = texto;
             }
@@ -432,23 +504,85 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-        public static void CleanButtonsNestedMenu(this GameObject Parent)
+        public static void CleanCameraMenu(this GameObject Parent)
         {
-            var ButtonToDelete = Parent.GetComponentsInChildren<Button>(true);
-            for (int i = 0; i < ButtonToDelete.Count; i++)
+            foreach(var child in Parent.Get_Childs())
             {
-                Button Button = ButtonToDelete[i];
-                if (Button.name.Contains("Camera") || Button.name == "Button_Panorama" || Button.name == "Button_Screenshot"
-                    || Button.name == "Button_VrChivePano" || Button.name == "Button_DynamicLight")
-                    UnityEngine.Object.Destroy(Button.gameObject);
+                if(child.gameObject.name != "Buttons (1)")
+                {
+                    UnityEngine.Object.Destroy(child.gameObject);
+                }
+                else
+                {
+                    foreach(var child2 in child.Get_Childs())
+                    {
+                        UnityEngine.Object.Destroy(child2.gameObject);
+                    }
+                }
+            }
+        }
+        public static void RemoveComponents<T>(this GameObject Parent) where T : Behaviour
+        {
+            if (Parent == null) return;
+            var ParentComp = Parent.GetComponents<T>();
+            if (ParentComp != null)
+            {
+                if (ParentComp.Count != 0)
+                {
+                    foreach (var comp in ParentComp)
+                    {
+                        if (comp != null)
+                        {
+                            UnityEngine.Object.DestroyImmediate(comp);
+                        }
+                    }
+                }
             }
 
-            var ButtonToDelete2 = Parent.GetComponentsInChildren<Toggle>(true);
-            for (int i1 = 0; i1 < ButtonToDelete2.Count; i1++)
+            foreach (var child in Parent.transform.Get_All_Childs())
             {
-                Toggle Button = ButtonToDelete2[i1];
-                if (Button.name == "Button_Steadycam")
-                    UnityEngine.Object.Destroy(Button.gameObject);
+                var comps = child.GetComponents<T>();
+                if (comps == null) continue;
+                if (comps.Length != 0) continue;
+                foreach (var comp in comps)
+                {
+                    if (comp != null)
+                    {
+                        UnityEngine.Object.DestroyImmediate(comp);
+                    }
+                }
+            }
+        }
+        public static void ActivateComponents<T>(this GameObject Parent) where T : Behaviour
+        {
+            if (Parent == null) return;
+            var ParentComp = Parent.GetComponents<T>();
+            if (ParentComp != null)
+            {
+                if (ParentComp.Count != 0)
+                {
+                    foreach (var comp in ParentComp)
+                    {
+                        if (comp != null)
+                        {
+                            comp.enabled = true;
+                        }
+                    }
+                }
+            }
+
+            foreach (var child in Parent.transform.Get_All_Childs())
+            {
+                var comps = child.GetComponents<T>();
+                if (comps == null) continue;
+                if (comps.Length != 0) continue;
+                foreach (var comp in comps)
+                {
+                    if (comp != null)
+                    {
+                        comp.enabled = true;
+                    }
+                }
             }
         }
 
@@ -528,6 +662,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
                 QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
+                NestedPart.SetActive(false);
             }));
             return btn;
         }
@@ -540,6 +675,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             btn.GetComponentInChildren<Button>().onClick.AddListener(new Action(() =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
+                NestedPart.SetActive(false);
             }));
             return btn;
         }

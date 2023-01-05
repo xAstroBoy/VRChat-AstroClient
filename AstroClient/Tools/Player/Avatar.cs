@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using Extensions;
-    using FavCat.Modules;
     using Il2CppSystem;
     using Il2CppSystem.Net;
     using Startup.Hooks;

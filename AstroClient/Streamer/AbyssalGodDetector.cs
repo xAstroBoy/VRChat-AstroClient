@@ -1,6 +1,8 @@
 ﻿
 using System.Collections.Generic;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.Streamer
 {
@@ -35,7 +37,7 @@ namespace AstroClient.Streamer
                     if (AbyssalGodAlts.Contains(apiuser.GetUserID()))
                     {
                         player.AddSingleTag("<swing>Troll Warning : AbyssalGod </swing>", Color.OrangeRed);
-                        PopupUtils.QueHudMessage("AbyssalGod Detected".AddRichColorTag(Color.OrangeRed) + $" : {apiuser.displayName} Joined!");
+                        HudNotifier.WriteHudMessage("AbyssalGod Detected".AddRichColorTag(Color.OrangeRed) + $" : {apiuser.displayName} Joined!");
                         Log.Warn($"AbyssalGod Detected : {apiuser.displayName} Joined!");
                     }
                 }

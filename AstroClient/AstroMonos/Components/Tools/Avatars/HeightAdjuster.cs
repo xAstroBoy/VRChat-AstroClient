@@ -23,7 +23,7 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         static readonly float[] ms_heightMultipliers = { 1f, 0.6f, 0.35f };
 
         VRCPlayer m_player = null;
-        readonly VRCPlayer.OnAvatarIsReady m_avatarReadyEvent = null;
+        readonly VRCPlayer.MulticastDelegateNPublicSealedVoUnique m_avatarReadyEvent = null;
         CharacterController m_characterController = null;
         VRCVrIkController m_ikController = null;
 
@@ -45,20 +45,20 @@ namespace AstroClient.AstroMonos.Components.Tools.Avatars
         {
             m_avatarReadyEvent = new Action(this.RecacheComponents);
         }
-
+        // OnAvataReady = MulticastDelegateNPublicSealedVoUnique
 
         void Awake()
         {
             m_player = this.GetComponent<VRCPlayer>();
             m_characterController = this.GetComponent<CharacterController>();
 
-            m_player.field_Private_OnAvatarIsReady_0 += m_avatarReadyEvent;
+            m_player.field_Private_MulticastDelegateNPublicSealedVoUnique_0 += m_avatarReadyEvent;
         }
 
         void OnDestroy()
         {
             if(m_player != null)
-                m_player.field_Private_OnAvatarIsReady_0 -= m_avatarReadyEvent;
+                m_player.field_Private_MulticastDelegateNPublicSealedVoUnique_0 -= m_avatarReadyEvent;
         }
 
         void Update()

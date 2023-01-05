@@ -15,8 +15,7 @@
 
         internal static bool isClicked(this VRCInput instance)
         {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            return instance.GetAxis() == 1f;
+            return instance.GetAxis().Equals(1);
         }
 
         internal static bool isDown(this VRCInput instance)

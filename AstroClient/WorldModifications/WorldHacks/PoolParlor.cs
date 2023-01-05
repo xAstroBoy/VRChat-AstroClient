@@ -21,6 +21,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
+    // TODO: update
     internal class PoolParlor : AstroEvents
     {
         internal override void RegisterToEvents()

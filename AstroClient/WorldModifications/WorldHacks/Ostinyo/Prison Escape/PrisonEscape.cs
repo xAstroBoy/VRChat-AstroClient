@@ -29,6 +29,7 @@ using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 {
+
     internal class PrisonEscape : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -106,7 +107,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     MoneyInteraction = null;
                     GetRedCard = null;
                     RedCardBehaviour = null;
-                    GateInteraction = null;
+                    Lit_GateInteraction = null;
+                    Dark_GateInteraction = null;
                     _GuardsAreAllowedToUseVents = false;
                     _DropKnifeAfterKill = true;
                     _FreeCratesItems = false;
@@ -155,6 +157,32 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     Gun_Purple_Color_Button = null;
                     Gun_Gold_Color_Button = null;
                     Gun_Red_Color_Button = null;
+                    _Spawn_Area = null;
+                    _Gun_Color_Panel = null;
+                    _Respawn_Points = null;
+                    _Game_Join_Blocker = null;
+                    _Scripts = null;
+                    _Player_Object_Pool = null;
+                    _Openables = null;
+                    _Vents = null;
+                    _Floor_Vents = null;
+                    _PrisonRoot = null;
+                    _Lit_Prison = null;
+                    _Dark_Prison = null;
+                    _Dark_Gate_Button = null;
+                    _Dark_Guard_Booth = null;
+                    _Dark_Yard = null;
+                    _Lit_Gate_Button = null;
+                    _Lit_Guard_Booth = null;
+                    _Lit_Yard = null;
+                    _Spawn_Points = null;
+                    _Prisoner_Spawns = null;
+                    _Guard_Spawns = null;
+                    _ITEMS = null;
+                    _Money = null;
+                    _MoneyPile = null;
+                    _Keycards = null;
+                    _Keycard = null;
 
 
                 }
@@ -165,7 +193,93 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
         }
+        internal static void ClickGateButton()
+        {
+            if(Lit_Prison.active)
+            {
+                if (Lit_GateInteraction != null)
+                {
+                    Lit_GateInteraction.InvokeBehaviour();
+                }
 
+            }
+            else
+            {
+                if (Dark_Prison.active)
+                {
+                    if (Dark_GateInteraction != null)
+                    {
+                        Dark_GateInteraction.InvokeBehaviour();
+                    }
+                }
+            }
+
+        }
+
+        private static void PatchYard(GameObject Yard)
+        {
+            if (Yard == null) return;
+            Yard.FindObject("Colliders/Collider").DestroyMeLocal(true);
+            Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true);
+            Yard.FindObject("Colliders/Collider (2)").DestroyMeLocal(true);
+            Yard.FindObject("Colliders/Collider (3)").DestroyMeLocal(true);
+            FixOutsideFence(Yard.FindObject("Colliders/Collider (4)"));
+            FixOutsideFence(Yard.FindObject("Colliders/Collider (5)"));
+            var guardtower = Yard.FindObject("GuardTower/Colliders");
+            if (guardtower != null)
+            {
+                AdjustGuardTowerBorders(guardtower);
+            }
+            var guardtower_1 = Yard.FindObject("GuardTower (1)/Colliders");
+            if (guardtower_1 != null)
+            {
+                AdjustGuardTowerBorders(guardtower_1);
+            }
+
+        }
+
+        private static void PatchPrison(GameObject Prison)
+        {
+            if(Prison == null) return;
+            // Fix Fence Collider height 
+            var fence = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
+            if (fence != null)
+            {
+                FixbaseballFence(fence);
+            }
+            // Fix Fence Collider height 
+            var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider (1)");
+            if (fence1 != null)
+            {
+                FixbaseballFence(fence1);
+            }
+
+
+            // Remove roof & other useless colliders
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (3)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (4)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (5)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal(true);
+            Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal(true);
+
+
+            var fence3 = Prison.FindObject("Building/Back Area/Colliders/Collider");
+            if (fence3 != null)
+            {
+                FixBackAreaFence(fence1);
+            }
+            var fence4 = Prison.FindObject("Building/Back Area/Colliders/Collider (1)");
+            if (fence4 != null)
+            {
+                FixBackAreaFence(fence1);
+            }
+
+            // Kitchen Roof
+            Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
+
+        }
         private static void AdjustWorld()
         {
 
@@ -218,77 +332,45 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 occluder.DestroyMeLocal(true);
             }
-            if (Yard != null)
+            if (Lit_Yard != null)
             {
-                Yard.FindObject("Colliders/Collider").DestroyMeLocal(true);
-                Yard.FindObject("Colliders/Collider (1)").DestroyMeLocal(true);
-                Yard.FindObject("Colliders/Collider (2)").DestroyMeLocal(true);
-                Yard.FindObject("Colliders/Collider (3)").DestroyMeLocal(true);
-                FixOutsideFence(Yard.FindObject("Colliders/Collider (4)"));
-                FixOutsideFence(Yard.FindObject("Colliders/Collider (5)"));
+                PatchYard(Lit_Yard);
+            }
+
+            if (Dark_Yard != null)
+            {
+                PatchYard(Dark_Yard);
+            }
+
+            if(PrisonRoot != null)
+            {
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (1)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (2)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (3)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (4)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (5)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (6)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (7)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (8)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (9)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (10)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (11)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (12)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (13)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (14)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (15)").IgnoreLocalPlayerCollision(true, true, false);
+                PrisonRoot.FindObject("Guard Objects/Guard Blocker (16)").IgnoreLocalPlayerCollision(true, true, false);
 
             }
 
-            var guardtower = Yard.FindObject("GuardTower/Colliders");
-            if (guardtower != null)
+            if (Lit_Prison != null)
             {
-                AdjustGuardTowerBorders(guardtower);
+                PatchPrison(Lit_Prison);
             }
-            var guardtower_1 = Yard.FindObject("GuardTower (1)/Colliders");
-            if (guardtower_1 != null)
+            if(Dark_Prison != null)
             {
-                AdjustGuardTowerBorders(guardtower_1);
-            }
-
-
-            if (Prison != null)
-            {
-                // Fix Fence Collider height 
-                var fence = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
-                if (fence != null)
-                {
-                    FixbaseballFence(fence);
-                }
-                // Fix Fence Collider height 
-                var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider (1)");
-                if (fence1 != null)
-                {
-                    FixbaseballFence(fence1);
-                }
-                Prison.FindObject("Guard Objects/Guard Blocker").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (1)").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (2)").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (3)").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (4)").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (5)").IgnoreLocalPlayerCollision(true, true, false);
-                Prison.FindObject("Guard Objects/Guard Blocker (6)").IgnoreLocalPlayerCollision(true, true, false);
-
-
-                // Remove roof & other useless colliders
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (3)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (4)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (5)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal(true);
-                Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal(true);
-
-
-                var fence3 = Prison.FindObject("Building/Back Area/Colliders/Collider");
-                if (fence3 != null)
-                {
-                    FixBackAreaFence(fence1);
-                }
-                var fence4 = Prison.FindObject("Building/Back Area/Colliders/Collider (1)");
-                if (fence4 != null)
-                {
-                    FixBackAreaFence(fence1);
-                }
-
-                // Kitchen Roof
-                Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
-
-
+                PatchPrison(Dark_Prison);
             }
         }
 
@@ -319,7 +401,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 if (item.name.Contains("Sniper"))
                 {
-                    var MuzzlePos = item.transform.FindObject("Mesh/Muzzle Loc");
+                    var MuzzlePos = item.transform.FindObject("Gun/Mesh/Muzzle Loc");
                     if (MuzzlePos != null)
                     {
                         var laser = MuzzlePos.AddComponent<LaserPointer>();
@@ -481,6 +563,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             if (MoneyPile != null)
             {
                 Patch__MaxPickupDist(MoneyPile);
+                MoneyInteraction = MoneyPile.FindUdonEvent("_interact");
             }
 
             if (Keycard != null)
@@ -514,17 +597,22 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static void FindGateButton()
         {
-            if (Gate_Button != null)
+            if (Lit_Gate_Button != null )
             {
-                GateInteraction = Gate_Button.FindUdonEvent("_interact");
+                Lit_GateInteraction = Lit_Gate_Button.FindUdonEvent("_interact");
             }
+            if (Dark_Gate_Button != null)
+            {
+                Dark_GateInteraction = Dark_Gate_Button.FindUdonEvent("_interact");
+            }
+
         }
         private static void InstallReaders()
         {
             foreach (var item in Player_Object_Pool.transform.Get_UdonBehaviours())
             {
 
-                var obj = item.FindUdonEvent("_SetWantedSynced");
+                var obj = item.FindUdonEvent("__0__SetWantedSynced");
                 if (obj != null)
                 {
                     var reader = obj.transform.GetOrAddComponent<PrisonEscape_PoolDataReader>();
@@ -894,7 +982,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             // label parameter is only for debug reasons.
 
-            string defaultlabel = "<color=red>ESCAPE!</color>";
+            string defaultlabel = "<bounce><color=red>ESCAPE!</color></bounce>";
             var btn = new WorldButton(Position, new Vector3(0, rotation, 0), defaultlabel, action);
 
             MiscUtils.DelayFunction(2f, () =>
@@ -2096,7 +2184,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (_Floor_Vents == null)
                     {
-                        return _Floor_Vents = Prison.FindObject("Floor Vent");
+                        return _Floor_Vents = PrisonRoot.FindObject("Floor Vent");
                     }
                     return _Floor_Vents;
                 }
@@ -2106,19 +2194,75 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static GameObject _Prison;
+        private static GameObject _PrisonRoot;
 
-        internal static GameObject Prison
+        internal static GameObject PrisonRoot
         {
             get
             {
                 if (isCurrentWorld)
                 {
-                    if (_Prison == null)
+                    if (_PrisonRoot == null)
                     {
-                        return _Prison = Finder.FindRootSceneObject("Prison");
+                        return _PrisonRoot = Finder.FindRootSceneObject("Prison");
                     }
-                    return _Prison;
+                    return _PrisonRoot;
+                }
+
+                return null;
+            }
+        }
+        private static GameObject _Lit_Prison;
+
+        internal static GameObject Lit_Prison
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (PrisonRoot == null) return null;
+                    if (_Lit_Prison == null)
+                    {
+                        return _Lit_Prison = PrisonRoot.FindObject("Lit Prison");
+                    }
+                    return _Lit_Prison;
+                }
+
+                return null;
+            }
+        }
+        private static GameObject _Dark_Prison;
+
+        internal static GameObject Dark_Prison
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (PrisonRoot == null) return null;
+
+                    if (_Dark_Prison == null)
+                    {
+                        return _Dark_Prison = PrisonRoot.FindObject("Dark Prison");
+                    }
+                    return _Dark_Prison;
+                }
+
+                return null;
+            }
+        }
+        private static GameObject _Dark_Gate_Button;
+        internal static GameObject Dark_Gate_Button
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Dark_Gate_Button == null)
+                    {
+                        return _Dark_Gate_Button = Dark_Guard_Booth.FindObject("Gate Button");
+                    }
+                    return _Dark_Gate_Button;
                 }
 
                 return null;
@@ -2126,36 +2270,54 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static GameObject _Gate_Button;
-        internal static GameObject Gate_Button
+        private static GameObject _Dark_Guard_Booth;
+        internal static GameObject Dark_Guard_Booth
         {
             get
             {
                 if (isCurrentWorld)
                 {
-                    if (_Gate_Button == null)
+                    if (_Dark_Guard_Booth == null)
                     {
-                        return _Gate_Button = Guard_Booth.FindObject("Gate Button");
+                        return _Dark_Guard_Booth = Dark_Yard.FindObject("Guard Booth");
                     }
-                    return _Gate_Button;
+                    return _Dark_Guard_Booth;
                 }
 
                 return null;
             }
         }
 
-        private static GameObject _Guard_Booth;
-        internal static GameObject Guard_Booth
+        private static GameObject _Dark_Yard;
+        internal static GameObject Dark_Yard
         {
             get
             {
                 if (isCurrentWorld)
                 {
-                    if (_Guard_Booth == null)
+                    if (Dark_Prison == null) return null;
+                    if (_Dark_Yard == null)
                     {
-                        return _Guard_Booth = Yard.FindObject("Guard Booth");
+                        return _Dark_Yard = Dark_Prison.FindObject("Building/Yard/");
                     }
-                    return _Guard_Booth;
+                    return _Dark_Yard;
+                }
+
+                return null;
+            }
+        }
+        private static GameObject _Lit_Gate_Button;
+        internal static GameObject Lit_Gate_Button
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (_Lit_Gate_Button == null)
+                    {
+                        return _Lit_Gate_Button = Lit_Guard_Booth.FindObject("Gate Button");
+                    }
+                    return _Lit_Gate_Button;
                 }
 
                 return null;
@@ -2163,24 +2325,43 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static GameObject _Yard;
-        internal static GameObject Yard
+        private static GameObject _Lit_Guard_Booth;
+        internal static GameObject Lit_Guard_Booth
         {
             get
             {
                 if (isCurrentWorld)
                 {
-                    if (Prison == null) return null;
-                    if (_Yard == null)
+                    if (_Lit_Guard_Booth == null)
                     {
-                        return _Yard = Prison.FindObject("Yard");
+                        return _Lit_Guard_Booth = Lit_Yard.FindObject("Guard Booth");
                     }
-                    return _Yard;
+                    return _Lit_Guard_Booth;
                 }
 
                 return null;
             }
         }
+
+        private static GameObject _Lit_Yard;
+        internal static GameObject Lit_Yard
+        {
+            get
+            {
+                if (isCurrentWorld)
+                {
+                    if (Lit_Prison == null) return null;
+                    if (_Lit_Yard == null)
+                    {
+                        return _Lit_Yard = Lit_Prison.FindObject("Building/Yard/");
+                    }
+                    return _Lit_Yard;
+                }
+
+                return null;
+            }
+        }
+ 
 
 
         private static GameObject _Spawn_Points;
@@ -2190,10 +2371,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (isCurrentWorld)
                 {
-                    if (Prison == null) return null;
+                    if (PrisonRoot == null) return null;
                     if (_Spawn_Points == null)
                     {
-                        return _Spawn_Points = Prison.FindObject("Spawn Points");
+                        return _Spawn_Points = PrisonRoot.FindObject("Spawn Points");
                     }
                     return _Spawn_Points;
                 }
@@ -2202,24 +2383,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-        private static GameObject _Cells_Closed_Objects;
-        internal static GameObject Cells_Closed_Objects
-        {
-            get
-            {
-                if (isCurrentWorld)
-                {
-                    if (Prison == null) return null;
-                    if (_Cells_Closed_Objects == null)
-                    {
-                        return _Cells_Closed_Objects = Prison.FindObject("Cells Closed Objects");
-                    }
-                    return _Cells_Closed_Objects;
-                }
-
-                return null;
-            }
-        }
 
 
 
@@ -2230,7 +2393,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (isCurrentWorld)
                 {
-                    if (Prison == null) return null;
+                    if (PrisonRoot == null) return null;
                     if (_Prisoner_Spawns == null)
                     {
                         return _Prisoner_Spawns = Spawn_Points.FindObject("Prisoner Spawns");
@@ -2250,7 +2413,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 if (isCurrentWorld)
                 {
-                    if (Prison == null) return null;
+                    if (PrisonRoot == null) return null;
                     if (_Guard_Spawns == null)
                     {
                         return _Guard_Spawns = Spawn_Points.FindObject("Guard Spawns");
@@ -2366,7 +2529,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static RawUdonBehaviour RedCardBehaviour { get; set; } = null;
         internal static UdonBehaviour_Cached MoneyInteraction { get; set; } = null;
-        internal static UdonBehaviour_Cached GateInteraction { get; set; } = null;
+        internal static UdonBehaviour_Cached Lit_GateInteraction { get; set; } = null;
+        internal static UdonBehaviour_Cached Dark_GateInteraction { get; set; } = null;
+
         internal static UdonBehaviour_Cached TogglePatronGuns { get; set; } = null;
         internal static UdonBehaviour_Cached ToggleDoublePoints { get; set; } = null;
         internal static UdonBehaviour_Cached TakeKeycard { get; set; } = null;

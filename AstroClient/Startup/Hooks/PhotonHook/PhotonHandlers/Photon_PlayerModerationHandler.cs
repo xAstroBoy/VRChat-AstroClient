@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Startup.Hooks.PhotonHook.PhotonHandlers;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientUI.Hud.Notifier;
+
+namespace AstroClient.Startup.Hooks.PhotonHook.PhotonHandlers;
 
 using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
@@ -34,7 +37,7 @@ internal class Photon_PlayerModerationHandler
 
                     case ModerationCode.VoteKick: // VoteKick
 
-                        PopupUtils.QueHudMessage("<color=#FFA5F>A Votekick has Been started (Check console!)</color>");
+                        HudNotifier.WriteHudMessage("<color=#FFA5F>A Votekick has Been started (Check console!)</color>");
                         Log.Warn("VOTEKICK DETECTED : ");
                         break;
 

@@ -17,7 +17,7 @@ public class QMTabButton
 	public QMTabButton(int index, Action action, Sprite loadSprite = null)
 	{
 		// Evemtually move to a templates class or something
-		var tabbase = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings");
+		var tabbase = Finder.Find("UserInterface/Canvas_QuickMenu(Clone)/CanvasGroup/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Settings");
 		_self = UnityEngine.Object.Instantiate(tabbase, tabbase.parent, true).gameObject;
 		_self.name = "CheetoTab";
 		SetToolTip("CheetoClient");

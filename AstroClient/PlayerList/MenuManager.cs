@@ -55,7 +55,7 @@ namespace AstroClient.PlayerList
         {
             get
             {
-                return PlayerList_Constants.playerList;
+                return PlayerList_Constants.playerList.gameObject;
             }
         }
         public static RectTransform playerListRect{ get; set; }

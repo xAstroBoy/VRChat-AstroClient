@@ -1,4 +1,6 @@
-﻿using AstroClient.AstroMonos;
+﻿using System;
+using System.Collections;
+using AstroClient.AstroMonos;
 using AstroClient.ClientActions;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2;
@@ -12,6 +14,8 @@ using AstroClient.Tools.Headlight;
 using AstroClient.Tools.ObjectEditor;
 using AstroClient.WorldModifications;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using MelonLoader;
 
 namespace AstroClient.ClientUI.QuickMenuGUI
 {
@@ -19,23 +23,36 @@ namespace AstroClient.ClientUI.QuickMenuGUI
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.VRChat_OnUiManagerInit += VRChat_OnQuickMenuInit;
+            ClientEventActions.VRChat_OnUiManagerInit += InitGUI;
         }
 
         #region Buttons
 
         internal static QMToggleButton ToggleDebugInfo;
-        internal static QMSingleButton CopyIDButton;
-        internal static QMSingleButton AvatarByIDButton;
-        internal static QMSingleButton ClearVRamButton;
-        internal static QMSingleButton JoinInstanceButton;
-        internal static QMSingleButton ReloadAvatarsButton;
 
         #endregion Buttons
-
-        private void VRChat_OnQuickMenuInit()
+        protected static void DoAfterTemplateIsLoaded (Action code)
         {
-            InitMainsButtons();
+            _ = MelonCoroutines.Start(WaitForTemplateInitCoro(code));
+        }
+
+        private static IEnumerator WaitForTemplateInitCoro(Action code)
+        {
+            while(QuickMenuTools.UserInterface == null)
+                yield return null;
+            while (QuickMenuTools.NestedMenuTemplate == null)
+                yield return null;
+            while (QuickMenuTools.SingleButtonTemplate == null)
+                yield return null;
+            while (QuickMenuTools.SingleButtonTemplate.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>() == null)
+                yield return null;
+
+            code();
+        }
+
+        private static void InitGUI()
+        {
+           DoAfterTemplateIsLoaded(InitMainsButtons);
         }
 
         internal static void InitMainsButtons()
@@ -59,7 +76,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient);
-                KanedWIP.InitMenu(AstroClient);
+                //KanedWIP.InitMenu(AstroClient);
                 //CheetosWIP.InitCheetosWIPMenu(AstroClient);
             }
 

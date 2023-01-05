@@ -154,7 +154,7 @@ namespace AstroClient.Tools.Extensions
 
 
 
-public static void SetLayerRecursive(this GameObject gameObject, int layer)
+		public static void SetLayerRecursive(this GameObject gameObject, int layer)
         {
             gameObject.layer = layer;
             foreach (Il2CppObjectBase il2CppObjectBase in gameObject.transform)
@@ -640,6 +640,56 @@ public static void SetLayerRecursive(this GameObject gameObject, int layer)
             }
             return childs;
         }
+        /// <summary>
+        /// Replaces the prefab content.
+        /// </summary>
+        /// <param name="Prefab"></param>
+        /// <param name="template"></param>
+        internal static void ReplacePrefabContent(this GameObject Prefab, GameObject template)
+        {
+            if (Prefab == null) return;
+            if (template == null) return;
+            var instantiated = UnityEngine.Object.Instantiate(template, Prefab.transform.position, Prefab.transform.rotation);
+            if (instantiated != null)
+            {
+                foreach (var item in instantiated.Get_Childs())
+                {
+                    item.parent = Prefab.transform;
+                    var name = item.name;
+                    item.name += "_UNPACKED";
+                    // Then after that, let's take every info inside it
+                    var Original = Prefab.transform.FindObject(name);
+                    if (Original != null)
+                    {
+                        // Copy everything off it
+                        item.position = Original.position;
+                        item.rotation = Original.rotation;
+                        item.localScale = Original.localScale;
+
+                        // TODO: Copy the components maybe if needed.
+                    }
+                }
+
+                // After this remove the empty instantiated transform
+                instantiated.DestroyMeLocal(true);
+                // Remove the unpacked name or destroy the original childs in the original prefab.
+
+                foreach (var item in Prefab.Get_Childs())
+                {
+                    if (item.name.EndsWith("_UNPACKED"))
+                    {
+                        item.name = item.name.Replace("_UNPACKED", string.Empty);
+                    }
+                    else
+                    {
+                        item.DestroyMeLocal(true);
+                    }
+                }
+
+
+            }
+
+        }
 
         internal static List<Transform> Get_All_Childs(this Transform item)
         {
@@ -687,7 +737,7 @@ public static void SetLayerRecursive(this GameObject gameObject, int layer)
         internal static bool isMirror(this GameObject item)
         {
             return item.GetComponent<VRC_MirrorReflection>() != null ||
-                   item.GetComponent<MirrorReflection>() != null ||
+                   //item.GetComponent<MirrorReflection>() != null ||
                    item.GetComponent<VRCSDK2.VRC_MirrorReflection>() != null ||
                    item.GetComponent<VRCMirrorReflection>() != null;
         }

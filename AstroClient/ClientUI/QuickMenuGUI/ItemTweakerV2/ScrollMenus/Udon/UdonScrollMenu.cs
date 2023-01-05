@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
@@ -143,6 +145,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon
                         GenerateInternal(udon, action);
                         udon.OnOpenAction = (() =>
                         {
+                            
                             WingMenu.OpenMe(); // Keep it open.
                             if (CurrentUnboxBehaviourToConsole != null)
                             {
@@ -214,7 +217,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon
                         if (!Active_Spammers.Contains(Generated_Spammer))
                         {
                             Log.Debug($"Spamming Event in {action.name}, {subaction}");
-                            PopupUtils.QueHudMessage($"<color=#FFA500>Spamming Udon Event in {action.name}, {subaction}</color>");
+                            NewHudNotifier.WriteHudMessage($"<color=#FFA500>Spamming Udon Event in {action.name}, {subaction}</color>");
                             Active_Spammers.Add(Generated_Spammer);
                             btn.setTextColorHTML("#FFA500");
                             Generated_Spammer.InvokeOnLoop = true;

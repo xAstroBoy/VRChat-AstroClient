@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.MenuMethods
+﻿using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+
+namespace AstroClient.xAstroBoy.MenuMethods
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +12,7 @@
     using VRC.DataModel;
     using VRC.UI;
     using VRC.UI.Elements;
-
+    using UiManagerImpl = UIManagerPublicBoObBoAc1BoAcGa1MeUnique;
     internal static class NewMenuXrefsSystem
     {
 
@@ -46,39 +48,39 @@
             }
         }
 
-        private static MethodInfo _closeBigMenu;
-        internal static MethodInfo closeBigMenu
-        {
-            get
-            {
-                if (_closeBigMenu == null)
-                {
-                    return _closeBigMenu = typeof(VRCUiManager).GetMethods()
-                        .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") 
-                                     && !mb.Name.Contains("_PDM_") 
-                                     && XrefUtils.CheckUsedBy(mb, "ChangeToSelectedAvatar"));
+        //private static MethodInfo _closeBigMenu;
+        //internal static MethodInfo closeBigMenu
+        //{
+        //    get
+        //    {
+        //        if (_closeBigMenu == null)
+        //        {
+        //            return _closeBigMenu = typeof(VRCUiManager).GetMethods()
+        //                .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") 
+        //                             && !mb.Name.Contains("_PDM_") 
+        //                             && XrefUtils.CheckUsedBy(mb, "ChangeToSelectedAvatar"));
 
-                }
-                return _closeBigMenu;
-            }
-        }
+        //        }
+        //        return _closeBigMenu;
+        //    }
+        //}
 
-        private static MethodInfo _openBigMenu;
-        internal static MethodInfo openBigMenu
-        {
-            get
-            {
-                if (_openBigMenu == null)
-                {
-                    return _openBigMenu = typeof(VRCUiManager).GetMethods()
-                        .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") 
-                                     && !mb.Name.Contains("_PDM_") 
-                                     && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Backdrop/Backdrop"));
+        //private static MethodInfo _openBigMenu;
+        //internal static MethodInfo openBigMenu
+        //{
+        //    get
+        //    {
+        //        if (_openBigMenu == null)
+        //        {
+        //            return _openBigMenu = typeof(VRCUiManager).GetMethods()
+        //                .First(mb => mb.Name.StartsWith("Method_Public_Void_Boolean_Boolean_") 
+        //                             && !mb.Name.Contains("_PDM_") 
+        //                             && XrefUtils.CheckStrings(mb, "UserInterface/MenuContent/Backdrop/Backdrop"));
 
-                }
-                return _openBigMenu;
-            }
-        }
+        //        }
+        //        return _openBigMenu;
+        //    }
+        //}
         private static MethodInfo _selectUserMethod;
         internal static MethodInfo selectUserMethod
         {
@@ -86,7 +88,7 @@
             {
                 if (_selectUserMethod == null)
                 {
-                    return _selectUserMethod = typeof(UserSelectionManager).GetMethods()
+                    return _selectUserMethod = typeof(Helper.EventPump).GetMethods()
                 .First(method => method.Name.StartsWith("Method_Public_Void_APIUser_") && !method.Name.Contains("_PDM_")
                 && XrefUtils.CheckUsedBy(method, "Method_Public_Void_VRCPlayer_")
                 && XrefUtils.CheckUsedBy(method, "Method_Public_Virtual_Final_New_Void_IUser_"));
@@ -143,7 +145,7 @@
             {
                 if (_openQuickMenuPageMethod == null)
                 {
-                    return _openQuickMenuPageMethod = typeof(UIManagerImpl).GetMethods()
+                    return _openQuickMenuPageMethod = typeof(UiManagerImpl).GetMethods()
                         .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_String_") && XrefUtils.CheckUsing(method, openQuickMenuMethod.Name, openQuickMenuMethod.DeclaringType));
 
                 }
@@ -158,7 +160,7 @@
             {
                 if (_onQuickMenuOpenedMethod == null)
                 {
-                    return _onQuickMenuOpenedMethod = typeof(UIManagerImpl).GetMethods()
+                    return _onQuickMenuOpenedMethod = typeof(UiManagerImpl).GetMethods()
                         .First(method => method.Name.StartsWith("Method_Private_Void_Boolean_") && !method.Name.Contains("_PDM_") && XrefUtils.CheckUsedBy(method, openQuickMenuMethod.Name));
 
                 }
@@ -172,7 +174,7 @@
             {
                 if (_openQuickMenuMethod == null)
                 {
-                    return _openQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    return _openQuickMenuMethod = typeof(UiManagerImpl).GetMethods()
                         .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && 
                                          method.Name.Length <= 29 &&
                                          XrefUtils.CheckUsing(method, "Method_Private_Void_"));
@@ -189,7 +191,7 @@
             {
                 if (_closeMenuMethod == null)
                 {
-                    return _closeMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    return _closeMenuMethod = typeof(UiManagerImpl).GetMethods()
                         .First(method => method.Name.StartsWith("Method_Public_Virtual_Final_New_Void_") && XrefScanner.XrefScan(method).Count() == 2);
 
                 }
@@ -203,7 +205,7 @@
             {
                 if (_closeQuickMenuMethod == null)
                 {
-                    return _closeQuickMenuMethod = typeof(UIManagerImpl).GetMethods()
+                    return _closeQuickMenuMethod = typeof(UiManagerImpl).GetMethods()
                         .First(method => method.Name.StartsWith("Method_Public_Void_Boolean_") && XrefUtils.CheckUsedBy(method, closeMenuMethod.Name));
 
                 }
@@ -293,7 +295,7 @@
             {
                 if (_selectedUserManagerObject == null)
                 {
-                    return _selectedUserManagerObject = GameObject.Find("_Application/UIManager/SelectedUserManager").GetComponent<UserSelectionManager>();
+                    return _selectedUserManagerObject = GameObject.Find($"{QuickMenuTools.Application.name}/UIManager/SelectedUserManager").GetComponent<Helper.EventPump>();
 
                 }
                 return _selectedUserManagerObject;

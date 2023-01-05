@@ -1,4 +1,6 @@
-﻿using AstroClient.ClientActions;
+﻿using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.ClientActions;
+using AstroClient.ClientUI.Hud.Notifier;
 
 namespace AstroClient.Streamer
 {
@@ -31,7 +33,7 @@ namespace AstroClient.Streamer
                     if (apiuser.IsWorldCreator())
                     {
                         player.AddSingleTag("<wave><rainb>World Author</rainb></wave>", Color.DarkOrange);
-                        PopupUtils.QueHudMessage($"World Author : {apiuser.displayName} Joined!");
+                        NewHudNotifier.WriteHudMessage($"World Author : {apiuser.displayName} Joined!");
                         Log.Warn($"World Author : {apiuser.displayName} Joined!");
                     }
                 }

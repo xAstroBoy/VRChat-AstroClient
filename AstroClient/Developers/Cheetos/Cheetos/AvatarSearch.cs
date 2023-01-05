@@ -9,8 +9,6 @@ namespace AstroClient.Cheetos
     using System.Collections.Generic;
     using System.Diagnostics;
     using CheetoLibrary.Menu.MenuApi;
-    using FavCat.Database.Stored;
-    using FavCat.Modules;
     using Tools.World;
     using UnityEngine;
     using xAstroBoy.Utility;
@@ -101,12 +99,12 @@ namespace AstroClient.Cheetos
 
             //worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 0);
             //worldList.Text.supportRichText = true;
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh World Avatars", 921f, 470f, delegate
-            {
-                _WorldPedestralAvatars.Clear();
-                PedestalDump();
-                ShowAvatarsOnFavcat();
-            });
+            //_ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh World Avatars", 921f, 470f, delegate
+            //{
+            //    //_WorldPedestralAvatars.Clear();
+            //    PedestalDump();
+            //    ShowAvatarsOnFavcat();
+            //});
 
         }
 
@@ -192,32 +190,32 @@ namespace AstroClient.Cheetos
         private void OnRoomLeft()
         {
             worldAvatarsids.Clear();
-            _WorldPedestralAvatars.Clear();
+            //_WorldPedestralAvatars.Clear();
 
         }
 
-        private static System.Collections.Generic.List<StoredAvatar> _WorldPedestralAvatars = new System.Collections.Generic.List<StoredAvatar>();
-        internal static System.Collections.Generic.List<StoredAvatar> WorldPedestralAvatars
-        {
-            get
-            {
-                if (_WorldPedestralAvatars.Count == 0)
-                {
-                    for (int i = 0; i < worldAvatarsids.Count; i++)
-                    {
-                        AvatarModule.GetStoredFromID(worldAvatarsids[i], (avatar) =>
-                        {
-                            _WorldPedestralAvatars.Add(avatar);
-                        });
+        //private static System.Collections.Generic.List<StoredAvatar> _WorldPedestralAvatars = new System.Collections.Generic.List<StoredAvatar>();
+        //internal static System.Collections.Generic.List<StoredAvatar> WorldPedestralAvatars
+        //{
+        //    get
+        //    {
+        //        if (_WorldPedestralAvatars.Count == 0)
+        //        {
+        //            for (int i = 0; i < worldAvatarsids.Count; i++)
+        //            {
+        //                AvatarModule.GetStoredFromID(worldAvatarsids[i], (avatar) =>
+        //                {
+        //                    _WorldPedestralAvatars.Add(avatar);
+        //                });
 
-                    }
-                    return _WorldPedestralAvatars;
-                }
+        //            }
+        //            return _WorldPedestralAvatars;
+        //        }
 
-                return _WorldPedestralAvatars;
+        //        return _WorldPedestralAvatars;
 
-            }
-        }
+        //    }
+        //}
 
         //private StoredCategory _WorldPedestralCategory;
         //private StoredCategory WorldPedestralCategory
@@ -238,8 +236,8 @@ namespace AstroClient.Cheetos
         {
 
             // TODO : make Favcat have custom categories that can be controlled from here.
-            AvatarModule.AcceptRemoteResults(WorldPedestralAvatars);
-            AvatarModule.SetSearchHeaderText($"<color=#E0E300>World Pedestal (AstroClient)</color>");
+            //AvatarModule.AcceptRemoteResults(WorldPedestralAvatars);
+            //AvatarModule.SetSearchHeaderText($"<color=#E0E300>World Pedestal (AstroClient)</color>");
 
         }
 

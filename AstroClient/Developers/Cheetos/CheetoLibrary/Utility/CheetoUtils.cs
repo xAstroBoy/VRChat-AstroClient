@@ -1,4 +1,6 @@
-﻿namespace AstroClient.CheetoLibrary.Utility
+﻿using TMPro;
+
+namespace AstroClient.CheetoLibrary.Utility
 {
     #region Imports
 
@@ -105,25 +107,6 @@
                 Log.Exception(e);
             }
             return null;
-        }
-
-        public static void PopupCall(string title, string confirmButtonText, string placeholderText, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
-        {
-            UiManager.ShowUiInputPopup(
-
-                title,
-                "",
-                InputField.InputType.Standard,
-                IsNumpad,
-                confirmButtonText,
-                UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>>(new Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text>((a, b, c) => { OnAccept?.Invoke(a); })),
-                UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<Il2CppSystem.Action>(OnCancel),
-                placeholderText,
-                true,
-                null,
-                false,
-                0
-        );
         }
     }
 }

@@ -22,8 +22,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         internal Button OpenButton { get; set; }
 
         internal GameObject backbuttonObject { get; set; }
-        internal TextMeshProUGUI ButtonText { get; set; }
-        internal TextMeshProUGUI ButtonText_Title { get; set; }
+        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
+        internal TextMeshProUGUIPublicBoUnique ButtonText_Title { get; set; }
         internal UIPage CurrentPage { get; set; }
         internal string MenuName { get; set; }
         internal string menuName { get; set; }

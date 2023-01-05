@@ -73,46 +73,38 @@ namespace AstroClient.Startup.Patches
             {
                 return;
             }
-
-            EnableListener = false;
             switch (__instance.Name())
             {
                 case VRCInputs.Jump:
                     {
                         ClientEventActions.OnInput_Jump.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
-                        EnableListener = true;
                         break;
                     }
                 case VRCInputs.UseLeft:
                     {
                         ClientEventActions.OnInput_UseLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
-                        EnableListener = true;
                         break;
                     }
 
                 case VRCInputs.UseRight:
                     {
                         ClientEventActions.OnInput_UseRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
-                        EnableListener = true;
                         break;
                     }
 
                 case VRCInputs.GrabLeft:
                     {
                         ClientEventActions.OnInput_GrabLeft.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
-                        EnableListener = true;
                         break;
                     }
 
                 case VRCInputs.GrabRight:
                     {
                         ClientEventActions.OnInput_GrabRight.SafetyRaiseWithParams(__instance.isClicked(), __instance.isDown(), __instance.isUp());
-                        EnableListener = true;
                         break;
                     }
 
                 default:
-                    EnableListener = true;
                     break;
             }
 
