@@ -28,8 +28,8 @@ namespace AstroClient.Tools.UdonEditor
 
         internal override void ExecutePriorityPatches()
         {
-            new AstroPatch(typeof(UdonHeap).GetMethod(nameof(UdonHeap.GetHeapVariableInternal)).MakeGenericMethod(typeof(System.Object)), GetPatch(nameof(PlayerStartPatch)));
-            new AstroPatch(typeof(UdonHeap).GetMethod(nameof(UdonHeap)), null, GetPatch(nameof(PlayerStartPatch)));
+            //new AstroPatch(typeof(UdonHeap).GetMethod(nameof(UdonHeap.GetHeapVariableInternal)).MakeGenericMethod(typeof(System.Object)), null, GetPatch(nameof(PlayerStartPatch)));
+            //new AstroPatch(typeof(UdonHeap).GetMethod(nameof(UdonHeap)), null, GetPatch(nameof(PlayerStartPatch)));
         }
 
 
