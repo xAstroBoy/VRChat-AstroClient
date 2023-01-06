@@ -41,7 +41,7 @@ namespace AstroClient.Startup.Hooks
             return new HarmonyMethod(typeof(VRCPickupHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        private static bool EnableListener = false;
+        private static bool EnableListener { get; set; } = false;
         private void OnRoomJoined()
         {
             EnableListener = true;

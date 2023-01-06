@@ -15,9 +15,17 @@ using UnityEngine.XR;
 namespace AstroClient.ClientUI.Hud.Notifier
 {
 
-    internal class HudNotifier 
+    internal class HudNotifier : AstroEvents
     {
+        internal override void RegisterToEvents()
+        {
+            ClientEventActions.OnRoomLeft += RoomLeft;
+        }
 
+        private void RoomLeft()
+        {
+            Clear();
+        }
 
 
         // Rename this to avoid conflicts.
@@ -46,37 +54,45 @@ namespace AstroClient.ClientUI.Hud.Notifier
 
         private static void InitiateHud()
         {
-            if(HudCanvas != null)
+            try
             {
-                // Initialize the HUD.
-                NotificationObj = HudCanvas.Find(HudObjectName);
-                if (NotificationObj == null)
+                if (HudCanvas != null)
                 {
-                    NotificationObj = new GameObject().transform;
-                    NotificationObj.name = HudObjectName;
-                    NotificationObj.transform.parent = HudCanvas.transform;
-                    NotificationObj.transform.localPosition = XRDevice.isPresent ? new Vector3(118.8272f, -358.8817f, 0f) : new Vector3(-257.5001f, -424.0091f, 0f);
-                    NotificationObj.transform.localRotation = new Quaternion(0, 0, 0, 0);
-                    NotificationObj.transform.rotation = new Quaternion(0, 0, 0, 0);
-                    NotificationObj.transform.localScale = new Vector3(10, 10, 10);
+                    // Initialize the HUD.
+                    NotificationObj = HudCanvas.Find(HudObjectName);
+                    if (NotificationObj == null)
+                    {
+                        NotificationObj = new GameObject().transform;
+                        NotificationObj.name = HudObjectName;
+                    }
+                    if(NotificationObj != null)
+                    {
+                        NotificationObj.transform.parent = HudCanvas.transform;
+                        NotificationObj.transform.localPosition = XRDevice.isPresent ? new Vector3(118.8272f, -358.8817f, 0f) : new Vector3(-257.5001f, -424.0091f, 0f);
+                        NotificationObj.transform.localRotation = new Quaternion(0, 0, 0, 0);
+                        NotificationObj.transform.rotation = new Quaternion(0, 0, 0, 0);
+                        NotificationObj.transform.localScale = new Vector3(10, 10, 10);
+                    }
+                    NotificationRect = NotificationObj.GetOrAddComponent<RectTransform>();
+                    if (NotificationRect != null)
+                    {
+                        NotificationRect.sizeDelta = new Vector2(120, 120);
+                    }
+                    NotifierText = NotificationObj.GetOrAddComponent<TextMeshPro>();
+                    if (NotifierText != null)
+                    {
+                        NotifierText.richText = true;
+                        NotifierText.fontSize = 27;
+                    }
+                    if (NotifierTextAnimator == null)
+                    {
+                        NotifierTextAnimator = NotificationObj.GetOrAddComponent<TextAnimator>();
+                    }
                 }
-
-                NotificationRect = NotificationObj.GetOrAddComponent<RectTransform>();
-                if (NotificationRect != null)
-                {
-                    NotificationRect.sizeDelta = new Vector2(120, 120);
-                }
-                NotifierText = NotificationObj.GetOrAddComponent<TextMeshPro>();
-                if (NotifierText != null)
-                {
-                    NotifierText.richText = true;
-                    NotifierText.fontSize = 27;
-                }
-                if (NotifierTextAnimator == null)
-                {
-
-                    NotifierTextAnimator = NotificationObj.GetOrAddComponent<TextAnimator>();
-                }
+            }
+            catch
+            {
+                InitiateHud();
             }
 
         }
@@ -98,8 +114,6 @@ namespace AstroClient.ClientUI.Hud.Notifier
             if(NotifierTextAnimator == null)
             {
                 InitiateHud();
-                WriteHudMessage(msg, duration);
-                return;
             }
             MelonCoroutines.Start(SpawnHudMessage(msg, duration));
          }

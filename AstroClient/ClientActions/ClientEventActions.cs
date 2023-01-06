@@ -39,13 +39,7 @@ namespace AstroClient.ClientActions
 
         internal static Action LateUpdate { get; set; }
 
-        ///// <summary>
-        ///// This gets called once VRChat UI is not null with a delay of 10s.
-        ///// </summary>
-
-        //internal static Action Delayed_VRChat_OnUiManagerInit { get; set; }
-
-
+        
         /// <summary>
         /// This gets called once VRChat UI is not null.
         /// </summary>
