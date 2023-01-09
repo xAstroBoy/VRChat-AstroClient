@@ -1,4 +1,5 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+﻿using System;
+using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
@@ -762,7 +763,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 var Root = Finder.Find("Just B Club 2");
-                var VIPPath = Root.transform.FindObject("VIP/Udon VIP/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
+                var VIPPath = Root.transform.FindObject("Bedroom/Udon Bedroom/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
 
                 var VerticalLayout = VIPPath.GetComponent<VerticalLayoutGroup>();
                 if(VerticalLayout != null)
@@ -777,33 +778,40 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                         var enabler = item.GetOrAddComponent<Enabler>();
                         if (enabler != null)
                         {
+                            enabler.Extra = new Action(() =>
+                            {
+                                if (VerticalLayout != null)
+                                {
+                                    VerticalLayout.enabled = true;
+                                }
+                            });
                             enabler.ForceStart();
                         }
                         item.gameObject.SetActive(true);
-                        var rect = item.GetComponent<RectTransform>();
-                        if (rect != null)
-                        {
-                            if (item.name.Equals("Button | _TryToggleVipOnly"))
-                            {
-                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -90);
-                            }
-                            if (item.name.Equals("Button | _Lock"))
-                            {
-                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -320);
-                            }
-                            if (item.name.Equals("Button | _Dnd"))
-                            {
-                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -550);
-                            }
-                            if (item.name.Equals("Button | _Anon"))
-                            {
-                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -780);
-                            }
-                            if (item.name.Equals("Button | _Looking"))
-                            {
-                                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -1010);
-                            }
-                        }
+                        //var rect = item.GetComponent<RectTransform>();
+                        //if (rect != null)
+                        //{
+                        //    if (item.name.Equals("Button | _TryToggleVipOnly"))
+                        //    {
+                        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -90);
+                        //    }
+                        //    if (item.name.Equals("Button | _Lock"))
+                        //    {
+                        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -320);
+                        //    }
+                        //    if (item.name.Equals("Button | _Dnd"))
+                        //    {
+                        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -550);
+                        //    }
+                        //    if (item.name.Equals("Button | _Anon"))
+                        //    {
+                        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -780);
+                        //    }
+                        //    if (item.name.Equals("Button | _Looking"))
+                        //    {
+                        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -1010);
+                        //    }
+                        //}
                     }
                 }
 

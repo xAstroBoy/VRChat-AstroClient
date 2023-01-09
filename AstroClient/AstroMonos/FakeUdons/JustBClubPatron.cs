@@ -61,7 +61,7 @@ namespace JustBPatreon
     {
         internal class JustBClub_1_2_RuntimeDecoder : UdonSharp.UdonSharpBehaviour
         {
-            internal static string CurrentDisplayName
+            public string CurrentDisplayName
             {
                 get
                 {

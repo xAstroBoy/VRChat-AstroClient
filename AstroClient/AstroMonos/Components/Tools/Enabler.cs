@@ -19,7 +19,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList.Add(this);
         }
 
-
+        internal Action Extra { get; set; }
         private bool HasStartedEvent = false;
         private bool _HasSubscribed = false;
         private bool HasSubscribed
@@ -69,6 +69,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 HasSubscribed = true;
             }
             gameObject.SetActive(true);
+            Extra.SafetyRaise();
             if (!HasStartedEvent)
             {
                 InvokeRepeating(nameof(CustomUpdate), 0.1f, 0.3f);
@@ -79,11 +80,16 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void OnDisable()
         {
             gameObject.SetActive(true);
+            Extra.SafetyRaise();
         }
 
         private void CustomUpdate()
         {
-            if (gameObject != null && !gameObject.active) gameObject.SetActive(true);
+            if (gameObject != null && !gameObject.active)
+            {
+                gameObject.SetActive(true);
+                Extra.SafetyRaise();
+            }
         }
 
         void OnDestroy()

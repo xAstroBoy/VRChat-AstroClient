@@ -1,14 +1,5 @@
 ﻿namespace AstroClient.Tools.UdonEditor
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using CustomClasses;
-    using VRC.Udon;
-
-
     internal class AstroUdonVariable<T>
     {
         private uint address { get; set; }
@@ -18,8 +9,6 @@
         /// This will verify if the Udon Heap will provide the heap variable.
         /// </summary>
         private bool isInitialized => rawUdonBehaviour.isHeapVariableValid<T>(address);
-        
-
 
         internal AstroUdonVariable(RawUdonBehaviour rawUdonBehaviour, string symbol)
         {
@@ -37,7 +26,7 @@
                     this.address = 0;
                 }
                 // Test if is able to give a valid result.
-                if(!isInitialized)
+                if (!isInitialized)
                 {
                     //Log.Debug($"{rawUdonBehaviour.udonBehaviour.name} symbol {symbol} is Unitialized!");
                     this.rawUdonBehaviour = null;
@@ -45,7 +34,6 @@
                 }
             }
         }
-
 
         internal T Value
         {
@@ -56,13 +44,11 @@
                     return rawUdonBehaviour.UdonHeap.GetHeapVariable<T>(address);
                 }
                 return rawUdonBehaviour.FakeUdonHeap.GetHeapVariable<T>(address);
-
             }
             set
             {
                 if (!rawUdonBehaviour.isFakeUdon)
                 {
-
                     rawUdonBehaviour.UdonHeap.SetHeapVariable<T>(address, value);
                 }
                 else

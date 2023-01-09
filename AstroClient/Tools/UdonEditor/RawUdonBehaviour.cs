@@ -34,9 +34,7 @@ namespace AstroClient.Tools.UdonEditor
 
         internal UdonBehaviour udonBehaviour => behaviour;
 
-
-
-        internal bool isFakeUdon { get; private set; } = false;
+        protected internal bool isFakeUdon { get; private set; } = false;
 
         internal int SymbolsAmount
         {
@@ -87,7 +85,7 @@ namespace AstroClient.Tools.UdonEditor
             this.FakeUdonHeap = UdonHeap;
             this.Parent = Parent;
             this.behaviour = behaviour;
-            isFakeUdon = true;
+            this.isFakeUdon = true;
         }
 
     }
