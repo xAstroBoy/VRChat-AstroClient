@@ -52,6 +52,8 @@ namespace AstroClient.Tools.UdonSearcher
             var unpackedudon = udonnode.ToRawUdonBehaviour();
             if (unpackedudon != null)
             {
+                if (unpackedudon.isFakeUdon) yield return null; // No need to replace fakeudons.
+
                 var symboltable = unpackedudon.UdonSymbolTable;
                 var table = symboltable.GetSymbols();
                 for (int i2 = 0; i2 < table.Length; i2++)

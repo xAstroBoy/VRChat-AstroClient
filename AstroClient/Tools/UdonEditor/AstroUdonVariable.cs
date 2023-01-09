@@ -49,8 +49,27 @@
 
         internal T Value
         {
-            get => rawUdonBehaviour.UdonHeap.GetHeapVariable<T>(address);
-            set => rawUdonBehaviour.UdonHeap.SetHeapVariable<T>(address, value);
+            get
+            {
+                if (!rawUdonBehaviour.isFakeUdon)
+                {
+                    return rawUdonBehaviour.UdonHeap.GetHeapVariable<T>(address);
+                }
+                return rawUdonBehaviour.FakeUdonHeap.GetHeapVariable<T>(address);
+
+            }
+            set
+            {
+                if (!rawUdonBehaviour.isFakeUdon)
+                {
+
+                    rawUdonBehaviour.UdonHeap.SetHeapVariable<T>(address, value);
+                }
+                else
+                {
+                    rawUdonBehaviour.FakeUdonHeap.SetHeapVariable<T>(address, value);
+                }
+            }
         }
     }
 }

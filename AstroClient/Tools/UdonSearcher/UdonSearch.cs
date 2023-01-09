@@ -418,6 +418,7 @@ namespace AstroClient.Tools.UdonSearcher
                         {
                             continue;
                         }
+                        if (unpackedudon.isFakeUdon) continue; // No need to check fakeudons.
 
                         var table = unpackedudon.UdonSymbolTable.GetSymbols();
                         for (var symbolint = 0; symbolint < table.Length; symbolint++)

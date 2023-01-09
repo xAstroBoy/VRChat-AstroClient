@@ -77,22 +77,38 @@ namespace AstroClient.Tools.UdonEditor
             {
                 StringBuilder builder = new StringBuilder();
 
-                var unpackedudon = udonnode.ToRawUdonBehaviour();
-                if (unpackedudon != null)
+                var raw = udonnode.ToRawUdonBehaviour();
+                if (raw != null)
                 {
                     Console.Clear();
                     builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
                     builder.AppendLine();
-                    foreach (var symbol in unpackedudon.UdonSymbolTable.GetSymbols())
+                    foreach (var symbol in raw.UdonSymbolTable.GetSymbols())
                     {
                         if (symbol != null)
                         {
-                            var address = unpackedudon.UdonSymbolTable.GetAddressFromSymbol(symbol);
-                            var UnboxVariable = unpackedudon.UdonHeap.GetHeapVariable(address);
+                            var address = raw.UdonSymbolTable.GetAddressFromSymbol(symbol);
+                            Il2CppSystem.Object UnboxVariable = null;
+                            if(!raw.isFakeUdon)
+                            {
+                                UnboxVariable = raw.UdonHeap.GetHeapVariable(address);
+                            }
+                            else
+                            {
+                                UnboxVariable = raw.FakeUdonHeap.GetHeapVariable(address);
+                            }
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.UdonHeap, address, UnboxVariable);
+                                string unpackedsymbol;
+                                if(!raw.isFakeUdon)
+                                {
+                                     unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(raw.FakeUdonHeap, address, UnboxVariable);
+                                }
+                                else
+                                {
+                                     unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(raw.UdonHeap, address, UnboxVariable);
+                                }
                                 builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }
