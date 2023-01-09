@@ -104,10 +104,7 @@
     </Compile>
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroStation.cs" />
     <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\BClub2PatronReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader2.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\Ostinyo_World_PatronCracker.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\PatronCrackers\ImageRenderCameraReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronEventsLists.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DrinkingNight\DrinkingNight_NormalPlusReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\DreamWaves\DreamWaves_WhiteListManagerReader.cs" />
@@ -141,6 +138,8 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\RespawnerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\PickupChair.cs" />
+    <Compile Include="AstroMonos\FakeUdons\JustBClubPatron.cs" />
+    <Compile Include="ClientAttributes\RegisterFakeUdon.cs" />
     <Compile Include="ClientUI\ActionMenu\ActionMenuUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Hud\Notifier\NewHudNotifier.cs" />
@@ -302,7 +301,6 @@
     <Compile Include="Startup\Fixes\KillAnalyticsOnMenus.cs" />
     <Compile Include="Startup\Fixes\RemoveAds.cs" />
     <Compile Include="Startup\Fixes\KillCringeNewButtonOnBigUI.cs" />
-    <Compile Include="Startup\Hooks\HeapVariablePatcher.cs" />
     <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
@@ -586,6 +584,16 @@
     <Compile Include="Tools\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Tools\UdonEditor\AstroUdonVariable.cs" />
     <Compile Include="Tools\UdonEditor\UdonVariableGenerator.cs" />
+    <Compile Include="UdonUtils\FakeUdon\FakeUdon.cs" />
+    <Compile Include="UdonUtils\FakeUdon\FakeUdonHeap.cs" />
+    <Compile Include="UdonUtils\FakeUdon\FakeUdonProgram.cs" />
+    <Compile Include="UdonUtils\FakeUdon\FakeUdonRegistry.cs" />
+    <Compile Include="UdonUtils\FakeUdon\FakeUdonVM.cs" />
+    <Compile Include="UdonUtils\UdonExtensions.cs" />
+    <Compile Include="UdonUtils\UdonSharp\UdonSharpAttributes.cs" />
+    <Compile Include="UdonUtils\UdonSharp\UdonSharpBehaviour.cs" />
+    <Compile Include="UdonUtils\UdonSharp\UdonSharpRuntimeUtils.cs" />
+    <Compile Include="UdonUtils\UdonUtils.cs" />
     <Compile Include="WorldModifications\WorldHacks\BeyondDarkness.cs" />
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub1.cs" />
     <Compile Include="WorldModifications\WorldHacks\BlueKun\JustBClub2Lobby.cs" />
@@ -797,6 +805,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />
+    <None Include="UdonUtils\README.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ClientResources\IconsArchive\shuttle.png">

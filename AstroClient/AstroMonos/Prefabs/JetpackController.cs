@@ -17,6 +17,7 @@ using VRCStation = VRC.SDKBase.VRCStation;
 
 namespace AstroClient.AstroMonos.Prefabs
 {
+    // TODO : make a option to control the jetpack force speed.
     [RegisterComponent]
     public class JetpackController : MonoBehaviour
     {
@@ -171,6 +172,7 @@ namespace AstroClient.AstroMonos.Prefabs
                     Thruster_JoypadPickup.PickupController.ExactGrip = Thruster_Joypad_Grip;
                     Thruster_JoypadPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Grip;
                 }
+                //ThrusterForceDefault = ThrusterForce.relativeForce;
             }
             
             if(Chair != null)
@@ -251,6 +253,13 @@ namespace AstroClient.AstroMonos.Prefabs
             LowerJet_ON.gameObject.SetActive(true);
 
         }
+        private void Thruster_Joypad_OnPickupUseUp()
+        {
+            ThrusterForce.enabled = false;
+            LowerJet_OFF.gameObject.SetActive(true);
+            LowerJet_ON.gameObject.SetActive(false);
+
+        }
 
 
 
@@ -312,13 +321,6 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
-        private void Thruster_Joypad_OnPickupUseUp()
-        {
-            ThrusterForce.enabled = false;
-            LowerJet_OFF.gameObject.SetActive(true);
-            LowerJet_ON.gameObject.SetActive(false);
-
-        }
 
         private ScaleConstraint _JetpackScaleConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private ScaleConstraint JetpackScaleConstraint
@@ -729,6 +731,9 @@ namespace AstroClient.AstroMonos.Prefabs
         internal VRC_AstroPickup Thruster_JoypadPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal VRC_AstroStation CurrentChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float ThrusterForceDefault { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float JetpackForceDefault { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
 
     }
 }

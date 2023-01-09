@@ -419,14 +419,14 @@ namespace AstroClient.Tools.UdonSearcher
                             continue;
                         }
 
-                        var table = unpackedudon.IUdonSymbolTable.GetSymbols();
+                        var table = unpackedudon.UdonSymbolTable.GetSymbols();
                         for (var symbolint = 0; symbolint < table.Length; symbolint++)
                         {
                             string symbol = table[symbolint];
                             if (symbol != null)
                             {
-                                var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                                var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                                var address = unpackedudon.UdonSymbolTable.GetAddressFromSymbol(symbol);
+                                var UnboxVariable = unpackedudon.UdonHeap.GetHeapVariable(address);
                                 if (UnboxVariable != null)
                                 {
                                     var Il2CppType = UnboxVariable.GetIl2CppType();
@@ -437,7 +437,7 @@ namespace AstroClient.Tools.UdonSearcher
                                         {
                                             case "System.String":
                                                 {
-                                                    var item = unpackedudon.IUdonHeap.GetHeapVariable<string>(address);
+                                                    var item = unpackedudon.UdonHeap.GetHeapVariable<string>(address);
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
                                                         if (item.IsAvatarID())
@@ -468,7 +468,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                 }
                                             case "System.String[]":
                                                 {
-                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<string[]>(address);
+                                                    var list = unpackedudon.UdonHeap.GetHeapVariable<string[]>(address);
                                                     if (list.Count() != 0)
                                                         for (int i = 0; i < list.Length; i++)
                                                         {
@@ -501,7 +501,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                 }
                                             case "VRC.SDK3.Components.VRCAvatarPedestal":
                                                 {
-                                                    var pedestral = unpackedudon.IUdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal>(address);
+                                                    var pedestral = unpackedudon.UdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal>(address);
                                                     if (pedestral != null)
                                                     {
                                                         if (!pedestral.grantBlueprintAccess)
@@ -520,7 +520,7 @@ namespace AstroClient.Tools.UdonSearcher
                                                 }
                                             case "VRC.SDK3.Components.VRCAvatarPedestal[]":
                                                 {
-                                                    var list = unpackedudon.IUdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal[]>(address);
+                                                    var list = unpackedudon.UdonHeap.GetHeapVariable<VRC.SDK3.Components.VRCAvatarPedestal[]>(address);
                                                     if (list != null && list.Count() != 0)
                                                     {
                                                         for (int i = 0; i < list.Length; i++)

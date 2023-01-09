@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FakeUdon;
+using VRC.Udon.Common;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -13,46 +15,72 @@ namespace AstroClient.Tools.UdonEditor
         {
             if (udon != null)
             {
-                IUdonProgram program = null;
-                IUdonSymbolTable symbol_table = null;
-                IUdonHeap heap = null;
                 if (udon._program != null)
                 {
-                    program = udon._program;
-                }
-                if (program != null)
-                {
-                    symbol_table = program.SymbolTable;
-                    if (symbol_table != null)
-                    {            // This part extracts the symbols to facilitate everything.
-
-                        if (program.Heap != null)
+                    var RealProgram = udon._program.TryCast<UdonProgram>();
+                    if (RealProgram != null)
+                    {
+                        var symbol_table = RealProgram.SymbolTable.TryCast<UdonSymbolTable>();
+                        if (symbol_table != null)
                         {
-                            heap = program.Heap;
+                            if (RealProgram.Heap != null)
+                            {
+                                var heap = RealProgram.Heap.TryCast<UdonHeap>();
+                                if (RealProgram != null && symbol_table != null && heap != null)
+                                {
+                                    return new RawUdonBehaviour(udon, RealProgram, symbol_table, heap, udon.transform);
+                                }
+                            }
+                            else
+                            {
+                                Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, UdonHeap is Null!");
+                                return null;
+                            }
+
                         }
                         else
                         {
-                            Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, IUdonHeap is Null!");
+                            Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, UdonSymbolTable is Null!");
                             return null;
-                        }
-                        
-
-                        if (program != null && symbol_table != null && heap != null)
-                        {
-                            return new RawUdonBehaviour(udon, program, symbol_table, heap, udon.transform);
                         }
                     }
                     else
                     {
-                        Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, IUdonSymbolTable is Null!");
+                        var FakeUdonProgram = udon._program.TryCast<FakeUdonProgram>();
+                        if (FakeUdonProgram != null)
+                        {
+                            var symbol_table = FakeUdonProgram.SymbolTable.TryCast<UdonSymbolTable>();
+                            if (symbol_table != null)
+                            {
+                                if (FakeUdonProgram.Heap != null)
+                                {
+                                    var FakeHeap = FakeUdonProgram.Heap.TryCast<FakeUdonHeap>();
+                                    if (FakeUdonProgram != null && symbol_table != null && FakeHeap != null)
+                                    {
+                                        return new RawUdonBehaviour(udon, FakeUdonProgram, symbol_table, FakeHeap, udon.transform);
+                                    }
+                                }
+                                else
+                                {
+                                    Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, UdonHeap is Null!");
+                                    return null;
+                                }
+
+                            }
+                            else
+                            {
+                                Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, UdonSymbolTable is Null!");
+                                return null;
+                            }
+
+                        }
+                        else
+                        {
+                            Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, UdonProgram is Null!");
+                        }
+
                         return null;
                     }
-                }
-                else
-                {
-                    Log.Warn($"Can't Unpack Udon Behaviour {udon.name}, IUdonProgram is Null!");
-
-                    return null;
                 }
             }
             return null;

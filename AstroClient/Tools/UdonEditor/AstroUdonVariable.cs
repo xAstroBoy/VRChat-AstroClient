@@ -28,7 +28,7 @@
                 this.rawUdonBehaviour = rawUdonBehaviour;
                 try
                 {
-                    address = rawUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol);
+                    address = rawUdonBehaviour.UdonSymbolTable.GetAddressFromSymbol(symbol);
                 }
                 catch
                 {
@@ -49,8 +49,8 @@
 
         internal T Value
         {
-            get => rawUdonBehaviour.IUdonHeap.GetHeapVariable<T>(address);
-            set => rawUdonBehaviour.IUdonHeap.SetHeapVariable<T>(address, value);
+            get => rawUdonBehaviour.UdonHeap.GetHeapVariable<T>(address);
+            set => rawUdonBehaviour.UdonHeap.SetHeapVariable<T>(address, value);
         }
     }
 }

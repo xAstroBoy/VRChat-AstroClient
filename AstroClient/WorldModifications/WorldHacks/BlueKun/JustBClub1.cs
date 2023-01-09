@@ -51,7 +51,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUnityLog += OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
+                        //ClientEventActions.Udon_SendCustomEvent += UdonBehaviour_Event_SendCustomEvent;
 
                     }
                     else
@@ -59,7 +59,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUnityLog -= OnUnityLog;
-                        ClientEventActions.Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
+                        //ClientEventActions.Udon_SendCustomEvent -= UdonBehaviour_Event_SendCustomEvent;
 
                     }
                 }
@@ -554,31 +554,31 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-        private static ImageRenderCameraReader _RenderCameraReader;
+        //private static ImageRenderCameraReader _RenderCameraReader;
 
-        internal static ImageRenderCameraReader RenderCameraReader
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Decoder_Debug == null) return null;
-                else
-                {
-                    Decoder_Debug.SetActive(true);
-                }
-                if (RenderCamera == null) return null;
-                else
-                {
-                    RenderCamera.SetActive(true);
-                }
+        //internal static ImageRenderCameraReader RenderCameraReader
+        //{
+        //    get
+        //    {
+        //        if (!isCurrentWorld) return null;
+        //        if (Decoder_Debug == null) return null;
+        //        else
+        //        {
+        //            Decoder_Debug.SetActive(true);
+        //        }
+        //        if (RenderCamera == null) return null;
+        //        else
+        //        {
+        //            RenderCamera.SetActive(true);
+        //        }
 
-                if (_RenderCameraReader == null)
-                {
-                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader>(RenderCamera);
-                }
-                return _RenderCameraReader;
-            }
-        }
+        //        if (_RenderCameraReader == null)
+        //        {
+        //            return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader>(RenderCamera);
+        //        }
+        //        return _RenderCameraReader;
+        //    }
+        //}
 
         internal static bool _BlockVIPRoom_Kick = false;
 
@@ -715,7 +715,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     _FallSpamBehaviour = null;
                     _ProcessPatronsFromReadRenderTexture = null;
                     _ReadPictureStep = null;
-                    _RenderCameraReader = null;
+                    //_RenderCameraReader = null;
                     MoanSpam_CancellationToken = null;
                     FallSpam_CancellationToken = null;
                     DoorLockFreeze_CancellationToken = null;
@@ -1082,7 +1082,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             if (id.Equals(WorldIds.JustBClub))
             {
                 isCurrentWorld = true;
-                _ = MelonCoroutines.Start(ForceEnableRenderCamera());
+                //_ = MelonCoroutines.Start(ForceEnableRenderCamera());
                 HasSubscribed = true;
 
                 
@@ -1294,7 +1294,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     }
                     if (message.Contains("is not a patron"))
                     {
-                        ForceEliteTier();
+                        //ForceEliteTier();
                         if (isLocalPlayerPatron)
                         {
                             isLocalPlayerPatron = false;
@@ -1311,7 +1311,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     }
                     if (message.Contains("is not an elite"))
                     {
-                        ForceEliteTier();
+                       // ForceEliteTier();
                         if (isLocalPlayerElite)
                         {
                             isLocalPlayerElite = false;
@@ -1583,74 +1583,74 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             yield return null;
         }
 
-        private static void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
-        {
-            if (!isCurrentWorld) return;
-            if (item == null) return;
-            if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
-            //if (item.name.isMatch("RenderCamera") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
-            //{
-            //    ForceEliteTier();
-            //}
+        //private static void UdonBehaviour_Event_SendCustomEvent(UdonBehaviour item, string EventName)
+        //{
+        //    if (!isCurrentWorld) return;
+        //    if (item == null) return;
+        //    if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
+        //    //if (item.name.isMatch("RenderCamera") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
+        //    //{
+        //    //    ForceEliteTier();
+        //    //}
 
-            if (item.name.isMatch("Patreon") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
-            {
-                ForceEliteTier();
-            }
-        }
+        //    if (item.name.isMatch("Patreon") && EventName.isMatch("_ProcessPatronsFromReadRenderTexture"))
+        //    {
+        //        ForceEliteTier();
+        //    }
+        //}
 
-        internal static void ForceEliteTier()
-        {
-            try
-            {
-                if (RenderCameraReader == null)
-                {
-                    Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
-                    return;
-                }
-                if (ProcessPatronsFromReadRenderTexture == null)
-                {
-                    Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
-                    return;
-                }
+        //internal static void ForceEliteTier()
+        //{
+        //    try
+        //    {
+        //        if (RenderCameraReader == null)
+        //        {
+        //            Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
+        //            return;
+        //        }
+        //        if (ProcessPatronsFromReadRenderTexture == null)
+        //        {
+        //            Log.Warn($"Unable to Force Elite Tier due to ProcessPatronsFromReadRenderTexture Event being Null!");
+        //            return;
+        //        }
 
-                // First let's edit the results of the rendercamera.
+        //        // First let's edit the results of the rendercamera.
 
-                // Split the results.
-                bool HasBeenModified = false;
-                var result = RenderCameraReader.currentOutputString.ReadLines().ToList();
-                if (result != null && result.Count != 0)
-                {
-                    if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
-                    {
-                        Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                        result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
-                        HasBeenModified = true;
-                    }
-                    if (GameInstances.LocalPlayer != null)
-                    {
-                        if (!result.Contains(GameInstances.LocalPlayer.displayName))
-                        {
-                            Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
-                            result.Insert(1, GameInstances.LocalPlayer.displayName);
-                            HasBeenModified = true;
-                        }
-                    }
-                }
+        //        // Split the results.
+        //        bool HasBeenModified = false;
+        //        var result = RenderCameraReader.currentOutputString.ReadLines().ToList();
+        //        if (result != null && result.Count != 0)
+        //        {
+        //            if (!result.Contains(PlayerSpooferUtils.Original_DisplayName))
+        //            {
+        //                Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
+        //                result.Insert(0, PlayerSpooferUtils.Original_DisplayName);
+        //                HasBeenModified = true;
+        //            }
+        //            if (GameInstances.LocalPlayer != null)
+        //            {
+        //                if (!result.Contains(GameInstances.LocalPlayer.displayName))
+        //                {
+        //                    Log.Debug($"Adding {PlayerSpooferUtils.Original_DisplayName} in Patron & Elite List..");
+        //                    result.Insert(1, GameInstances.LocalPlayer.displayName);
+        //                    HasBeenModified = true;
+        //                }
+        //            }
+        //        }
 
-                if (HasBeenModified)
-                {
-                    // if that's so, let's force a new reading.
+        //        if (HasBeenModified)
+        //        {
+        //            // if that's so, let's force a new reading.
 
-                    // First replace the output with the modified one
-                    RenderCameraReader.currentOutputString = string.Join("\n", result);
+        //            // First replace the output with the modified one
+        //            RenderCameraReader.currentOutputString = string.Join("\n", result);
 
-                    //Secondly invoke again the Reading event.
-                    ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
-                }
-            }
-            catch { } // SHUT UP
-        }
+        //            //Secondly invoke again the Reading event.
+        //            ProcessPatronsFromReadRenderTexture.InvokeBehaviour();
+        //        }
+        //    }
+        //    catch { } // SHUT UP
+        //}
 
         private static IEnumerator RemovePrivacies()
         {
@@ -1695,12 +1695,12 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             yield break;
         }
 
-        private static IEnumerator ForceEnableRenderCamera()
-        {
-            while (RenderCameraReader == null) yield return null;
-            Log.Debug("RenderCamera Reader Installed!");
-            yield break;
-        }
+        //private static IEnumerator ForceEnableRenderCamera()
+        //{
+        //    while (RenderCameraReader == null) yield return null;
+        //    Log.Debug("RenderCamera Reader Installed!");
+        //    yield break;
+        //}
 
         private static IEnumerator EnableTabletFlairBtn()
         {

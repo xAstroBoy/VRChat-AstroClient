@@ -34,6 +34,8 @@ using VRC.SDKBase;
 using static AstroClient.HookedBehemoth.WorldCleanup.Polyfill;
 
 using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+using Color = System.Drawing.Color;
+
 //using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
 
 namespace AstroClient.HookedBehemoth.WorldCleanup
@@ -168,7 +170,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                                             {
                                                 var param = FindParameter(control.parameter.name);
                                                 if (param == null) {
-                                                    MelonLogger.Msg($"Parameter {control.parameter.name} not found");
+                                                    Log.Debug($"Parameter {control.parameter.name} not found");
                                                     continue;
                                                 };
                                                 var current_value = param.GetValue();
@@ -242,7 +244,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                 }
             });
 
-            MelonLogger.Msg(ConsoleColor.Green, "WorldCleanup ready!");
+            Log.Debug("WorldCleanup ready!", Color.Green);
         }
 
         private  void OnApplicationQuit()
@@ -315,13 +317,13 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             if (player_name == null) return;
             s_PlayerList[player_name] = avatar;
 
-            MelonLogger.Msg($"Avatar Instantiated for: {player_name}");
+           // Log.Debug($"Avatar Instantiated for: {player_name}");
 
             Parameters.ApplyParameters(manager);
 
             var avatar_id = avatar.GetComponent<VRC.Core.PipelineManager>().blueprintId;
 
-            MelonLogger.Msg($"Avatar ID: {avatar_id}");
+            //Log.Debug($"Avatar ID: {avatar_id}");
 
             var destroy_listener = avatar.AddComponent<GameObjectListener>();
             var parameters = manager.GetAvatarParameters().ToArray();

@@ -83,16 +83,16 @@ namespace AstroClient.Tools.UdonEditor
                     Console.Clear();
                     builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
                     builder.AppendLine();
-                    foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                    foreach (var symbol in unpackedudon.UdonSymbolTable.GetSymbols())
                     {
                         if (symbol != null)
                         {
-                            var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                            var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                            var address = unpackedudon.UdonSymbolTable.GetAddressFromSymbol(symbol);
+                            var UnboxVariable = unpackedudon.UdonHeap.GetHeapVariable(address);
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.IUdonHeap, address, UnboxVariable);
+                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.UdonHeap, address, UnboxVariable);
                                 builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }
@@ -144,16 +144,16 @@ namespace AstroClient.Tools.UdonEditor
                 {
                     StringBuilder builder = new StringBuilder();
                     _ = builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
-                    foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                    foreach (var symbol in unpackedudon.UdonSymbolTable.GetSymbols())
                     {
                         if (symbol != null)
                         {
-                            var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                            var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                            var address = unpackedudon.UdonSymbolTable.GetAddressFromSymbol(symbol);
+                            var UnboxVariable = unpackedudon.UdonHeap.GetHeapVariable(address);
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.IUdonHeap, address, UnboxVariable);
+                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.UdonHeap, address, UnboxVariable);
                                 _ = builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }

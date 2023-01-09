@@ -18,6 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.Core;
 using VRC.Udon;
 
@@ -157,14 +158,14 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("SetAdapterFloat");
 
 
-                UnityDestroyBlock.AddBlock("Udon 3rd Party");
-                UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system
-                UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
+             //   UnityDestroyBlock.AddBlock("Udon 3rd Party");
+              //  UnityDestroyBlock.MonitorDestroyingEvent = true; // This is to prevent Blue-kun from destroying the RenderCamera system
+               // UnityDestroyBlock.OnDestroyBlocked += OnBlockedDestroy;
                 //BlockPatronProcessor = true;
-                _ = MelonCoroutines.Start(ForcePatronReader());
-                _ = MelonCoroutines.Start(ForceEnableRenderCamera());
+                //_ = MelonCoroutines.Start(ForcePatronReader());
+                //_ = MelonCoroutines.Start(ForceEnableRenderCamera());
                 HasSubscribed = true;
-                InterceptUdonCustomEvent = true;
+               // InterceptUdonCustomEvent = true;
                 isCurrentWorld = true;
             }
         }
@@ -192,27 +193,27 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 _HasSubscribed = value;
             }
         }
-        private static bool _InterceptUdonCustomEvent = false;
+        //private static bool _InterceptUdonCustomEvent = false;
 
-        private static bool InterceptUdonCustomEvent
-        {
-            get => _InterceptUdonCustomEvent;
-            set
-            {
-                if (_InterceptUdonCustomEvent != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.Udon_SendCustomEvent += Udon_SendCustomEvent;
-                    }
-                    else
-                    {
-                        ClientEventActions.Udon_SendCustomEvent -= Udon_SendCustomEvent;
-                    }
-                }
-                _InterceptUdonCustomEvent = value;
-            }
-        }
+        //private static bool InterceptUdonCustomEvent
+        //{
+        //    get => _InterceptUdonCustomEvent;
+        //    set
+        //    {
+        //        if (_InterceptUdonCustomEvent != value)
+        //        {
+        //            if (value)
+        //            {
+        //                ClientEventActions.Udon_SendCustomEvent += Udon_SendCustomEvent;
+        //            }
+        //            else
+        //            {
+        //                ClientEventActions.Udon_SendCustomEvent -= Udon_SendCustomEvent;
+        //            }
+        //        }
+        //        _InterceptUdonCustomEvent = value;
+        //    }
+        //}
         #region World Paths
 
         private static GameObject _Special;
@@ -279,43 +280,43 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
         #endregion World Paths
 
-        private static ImageRenderCameraReader2 _RenderCameraReader;
+        //private static ImageRenderCameraReader2 _RenderCameraReader;
 
-        internal static ImageRenderCameraReader2 RenderCameraReader
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (ImageReader == null) return null;
-                else
-                {
-                    ImageReader.SetActive(true);
-                }
+        //internal static ImageRenderCameraReader2 RenderCameraReader
+        //{
+        //    get
+        //    {
+        //        if (!isCurrentWorld) return null;
+        //        if (ImageReader == null) return null;
+        //        else
+        //        {
+        //            ImageReader.SetActive(true);
+        //        }
 
-                if (_RenderCameraReader == null)
-                {
-                    return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader2>(ImageReader);
-                }
-                return _RenderCameraReader;
-            }
-        }
+        //        if (_RenderCameraReader == null)
+        //        {
+        //            return _RenderCameraReader = ComponentUtils.GetOrAddComponent<ImageRenderCameraReader2>(ImageReader);
+        //        }
+        //        return _RenderCameraReader;
+        //    }
+        //}
 
-        private static BClub2PatronReader _PatronSystemReader;
+        //private static BClub2PatronReader _PatronSystemReader;
 
-        internal static BClub2PatronReader PatronSystemReader
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (ProcessPatrons == null) return null;
+        //internal static BClub2PatronReader PatronSystemReader
+        //{
+        //    get
+        //    {
+        //        if (!isCurrentWorld) return null;
+        //        if (ProcessPatrons == null) return null;
 
-                if (_PatronSystemReader == null)
-                {
-                    return _PatronSystemReader = ComponentUtils.GetOrAddComponent<BClub2PatronReader>(ProcessPatrons.gameObject);
-                }
-                return _PatronSystemReader;
-            }
-        }
+        //        if (_PatronSystemReader == null)
+        //        {
+        //            return _PatronSystemReader = ComponentUtils.GetOrAddComponent<BClub2PatronReader>(ProcessPatrons.gameObject);
+        //        }
+        //        return _PatronSystemReader;
+        //    }
+       // }
 
         #region Udon Behaviours Cached and other random stuff
 
@@ -349,35 +350,35 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-        private static UdonBehaviour_Cached _ProcessPatrons;
+        //private static UdonBehaviour_Cached _ProcessPatrons;
 
-        internal static UdonBehaviour_Cached ProcessPatrons
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_ProcessPatrons == null)
-                {
-                    return _ProcessPatrons = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatrons");
-                }
-                return _ProcessPatrons;
-            }
-        }
+        //internal static UdonBehaviour_Cached ProcessPatrons
+        //{
+        //    get
+        //    {
+        //        if (!isCurrentWorld) return null;
+        //        if (_ProcessPatrons == null)
+        //        {
+        //            return _ProcessPatrons = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatrons");
+        //        }
+        //        return _ProcessPatrons;
+        //    }
+        //}
 
-        private static UdonBehaviour_Cached _ProcessPatronsTest;
+        //private static UdonBehaviour_Cached _ProcessPatronsTest;
 
-        internal static UdonBehaviour_Cached ProcessPatronsTest
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_ProcessPatronsTest == null)
-                {
-                    return _ProcessPatronsTest = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsTest");
-                }
-                return _ProcessPatronsTest;
-            }
-        }
+        //internal static UdonBehaviour_Cached ProcessPatronsTest
+        //{
+        //    get
+        //    {
+        //        if (!isCurrentWorld) return null;
+        //        if (_ProcessPatronsTest == null)
+        //        {
+        //            return _ProcessPatronsTest = UdonSearch.FindUdonEvent("Patreon", "_ProcessPatronsTest");
+        //        }
+        //        return _ProcessPatronsTest;
+        //    }
+        //}
 
         //private static UdonBehaviour_Cached _EjectNonVips;
 
@@ -524,14 +525,14 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     IsMoanSpamEnabled = false;
                     IsFallSpamEnabled = false;
                     _isLocalPlayerSupporter = false;
-                    InterceptUdonCustomEvent = false;
+                    //InterceptUdonCustomEvent = false;
                     // Bells.Clear();
                     // Chairs.Clear();
                     ColorActions.Clear();
                     _MoanSpamBehaviour = null;
                     _FallSpamBehaviour = null;
-                    _ProcessPatrons = null;
-                    _RenderCameraReader = null;
+                    //_ProcessPatrons = null;
+                    //_RenderCameraReader = null;
                     MoanSpam_CancellationToken = null;
                     FallSpam_CancellationToken = null;
                     RainbowSpam_CancellationToken = null;
@@ -659,38 +660,38 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
         #endregion FallSpam
 
-        private static bool _BlockPatronProcessor = false;
+        //private static bool _BlockPatronProcessor = false;
 
-        internal static bool BlockPatronProcessor
-        {
-            get => _BlockPatronProcessor;
-            set
-            {
-                if (_BlockPatronProcessor != value)
-                {
-                    if (value)
-                    {
-                        //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatrons", false, false, true);
-                        //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatronsTest", false, false, true);
-                        //GameObject_RPC_Firewall.EditRule("Patreon", "__0__ProcessPatrons", false, false, true);
-                        GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF16", false, false, true);
-                        GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF8", false, false, true);
+        //internal static bool BlockPatronProcessor
+        //{
+        //    get => _BlockPatronProcessor;
+        //    set
+        //    {
+        //        if (_BlockPatronProcessor != value)
+        //        {
+        //            if (value)
+        //            {
+        //                //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatrons", false, false, true);
+        //                //GameObject_RPC_Firewall.EditRule("Patreon", "_ProcessPatronsTest", false, false, true);
+        //                //GameObject_RPC_Firewall.EditRule("Patreon", "__0__ProcessPatrons", false, false, true);
+        //                GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF16", false, false, true);
+        //                GameObject_RPC_Firewall.EditRule("New avatar image reader (TMP)", "_DecodeStepUTF8", false, false, true);
 
                         
-                    }
-                    else
-                    {
-                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatrons");
-                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatronsTest");
-                        //GameObject_RPC_Firewall.RemoveRule("Patreon", "__0__ProcessPatrons");
-                        GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF16");
-                        GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF8");
+        //            }
+        //            else
+        //            {
+        //                //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatrons");
+        //                //GameObject_RPC_Firewall.RemoveRule("Patreon", "_ProcessPatronsTest");
+        //                //GameObject_RPC_Firewall.RemoveRule("Patreon", "__0__ProcessPatrons");
+        //                GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF16");
+        //                GameObject_RPC_Firewall.RemoveRule("New avatar image reader (TMP)", "_DecodeStepUTF8");
 
-                    }
-                }
-                _BlockPatronProcessor = value;
-            }
-        }
+        //            }
+        //        }
+        //        _BlockPatronProcessor = value;
+        //    }
+        //}
         private static UdonBehaviour_Cached _DecodeStep;
 
         internal static UdonBehaviour_Cached DecodeStep
@@ -706,20 +707,20 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             }
         }
 
-        internal static void ForceEliteTier()
-        {
-            try
-            {
-                if (RenderCameraReader == null)
-                {
-                    Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
-                    return;
-                }
+        //internal static void ForceEliteTier()
+        //{
+        //    try
+        //    {
+        //        if (RenderCameraReader == null)
+        //        {
+        //            Log.Warn($"Unable to Force Elite Tier due to RenderCamera Reader being Null!");
+        //            return;
+        //        }
 
                 
-            }
-            catch { } // SHUT UP
-        }
+        //    }
+        //    catch { } // SHUT UP
+        //}
 
         internal static void InitButtons(QMGridTab main)
         {
@@ -740,13 +741,13 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
             // VIP
         }
 
-        internal static void OnBlockedDestroy(string path)
-        {
-            if (path == "Udon 3rd Party/New avatar image reader (TMP)")
-            {
-                UnityDestroyBlock.MonitorDestroyingEvent = false;
-            }
-        }
+        //internal static void OnBlockedDestroy(string path)
+        //{
+        //    if (path == "Udon 3rd Party/New avatar image reader (TMP)")
+        //    {
+        //        UnityDestroyBlock.MonitorDestroyingEvent = false;
+        //    }
+        //}
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -760,7 +761,15 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 Log.Write($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
-                var VIPPath = Finder.Find("Just B Club 2/Bedroom/Udon Bedroom/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
+                var Root = Finder.Find("Just B Club 2");
+                var VIPPath = Root.transform.FindObject("VIP/Udon VIP/Canvas TP/Room Canvas/UICanvas/UIHover/Main Canvas/Intercom/Left/Padding/Buttons");
+
+                var VerticalLayout = VIPPath.GetComponent<VerticalLayoutGroup>();
+                if(VerticalLayout != null)
+                {
+                    VerticalLayout.enabled = true;
+                }
+
                 foreach (var item in VIPPath.Get_Childs())
                 {
                     if (item != null)
@@ -863,7 +872,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                 }
                 if (message.Contains("[Patreon] IsSupporter = false. Toggle vipObjects"))
                 {
-                    ForceEliteTier();
+                   // ForceEliteTier();
                     if (isLocalPlayerSupporter)
                     {
                         isLocalPlayerSupporter = false;
@@ -980,34 +989,34 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         //    yield return null;
         //}
 
-        private static void Udon_SendCustomEvent(UdonBehaviour item, string EventName)
-        {
-            if (!isCurrentWorld) return;
-            if (item == null) return;
-            if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
-            if (item.name.Equals("New avatar image reader (TMP)"))
-            {
-                RenderCameraReader.HijackUdon();
-            }
-            if(item.name.Equals("Patreon"))
-            {
-                PatronSystemReader.HijackUdon();
-            }
+        //private static void Udon_SendCustomEvent(UdonBehaviour item, string EventName)
+        //{
+        //    if (!isCurrentWorld) return;
+        //    if (item == null) return;
+        //    if (EventName.IsNullOrEmptyOrWhiteSpace()) return;
+        //    if (item.name.Equals("New avatar image reader (TMP)"))
+        //    {
+        //        RenderCameraReader.HijackUdon();
+        //    }
+        //    if(item.name.Equals("Patreon"))
+        //    {
+        //        PatronSystemReader.HijackUdon();
+        //    }
 
-        }
+        //}
 
-        private static IEnumerator ForcePatronReader()
-        {
-            while (PatronSystemReader == null) yield return null;
-            Log.Debug("Patron Reader Installed!");
-            yield break;
-        }
+        //private static IEnumerator ForcePatronReader()
+        //{
+        //    while (PatronSystemReader == null) yield return null;
+        //    Log.Debug("Patron Reader Installed!");
+        //    yield break;
+        //}
 
-        private static IEnumerator ForceEnableRenderCamera()
-        {
-            while (RenderCameraReader == null) yield return null;
-            Log.Debug("RenderCamera Reader Installed!");
-            yield break;
-        }
+        //private static IEnumerator ForceEnableRenderCamera()
+        //{
+        //    while (RenderCameraReader == null) yield return null;
+        //    Log.Debug("RenderCamera Reader Installed!");
+        //    yield break;
+        //}
     }
 }

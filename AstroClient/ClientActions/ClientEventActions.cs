@@ -71,6 +71,12 @@ namespace AstroClient.ClientActions
         internal static Action<int, string> OnSceneLoaded { get; set; }
 
         /// <summary>
+        /// This gets called every scene Unload .
+        /// </summary>
+
+        internal static Action<int, string> OnSceneWasUnloaded { get; set; }
+
+        /// <summary>
         /// This gets When application is being closed.
         /// </summary>
         internal static Action OnApplicationQuit { get; set; }
@@ -138,6 +144,13 @@ namespace AstroClient.ClientActions
         /// <para>Params : VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat</para>
         /// </summary>
         internal static Action<VRC_EventHandler, VRC_EventHandler.VrcEvent, VRC_EventHandler.VrcBroadcastType, int, float> VRC_EventDispatcherRFC_triggerEvent { get; set; }
+
+
+        /// <summary>
+        /// This Gets called when a UdonBehaviour Gets Loaded.
+        /// <para>Params : UdonBehaviour instance</para>
+        /// </summary>
+        internal static Action<UdonBehaviour> Udon_OnBehaviourLoaded;
 
         /// <summary>
         /// This Gets called when a UdonBehaviour OnPickup method gets invoked.

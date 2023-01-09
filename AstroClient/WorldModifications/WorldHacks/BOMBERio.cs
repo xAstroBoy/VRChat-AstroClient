@@ -295,28 +295,28 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                                 if (disassembled != null)
                                 {
-                                    var Outside_RunSpeedAddress = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Outside_RunSpeedSymbol);
-                                    var Outside_WalkAndStrafeAddress = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Outside_WalkAndStrafeSpeedSymbol);
+                                    var Outside_RunSpeedAddress = disassembled.UdonSymbolTable.GetAddressFromSymbol(Outside_RunSpeedSymbol);
+                                    var Outside_WalkAndStrafeAddress = disassembled.UdonSymbolTable.GetAddressFromSymbol(Outside_WalkAndStrafeSpeedSymbol);
 
-                                    var Inner_RunSpeedAddress = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Inner_RunSpeedSymbol);
-                                    var Inner_WalkAndStrafeAddress = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Inner_WalkAndStrafeSpeedSymbol);
+                                    var Inner_RunSpeedAddress = disassembled.UdonSymbolTable.GetAddressFromSymbol(Inner_RunSpeedSymbol);
+                                    var Inner_WalkAndStrafeAddress = disassembled.UdonSymbolTable.GetAddressFromSymbol(Inner_WalkAndStrafeSpeedSymbol);
 
-                                    var Unpacked_Outside_RunSpeed = disassembled.IUdonHeap.GetHeapVariable(Outside_RunSpeedAddress).Unpack_Single();
+                                    var Unpacked_Outside_RunSpeed = disassembled.UdonHeap.GetHeapVariable(Outside_RunSpeedAddress).Unpack_Single();
                                     if (Unpacked_Outside_RunSpeed.HasValue)
                                     {
                                         Outside_Default_RunSpeed = Unpacked_Outside_RunSpeed.Value;
                                     }
-                                    var Unpacked_Outside_WalkAndStrafe = disassembled.IUdonHeap.GetHeapVariable(Outside_WalkAndStrafeAddress).Unpack_Single();
+                                    var Unpacked_Outside_WalkAndStrafe = disassembled.UdonHeap.GetHeapVariable(Outside_WalkAndStrafeAddress).Unpack_Single();
                                     if (Unpacked_Outside_WalkAndStrafe.HasValue)
                                     {
                                         Outside_Default_StrafeAndWalkSpeed = Unpacked_Outside_WalkAndStrafe.Value;
                                     }
-                                    var Unpacked_Inner_RunSpeed = disassembled.IUdonHeap.GetHeapVariable(Inner_RunSpeedAddress).Unpack_Single();
+                                    var Unpacked_Inner_RunSpeed = disassembled.UdonHeap.GetHeapVariable(Inner_RunSpeedAddress).Unpack_Single();
                                     if (Unpacked_Inner_RunSpeed.HasValue)
                                     {
                                         Inner_Default_RunSpeed = Unpacked_Inner_RunSpeed.Value;
                                     }
-                                    var Unpacked_Inner_WalkAndStrafe = disassembled.IUdonHeap.GetHeapVariable(Inner_WalkAndStrafeAddress).Unpack_Single();
+                                    var Unpacked_Inner_WalkAndStrafe = disassembled.UdonHeap.GetHeapVariable(Inner_WalkAndStrafeAddress).Unpack_Single();
                                     if (Unpacked_Inner_WalkAndStrafe.HasValue)
                                     {
                                         Inner_Default_StrafeAndWalkSpeed = Unpacked_Inner_WalkAndStrafe.Value;

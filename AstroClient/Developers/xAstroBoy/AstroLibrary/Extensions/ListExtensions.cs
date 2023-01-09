@@ -141,6 +141,15 @@
                 }
             }
         }
+        public static Il2CppSystem.Collections.Generic.List<T> ToIl2CppList<T>(this System.Collections.Generic.List<T> list)
+        {
+            var ret = new Il2CppSystem.Collections.Generic.List<T>(list.Count);
+            for (int i = 0; i < list.Count; i++)
+            {
+                ret.Add(list[i]);
+            }
+            return ret;
+        }
 
     }
 }

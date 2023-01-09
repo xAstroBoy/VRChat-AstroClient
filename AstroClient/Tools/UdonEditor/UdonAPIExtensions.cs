@@ -1,6 +1,8 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
 using System;
 using System.Linq;
+using FakeUdon;
+using VRC.Udon.Common;
 using VRC.Udon.Common.Interfaces;
 using Enumerable = Il2CppSystem.Linq.Enumerable;
 
@@ -20,7 +22,7 @@ namespace AstroClient.Tools.UdonEditor
         /// <param name="heap"></param>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal static bool isHeapVariableValid<T>(this IUdonHeap heap, uint address)
+        internal static bool isHeapVariableValid<T>(this UdonHeap heap, uint address)
         {
             if (heap == null) return false;
             try
@@ -32,6 +34,60 @@ namespace AstroClient.Tools.UdonEditor
                 }
             }
             catch {}
+
+            try
+            {
+                // Try to read heap address, if it throws the exception, try again.
+                _ = heap.GetHeapVariable<T>(address);
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() == typeof(TypeInitializationException))
+                {
+                    try
+                    {
+                        // init again.
+                        heap.InitializeHeapVariable<T>(address);
+                    }
+                    catch { }
+                    try
+                    {
+                        // try for the second time, if it fails, we can't do aything.
+                        _ = heap.GetHeapVariable<T>(address);
+                    }
+                    catch (Exception e3)
+                    {
+                        if (e3.GetType() == typeof(TypeInitializationException))
+                        {
+                            //TODO: Figure how to Get a valid result.
+                            return false; // no need to proceed as udon won't give us anything.
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// This verifies and avoids TypeUnitializedException by doing 2 steps
+        /// First it asks the heap if the Variable is initalized, if not inits it, then tries to read it.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="heap"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        internal static bool isHeapVariableValid<T>(this FakeUdonHeap heap, uint address)
+        {
+            if (heap == null) return false;
+            try
+            {
+                // Check if Heap is initialized, if not inits it.
+                if (!heap.IsHeapVariableInitialized(address))
+                {
+                    heap.InitializeHeapVariable<T>(address);
+                }
+            }
+            catch { }
 
             try
             {
@@ -80,10 +136,17 @@ namespace AstroClient.Tools.UdonEditor
             if (udon == null) return false;
             try
             {
-                var address = udon.IUdonSymbolTable.GetAddressFromSymbol(symbolName);
+                var address = udon.UdonSymbolTable.GetAddressFromSymbol(symbolName);
                 if (address != null)
                 {
-                    return udon.IUdonHeap.isHeapVariableValid<T>(address);
+                    if (!udon.isFakeUdon)
+                    {
+                        return udon.UdonHeap.isHeapVariableValid<T>(address);
+                    }
+                    else
+                    {
+                        return udon.FakeUdonHeap.isHeapVariableValid<T>(address);
+                    }
                 }
             }
             catch { }
@@ -104,9 +167,17 @@ namespace AstroClient.Tools.UdonEditor
             if (udon == null) return false;
             try
             {
-                if (udon.IUdonSymbolTable.HasSymbolForAddress(address))
+                if (udon.UdonSymbolTable.HasSymbolForAddress(address))
                 {
-                    return udon.IUdonHeap.isHeapVariableValid<T>(address);
+                    if (!udon.isFakeUdon)
+                    {
+                        return udon.UdonHeap.isHeapVariableValid<T>(address);
+                    }
+                    else
+                    {
+                        return udon.FakeUdonHeap.isHeapVariableValid<T>(address);
+                    }
+
                 }
             }
             catch { }

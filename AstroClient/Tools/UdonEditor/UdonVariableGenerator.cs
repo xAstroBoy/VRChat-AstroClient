@@ -42,12 +42,21 @@ namespace AstroClient.Tools.UdonEditor
 
                 builder.AppendLine("         private RawUdonBehaviour " + CurrentBehaviourTemplateName + " {[HideFromIl2Cpp] get; [HideFromIl2Cpp] set;} =  null;");
 
-                foreach (var symbol in behaviour.IUdonSymbolTable.GetSymbols())
+                foreach (var symbol in behaviour.UdonSymbolTable.GetSymbols())
                 {
+                    
                     if (symbol != null)
                     {
-                        var address = behaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol);
-                        var UnboxVariable = behaviour.IUdonHeap.GetHeapVariable(address);
+                        var address = behaviour.UdonSymbolTable.GetAddressFromSymbol(symbol);
+                        Il2CppSystem.Object UnboxVariable;
+                        if (!behaviour.isFakeUdon)
+                        {
+                            UnboxVariable = behaviour.UdonHeap.GetHeapVariable(address);
+                        }
+                        else
+                        {
+                            UnboxVariable = behaviour.FakeUdonHeap.GetHeapVariable(address);
+                        }
                         if (UnboxVariable != null)
                         {
                             if (UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType" || UnboxVariable.GetIl2CppType().FullName == "System.RuntimeType[]")

@@ -98,6 +98,11 @@ namespace AstroClient
             ConfigManager.SaveAll();
         }
 
+        public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
+        {
+            ClientEventActions.OnSceneWasUnloaded.SafetyRaiseWithParams(buildIndex, sceneName);
+        }
+
         public override void OnPreferencesSaved()
         {
             ConfigManager.SaveAll();

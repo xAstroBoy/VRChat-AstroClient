@@ -3,6 +3,8 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
+using FakeUdon;
+using VRC.Udon.Common;
 
 namespace AstroClient.Tools.UdonEditor
 {
@@ -12,9 +14,16 @@ namespace AstroClient.Tools.UdonEditor
 
     internal class RawUdonBehaviour
     {
-        internal IUdonProgram IUdonProgram { get; set; }
-        internal IUdonSymbolTable IUdonSymbolTable { get; set; }
-        internal IUdonHeap IUdonHeap { get; set; }
+        internal UdonProgram UdonProgram { get; set; }
+
+        internal FakeUdonProgram FakeUdonProgram { get; set; }
+        internal UdonSymbolTable UdonSymbolTable { get; set; }
+
+
+        internal UdonHeap UdonHeap { get; set; }
+
+        internal FakeUdonHeap FakeUdonHeap { get; set; }
+
 
         private Transform Parent { get; set; }
         private UdonBehaviour behaviour { get; set; }
@@ -26,13 +35,16 @@ namespace AstroClient.Tools.UdonEditor
         internal UdonBehaviour udonBehaviour => behaviour;
 
 
+
+        internal bool isFakeUdon { get; private set; } = false;
+
         internal int SymbolsAmount
         {
             get
             {
-                if(IUdonSymbolTable != null)
+                if(UdonSymbolTable != null)
                 {
-                    return IUdonSymbolTable.GetSymbols().Length;
+                    return UdonSymbolTable.GetSymbols().Length;
                 }
                 return 0;
             }
@@ -45,9 +57,9 @@ namespace AstroClient.Tools.UdonEditor
         /// <returns></returns>
         internal bool HasSymbol(string Symbol)
         {
-            if (IUdonSymbolTable != null)
+            if (UdonSymbolTable != null)
             {
-                var SymbolArray = IUdonSymbolTable.GetSymbols();
+                var SymbolArray = UdonSymbolTable.GetSymbols();
                 for (var symbolsitems = 0; symbolsitems < SymbolArray.Length; symbolsitems++)
                 {
                     var item = SymbolArray[symbolsitems];
@@ -60,13 +72,23 @@ namespace AstroClient.Tools.UdonEditor
             return false;
         }
 
-        internal RawUdonBehaviour(UdonBehaviour behaviour, IUdonProgram IUdonProgram,  IUdonSymbolTable IUdonSymbolTable, IUdonHeap IUdonHeap, Transform Parent)
+        internal RawUdonBehaviour(UdonBehaviour behaviour, UdonProgram UdonProgram,  UdonSymbolTable UdonSymbolTable, UdonHeap UdonHeap, Transform Parent)
         {
-            this.IUdonProgram = IUdonProgram;
-            this.IUdonSymbolTable = IUdonSymbolTable;
-            this.IUdonHeap = IUdonHeap;
+            this.UdonProgram = UdonProgram;
+            this.UdonSymbolTable = UdonSymbolTable;
+            this.UdonHeap = UdonHeap;
             this.Parent = Parent;
             this.behaviour = behaviour;
         }
+        internal RawUdonBehaviour(UdonBehaviour behaviour, FakeUdonProgram UdonProgram, UdonSymbolTable UdonSymbolTable, FakeUdonHeap UdonHeap, Transform Parent)
+        {
+            this.FakeUdonProgram = UdonProgram;
+            this.UdonSymbolTable = UdonSymbolTable;
+            this.FakeUdonHeap = UdonHeap;
+            this.Parent = Parent;
+            this.behaviour = behaviour;
+            isFakeUdon = true;
+        }
+
     }
 }
