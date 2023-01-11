@@ -154,6 +154,9 @@ namespace AstroClient.AstroMonos.Prefabs
                     JetstickPickup.PickupController.ExactGrip = Movement_Joypad_Grip;
                     JetstickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Grip;
                 }
+                Default_Movement_Joystick_Pos = Movement_Joypad.localPosition;
+                Default_Movement_Joystick_Rot = Movement_Joypad.localRotation;
+
             }
 
             if (Thruster_Joypad != null)
@@ -173,6 +176,9 @@ namespace AstroClient.AstroMonos.Prefabs
                     Thruster_JoypadPickup.PickupController.ExactGrip = Thruster_Joypad_Grip;
                     Thruster_JoypadPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Grip;
                 }
+                Default_Thruster_Joystick_Pos = Thruster_Joypad.localPosition;
+                Default_Thruster_Joystick_Rot = Thruster_Joypad.localRotation;
+
                 //ThrusterForceDefault = ThrusterForce.relativeForce;
             }
             
@@ -285,6 +291,9 @@ namespace AstroClient.AstroMonos.Prefabs
 
         private void Thruster_Joypad_OnDrop()
         {
+            Thruster_Joypad.localPosition = Default_Thruster_Joystick_Pos;
+            Thruster_Joypad.localRotation = Default_Thruster_Joystick_Rot;
+
             if (Thruster_Joypad_PositionConstraint != null)
             {
                 Thruster_Joypad_PositionConstraint.enabled = true;
@@ -312,6 +321,8 @@ namespace AstroClient.AstroMonos.Prefabs
 
         private void Movement_Joypad_OnDrop()
         {
+            Movement_Joypad.localPosition = Default_Movement_Joystick_Pos;
+            Movement_Joypad.localRotation = Default_Movement_Joystick_Rot;
             if (Movement_Joypad_PositionConstraint != null)
             {
                 Movement_Joypad_PositionConstraint.enabled = true;
@@ -737,6 +748,12 @@ namespace AstroClient.AstroMonos.Prefabs
                 return _ParticleThrustParticles;
             }
         }
+        internal Vector3 Default_Thruster_Joystick_Pos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Quaternion Default_Thruster_Joystick_Rot  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        internal Vector3 Default_Movement_Joystick_Pos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Quaternion Default_Movement_Joystick_Rot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
 
         internal VRC_AstroPickup JetstickPickup {   [HideFromIl2Cpp]  get; [HideFromIl2Cpp] set; }
 
