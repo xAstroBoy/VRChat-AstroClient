@@ -200,6 +200,16 @@ namespace AstroClient.AstroMonos.AstroUdons
                 Station.enabled = true;
             }
         }
+        internal bool disableStationExit
+        {
+            [HideFromIl2Cpp]
+            get => Station.disableStationExit;
+            [HideFromIl2Cpp]
+            set
+            {
+                Station.disableStationExit = value;
+            }
+        }
 
         internal VRCPlayerApi Player
         {

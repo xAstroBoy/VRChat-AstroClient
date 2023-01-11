@@ -279,11 +279,11 @@ namespace AstroClient.AstroMonos.Prefabs
         {
             if (Thruster_Joypad_PositionConstraint != null)
             {
-                Thruster_Joypad_PositionConstraint.enabled = false;
+                Thruster_Joypad_PositionConstraint.constraintActive = false;
             }
             if (Thruster_Joypad_RotationConstraint != null)
             {
-                Thruster_Joypad_RotationConstraint.enabled = false;
+                Thruster_Joypad_RotationConstraint.constraintActive = false;
             }
 
 
@@ -291,16 +291,16 @@ namespace AstroClient.AstroMonos.Prefabs
 
         private void Thruster_Joypad_OnDrop()
         {
-            Thruster_Joypad.localPosition = Default_Thruster_Joystick_Pos;
-            Thruster_Joypad.localRotation = Default_Thruster_Joystick_Rot;
+            //Thruster_Joypad.localPosition = Default_Thruster_Joystick_Pos;
+            //Thruster_Joypad.localRotation = Default_Thruster_Joystick_Rot;
 
             if (Thruster_Joypad_PositionConstraint != null)
             {
-                Thruster_Joypad_PositionConstraint.enabled = true;
+                Thruster_Joypad_PositionConstraint.constraintActive = true;
             }
             if (Thruster_Joypad_RotationConstraint != null)
             {
-                Thruster_Joypad_RotationConstraint.enabled = true;
+                Thruster_Joypad_RotationConstraint.constraintActive = true;
             }
         }
 
@@ -309,11 +309,11 @@ namespace AstroClient.AstroMonos.Prefabs
         {
             if (Movement_Joypad_PositionConstraint != null)
             {
-                Movement_Joypad_PositionConstraint.enabled = false;
+                Movement_Joypad_PositionConstraint.constraintActive = false;
             }
             if (Movement_Joypad_RotationConstraint != null)
             {
-                Movement_Joypad_RotationConstraint.enabled = false;
+                Movement_Joypad_RotationConstraint.constraintActive = false;
             }
 
 
@@ -321,15 +321,15 @@ namespace AstroClient.AstroMonos.Prefabs
 
         private void Movement_Joypad_OnDrop()
         {
-            Movement_Joypad.localPosition = Default_Movement_Joystick_Pos;
-            Movement_Joypad.localRotation = Default_Movement_Joystick_Rot;
+            //Movement_Joypad.localPosition = Default_Movement_Joystick_Pos;
+            //Movement_Joypad.localRotation = Default_Movement_Joystick_Rot;
             if (Movement_Joypad_PositionConstraint != null)
             {
-                Movement_Joypad_PositionConstraint.enabled = true;
+                Movement_Joypad_PositionConstraint.constraintActive = true;
             }
             if (Movement_Joypad_RotationConstraint != null)
             {
-                Movement_Joypad_RotationConstraint.enabled = true;
+                Movement_Joypad_RotationConstraint.constraintActive = true;
             }
         }
 

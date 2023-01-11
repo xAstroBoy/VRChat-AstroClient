@@ -272,6 +272,13 @@ namespace AstroClient.AstroMonos.AstroUdons
             set => PickupController.pickupable = value;
         }
 
+
+        internal VRC_Pickup.PickupHand CurrentHand
+        {
+            [HideFromIl2Cpp]
+            get => PickupController.CurrentHand;
+        }
+
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

@@ -157,7 +157,27 @@ namespace AstroClient.AstroMonos.AstroUdons
                 }
             }
         }
+        internal float proximity
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (UdonBehaviour != null)
+                {
+                    return UdonBehaviour.proximity;
+                }
+                return default;
+            }
 
+            [HideFromIl2Cpp]
+            set
+            {
+                if (UdonBehaviour != null)
+                {
+                    UdonBehaviour.proximity = value;
+                }
+            }
+        }
 
         internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
