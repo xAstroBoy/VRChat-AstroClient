@@ -13,6 +13,10 @@ namespace AstroClient.Spawnables
         private static GameObject VR_Jetpack_Object { get; set; }
         private static GameObject Desktop_Jetpack_Object { get; set; }
 
+        internal static float Thruster_Force_Default { get; } = -400f;
+        internal static float Jetpack_Force_Default { get; } = -80;
+        internal static float Thruster_Force_Current { get; set; } = -400f;
+        internal static float Jetpack_Force_Current { get; set; } = -80;
 
         internal static bool SitOnJetpackOnSpawn { get; set; }
 
@@ -75,6 +79,19 @@ namespace AstroClient.Spawnables
                     VR_Jetpack_Controller.AdjustScaleBasedOffAvatar = AdjustBasedOffAvatarSize;
                     MiscUtils.DelayFunction(0.2f, () =>
                     {
+                        if(VR_Jetpack_Controller.Current_Jetpack_Force !=  Jetpack_Force_Current)
+                        {
+                            VR_Jetpack_Controller.Current_Jetpack_Force = Jetpack_Force_Current;
+                        }
+                        if(VR_Jetpack_Controller.Current_Thruster_Force != Thruster_Force_Current)
+                        {
+                            VR_Jetpack_Controller.Current_Thruster_Force = Thruster_Force_Current;
+                            VR_Jetpack_Controller.IgnoreQuickBoostAnim = true;
+                        }
+                        if(DisableThrusterSlowDown)
+                        {
+                            VR_Jetpack_Controller.IgnoreQuickBoostAnim = true;
+                        }
                         if (SitOnJetpackOnSpawn)
                         {
                             VR_Jetpack_Controller.CurrentChair.EnterStation();
@@ -85,6 +102,7 @@ namespace AstroClient.Spawnables
             }
 
         }
+
 
 
         internal static void SpawnDesktopJetpack()
@@ -108,6 +126,11 @@ namespace AstroClient.Spawnables
                     Desktop_Jetpack_Controller.AdjustScaleBasedOffAvatar = AdjustBasedOffAvatarSize;
                     MiscUtils.DelayFunction(0.2f, () =>
                     {
+                        if (Desktop_Jetpack_Controller.Current_Jetpack_Force != Jetpack_Force_Current)
+                        {
+                            Desktop_Jetpack_Controller.Current_Jetpack_Force = Jetpack_Force_Current;
+                        }
+
                         if (SitOnJetpackOnSpawn)
                         {
                             Desktop_Jetpack_Controller.CurrentChair.EnterStation();
@@ -136,6 +159,48 @@ namespace AstroClient.Spawnables
                 {
                     Desktop_Jetpack_Controller.CurrentChair.ExitStation();
                 }
+            }
+
+        }
+
+        internal static void SetJetpackMovementForce(float newForce)
+        {
+            Jetpack_Force_Current = newForce;
+            if(Desktop_Jetpack_Controller != null)
+            {
+                Desktop_Jetpack_Controller.Current_Jetpack_Force = newForce;
+            }
+            if(VR_Jetpack_Controller != null)
+            {
+                VR_Jetpack_Controller.Current_Jetpack_Force = newForce;
+            }
+
+        }
+        internal static void SetThrusterMovementForce(float newForce)
+        {
+            Thruster_Force_Current = newForce;
+            if (VR_Jetpack_Controller != null)
+            {
+                VR_Jetpack_Controller.Current_Thruster_Force = newForce;
+                if(newForce != Thruster_Force_Default)
+                {
+                    VR_Jetpack_Controller.IgnoreQuickBoostAnim = true;
+                }
+            }
+
+        }
+        internal static void RestoreJetpackForces()
+        {
+            Jetpack_Force_Current = Jetpack_Force_Default;
+            Thruster_Force_Current = Thruster_Force_Default;
+
+            if (Desktop_Jetpack_Controller != null)
+            {
+                Desktop_Jetpack_Controller.RestoreOriginalSettings();
+            }
+            if (VR_Jetpack_Controller != null)
+            {
+                VR_Jetpack_Controller.RestoreOriginalSettings();
             }
 
         }

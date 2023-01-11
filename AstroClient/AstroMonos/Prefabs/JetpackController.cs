@@ -2,6 +2,7 @@ using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientActions;
 using AstroClient.ClientAttributes;
+using AstroClient.Spawnables;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Player;
 using AstroClient.xAstroBoy;
@@ -321,7 +322,18 @@ namespace AstroClient.AstroMonos.Prefabs
             }
         }
 
+        internal void RestoreOriginalSettings()
+        {
+            if(JetpackForce != null)
+            {
+                Current_Jetpack_Force = AstroJetPack.Jetpack_Force_Default;
+            }
+            if (ThrusterForce != null)
+            {
+                Current_Thruster_Force = AstroJetPack.Thruster_Force_Default;
+            }
 
+        }
         private ScaleConstraint _JetpackScaleConstraint { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private ScaleConstraint JetpackScaleConstraint
         {
@@ -731,9 +743,43 @@ namespace AstroClient.AstroMonos.Prefabs
         internal VRC_AstroPickup Thruster_JoypadPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal VRC_AstroStation CurrentChair { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float ThrusterForceDefault { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float JetpackForceDefault { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
+        internal float Current_Thruster_Force
+        {
+            get
+            {
+                if(ThrusterForce != null)
+                {
+                    return ThrusterForce.relativeForce.x;
+                }
+                return default;
+            }
+            set
+            {
+                if(ThrusterForce != null)
+                {
+                    ThrusterForce.relativeForce = new Vector3(value, 0, 0);
+                }
+            }
+        }
+        internal float Current_Jetpack_Force
+        {
+            get
+            {
+                if (JetpackForce != null)
+                {
+                    return JetpackForce.relativeForce.x;
+                }
+                return default;
+            }
+            set
+            {
+                if (JetpackForce != null)
+                {
+                    JetpackForce.relativeForce = new Vector3(value, 0, 0);
+                }
+            }
+        }
 
     }
 }

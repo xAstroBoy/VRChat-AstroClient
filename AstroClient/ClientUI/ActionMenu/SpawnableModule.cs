@@ -31,16 +31,21 @@ namespace AstroClient.ClientUI.ActionMenu
                     AstroJetPack.ExitJetpacks();
                 }, null);
                 CustomSubMenu.AddToggle("Sit On Jetpack Spawn", AstroJetPack.SitOnJetpackOnSpawn, value => AstroJetPack.SitOnJetpackOnSpawn = value);
-                //CustomSubMenu.AddSubMenu("Jetpack", () =>
-                //{
-                //});
-                //CustomSubMenu.AddButton("Spawn 8 Ball", () =>
-                //{
-                //    EightBall.Spawn();
-                //}, null);
                 CustomSubMenu.AddToggle("Adjust Based of avatar size", AstroJetPack.AdjustBasedOffAvatarSize, value => AstroJetPack.AdjustBasedOffAvatarSize = value);
                 CustomSubMenu.AddToggle("Disable Thruster Slowdown", AstroJetPack.DisableThrusterSlowDown, value => AstroJetPack.DisableThrusterSlowDown = value);
 
+                CustomSubMenu.AddButton($"Increase Jetpack Force Current : {AstroJetPack.Jetpack_Force_Current}", () =>
+                {
+                    AstroJetPack.SetJetpackMovementForce(AstroJetPack.Jetpack_Force_Current + AstroJetPack.Jetpack_Force_Default);
+                }, null);
+                CustomSubMenu.AddButton($"Increase Thruster Force Current : {AstroJetPack.Thruster_Force_Current}", () =>
+                {
+                    AstroJetPack.SetThrusterMovementForce(AstroJetPack.Thruster_Force_Current + AstroJetPack.Thruster_Force_Default);
+                }, null);
+                CustomSubMenu.AddButton($"Set Jetpacks Default Speeds", () =>
+                {
+                    AstroJetPack.RestoreJetpackForces();
+                }, null);
 
             });
 

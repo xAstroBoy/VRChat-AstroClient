@@ -1,7 +1,6 @@
 ﻿
 
-using AstroClient.AstroMonos.Components.Spoofer;
-using UdonSharp;
+
 
 namespace AstroClient.AstroMonos.FakeUdons
 {
@@ -10,6 +9,12 @@ namespace AstroClient.AstroMonos.FakeUdons
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using MelonLoader;
+    using VRC.Udon;
+    using UdonSharp;
+    using FakeUdon;
+    using AstroClient.AstroMonos.Components.Spoofer;
+    using UdonSharp;
 
     /*
      * Copyright (c) 2023 HookedBehemoth
@@ -27,13 +32,8 @@ namespace AstroClient.AstroMonos.FakeUdons
      * along with this program.  If not, see <http://www.gnu.org/licenses/>.
      */
 
-    using MelonLoader;
-    using VRC.Udon;
-    using UdonSharp;
-    using FakeUdon;
 
-
-namespace JustBPatreon
+    namespace JustBPatreon
     {
         internal class Register_JustBClub1_2_Patron : AstroEvents
         {
@@ -95,7 +95,7 @@ namespace JustBPatreon
 
             public void _TestMessage()
             {
-                Log.Write("This is a test message from a fake udon behaviour.");
+                Log.Debug("This is a test message from a fake udon behaviour.");
             }
         }
     }
