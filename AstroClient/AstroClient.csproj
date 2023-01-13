@@ -804,6 +804,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\Jetpacks.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\8Ball.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\WorldCleanup.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\shuttle.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />

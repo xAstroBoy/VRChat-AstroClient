@@ -208,8 +208,19 @@ internal class WorldCheatsModule : AstroEvents
             if (WorldUtils.WorldID == WorldIds.AmongUS)
             {
                 CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
+                CustomSubMenu.AddSubMenu("Lobby ", () =>
+                {
+                    CustomSubMenu.AddButton("Start Game", () => { AmongUSCheats.AbortGameEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUSCheats.VictoryCrewmateEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Victory Impostor", () => { AmongUSCheats.VictoryImpostorEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Abort game", () => { AmongUSCheats.AbortGameEvent?.InvokeBehaviour(); });
+                });
 
-                CustomSubMenu.AddSubMenu("Game Events", () => { CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); }); });
+
+                CustomSubMenu.AddSubMenu("Game Events", () =>
+                {
+                    CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); });
+                });
 
                 CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                 {

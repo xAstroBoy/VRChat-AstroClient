@@ -237,6 +237,19 @@
                 return _WorldCleanup;
             }
         }
+        private static AssetBundle _Shuttle;
+        internal static AssetBundle SpaceShuttle
+        {
+            get
+            {
+                if (_Shuttle == null)
+                {
+                    _Shuttle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}shuttle.assetbundle"), 0u);
+                    _Shuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _Shuttle;
+            }
+        }
 
         //private static AssetBundle _EightBall;
         //internal static AssetBundle EightBall

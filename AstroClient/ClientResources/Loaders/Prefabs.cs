@@ -166,8 +166,26 @@
                 return _DesktopJetpack;
             }
         }
+        private static GameObject _SpaceShuttle;
 
-        private static GameObject _EightBall;
+        /// <summary>
+        ///     Loads SpaceShuttle bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject SpaceShuttle
+        {
+            get
+            {
+                if (_SpaceShuttle == null)
+                {
+                    _SpaceShuttle = Bundles.SpaceShuttle.LoadAsset_Internal("assets/ReimajoBoothAssets/SpaceShuttle/SpaceShuttle.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _SpaceShuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _SpaceShuttle;
+                }
+
+                return _SpaceShuttle;
+            }
+        }
+        //private static GameObject _EightBall;
 
         /// <summary>
         ///     Loads EightBall bundle in resources as Prefab Object

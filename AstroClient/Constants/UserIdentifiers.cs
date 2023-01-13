@@ -7,10 +7,23 @@ namespace AstroClient.Constants
 
     internal class UserIdentifiers
     {
-        
+
+        private static string xAstroBoyID { get;  } = "usr_9370dc54-1fdd-435e-90f4-8e9666593f9a";
+        private static bool DoOnce_xAstroBoyCheck { get; set; } = false;
+        private static bool _is_xAstroBoy { get; set; } = false;
+
         internal static bool is_xAstroBoy
         {
-            get => Networking.LocalPlayer.GetPlayer().GetAPIUser().id == "usr_a2fb27e8-921e-42f5-aa22-545c816b376e";
+            get
+            {
+                if(!DoOnce_xAstroBoyCheck)
+                {
+                    _is_xAstroBoy = Networking.LocalPlayer.GetPlayer().GetAPIUser().id == xAstroBoyID;
+                    DoOnce_xAstroBoyCheck = true;
+                }
+                return _is_xAstroBoy;
+            }
+
         }
 
         
