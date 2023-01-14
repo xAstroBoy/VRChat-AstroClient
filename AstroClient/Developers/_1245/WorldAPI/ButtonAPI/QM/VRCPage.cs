@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using AstroClient;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,19 +19,19 @@ namespace WorldAPI.ButtonAPI
 {
     public class VRCPage 
     {
-        public UIPage page;
-        public Transform menuContents;
-        public TextMeshProUGUI pageTitleText;
-        private bool isRoot;
-        private GameObject extButtonGameObject;
-        public RectMask2D menuMask;
-        public string menuName;
+        public UIPage page{ get; set; }
+        public Transform menuContents{ get; set; }
+        public TextMeshProUGUI pageTitleText{ get; set; }
+        private bool isRoot{ get; set; }
+        private GameObject extButtonGameObject{ get; set; }
+        public RectMask2D menuMask { get; set; }
+        public string menuName { get; set; }
 
         public VRCPage(string pageTitle, bool root = false, bool backButton = true, bool expandButton = false, Action expandButtonAction = null, string expandButtonTooltip = "", Sprite expandButtonSprite = null, bool preserveColor = false, bool fix = true)
         {
             if (!APIBase.IsReady()) throw new Exception();
             if (APIBase.MenuTab == null) {
-                Logs.Error("Fatal Error: ButtonAPI.menuPageBase Is Null!");
+                Log.Error("Fatal Error: ButtonAPI.menuPageBase Is Null!");
                 return;
             }
 
@@ -47,17 +50,17 @@ namespace WorldAPI.ButtonAPI
                 region++;
                 page.field_Public_String_0 = menuName;
                 page.field_Private_Boolean_1 = true;
-                page.field_Protected_MenuStateController_0 = QMUtils.GetMenuStateControllerInstance;
+                page.field_Protected_MenuStateController_0 = QuickMenuTools.QuickMenuController;
                 page.field_Private_List_1_UIPage_0 = new Il2CppSystem.Collections.Generic.List<UIPage>();
                 page.field_Private_List_1_UIPage_0.Add(page);
                 region++;
-                QMUtils.GetMenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
+                QuickMenuTools.QuickMenuController.field_Private_Dictionary_2_String_UIPage_0.Add(menuName, page);
                 region++;
                 if (root)
                 {
-                    var list = QMUtils.GetMenuStateControllerInstance.field_Public_Il2CppReferenceArray_1_UIPage_0.ToList();
+                    var list = QuickMenuTools.QuickMenuController.field_Public_ArrayOf_UIPage_0.ToList();
                     list.Add(page);
-                    QMUtils.GetMenuStateControllerInstance.field_Public_Il2CppReferenceArray_1_UIPage_0 = list.ToArray();
+                    QuickMenuTools.QuickMenuController.field_Public_ArrayOf_UIPage_0 = list.ToArray();
                 }
 
                 region++;
@@ -81,7 +84,7 @@ namespace WorldAPI.ButtonAPI
                 backButtonGameObject.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
                 backButtonGameObject.GetComponentInChildren<Button>().onClick.AddListener((Action)delegate {
                     if (isRoot)
-                        QMUtils.GetMenuStateControllerInstance.Method_Public_Void_String_ObjectPublicStBoAc1ObObUnique_Boolean_EnumNPublicSealedvaNoLeRiBoIn6vUnique_0("QuickMenuDashboard", null, false, UIPage.EnumNPublicSealedvaNoLeRiBoIn6vUnique.Right);
+                        QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                     else
                         page.Method_Protected_Virtual_New_Void_0();
                 });
@@ -144,7 +147,7 @@ namespace WorldAPI.ButtonAPI
         public void OpenMenu()
         {
             page.gameObject.active = true;
-            QMUtils.GetMenuStateControllerInstance.Method_Public_Void_String_ObjectPublicStBoAc1ObObUnique_Boolean_EnumNPublicSealedvaNoLeRiBoIn6vUnique_1(page.field_Public_String_0, null, false, UIPage.EnumNPublicSealedvaNoLeRiBoIn6vUnique.Right);
+            QuickMenuTools.QuickMenuController.ShowTabContent(page.field_Public_String_0);
         }
 
 

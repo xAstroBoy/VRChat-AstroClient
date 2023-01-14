@@ -1,29 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using AstroClient;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
-using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
-
+using AstroClient.xAstroBoy.Utility;
 
 namespace WorldAPI.ButtonAPI.MM;
 
 public class MMTab
 {
-    public MenuTab menuTab;
-    public GameObject gameObject;
-    public static Action OnClick;
-    public MMPage Menu;
+    public MenuTab menuTab { get; set; }
+    public GameObject gameObject { get; set; }
+    public static Action OnClick { get; set; }
+    public MMPage Menu { get; set; }
 
-    public MMTab(MMPage page, string toolTip = "", Sprite sprite = null) {
+    public MMTab(MMPage page, string toolTip = "", Sprite sprite = null)
+    {
         if (!APIBase.IsReady()) throw new Exception();
-        if (APIBase.MMMTabTemplate == null) {
-            Logs.Error("Fatal Error: MMMpageTemplate Is Null!");
+        if (APIBase.MMMTabTemplate == null)
+        {
+            Log.Error("Fatal Error: MMMpageTemplate Is Null!");
             return;
         }
         gameObject = Object.Instantiate(APIBase.MMMTabTemplate, APIBase.MMMTabTemplate.transform.parent);
@@ -31,8 +29,9 @@ public class MMTab
         menuTab.field_Private_AnalyticsController_0 = null;
         menuTab.field_Public_Int32_0 = page.Pageint - 1;
         Menu = page;
-        //menuTab.field_Public_String_0 = page.MenuName; // Dont Do this 
-        if (sprite != null) {
+        //menuTab.field_Public_String_0 = page.MenuName; // Dont Do this
+        if (sprite != null)
+        {
             gameObject.transform.Find("Icon").GetComponent<UIWidgets.ImageAdvanced>().sprite = sprite;
             gameObject.transform.Find("Icon").GetComponent<UIWidgets.ImageAdvanced>().overrideSprite = sprite;
         }

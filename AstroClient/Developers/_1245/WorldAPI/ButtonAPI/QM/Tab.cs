@@ -1,4 +1,6 @@
 ﻿using System;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,19 +8,16 @@ using VRC.UI.Core.Styles;
 using VRC.UI.Elements.Controls;
 using WorldAPI.ButtonAPI.Controls;
 using WorldAPI.ButtonAPI.Extras;
-using WorldLoader.HookUtils;
 
 namespace WorldAPI.ButtonAPI
 {
     public class Tab : ExtentedControl
     {
-        public readonly MenuTab menuTab;
-        public readonly Image tabIcon;
-        public readonly GameObject badgeGameObject;
-        public readonly TextMeshProUGUI badgeText;
-        public readonly VRCPage Menu;
-        private bool test = false;
-
+        public MenuTab menuTab { get;  }
+        public Image tabIcon { get; }
+        public GameObject badgeGameObject { get; }
+        public TextMeshProUGUI badgeText { get; }
+        public VRCPage Menu { get; }
         public Action OnClick { get; set; }
 
         public Tab(VRCPage menu, string tooltip, Sprite icon = null, Transform parent = null)
@@ -33,7 +32,7 @@ namespace WorldAPI.ButtonAPI
             gameObject.name = menu.menuName + "_Tab";
             gameObject.active = true;
             menuTab = gameObject.GetOrAddComponent<MenuTab>();
-            menuTab.field_Private_MenuStateController_0 = QMUtils.GetMenuStateControllerInstance;
+            menuTab.field_Private_MenuStateController_0 = QuickMenuTools.QuickMenuController;
             menuTab.field_Public_String_0 = menu.menuName;
             tabIcon = gameObject.transform.Find("Icon").GetOrAddComponent<Image>();
             tabIcon.sprite = icon;

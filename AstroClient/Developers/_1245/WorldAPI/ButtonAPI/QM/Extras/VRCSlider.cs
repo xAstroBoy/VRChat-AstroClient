@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AstroClient;
 using TMPro;
 using UnityEngine;
 using VRC.UI.Elements.Controls;
@@ -19,7 +20,7 @@ public class VRCSlider : Root
 
     public VRCSlider(Transform menu, string text, string tooltip, Action<float> listener, float defaultValue = 0f) {
 
-        if (!APIBase.IsReady()) { Logs.Error("Error, Something Was Missing!"); return; }
+        if (!APIBase.IsReady()) { Log.Error("Error, Something Was Missing!"); return; }
 
         if (menu != null)
             APIBase.LastButtonParent = menu;
@@ -33,9 +34,9 @@ public class VRCSlider : Root
         transform.localPosition = Vector3.zeroVector;
 
         transform.gameObject.SetActive(true);
-        PercentComp = transform.Find("Text_CurrentValue").GetComponent<TextMeshProUGUIEx>();
+        PercentComp = transform.Find("Text_CurrentValue").GetComponent<TextMeshProUGUI>();
         QMUtils.RemoveUnknownComps(transform.Find("Text_CurrentValue").gameObject);
-        TMProCompnt = transform.Find("Text_Name").GetComponent<TextMeshProUGUIEx>();
+        TMProCompnt = transform.Find("Text_Name").GetComponent<TextMeshProUGUI>();
         TMProCompnt.text = text;
         TMProCompnt.transform.localPosition = new Vector3(-386.4344f, 24.1347f, 0);
         var tip = gameObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>();

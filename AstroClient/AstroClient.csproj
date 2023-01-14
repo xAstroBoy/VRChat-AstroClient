@@ -298,6 +298,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
+    <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\Base.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\MM\MMPage.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\MM\MMTab.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\QM\Buttons\Groups\ButtonGroup.cs" />

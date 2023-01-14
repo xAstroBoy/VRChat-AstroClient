@@ -8,86 +8,85 @@ using System.Threading.Tasks;
 using UnityEngine;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
-using WorldLoader.HookUtils;
 using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Extras
 {
     public static class QMUtils
     {
-        internal static MenuStateController WLcontroller;
-        internal static MenuStateController WRcontroller;
+        //internal static MenuStateController WLcontroller;
+        //internal static MenuStateController WRcontroller;
 
-        public static VRC.UI.Elements.QuickMenu GetQuickMenuInstance
-        {
-            get =>
-                Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>().FirstOrDefault();
-        }
+        //public static VRC.UI.Elements.QuickMenu GetQuickMenuInstance
+        //{
+        //    get =>
+        //        Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>().FirstOrDefault();
+        //}
 
-        public static MenuStateController GetMenuStateControllerInstance
-        {
-            get =>
-                GetQuickMenuInstance.GetComponent<MenuStateController>();
-        }
+        //public static MenuStateController GetMenuStateControllerInstance
+        //{
+        //    get =>
+        //        GetQuickMenuInstance.GetComponent<MenuStateController>();
+        //}
 
-        public static VRC.UI.Elements.MainMenu GetMainMenuInstance
-        {
-            get =>
-                Resources.FindObjectsOfTypeAll<VRC.UI.Elements.MainMenu>().FirstOrDefault(x => x.name == "Canvas_MainMenu(Clone)");
-        }
+        //public static VRC.UI.Elements.menu GetMainMenuInstance
+        //{
+        //    get =>
+        //        Resources.FindObjectsOfTypeAll<VRC.UI.Elements.MainMenu>().FirstOrDefault(x => x.name == "Canvas_MainMenu(Clone)");
+        //}
 
-        public static MenuStateController GetMainMenuStateControllerInstance
-        {
-            get =>
-                GetMainMenuInstance.GetComponent<MenuStateController>();
-        }
+        //public static MenuStateController GetMainMenuStateControllerInstance
+        //{
+        //    get =>
+        //        GetMainMenuInstance.GetComponent<MenuStateController>();
+        //}
 
-        public static MenuStateController GetWngLMenuStateControllerInstance
-        {
-            get { 
-                if (WLcontroller == null) WLcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Left").GetComponent<MenuStateController>();
-                return WLcontroller;
-            }
-        }
+        //public static MenuStateController GetWngLMenuStateControllerInstance
+        //{
+        //    get { 
+        //        if (WLcontroller == null) WLcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Left").GetComponent<MenuStateController>();
+        //        return WLcontroller;
+        //    }
+        //}
 
-        public static MenuStateController GetWngRMenuStateControllerInstance
-        {
-            get {
-                if (WRcontroller == null) WRcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Right").GetComponent<MenuStateController>();
-                return WRcontroller;
-            }
-        }
+        //public static MenuStateController GetWngRMenuStateControllerInstance
+        //{
+        //    get {
+        //        if (WRcontroller == null) WRcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Right").GetComponent<MenuStateController>();
+        //        return WRcontroller;
+        //    }
+        //}
 
-        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
-        {
-            T component = gameObject.GetComponent<T>();
-            if (component == null)
-                return gameObject.AddComponent<T>();
+        //public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        //{
+        //    T component = gameObject.GetComponent<T>();
+        //    if (component == null)
+        //        return gameObject.AddComponent<T>();
 
-            return component;
-        }
+        //    return component;
+        //}
 
-        public static T GetOrAddComponent<T>(this Transform transform) where T : Component
-        {
-            T component = transform.GetComponent<T>();
-            if (component == null)
-                return transform.gameObject.AddComponent<T>();
+        //public static T GetOrAddComponent<T>(this Transform transform) where T : Component
+        //{
+        //    T component = transform.GetComponent<T>();
+        //    if (component == null)
+        //        return transform.gameObject.AddComponent<T>();
 
-            return component;
-        }
+        //    return component;
+        //}
 
-        public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
-        {
-            for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
-                if (exclude == null || exclude(transform.GetChild(childcount)))
-                    UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
-        }
+        //public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
+        //{
+        //    for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
+        //        if (exclude == null || exclude(transform.GetChild(childcount)))
+        //            UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
+        //}
 
-        public static void DestroyChildren(this Transform transform) =>
-            transform.DestroyChildren(null);
+        //public static void DestroyChildren(this Transform transform) =>
+        //    transform.DestroyChildren(null);
 
-        public static void DestroyChildren(this GameObject gameObj) =>
-            gameObj.transform.DestroyChildren(null);
+        //public static void DestroyChildren(this GameObject gameObj) =>
+        //    gameObj.transform.DestroyChildren(null);
 
         public static Color HexToColor(string hexColor)
         {

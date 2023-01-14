@@ -1,4 +1,6 @@
 ﻿using System;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +13,8 @@ namespace WorldAPI.ButtonAPI.Groups;
 
 public class ButtonGroup : ButtonGrp
 {
-    public Transform transform;
-    private GridLayoutGroup Layout;
+    public Transform transform { get; set; }
+    private GridLayoutGroup Layout { get; set; }
 
     public ButtonGroup(Transform parent, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) {
         if (!APIBase.IsReady()) throw new Exception();

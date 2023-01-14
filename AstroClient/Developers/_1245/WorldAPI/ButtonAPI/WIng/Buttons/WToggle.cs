@@ -32,7 +32,7 @@ public class WToggle : WingTglControls
         Text = text;
         var transform = new WButton(menu, Text, () => {
             State = !State;
-            APIBase.SafelyInvolk(State, Listener, Text);
+            APIBase.SafelyInvoke(State, Listener, Text);
             OffImage.gameObject.active = !State;
             OnImage.gameObject.active = State;
             SetToolTip(DefaultState ? onTip : offTip);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements.Controls;
@@ -18,7 +19,7 @@ public class WingBtnControls : Root
     public Button ButtonCompnt { get; internal set; }
     public Image ImgCompnt { get; internal set; }
     public Action onClickAction { get; internal set; }
-    public TextMeshProUGUIEx HeaderTMProCompnt { get; internal set; }
+    public TextMeshProUGUI HeaderTMProCompnt { get; internal set; }
 
     public void RecolorBackGrn(string hexColor, string path = "Container/Background")
     {

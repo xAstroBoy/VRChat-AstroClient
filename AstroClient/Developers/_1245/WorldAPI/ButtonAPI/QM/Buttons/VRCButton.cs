@@ -1,4 +1,5 @@
 ﻿using System;
+using AstroClient;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +13,10 @@ namespace WorldAPI.Buttons
 {
     public class VRCButton : ExtentedControl
     {
-        public Transform transform;
+        public Transform transform { get; set; }
 
         public VRCButton(Transform menu, string text, string tooltip, Action listener, bool Half = false, bool SubMenuIcon = false, Sprite Icon = null, HalfType Type = HalfType.Normal, bool IsGroup = false) {
-            if (!APIBase.IsReady()) { Logs.Error("Error, Something Was Missing!"); return; }
+            if (!APIBase.IsReady()) { Log.Error("Error, Something Was Missing!"); return; }
 
             if (Icon == null)
                 Icon = APIBase.DefaultButtonSprite;
@@ -36,7 +37,7 @@ namespace WorldAPI.Buttons
             ButtonCompnt = transform.GetComponent<Button>();
             ButtonCompnt.onClick = new Button.ButtonClickedEvent();
             onClickAction = listener;
-            ButtonCompnt.onClick.AddListener(new Action(() => APIBase.SafelyInvolk(onClickAction, Text)));
+            ButtonCompnt.onClick.AddListener(new Action(() => APIBase.SafelyInvoke(onClickAction, Text)));
 
             ImgCompnt = transform.transform.Find("Icon").GetComponent<Image>();
             ImgCompnt.gameObject.GetComponent<StyleElement>().enabled = false; // Fix the Images from going back to the default

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using WorldAPI.ButtonAPI.Controls;
 using WorldAPI.ButtonAPI.Extras;
 using WorldAPI.ButtonAPI.Groups;
-using WorldLoader.HookUtils;
 using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Buttons
@@ -40,7 +39,7 @@ namespace WorldAPI.ButtonAPI.Buttons
             ToggleCompnt.onValueChanged = new Toggle.ToggleEvent();
             State = DefaultState;
             Listener = listener;
-            ToggleCompnt.onValueChanged.AddListener(new Action<bool>((val) => APIBase.SafelyInvolk(val, Listener, Text)));
+            ToggleCompnt.onValueChanged.AddListener(new Action<bool>((val) => APIBase.SafelyInvoke(val, Listener, Text)));
 
             OnImage = gameObject.transform.Find("Icon_On").GetComponent<Image>();
             OffImage = gameObject.transform.Find("Icon_Off").GetComponent<Image>();

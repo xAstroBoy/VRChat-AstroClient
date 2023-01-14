@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 using WorldAPI.ButtonAPI.Controls;
@@ -14,10 +15,10 @@ namespace WorldAPI.ButtonAPI.Groups;
 
 public class CollapsibleButtonGroup : Root
 {
-    public bool IsOpen;
-    public GameObject headerObj;
-    public Transform InfoButton;
-    public ButtonGroup buttonGroup;
+    public bool IsOpen { get; set; }
+    public GameObject headerObj { get; set; }
+    public Transform InfoButton { get; set; }
+    public ButtonGroup buttonGroup { get; set; }    
     public static Action ActionButto { get; internal set; }
 
     public CollapsibleButtonGroup(Transform parent, string text, bool openByDefault = false,

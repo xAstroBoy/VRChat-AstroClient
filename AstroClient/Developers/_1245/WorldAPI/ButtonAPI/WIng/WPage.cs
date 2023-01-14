@@ -1,30 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 using VRC.UI.Elements;
 using WorldAPI.ButtonAPI.Extras;
-using UnityEngine;
-using Object = UnityEngine.Object;
-using static WorldAPI.APIBase;
-using WorldLoader.HookUtils;
-using UnityEngine.UI;
 using WorldAPI.ButtonAPI.Wing.Buttons;
-using VRC.UI.Elements.Controls;
 using WorldAPI.ButtonAPI.WIng.Buttons;
-
+using static WorldAPI.APIBase;
+using Object = UnityEngine.Object;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 namespace WorldAPI.ButtonAPI.Wing;
 
 public class WPage
 {
-    public WingSide wingSide;
-    public UIPage page;
-    public GameObject gameObject;
-    public Transform transform;
-    public Transform menuContents;
+    public WingSide wingSide { get; set; }
+    public UIPage page  { get; set; }
+    public GameObject gameObject  { get; set; }
+    public Transform transform  { get; set; }
+    public Transform menuContents  { get; set; }
 
-    public WPage(string pageName, WingSide WingSide) {
+    public WPage(string pageName, WingSide WingSide)
+    {
         wingSide = WingSide;
 
         gameObject = Object.Instantiate(APIBase.WPageTemplate, APIBase.WPageTemplate.transform.parent);
@@ -37,11 +34,11 @@ public class WPage
         menuContents = gameObject.transform.Find("ScrollRect/Viewport/VerticalLayoutGroup");
         menuContents.GetComponent<VerticalLayoutGroup>().childForceExpandWidth = true;
         menuContents.DestroyChildren();
-        gameObject.transform.Find("WngHeader_H1/LeftItemContainer/Text_QM_H2 (1)").GetComponent<TextMeshProUGUIEx>().text = pageName;
-        if (wingSide == WingSide.Left) 
-            QMUtils.GetWngLMenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(pageName, page);
-        else 
-            QMUtils.GetWngRMenuStateControllerInstance.field_Private_Dictionary_2_String_UIPage_0.Add(pageName, page);
+        gameObject.transform.Find("WngHeader_H1/LeftItemContainer/Text_QM_H2 (1)").GetComponent<TextMeshProUGUI>().text = pageName;
+        if (wingSide == WingSide.Left)
+            QuickMenuTools.WingMenuStateControllerLeft.AddPage(page);
+        else
+            QuickMenuTools.WingMenuStateControllerRight.AddPage(page);
 
         page.transform.Find("ScrollRect").GetComponent<VRC.UI.Elements.Controls.ScrollRectEx>().field_Public_Boolean_0 = true;
         page.GetComponent<Canvas>().enabled = true;
@@ -51,16 +48,17 @@ public class WPage
         gameObject.SetActive(false);  // Set off as enabling the comps above makes the page visable, but we dont want that so we set it off, once we go into and out of the menu it syncs
     }
 
-    public void OpenMenu() {
+    public void OpenMenu()
+    {
         gameObject.SetActive(true);
         if (wingSide == WingSide.Left)
-            QMUtils.GetWngLMenuStateControllerInstance.Method_Public_Void_String_ObjectPublicStBoAc1ObObUnique_Boolean_EnumNPublicSealedvaNoLeRiBoIn6vUnique_0(page.field_Public_String_0);
-        else QMUtils.GetWngRMenuStateControllerInstance.Method_Public_Void_String_ObjectPublicStBoAc1ObObUnique_Boolean_EnumNPublicSealedvaNoLeRiBoIn6vUnique_0(page.field_Public_String_0);
-
+            QuickMenuTools.Wing_Left.ShowWingPage(page.field_Public_String_0);
+        else QuickMenuTools.Wing_Right.ShowWingPage(page.field_Public_String_0);
     }
+
     public WButton AddButton(string buttonName, Action listener, string toolTip, Sprite Icon = null, bool SubMenu = false, string Header = "") => new(this, buttonName, listener, toolTip, Icon, SubMenu, Header);
+
     public WToggle AddToggle(string text, Action<bool> listener, bool DefaultState = false,
             string OffTooltip = null, string OnToolTip = null,
             Sprite onimage = null, Sprite offimage = null) => new(this, text, listener, DefaultState, OffTooltip, OnToolTip, onimage, offimage);
-
 }
