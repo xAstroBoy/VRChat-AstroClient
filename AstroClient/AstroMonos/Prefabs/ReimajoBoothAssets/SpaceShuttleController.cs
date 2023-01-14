@@ -16,7 +16,7 @@ namespace ReimajoBoothAssets
     /// This script needs to be added in "SpaceShuttle/ShipController"
     /// </summary>
     [RegisterComponent]
-    public class SpaceShuttleController : MonoBehaviour
+    internal class SpaceShuttleController : MonoBehaviour
     {
         private bool _gearDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
@@ -32,19 +32,19 @@ namespace ReimajoBoothAssets
             {
                 if (value != _gearDown)
                 {
-                    _gearDeployAudioSource.Stop();
+                    gearDeployAudioSource.Stop();
                     if (value)
                     {
-                        _gearDeployAudioSource.clip = _gearOutSound;
-                        _gearDeployAudioSource.Play();
+                        gearDeployAudioSource.clip = gearOutSound;
+                        gearDeployAudioSource.Play();
                     }
                     else
                     {
-                        _gearDeployAudioSource.clip = _gearInSound;
-                        _gearDeployAudioSource.Play();
+                        gearDeployAudioSource.clip = gearInSound;
+                        gearDeployAudioSource.Play();
                     }
-                    _buttonHighlightGearDown.SetActive(value);
-                    _animator.SetBool("LandingGearDeployed", value);
+                    buttonHighlightGearDown.SetActive(value);
+                    animator.SetBool("LandingGearDeployed", value);
                     _gearDown = value;
                 }
             }
@@ -315,9 +315,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionRollLeft();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
+                            animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -325,17 +325,17 @@ namespace ReimajoBoothAssets
                         if (directionRollRight)
                         {
                             SetDirectionRollRight();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
+                                animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionRollLeftRollRightNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -362,9 +362,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionRollRight();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
+                            animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -372,17 +372,17 @@ namespace ReimajoBoothAssets
                         if (directionRollLeft)
                         {
                             SetDirectionRollLeft();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
+                                animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionRollLeftRollRightNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -409,9 +409,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionPitchUp();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
+                            animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -419,17 +419,17 @@ namespace ReimajoBoothAssets
                         if (directionPitchDown)
                         {
                             SetDirectionPitchDown();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
+                                animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionPitchUpPitchDownNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -456,9 +456,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionPitchDown();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
+                            animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -466,17 +466,17 @@ namespace ReimajoBoothAssets
                         if (directionPitchUp)
                         {
                             SetDirectionPitchUp();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
+                                animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionPitchUpPitchDownNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -503,9 +503,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionYawLeft();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
+                            animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -513,17 +513,17 @@ namespace ReimajoBoothAssets
                         if (directionYawRight)
                         {
                             SetDirectionYawRight();
-                            if (_localPlayerIsInStationSeat)
+                            if (localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
+                                animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionYawLeftYawRightNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -550,9 +550,9 @@ namespace ReimajoBoothAssets
                     if (value)
                     {
                         SetDirectionYawRight();
-                        if (!_localPlayerIsInStationSeat)
+                        if (!localPlayerIsInStationSeat)
                         {
-                            _animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
+                            animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
                         }
                     }
                     else
@@ -560,17 +560,17 @@ namespace ReimajoBoothAssets
                         if (directionYawLeft)
                         {
                             SetDirectionYawLeft();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
+                                animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
                             }
                         }
                         else
                         {
                             SetDirectionYawLeftYawRightNeutral();
-                            if (!_localPlayerIsInStationSeat)
+                            if (!localPlayerIsInStationSeat)
                             {
-                                _animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
+                                animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
                             }
                         }
                     }
@@ -583,119 +583,119 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// This slider value ranging from 0 to 1 determines the flight stick sensitivity
         /// </summary>
-        internal float _sliderValue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.3f;
+        internal float sliderValue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.3f;
 
         /// <summary>
         /// The constant forward force that is applied to the constant force component on the ship
         /// </summary>
-        internal float _constantRelativeForwardForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 600000;
+        internal float constantRelativeForwardForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 600000;
 
         /// <summary>
         /// The constant backward force that is applied to the constant force component on the ship
         /// </summary>
-        internal float _constantRelativeBackwardForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
+        internal float constantRelativeBackwardForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
 
         /// <summary>
         /// The horizontal thruster force that is applied to the constant force component on the ship
         /// when steering with the thumbstick
         /// </summary>
-        internal float _constantRelativeHorizontalForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
+        internal float constantRelativeHorizontalForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
 
         /// <summary>
         /// The vertical thruster force that is applied to the constant force component on the ship
         /// when steering with the thumbstick
         /// </summary>
-        internal float _constantRelativeVerticalForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
+        internal float constantRelativeVerticalForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 100000;
 
         /// <summary>
         /// How fast the roll will accelerate in deskop mode, multiplier of delta time
         /// </summary>
-        internal float _desktopRollSpeedLerp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 2f;
+        internal float desktopRollSpeedLerp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 2f;
 
         /// <summary>
         /// Maximum roll speed, in degrees. Should stay under 180.
         /// </summary>
-        internal float _maxRollSpeedDegrees { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 90f; //was 100
+        internal float maxRollSpeedDegrees { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 90f; //was 100
 
         /// <summary>
         /// Minimum value when <see cref="_sliderValue"/> is 0
         /// </summary>
-        internal float _controlSensitivityMin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 1.0f;
+        internal float controlSensitivityMin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 1.0f;
 
         /// <summary>
         /// Maximum value when <see cref="_sliderValue"/> is 1
         /// </summary>
-        internal float _controlSensitivityMax { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 3.0f;
+        internal float controlSensitivityMax { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 3.0f;
 
         /// <summary>
         /// Controller rotation offset for desktop players, so that they can look forward while flying instead of looking down
         /// </summary>
-        internal float _controllerXOffsetDesktopUser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 45f;
+        internal float controllerXOffsetDesktopUser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 45f;
 
         /// <summary>
         /// Controller rotation offset for VR players, so that they can look forward while flying instead of looking down
         /// </summary>
-        internal float _controllerXOffsetVRUser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
+        internal float controllerXOffsetVRUser { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
 
         /// <summary>
         /// All desktop buttons which will be disabled unless the player is in the spaceship.
         /// </summary>
-        private List<GameObject> _desktopButtons { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new List<GameObject>();
+        private List<GameObject> desktopButtons { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = new List<GameObject>();
 
         /// <summary>
         /// Gear down button highlight (shown when the gears are down & the player is in the spaceship)
         /// </summary>
-        private GameObject _buttonHighlightGearDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject buttonHighlightGearDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Flight assist button highlight (shown when the flight assist is on & the player is in the spaceship)
         /// </summary>
-        private GameObject _buttonHighlightFlightAssist { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject buttonHighlightFlightAssist { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Custom center of gravity of the ship
         /// </summary>
-        private Transform _customCenterOfGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform customCenterOfGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Animator of the space shuttle
         /// </summary>
-        private Animator _animator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Animator animator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// AudioSource to play the gear deploy sound
         /// </summary>
-        private AudioSource _gearDeployAudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource gearDeployAudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// AudioClip for the gear deploy (gear in) sound
         /// </summary>
-        private AudioClip _gearInSound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioClip gearInSound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// AudioClip for the gear deploy (gear out) sound
         /// </summary>
-        private AudioClip _gearOutSound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioClip gearOutSound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Root of the Flight Stick (local pickup object), will be re-[HideFromIl2Cpp] set to the local position at start when it's released
         /// </summary>
-        private Transform _flightStickRoot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform flightStickRoot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Nav ball bone (Instrumentation)
         /// </summary>
-        private Transform _navBall { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform navBall { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Speed indicator bone (Instrumentation)
         /// </summary>
-        private Transform _speedIndicatorBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform speedIndicatorBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Altitude indicator bone (Instrumentation)
         /// </summary>
-        private Transform _altitudeIndicatorBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform altitudeIndicatorBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Rigidbody of the ship, will be toggled between kinematic / non-kinematic
@@ -705,111 +705,111 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// The pilot's chair of the ship (VRCStation)
         /// </summary>
-        private ChairController _pilotChairStation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ChairController pilotChairStation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing main truster number 1/3 </summary>
-        private Transform _backwardMTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backwardMTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing main truster number 2/3 </summary>
-        private Transform _backwardMTRs2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backwardMTRs2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing main truster number 3/3 </summary>
-        private Transform _backwardMTRs3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backwardMTRs3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing cold gas truster number 1/2 </summary>
-        private Transform _backwardCTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backwardCTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing cold gas truster number 2/2 </summary>
-        private Transform _backwardCTRs2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backwardCTRs2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Forward pointing cold gas truster number 1/2 </summary>
-        private Transform _frontForwardCTR1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform frontForwardCTR1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Forward pointing cold gas truster number 2/2 </summary>
-        private Transform _frontForwardCTR2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform frontForwardCTR2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Forward pointing cold gas truster on the front left </summary>
-        private Transform _frontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform frontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Forward pointing cold gas truster on the front right </summary>
-        private Transform _frontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform frontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Upward pointing cold gas truster on the front left </summary>
-        private Transform _upFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform upFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Upward pointing cold gas truster on the front right </summary>
-        private Transform _upFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform upFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Upward pointing cold gas truster on the far left / middle (wing) </summary>
-        private Transform _upLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform upLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Upward pointing cold gas truster on the far right / middle (wing) </summary>
-        private Transform _upRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform upRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Downward pointing cold gas truster on the far left / middle (wing) </summary>
-        private Transform _downLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform downLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Downward pointing cold gas truster on the far right / middle (wing) </summary>
-        private Transform _downRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform downRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Downward pointing cold gas truster on the front left </summary>
-        private Transform _downFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform downFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Downward pointing cold gas truster on the front right </summary>
-        private Transform _downFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform downFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backward pointing cold gas truster on the back left </summary>
-        private Transform _backLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backward pointing cold gas truster on the back right </summary>
-        private Transform _backRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform backRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Bone of the space ship armature that moves the joystick visually </summary>
-        private Transform _joystickBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform joystickBone { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal float _oldForwardThrustTriggerInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float oldForwardThrustTriggerInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         //particle systems fetched from the transform objects
-        private ParticleSystem _backwardMainPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backwardMainPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private ParticleSystem _backwardMainPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _backwardMainPS3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _backwardSlowPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _backwardSlowPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _frontForwardPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _frontForwardPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _frontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _frontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _upFrontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _upFrontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _upLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _upRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _downLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _downRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _downFrontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _downFrontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _backLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private ParticleSystem _backRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backwardMainPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backwardMainPS3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backwardSlowPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backwardSlowPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem frontForwardPS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem frontForwardPS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem frontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem frontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem upFrontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem upFrontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem upLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem upRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem downLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem downRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem downFrontLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem downFrontRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backLeftPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ParticleSystem backRightPS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         //audio sources
-        private AudioSource _backwardMainASs { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource backwardMainASs { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private AudioSource _backwardSlowAS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _backwardSlowAS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _frontForwardAS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _frontForwardAS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _frontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _frontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _upFrontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _upFrontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _upLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _upRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _downLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _downRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _downFrontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _downFrontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _backLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private AudioSource _backRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource backwardSlowAS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource backwardSlowAS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource frontForwardAS1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource frontForwardAS2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource frontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource frontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource upFrontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource upFrontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource upLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource upRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource downLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource downRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource downFrontLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource downFrontRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource backLeftAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioSource backRightAS { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _backwardMain { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
@@ -830,17 +830,17 @@ namespace ReimajoBoothAssets
                     //forward main boosters
                     if (value)
                     {
-                        _backwardMainPS1.Play();
-                        _backwardMainPS2.Play();
-                        _backwardMainPS3.Play();
-                        _backwardMainASs.Play();
+                        backwardMainPS1.Play();
+                        backwardMainPS2.Play();
+                        backwardMainPS3.Play();
+                        backwardMainASs.Play();
                     }
                     else
                     {
-                        _backwardMainPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backwardMainPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backwardMainPS3.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backwardMainASs.Stop();
+                        backwardMainPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backwardMainPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backwardMainPS3.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backwardMainASs.Stop();
                     }
                 }
             }
@@ -863,11 +863,11 @@ namespace ReimajoBoothAssets
                     _upFrontLeft = value;
                     if (value)
                     {
-                        _upFrontLeftPS.Play();
+                        upFrontLeftPS.Play();
                     }
                     else
                     {
-                        _upFrontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        upFrontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
                     }
                 }
             }
@@ -890,17 +890,17 @@ namespace ReimajoBoothAssets
                     _backwardSlow = value;
                     if (value)
                     {
-                        _backwardSlowPS1.Play();
-                        _backwardSlowPS2.Play();
-                        _backwardSlowAS1.Play();
-                        _backwardSlowAS2.Play();
+                        backwardSlowPS1.Play();
+                        backwardSlowPS2.Play();
+                        backwardSlowAS1.Play();
+                        backwardSlowAS2.Play();
                     }
                     else
                     {
-                        _backwardSlowPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backwardSlowPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backwardSlowAS1.Stop();
-                        _backwardSlowAS2.Stop();
+                        backwardSlowPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backwardSlowPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backwardSlowAS1.Stop();
+                        backwardSlowAS2.Stop();
                     }
                 }
             }
@@ -923,17 +923,17 @@ namespace ReimajoBoothAssets
                     _frontForward = value;
                     if (value)
                     {
-                        _frontForwardPS1.Play();
-                        _frontForwardAS1.Play();
-                        _frontForwardPS2.Play();
-                        _frontForwardAS2.Play();
+                        frontForwardPS1.Play();
+                        frontForwardAS1.Play();
+                        frontForwardPS2.Play();
+                        frontForwardAS2.Play();
                     }
                     else
                     {
-                        _frontForwardPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _frontForwardAS1.Stop();
-                        _frontForwardPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _frontForwardAS2.Stop();
+                        frontForwardPS1.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        frontForwardAS1.Stop();
+                        frontForwardPS2.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        frontForwardAS2.Stop();
                     }
                 }
             }
@@ -956,13 +956,13 @@ namespace ReimajoBoothAssets
                     _frontLeft = value;
                     if (value)
                     {
-                        _frontLeftPS.Play();
-                        _frontLeftAS.Play();
+                        frontLeftPS.Play();
+                        frontLeftAS.Play();
                     }
                     else
                     {
-                        _frontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _frontLeftAS.Stop();
+                        frontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        frontLeftAS.Stop();
                     }
                 }
             }
@@ -985,13 +985,13 @@ namespace ReimajoBoothAssets
                     _frontRight = value;
                     if (value)
                     {
-                        _frontRightPS.Play();
-                        _frontRightAS.Play();
+                        frontRightPS.Play();
+                        frontRightAS.Play();
                     }
                     else
                     {
-                        _frontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _frontRightAS.Stop();
+                        frontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        frontRightAS.Stop();
                     }
                 }
             }
@@ -1014,11 +1014,11 @@ namespace ReimajoBoothAssets
                     _upFrontRight = value;
                     if (value)
                     {
-                        _upFrontRightPS.Play();
+                        upFrontRightPS.Play();
                     }
                     else
                     {
-                        _upFrontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        upFrontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
                     }
                 }
             }
@@ -1041,11 +1041,11 @@ namespace ReimajoBoothAssets
                     _upLeft = value;
                     if (value)
                     {
-                        _upLeftPS.Play();
+                        upLeftPS.Play();
                     }
                     else
                     {
-                        _upLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        upLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
                     }
                 }
             }
@@ -1068,13 +1068,13 @@ namespace ReimajoBoothAssets
                     _upRight = value;
                     if (value)
                     {
-                        _upRightPS.Play();
-                        _upRightAS.Play();
+                        upRightPS.Play();
+                        upRightAS.Play();
                     }
                     else
                     {
-                        _upRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _upRightAS.Stop();
+                        upRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        upRightAS.Stop();
                     }
                 }
             }
@@ -1097,13 +1097,13 @@ namespace ReimajoBoothAssets
                     _downLeft = value;
                     if (value)
                     {
-                        _downLeftPS.Play();
-                        _downLeftAS.Play();
+                        downLeftPS.Play();
+                        downLeftAS.Play();
                     }
                     else
                     {
-                        _downLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _downLeftAS.Stop();
+                        downLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        downLeftAS.Stop();
                     }
                 }
             }
@@ -1126,13 +1126,13 @@ namespace ReimajoBoothAssets
                     _downRight = value;
                     if (value)
                     {
-                        _downRightPS.Play();
-                        _downRightAS.Play();
+                        downRightPS.Play();
+                        downRightAS.Play();
                     }
                     else
                     {
-                        _downRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _downRightAS.Stop();
+                        downRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        downRightAS.Stop();
                     }
                 }
             }
@@ -1155,13 +1155,13 @@ namespace ReimajoBoothAssets
                     _downFrontLeft = value;
                     if (value)
                     {
-                        _downFrontLeftPS.Play();
-                        _downFrontLeftAS.Play();
+                        downFrontLeftPS.Play();
+                        downFrontLeftAS.Play();
                     }
                     else
                     {
-                        _downFrontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _downFrontLeftAS.Stop();
+                        downFrontLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        downFrontLeftAS.Stop();
                     }
                 }
             }
@@ -1184,13 +1184,13 @@ namespace ReimajoBoothAssets
                     _downFrontRight = value;
                     if (value)
                     {
-                        _downFrontRightPS.Play();
-                        _downFrontRightAS.Play();
+                        downFrontRightPS.Play();
+                        downFrontRightAS.Play();
                     }
                     else
                     {
-                        _downFrontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _downFrontRightAS.Stop();
+                        downFrontRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        downFrontRightAS.Stop();
                     }
                 }
             }
@@ -1213,13 +1213,13 @@ namespace ReimajoBoothAssets
                     _backLeft = value;
                     if (value)
                     {
-                        _backLeftPS.Play();
-                        _backLeftAS.Play();
+                        backLeftPS.Play();
+                        backLeftAS.Play();
                     }
                     else
                     {
-                        _backLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backLeftAS.Stop();
+                        backLeftPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backLeftAS.Stop();
                     }
                 }
             }
@@ -1242,38 +1242,38 @@ namespace ReimajoBoothAssets
                     _backRight = value;
                     if (value)
                     {
-                        _backRightPS.Play();
-                        _backRightAS.Play();
+                        backRightPS.Play();
+                        backRightAS.Play();
                     }
                     else
                     {
-                        _backRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
-                        _backRightAS.Stop();
+                        backRightPS.Stop(withChildren: true, ParticleSystemStopBehavior.StopEmitting);
+                        backRightAS.Stop();
                     }
                 }
             }
         }
 
-        private ConstantForce _constantForceShipComponent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private VRC_AstroPickup _flightStickPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _forwardSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _controlSensitivitySpan { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _currentControlSensitivity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _localPlayerIsInStationSeat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _rollAngleInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _addControllerOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _stickIsHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _fadeOutTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Vector3 _localFlightStickLocalResetPosition { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Quaternion _localFlightStickLocalResetRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Quaternion _steeringOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Quaternion _currentFlightStickRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private GameObject _syncedShipGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _forwardBackwardThrust { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _upDownThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _leftRightThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float _controllerXOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool _isVR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private ConstantForce constantForceShipComponent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup flightStickPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float forwardSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float controlSensitivitySpan { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float currentControlSensitivity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool localPlayerIsInStationSeat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float rollAngleInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool addControllerOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool stickIsHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float fadeOutTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Vector3 localFlightStickLocalResetPosition { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Quaternion localFlightStickLocalResetRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Quaternion steeringOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Quaternion currentFlightStickRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject syncedShipGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float forwardBackwardThrust { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float upDownThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float leftRightThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal float controllerXOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isVR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private string INDEX_TRIGGER_PICKUP_HAND_NAME { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } //is [HideFromIl2Cpp] set at runtime
         private string INDEX_TRIGGER_OTHER_HAND_NAME { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } //is [HideFromIl2Cpp] set at runtime
         private const string INDEX_TRIGGER_RIGHT = "Oculus_CrossPlatform_SecondaryIndexTrigger";
@@ -1386,10 +1386,10 @@ namespace ReimajoBoothAssets
         internal void SyncControlInput(float pitchRotation, float yawRotation, float rollRotation)
         {
             //check up-down stick axis
-            if (Mathf.Abs(_upDownThrustInput) > MIN_STICK_INPUT)
+            if (Mathf.Abs(upDownThrustInput) > MIN_STICK_INPUT)
             {
                 //relevant input for up/down
-                if (_upDownThrustInput < 0)
+                if (upDownThrustInput < 0)
                 {
                     SetDirectionUp();
                 }
@@ -1404,10 +1404,10 @@ namespace ReimajoBoothAssets
             }
 
             //check left-right stick axis
-            if (Mathf.Abs(_leftRightThrustInput) > MIN_STICK_INPUT)
+            if (Mathf.Abs(leftRightThrustInput) > MIN_STICK_INPUT)
             {
                 //relevant input for up/down
-                if (_leftRightThrustInput > 0)
+                if (leftRightThrustInput > 0)
                 {
                     SetDirectionRight();
                 }
@@ -1422,12 +1422,12 @@ namespace ReimajoBoothAssets
             }
 
             //check forward-backward input _forwardBackwardThrust
-            if (Mathf.Abs(_forwardBackwardThrust) > MIN_STICK_INPUT)
+            if (Mathf.Abs(forwardBackwardThrust) > MIN_STICK_INPUT)
             {
                 //relevant input for forward/backward
-                if (_forwardBackwardThrust > 0)
+                if (forwardBackwardThrust > 0)
                 {
-                    if (_forwardBackwardThrust < SLOW_TRIGGER_INPUT)
+                    if (forwardBackwardThrust < SLOW_TRIGGER_INPUT)
                     {
                         SetDirectionForwardSlow();
                     }
@@ -2217,7 +2217,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void SliderValueChanged()
         {
-            _currentControlSensitivity = _controlSensitivityMin + (_sliderValue * _controlSensitivitySpan);
+            currentControlSensitivity = controlSensitivityMin + (sliderValue * controlSensitivitySpan);
         }
 
         /// <summary>
@@ -2236,9 +2236,9 @@ namespace ReimajoBoothAssets
                     break;
 
                 case 2:
-                    if (_localPlayerIsInStationSeat)
+                    if (localPlayerIsInStationSeat)
                     {
-                        _pilotChairStation.Station.ExitStation();
+                        pilotChairStation.Station.ExitStation();
                     }
                     break;
             }
@@ -2260,7 +2260,7 @@ namespace ReimajoBoothAssets
         internal void _ToggleFlightAssist()
         {
             _flightAssistOn = !_flightAssistOn;
-            _buttonHighlightFlightAssist.SetActive(_flightAssistOn);
+            buttonHighlightFlightAssist.SetActive(_flightAssistOn);
             ApplyFlightAssistSetting();
         }
 
@@ -2299,7 +2299,7 @@ namespace ReimajoBoothAssets
                         this.OnButtonDown(0);
                     };
                 }
-                _desktopButtons.Add(Desktop0);
+                desktopButtons.Add(Desktop0);
             }
             var Desktop1 = root.FindObject($"Space Shuttle Model/Armature/Root/DashboardButton.L/_desktopButton1").gameObject;
             if (Desktop1 != null)
@@ -2314,7 +2314,7 @@ namespace ReimajoBoothAssets
                         this.OnButtonDown(1);
                     };
                 }
-                _desktopButtons.Add(Desktop1);
+                desktopButtons.Add(Desktop1);
             }
             var Desktop2 = root.FindObject($"Space Shuttle Model/Armature/Root/EjectButton/_desktopButton2").gameObject;
             if (Desktop2 != null)
@@ -2329,55 +2329,55 @@ namespace ReimajoBoothAssets
                         this.OnButtonDown(2);
                     };
                 }
-                _desktopButtons.Add(Desktop2);
+                desktopButtons.Add(Desktop2);
             }
             Ship = root.GetComponent<Rigidbody>();
-            _syncedShipGameObject = root.gameObject;
-            _buttonHighlightGearDown = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L/ButtonHighlightGearDown").gameObject;
-            _buttonHighlightFlightAssist = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R/ButtonHighlightFlightAssist").gameObject;
-            _customCenterOfGravity = root.FindObject("CustomCG");
-            _animator = root.FindObject("Space Shuttle Model").GetComponent<Animator>();
-            _gearDeployAudioSource = root.FindObject("_audioSourceGearDeploySound").GetComponent<AudioSource>();
-            _flightStickRoot = this.transform;
-            _navBall = root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent/NavballRotateHere");
-            _speedIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Speedometer");
-            _altitudeIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Altimeter");
-            _backwardMTRs1 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1");
-            _backwardMTRs2 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2");
-            _backwardMTRs3 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop/_backwardMTRs3");
+            syncedShipGameObject = root.gameObject;
+            buttonHighlightGearDown = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L/ButtonHighlightGearDown").gameObject;
+            buttonHighlightFlightAssist = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R/ButtonHighlightFlightAssist").gameObject;
+            customCenterOfGravity = root.FindObject("CustomCG");
+            animator = root.FindObject("Space Shuttle Model").GetComponent<Animator>();
+            gearDeployAudioSource = root.FindObject("_audioSourceGearDeploySound").GetComponent<AudioSource>();
+            flightStickRoot = this.transform;
+            navBall = root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent/NavballRotateHere");
+            speedIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Speedometer");
+            altitudeIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Altimeter");
+            backwardMTRs1 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1");
+            backwardMTRs2 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2");
+            backwardMTRs3 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop/_backwardMTRs3");
 
-            _backwardCTRs1 = root.FindObject("ParticlesRoot/_backwardCTR1");
-            _backwardCTRs2 = root.FindObject("ParticlesRoot/_backwardCTR2");
+            backwardCTRs1 = root.FindObject("ParticlesRoot/_backwardCTR1");
+            backwardCTRs2 = root.FindObject("ParticlesRoot/_backwardCTR2");
 
-            _frontForwardCTR1 = root.FindObject("ParticlesRoot/_frontForwardCTR1");
-            _frontForwardCTR2 = root.FindObject("ParticlesRoot/_frontForwardCTR2");
+            frontForwardCTR1 = root.FindObject("ParticlesRoot/_frontForwardCTR1");
+            frontForwardCTR2 = root.FindObject("ParticlesRoot/_frontForwardCTR2");
 
-            _upRightCTR = root.FindObject("ParticlesRoot/_upRightCTR");
+            upRightCTR = root.FindObject("ParticlesRoot/_upRightCTR");
 
-            _upFrontRightCTR = root.FindObject("ParticlesRoot/_upFrontRightCTR");
-            _downFrontRightCTR = root.FindObject("ParticlesRoot/_downFrontRightCTR");
-            _downFrontLeftCTR = root.FindObject("ParticlesRoot/_downFrontLeftCTR");
-            _backLeftCTR = root.FindObject("ParticlesRoot/_backLeftCTR");
-            _downRightCTR = root.FindObject("ParticlesRoot/_downRightCTR");
-            _downLeftCTR = root.FindObject("ParticlesRoot/_downLeftCTR");
-            _frontRightCTR = root.FindObject("ParticlesRoot/_frontRightCTR");
-            _frontLeftCTR = root.FindObject("ParticlesRoot/_frontLeftCTR");
-            _backRightCTR = root.FindObject("ParticlesRoot/_backRightCTR");
-            _upFrontLeftCTR = root.FindObject("ParticlesRoot/_upFrontLeftCTR");
-            _upLeftCTR = root.FindObject("ParticlesRoot/_upLeftCTR");
-            _joystickBone = root.FindObject("Space Shuttle Model/Armature/Root/Joystick");
+            upFrontRightCTR = root.FindObject("ParticlesRoot/_upFrontRightCTR");
+            downFrontRightCTR = root.FindObject("ParticlesRoot/_downFrontRightCTR");
+            downFrontLeftCTR = root.FindObject("ParticlesRoot/_downFrontLeftCTR");
+            backLeftCTR = root.FindObject("ParticlesRoot/_backLeftCTR");
+            downRightCTR = root.FindObject("ParticlesRoot/_downRightCTR");
+            downLeftCTR = root.FindObject("ParticlesRoot/_downLeftCTR");
+            frontRightCTR = root.FindObject("ParticlesRoot/_frontRightCTR");
+            frontLeftCTR = root.FindObject("ParticlesRoot/_frontLeftCTR");
+            backRightCTR = root.FindObject("ParticlesRoot/_backRightCTR");
+            upFrontLeftCTR = root.FindObject("ParticlesRoot/_upFrontLeftCTR");
+            upLeftCTR = root.FindObject("ParticlesRoot/_upLeftCTR");
+            joystickBone = root.FindObject("Space Shuttle Model/Armature/Root/Joystick");
 
-            _flightStickPickup = _flightStickRoot.GetOrAddComponent<VRC_AstroPickup>();
-            _flightStickPickup.ForcePickupComponent = true;
-            _flightStickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Any;
-            _flightStickPickup.PickupController.AutoHold = VRC_Pickup.AutoHoldMode.Yes;
-            _flightStickPickup.PickupController.UseText = "Grab";
-            _flightStickPickup.PickupController.ThrowVelocityBoostMinSpeed = 1;
-            _flightStickPickup.PickupController.ThrowVelocityBoostScale = 1;
-            _flightStickPickup.pickupable = true;
-            _flightStickPickup.PickupController.proximity = 2;
-            _flightStickPickup.OnPickup += OnPickup;
-            _flightStickPickup.OnDrop += OnDrop;
+            flightStickPickup = flightStickRoot.GetOrAddComponent<VRC_AstroPickup>();
+            flightStickPickup.ForcePickupComponent = true;
+            flightStickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Any;
+            flightStickPickup.PickupController.AutoHold = VRC_Pickup.AutoHoldMode.Yes;
+            flightStickPickup.PickupController.UseText = "Grab";
+            flightStickPickup.PickupController.ThrowVelocityBoostMinSpeed = 1;
+            flightStickPickup.PickupController.ThrowVelocityBoostScale = 1;
+            flightStickPickup.pickupable = true;
+            flightStickPickup.PickupController.proximity = 2;
+            flightStickPickup.OnPickup += OnPickup;
+            flightStickPickup.OnDrop += OnDrop;
 
             var ChairController = root.FindObject("SelfAdjustingChair_Pilot/ChairController");
             var station = ChairController.GetOrAddComponent<VRC_AstroStation>();
@@ -2395,14 +2395,14 @@ namespace ReimajoBoothAssets
                 station.StationTrigger.proximity = 2;
             }
 
-            _pilotChairStation = ChairController.GetOrAddComponent<ChairController>();
-            if (_pilotChairStation != null)
+            pilotChairStation = ChairController.GetOrAddComponent<ChairController>();
+            if (pilotChairStation != null)
             {
-                _pilotChairStation._disableColliderControl = false;
-                _pilotChairStation._enableStationMenuButtonExit = false;
-                _pilotChairStation._stationSeat = root.FindObject("SelfAdjustingChair_Pilot/_stationSeat");
-                _pilotChairStation._seatSurfaceUpAndFrontEdgeForward = root.FindObject("SelfAdjustingChair_Pilot/_seatSurfaceUpAndFrontEdgeForward");
-                _pilotChairStation._seatBackEndSurfaceForward = root.FindObject("SelfAdjustingChair_Pilot/_seatBackEndSurfaceForward");
+                pilotChairStation.disableColliderControl = false;
+                pilotChairStation.enableStationMenuButtonExit = false;
+                pilotChairStation.stationSeat = root.FindObject("SelfAdjustingChair_Pilot/_stationSeat");
+                pilotChairStation.seatSurfaceUpAndFrontEdgeForward = root.FindObject("SelfAdjustingChair_Pilot/_seatSurfaceUpAndFrontEdgeForward");
+                pilotChairStation.seatBackEndSurfaceForward = root.FindObject("SelfAdjustingChair_Pilot/_seatBackEndSurfaceForward");
             }
             // add missing audio components.
             SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_upRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
@@ -2425,91 +2425,91 @@ namespace ReimajoBoothAssets
             SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1/AudioSource").gameObject, 60, 40);
             SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2/AudioSource").gameObject, 60, 40);
             SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2/AudioSource").gameObject, 60, 40);
-            _backwardMainPS1 = _backwardMTRs1.GetComponentInChildren<ParticleSystem>();
-            _backwardMainPS2 = _backwardMTRs2.GetComponentInChildren<ParticleSystem>();
-            _backwardMainPS3 = _backwardMTRs3.GetComponentInChildren<ParticleSystem>();
-            _backwardSlowPS1 = _backwardCTRs1.GetComponentInChildren<ParticleSystem>();
-            _backwardSlowPS2 = _backwardCTRs2.GetComponentInChildren<ParticleSystem>();
-            _frontForwardPS1 = _frontForwardCTR1.GetComponentInChildren<ParticleSystem>();
-            _frontForwardPS2 = _frontForwardCTR2.GetComponentInChildren<ParticleSystem>();
-            _frontLeftPS = _frontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _frontRightPS = _frontRightCTR.GetComponentInChildren<ParticleSystem>();
-            _upFrontLeftPS = _upFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _upFrontRightPS = _upFrontRightCTR.GetComponentInChildren<ParticleSystem>();
-            _upLeftPS = _upLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _upRightPS = _upRightCTR.GetComponentInChildren<ParticleSystem>();
-            _downLeftPS = _downLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _downRightPS = _downRightCTR.GetComponentInChildren<ParticleSystem>();
-            _downFrontLeftPS = _downFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _downFrontRightPS = _downFrontRightCTR.GetComponentInChildren<ParticleSystem>();
-            _backLeftPS = _backLeftCTR.GetComponentInChildren<ParticleSystem>();
-            _backRightPS = _backRightCTR.GetComponentInChildren<ParticleSystem>();
+            backwardMainPS1 = backwardMTRs1.GetComponentInChildren<ParticleSystem>();
+            backwardMainPS2 = backwardMTRs2.GetComponentInChildren<ParticleSystem>();
+            backwardMainPS3 = backwardMTRs3.GetComponentInChildren<ParticleSystem>();
+            backwardSlowPS1 = backwardCTRs1.GetComponentInChildren<ParticleSystem>();
+            backwardSlowPS2 = backwardCTRs2.GetComponentInChildren<ParticleSystem>();
+            frontForwardPS1 = frontForwardCTR1.GetComponentInChildren<ParticleSystem>();
+            frontForwardPS2 = frontForwardCTR2.GetComponentInChildren<ParticleSystem>();
+            frontLeftPS = frontLeftCTR.GetComponentInChildren<ParticleSystem>();
+            frontRightPS = frontRightCTR.GetComponentInChildren<ParticleSystem>();
+            upFrontLeftPS = upFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
+            upFrontRightPS = upFrontRightCTR.GetComponentInChildren<ParticleSystem>();
+            upLeftPS = upLeftCTR.GetComponentInChildren<ParticleSystem>();
+            upRightPS = upRightCTR.GetComponentInChildren<ParticleSystem>();
+            downLeftPS = downLeftCTR.GetComponentInChildren<ParticleSystem>();
+            downRightPS = downRightCTR.GetComponentInChildren<ParticleSystem>();
+            downFrontLeftPS = downFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
+            downFrontRightPS = downFrontRightCTR.GetComponentInChildren<ParticleSystem>();
+            backLeftPS = backLeftCTR.GetComponentInChildren<ParticleSystem>();
+            backRightPS = backRightCTR.GetComponentInChildren<ParticleSystem>();
             //fetch audio sources
-            _backwardMainASs = _backwardMainPS1.GetComponentInChildren<AudioSource>();
-            _backwardSlowAS1 = _backwardSlowPS1.GetComponentInChildren<AudioSource>();
-            _backwardSlowAS2 = _backwardSlowPS2.GetComponentInChildren<AudioSource>();
-            _frontForwardAS1 = _frontForwardCTR1.GetComponentInChildren<AudioSource>();
-            _frontForwardAS2 = _frontForwardCTR2.GetComponentInChildren<AudioSource>();
-            _frontLeftAS = _frontLeftCTR.GetComponentInChildren<AudioSource>();
-            _frontRightAS = _frontRightCTR.GetComponentInChildren<AudioSource>();
-            _upFrontLeftAS = _upFrontLeftCTR.GetComponentInChildren<AudioSource>();
-            _upFrontRightAS = _upFrontRightCTR.GetComponentInChildren<AudioSource>();
-            _upLeftAS = _upLeftCTR.GetComponentInChildren<AudioSource>();
-            _upRightAS = _upRightCTR.GetComponentInChildren<AudioSource>();
-            _downLeftAS = _downLeftCTR.GetComponentInChildren<AudioSource>();
-            _downRightAS = _downRightCTR.GetComponentInChildren<AudioSource>();
-            _downFrontLeftAS = _downFrontLeftCTR.GetComponentInChildren<AudioSource>();
-            _downFrontRightAS = _downFrontRightCTR.GetComponentInChildren<AudioSource>();
-            _backLeftAS = _backLeftCTR.GetComponentInChildren<AudioSource>();
-            _backRightAS = _backRightCTR.GetComponentInChildren<AudioSource>();
+            backwardMainASs = backwardMainPS1.GetComponentInChildren<AudioSource>();
+            backwardSlowAS1 = backwardSlowPS1.GetComponentInChildren<AudioSource>();
+            backwardSlowAS2 = backwardSlowPS2.GetComponentInChildren<AudioSource>();
+            frontForwardAS1 = frontForwardCTR1.GetComponentInChildren<AudioSource>();
+            frontForwardAS2 = frontForwardCTR2.GetComponentInChildren<AudioSource>();
+            frontLeftAS = frontLeftCTR.GetComponentInChildren<AudioSource>();
+            frontRightAS = frontRightCTR.GetComponentInChildren<AudioSource>();
+            upFrontLeftAS = upFrontLeftCTR.GetComponentInChildren<AudioSource>();
+            upFrontRightAS = upFrontRightCTR.GetComponentInChildren<AudioSource>();
+            upLeftAS = upLeftCTR.GetComponentInChildren<AudioSource>();
+            upRightAS = upRightCTR.GetComponentInChildren<AudioSource>();
+            downLeftAS = downLeftCTR.GetComponentInChildren<AudioSource>();
+            downRightAS = downRightCTR.GetComponentInChildren<AudioSource>();
+            downFrontLeftAS = downFrontLeftCTR.GetComponentInChildren<AudioSource>();
+            downFrontRightAS = downFrontRightCTR.GetComponentInChildren<AudioSource>();
+            backLeftAS = backLeftCTR.GetComponentInChildren<AudioSource>();
+            backRightAS = backRightCTR.GetComponentInChildren<AudioSource>();
 
             #endregion Setup Variables
 
-            foreach (var button in _desktopButtons)
+            foreach (var button in desktopButtons)
             {
                 button.SetActive(false);
             }
             DisableButtonHighlights();
             //fetch particle systems
-            _controlSensitivitySpan = _controlSensitivityMax - _controlSensitivityMin;
-            SliderValueChanged(); //apply the calculated _controlSensitivitySpan
-            _constantForceShipComponent = Ship.GetComponent<ConstantForce>();
+            controlSensitivitySpan = controlSensitivityMax - controlSensitivityMin;
+            SliderValueChanged(); //apply the calculated controlSensitivitySpan
+            constantForceShipComponent = Ship.GetComponent<ConstantForce>();
             ApplyFlightAssistSetting();
             DisableAllThrusters();
-            if (_customCenterOfGravity)
+            if (customCenterOfGravity)
             {
-                Ship.centerOfMass = _customCenterOfGravity.localPosition;
+                Ship.centerOfMass = customCenterOfGravity.localPosition;
             }
-            if (_constantForceShipComponent != null)
+            if (constantForceShipComponent != null)
             {
-                _constantForceShipComponent.relativeForce = new Vector3(0, 0, 0);
+                constantForceShipComponent.relativeForce = new Vector3(0, 0, 0);
             }
             else
             {
                 Log.Error("[ShipController] There is no constant force component attached to the ship's rigidbody.");
             }
             Ship.isKinematic = true;
-            _flightStickPickup.pickupable = false;
-            _isVR = Networking.LocalPlayer.IsUserInVR();
-            _controllerXOffset = _isVR ? _controllerXOffsetVRUser : _controllerXOffsetDesktopUser;
-            if (_controllerXOffset != 0)
+            flightStickPickup.pickupable = false;
+            isVR = Networking.LocalPlayer.IsUserInVR();
+            controllerXOffset = isVR ? controllerXOffsetVRUser : controllerXOffsetDesktopUser;
+            if (controllerXOffset != 0)
             {
-                _addControllerOffset = true;
-                Log.Debug($"[ShipController] Adding controller X-Offset with {_controllerXOffset} degrees.");
-                _steeringOffset = Quaternion.Euler(_controllerXOffset, 0, 0);
+                addControllerOffset = true;
+                Log.Debug($"[ShipController] Adding controller X-Offset with {controllerXOffset} degrees.");
+                steeringOffset = Quaternion.Euler(controllerXOffset, 0, 0);
             }
             StoreLocalStickPositionOffset();
-            if (_constantRelativeVerticalForce > 0)
-                _constantRelativeVerticalForce = -_constantRelativeVerticalForce;
-            if (_constantRelativeBackwardForce < 0)
-                _constantRelativeBackwardForce = -_constantRelativeBackwardForce;
-            _animator.SetBool("LandingGearDeployed", gearDown);
+            if (constantRelativeVerticalForce > 0)
+                constantRelativeVerticalForce = -constantRelativeVerticalForce;
+            if (constantRelativeBackwardForce < 0)
+                constantRelativeBackwardForce = -constantRelativeBackwardForce;
+            animator.SetBool("LandingGearDeployed", gearDown);
             ResetAnimator();
         }
 
         internal void Update()
         {
-            if (_isVR)
+            if (isVR)
             {
                 //allows advanced VR input via thumbstick
                 UpdateSteeringVR();
@@ -2527,9 +2527,9 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void ResetAnimator()
         {
-            _animator.SetFloat("V", value: 0 + V_OFFSET);
-            _animator.SetFloat("H", value: 0);
-            _animator.SetFloat("R", value: 0.5f + R_OFFSET);
+            animator.SetFloat("V", value: 0 + V_OFFSET);
+            animator.SetFloat("H", value: 0);
+            animator.SetFloat("R", value: 0.5f + R_OFFSET);
         }
 
         /// <summary>
@@ -2539,12 +2539,12 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void UpdateFadeOut()
         {
-            if (_stickIsHeld)
+            if (stickIsHeld)
                 return;
-            _fadeOutTime += Time.deltaTime;
-            if (_fadeOutTime < FADE_OUT_TIME)
+            fadeOutTime += Time.deltaTime;
+            if (fadeOutTime < FADE_OUT_TIME)
             {
-                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, _currentFlightStickRotation, _currentControlSensitivity * Time.deltaTime));
+                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, currentFlightStickRotation, currentControlSensitivity * Time.deltaTime));
             }
             else
             {
@@ -2558,17 +2558,17 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void UpdateWhileInStation()
         {
-            if (_localPlayerIsInStationSeat)
+            if (localPlayerIsInStationSeat)
             {
                 UpdateInstruments();
-                Vector3 localRotation = _flightStickRoot.localEulerAngles;
-                if (_isVR)
+                Vector3 localRotation = flightStickRoot.localEulerAngles;
+                if (isVR)
                 {
-                    float inputX = (_flightStickRoot.localRotation.eulerAngles.x + _controllerXOffset) % 360;
+                    float inputX = (flightStickRoot.localRotation.eulerAngles.x + controllerXOffset) % 360;
                     if (inputX > 180) inputX -= 360;
-                    float inputY = _flightStickRoot.localRotation.eulerAngles.y % 360;
+                    float inputY = flightStickRoot.localRotation.eulerAngles.y % 360;
                     if (inputY > 180) inputY -= 360;
-                    float inputZ = _flightStickRoot.localRotation.eulerAngles.z % 360;
+                    float inputZ = flightStickRoot.localRotation.eulerAngles.z % 360;
                     if (inputZ > 180) inputZ -= 360;
                     float inputXClamped = Mathf.Clamp(inputX, MIN_JOYSTICK_TILT, MAX_JOYSTICK_TILT);
                     float inputYClamped = Mathf.Clamp(inputY, MIN_JOYSTICK_TILT, MAX_JOYSTICK_TILT);
@@ -2576,21 +2576,21 @@ namespace ReimajoBoothAssets
                     //joystick is already driven by animation --> _joystickBone.localEulerAngles = new Vector3(inputXClamped, 0, inputZClamped);
                     //pitch up-> joystick back -> V:1 (Pitch&Yaw layer)
                     //pitch down-> joystick front -> V:-1 (Pitch&Yaw layer)
-                    _animator.SetFloat("V", value: (-inputXClamped / MAX_JOYSTICK_TILT) + V_OFFSET);
+                    animator.SetFloat("V", value: (-inputXClamped / MAX_JOYSTICK_TILT) + V_OFFSET);
                     //turn left-> thumbstick left -> H:-1 (Pitch&Yaw layer)
                     //turn right-> thumbstick right -> H:1 (Pitch&Yaw layer)
-                    _animator.SetFloat("H", value: inputYClamped / MAX_JOYSTICK_TILT);
+                    animator.SetFloat("H", value: inputYClamped / MAX_JOYSTICK_TILT);
                     //roll left-> joystick left -> R:0 (Pitch&Yaw layer)
                     //roll right-> joystick right -> R:1 (Pitch&Yaw layer)
-                    _animator.SetFloat("R", value: (((inputZClamped / MAX_JOYSTICK_TILT) + 1) * 0.5f) + R_OFFSET);
+                    animator.SetFloat("R", value: (((inputZClamped / MAX_JOYSTICK_TILT) + 1) * 0.5f) + R_OFFSET);
                     //JTH Joystick Thumbstick horizontal
-                    _animator.SetFloat("JTH", value: _leftRightThrustInput);
+                    animator.SetFloat("JTH", value: leftRightThrustInput);
                     //JTV Joystick Thumbstick vertical
-                    _animator.SetFloat("JTV", value: _upDownThrustInput);
+                    animator.SetFloat("JTV", value: upDownThrustInput);
                     //TTH Throttle Thumbstick horizontal
                     //TTV Throttle Thumbstick vertical
                     //Throttle 0-1
-                    _animator.SetFloat("Throttle", value: (_forwardBackwardThrust > 0 ? _forwardBackwardThrust / _constantRelativeForwardForce : 0));
+                    animator.SetFloat("Throttle", value: (forwardBackwardThrust > 0 ? forwardBackwardThrust / constantRelativeForwardForce : 0));
                     //LandingGearDeployed (bool)
                 }
             }
@@ -2608,16 +2608,16 @@ namespace ReimajoBoothAssets
             float axisRotation;
 #pragma warning restore IDE0018
 
-            _syncedShipGameObject.transform.rotation.ToAngleAxis(out axisRotation, out axisVector);
+            syncedShipGameObject.transform.rotation.ToAngleAxis(out axisRotation, out axisVector);
 
             //Mirror pitch
             axisVector.y *= -1;
-            _navBall.localRotation = Quaternion.AngleAxis(axisRotation, axisVector);
+            navBall.localRotation = Quaternion.AngleAxis(axisRotation, axisVector);
 
             //moves from 90 (zero) to -90 (max)
-            _altitudeIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(_syncedShipGameObject.transform.position.y / 400)));
+            altitudeIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(syncedShipGameObject.transform.position.y / 400)));
             //moves from 90 (zero) to -90 (max)
-            _speedIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(Ship.velocity.magnitude / 60)));
+            speedIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(Ship.velocity.magnitude / 60)));
         }
 
         /// <summary>
@@ -2625,12 +2625,12 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void UpdateSteeringVR()
         {
-            if (_stickIsHeld)
+            if (stickIsHeld)
             {
                 if (Input.GetButtonDown("Oculus_CrossPlatform_Button2")) //right menu button
                     OnButtonDown(1);
                 //amplify the roll axis 3x
-                float roll = _flightStickRoot.localRotation.eulerAngles.z % 360;
+                float roll = flightStickRoot.localRotation.eulerAngles.z % 360;
                 roll = roll > 180 ? roll - 360 : roll;
                 if (roll >= 0)
                 {
@@ -2640,43 +2640,43 @@ namespace ReimajoBoothAssets
                 {
                     roll = Mathf.Max(2 * roll, -120 - roll);
                 }
-                _currentFlightStickRotation = Quaternion.AngleAxis(roll, _flightStickRoot.forward) * _flightStickRoot.rotation;
-                if (_addControllerOffset)
+                currentFlightStickRotation = Quaternion.AngleAxis(roll, flightStickRoot.forward) * flightStickRoot.rotation;
+                if (addControllerOffset)
                 {
-                    _currentFlightStickRotation *= _steeringOffset;
+                    currentFlightStickRotation *= steeringOffset;
                 }
-                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, _currentFlightStickRotation, _currentControlSensitivity * Time.deltaTime));
+                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, currentFlightStickRotation, currentControlSensitivity * Time.deltaTime));
                 //check if input thrust has changed
                 float triggerInput = Input.GetAxisRaw(INDEX_TRIGGER_PICKUP_HAND_NAME) - (Input.GetAxisRaw(INDEX_TRIGGER_OTHER_HAND_NAME));
-                if (triggerInput != _oldForwardThrustTriggerInput)
+                if (triggerInput != oldForwardThrustTriggerInput)
                 {
                     if (triggerInput > 0)
                     {
-                        _forwardBackwardThrust = triggerInput * _constantRelativeForwardForce;
+                        forwardBackwardThrust = triggerInput * constantRelativeForwardForce;
                     }
                     else
                     {
-                        _forwardBackwardThrust = triggerInput * _constantRelativeBackwardForce;
+                        forwardBackwardThrust = triggerInput * constantRelativeBackwardForce;
                     }
-                    _oldForwardThrustTriggerInput = triggerInput;
+                    oldForwardThrustTriggerInput = triggerInput;
                 }
-                if (_forwardBackwardThrust >= 0)
+                if (forwardBackwardThrust >= 0)
                 {
-                    _forwardSpeed = Mathf.Min(Mathf.Lerp(_forwardSpeed, _forwardBackwardThrust, Time.deltaTime), _forwardBackwardThrust);
+                    forwardSpeed = Mathf.Min(Mathf.Lerp(forwardSpeed, forwardBackwardThrust, Time.deltaTime), forwardBackwardThrust);
                 }
                 else
                 {
-                    _forwardSpeed = Mathf.Max(Mathf.Lerp(_forwardSpeed, _forwardBackwardThrust, Time.deltaTime), _forwardBackwardThrust);
+                    forwardSpeed = Mathf.Max(Mathf.Lerp(forwardSpeed, forwardBackwardThrust, Time.deltaTime), forwardBackwardThrust);
                 }
-                _leftRightThrustInput = Input.GetAxisRaw(HORIZONTAL_INPUT_AXIS_NAME);
-                _upDownThrustInput = Input.GetAxisRaw(VERTICAL_INPUT_AXIS_NAME);
-                _constantForceShipComponent.relativeForce = new Vector3(_leftRightThrustInput * _constantRelativeHorizontalForce, _upDownThrustInput * _constantRelativeVerticalForce, _forwardSpeed);
-                Vector3 stickRotation = _flightStickRoot.localRotation.eulerAngles;
+                leftRightThrustInput = Input.GetAxisRaw(HORIZONTAL_INPUT_AXIS_NAME);
+                upDownThrustInput = Input.GetAxisRaw(VERTICAL_INPUT_AXIS_NAME);
+                constantForceShipComponent.relativeForce = new Vector3(leftRightThrustInput * constantRelativeHorizontalForce, upDownThrustInput * constantRelativeVerticalForce, forwardSpeed);
+                Vector3 stickRotation = flightStickRoot.localRotation.eulerAngles;
                 SyncControlInput(stickRotation.x % 360, stickRotation.y % 360, stickRotation.z % 360);
             }
             else
             {
-                _constantForceShipComponent.relativeForce = Vector3.zero;
+                constantForceShipComponent.relativeForce = Vector3.zero;
 #if DEBUG_TEST
                 Log.Debug("[ShipController] Stopping steering update loop");
 #endif
@@ -2688,7 +2688,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void UpdateSteeringDesktop()
         {
-            if (_stickIsHeld)
+            if (stickIsHeld)
             {
                 float rollAngleInput = 0;
                 if (Input.GetKey(KeyCode.Q))
@@ -2696,77 +2696,77 @@ namespace ReimajoBoothAssets
                     if (Input.GetKey(KeyCode.E)) { } //compiler optimization
                     else
                     {
-                        rollAngleInput = _maxRollSpeedDegrees;
+                        rollAngleInput = maxRollSpeedDegrees;
                     }
                 }
                 else
                 {
                     if (Input.GetKey(KeyCode.E))
                     {
-                        rollAngleInput = -_maxRollSpeedDegrees;
+                        rollAngleInput = -maxRollSpeedDegrees;
                     }
                 }
-                _rollAngleInput = Mathf.LerpAngle(_rollAngleInput, rollAngleInput, Time.deltaTime * _desktopRollSpeedLerp);
-                _currentFlightStickRotation = Quaternion.AngleAxis(_rollAngleInput, _flightStickRoot.forward) * _flightStickRoot.rotation;
-                if (_addControllerOffset)
+                rollAngleInput = Mathf.LerpAngle(rollAngleInput, rollAngleInput, Time.deltaTime * desktopRollSpeedLerp);
+                currentFlightStickRotation = Quaternion.AngleAxis(rollAngleInput, flightStickRoot.forward) * flightStickRoot.rotation;
+                if (addControllerOffset)
                 {
-                    _currentFlightStickRotation *= _steeringOffset;
+                    currentFlightStickRotation *= steeringOffset;
                 }
-                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, _currentFlightStickRotation, _currentControlSensitivity * Time.deltaTime));
+                Ship.MoveRotation(Quaternion.Slerp(Ship.rotation, currentFlightStickRotation, currentControlSensitivity * Time.deltaTime));
                 //UpDown
                 if (Input.GetKey(KeyCode.S))
                 {
                     if (Input.GetKey(KeyCode.W))
                     {
-                        _upDownThrustInput = 0;
+                        upDownThrustInput = 0;
                     }
                     else
                     {
-                        _upDownThrustInput = 1;
+                        upDownThrustInput = 1;
                     }
                 }
                 else if (Input.GetKey(KeyCode.W))
                 {
-                    _upDownThrustInput = -1;
+                    upDownThrustInput = -1;
                 }
                 else
                 {
-                    _upDownThrustInput = 0;
+                    upDownThrustInput = 0;
                 }
                 //LeftRight
                 if (Input.GetKey(KeyCode.D))
                 {
                     if (Input.GetKey(KeyCode.A))
-                        _leftRightThrustInput = 0;
+                        leftRightThrustInput = 0;
                     else
-                        _leftRightThrustInput = 1;
+                        leftRightThrustInput = 1;
                 }
                 else if (Input.GetKey(KeyCode.A))
                 {
-                    _leftRightThrustInput = -1;
+                    leftRightThrustInput = -1;
                 }
                 else
                 {
-                    _leftRightThrustInput = 0;
+                    leftRightThrustInput = 0;
                 }
                 //forward/backward
                 if (Input.GetMouseButton(0)) //primary mouse button
                 {
                     if (Input.GetKey(KeyCode.Space))
-                        _forwardBackwardThrust = 0;
+                        forwardBackwardThrust = 0;
                     else
-                        _forwardBackwardThrust = _constantRelativeForwardForce;
+                        forwardBackwardThrust = constantRelativeForwardForce;
                 }
                 else if (Input.GetKey(KeyCode.Space)) //space
                 {
-                    _forwardBackwardThrust = -_constantRelativeForwardForce;
+                    forwardBackwardThrust = -constantRelativeForwardForce;
                 }
                 else
                 {
-                    _forwardBackwardThrust = 0;
+                    forwardBackwardThrust = 0;
                 }
-                _constantForceShipComponent.relativeForce = new Vector3(_leftRightThrustInput * _constantRelativeHorizontalForce, _upDownThrustInput * _constantRelativeVerticalForce, _forwardBackwardThrust);
-                Vector3 stickRotation = _addControllerOffset ? (_flightStickRoot.localRotation * _steeringOffset).eulerAngles : _flightStickRoot.localRotation.eulerAngles;
+                constantForceShipComponent.relativeForce = new Vector3(leftRightThrustInput * constantRelativeHorizontalForce, upDownThrustInput * constantRelativeVerticalForce, forwardBackwardThrust);
+                Vector3 stickRotation = addControllerOffset ? (flightStickRoot.localRotation * steeringOffset).eulerAngles : flightStickRoot.localRotation.eulerAngles;
                 SyncControlInput(stickRotation.x % 360, stickRotation.y % 360, rollAngleInput);
                 //we call UpdateSteering each frame while the controller is held, to avoid having update loops for empty stations
             }
@@ -2783,8 +2783,8 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void StoreLocalStickPositionOffset()
         {
-            _localFlightStickLocalResetPosition = _flightStickRoot.localPosition;
-            _localFlightStickLocalResetRotation = _flightStickRoot.localRotation;
+            localFlightStickLocalResetPosition = flightStickRoot.localPosition;
+            localFlightStickLocalResetRotation = flightStickRoot.localRotation;
         }
 
         /// <summary>
@@ -2795,8 +2795,8 @@ namespace ReimajoBoothAssets
 #if DEBUG_TEST
             Log.Debug("[ShipController] Restored stick position offset");
 #endif
-            _flightStickRoot.localPosition = _localFlightStickLocalResetPosition;
-            _flightStickRoot.localRotation = _localFlightStickLocalResetRotation;
+            flightStickRoot.localPosition = localFlightStickLocalResetPosition;
+            flightStickRoot.localRotation = localFlightStickLocalResetRotation;
         }
 
         /// <summary>
@@ -2807,7 +2807,7 @@ namespace ReimajoBoothAssets
 #if DEBUG_TEST
             Log.Debug("[ShipController] Player entered this station, called OnStationEnter() locally");
 #endif
-            foreach (GameObject button in _desktopButtons)
+            foreach (GameObject button in desktopButtons)
             {
                 button.SetActive(true);
             }
@@ -2815,12 +2815,12 @@ namespace ReimajoBoothAssets
 #if DEBUG_TEST
                 Log.Debug("[ShipController] LocalPlayer entered the station.");
 #endif
-            _localPlayerIsInStationSeat = true;
+            localPlayerIsInStationSeat = true;
             Ship.isKinematic = false;
             ResetLocalStickPositionOffset();
-            _flightStickPickup.pickupable = true;
+            flightStickPickup.pickupable = true;
             //reset ship thrusters just in case
-            _stickIsHeld = false;
+            stickIsHeld = false;
             DisableAllThrusters();
             ResetAnimator();
         }
@@ -2830,8 +2830,8 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void SetButtonHighlightsToCurrentState()
         {
-            _buttonHighlightGearDown.SetActive(gearDown);
-            _buttonHighlightFlightAssist.SetActive(_flightAssistOn);
+            buttonHighlightGearDown.SetActive(gearDown);
+            buttonHighlightFlightAssist.SetActive(_flightAssistOn);
         }
 
         /// <summary>
@@ -2839,8 +2839,8 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void DisableButtonHighlights()
         {
-            _buttonHighlightGearDown.SetActive(false);
-            _buttonHighlightFlightAssist.SetActive(false);
+            buttonHighlightGearDown.SetActive(false);
+            buttonHighlightFlightAssist.SetActive(false);
         }
 
         /// <summary>
@@ -2851,24 +2851,24 @@ namespace ReimajoBoothAssets
 #if DEBUG_TEST
                 Log.Debug("[ShipController] Player exited this station, called _OnRelayedAllStationExit() locally");
 #endif
-            foreach (GameObject button in _desktopButtons)
+            foreach (GameObject button in desktopButtons)
             {
                 button.SetActive(false);
             }
             DisableButtonHighlights();
-            _stickIsHeld = false;
+            stickIsHeld = false;
             DisableAllThrusters();
             ResetAnimator();
             //smoothly fade out rotation steering
-            _fadeOutTime = 0;
+            fadeOutTime = 0;
 #if DEBUG_TEST
                 Log.Debug("[ShipController] LocalPlayer exited the station.");
 #endif
-            _localPlayerIsInStationSeat = false;
+            localPlayerIsInStationSeat = false;
             Ship.isKinematic = true;
-            _flightStickPickup.pickupable = false;
+            flightStickPickup.pickupable = false;
             ResetLocalStickPositionOffset();
-            _flightStickPickup.Drop();
+            flightStickPickup.Drop();
         }
 
         /// <summary>
@@ -2877,7 +2877,7 @@ namespace ReimajoBoothAssets
         internal void OnPickup()
         {
             DisableAllThrusters();
-            if (_flightStickPickup.CurrentHand == VRC_Pickup.PickupHand.Left)
+            if (flightStickPickup.CurrentHand == VRC_Pickup.PickupHand.Left)
             {
                 INDEX_TRIGGER_PICKUP_HAND_NAME = INDEX_TRIGGER_LEFT;
                 INDEX_TRIGGER_OTHER_HAND_NAME = INDEX_TRIGGER_RIGHT;
@@ -2887,16 +2887,16 @@ namespace ReimajoBoothAssets
                 INDEX_TRIGGER_PICKUP_HAND_NAME = INDEX_TRIGGER_RIGHT;
                 INDEX_TRIGGER_OTHER_HAND_NAME = INDEX_TRIGGER_LEFT;
             }
-            if (_stickIsHeld) { } //compiler optimization
+            if (stickIsHeld) { } //compiler optimization
             else //avoid having two "update" loops in any case
             {
 #if DEBUG_TEST
                     Log.Debug("[ShipController] Starting steering update loop");
 #endif
-                _stickIsHeld = true;
-                if (_addControllerOffset)
+                stickIsHeld = true;
+                if (addControllerOffset)
                 {
-                    _controllerXOffset = _isVR ? _controllerXOffsetVRUser : _controllerXOffsetDesktopUser;
+                    controllerXOffset = isVR ? controllerXOffsetVRUser : controllerXOffsetDesktopUser;
                 }
             }
         }
@@ -2906,25 +2906,15 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void OnDrop()
         {
-#if DEBUG_TEST
-            Log.Debug("[ShipController] Flight stick was dropped, called OnDrop() locally.");
-#endif
             Log.Debug("[ShipController] Flight stick was dropped, now fading out steering.");
-#if ADMIN_STOP && UDON_TYCOON
-            if (_isStoppedByAdmin)
+            stickIsHeld = false;
+            if (addControllerOffset)
             {
-                _stickIsHeld = false;
-                return;
-            }
-#endif
-            _stickIsHeld = false;
-            if (_addControllerOffset)
-            {
-                _controllerXOffset = 0;
+                controllerXOffset = 0;
             }
             DisableAllThrusters();
             //smoothly fade out rotation steering
-            _fadeOutTime = 0;
+            fadeOutTime = 0;
             ResetLocalStickPositionOffset();
         }
     }

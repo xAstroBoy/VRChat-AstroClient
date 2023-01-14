@@ -35,31 +35,31 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Activate only if the station should NOT control when the attached collider is active
         /// </summary>
-        internal bool _disableColliderControl  { get; set; } = false;
+        internal bool disableColliderControl  { get; set; } = false;
         /// <summary>
         /// If enabled, pressing ESC or the menu button in VR will kick the player out of the station
         /// and leaving the station by pressing WASD is disabled instead.
         /// </summary>
-        internal bool _enableStationMenuButtonExit  { get; set; } = false;
+        internal bool enableStationMenuButtonExit  { get; set; } = false;
 
         /// <summary>
         /// The station transform
         /// </summary>
-        internal Transform _stationSeat  { get; set; }
+        internal Transform stationSeat  { get; set; }
         /// <summary>
         /// An empty transform to mark the surface to sit on (up/green vector) and the front edge position of the seat (forward/blue axis).
         /// Must have the same parent as the ChairController.
         /// </summary>
-        internal Transform _seatSurfaceUpAndFrontEdgeForward  { get; set; }
+        internal Transform seatSurfaceUpAndFrontEdgeForward  { get; set; }
         /// <summary>
         /// An empty transform to mark the chair back surface to lean the back against (forward/blue axis).
         /// Must have the same parent as the ChairController.
         /// </summary>
-        internal Transform _seatBackEndSurfaceForward  { get; set; }
+        internal Transform seatBackEndSurfaceForward  { get; set; }
         /// <summary>
         /// Collider of the bed/chair to walk on it, can be empty
         /// </summary>
-        internal Collider _furnitureCollider  { get; set; }
+        internal Collider furnitureCollider  { get; set; }
 
         #region Settings
         /// <summary>
@@ -114,21 +114,21 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// If set to true, the interactable collider is disabled and will stay disabled when a player leaves the station
         /// </summary>
-        internal bool _isStationDisabledByApi  { get; set; }= false;
+        internal bool isStationDisabledByApi  { get; set; }= false;
         /// <summary>
         /// If set to true, the furniture collider is disabled and will stay disabled when a player leaves the station
         /// </summary>
-        internal bool _isFurnitureColliderDisabledByApi  { get; set; } = false;
-        internal Quaternion _localChairRotation { get; set; } 
+        internal bool isFurnitureColliderDisabledByApi  { get; set; } = false;
+        internal Quaternion localChairRotation { get; set; } 
 #if !EXPOSE_FIELDS
         internal bool isLocalPlayerInStation { get; set; } 
 #endif
 #if RESET_POSITION
-        internal Vector3 _localPositionAtStart;
+        internal Vector3 localPositionAtStart;
 #endif
-        internal bool _colliderIsOn { get; set; } 
-        internal int _adjustCounter { get; set; } 
-        internal bool _isVR { get; set; } 
+        internal bool colliderIsOn { get; set; } 
+        internal int adjustCounter { get; set; } 
+        internal bool isVR { get; set; } 
         #endregion PrivateFields
         #region StartSetup
         private void Start()
@@ -137,9 +137,9 @@ namespace ReimajoBoothAssets
             Station.StationTrigger.OnInteract += Interact;
             Station.OnStationEnterEvent += OnStationEntered;
             Station.OnStationExitEvent += OnStationExited;
-            if (_enableStationMenuButtonExit)
+            if (enableStationMenuButtonExit)
             {
-                _isVR = Networking.LocalPlayer.IsUserInVR();
+                isVR = Networking.LocalPlayer.IsUserInVR();
                 Station.disableStationExit = true;
             }
         }
@@ -153,7 +153,7 @@ namespace ReimajoBoothAssets
         {
             if (isLocalPlayerInStation)
             {
-                if (_isVR)
+                if (isVR)
                 {
 #if LEFT_MENU_BUTTON_EXIT
                     if (Input.GetButtonDown("Oculus_CrossPlatform_Button4")) //left menu button
@@ -178,7 +178,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void StartAdjusting()
         {
-            _adjustCounter = ADJUSTMENT_COUNTS;
+            adjustCounter = ADJUSTMENT_COUNTS;
             MiscUtils.DelayFunction(ADJUSTMENT_START_DELAY, () =>
             {
                 AdjustPosition();
@@ -197,15 +197,15 @@ namespace ReimajoBoothAssets
                 Log.Debug($"[RMStationController] Player doesn't have RightUpperLeg/RightLowerLeg, so we can't adjust the chair for them.");
                 return;
             }
-            Vector3 scale = _stationSeat.lossyScale;
-            Vector3 refPointLocalPosition = _seatSurfaceUpAndFrontEdgeForward.localPosition;
+            Vector3 scale = stationSeat.lossyScale;
+            Vector3 refPointLocalPosition = seatSurfaceUpAndFrontEdgeForward.localPosition;
             float refBoneDistance = Vector3.Distance(rightUpperLegJoint, rightLowerLegJoint);
-            float currentYDiff = _seatSurfaceUpAndFrontEdgeForward.InverseTransformPoint(rightUpperLegJoint).y - ((refBoneDistance * LEG_DISTANCE_TO_UPPER_LEG_THICCNESS) / scale.y);
-            float currentZDiff = _seatSurfaceUpAndFrontEdgeForward.InverseTransformPoint(rightLowerLegJoint).z - ((refBoneDistance * LEG_DISTANCE_TO_LOWER_LEG_THICCNESS) / scale.z);
+            float currentYDiff = seatSurfaceUpAndFrontEdgeForward.InverseTransformPoint(rightUpperLegJoint).y - ((refBoneDistance * LEG_DISTANCE_TO_UPPER_LEG_THICCNESS) / scale.y);
+            float currentZDiff = seatSurfaceUpAndFrontEdgeForward.InverseTransformPoint(rightLowerLegJoint).z - ((refBoneDistance * LEG_DISTANCE_TO_LOWER_LEG_THICCNESS) / scale.z);
             Vector3 hipJoint = GameInstances.LocalPlayer.GetBonePosition(HumanBodyBones.Hips);
             if (hipJoint != Vector3.zero)
             {
-                float currentHipDiff = _seatBackEndSurfaceForward.InverseTransformPoint(hipJoint).z - ((refBoneDistance * LEG_DISTANCE_TO_HIP_THICCNESS) / scale.z);
+                float currentHipDiff = seatBackEndSurfaceForward.InverseTransformPoint(hipJoint).z - ((refBoneDistance * LEG_DISTANCE_TO_HIP_THICCNESS) / scale.z);
                 //we might end up inside the back of the chair, so we can only move the chair backwards by the currentHipDiff and not further
                 if (currentHipDiff < currentZDiff)
                 {
@@ -223,11 +223,11 @@ namespace ReimajoBoothAssets
             }
             Log.Debug($"[RMStationController] Assuming upper leg thiccness of {(refBoneDistance * LEG_DISTANCE_TO_UPPER_LEG_THICCNESS):F4}, correcting offset of Y:{currentYDiff:F4} and Z:{currentZDiff:F4}");
             //since the character was offset by the current local position, we need to keep this one and add only the diff
-            Vector3 currentLocalPosition = _stationSeat.localPosition;
+            Vector3 currentLocalPosition = stationSeat.localPosition;
             //the ChairController is already alligned to x at start to make this work
-            _stationSeat.localPosition = new Vector3(currentLocalPosition.x, currentLocalPosition.y - currentYDiff, currentLocalPosition.z - currentZDiff);
-            _adjustCounter--;
-            if (_adjustCounter > 0 || (Time.timeSinceLevelLoad < AVATAR_LOAD_TIME && !isLocalPlayerInStation))
+            stationSeat.localPosition = new Vector3(currentLocalPosition.x, currentLocalPosition.y - currentYDiff, currentLocalPosition.z - currentZDiff);
+            adjustCounter--;
+            if (adjustCounter > 0 || (Time.timeSinceLevelLoad < AVATAR_LOAD_TIME && !isLocalPlayerInStation))
             {
                 Log.Debug($"[RMStationController] Adjusting again in {ADJUSTMENT_DELAY} seconds.");
                 MiscUtils.DelayFunction(ADJUSTMENT_DELAY, () =>
@@ -240,7 +240,7 @@ namespace ReimajoBoothAssets
         #region Calibration
         /// <summary>
         /// Is called from my player calibration script (https://reimajo.booth.pm/items/2753511) when the avatar changed
-        /// This is externally called after setting _avatarHeight (happening after localPlayer changed their avatar)
+        /// This is externally called after setting avatarHeight (happening after localPlayer changed their avatar)
         /// </summary>
         internal void OnAvatarChanged()
         {
@@ -255,7 +255,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void OnAvatarInStationChanged()
         {
-            if (_adjustCounter > 0)
+            if (adjustCounter > 0)
             {
                 Log.Debug($"[RMStationController] (Remote) player in station changed avatar but we are already adjusting, skipping event.");
                 return;
@@ -271,13 +271,10 @@ namespace ReimajoBoothAssets
         internal void Interact()
         {
             Log.Debug($"[RMStationController] LocalPlayer called Interact() on the station.");
-            _localChairRotation = _stationSeat.localRotation;
-            _stationSeat.rotation = Quaternion.identity;
-            if (Utilities.IsValid(_furnitureCollider))
-            {
-                _colliderIsOn = _furnitureCollider.enabled;
-                _furnitureCollider.enabled = false;
-            }
+            localChairRotation = stationSeat.localRotation;
+            stationSeat.rotation = Quaternion.identity;
+            colliderIsOn = furnitureCollider.enabled;
+            furnitureCollider.enabled = false;
             LocalPlayerEnterStation();
         }
         /// <summary>
@@ -287,15 +284,15 @@ namespace ReimajoBoothAssets
         /// <param name="playerWhoEntered">The player that entered the station</param>
         internal void OnStationEntered()
         {
-            _stationSeat.localRotation = _localChairRotation;
-            if (!_disableColliderControl)
+            stationSeat.localRotation = localChairRotation;
+            if (!disableColliderControl)
             {
                 Collider collider = this.GetComponent<Collider>();
                 collider.enabled = false;
             }
             Log.Debug($"[RMStationController] LocalPlayer entered station, adjusting position in {ADJUSTMENT_START_DELAY} seconds.");
             isLocalPlayerInStation = true;
-            if (_enableStationMenuButtonExit)
+            if (enableStationMenuButtonExit)
                 CheckStationExitButton();
             //saving the last player who entered the station
             StartAdjusting();
@@ -327,8 +324,8 @@ namespace ReimajoBoothAssets
                 Log.Debug($"[RMStationController] LocalPlayer exited the chair.");
                 isLocalPlayerInStation = false;
                 //turn the collider back on if it was on before and is not set to be disabled by an external API call
-                if (!_isFurnitureColliderDisabledByApi)
-                    _furnitureCollider.enabled = _colliderIsOn;
+                if (!isFurnitureColliderDisabledByApi)
+                    furnitureCollider.enabled = colliderIsOn;
             }
             //check if the last player who entered has now left the station
             LastPlayerLeftStation();
@@ -340,10 +337,10 @@ namespace ReimajoBoothAssets
         internal void LastPlayerLeftStation()
         {
             Log.Debug($"[RMStationController] Last player exited the chair, resetting it's position.");
-            if (!_disableColliderControl)
+            if (!disableColliderControl)
             {
                 //make sure an external API call didn't disable the collider
-                if (!_isStationDisabledByApi)
+                if (!isStationDisabledByApi)
                 {
                     Collider collider = this.GetComponent<Collider>();
                     collider.enabled = true;
