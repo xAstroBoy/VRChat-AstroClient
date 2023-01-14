@@ -27,21 +27,19 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
     internal static class Extensions
     {
-        public static void DestroyChildren(this Transform transform)
-        {
-            transform.DestroyChildren(null);
-        }
-
         public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
         {
-            for (var i = transform.childCount - 1; i >= 0; i--)
-            {
-                if (exclude == null || exclude(transform.GetChild(i)))
-                {
-                    UnityEngine.Object.DestroyImmediate(transform.GetChild(i).gameObject);
-                }
-            }
+            for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
+                if (exclude == null || exclude(transform.GetChild(childcount)))
+                    UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
         }
+
+        public static void DestroyChildren(this Transform transform) =>
+            transform.DestroyChildren(null);
+
+        public static void DestroyChildren(this GameObject gameObj) =>
+            gameObj.transform.DestroyChildren(null);
+
 
         internal static void ToggleScrollRectOnExistingMenu(this GameObject NestedPart, bool active)
         {
@@ -619,7 +617,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                             {
                                 if (page.GetName() == PageName)
                                 {
-                                    MenuController.ShowTabContent(i, false);
+                                    MenuController.ShowTabContent(i, true);
                                     break;
                                 }
                             }

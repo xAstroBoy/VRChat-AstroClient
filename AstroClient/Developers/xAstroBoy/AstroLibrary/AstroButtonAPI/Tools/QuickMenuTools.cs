@@ -12,59 +12,61 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
     internal static class QuickMenuTools
     {
         //Templates and references
-        internal static bool SelectSelf = false;
-        private static Transform _UnscaledUI;
-        private static Transform _Application;
+        internal static bool SelectSelf  { get; set; }= false;
+        private static Transform _UnscaledUI { get; set; }
+        private static Transform _Application  { get; set; }
 
-        private static Transform _UserInterface;
-        private static Transform SingleButtonReference = null;
-        private static Vector3? _SingleButtonTemplatePosition;
-        private static Transform _ToggleButtonTemplate;
-        private static Transform _NestedMenuTemplate;
-        private static Transform SelectedUserPageReference;
-        private static Transform _SelectedUserPage_ButtonsSection;
-        private static Transform _NestedPages;
-        private static Transform _MenuDashboard_ButtonsSection;
-        private static Transform _TabButtonTemplate;
+        private static Transform _UserInterface  { get; set; }
+        private static Transform SingleButtonReference  { get; set; } = null;
+        private static Vector3? _SingleButtonTemplatePosition { get; set; }
+        private static Transform _ToggleButtonTemplate { get; set; }
+        private static Transform _NestedMenuTemplate { get; set; }
+        private static Transform SelectedUserPageReference { get; set; }
+        private static Transform _SelectedUserPage_ButtonsSection { get; set; }
+        private static Transform _NestedPages { get; set; }
+        private static Transform _MenuDashboard_ButtonsSection { get; set; }
+        private static Transform _TabButtonTemplate { get; set; }
         
-        private static Transform _Header_DashboardTemplate;
-        private static Transform _SliderTemplate;
-        private static Transform _ToolTipPanel;
-        private static Transform _TabMenu;
-        private static Transform _MenuDashboard;
+        private static Transform _Header_DashboardTemplate { get; set; }
+        private static Transform _SliderTemplate { get; set; }
+        private static Transform _ToolTipPanel { get; set; }
+        private static Transform _TabMenu { get; set; }
+        private static Transform _MenuDashboard { get; set; }
 
-        private static Transform _SingleButtonTemplate;
+        private static Transform _SingleButtonTemplate { get; set; }
 
         //VRC
-        private static Transform _Carousel_Banners;
+        private static Transform _Carousel_Banners  { get; set; }
 
-        private static QuickMenu _QuickMenuInstance;
-        internal static VRCUiManager vrcuimInstance = null; // Dead
-        private static GameObject shortcutMenu = null;
-        private static GameObject userInteractMenu = null;
-        private static Transform _SelectedUserPage_Remote = null;
-        private static Transform _SelectedUserPage_Local = null;
+        private static QuickMenu _QuickMenuInstance { get; set; }
+        internal static VRCUiManager vrcuimInstance  { get; set; } = null; // Dead
+        private static GameObject shortcutMenu  { get; set; } = null;
+        private static GameObject userInteractMenu  { get; set; } = null;
+        private static Transform _SelectedUserPage_Remote  { get; set; } = null;
+        private static Transform _SelectedUserPage_Local  { get; set; } = null;
 
-        private static Transform _SelectedUserPage_Remote_VerticalLayoutGroup = null;
-        private static Transform _SelectedUserPage_Local_VerticalLayoutGroup = null;
-        private static Transform _MenuDashboard_VerticalLayoutGroup = null;
+        private static Transform _SelectedUserPage_Remote_VerticalLayoutGroup { get; set; }= null;
+        private static Transform _SelectedUserPage_Local_VerticalLayoutGroup { get; set; }= null;
+        private static Transform _MenuDashboard_VerticalLayoutGroup { get; set; }= null;
 
-        private static UIPage _UIPageTemplate_Right;
-        private static UIPage _UIPageTemplate_Left;
-        private static WingMenu WingmenuInstance = null;
-        private static WingMenu _Wing_Right;
-        private static WingMenu _Wing_Left;
-        private static GameObject _WingButtonTemplate_Right;
-        private static GameObject _WingButtonTemplate_Left;
-        private static GameObject _WingPageButtonTemplate;
-        private static MenuStateController _WingMenuStateControllerRight;
-        private static MenuStateController _WingMenuStateControllerLeft;
-        private static MenuStateController _QuickMenuController;
-        private static SelectedUserMenuQM _SelectedUserMenuQM;
-        private static UIPage _QuickMenuPage;
+        private static UIPage _UIPageTemplate_Right{ get; set; }
+        private static UIPage _UIPageTemplate_Left{ get; set; }
+        private static WingMenu WingmenuInstance { get; set; }= null;
+        private static WingMenu _Wing_Right{ get; set; }
+        private static WingMenu _Wing_Left{ get; set; }
+        private static GameObject _WingButtonTemplate_Right { get; set; }
+        private static GameObject _WingButtonTemplate_Left { get; set; }
+        private static GameObject _WingPageButtonTemplate { get; set; }
+        private static MenuStateController _WingMenuStateControllerRight{ get; set; }
+        private static MenuStateController _WingMenuStateControllerLeft{ get; set; }
+        private static MenuStateController _QuickMenuController{ get; set; }
+        private static MenuStateController _MainMenuStateController{ get; set; }
 
-        private static GameObject _DebugPanelTemplate;
-        private static Transform _Canvas_QuickMenu;
+        private static SelectedUserMenuQM _SelectedUserMenuQM{ get; set; }
+        private static UIPage _QuickMenuPage{ get; set; }
+
+        private static GameObject _DebugPanelTemplate{ get; set; }
+        private static Transform _Canvas_QuickMenu{ get; set; }
         internal static Transform Canvas_QuickMenu
         {
             get
@@ -520,6 +522,27 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 }
 
                 return _Wing_Right;
+            }
+        }
+        internal static MenuStateController MainMenuStateController
+        {
+            get
+            {
+                if (_QuickMenuController == null)
+                {
+                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<MenuStateController>(true);
+                    for (int i = 0; i < Buttons.Count; i++)
+                    {
+                        MenuStateController button = Buttons[i];
+                        if (button.name == "Canvas_MainMenu(Clone)")
+                        {
+                            _MainMenuStateController = button;
+                            break;
+                        }
+                    }
+                }
+
+                return _QuickMenuController;
             }
         }
 
