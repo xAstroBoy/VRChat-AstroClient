@@ -10,12 +10,12 @@ using WorldAPI.Buttons;
 
 namespace WorldAPI.ButtonAPI.Buttons
 {
-    public class VRCLable : LableControls
+    internal class VRCLable : LableControls
     {
-        public readonly VRCButton SButton;
-        public readonly TextMeshProUGUI LowerTextUgui;
+        internal readonly VRCButton SButton;
+        internal readonly TextMeshProUGUI LowerTextUgui;
 
-        public VRCLable(Transform menu, string text, string LowerText, Action onClick = null, bool Bg = true)
+        internal VRCLable(Transform menu, string text, string LowerText, Action onClick = null, bool Bg = true)
         {
             Text = text;
 
@@ -47,12 +47,12 @@ namespace WorldAPI.ButtonAPI.Buttons
             Text2.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
-        public VRCLable(ButtonGroup grp, string text, string LowerText, Action onClick = null, bool Bg = false)
+        internal VRCLable(ButtonGroup grp, string text, string LowerText, Action onClick = null, bool Bg = false)
             : this(grp.gameObject.transform, text, LowerText, onClick, Bg)
         {
         }
 
-        public VRCLable(CollapsibleButtonGroup grp, string text, string LowerText, Action onClick = null, bool Bg = false)
+        internal VRCLable(CollapsibleButtonGroup grp, string text, string LowerText, Action onClick = null, bool Bg = false)
             : this(grp.buttonGroup.gameObject.transform, text, LowerText, onClick, Bg)
         {
         }

@@ -11,14 +11,14 @@ using static WorldAPI.ButtonAPI.Controls.ExtentedControl;
 
 namespace WorldAPI.ButtonAPI.Buttons.Groups
 {
-    public class GrpButtons
+    internal class GrpButtons
     {
 
-        public VRCButton buttonOne;
-        public VRCButton buttonTwo;
-        public VRCButton buttonThree;
+        internal VRCButton buttonOne;
+        internal VRCButton buttonTwo;
+        internal VRCButton buttonThree;
 
-        public GrpButtons(GameObject menu, string FirstName, string FirstTooltip, Action action, 
+        internal GrpButtons(GameObject menu, string FirstName, string FirstTooltip, Action action, 
             string SecondName = null, string SecondTooltip = null, Action Secondaction = null, 
             string thirdName = null, string thirdTooltip = null, Action thirdaction = null)
         {
@@ -52,14 +52,14 @@ namespace WorldAPI.ButtonAPI.Buttons.Groups
             }
         }
 
-        public GrpButtons(CollapsibleButtonGroup grp, string FirstName, string FirstTooltip, Action action,
+        internal GrpButtons(CollapsibleButtonGroup grp, string FirstName, string FirstTooltip, Action action,
             string SecondName = null, string SecondTooltip = null, Action Secondaction = null,
             string thirdName = null, string thirdTooltip = null, Action thirdaction = null) : this(grp.gameObject, FirstTooltip, FirstTooltip, action,
                 SecondName, SecondTooltip, Secondaction,
                 thirdName, thirdTooltip, thirdaction)
         { }
 
-        public GrpButtons(ButtonGroup grp, string FirstName, string FirstTooltip, Action action,
+        internal GrpButtons(ButtonGroup grp, string FirstName, string FirstTooltip, Action action,
             string SecondName = null, string SecondTooltip = null, Action Secondaction = null,
             string thirdName = null, string thirdTooltip = null, Action thirdaction = null) : this(grp.gameObject, FirstName, FirstTooltip, action,
                 SecondName, SecondTooltip, Secondaction,

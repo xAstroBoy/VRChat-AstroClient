@@ -17,17 +17,17 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI
 {
-    public class VRCPage 
+    internal class VRCPage 
     {
-        public UIPage page{ get; set; }
-        public Transform menuContents{ get; set; }
-        public TextMeshProUGUI pageTitleText{ get; set; }
+        internal UIPage page{ get; set; }
+        internal Transform menuContents{ get; set; }
+        internal TextMeshProUGUI pageTitleText{ get; set; }
         private bool isRoot{ get; set; }
         private GameObject extButtonGameObject{ get; set; }
-        public RectMask2D menuMask { get; set; }
-        public string menuName { get; set; }
+        internal RectMask2D menuMask { get; set; }
+        internal string menuName { get; set; }
 
-        public VRCPage(string pageTitle, bool root = false, bool backButton = true, bool expandButton = false, Action expandButtonAction = null, string expandButtonTooltip = "", Sprite expandButtonSprite = null, bool preserveColor = false, bool fix = true)
+        internal VRCPage(string pageTitle, bool root = false, bool backButton = true, bool expandButton = false, Action expandButtonAction = null, string expandButtonTooltip = "", Sprite expandButtonSprite = null, bool preserveColor = false, bool fix = true)
         {
             if (!APIBase.IsReady()) throw new Exception();
             if (APIBase.MenuTab == null) {
@@ -129,10 +129,10 @@ namespace WorldAPI.ButtonAPI
                 throw new Exception("Exception Caught When Making Page At Region: " + region + "\n\n" + ex);
             }
         }
-        public void SetTitle(string text) =>
+        internal void SetTitle(string text) =>
             pageTitleText.text = text;
 
-        public void AddExtButton(Action onClick, string tooltip, Sprite icon)
+        internal void AddExtButton(Action onClick, string tooltip, Sprite icon)
         {
             var obj = Object.Instantiate(extButtonGameObject, extButtonGameObject.transform.parent);
             obj.SetActive(true);
@@ -144,14 +144,14 @@ namespace WorldAPI.ButtonAPI
         }
 
 
-        public void OpenMenu()
+        internal void OpenMenu()
         {
             page.gameObject.active = true;
             QuickMenuTools.QuickMenuController.ShowTabContent(page.field_Public_String_0);
         }
 
 
-        public void CloseMenu() =>
+        internal void CloseMenu() =>
             page.Method_Public_Virtual_New_Void_0();
 
     }

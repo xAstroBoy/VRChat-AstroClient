@@ -13,12 +13,12 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.QM.Extras;
 
-public class VRCSlider : Root
+internal class VRCSlider : Root
 {
-    public Transform transform;
+    internal Transform transform;
     private TextMeshProUGUI PercentComp;
 
-    public VRCSlider(Transform menu, string text, string tooltip, Action<float> listener, float defaultValue = 0f) {
+    internal VRCSlider(Transform menu, string text, string tooltip, Action<float> listener, float defaultValue = 0f) {
 
         if (!APIBase.IsReady()) { Log.Error("Error, Something Was Missing!"); return; }
 

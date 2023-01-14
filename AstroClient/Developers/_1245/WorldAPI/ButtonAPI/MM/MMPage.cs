@@ -13,17 +13,17 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.MM;
 
-public class MMPage
+internal class MMPage
 {
-    public UIPage page;
-    public Transform menuContents;
-    public int Pageint;
-    public GameObject gameObject;
-    public Transform transform;
+    internal UIPage page;
+    internal Transform menuContents;
+    internal int Pageint;
+    internal GameObject gameObject;
+    internal Transform transform;
 
-    public string MenuName { get; internal set; }
+    internal string MenuName { get; set; }
 
-    public MMPage(string menuName) {
+    internal MMPage(string menuName) {
         if (!APIBase.IsReady()) throw new Exception();
         if (APIBase.MMMpageTemplate == null) {
             Log.Error("Fatal Error: MMMpageTemplate Is Null!");
@@ -65,7 +65,7 @@ public class MMPage
         }
     }
 
-    public void OpenMenu()
+    internal void OpenMenu()
     {
         gameObject.SetActive(true);
         QuickMenuTools.MainMenuStateController.ShowTabContent(page.field_Public_String_0);

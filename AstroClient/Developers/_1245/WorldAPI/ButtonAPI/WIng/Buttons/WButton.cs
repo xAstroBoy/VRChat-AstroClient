@@ -14,9 +14,9 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Wing.Buttons;
 
-public class WButton : WingBtnControls
+internal class WButton : WingBtnControls
 {
-    public WButton(WPage menu, string buttonName, Action listener, string toolTip, Sprite Icon = null, bool SubMenu = false, string Header = "") {
+    internal WButton(WPage menu, string buttonName, Action listener, string toolTip, Sprite Icon = null, bool SubMenu = false, string Header = "") {
         gameObject = Object.Instantiate(APIBase.WBtnPgTemplate, menu.menuContents);
         transform = gameObject.transform;
 
@@ -50,7 +50,7 @@ public class WButton : WingBtnControls
         if (!string.IsNullOrEmpty(APIBase.autoColorHex)) RecolorBackGrn(APIBase.autoColorHex, "Background");
     }
 
-    public WButton(WingSide WingSide, string buttonName, Action listener, string toolTip, Sprite Icon = null, bool Separator = false) {
+    internal WButton(WingSide WingSide, string buttonName, Action listener, string toolTip, Sprite Icon = null, bool Separator = false) {
         if (WingSide == WingSide.Left)
             gameObject = Object.Instantiate(APIBase.WBtnTemplate, APIBase.WLDefMenu.transform);
         else gameObject = Object.Instantiate(APIBase.WBtnTemplate, APIBase.WRDefMenu.transform);

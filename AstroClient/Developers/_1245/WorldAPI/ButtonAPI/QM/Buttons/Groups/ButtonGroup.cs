@@ -11,12 +11,12 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Groups;
 
-public class ButtonGroup : ButtonGrp
+internal class ButtonGroup : ButtonGrp
 {
-    public Transform transform { get; set; }
+    internal Transform transform { get; set; }
     private GridLayoutGroup Layout { get; set; }
 
-    public ButtonGroup(Transform parent, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) {
+    internal ButtonGroup(Transform parent, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) {
         if (!APIBase.IsReady()) throw new Exception();
 
         WasNoText = NoText;
@@ -39,8 +39,8 @@ public class ButtonGroup : ButtonGrp
         parentMenuMask = parent.parent.GetOrAddComponent<RectMask2D>();
     }
 
-    public void ChangeChildAlignment(TextAnchor ButtonAlignment = TextAnchor.UpperCenter) => Layout.childAlignment = ButtonAlignment;
+    internal void ChangeChildAlignment(TextAnchor ButtonAlignment = TextAnchor.UpperCenter) => Layout.childAlignment = ButtonAlignment;
 
-    public ButtonGroup(VRCPage page, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) : this(page.menuContents, text, NoText, ButtonAlignment) { }
-    public ButtonGroup(MMPage page, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) : this(page.menuContents, text, NoText, ButtonAlignment) { }
+    internal ButtonGroup(VRCPage page, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) : this(page.menuContents, text, NoText, ButtonAlignment) { }
+    internal ButtonGroup(MMPage page, string text, bool NoText = false, TextAnchor ButtonAlignment = TextAnchor.UpperCenter) : this(page.menuContents, text, NoText, ButtonAlignment) { }
 }

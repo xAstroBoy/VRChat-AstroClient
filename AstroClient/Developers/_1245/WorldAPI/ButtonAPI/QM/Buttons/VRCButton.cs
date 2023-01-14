@@ -11,11 +11,11 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.Buttons
 {
-    public class VRCButton : ExtentedControl
+    internal class VRCButton : ExtentedControl
     {
-        public Transform transform { get; set; }
+        internal Transform transform { get; set; }
 
-        public VRCButton(Transform menu, string text, string tooltip, Action listener, bool Half = false, bool SubMenuIcon = false, Sprite Icon = null, HalfType Type = HalfType.Normal, bool IsGroup = false) {
+        internal VRCButton(Transform menu, string text, string tooltip, Action listener, bool Half = false, bool SubMenuIcon = false, Sprite Icon = null, HalfType Type = HalfType.Normal, bool IsGroup = false) {
             if (!APIBase.IsReady()) { Log.Error("Error, Something Was Missing!"); return; }
 
             if (Icon == null)
@@ -57,12 +57,12 @@ namespace WorldAPI.Buttons
         }
 
 
-        public VRCButton(ButtonGroup buttonGroup, string text, string tooltip, Action click, bool Half = false, bool subMenuIcon = false, Sprite icon = null) 
+        internal VRCButton(ButtonGroup buttonGroup, string text, string tooltip, Action click, bool Half = false, bool subMenuIcon = false, Sprite icon = null) 
             : this(buttonGroup.transform, text, tooltip, click, Half, subMenuIcon, icon)
         {
         }
 
-        public VRCButton(CollapsibleButtonGroup buttonGroup, string text, string tooltip, Action click, bool Half = false, bool subMenuIcon = false, Sprite icon = null)
+        internal VRCButton(CollapsibleButtonGroup buttonGroup, string text, string tooltip, Action click, bool Half = false, bool subMenuIcon = false, Sprite icon = null)
             : this(buttonGroup.buttonGroup.transform, text, tooltip, click, Half, subMenuIcon, icon)
         {
         }

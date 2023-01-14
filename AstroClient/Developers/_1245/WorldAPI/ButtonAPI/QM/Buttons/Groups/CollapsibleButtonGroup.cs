@@ -13,15 +13,15 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Groups;
 
-public class CollapsibleButtonGroup : Root
+internal class CollapsibleButtonGroup : Root
 {
-    public bool IsOpen { get; set; }
-    public GameObject headerObj { get; set; }
-    public Transform InfoButton { get; set; }
-    public ButtonGroup buttonGroup { get; set; }    
-    public static Action ActionButto { get; internal set; }
+    internal bool IsOpen { get; set; }
+    internal GameObject headerObj { get; set; }
+    internal Transform InfoButton { get; set; }
+    internal ButtonGroup buttonGroup { get; set; }    
+    internal static Action ActionButto { get; set; }
 
-    public CollapsibleButtonGroup(Transform parent, string text, bool openByDefault = false,
+    internal CollapsibleButtonGroup(Transform parent, string text, bool openByDefault = false,
         bool MoreActionButton = false, string ActionButtontext = null, Action MoreActionButtonAction = null)
     {
         if (!APIBase.IsReady()) throw new Exception();
@@ -48,7 +48,7 @@ public class CollapsibleButtonGroup : Root
         });
     }
 
-    public void MoreActionsButton(bool enabled, string text, Action action) {
+    internal void MoreActionsButton(bool enabled, string text, Action action) {
         if (ActionButto != null && action == null) action = ActionButto;
         ActionButto = action;
         InfoButton.gameObject.active = enabled;
@@ -61,10 +61,10 @@ public class CollapsibleButtonGroup : Root
     /// <summary>
     ///  Remove Buttons, Toggles, anything that was put on this ButtnGrp
     /// </summary>
-    public void RemoveAllChildren() =>
+    internal void RemoveAllChildren() =>
         buttonGroup.gameObject.transform.DestroyChildren();
 
 
-    public CollapsibleButtonGroup(VRCPage page, string text, bool openByDefault = false) : this(page.menuContents, text, openByDefault) { }
-    public CollapsibleButtonGroup(MMPage page, string text, bool openByDefault = false) : this(page.menuContents, text, openByDefault) { }
+    internal CollapsibleButtonGroup(VRCPage page, string text, bool openByDefault = false) : this(page.menuContents, text, openByDefault) { }
+    internal CollapsibleButtonGroup(MMPage page, string text, bool openByDefault = false) : this(page.menuContents, text, openByDefault) { }
 }

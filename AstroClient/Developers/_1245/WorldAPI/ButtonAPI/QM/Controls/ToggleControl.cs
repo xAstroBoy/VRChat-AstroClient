@@ -5,33 +5,33 @@ using UnityEngine.UI;
 
 namespace WorldAPI.ButtonAPI.Controls
 {
-    public class ToggleControl : Root
+    internal class ToggleControl : Root
     {
-        public Toggle ToggleCompnt { get; internal set; }
+        internal Toggle ToggleCompnt { get; set; }
         internal Action<bool> Listener { get; set; }
-        public Image OnImage { get; internal set; }
-        public Image OffImage { get; internal set; }
+        internal Image OnImage { get; set; }
+        internal Image OffImage { get; set; }
 
-        public bool State
+        internal bool State
         {
             get => ToggleCompnt.isOn;
             set => ToggleCompnt.isOn = value;
         }
 
-        public void SetAction(Action<bool> newAction) {
+        internal void SetAction(Action<bool> newAction) {
             ToggleCompnt.onValueChanged = new Toggle.ToggleEvent();
             ToggleCompnt.onValueChanged.AddListener(newAction);
         }
 
-        public (Sprite, Sprite) SetImages(Sprite onSprite = null, Sprite offSprite = null) {
+        internal (Sprite, Sprite) SetImages(Sprite onSprite = null, Sprite offSprite = null) {
             OffImage.sprite = offSprite;
             OnImage.sprite = onSprite;
             return (onSprite, offSprite);
         }
 
-        public void SetInteractable(bool val) => ToggleCompnt.interactable = val;
+        internal void SetInteractable(bool val) => ToggleCompnt.interactable = val;
 
-        public (Sprite, Sprite) SetImages(bool checkForNull, Sprite onSprite = null, Sprite offSprite = null)
+        internal (Sprite, Sprite) SetImages(bool checkForNull, Sprite onSprite = null, Sprite offSprite = null)
         {
             if (checkForNull) {
                 if (onSprite == null) onSprite = APIBase.OnSprite;
@@ -44,12 +44,12 @@ namespace WorldAPI.ButtonAPI.Controls
             return (onSprite, offSprite);
         }
 
-        public void TurnHalf(Vector3 TogglePoz, float FontSize = 24f) {
+        internal void TurnHalf(Vector3 TogglePoz, float FontSize = 24f) {
             gameObject.transform.localPosition = TogglePoz;
             TurnHalf(FontSize);
         }
 
-        public void TurnHalf(float FontSize = 24f) {
+        internal void TurnHalf(float FontSize = 24f) {
             OnImage.transform.localScale = new Vector3(0.86f, 0.86f, 0.86f);
             OnImage.transform.localPosition = new Vector3(-52.22f, 30.18f, 0f);
             OnImage.gameObject.SetActive(ToggleCompnt.isOn);
@@ -70,7 +70,7 @@ namespace WorldAPI.ButtonAPI.Controls
 
         }
 
-        public string SetToolTip(string tip, string tip2)
+        internal string SetToolTip(string tip, string tip2)
         {
             gameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_1 = tip;
             gameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = tip2;

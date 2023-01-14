@@ -9,11 +9,11 @@ using WorldAPI.ButtonAPI.Groups;
 
 namespace WorldAPI.ButtonAPI.Buttons.Groups
 {
-    public class GrpToggles
+    internal class GrpToggles
     {
-        public VRCToggle tlgOne, tlgTwo;
+        internal VRCToggle tlgOne, tlgTwo;
 
-        public GrpToggles(GameObject menu, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange, 
+        internal GrpToggles(GameObject menu, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange, 
             string text2, string Ontooltip2, string OffTooltip2, Action<bool> BoolStateChange2, 
             Vector3 TogglePoz, Sprite OnImageSprite = null, Sprite OffImageSprite = null,
             float FirstFontSize = 24f, float SecondFontSize = 24f, bool FirstState = false, bool SecondState = false)
@@ -39,7 +39,7 @@ namespace WorldAPI.ButtonAPI.Buttons.Groups
             tlgTwo.TurnHalf(new Vector3(0f, -51f, 0f), SecondFontSize);
         }
 
-        public GrpToggles(ButtonGroup btnGrp, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange,
+        internal GrpToggles(ButtonGroup btnGrp, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange,
             string text2, string Ontooltip2, string OffTooltip2, Action<bool> BoolStateChange2,
             Vector3 TogglePoz, Sprite OnImageSprite = null, Sprite OffImageSprite = null,
             float FirstFontSize = 24f, float SecondFontSize = 24f, bool FirstState = false, bool SecondState = false) :
@@ -48,7 +48,7 @@ namespace WorldAPI.ButtonAPI.Buttons.Groups
                 TogglePoz, OnImageSprite, OffImageSprite, FirstFontSize, SecondFontSize, FirstState, SecondState)
         { }
 
-        public GrpToggles(CollapsibleButtonGroup btnGrp, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange,
+        internal GrpToggles(CollapsibleButtonGroup btnGrp, string text, string Ontooltip, string OffTooltip, Action<bool> BoolStateChange,
             string text2, string Ontooltip2, string OffTooltip2, Action<bool> BoolStateChange2,
             Vector3 TogglePoz, Sprite OnImageSprite = null, Sprite OffImageSprite = null,
             float FirstFontSize = 24f, float SecondFontSize = 24f, bool FirstState = false, bool SecondState = false) :

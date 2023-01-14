@@ -6,37 +6,37 @@ using UnityEngine.UI;
 
 namespace WorldAPI
 {
-    public class APIBase
+    internal class APIBase
     {
-        public static string autoColorHex { get; set; } = null;
+        internal static string autoColorHex { get; set; } = null;
 
-        public static Sprite DefaultButtonSprite { get; set; } // Override these if u want custom ones
-        public static Sprite OnSprite { get; set; } // Override these if u want custom ones
-        public static Sprite OffSprite { get; set; }  // Override these if u want custom ones
+        internal static Sprite DefaultButtonSprite { get; set; } // Override these if u want custom ones
+        internal static Sprite OnSprite { get; set; } // Override these if u want custom ones
+        internal static Sprite OffSprite { get; set; }  // Override these if u want custom ones
 
-        public static Transform Button { get; set; } = null;
-        public static Transform Toggle { get; set; } = null;
-        public static Transform Tab { get; set; } = null;
-        public static Transform MenuTab { get; set; } = null;
-        public static GameObject ColpButtonGrp { get; set; } = null;
-        public static GameObject ButtonGrp { get; set; } = null;
-        public static GameObject ButtonGrpText { get; set; } = null;
-        public static Transform Slider { get; set; }
-        public static GameObject QuickMenu { get; set; }
-        public static Transform LastButtonParent { get; set; }
+        internal static Transform Button { get; set; } = null;
+        internal static Transform Toggle { get; set; } = null;
+        internal static Transform Tab { get; set; } = null;
+        internal static Transform MenuTab { get; set; } = null;
+        internal static GameObject ColpButtonGrp { get; set; } = null;
+        internal static GameObject ButtonGrp { get; set; } = null;
+        internal static GameObject ButtonGrpText { get; set; } = null;
+        internal static Transform Slider { get; set; }
+        internal static GameObject QuickMenu { get; set; }
+        internal static Transform LastButtonParent { get; set; }
         private static bool HasChecked { get; set; }
 
-        public static GameObject MMM { get; set; }
-        public static GameObject MMMpageTemplate { get; set; }
-        public static GameObject MMMTabTemplate { get; set; }
+        internal static GameObject MMM { get; set; }
+        internal static GameObject MMMpageTemplate { get; set; }
+        internal static GameObject MMMTabTemplate { get; set; }
 
-        public static GameObject WPageTemplate { get; set; }
-        public static GameObject WBtnTemplate { get; set; }
-        public static GameObject WBtnPgTemplate { get; set; }
-        public static GameObject WLDefMenu { get; set; }
-        public static GameObject WRDefMenu { get; set; }
+        internal static GameObject WPageTemplate { get; set; }
+        internal static GameObject WBtnTemplate { get; set; }
+        internal static GameObject WBtnPgTemplate { get; set; }
+        internal static GameObject WLDefMenu { get; set; }
+        internal static GameObject WRDefMenu { get; set; }
 
-        public static bool IsReady()
+        internal static bool IsReady()
         {
             if (HasChecked) return true;
             if ((QuickMenu = Finder.Find("Canvas_QuickMenu(Clone)")) == null)
@@ -166,7 +166,7 @@ namespace WorldAPI
             }
         }
 
-        public enum WingSide
+        internal enum WingSide
         {
             Left,
             Right

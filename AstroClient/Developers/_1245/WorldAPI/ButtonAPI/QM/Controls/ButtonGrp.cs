@@ -13,16 +13,16 @@ using WorldAPI.Buttons;
 
 namespace WorldAPI.ButtonAPI.Controls
 {
-    public class ButtonGrp : Root
+    internal class ButtonGrp : Root
     {
-        public GameObject headerGameObject { get; internal set; }
-        public RectMask2D parentMenuMask { get; internal set; }
-        public bool WasNoText { get; internal set; }
+        internal GameObject headerGameObject { get; set; }
+        internal RectMask2D parentMenuMask { get; set; }
+        internal bool WasNoText { get; set; }
 
         /// <summary>
         ///  Remove Buttons, Toggles, anything that was put on this ButtnGrp
         /// </summary>
-        public void RemoveAllChildren() =>
+        internal void RemoveAllChildren() =>
             gameObject.transform.DestroyChildren();
         
 

@@ -9,10 +9,10 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Buttons
 {
-    public class VRCToggle : ToggleControl
+    internal class VRCToggle : ToggleControl
     {
 
-        public VRCToggle(Transform menu, string text, Action<bool> listener, bool DefaultState = false,
+        internal VRCToggle(Transform menu, string text, Action<bool> listener, bool DefaultState = false,
             string OffTooltip = null, string OnToolTip = null,
             Sprite onimage = null, Sprite offimage = null, bool half = false)
         {
@@ -51,12 +51,12 @@ namespace WorldAPI.ButtonAPI.Buttons
         }
 
 
-        public VRCToggle(ButtonGroup buttonGroup, string text, Action<bool> stateChanged, bool DefaultState = false, string OffTooltip = "Off", string OnToolTip = "On")
+        internal VRCToggle(ButtonGroup buttonGroup, string text, Action<bool> stateChanged, bool DefaultState = false, string OffTooltip = "Off", string OnToolTip = "On")
             : this(buttonGroup.transform, text, stateChanged, DefaultState, OffTooltip, OnToolTip)
         {
         }
 
-        public VRCToggle(CollapsibleButtonGroup buttonGroup, string text, Action<bool> stateChanged, bool DefaultState = false, string OffTooltip = "Off", string OnToolTip = "On")
+        internal VRCToggle(CollapsibleButtonGroup buttonGroup, string text, Action<bool> stateChanged, bool DefaultState = false, string OffTooltip = "Off", string OnToolTip = "On")
             : this(buttonGroup.buttonGroup.transform, text, stateChanged, DefaultState, OffTooltip, OnToolTip)
         {
         }

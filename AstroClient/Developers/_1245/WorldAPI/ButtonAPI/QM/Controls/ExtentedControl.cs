@@ -10,14 +10,14 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Controls
 {
-    public class ExtentedControl : Root
+    internal class ExtentedControl : Root
     {
-        public Button ButtonCompnt { get; internal set; }
-        public Image ImgCompnt { get; internal set; }
-        public Action onClickAction { get; internal set; }
-        public string ToolTip { get; internal set; }
+        internal Button ButtonCompnt { get; set; }
+        internal Image ImgCompnt { get; set; }
+        internal Action onClickAction { get; set; }
+        internal string ToolTip { get; set; }
 
-        public string SetToolTip(string tip)
+        internal string SetToolTip(string tip)
         {
             var tooltip = gameObject.GetComponentsInChildren<VRC.UI.Elements.Tooltips.UiTooltip>();
             foreach (var s in tooltip) {
@@ -28,25 +28,25 @@ namespace WorldAPI.ButtonAPI.Controls
             return tip;
         }
 
-       public void SetSprite(Sprite sprite) 
+       internal void SetSprite(Sprite sprite) 
             => ImgCompnt.sprite = sprite;
 
-        public Sprite GetSprite()
+        internal Sprite GetSprite()
             => ImgCompnt.sprite;
 
-        public void ShowSubMenuIcon(bool state) => 
+        internal void ShowSubMenuIcon(bool state) => 
             gameObject.transform.Find("Badge_MMJump").gameObject.SetActive(state);
 
-        public void SetIconColor(Color color) =>
+        internal void SetIconColor(Color color) =>
             ImgCompnt.color = color;
 
-        public void SetAction(Action newAction)
+        internal void SetAction(Action newAction)
         {
             ButtonCompnt.onClick = new Button.ButtonClickedEvent();
             ButtonCompnt.onClick.AddListener(newAction);
         }
 
-        public void SetBackgroundImage(Sprite newImg) // Idea From WTFBlaze <3
+        internal void SetBackgroundImage(Sprite newImg) // Idea From WTFBlaze <3
         {
             gameObject.transform.Find("Background").GetComponent<Image>().sprite = newImg;
             gameObject.transform.Find("Background").GetComponent<Image>().overrideSprite = newImg;
@@ -59,7 +59,7 @@ namespace WorldAPI.ButtonAPI.Controls
             gameObject.active = true;
         }
 
-        public void RecolorBackGrn(string hexColor) // Code used from WCv2 Recolor Eng
+        internal void RecolorBackGrn(string hexColor) // Code used from WCv2 Recolor Eng
         {
             var bg = gameObject.transform.Find("Background");
             var Btn = Object.Instantiate(bg.gameObject, bg.transform.parent);
@@ -73,7 +73,7 @@ namespace WorldAPI.ButtonAPI.Controls
 
         internal void ResetTextPox() => gameObject.transform.Find("Text_H4").transform.localPosition = new Vector3(0, 0, 0);
 
-        public void TurnHalf(HalfType Type, bool IsGroup) {
+        internal void TurnHalf(HalfType Type, bool IsGroup) {
             ImgCompnt.gameObject.active = false;
             var JmpPoz = gameObject.transform.Find("Badge_MMJump").localPosition;
             gameObject.transform.Find("Badge_MMJump").localPosition = new Vector3(JmpPoz.x, JmpPoz.y - 34, JmpPoz.z);
@@ -102,8 +102,8 @@ namespace WorldAPI.ButtonAPI.Controls
 
         }
 
-        public WButton CopyToWing(WPage pg) => new(pg, Text, onClickAction, ToolTip);
-        public WButton CopyToWing(WingSide WingSide) => new(WingSide, Text, onClickAction, ToolTip);
+        internal WButton CopyToWing(WPage pg) => new(pg, Text, onClickAction, ToolTip);
+        internal WButton CopyToWing(WingSide WingSide) => new(WingSide, Text, onClickAction, ToolTip);
 
         private void ChangeBoth(Vector2 vec2) {
             gameObject.transform.Find("Background").GetComponent<RectTransform>().sizeDelta = vec2;
@@ -116,7 +116,7 @@ namespace WorldAPI.ButtonAPI.Controls
             if (gameObject.transform.Find("Bg") != null) gameObject.transform.Find("Bg").localPosition = vec;
         }
 
-        public enum HalfType
+        internal enum HalfType
         {
             Top,
             Normal,

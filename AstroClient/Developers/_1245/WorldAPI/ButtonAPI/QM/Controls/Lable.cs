@@ -6,11 +6,11 @@ using WorldAPI.Buttons;
 
 namespace WorldAPI.ButtonAPI.Controls
 {
-    public class LableControls : Root
+    internal class LableControls : Root
     {
-        public Button ButtonCompnt { get; internal set; }
+        internal Button ButtonCompnt { get; set; }
 
-        public Image BgImgCompnt { get; internal set; }
+        internal Image BgImgCompnt { get; set; }
       
     }
 }

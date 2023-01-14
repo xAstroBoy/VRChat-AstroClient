@@ -12,13 +12,13 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.WIng.Buttons;
 
-public class WToggle : WingTglControls
+internal class WToggle : WingTglControls
 {
-    public bool State { get; internal set; }
-    public string onTip { get; private set; }
-    public string offTip { get; private set; }
+    internal bool State { get; set; }
+    internal string onTip { get; private set; }
+    internal string offTip { get; private set; }
 
-    public WToggle(WPage menu, string text, Action<bool> listener, bool DefaultState = false,
+    internal WToggle(WPage menu, string text, Action<bool> listener, bool DefaultState = false,
             string OffTooltip = null, string OnToolTip = null,
             Sprite onimage = null, Sprite offimage = null) {
         if (!APIBase.IsReady()) throw new Exception();

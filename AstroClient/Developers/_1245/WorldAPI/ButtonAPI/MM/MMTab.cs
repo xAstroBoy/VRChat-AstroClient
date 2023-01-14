@@ -9,14 +9,14 @@ using AstroClient.xAstroBoy.Utility;
 
 namespace WorldAPI.ButtonAPI.MM;
 
-public class MMTab
+internal class MMTab
 {
-    public MenuTab menuTab { get; set; }
-    public GameObject gameObject { get; set; }
-    public static Action OnClick { get; set; }
-    public MMPage Menu { get; set; }
+    internal MenuTab menuTab { get; set; }
+    internal GameObject gameObject { get; set; }
+    internal static Action OnClick { get; set; }
+    internal MMPage Menu { get; set; }
 
-    public MMTab(MMPage page, string toolTip = "", Sprite sprite = null)
+    internal MMTab(MMPage page, string toolTip = "", Sprite sprite = null)
     {
         if (!APIBase.IsReady()) throw new Exception();
         if (APIBase.MMMTabTemplate == null)

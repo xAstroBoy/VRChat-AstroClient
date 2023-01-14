@@ -10,13 +10,13 @@ using WorldAPI.Buttons;
 
 namespace WorldAPI.ButtonAPI.Buttons.Groups;
 
-public class DuoButtons 
+internal class DuoButtons 
 {
-    public VRCButton btn1, btn2;
-    public GameObject gameObject;
-    public Transform transform;
+    internal VRCButton btn1, btn2;
+    internal GameObject gameObject;
+    internal Transform transform;
 
-    public DuoButtons(GameObject menu, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) {
+    internal DuoButtons(GameObject menu, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) {
         gameObject = new GameObject();
         transform = gameObject.transform;
         gameObject.name = $"DuoToggles";
@@ -38,12 +38,12 @@ public class DuoButtons
         btn2.transform.localPosition = new Vector3(0f, -51f, 0f);
     }
 
-    public DuoButtons(CollapsibleButtonGroup grp, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) :
+    internal DuoButtons(CollapsibleButtonGroup grp, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) :
         this(grp.gameObject, buttonOne, buttonOneTooltip, btnAction,
             buttonTwo, buttonTwoTooltip, buttonTwoAction)
     { }
 
-    public DuoButtons(ButtonGroup grp, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) :
+    internal DuoButtons(ButtonGroup grp, string buttonOne, string buttonOneTooltip, Action btnAction, string buttonTwo, string buttonTwoTooltip, Action buttonTwoAction) :
     this(grp.gameObject, buttonOne, buttonOneTooltip, btnAction,
         buttonTwo, buttonTwoTooltip, buttonTwoAction)
     { }

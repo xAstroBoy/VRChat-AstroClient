@@ -5,20 +5,20 @@ using WorldAPI.ButtonAPI.Controls;
 
 namespace WorldAPI.ButtonAPI.WIng.Controls;
 
-public class WingTglControls : Root
+internal class WingTglControls : Root
 {
     internal Action<bool> Listener { get; set; }
-    public Image OnImage { get; internal set; }
-    public Image OffImage { get; internal set; }
+    internal Image OnImage { get; set; }
+    internal Image OffImage { get; set; }
 
-    public (Sprite, Sprite) SetImages(Sprite onSprite = null, Sprite offSprite = null)
+    internal (Sprite, Sprite) SetImages(Sprite onSprite = null, Sprite offSprite = null)
     {
         OffImage.sprite = offSprite;
         OnImage.sprite = onSprite;
         return (onSprite, offSprite);
     }
 
-    public (Sprite, Sprite) SetImages(bool checkForNull, Sprite onSprite = null, Sprite offSprite = null)
+    internal (Sprite, Sprite) SetImages(bool checkForNull, Sprite onSprite = null, Sprite offSprite = null)
     {
         if (checkForNull)
         {
@@ -32,7 +32,7 @@ public class WingTglControls : Root
         return (onSprite, offSprite);
     }
 
-    public string SetToolTip(string tip)
+    internal string SetToolTip(string tip)
     {
         gameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_1 = tip;
         gameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = tip;

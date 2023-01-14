@@ -12,15 +12,15 @@ using Object = UnityEngine.Object;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 namespace WorldAPI.ButtonAPI.Wing;
 
-public class WPage
+internal class WPage
 {
-    public WingSide wingSide { get; set; }
-    public UIPage page  { get; set; }
-    public GameObject gameObject  { get; set; }
-    public Transform transform  { get; set; }
-    public Transform menuContents  { get; set; }
+    internal WingSide wingSide { get; set; }
+    internal UIPage page  { get; set; }
+    internal GameObject gameObject  { get; set; }
+    internal Transform transform  { get; set; }
+    internal Transform menuContents  { get; set; }
 
-    public WPage(string pageName, WingSide WingSide)
+    internal WPage(string pageName, WingSide WingSide)
     {
         wingSide = WingSide;
 
@@ -48,7 +48,7 @@ public class WPage
         gameObject.SetActive(false);  // Set off as enabling the comps above makes the page visable, but we dont want that so we set it off, once we go into and out of the menu it syncs
     }
 
-    public void OpenMenu()
+    internal void OpenMenu()
     {
         gameObject.SetActive(true);
         if (wingSide == WingSide.Left)
@@ -56,9 +56,9 @@ public class WPage
         else QuickMenuTools.Wing_Right.ShowWingPage(page.field_Public_String_0);
     }
 
-    public WButton AddButton(string buttonName, Action listener, string toolTip, Sprite Icon = null, bool SubMenu = false, string Header = "") => new(this, buttonName, listener, toolTip, Icon, SubMenu, Header);
+    internal WButton AddButton(string buttonName, Action listener, string toolTip, Sprite Icon = null, bool SubMenu = false, string Header = "") => new(this, buttonName, listener, toolTip, Icon, SubMenu, Header);
 
-    public WToggle AddToggle(string text, Action<bool> listener, bool DefaultState = false,
+    internal WToggle AddToggle(string text, Action<bool> listener, bool DefaultState = false,
             string OffTooltip = null, string OnToolTip = null,
             Sprite onimage = null, Sprite offimage = null) => new(this, text, listener, DefaultState, OffTooltip, OnToolTip, onimage, offimage);
 }

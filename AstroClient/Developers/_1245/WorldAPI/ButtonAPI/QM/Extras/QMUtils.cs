@@ -12,36 +12,36 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Extras
 {
-    public static class QMUtils
+    internal static class QMUtils
     {
         //internal static MenuStateController WLcontroller;
         //internal static MenuStateController WRcontroller;
 
-        //public static VRC.UI.Elements.QuickMenu GetQuickMenuInstance
+        //internal static VRC.UI.Elements.QuickMenu GetQuickMenuInstance
         //{
         //    get =>
         //        Resources.FindObjectsOfTypeAll<VRC.UI.Elements.QuickMenu>().FirstOrDefault();
         //}
 
-        //public static MenuStateController GetMenuStateControllerInstance
+        //internal static MenuStateController GetMenuStateControllerInstance
         //{
         //    get =>
         //        GetQuickMenuInstance.GetComponent<MenuStateController>();
         //}
 
-        //public static VRC.UI.Elements.menu GetMainMenuInstance
+        //internal static VRC.UI.Elements.menu GetMainMenuInstance
         //{
         //    get =>
         //        Resources.FindObjectsOfTypeAll<VRC.UI.Elements.MainMenu>().FirstOrDefault(x => x.name == "Canvas_MainMenu(Clone)");
         //}
 
-        //public static MenuStateController GetMainMenuStateControllerInstance
+        //internal static MenuStateController GetMainMenuStateControllerInstance
         //{
         //    get =>
         //        GetMainMenuInstance.GetComponent<MenuStateController>();
         //}
 
-        //public static MenuStateController GetWngLMenuStateControllerInstance
+        //internal static MenuStateController GetWngLMenuStateControllerInstance
         //{
         //    get { 
         //        if (WLcontroller == null) WLcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Left").GetComponent<MenuStateController>();
@@ -49,7 +49,7 @@ namespace WorldAPI.ButtonAPI.Extras
         //    }
         //}
 
-        //public static MenuStateController GetWngRMenuStateControllerInstance
+        //internal static MenuStateController GetWngRMenuStateControllerInstance
         //{
         //    get {
         //        if (WRcontroller == null) WRcontroller = GetQuickMenuInstance.transform.Find("CanvasGroup/Container/Window/Wing_Right").GetComponent<MenuStateController>();
@@ -57,7 +57,7 @@ namespace WorldAPI.ButtonAPI.Extras
         //    }
         //}
 
-        //public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        //internal static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         //{
         //    T component = gameObject.GetComponent<T>();
         //    if (component == null)
@@ -66,7 +66,7 @@ namespace WorldAPI.ButtonAPI.Extras
         //    return component;
         //}
 
-        //public static T GetOrAddComponent<T>(this Transform transform) where T : Component
+        //internal static T GetOrAddComponent<T>(this Transform transform) where T : Component
         //{
         //    T component = transform.GetComponent<T>();
         //    if (component == null)
@@ -75,20 +75,20 @@ namespace WorldAPI.ButtonAPI.Extras
         //    return component;
         //}
 
-        //public static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
+        //internal static void DestroyChildren(this Transform transform, Func<Transform, bool> exclude)
         //{
         //    for (var childcount = transform.childCount - 1; childcount >= 0; childcount--)
         //        if (exclude == null || exclude(transform.GetChild(childcount)))
         //            UnityEngine.Object.DestroyImmediate(transform.GetChild(childcount).gameObject);
         //}
 
-        //public static void DestroyChildren(this Transform transform) =>
+        //internal static void DestroyChildren(this Transform transform) =>
         //    transform.DestroyChildren(null);
 
-        //public static void DestroyChildren(this GameObject gameObj) =>
+        //internal static void DestroyChildren(this GameObject gameObj) =>
         //    gameObj.transform.DestroyChildren(null);
 
-        public static Color HexToColor(string hexColor)
+        internal static Color HexToColor(string hexColor)
         {
             if (hexColor.IndexOf('#') != -1)
                 hexColor = hexColor.Replace("#", "");
@@ -99,7 +99,7 @@ namespace WorldAPI.ButtonAPI.Extras
             return new Color(r, g, b);
         }
         
-        public static Texture2D ConvertSprite(Sprite sprite) {
+        internal static Texture2D ConvertSprite(Sprite sprite) {
             if (sprite == null) return null;
             Texture2D texture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
             Color[] pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
@@ -111,7 +111,7 @@ namespace WorldAPI.ButtonAPI.Extras
             return texture;
         }
 
-        public static List<GameObject> GetChildren(this Transform transform)
+        internal static List<GameObject> GetChildren(this Transform transform)
         {
             List<GameObject> list = new List<GameObject>();
             for (int i = 0; i < transform.childCount; i++) {
@@ -123,7 +123,7 @@ namespace WorldAPI.ButtonAPI.Extras
 
         private static string lastsrt;
 
-        public static string Random(this string s, string spliter = " ", int length = 9, bool numbersOnly = false) {
+        internal static string Random(this string s, string spliter = " ", int length = 9, bool numbersOnly = false) {
             System.Random randomString = new System.Random();
             string element = numbersOnly ? "0123456789" : "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789";
             var randomstr = new string((from temp in Enumerable.Repeat<string>(element, length)
@@ -145,7 +145,7 @@ namespace WorldAPI.ButtonAPI.Extras
             return false;
         }
 
-        public static void RemoveUnknownComps(GameObject gameObject, Action<string> callBackOnDestroy = null) {
+        internal static void RemoveUnknownComps(GameObject gameObject, Action<string> callBackOnDestroy = null) {
             Component[] components = gameObject.GetComponents<Component>();
             for (int D = 0; D < components.Length; D++)
             {

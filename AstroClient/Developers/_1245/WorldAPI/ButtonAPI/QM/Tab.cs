@@ -11,16 +11,16 @@ using WorldAPI.ButtonAPI.Extras;
 
 namespace WorldAPI.ButtonAPI
 {
-    public class Tab : ExtentedControl
+    internal class Tab : ExtentedControl
     {
-        public MenuTab menuTab { get;  }
-        public Image tabIcon { get; }
-        public GameObject badgeGameObject { get; }
-        public TextMeshProUGUI badgeText { get; }
-        public VRCPage Menu { get; }
-        public Action OnClick { get; set; }
+        internal MenuTab menuTab { get;  }
+        internal Image tabIcon { get; }
+        internal GameObject badgeGameObject { get; }
+        internal TextMeshProUGUI badgeText { get; }
+        internal VRCPage Menu { get; }
+        internal Action OnClick { get; set; }
 
-        public Tab(VRCPage menu, string tooltip, Sprite icon = null, Transform parent = null)
+        internal Tab(VRCPage menu, string tooltip, Sprite icon = null, Transform parent = null)
         {
             if (!APIBase.IsReady()) throw new Exception();
 

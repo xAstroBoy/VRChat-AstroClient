@@ -13,15 +13,15 @@ using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI.Wing.Controls;
 
-public class WingBtnControls : Root
+internal class WingBtnControls : Root
 {
-    public Transform transform { get; internal set; }
-    public Button ButtonCompnt { get; internal set; }
-    public Image ImgCompnt { get; internal set; }
-    public Action onClickAction { get; internal set; }
-    public TextMeshProUGUI HeaderTMProCompnt { get; internal set; }
+    internal Transform transform { get; set; }
+    internal Button ButtonCompnt { get; set; }
+    internal Image ImgCompnt { get; set; }
+    internal Action onClickAction { get; set; }
+    internal TextMeshProUGUI HeaderTMProCompnt { get; set; }
 
-    public void RecolorBackGrn(string hexColor, string path = "Container/Background")
+    internal void RecolorBackGrn(string hexColor, string path = "Container/Background")
     {
         var bg = gameObject.transform.Find(path);
 
