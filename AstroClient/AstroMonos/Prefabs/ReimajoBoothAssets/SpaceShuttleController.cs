@@ -4083,6 +4083,7 @@ namespace ReimajoBoothAssets
             pilotChairStation = SpaceShuttle_SelfAdjustingChair_Pilot_ChairController.GetOrAddComponent<ChairController>();
             if (pilotChairStation != null)
             {
+                pilotChairStation.ADJUSTMENT_COUNTS = 3;
                 pilotChairStation.disableColliderControl = false;
                 pilotChairStation.enableStationMenuButtonExit = false;
                 pilotChairStation.stationSeat = SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat.transform;

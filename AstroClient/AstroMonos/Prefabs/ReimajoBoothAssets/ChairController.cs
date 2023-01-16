@@ -200,7 +200,7 @@ namespace ReimajoBoothAssets
         /// directly after seating, but then a more accurate re-adjustement later, since VRChat is still in the seating animation
         /// transition while seating, so a later adjustement is more accurate then the first initial one.
         /// </summary>
-        internal  const int ADJUSTMENT_COUNTS = 4;
+        internal  int ADJUSTMENT_COUNTS { get; set; } = 3;
 
         /// <summary>
         /// How much time should be between 2 calls of <see cref="_AdjustPosition"/>,
