@@ -57,12 +57,13 @@ namespace AstroClient.AstroMonos.AstroUdons
             }
         }
 
-        private void Start()
+        internal void Start()
         {
             HasSubscribed = true;
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (PickupController != null)
             {
+                PickupController.Start(); // Force a start.
                 // Required To Show the interaction text
                 PickupController.EditMode = true;
                 if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
@@ -269,7 +270,11 @@ namespace AstroClient.AstroMonos.AstroUdons
             [HideFromIl2Cpp]
             get => PickupController.pickupable;
             [HideFromIl2Cpp]
-            set => PickupController.pickupable = value;
+            set
+            {
+                PickupController.EditMode = true;
+                PickupController.pickupable = value;
+            }
         }
 
 

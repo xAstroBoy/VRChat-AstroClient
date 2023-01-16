@@ -1,7 +1,9 @@
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.AstroMonos.Prefabs;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using ReimajoBoothAssets;
 using UnityEngine;
 
 namespace AstroClient.Spawnables
@@ -67,11 +69,11 @@ namespace AstroClient.Spawnables
                 VR_Jetpack_Controller = null;
                 return;
             }
-            Vector3? buttonPosition = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
-            Quaternion? buttonRotation = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-            if (buttonPosition.HasValue && buttonRotation.HasValue)
+            Vector3? Pos = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+            Quaternion? Rot = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+            if (Pos.HasValue && Rot.HasValue)
             {
-                VR_Jetpack_Object = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
+                VR_Jetpack_Object = Object.Instantiate(ClientResources.Loaders.Prefabs.VRJetpack, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
                 VR_Jetpack_Object.AddToWorldUtilsMenu();
                 VR_Jetpack_Controller = ComponentUtils.GetOrAddComponent<JetpackController>(VR_Jetpack_Object);
                 if (VR_Jetpack_Controller != null)
@@ -114,11 +116,11 @@ namespace AstroClient.Spawnables
                 Desktop_Jetpack_Controller = null;
                 return;
             }
-            Vector3? buttonPosition = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
-            Quaternion? buttonRotation = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-            if (buttonPosition.HasValue && buttonRotation.HasValue)
+            Vector3? Pos = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+            Quaternion? Rot = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+            if (Pos.HasValue && Rot.HasValue)
             {
-                var item = Object.Instantiate(ClientResources.Loaders.Prefabs.DesktopJetpack, buttonPosition.GetValueOrDefault(), buttonRotation.GetValueOrDefault(), null);
+                var item = Object.Instantiate(ClientResources.Loaders.Prefabs.DesktopJetpack, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
                 item.AddToWorldUtilsMenu();
                 Desktop_Jetpack_Controller = ComponentUtils.GetOrAddComponent<JetpackController>(item);
                 if (Desktop_Jetpack_Controller != null)
@@ -158,6 +160,13 @@ namespace AstroClient.Spawnables
                 if (Desktop_Jetpack_Controller.CurrentChair != null)
                 {
                     Desktop_Jetpack_Controller.CurrentChair.ExitStation();
+                }
+            }
+            if (SpaceShuttle_Controller != null)
+            {
+                if (SpaceShuttle_Controller.pilotChairStation != null)
+                {
+                    SpaceShuttle_Controller.pilotChairStation.Station.ExitStation();
                 }
             }
 
@@ -201,6 +210,44 @@ namespace AstroClient.Spawnables
             if (VR_Jetpack_Controller != null)
             {
                 VR_Jetpack_Controller.RestoreOriginalSettings();
+            }
+
+        }
+        private static SpaceShuttleController SpaceShuttle_Controller { get; set; } = null;
+        private static GameObject SpaceShuttle_Object { get; set; }
+
+        internal static void SpawnSpaceShuttle()
+        {
+            if (SpaceShuttle_Object != null)
+            {
+                UnityEngine.Object.Destroy(SpaceShuttle_Object);
+                SpaceShuttle_Object = null;
+                SpaceShuttle_Controller = null;
+                return;
+            }
+            Vector3? Pos = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+            Quaternion? Rot = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+            if (Pos.HasValue && Rot.HasValue)
+            {
+                var item = Object.Instantiate(ClientResources.Loaders.Prefabs.SpaceShuttle, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
+                item.AddToWorldUtilsMenu();
+                SpaceShuttle_Controller = item.FindObject("ShipController").GetOrAddComponent<SpaceShuttleController>();
+                float scale = 1.3f;
+                item.transform.localScale = new Vector3(scale, scale, scale);
+                if (SpaceShuttle_Controller != null)
+                {
+                   // SpaceShuttle_Controller.Initialize(); // Force a second check.
+                    MiscUtils.DelayFunction(0.2f, () =>
+                    {
+                        if (SitOnJetpackOnSpawn)
+                        {
+                            SpaceShuttle_Controller.pilotChairStation.Station.EnterStation();
+                        }
+                    });
+                }
+                SpaceShuttle_Object = item;
+                ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(item);
+
             }
 
         }

@@ -18,6 +18,11 @@ namespace AstroClient.ClientUI.ActionMenu
         {
             AMUtils.AddToModsFolder("Jetpacks", () =>
             {
+                CustomSubMenu.AddButton("Spawn Space Shuttle", () =>
+                {
+                    AstroJetPack.SpawnSpaceShuttle();
+                }, null);
+
                 CustomSubMenu.AddButton("Spawn VR Jetpack", () =>
                 {
                     AstroJetPack.SpawnVRJetpack();

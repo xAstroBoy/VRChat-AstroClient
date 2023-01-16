@@ -57,34 +57,37 @@ namespace AstroClient.AstroMonos.AstroUdons
             RespawnHeight = SceneUtils.RespawnHeightY;
         }
 
-
-        private void Start()
+        private bool HasInitialized { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal void Start()
         {
-            RespawnHeight = SceneUtils.RespawnHeightY;
-            Identifier = "AstroStation_" + Guid.NewGuid();
-            if (SceneUtils.SDKVersion == 2)
+            if (!HasInitialized)
             {
-                Station = gameObject.GetOrAddComponent<VRC_Station>();
-            }
-            else if (SceneUtils.SDKVersion == 3)
-            {
-                Station = gameObject.GetOrAddComponent<VRCStation>();
-            }
-            inAxisHorizontal = InputUtils.GetInput(VRCInputs.Horizontal);
-            inAxisVertical = InputUtils.GetInput(VRCInputs.Vertical);
-            StationTrigger = gameObject.GetOrAddComponent<VRC_AstroInteract>();
-            if (StationTrigger != null)
-            {
-                StationTrigger.OnInteract = EnterStation;
-                StationTrigger.interactText = "Sit";
-                StationTrigger.InteractionText = "Sit";
-            }
-            HasSubscribed = true;
-            InvokeRepeating(nameof(CheckForHeightLimit), 0.1f, 0.1f);
+                RespawnHeight = SceneUtils.RespawnHeightY;
+                Identifier = "AstroStation_" + Guid.NewGuid();
+                if (SceneUtils.SDKVersion == 2)
+                {
+                    Station = gameObject.GetOrAddComponent<VRC_Station>();
+                }
+                else if (SceneUtils.SDKVersion == 3)
+                {
+                    Station = gameObject.GetOrAddComponent<VRCStation>();
+                }
+                inAxisHorizontal = InputUtils.GetInput(VRCInputs.Horizontal);
+                inAxisVertical = InputUtils.GetInput(VRCInputs.Vertical);
+                StationTrigger = gameObject.GetOrAddComponent<VRC_AstroInteract>();
+                if (StationTrigger != null)
+                {
+                    StationTrigger.OnInteract += EnterStation;
+                    StationTrigger.interactText = "Sit";
+                    StationTrigger.InteractionText = "Sit";
+                }
+                HasSubscribed = true;
+                InvokeRepeating(nameof(CheckForHeightLimit), 0.1f, 0.1f);
 
-            
-            InvokeRepeating(nameof(ReplacevanillaStationExit), 0.1f, 0.1f);
 
+                InvokeRepeating(nameof(ReplacevanillaStationExit), 0.1f, 0.1f);
+                HasInitialized = true;
+            }
         }
 
         private void OnStationEnter(VRC_StationInternal instance)

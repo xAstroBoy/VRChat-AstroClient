@@ -142,6 +142,7 @@
     <Compile Include="AstroMonos\Prefabs\ReimajoBoothAssets\ChairController.cs" />
     <Compile Include="AstroMonos\Prefabs\ReimajoBoothAssets\SpaceShuttleController.cs" />
     <Compile Include="ClientAttributes\RegisterFakeUdon.cs" />
+    <Compile Include="ClientResources\Loaders\AudioClips.cs" />
     <Compile Include="ClientUI\ActionMenu\ActionMenuUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Hud\Notifier\NewHudNotifier.cs" />

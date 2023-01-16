@@ -31,15 +31,19 @@ namespace AstroClient.Startup.Hooks
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            new AstroPatch(typeof(AnalyticsController).GetMethod(nameof(AnalyticsController.Awake)), GetPatch(nameof(KillItWithFire)));
+            new AstroPatch(typeof(AnalyticsController).GetMethod(nameof(AnalyticsController.OnEnable)), GetPatch(nameof(KillItWithFire)));
         }
 
         private static void KillItWithFire(ref AnalyticsController __instance)
         {
-            if (__instance != null)
+            try
             {
-                UnityEngine.Object.DestroyImmediate(__instance);
+                if (__instance != null)
+                {
+                    UnityEngine.Object.DestroyImmediate(__instance);
+                }
             }
+            catch{}
         }
     }
 }

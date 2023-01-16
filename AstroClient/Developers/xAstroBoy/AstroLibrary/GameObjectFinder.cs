@@ -19,7 +19,7 @@
             }
             else
             {
-                Log.Warn($"[WARNING (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
+                Log.Error($"[ERROR (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
                 return null;
             }
         }

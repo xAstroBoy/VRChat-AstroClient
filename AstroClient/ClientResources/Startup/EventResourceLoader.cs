@@ -21,6 +21,7 @@
             LoadClassResources(typeof(Bundles));
             LoadClassResources(typeof(Materials));
             LoadClassResources(typeof(Prefabs));
+            LoadClassResources(typeof(AudioClips));
             LoadClassResources(typeof(LoadScreenPrefabs));
             LoadClassResources(typeof(Icons));
         }

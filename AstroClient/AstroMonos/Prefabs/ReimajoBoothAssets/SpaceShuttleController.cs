@@ -1,23 +1,2115 @@
 ﻿using AstroClient;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientAttributes;
+using AstroClient.ClientResources.Loaders;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using System;
 using System.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.SDKBase;
-using VRCStation = VRC.SDKBase.VRCStation;
 
 namespace ReimajoBoothAssets
 {
     // TODO: Finish and adjust to make it work without udon.
     /// <summary>
-    /// This script needs to be added in "SpaceShuttle/ShipController"
+    /// This script needs to be added in "{this.transform.root.name}/ShipController"
     /// </summary>
     [RegisterComponent]
     internal class SpaceShuttleController : MonoBehaviour
     {
+        private List<Il2CppSystem.Object> AntiGarbageCollection = new();
+
+        public SpaceShuttleController(IntPtr ptr) : base(ptr)
+        {
+            AntiGarbageCollection.Add(this);
+        }
+
+        #region PrefabPaths
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_frontLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_upRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_backRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_backwardCTR1/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_downLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_downFrontLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_downRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_downFrontLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_frontRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR1/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/LandingGearDoorFront.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/OrbitalManouveringEngine.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/LandingGearDoorFront.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorFront_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downLeftCTR = this.transform.root.FindObject("ParticlesRoot/_downLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/FrontGear1/FrontGear3").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/LandingGearDoorRear.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_upRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_upFrontLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_backwardCTR1/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_downFrontRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_frontLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_upFrontRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3_AudioSource == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3_AudioSource = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop/_backwardMTRs3/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR1 == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR1 = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR1").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Altimeter").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Throttle").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Elevator.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.L/RearGear2.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/EjectButton").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR2 == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR2 = this.transform.root.FindObject("ParticlesRoot/_backwardCTR2").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.R/RearGear3.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/OrbitalManouveringEngine.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_OrbitalManouveringEngine_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Rudder { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Rudder
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Rudder == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Rudder = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Rudder").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Rudder;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/EjectButton/_desktopButton2").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RudderControl.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR2/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_backwardCTR2/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RudderControl.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RudderControl_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/FrontGear1/FrontGear2").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2;
+            }
+        }
+
+        private GameObject _SpaceShuttle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle == null)
+                {
+                    return _SpaceShuttle = Finder.Find($"SpaceShuttle").gameObject;
+                }
+
+                return _SpaceShuttle;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot_Exit { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot_Exit
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot_Exit == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot_Exit = this.transform.root.FindObject("SelfAdjustingChair_Pilot/Exit").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot_Exit;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button2").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/LandingGearDoorRear.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_LandingGearDoorRear_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Elevator.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Elevator_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickTrigger
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickTrigger == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickTrigger = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Joystick/JoystickTrigger").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickTrigger;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button1").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backLeftCTR = this.transform.root.FindObject("ParticlesRoot/_backLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR = this.transform.root.FindObject("ParticlesRoot/_downFrontLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downRightCTR = this.transform.root.FindObject("ParticlesRoot/_downRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_backLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_upLeftCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource = this.transform.root.FindObject("ParticlesRoot/_downRightCTR/ColdGasThrusters/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_upFrontRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_frontRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_upFrontLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward = this.transform.root.FindObject("SelfAdjustingChair_Pilot/_seatBackEndSurfaceForward").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R/_desktopButton0").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R_RearGear4_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R_RearGear4_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R_RearGear4_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R_RearGear4_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.R/RearGear3.R/RearGear4.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear3_R_RearGear4_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature = this.transform.root.FindObject("Space Shuttle Model/Armature").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model = this.transform.root.FindObject("Space Shuttle Model").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L_RearWheel_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L_RearWheel_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L_RearWheel_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L_RearWheel_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.L/RearGear2.L/RearWheel.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear2_L_RearWheel_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/FrontGear1").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3_FrontGear4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3_FrontGear4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3_FrontGear4 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3_FrontGear4 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/FrontGear1/FrontGear3/FrontGear4").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear3_FrontGear4;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton1 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton1 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Joystick/JoystickButton1").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_upLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1/AudioSource").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop/_backwardMTRs3").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.L/RearGear3.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontRightCTR = this.transform.root.FindObject("ParticlesRoot/_frontRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button3").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot = this.transform.root.FindObject("SelfAdjustingChair_Pilot").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot;
+            }
+        }
+
+        private GameObject _SpaceShuttle__audioSourceGearDeploySound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle__audioSourceGearDeploySound
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle__audioSourceGearDeploySound == null)
+                {
+                    return _SpaceShuttle__audioSourceGearDeploySound = this.transform.root.FindObject("_audioSourceGearDeploySound").gameObject;
+                }
+
+                return _SpaceShuttle__audioSourceGearDeploySound;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR1/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward = this.transform.root.FindObject("SelfAdjustingChair_Pilot/_seatSurfaceUpAndFrontEdgeForward").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upLeftCTR = this.transform.root.FindObject("ParticlesRoot/_upLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR = this.transform.root.FindObject("ParticlesRoot/_upFrontLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot = this.transform.root.FindObject("ParticlesRoot").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR1 == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR1 = this.transform.root.FindObject("ParticlesRoot/_backwardCTR1").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent/NavballRotateHere").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_backRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L/_desktopButton1").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.R/RearGear2.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ShipController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ShipController
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ShipController == null)
+                {
+                    return _SpaceShuttle_ShipController = this.transform.root.FindObject("ShipController").gameObject;
+                }
+
+                return _SpaceShuttle_ShipController;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_backLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button5").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upRightCTR = this.transform.root.FindObject("ParticlesRoot/_upRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontRightCTR = this.transform.root.FindObject("ParticlesRoot/_downFrontRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_CustomCG { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_CustomCG
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_CustomCG == null)
+                {
+                    return _SpaceShuttle_CustomCG = this.transform.root.FindObject("CustomCG").gameObject;
+                }
+
+                return _SpaceShuttle_CustomCG;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__upFrontRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__upFrontRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__upFrontRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__upFrontRightCTR = this.transform.root.FindObject("ParticlesRoot/_upFrontRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__upFrontRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3_ButtonHighlight__2_ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3_ButtonHighlight__2_
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3_ButtonHighlight__2_ == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3_ButtonHighlight__2_ = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button3/ButtonHighlight (2)").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button3_ButtonHighlight__2_;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L/ButtonHighlightGearDown").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat = this.transform.root.FindObject("SelfAdjustingChair_Pilot/_stationSeat").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Space_Shuttle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Space_Shuttle
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Space_Shuttle == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Space_Shuttle = this.transform.root.FindObject("Space Shuttle Model/Space Shuttle").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Space_Shuttle;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button6").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere_Navball { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere_Navball
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere_Navball == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere_Navball = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent/NavballRotateHere/Navball").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere_Navball;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R_RearWheel_R { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R_RearWheel_R
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R_RearWheel_R == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R_RearWheel_R = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.R/RearGear2.R/RearWheel.R").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_R_RearGear2_R_RearWheel_R;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Speedometer").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L_RearGear4_L { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L_RearGear4_L
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L_RearGear4_L == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L_RearGear4_L = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/RearGear1.L/RearGear3.L/RearGear4.L").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_RearGear1_L_RearGear3_L_RearGear4_L;
+            }
+        }
+
+        private GameObject _SpaceShuttle_SelfAdjustingChair_Pilot_ChairController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_SelfAdjustingChair_Pilot_ChairController
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_SelfAdjustingChair_Pilot_ChairController == null)
+                {
+                    return _SpaceShuttle_SelfAdjustingChair_Pilot_ChairController = this.transform.root.FindObject("SelfAdjustingChair_Pilot/ChairController").gameObject;
+                }
+
+                return _SpaceShuttle_SelfAdjustingChair_Pilot_ChairController;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontLeftCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontLeftCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontLeftCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontLeftCTR = this.transform.root.FindObject("ParticlesRoot/_frontLeftCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontLeftCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button4").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2_FrontWheel { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2_FrontWheel
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2_FrontWheel == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2_FrontWheel = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/FrontGear1/FrontGear2/FrontWheel").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_FrontGear1_FrontGear2_FrontWheel;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Joystick").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root = this.transform.root.FindObject("Space Shuttle Model/Armature/Root").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton2 == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton2 = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Joystick/JoystickButton2").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickButton2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4_ButtonHighlight__3_ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4_ButtonHighlight__3_
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4_ButtonHighlight__3_ == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4_ButtonHighlight__3_ = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button4/ButtonHighlight (3)").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button4_ButtonHighlight__3_;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5_ButtonHighlight__4_ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5_ButtonHighlight__4_
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5_ButtonHighlight__4_ == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5_ButtonHighlight__4_ = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button5/ButtonHighlight (4)").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button5_ButtonHighlight__4_;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6_ButtonHighlight__5_ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6_ButtonHighlight__5_
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6_ButtonHighlight__5_ == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6_ButtonHighlight__5_ = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button6/ButtonHighlight (5)").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button6_ButtonHighlight__5_;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2_ButtonHighlight__1_ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2_ButtonHighlight__1_
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2_ButtonHighlight__1_ == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2_ButtonHighlight__1_ = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button2/ButtonHighlight (1)").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button2_ButtonHighlight__1_;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R/ButtonHighlightFlightAssist").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1_ButtonHighlight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1_ButtonHighlight
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1_ButtonHighlight == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1_ButtonHighlight = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Button1/ButtonHighlight").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Button1_ButtonHighlight;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backRightCTR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backRightCTR
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backRightCTR == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backRightCTR = this.transform.root.FindObject("ParticlesRoot/_backRightCTR").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backRightCTR;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR2 == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR2 = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR2").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR2;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle_ThrottleThumbstick { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle_ThrottleThumbstick
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle_ThrottleThumbstick == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle_ThrottleThumbstick = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Throttle/ThrottleThumbstick").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Throttle_ThrottleThumbstick;
+            }
+        }
+
+        private GameObject _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickThumbstick { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickThumbstick
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickThumbstick == null)
+                {
+                    return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickThumbstick = this.transform.root.FindObject("Space Shuttle Model/Armature/Root/Joystick/JoystickThumbstick").gameObject;
+                }
+
+                return _SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick_JoystickThumbstick;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_downLeftCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_frontForwardCTR2/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_downFrontRightCTR/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters;
+            }
+        }
+
+        private GameObject _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters == null)
+                {
+                    return _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters = this.transform.root.FindObject("ParticlesRoot/_backwardCTR2/ColdGasThrusters").gameObject;
+                }
+
+                return _SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters;
+            }
+        }
+
+        #endregion PrefabPaths
+
         private bool _gearDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
         internal bool gearDown
@@ -50,535 +2142,45 @@ namespace ReimajoBoothAssets
             }
         }
 
-        private bool _directionUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionUp
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionUp;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionUp)
-                {
-                    if (value)
-                    {
-                        SetDirectionUp();
-                    }
-                    else
-                    {
-                        if (directionDown)
-                        {
-                            SetDirectionDown();
-                        }
-                        else
-                        {
-                            SetDirectionUpDownNeutral();
-                        }
-                    }
-                    _directionUp = value;
-                }
-            }
-        }
 
-        private bool _directionDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionDown
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionDown;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionDown)
-                {
-                    if (value)
-                    {
-                        SetDirectionDown();
-                    }
-                    else
-                    {
-                        if (directionUp)
-                        {
-                            SetDirectionUp();
-                        }
-                        else
-                        {
-                            SetDirectionUpDownNeutral();
-                        }
-                    }
-                    _directionDown = value;
-                }
-            }
-        }
 
-        private bool _directionLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionLeft
-        {
-            [HideFromIl2Cpp]
-            get => _directionLeft;
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionLeft)
-                {
-                    if (value)
-                    {
-                        SetDirectionLeft();
-                    }
-                    else
-                    {
-                        if (directionRight)
-                        {
-                            SetDirectionRight();
-                        }
-                        else
-                        {
-                            SetDirectionLeftRightNeutral();
-                        }
-                    }
 
-                    _directionLeft = value;
-                }
-            }
-        }
+        private bool directionRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _directionRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionRight
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionRight;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionRight)
-                {
-                    if (value)
-                    {
-                        SetDirectionRight();
-                    }
-                    else
-                    {
-                        if (directionLeft)
-                        {
-                            SetDirectionLeft();
-                        }
-                        else
-                        {
-                            SetDirectionLeftRightNeutral();
-                        }
-                    }
+        private bool directionForwardFast { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-                    _directionRight = value;
-                }
-            }
-        }
 
-        private bool _directionForwardFast { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionForwardFast
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionForwardFast;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionForwardFast)
-                {
-                    if (value)
-                    {
-                        SetDirectionForwardFast();
-                    }
-                    else
-                    {
-                        if (directionForwardSlow)
-                        {
-                            SetDirectionForwardSlow();
-                        }
-                        else if (directionBackward)
-                        {
-                            SetDirectionBackward();
-                        }
-                        else
-                        {
-                            SetDirectionForwardBackwardNeutral();
-                        }
-                    }
+        private bool directionForwardSlow { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-                    _directionForwardFast = value;
-                }
-            }
-        }
 
-        private bool _directionForwardSlow { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionBackward { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionForwardSlow
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionForwardSlow;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionForwardSlow)
-                {
-                    if (value)
-                    {
-                        SetDirectionForwardSlow();
-                    }
-                    else
-                    {
-                        if (directionForwardFast)
-                        {
-                            SetDirectionForwardFast();
-                        }
-                        else if (directionBackward)
-                        {
-                            SetDirectionBackward();
-                        }
-                        else
-                        {
-                            SetDirectionForwardBackwardNeutral();
-                        }
-                    }
 
-                    _directionForwardSlow = value;
-                }
-            }
-        }
+        private bool directionRollLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _directionBackward { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionBackward
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionBackward;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionBackward)
-                {
-                    if (value)
-                    {
-                        SetDirectionBackward();
-                    }
-                    else
-                    {
-                        if (directionForwardFast)
-                        {
-                            SetDirectionForwardFast();
-                        }
-                        else
-                        {
-                            SetDirectionForwardBackwardNeutral();
-                        }
-                    }
+        private bool directionRollRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-                    _directionBackward = value;
-                }
-            }
-        }
 
-        private bool _directionRollLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionPitchUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionRollLeft
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionRollLeft;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionRollLeft)
-                {
-                    if (value)
-                    {
-                        SetDirectionRollLeft();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionRollRight)
-                        {
-                            SetDirectionRollRight();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionRollLeftRollRightNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
 
-                    _directionRollLeft = value;
-                }
-            }
-        }
+        private bool directionPitchDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _directionRollRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionRollRight
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionRollRight;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionRollRight)
-                {
-                    if (value)
-                    {
-                        SetDirectionRollRight();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("R", value: POSITIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionRollLeft)
-                        {
-                            SetDirectionRollLeft();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("R", value: NEGATIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionRollLeftRollRightNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("R", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
+        private bool directionYawLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-                    _directionRollRight = value;
-                }
-            }
-        }
 
-        private bool _directionPitchUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool directionYawRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal bool directionPitchUp
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionPitchUp;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionPitchUp)
-                {
-                    if (value)
-                    {
-                        SetDirectionPitchUp();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionPitchDown)
-                        {
-                            SetDirectionPitchDown();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionPitchUpPitchDownNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
-
-                    _directionPitchUp = value;
-                }
-            }
-        }
-
-        private bool _directionPitchDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
-        internal bool directionPitchDown
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionPitchDown;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionPitchDown)
-                {
-                    if (value)
-                    {
-                        SetDirectionPitchDown();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("V", value: NEGATIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionPitchUp)
-                        {
-                            SetDirectionPitchUp();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("V", value: POSITIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionPitchUpPitchDownNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("V", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
-
-                    _directionPitchDown = value;
-                }
-            }
-        }
-
-        private bool _directionYawLeft { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
-        internal bool directionYawLeft
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionYawLeft;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionYawLeft)
-                {
-                    if (value)
-                    {
-                        SetDirectionYawLeft();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionYawRight)
-                        {
-                            SetDirectionYawRight();
-                            if (localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionYawLeftYawRightNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
-
-                    _directionYawLeft = value;
-                }
-            }
-        }
-
-        private bool _directionYawRight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
-        internal bool directionYawRight
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _directionYawRight;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value != _directionYawRight)
-                {
-                    if (value)
-                    {
-                        SetDirectionYawRight();
-                        if (!localPlayerIsInStationSeat)
-                        {
-                            animator.SetFloat("H", value: POSITIVE_REMOTE_STEERING);
-                        }
-                    }
-                    else
-                    {
-                        if (directionYawLeft)
-                        {
-                            SetDirectionYawLeft();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("H", value: NEGATIVE_REMOTE_STEERING);
-                            }
-                        }
-                        else
-                        {
-                            SetDirectionYawLeftYawRightNeutral();
-                            if (!localPlayerIsInStationSeat)
-                            {
-                                animator.SetFloat("H", value: NEUTRAL_REMOTE_STEERING);
-                            }
-                        }
-                    }
-
-                    _directionYawRight = value;
-                }
-            }
-        }
 
         /// <summary>
         /// This slider value ranging from 0 to 1 determines the flight stick sensitivity
@@ -678,7 +2280,7 @@ namespace ReimajoBoothAssets
         private AudioClip gearOutSound { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
-        /// Root of the Flight Stick (local pickup object), will be re-[HideFromIl2Cpp] set to the local position at start when it's released
+        /// Root of the Flight Stick (local pickup object), will be reset to the local position at start when it's released
         /// </summary>
         private Transform flightStickRoot { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
@@ -705,7 +2307,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// The pilot's chair of the ship (VRCStation)
         /// </summary>
-        private ChairController pilotChairStation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal ChairController pilotChairStation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary> Backwards pointing main truster number 1/3 </summary>
         private Transform backwardMTRs1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -1260,7 +2862,6 @@ namespace ReimajoBoothAssets
         internal float controlSensitivitySpan { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float currentControlSensitivity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool localPlayerIsInStationSeat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        internal float rollAngleInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool addControllerOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool stickIsHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float fadeOutTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -1268,7 +2869,7 @@ namespace ReimajoBoothAssets
         private Quaternion localFlightStickLocalResetRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Quaternion steeringOffset { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Quaternion currentFlightStickRotation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private GameObject syncedShipGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject ShipGameObject { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float forwardBackwardThrust { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float upDownThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float leftRightThrustInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -1775,11 +3376,7 @@ namespace ReimajoBoothAssets
         internal void SetDirectionBackward()
         {
             //player wants to fly backward, so activate forward-booster
-            if (directionBackward)
-            {
-                //we're already flying backward, so nothing changed
-            }
-            else
+            if (!directionBackward)
             {
                 directionBackward = true;
 
@@ -2278,190 +3875,236 @@ namespace ReimajoBoothAssets
             }
         }
 
+        internal void FindParticleAndSource()
+        {
+            backwardMainPS1 = backwardMTRs1.GetGetInChildrens<ParticleSystem>(true);
+            backwardMainPS2 = backwardMTRs2.GetGetInChildrens<ParticleSystem>(true);
+            backwardMainPS3 = backwardMTRs3.GetGetInChildrens<ParticleSystem>(true);
+            backwardSlowPS1 = backwardCTRs1.GetGetInChildrens<ParticleSystem>(true);
+            backwardSlowPS2 = backwardCTRs2.GetGetInChildrens<ParticleSystem>(true);
+            frontForwardPS1 = frontForwardCTR1.GetGetInChildrens<ParticleSystem>(true);
+            frontForwardPS2 = frontForwardCTR2.GetGetInChildrens<ParticleSystem>(true);
+            frontLeftPS = frontLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            frontRightPS = frontRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            upFrontLeftPS = upFrontLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            upFrontRightPS = upFrontRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            upLeftPS = upLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            upRightPS = upRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            downLeftPS = downLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            downRightPS = downRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            downFrontLeftPS = downFrontLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            downFrontRightPS = downFrontRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            backLeftPS = backLeftCTR.GetGetInChildrens<ParticleSystem>(true);
+            backRightPS = backRightCTR.GetGetInChildrens<ParticleSystem>(true);
+            //fetch audio sources
+            backwardMainASs = backwardMTRs1.GetGetInChildrens<AudioSource>(true);
+            backwardSlowAS1 = backwardCTRs1.GetGetInChildrens<AudioSource>(true);
+            backwardSlowAS2 = backwardCTRs2.GetGetInChildrens<AudioSource>(true);
+            frontForwardAS1 = frontForwardCTR1.GetGetInChildrens<AudioSource>(true);
+            frontForwardAS2 = frontForwardCTR2.GetGetInChildrens<AudioSource>(true);
+            frontLeftAS = frontLeftCTR.GetGetInChildrens<AudioSource>(true);
+            frontRightAS = frontRightCTR.GetGetInChildrens<AudioSource>(true);
+            upFrontLeftAS = upFrontLeftCTR.GetGetInChildrens<AudioSource>(true);
+            upFrontRightAS = upFrontRightCTR.GetGetInChildrens<AudioSource>(true);
+            upLeftAS = upLeftCTR.GetGetInChildrens<AudioSource>(true);
+            upRightAS = upRightCTR.GetGetInChildrens<AudioSource>(true);
+            downLeftAS = downLeftCTR.GetGetInChildrens<AudioSource>(true);
+            downRightAS = downRightCTR.GetGetInChildrens<AudioSource>(true);
+            downFrontLeftAS = downFrontLeftCTR.GetGetInChildrens<AudioSource>(true);
+            downFrontRightAS = downFrontRightCTR.GetGetInChildrens<AudioSource>(true);
+            backLeftAS = backLeftCTR.GetGetInChildrens<AudioSource>(true);
+            backRightAS = backRightCTR.GetGetInChildrens<AudioSource>(true);
+        }
+
+        internal void Set_SpatialAudio()
+        {
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__upRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__frontForwardCTR2_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__downFrontLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__downRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__frontLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__backwardCTR1_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__upLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__frontForwardCTR1_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__backLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__frontRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__upFrontRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__upFrontLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__backwardCTR2_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__backRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__downLeftCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle_ParticlesRoot__downFrontRightCTR_ColdGasThrusters_AudioSource, 10, 100);
+            SetVRCSpatialAudioSource(SpaceShuttle__audioSourceGearDeploySound, 10, 40);
+            SetVRCSpatialAudioSource(SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1_AudioSource, 60, 40);
+            SetVRCSpatialAudioSource(SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource, 60, 40);
+            SetVRCSpatialAudioSource(SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2_AudioSource, 60, 40);
+            Log.Debug("Spatial Audio set.");
+        }
+
         /// <summary>
         /// Is called once at the start of the world to setup the script
         /// </summary>
         internal void Start()
         {
-            #region Setup Variables
+            Initialize();
+        }
 
-            var root = this.gameObject.transform.root;
-            var Desktop0 = root.FindObject($"Space Shuttle Model/Armature/Root/DashboardButton.R/_desktopButton0").gameObject;
+        internal void Set_DesktopButtons()
+        {
+
+            var Desktop0 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R__desktopButton0.gameObject;
             if (Desktop0 != null)
             {
                 var interact = Desktop0.GetOrAddComponent<VRC_AstroInteract>();
                 if (interact != null)
                 {
                     interact.InteractionText = "Toggle Pro Mode";
-                    interact.proximity = 0.05f;
+                    interact.proximity = 0_05f;
                     interact.OnInteract = () =>
                     {
                         this.OnButtonDown(0);
                     };
                 }
-                desktopButtons.Add(Desktop0);
+                if (!desktopButtons.Contains(Desktop0)) desktopButtons.Add(Desktop0);
             }
-            var Desktop1 = root.FindObject($"Space Shuttle Model/Armature/Root/DashboardButton.L/_desktopButton1").gameObject;
+            var Desktop1 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L__desktopButton1;
             if (Desktop1 != null)
             {
                 var interact = Desktop1.GetOrAddComponent<VRC_AstroInteract>();
                 if (interact != null)
                 {
                     interact.InteractionText = "Toggle Gear";
-                    interact.proximity = 0.05f;
+                    interact.proximity = 0_05f;
                     interact.OnInteract = () =>
                     {
                         this.OnButtonDown(1);
                     };
                 }
-                desktopButtons.Add(Desktop1);
+                if (!desktopButtons.Contains(Desktop1)) desktopButtons.Add(Desktop1);
             }
-            var Desktop2 = root.FindObject($"Space Shuttle Model/Armature/Root/EjectButton/_desktopButton2").gameObject;
+            var Desktop2 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_EjectButton__desktopButton2;
             if (Desktop2 != null)
             {
                 var interact = Desktop2.GetOrAddComponent<VRC_AstroInteract>();
                 if (interact != null)
                 {
                     interact.InteractionText = "Exit Space Ship";
-                    interact.proximity = 0.05f;
+                    interact.proximity = 0_05f;
                     interact.OnInteract = () =>
                     {
                         this.OnButtonDown(2);
                     };
                 }
-                desktopButtons.Add(Desktop2);
+                if (!desktopButtons.Contains(Desktop2)) desktopButtons.Add(Desktop2);
+
             }
-            Ship = root.GetComponent<Rigidbody>();
-            syncedShipGameObject = root.gameObject;
-            buttonHighlightGearDown = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.L/ButtonHighlightGearDown").gameObject;
-            buttonHighlightFlightAssist = root.FindObject("Space Shuttle Model/Armature/Root/DashboardButton.R/ButtonHighlightFlightAssist").gameObject;
-            customCenterOfGravity = root.FindObject("CustomCG");
-            animator = root.FindObject("Space Shuttle Model").GetComponent<Animator>();
-            gearDeployAudioSource = root.FindObject("_audioSourceGearDeploySound").GetComponent<AudioSource>();
+
+            Log.Debug("Set Buttons triggers.");
+
+        }
+        internal void Set_Paths()
+        {
+            Ship = this.transform.root.GetComponent<Rigidbody>();
+            constantForceShipComponent = this.transform.root.GetComponent<ConstantForce>();
+            ShipGameObject = this.transform.root.gameObject;
+            buttonHighlightGearDown = SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_L_ButtonHighlightGearDown.gameObject;
+            buttonHighlightFlightAssist = SpaceShuttle_Space_Shuttle_Model_Armature_Root_DashboardButton_R_ButtonHighlightFlightAssist.gameObject;
+            customCenterOfGravity = SpaceShuttle_CustomCG.transform;
+            animator = SpaceShuttle_Space_Shuttle_Model.GetComponent<Animator>();
+            gearDeployAudioSource = SpaceShuttle__audioSourceGearDeploySound.GetComponent<AudioSource>();
             flightStickRoot = this.transform;
-            navBall = root.FindObject("Space Shuttle Model/Armature/Root/NavBallParent/NavballRotateHere");
-            speedIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Speedometer");
-            altitudeIndicatorBone = root.FindObject("Space Shuttle Model/Armature/Root/Altimeter");
-            backwardMTRs1 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1");
-            backwardMTRs2 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2");
-            backwardMTRs3 = root.FindObject("Space Shuttle Model/Armature/Root/MainEngineTop/_backwardMTRs3");
+            navBall = SpaceShuttle_Space_Shuttle_Model_Armature_Root_NavBallParent_NavballRotateHere.transform;
+            speedIndicatorBone = SpaceShuttle_Space_Shuttle_Model_Armature_Root_Speedometer.transform;
+            altitudeIndicatorBone = SpaceShuttle_Space_Shuttle_Model_Armature_Root_Altimeter.transform;
+            backwardMTRs1 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_L__backwardMTRs1.transform;
+            backwardMTRs2 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngine_R__backwardMTRs2.transform;
+            backwardMTRs3 = SpaceShuttle_Space_Shuttle_Model_Armature_Root_MainEngineTop__backwardMTRs3.transform;
 
-            backwardCTRs1 = root.FindObject("ParticlesRoot/_backwardCTR1");
-            backwardCTRs2 = root.FindObject("ParticlesRoot/_backwardCTR2");
+            backwardCTRs1 = SpaceShuttle_ParticlesRoot__backwardCTR1.transform;
+            backwardCTRs2 = SpaceShuttle_ParticlesRoot__backwardCTR2.transform;
 
-            frontForwardCTR1 = root.FindObject("ParticlesRoot/_frontForwardCTR1");
-            frontForwardCTR2 = root.FindObject("ParticlesRoot/_frontForwardCTR2");
+            frontForwardCTR1 = SpaceShuttle_ParticlesRoot__frontForwardCTR1.transform;
+            frontForwardCTR2 = SpaceShuttle_ParticlesRoot__frontForwardCTR2.transform;
 
-            upRightCTR = root.FindObject("ParticlesRoot/_upRightCTR");
+            upRightCTR = SpaceShuttle_ParticlesRoot__upRightCTR.transform;
 
-            upFrontRightCTR = root.FindObject("ParticlesRoot/_upFrontRightCTR");
-            downFrontRightCTR = root.FindObject("ParticlesRoot/_downFrontRightCTR");
-            downFrontLeftCTR = root.FindObject("ParticlesRoot/_downFrontLeftCTR");
-            backLeftCTR = root.FindObject("ParticlesRoot/_backLeftCTR");
-            downRightCTR = root.FindObject("ParticlesRoot/_downRightCTR");
-            downLeftCTR = root.FindObject("ParticlesRoot/_downLeftCTR");
-            frontRightCTR = root.FindObject("ParticlesRoot/_frontRightCTR");
-            frontLeftCTR = root.FindObject("ParticlesRoot/_frontLeftCTR");
-            backRightCTR = root.FindObject("ParticlesRoot/_backRightCTR");
-            upFrontLeftCTR = root.FindObject("ParticlesRoot/_upFrontLeftCTR");
-            upLeftCTR = root.FindObject("ParticlesRoot/_upLeftCTR");
-            joystickBone = root.FindObject("Space Shuttle Model/Armature/Root/Joystick");
+            upFrontRightCTR = SpaceShuttle_ParticlesRoot__upFrontRightCTR.transform;
+            downFrontRightCTR = SpaceShuttle_ParticlesRoot__downFrontRightCTR.transform;
+            downFrontLeftCTR = SpaceShuttle_ParticlesRoot__downFrontLeftCTR.transform;
+            backLeftCTR = SpaceShuttle_ParticlesRoot__backLeftCTR.transform;
+            downRightCTR = SpaceShuttle_ParticlesRoot__downRightCTR.transform;
+            downLeftCTR = SpaceShuttle_ParticlesRoot__downLeftCTR.transform;
+            frontRightCTR = SpaceShuttle_ParticlesRoot__frontRightCTR.transform;
+            frontLeftCTR = SpaceShuttle_ParticlesRoot__frontLeftCTR.transform;
+            backRightCTR = SpaceShuttle_ParticlesRoot__backRightCTR.transform;
+            upFrontLeftCTR = SpaceShuttle_ParticlesRoot__upFrontLeftCTR.transform;
+            upLeftCTR = SpaceShuttle_ParticlesRoot__upLeftCTR.transform;
+            joystickBone = SpaceShuttle_Space_Shuttle_Model_Armature_Root_Joystick.transform;
+            gearOutSound = AudioClips.Shuttle_gearOutSound;
+            gearInSound = AudioClips.Shuttle_gearInSound;
+            Log.Debug("Set Shuttle Paths.");
+        }
 
+        internal void Set_FlightStick()
+        {
             flightStickPickup = flightStickRoot.GetOrAddComponent<VRC_AstroPickup>();
-            flightStickPickup.ForcePickupComponent = true;
-            flightStickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Any;
-            flightStickPickup.PickupController.AutoHold = VRC_Pickup.AutoHoldMode.Yes;
-            flightStickPickup.PickupController.UseText = "Grab";
-            flightStickPickup.PickupController.ThrowVelocityBoostMinSpeed = 1;
-            flightStickPickup.PickupController.ThrowVelocityBoostScale = 1;
-            flightStickPickup.pickupable = true;
-            flightStickPickup.PickupController.proximity = 2;
-            flightStickPickup.OnPickup += OnPickup;
-            flightStickPickup.OnDrop += OnDrop;
-
-            var ChairController = root.FindObject("SelfAdjustingChair_Pilot/ChairController");
-            var station = ChairController.GetOrAddComponent<VRC_AstroStation>();
-            if (station != null)
+            if (flightStickPickup != null)
             {
-                station.OnStationEnterEvent += OnStationEnter;
-                station.OnStationExitEvent += OnStationExit;
-                station.Station.disableStationExit = true;
+                flightStickPickup.ForcePickupComponent = true;
+                flightStickPickup.PickupController.EditMode = true;
+                flightStickPickup.PickupController.orientation = VRC_Pickup.PickupOrientation.Any;
+                flightStickPickup.PickupController.AutoHold = VRC_Pickup.AutoHoldMode.Yes;
+                flightStickPickup.PickupController.UseText = "Grab";
+                flightStickPickup.PickupController.ThrowVelocityBoostMinSpeed = 1;
+                flightStickPickup.PickupController.ThrowVelocityBoostScale = 1;
+                flightStickPickup.pickupable = true;
+                flightStickPickup.PickupController.proximity = 2;
+                flightStickPickup.OnPickup += OnPickup;
+                flightStickPickup.OnDrop += OnDrop;
+                Log.Debug("Flightstick ready.");
+            }
+        }
+
+        internal void Set_ChairController()
+        {
+            var station = SpaceShuttle_SelfAdjustingChair_Pilot_ChairController.GetOrAddComponent<VRC_AstroStation>();
+            if(station != null)
+            {
+                station.Start();
+                station.disableStationExit = true;
                 station.Station.seated = true;
                 station.Station.PlayerMobility = VRCStation.Mobility.ImmobilizeForVehicle;
                 station.Station.canUseStationFromStation = false;
-                station.Station.stationEnterPlayerLocation = root.FindObject("SelfAdjustingChair_Pilot/_stationSeat");
-                station.Station.stationExitPlayerLocation = root.FindObject("SelfAdjustingChair_Pilot/Exit");
+                station.Station.stationEnterPlayerLocation = SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat.transform;
+                station.Station.stationExitPlayerLocation = SpaceShuttle_SelfAdjustingChair_Pilot_Exit.transform;
                 station.StationTrigger.InteractionText = "Drive Shuttle";
                 station.StationTrigger.proximity = 2;
             }
-
-            pilotChairStation = ChairController.GetOrAddComponent<ChairController>();
+            pilotChairStation = SpaceShuttle_SelfAdjustingChair_Pilot_ChairController.GetOrAddComponent<ChairController>();
             if (pilotChairStation != null)
             {
                 pilotChairStation.disableColliderControl = false;
                 pilotChairStation.enableStationMenuButtonExit = false;
-                pilotChairStation.stationSeat = root.FindObject("SelfAdjustingChair_Pilot/_stationSeat");
-                pilotChairStation.seatSurfaceUpAndFrontEdgeForward = root.FindObject("SelfAdjustingChair_Pilot/_seatSurfaceUpAndFrontEdgeForward");
-                pilotChairStation.seatBackEndSurfaceForward = root.FindObject("SelfAdjustingChair_Pilot/_seatBackEndSurfaceForward");
+                pilotChairStation.stationSeat = SpaceShuttle_SelfAdjustingChair_Pilot__stationSeat.transform;
+                pilotChairStation.seatSurfaceUpAndFrontEdgeForward = SpaceShuttle_SelfAdjustingChair_Pilot__seatSurfaceUpAndFrontEdgeForward.transform;
+                pilotChairStation.seatBackEndSurfaceForward = SpaceShuttle_SelfAdjustingChair_Pilot__seatBackEndSurfaceForward.transform;
+                pilotChairStation.OnStationEnter += OnStationEnter;
+                pilotChairStation.OnStationExit += OnStationExit;
+                Log.Debug("ChairController ready!");
             }
-            // add missing audio components.
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_upRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_frontForwardCTR2/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_downFrontLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_downRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_frontLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_backwardCTR1/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_upLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_frontForwardCTR1/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_backLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_frontRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_upFrontRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_upFrontLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_backwardCTR2/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_backRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_downLeftCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("ParticlesRoot/_downFrontRightCTR/ColdGasThrusters/AudioSource").gameObject, 10, 100);
-            SetVRCSpatialAudioSource(root.FindObject("_audioSourceGearDeploySound").gameObject, 10, 40);
-            SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.L/_backwardMTRs1/AudioSource").gameObject, 60, 40);
-            SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2/AudioSource").gameObject, 60, 40);
-            SetVRCSpatialAudioSource(root.FindObject("SpaceShuttle/Space Shuttle Model/Armature/Root/MainEngine.R/_backwardMTRs2/AudioSource").gameObject, 60, 40);
-            backwardMainPS1 = backwardMTRs1.GetComponentInChildren<ParticleSystem>();
-            backwardMainPS2 = backwardMTRs2.GetComponentInChildren<ParticleSystem>();
-            backwardMainPS3 = backwardMTRs3.GetComponentInChildren<ParticleSystem>();
-            backwardSlowPS1 = backwardCTRs1.GetComponentInChildren<ParticleSystem>();
-            backwardSlowPS2 = backwardCTRs2.GetComponentInChildren<ParticleSystem>();
-            frontForwardPS1 = frontForwardCTR1.GetComponentInChildren<ParticleSystem>();
-            frontForwardPS2 = frontForwardCTR2.GetComponentInChildren<ParticleSystem>();
-            frontLeftPS = frontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            frontRightPS = frontRightCTR.GetComponentInChildren<ParticleSystem>();
-            upFrontLeftPS = upFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            upFrontRightPS = upFrontRightCTR.GetComponentInChildren<ParticleSystem>();
-            upLeftPS = upLeftCTR.GetComponentInChildren<ParticleSystem>();
-            upRightPS = upRightCTR.GetComponentInChildren<ParticleSystem>();
-            downLeftPS = downLeftCTR.GetComponentInChildren<ParticleSystem>();
-            downRightPS = downRightCTR.GetComponentInChildren<ParticleSystem>();
-            downFrontLeftPS = downFrontLeftCTR.GetComponentInChildren<ParticleSystem>();
-            downFrontRightPS = downFrontRightCTR.GetComponentInChildren<ParticleSystem>();
-            backLeftPS = backLeftCTR.GetComponentInChildren<ParticleSystem>();
-            backRightPS = backRightCTR.GetComponentInChildren<ParticleSystem>();
-            //fetch audio sources
-            backwardMainASs = backwardMainPS1.GetComponentInChildren<AudioSource>();
-            backwardSlowAS1 = backwardSlowPS1.GetComponentInChildren<AudioSource>();
-            backwardSlowAS2 = backwardSlowPS2.GetComponentInChildren<AudioSource>();
-            frontForwardAS1 = frontForwardCTR1.GetComponentInChildren<AudioSource>();
-            frontForwardAS2 = frontForwardCTR2.GetComponentInChildren<AudioSource>();
-            frontLeftAS = frontLeftCTR.GetComponentInChildren<AudioSource>();
-            frontRightAS = frontRightCTR.GetComponentInChildren<AudioSource>();
-            upFrontLeftAS = upFrontLeftCTR.GetComponentInChildren<AudioSource>();
-            upFrontRightAS = upFrontRightCTR.GetComponentInChildren<AudioSource>();
-            upLeftAS = upLeftCTR.GetComponentInChildren<AudioSource>();
-            upRightAS = upRightCTR.GetComponentInChildren<AudioSource>();
-            downLeftAS = downLeftCTR.GetComponentInChildren<AudioSource>();
-            downRightAS = downRightCTR.GetComponentInChildren<AudioSource>();
-            downFrontLeftAS = downFrontLeftCTR.GetComponentInChildren<AudioSource>();
-            downFrontRightAS = downFrontRightCTR.GetComponentInChildren<AudioSource>();
-            backLeftAS = backLeftCTR.GetComponentInChildren<AudioSource>();
-            backRightAS = backRightCTR.GetComponentInChildren<AudioSource>();
+
+        }
+        internal void Initialize()
+        {
+            #region Setup Variables
+            Set_Paths();
+            Set_DesktopButtons();
+            Set_FlightStick();
+            Set_ChairController();
+
+            // add missing audio components
+            Set_SpatialAudio();
+
 
             #endregion Setup Variables
 
@@ -2473,8 +4116,8 @@ namespace ReimajoBoothAssets
             //fetch particle systems
             controlSensitivitySpan = controlSensitivityMax - controlSensitivityMin;
             SliderValueChanged(); //apply the calculated controlSensitivitySpan
-            constantForceShipComponent = Ship.GetComponent<ConstantForce>();
             ApplyFlightAssistSetting();
+            FindParticleAndSource();
             DisableAllThrusters();
             if (customCenterOfGravity)
             {
@@ -2489,8 +4132,10 @@ namespace ReimajoBoothAssets
                 Log.Error("[ShipController] There is no constant force component attached to the ship's rigidbody.");
             }
             Ship.isKinematic = true;
+            flightStickPickup.ForcePickupComponent = true;
+            flightStickPickup.PickupController.EditMode = true;
             flightStickPickup.pickupable = false;
-            isVR = Networking.LocalPlayer.IsUserInVR();
+            isVR = GameInstances.LocalPlayer.IsUserInVR();
             controllerXOffset = isVR ? controllerXOffsetVRUser : controllerXOffsetDesktopUser;
             if (controllerXOffset != 0)
             {
@@ -2505,17 +4150,19 @@ namespace ReimajoBoothAssets
                 constantRelativeBackwardForce = -constantRelativeBackwardForce;
             animator.SetBool("LandingGearDeployed", gearDown);
             ResetAnimator();
+            Log.Debug("Shuttle is ready!");
         }
 
         internal void Update()
-        {
+        {   
+            //we call UpdateSteering each frame while the controller is held, to avoid having update loops for empty stations
             if (isVR)
             {
                 //allows advanced VR input via thumbstick
                 UpdateSteeringVR();
             }
             else
-            {
+            {   
                 UpdateSteeringDesktop();
             }
             UpdateWhileInStation();
@@ -2548,7 +4195,7 @@ namespace ReimajoBoothAssets
             }
             else
             {
-                Log.Debug("[ShipController] Stopped fade-out update.");
+                // Log.Debug("[ShipController] Stopped fade-out update.");
             }
         }
 
@@ -2608,14 +4255,14 @@ namespace ReimajoBoothAssets
             float axisRotation;
 #pragma warning restore IDE0018
 
-            syncedShipGameObject.transform.rotation.ToAngleAxis(out axisRotation, out axisVector);
+            ShipGameObject.transform.rotation.ToAngleAxis(out axisRotation, out axisVector);
 
             //Mirror pitch
             axisVector.y *= -1;
             navBall.localRotation = Quaternion.AngleAxis(axisRotation, axisVector);
 
             //moves from 90 (zero) to -90 (max)
-            altitudeIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(syncedShipGameObject.transform.position.y / 400)));
+            altitudeIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(ShipGameObject.transform.position.y / 400)));
             //moves from 90 (zero) to -90 (max)
             speedIndicatorBone.localEulerAngles = new Vector3(-74.413f, 180, 83.6f - (173.6f * Mathf.Clamp01(Ship.velocity.magnitude / 60)));
         }
@@ -2768,14 +4415,7 @@ namespace ReimajoBoothAssets
                 constantForceShipComponent.relativeForce = new Vector3(leftRightThrustInput * constantRelativeHorizontalForce, upDownThrustInput * constantRelativeVerticalForce, forwardBackwardThrust);
                 Vector3 stickRotation = addControllerOffset ? (flightStickRoot.localRotation * steeringOffset).eulerAngles : flightStickRoot.localRotation.eulerAngles;
                 SyncControlInput(stickRotation.x % 360, stickRotation.y % 360, rollAngleInput);
-                //we call UpdateSteering each frame while the controller is held, to avoid having update loops for empty stations
             }
-#if DEBUG_TEST
-            else
-            {
-                Log.Debug("[ShipController] Stopping steering update loop");
-            }
-#endif
         }
 
         /// <summary>
@@ -2804,17 +4444,13 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void OnStationEnter()
         {
-#if DEBUG_TEST
             Log.Debug("[ShipController] Player entered this station, called OnStationEnter() locally");
-#endif
             foreach (GameObject button in desktopButtons)
             {
                 button.SetActive(true);
             }
-            SetButtonHighlightsToCurrentState();
-#if DEBUG_TEST
-                Log.Debug("[ShipController] LocalPlayer entered the station.");
-#endif
+            SetButtonHighlightsToCurrentState(); 
+            Log.Debug("[ShipController] LocalPlayer entered the station.");
             localPlayerIsInStationSeat = true;
             Ship.isKinematic = false;
             ResetLocalStickPositionOffset();
@@ -2848,9 +4484,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void OnStationExit()
         {
-#if DEBUG_TEST
-                Log.Debug("[ShipController] Player exited this station, called _OnRelayedAllStationExit() locally");
-#endif
+            Log.Debug("[ShipController] Player exited this station, called OnStationExit() locally");
             foreach (GameObject button in desktopButtons)
             {
                 button.SetActive(false);
@@ -2861,9 +4495,7 @@ namespace ReimajoBoothAssets
             ResetAnimator();
             //smoothly fade out rotation steering
             fadeOutTime = 0;
-#if DEBUG_TEST
-                Log.Debug("[ShipController] LocalPlayer exited the station.");
-#endif
+            Log.Debug("[ShipController] LocalPlayer exited the station.");
             localPlayerIsInStationSeat = false;
             Ship.isKinematic = true;
             flightStickPickup.pickupable = false;
@@ -2887,18 +4519,12 @@ namespace ReimajoBoothAssets
                 INDEX_TRIGGER_PICKUP_HAND_NAME = INDEX_TRIGGER_RIGHT;
                 INDEX_TRIGGER_OTHER_HAND_NAME = INDEX_TRIGGER_LEFT;
             }
-            if (stickIsHeld) { } //compiler optimization
-            else //avoid having two "update" loops in any case
+            stickIsHeld = true;
+            if (addControllerOffset)
             {
-#if DEBUG_TEST
-                    Log.Debug("[ShipController] Starting steering update loop");
-#endif
-                stickIsHeld = true;
-                if (addControllerOffset)
-                {
-                    controllerXOffset = isVR ? controllerXOffsetVRUser : controllerXOffsetDesktopUser;
-                }
+                controllerXOffset = isVR ? controllerXOffsetVRUser : controllerXOffsetDesktopUser;
             }
+
         }
 
         /// <summary>
