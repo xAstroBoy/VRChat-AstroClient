@@ -545,7 +545,7 @@ namespace ReimajoBoothAssets
             desktopButtonCollider = this.GetComponent<MeshCollider>();
             if (desktopButtonCollider == null)
             {
-                Debug.LogError($"[ButtonController] No MeshCollider assigned to button '{this.transform.parent.name}'");
+                Log.Error($"[ButtonController] No MeshCollider assigned to button '{this.transform.parent.name}'");
                 this.gameObject.SetActive(false);
                 return;
             }
@@ -905,13 +905,13 @@ namespace ReimajoBoothAssets
             if (isOn)
             {
 #if DEBUG_TEST
-                Debug.Log($"[ButtonController] '{_buttonDebugName}' is TOGGLED to OFF by an external script.");
+                Log.Debug($"[ButtonController] '{_buttonDebugName}' is TOGGLED to OFF by an external script.");
 #endif
             }
             else
             {
 #if DEBUG_TEST
-                Debug.Log($"[ButtonController] '{_buttonDebugName}' is TOGGLED to ON by an external script.");
+                Log.Debug($"[ButtonController] '{_buttonDebugName}' is TOGGLED to ON by an external script.");
 #endif
             }
             ButtonDownEvent();
@@ -925,7 +925,7 @@ namespace ReimajoBoothAssets
         {
             if (!isOn)
             {
-                ///Debug.Log($"[ButtonController] '{_buttonDebugName}' is set to ON by an external script.");
+                ///Log.Debug($"[ButtonController] '{_buttonDebugName}' is set to ON by an external script.");
                 ButtonDownEvent();
                 UpdateButtonState();
             }
@@ -1070,7 +1070,7 @@ namespace ReimajoBoothAssets
 
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
             }
-            Debug.Log($"[ButtonController] '{this.gameObject.name}' turned to static");
+            Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to static");
         }
 
         /// <summary>
@@ -1097,7 +1097,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
 
             }
-            Debug.Log($"[ButtonController] '{this.gameObject.name}' turned to dynamic");
+            Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to dynamic");
         }
 
         /// <summary>
