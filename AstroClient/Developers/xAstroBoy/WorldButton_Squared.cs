@@ -71,6 +71,11 @@ namespace AstroClient.xAstroBoy
         {
             ButtonBody.transform.eulerAngles = new Vector3(0, Rotate, 0);
         }
+        internal void RotateButton(Vector3 Rotate)
+        {
+            ButtonBody.transform.eulerAngles = Rotate;
+        }
+
         internal void SetScale(Vector3 Scale)
         {
             ButtonBody.transform.localScale = Scale;
@@ -101,7 +106,7 @@ namespace AstroClient.xAstroBoy
         {
             ButtonBody.name = $"AstroWorldSquaredButton: {label}";
             ButtonBody.transform.rotation = Quaternion.Euler(new Vector3(180, 0, 90));
-            //Button.transform.localScale = new Vector3(0.15f, 0.1f, 0.3f);
+            SetScale(new Vector3(2, 2, 2));
             Controller = ButtonBody.FindObject("ButtonScript").GetOrAddComponent<ButtonController>();
             if(Controller != null)
             {

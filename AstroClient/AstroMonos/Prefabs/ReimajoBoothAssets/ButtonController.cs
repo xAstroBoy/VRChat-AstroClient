@@ -489,7 +489,6 @@ namespace ReimajoBoothAssets
         private Transform currentDynamicButtonTop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool isMovingDownDesktop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private Bounds pushAreaBounds { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private float buttonPushDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = BUTTON_PUSH_DISTANCE_DEFAULT;
         private float buttonMovingSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = MOVING_SPEED_DEFAULT;
         private float buttonTriggerDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -558,7 +557,6 @@ namespace ReimajoBoothAssets
             {
                 desktopButtonCollider.enabled = true; //enable for all users
             }
-            ReadButtonBounds();
             InitializeButtonSwitch();
             MakeStatic();
             buttonPushDirection.position = isOn ? dynamicButtonTopOn.transform.position : dynamicButtonTopOff.transform.position;
@@ -601,7 +599,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Determines all button distances at start
         /// </summary>
-        private void SetupButtonDistances()
+        internal void SetupButtonDistances()
         {
             float scale = this.transform.lossyScale.y;
             buttonPushDistance = BUTTON_PUSH_DISTANCE_DEFAULT * scale;
@@ -612,14 +610,6 @@ namespace ReimajoBoothAssets
             buttonUntriggerDistance = buttonPushDistance * BUTTON_UNTRIGGER_PERCENTAGE;
         }
 
-        /// <summary>
-        /// Reads button bounds at start. If the button won't move or rotate at runtime, those are worldspace bounds,
-        /// else localspace bounds are determined.
-        /// </summary>
-        private void ReadButtonBounds()
-        {
-            pushAreaBounds = pushArea.bounds;
-        }
 
         /// <summary>
         /// Only run script when target LOD is active
@@ -639,7 +629,7 @@ namespace ReimajoBoothAssets
         /// Is called from my player calibration script (https://reimajo.booth.pm/items/2753511) when the avatar changed
         /// This is externally called after setting _avatarHeight (happening after localPlayer changed their avatar)
         /// </summary>
-        public void OnAvatarChanged()
+        internal void OnAvatarChanged()
         {
             if (hasNotFinishedStart)
                 return;
@@ -690,7 +680,7 @@ namespace ReimajoBoothAssets
         /// 3. Fire the ButtonUp() event when the button moves back and passes the unTrigger-distance after
         ///    it was triggered
         /// </summary>
-        private void RunButtonForVR()
+        internal void RunButtonForVR()
         {
             CheckAllFingerBones();
             //check if at least one of the bones was in bounds
@@ -754,7 +744,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Checks all finger bones if they are in bounds to get the highest push distance of all bones
         /// </summary>
-        private void CheckAllFingerBones()
+        internal void CheckAllFingerBones()
         {
             //check all bones if one is pushing the button
             isPushingRightNow = false;
@@ -780,10 +770,10 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Checks a single bone if it's inside bounds. If true, the distance to the bone is measured against _buttonPushDirection
         /// </summary>
-        private void CheckBoneDistance(HumanBodyBones bone, bool isLeftHand)
+        internal void CheckBoneDistance(HumanBodyBones bone, bool isLeftHand)
         {
             Vector3 position = GameInstances.LocalPlayer.GetBonePosition(bone);
-            if (pushAreaBounds.Contains(position))
+            if (pushArea.bounds.Contains(position))
             {
                 //measure distances to hand bone
                 float distanceToHandNew = SignedDistancePlanePoint(buttonPushDirection.transform.forward, buttonPushDirection.position, position) + fingerThickness;
@@ -824,7 +814,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Animates the button to move down and then back up while accurately firing the button events like in VR mode
         /// </summary>
-        private void RunButtonForDesktop()
+        internal void RunButtonForDesktop()
         {
             if (!wasPushing)
                 return;
@@ -873,7 +863,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Call this event from your own scripts to enable the desktop button for VR users
         /// </summary>
-        public void EnableDesktopButtonForVR()
+        internal void EnableDesktopButtonForVR()
         {
             if (desktopButtonForVrDisabled)
             {
@@ -890,7 +880,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Call this event from your own scripts to enable the desktop button for VR users
         /// </summary>
-        public void DisableDesktopButtonForVR()
+        internal void DisableDesktopButtonForVR()
         {
             if (desktopButtonForVrDisabled) { }
             else
@@ -910,7 +900,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Call this event from your own scripts to toggle the button
         /// </summary>
-        public void ToggleButton()
+        internal void ToggleButton()
         {
             if (isOn)
             {
@@ -931,7 +921,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Call this event from your own scripts to turn this button on.
         /// </summary>
-        public void TurnButtonOn()
+        internal void TurnButtonOn()
         {
             if (!isOn)
             {
@@ -944,7 +934,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Call this event from your own scripts to turn this button off.
         /// </summary>
-        public void TurnButtonOff()
+        internal void TurnButtonOff()
         {
             if (isOn)
             {
@@ -957,7 +947,7 @@ namespace ReimajoBoothAssets
         /// DON'T CALL THIS EVENT. Call _TurnButtonOn instead.
         /// This here is only called from another button to sync this one instantly without animating it.
         /// </summary>
-        public void ButtonSyncSetButtonOn()
+        internal void ButtonSyncSetButtonOn()
         {
             if (!isOn)
             {
@@ -970,7 +960,7 @@ namespace ReimajoBoothAssets
         /// DON'T CALL THIS EVENT. Call _TurnButtonOff instead.
         /// This here is only called from another button to sync this one instantly without animating it.
         /// </summary>
-        public void ButtonSyncSetButtonOff()
+        internal void ButtonSyncSetButtonOff()
         {
             if (isOn)
             {
@@ -979,7 +969,7 @@ namespace ReimajoBoothAssets
             }
         }
 
-        private void UpdateButtonState()
+        internal void UpdateButtonState()
         {
             if (wasPushing)
                 UpdateDynamicButtonObjects();
@@ -990,7 +980,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Fires when the button goes down and reached the trigger distance while button is dynamic
         /// </summary>
-        private void ButtonDownEvent()
+        internal void ButtonDownEvent()
         {
             isOn = !isOn;
             OnButtonDown.SafetyRaise();
@@ -999,7 +989,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Updates the dynamic button objects (assuming it is currently in the dynamic state)
         /// </summary>
-        private void UpdateDynamicButtonObjects()
+        internal void UpdateDynamicButtonObjects()
         {
             if (isOn)
             {
@@ -1007,7 +997,6 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
                 dynamicButtonTopOn.SetActive(true);
                 dynamicButtonTopOff.SetActive(false);
-                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform, true);
             }
             else
             {
@@ -1015,14 +1004,13 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
                 dynamicButtonTopOn.SetActive(false);
                 dynamicButtonTopOff.SetActive(true);
-                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform, true);
             }
         }
 
         /// <summary>
         /// Updates the static button objects (assuming it is currently in the static state)
         /// </summary>
-        private void UpdateStaticButtonObjects()
+        internal void UpdateStaticButtonObjects()
         {
             if (isOn)
             {
@@ -1041,7 +1029,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Fires when button is released after being triggered and reached the un-trigger distance
         /// </summary>
-        private void ButtonUpEvent()
+        internal void ButtonUpEvent()
         {
             OnButtonUp.SafetyRaise();
         }
@@ -1049,7 +1037,7 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// To initialize the button switch, all switching components must be disabled
         /// </summary>
-        private void InitializeButtonSwitch()
+        internal void InitializeButtonSwitch()
         {
             staticButtonOn.SetActive(false);
             staticButtonOff.SetActive(false);
@@ -1061,7 +1049,7 @@ namespace ReimajoBoothAssets
         /// Switch button to the static version in which it has one drawcall less and can also be marked as static
         /// This state is always active while the button is not in direct operation
         /// </summary>
-        private void MakeStatic()
+        internal void MakeStatic()
         {
             //turn off dynamic base
             dynamicButtonBase.SetActive(false);
@@ -1070,12 +1058,16 @@ namespace ReimajoBoothAssets
             {
                 dynamicButtonTopOn.SetActive(false); //turn off dynamic part
                 staticButtonOn.SetActive(true);
+                WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform, true);
+
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
                 dynamicButtonTopOff.SetActive(false); //turn off dynamic part
                 staticButtonOff.SetActive(true);
+                WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform, true);
+
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
             }
             Debug.Log($"[ButtonController] '{this.gameObject.name}' turned to static");
@@ -1093,14 +1085,17 @@ namespace ReimajoBoothAssets
             if (isOn)
             {
                 staticButtonOn.SetActive(false); //turn of static part
-                dynamicButtonTopOn.SetActive(true);
+                dynamicButtonTopOn.SetActive(true); 
+                WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform, true);
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
             }
             else
             {
                 staticButtonOff.SetActive(false); //turn of static part
                 dynamicButtonTopOff.SetActive(true);
+                WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform, true);
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
+
             }
             Debug.Log($"[ButtonController] '{this.gameObject.name}' turned to dynamic");
         }

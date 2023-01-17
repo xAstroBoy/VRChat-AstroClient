@@ -434,7 +434,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     // Turret Respawn Sniper
 
                     #region  Turret Area
-                    var TurretTop = new WorldButton_Squared(new Vector3(60.879f, 11.45f, 282.65f), new Vector3(0, 270, 0), "<color=orange>Respawn Sniper</color>", () =>
+                    var TurretTop = new WorldButton_Squared(new Vector3(62.5019f, 12.1777f, 282.378f), new Vector3(0, 180, 270), "<color=orange>Respawn Sniper</color>", () =>
                     {
                         item.gameObject.RespawnPickup(false);
                     });
@@ -444,13 +444,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
 
                     #region  Guard Spawn
-                    var GuardArea = new WorldButton_Squared(new Vector3(22.9135f, 4.9f, 293.36f), new Vector3(0, 94, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    var GuardArea = new WorldButton_Squared(new Vector3(22.8851f, 5.0563f, 293.2779f), new Vector3(0, 270, 0), "<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.0804f, 4.925f, 293.2137f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
 
                     });
-                    GuardArea.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
+                    GuardArea.SetScale(new Vector3(1.5f, 1.5f, 1.5f));
 
 
 
@@ -498,26 +498,20 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     // Turret Respawn Sniper
 
                     #region  Turret Area
-                    var TurretTop = new WorldButton_Squared(new Vector3(60.879f, 11.45f, 317.3293f), new Vector3(0, 90, 0), "<color=orange>Respawn Sniper</color>", () =>
+                    var TurretTop = new WorldButton_Squared(new Vector3(62.5082f, 12.1081f, 317.6093f), new Vector3(0, 180, 270), "<color=orange>Respawn Sniper</color>", () =>
                     {
                         item.gameObject.RespawnPickup(false);
                     });
-                    TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
-
                     #endregion
 
 
                     #region  Guard Spawn
-                    var GuardArea = new WorldButton_Squared(new Vector3(20.6418f, 4.91f, 306.7371f), new Vector3(0, 185, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    var GuardArea = new WorldButton_Squared(new Vector3(20.6418f, 4.91f, 306.7371f), new Vector3(0 ,90, 0), "<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.08039f, 4.925f, 306.7233f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
 
                     });
-                    GuardArea.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
-
-
-
                     #endregion
                     var Control = item.GetOrAddComponent<PickupController>();
                     if (Control != null)
@@ -715,7 +709,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var startgame = item.FindUdonEvent("StartGameCountdown");
                     if (startgame != null)
                     {
-                        new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
+                        new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 90, 270), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
                         {
                             startgame.InvokeBehaviour();
                         });
@@ -879,15 +873,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         private static void CreateEscapeButtons()
         {
 
-            CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), 0, "ESCAPE 1", () => { InteractWithVent("Openable Vent"); });
-            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), 180, "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), new Vector3(0, 180, 270), "ESCAPE 1", () => { InteractWithVent("Openable Vent"); });
+            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), new Vector3(0,0,270), "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
 
-            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), 0, "ESCAPE 3", () => { InteractWithVent("Openable Vent (1)"); });
-            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), 180, "ESCAPE 4", () => { InteractWithFloorVent("Floor Vent"); });
+            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), new Vector3(0,180,270), "ESCAPE 3", () => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), new Vector3(0,0,270), "ESCAPE 4", () => { InteractWithFloorVent("Floor Vent"); });
 
-            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), 0, "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
+            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), new Vector3(0,180,270), "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
 
-            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), 270, "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
+            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), new Vector3(0,90,270), "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
 
         }
 
@@ -976,21 +970,18 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
 
-        private static void CreateEscapeButton(Vector3 Position, float rotation, string label, System.Action action)
+        private static void CreateEscapeButton(Vector3 Position, Vector3 rotation, string label, System.Action OnClick)
         {
             // label parameter is only for debug reasons.
 
-            string defaultlabel = "<bounce><color=red>ESCAPE!</color></bounce>";
-            var btn = new WorldButton_Squared(Position, new Vector3(0, rotation, 0), defaultlabel, action);
+            string defaultlabel = "<bounce a=0.05><color=red>ESCAPE!</color></bounce>";
+            var btn = new WorldButton_Squared(Position, rotation, defaultlabel, OnClick);
 
             MiscUtils.DelayFunction(2f, () =>
              {
                 //btn.MakePickupable();
                 btn.ButtonBody.name = label;
-                 if (btn != null)
-                 {
-                     btn.ButtonBody.transform.eulerAngles = new Vector3(0, rotation, 0);
-                 }
+                btn.RotateButton(rotation);
              });
         }
 
