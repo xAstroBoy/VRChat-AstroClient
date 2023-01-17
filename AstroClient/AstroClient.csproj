@@ -139,6 +139,7 @@
     <Compile Include="AstroMonos\Components\Custom\Items\RespawnerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\PickupChair.cs" />
     <Compile Include="AstroMonos\FakeUdons\JustBClubPatron.cs" />
+    <Compile Include="AstroMonos\Prefabs\ReimajoBoothAssets\ButtonController.cs" />
     <Compile Include="AstroMonos\Prefabs\ReimajoBoothAssets\ChairController.cs" />
     <Compile Include="AstroMonos\Prefabs\ReimajoBoothAssets\SpaceShuttleController.cs" />
     <Compile Include="ClientAttributes\RegisterFakeUdon.cs" />
