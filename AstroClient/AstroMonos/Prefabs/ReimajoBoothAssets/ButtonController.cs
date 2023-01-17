@@ -7,6 +7,7 @@ using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using System;
+using AstroClient.AstroMonos.AstroUdons;
 using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -506,6 +507,7 @@ namespace ReimajoBoothAssets
         private float currentPushedDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool leftHandIsClosest { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private MeshCollider desktopButtonCollider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroInteract DesktopInteraction { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool isVR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool isInDesktopFallbackMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool desktopButtonForVrDisabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
@@ -541,7 +543,12 @@ namespace ReimajoBoothAssets
             staticButtonOn = WorldButton_Squared__staticButtonOn;
             staticButtonOff = WorldButton_Squared__staticButtonOff;
             buttonPushDirection = WorldButton_Squared__buttonPushDirection.transform;
-
+            DesktopInteraction = desktopButtonCollider.GetOrAddComponent<VRC_AstroInteract>();
+            if(DesktopInteraction != null)
+            {
+                DesktopInteraction.OnInteract += Interact;
+                DesktopInteraction.interactText = "Click";
+            }
             isOn = isOnAtStart;
             isVR = GameInstances.LocalPlayer.IsUserInVR();
             desktopButtonCollider = this.GetComponent<MeshCollider>();
@@ -553,11 +560,13 @@ namespace ReimajoBoothAssets
             }
             if (desktopButtonForVrDisabled)
             {
-                desktopButtonCollider.enabled = !isVR; //disable for VR user, enable for desktop user
+                if (desktopButtonCollider != null) desktopButtonCollider.enabled = !isVR; //disable for VR user, enable for desktop user
+                if (DesktopInteraction != null) DesktopInteraction.enabled = !isVR;
             }
             else
             {
-                desktopButtonCollider.enabled = true; //enable for all users
+                if (DesktopInteraction != null) desktopButtonCollider.enabled = true; //enable for all users
+                if (DesktopInteraction != null) DesktopInteraction.enabled = true;
             }
             InitializeButtonSwitch();
             MakeStatic();
@@ -640,6 +649,7 @@ namespace ReimajoBoothAssets
                 {
                     //enable the "desktop" mode because the player is missing all finger bones
                     desktopButtonCollider.enabled = true;
+                    DesktopInteraction.enabled = true;
                     isVR = false;
                     isInDesktopFallbackMode = true;
                 }
@@ -667,6 +677,7 @@ namespace ReimajoBoothAssets
                     {
                         //enable the regular VR mode again
                         desktopButtonCollider.enabled = false;
+                        DesktopInteraction.enabled = false;
                         isVR = true;
                     }
                 }
@@ -808,6 +819,7 @@ namespace ReimajoBoothAssets
                 MakeDynamic();
             }
             desktopButtonCollider.enabled = false;
+            DesktopInteraction.enabled = false;
             isMovingDownDesktop = true;
             wasTriggered = true;
         }
@@ -848,6 +860,7 @@ namespace ReimajoBoothAssets
                     {
                         wasTriggered = false;
                         desktopButtonCollider.enabled = true;
+                        DesktopInteraction.enabled = true;
                         ButtonUpEvent();
                         AudioSource.PlayClipAtPoint(clickUpAudioClip, buttonPushDirection.position, 0.1f);
                     }
@@ -875,6 +888,7 @@ namespace ReimajoBoothAssets
                 if (hasNotFinishedStart)
                     return;
                 desktopButtonCollider.enabled = true;
+                DesktopInteraction.enabled = true;
             }
         }
 
@@ -895,6 +909,8 @@ namespace ReimajoBoothAssets
                 if (hasNotFinishedStart)
                     return;
                 desktopButtonCollider.enabled = false;
+                DesktopInteraction.enabled = false;
+
             }
         }
 
