@@ -1007,7 +1007,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
                 dynamicButtonTopOn.SetActive(true);
                 dynamicButtonTopOff.SetActive(false);
-                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform, true);
+                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform, true);
             }
             else
             {
@@ -1015,7 +1015,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
                 dynamicButtonTopOn.SetActive(false);
                 dynamicButtonTopOff.SetActive(true);
-                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform, true);
+                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform, true);
             }
         }
 

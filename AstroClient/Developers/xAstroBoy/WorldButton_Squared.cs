@@ -31,13 +31,16 @@ namespace AstroClient.xAstroBoy
             ButtonBody.AddToWorldUtilsMenu();
         }
 
+        
+
         internal void MakePickupable()
         {
-            ButtonBody.Pickup_Set_ForceComponent();
-            ButtonBody.Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes);
-            ButtonBody.RigidBody_Override_isKinematic(true);
-            ButtonBody.Pickup_Set_Pickupable(true);
-            //Button.SetMesh_IsConvex(true);
+            //ButtonBody.Pickup_Set_ForceComponent();
+            //ButtonBody.Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes);
+            //ButtonBody.RigidBody_Override_isKinematic(true);
+            //ButtonBody.Pickup_Set_Pickupable(true);
+            ////Button.SetMesh_IsConvex(true);
+            
         }
 
 
@@ -76,6 +79,7 @@ namespace AstroClient.xAstroBoy
         internal void SetText(string text)
         {
             Controller.SetText(text);
+            ButtonBody.name = $"AstroWorldSquaredButton: {text}";
         }
         internal void Set_OnButtonDown(Action action)
         {

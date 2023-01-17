@@ -715,13 +715,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var startgame = item.FindUdonEvent("StartGameCountdown");
                     if (startgame != null)
                     {
-                        var btn = new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
+                        new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 270, 0), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
                         {
                             startgame.InvokeBehaviour();
                         });
-                        btn.SetScale(new Vector3(0.15f, 0.24f, 0.3f));
                     }
-                    startgame.gameObject.AddToWorldUtilsMenu();
 
                 }
 

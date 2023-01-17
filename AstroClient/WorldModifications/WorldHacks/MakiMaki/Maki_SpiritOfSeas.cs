@@ -41,81 +41,138 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 BlockPlayerControllerDone = true;
             }
         }
+        private bool _HasSubscribed = false;
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+
+                    }
+                    else
+                    {
+
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
+        {
+            Coins.Clear();
+            Crabs.Clear();
+            GoldShells.Clear();
+            HasSubscribed = false;
+        }
 
         private void DoEverything()
         {
-            
             PlayerControllerDone = UdonSearch.FindUdonEvent("PlayerPermissionManager", "__0__AddAuthorizedPlayers");
             BlockPlayerControllerDone = true;
-
             _ = PlayerPermissionManagerReader;
+
+            var CoinsRoot = Finder.Find("----INTERACTABLE----/CoinCollection/Coins/");
+            if (CoinsRoot != null)
+            {
+                foreach (var coin in CoinsRoot.Get_UdonBehaviours())
+                {
+                    var udonevent = coin.FindUdonEvent("_interact");
+                    if (udonevent != null)
+                    {
+                        if (!Coins.Contains(udonevent))
+                        {
+                            Coins.Add(udonevent);
+                        }
+                    }
+                }
+            }
+            var CrabsRoot = Finder.Find("----INTERACTABLE----/Crabs/");
+            if (CrabsRoot != null)
+            {
+                foreach (var pickup in CrabsRoot.GetComponentsInChildren<PickupController>())
+                {
+                    if (!Crabs.Contains(pickup))
+                    {
+                        Crabs.Add(pickup);
+                    }
+                }
+            }
+            var GoldShellsRoot = Finder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
+            if (GoldShellsRoot != null)
+            {
+                foreach (var pickup in GoldShellsRoot.GetComponentsInChildren<PickupController>())
+                {
+                    if (!GoldShells.Contains(pickup))
+                    {
+                        GoldShells.Add(pickup);
+                    }
+                }
+            }
+
+
 
 
             Passcodes = new WorldButton(new Vector3(-3.0607f, 6.0675f, -4.1859f), new Vector3(0, 180, 0), String.Empty, null);
             if (Passcodes != null)
             {
-                Passcodes.SetScale(new Vector3(0.15f, 0.4f, 0.5f));
+                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
                 Passcodes.RemoveInteractions();
                 Passcodes.SetText($"{PasscodeText()}");
             }
             //Passcodes = new WorldButton(new Vector3(-3.0607f, 6.0675f, -4.1859f), new Vector3(0, 180, 0), String.Empty, null);
-            CollectAllCoins = new WorldButton_Squared(new Vector3(6.015f, -2.5074f, -3.1304f), new Vector3(0, 270, 0), String.Empty, null);
+            CollectAllCoins = new WorldButton_Squared(new Vector3(6.015f, -2.6074f, -3.2304f), new Vector3(0, 87, 270), String.Empty, null);
             if (CollectAllCoins != null)
             {
-                CollectAllCoins.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
+                CollectAllCoins.SetScale(new Vector3(2,2,2));
                 CollectAllCoins.SetText("<rainb>Collect All Gold Coins</rainb>");
                 CollectAllCoins.Set_OnButtonDown(() =>
                 {
-                    var parent = Finder.Find("----INTERACTABLE----/CoinCollection/Coins/");
-                    if (parent != null)
+                    foreach (var item in Coins)
                     {
-                        foreach (var coin in parent.Get_UdonBehaviours())
-                        {
-                            var udonevent = coin.FindUdonEvent("_interact");
-                            if (udonevent != null)
-                            {
-                                udonevent.InvokeBehaviour();
-                            }
-                        }
+                        item.InvokeBehaviour();
                     }
                 });
             }
 
-            TeleportGoldShells = new WorldButton_Squared(new Vector3(3.013f, 8.9642f, 8.936f), new Vector3(0, 270, 0), String.Empty, null);
+            TeleportGoldShells = new WorldButton_Squared(new Vector3(2.983f, 9.1642f, 8.866f), new Vector3(0f,92.6182f, 270f), String.Empty, null);
             if (TeleportGoldShells != null)
             {
-                TeleportGoldShells.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
+                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
                 TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
                 TeleportGoldShells.Set_OnButtonDown(() =>
                 {
-                    var parent = Finder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
-                    if (parent != null)
+                    foreach (var pickup in GoldShells)
                     {
-                        foreach (var pickup in parent.GetComponentsInChildren<PickupController>())
+                        if (pickup.pickupable)
                         {
                             pickup.gameObject.TeleportToMe();
                         }
                     }
-                    TeleportGoldShells.DestroyMe();
+                    //TeleportGoldShells.DestroyMe();
                 });
             }
 
-            TeleportAllCrabs = new WorldButton_Squared(new Vector3(2.9708f, 9.827f, 9.0896f), new Vector3(0, 90, 0), String.Empty, null);
+            TeleportAllCrabs = new WorldButton_Squared(new Vector3(3.0008f, 9.837f, 9.1496f), new Vector3(0f, 270f, 270f), String.Empty, null);
             if (TeleportAllCrabs != null)
             {
-                TeleportAllCrabs.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
+                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
                 TeleportAllCrabs.SetText("<rainb>Teleport all Crabs</rainb>");
                 TeleportAllCrabs.Set_OnButtonDown(() =>
                 {
-                    var parent = Finder.Find("----INTERACTABLE----/Crabs/");
-                    if (parent != null)
+                    foreach (var pickup in Crabs)
                     {
-                        foreach (var pickup in parent.GetComponentsInChildren<PickupController>())
-                        {
-                            pickup.gameObject.TeleportToMe();
-                        }
+                        pickup.gameObject.TeleportToMe();
                     }
-                    TeleportAllCrabs.DestroyMe();
+                    //TeleportAllCrabs.DestroyMe();
 
                 });
             }
@@ -143,13 +200,12 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             {
                 isSupportedWorld = true;
                 DoEverything();
-
+                HasSubscribed = true;
             }
             else
             {
                 isSupportedWorld = false;
                 _BlockPlayerControllerDone = false;
-
             }
         }
         private static GameObject PlayerPermissionManager = null;
@@ -158,6 +214,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         private static WorldButton_Squared TeleportGoldShells = null;
         private static WorldButton_Squared TeleportAllCrabs = null;
         internal static UdonBehaviour_Cached PlayerControllerDone = null;
+        internal static List<UdonBehaviour_Cached> Coins = new List<UdonBehaviour_Cached>();
+        internal static List<PickupController> Crabs = new List<PickupController>();
+        internal static List<PickupController> GoldShells = new List<PickupController>();
 
         private static bool _BlockPlayerControllerDone = false;
         internal static bool BlockPlayerControllerDone
