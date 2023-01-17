@@ -150,16 +150,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
                     {
                         SerializerPos = GameInstances.CurrentUser.transform.position;
                         SerializerRot = GameInstances.CurrentUser.transform.rotation;
+                        MovementSerializer.SerializerActivated = true;
                     }
                     else
                     {
                         GameInstances.CurrentUser.transform.position = SerializerPos;
                         GameInstances.CurrentUser.transform.rotation = SerializerRot;
-
                         SerializerRot = new Quaternion(0, 0, 0, 0);
                         SerializerPos = Vector3.zero;
+                        MiscUtils.DelayFunction(0.5f, () =>
+                        {
+                            MovementSerializer.SerializerActivated = false;
+                        });
                     }
-                    MovementSerializer.SerializerActivated = value;
                 }
             }
         }

@@ -1,7 +1,13 @@
-﻿using System;
-using AstroClient;
+﻿using AstroClient;
 using AstroClient.ClientAttributes;
+using AstroClient.febucci;
 using AstroClient.xAstroBoy.Utility;
+using System;
+using AstroClient.ClientResources.Loaders;
+using AstroClient.febucci.Utilities;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy;
+using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.SDKBase;
@@ -13,12 +19,355 @@ namespace ReimajoBoothAssets
     {
         internal Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new();
 
+        #region SquaredButtonController
+
+        private GameObject _WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic == null)
+                {
+                    return _WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic = this.transform.root.FindObject($"_staticButtonOn/_lod0RendererWhenOnFromStatic").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton__dynamicButtonTopOff_Model { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton__dynamicButtonTopOff_Model
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton__dynamicButtonTopOff_Model == null)
+                {
+                    return _WorldButton_Squared_DynamicButton__dynamicButtonTopOff_Model = this.transform.root.FindObject($"DynamicButton/_dynamicButtonTopOff/Model").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton__dynamicButtonTopOff_Model;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic == null)
+                {
+                    return _WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic = this.transform.root.FindObject($"_staticButtonOff/_lod0RendererWhenOffFromStatic").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOff_ButtonOff_LOD1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOff_ButtonOff_LOD1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOff_ButtonOff_LOD1 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD1 = this.transform.root.FindObject($"_staticButtonOff/ButtonOff_LOD1").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD1;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOff_ButtonOff_LOD2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOff_ButtonOff_LOD2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOff_ButtonOff_LOD2 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD2 = this.transform.root.FindObject($"_staticButtonOff/ButtonOff_LOD2").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD2;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOn
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOn == null)
+                {
+                    return _WorldButton_Squared__staticButtonOn = this.transform.root.FindObject($"_staticButtonOn").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOn;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOff_ButtonOff_LOD0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOff_ButtonOff_LOD0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOff_ButtonOff_LOD0 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD0 = this.transform.root.FindObject($"_staticButtonOff/ButtonOff_LOD0").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOff_ButtonOff_LOD0;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton == null)
+                {
+                    return _WorldButton_Squared_DynamicButton = this.transform.root.FindObject($"DynamicButton").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOn_ButtonOn_LOD1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOn_ButtonOn_LOD1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOn_ButtonOn_LOD1 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD1 = this.transform.root.FindObject($"_staticButtonOn/ButtonOn_LOD1").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD1;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton__dynamicButtonTopOn_Model { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton__dynamicButtonTopOn_Model
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton__dynamicButtonTopOn_Model == null)
+                {
+                    return _WorldButton_Squared_DynamicButton__dynamicButtonTopOn_Model = this.transform.root.FindObject($"DynamicButton/_dynamicButtonTopOn/Model").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton__dynamicButtonTopOn_Model;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton__dynamicButtonTopOff { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton__dynamicButtonTopOff
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton__dynamicButtonTopOff == null)
+                {
+                    return _WorldButton_Squared_DynamicButton__dynamicButtonTopOff = this.transform.root.FindObject($"DynamicButton/_dynamicButtonTopOff").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton__dynamicButtonTopOff;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton__dynamicButtonTopOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton__dynamicButtonTopOn
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton__dynamicButtonTopOn == null)
+                {
+                    return _WorldButton_Squared_DynamicButton__dynamicButtonTopOn = this.transform.root.FindObject($"DynamicButton/_dynamicButtonTopOn").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton__dynamicButtonTopOn;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__buttonPushDirection { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__buttonPushDirection
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__buttonPushDirection == null)
+                {
+                    return _WorldButton_Squared__buttonPushDirection = this.transform.root.FindObject($"_buttonPushDirection").gameObject;
+                }
+
+                return _WorldButton_Squared__buttonPushDirection;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOn_ButtonOn_LOD0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOn_ButtonOn_LOD0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOn_ButtonOn_LOD0 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD0 = this.transform.root.FindObject($"_staticButtonOn/ButtonOn_LOD0").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD0;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOn_ButtonOn_LOD2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOn_ButtonOn_LOD2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOn_ButtonOn_LOD2 == null)
+                {
+                    return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD2 = this.transform.root.FindObject($"_staticButtonOn/ButtonOn_LOD2").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOn_ButtonOn_LOD2;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__staticButtonOff { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__staticButtonOff
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__staticButtonOff == null)
+                {
+                    return _WorldButton_Squared__staticButtonOff = this.transform.root.FindObject($"_staticButtonOff").gameObject;
+                }
+
+                return _WorldButton_Squared__staticButtonOff;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_DynamicButton__dynamicButtonBase { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_DynamicButton__dynamicButtonBase
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_DynamicButton__dynamicButtonBase == null)
+                {
+                    return _WorldButton_Squared_DynamicButton__dynamicButtonBase = this.transform.root.FindObject($"DynamicButton/_dynamicButtonBase").gameObject;
+                }
+
+                return _WorldButton_Squared_DynamicButton__dynamicButtonBase;
+            }
+        }
+
+        private GameObject _WorldButton_Squared__pushArea { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared__pushArea
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared__pushArea == null)
+                {
+                    return _WorldButton_Squared__pushArea = this.transform.root.FindObject($"_pushArea").gameObject;
+                }
+
+                return _WorldButton_Squared__pushArea;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_ButtonScript { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_ButtonScript
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_ButtonScript == null)
+                {
+                    return _WorldButton_Squared_ButtonScript = this.transform.root.FindObject($"ButtonScript").gameObject;
+                }
+
+                return _WorldButton_Squared_ButtonScript;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_Canvas { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_Canvas
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_Canvas == null)
+                {
+                    return _WorldButton_Squared_Canvas = this.transform.root.FindObject($"Canvas").gameObject;
+                }
+
+                return _WorldButton_Squared_Canvas;
+            }
+        }
+
+        private GameObject _WorldButton_Squared_Canvas_Text { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+
+        internal GameObject WorldButton_Squared_Canvas_Text
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (_WorldButton_Squared_Canvas_Text == null)
+                {
+                    return _WorldButton_Squared_Canvas_Text = this.transform.root.FindObject($"Canvas/Text").gameObject;
+                }
+
+                return _WorldButton_Squared_Canvas_Text;
+            }
+        }
+
+        #endregion SquaredButtonController
+
         public ButtonController(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
+        internal TextAnimator TextMeshAnimator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal TextMeshPro TextMesh { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnButtonUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnButtonDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         /// <summary>
         /// Relevant bone from the left hand (of localPlayer), can be set by an external script for better usability of the keyboard accross all players.
         /// One such script is my AvatarCalibrationScript which I sell on my booth page.
@@ -43,12 +392,11 @@ namespace ReimajoBoothAssets
         /// do not modify this at runtime, only use _ExternalButtonOn() and _ExternalButtonOff() for this)
         /// </summary>
         private bool isOnAtStart { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        
-        
+
         /// <summary>
         /// Audio that plays when the button is released after being fully pressed down
         /// </summary>
-        private AudioClip clickUpAudioClip{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private AudioClip clickUpAudioClip { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Audio that plays when the button is fully pressed down
@@ -73,33 +421,33 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Button top (the pushable part of the button) for when the button is dynamic and on
         /// </summary>
-        private GameObject dynamicButtonTopOn{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject dynamicButtonTopOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Button top (the pushable part of the button) for when the button is dynamic and off
         /// </summary>
-        private GameObject dynamicButtonTopOff{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject dynamicButtonTopOff { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Button base (the static part of the button) for when the button is dynamic
         /// </summary>
-        private GameObject dynamicButtonBase{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject dynamicButtonBase { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Static button model for when the button is on but not being pushed
         /// </summary>
-        private GameObject staticButtonOn{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject staticButtonOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Static button model for when the button is off but not being pushed
         /// </summary>
-        private GameObject staticButtonOff{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private GameObject staticButtonOff { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Start position of the button when not pressed and push direction (blue axis / forward direction).
         /// This object is set to the _buttonPushDirection position at Start().
         /// </summary>
-        private Transform buttonPushDirection{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform buttonPushDirection { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Finger thickness of a standard sized avatar (1.3m), will automatically scale with avatar size
@@ -133,50 +481,65 @@ namespace ReimajoBoothAssets
         /// </summary>
         private const float MIN_TRIGGER_TIME_OFFSET = 0.2f;
 
-        private bool isOn{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isOn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         /// <summary>
         /// Current button top of the pushable part of the button
         /// </summary>
-        private Transform currentDynamicButtonTop{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Transform currentDynamicButtonTop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isMovingDownDesktop{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-        private Bounds pushAreaBounds{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float buttonPushDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= BUTTON_PUSH_DISTANCE_DEFAULT;
-        private float buttonMovingSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= MOVING_SPEED_DEFAULT;
-        private float buttonTriggerDistance{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float buttonUntriggerDistance{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float fingerThickness{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private float lastTriggerTime{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private Renderer lodLevelRenderer{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isMovingDownDesktop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private Bounds pushAreaBounds { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float buttonPushDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = BUTTON_PUSH_DISTANCE_DEFAULT;
+        private float buttonMovingSpeed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = MOVING_SPEED_DEFAULT;
+        private float buttonTriggerDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float buttonUntriggerDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float fingerThickness { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float lastTriggerTime { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Renderer lodLevelRenderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool hasNotFinishedStart { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
-        private float handPushDistance{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool wasTriggered { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= false;
-        private bool wasPushing { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= false;
-        private bool isPushingRightNow { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= false;
-        private float currentPushedDistance{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool leftHandIsClosest{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private MeshCollider desktopButtonCollider{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool isVR{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool isInDesktopFallbackMode{ [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool desktopButtonForVrDisabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }= true;
+        private float handPushDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool wasTriggered { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool wasPushing { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private bool isPushingRightNow { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private float currentPushedDistance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool leftHandIsClosest { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private MeshCollider desktopButtonCollider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isVR { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool isInDesktopFallbackMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private bool desktopButtonForVrDisabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
+
         /// <summary>
         /// The (other) furthest bones from the current avatar. The first index finger can be found in the API region.
         /// </summary>
         private HumanBodyBones fingerbone2r { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.RightLittleDistal;
+
         private HumanBodyBones fingerbone3r { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.RightMiddleDistal;
         private HumanBodyBones fingerbone4r { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.RightRingDistal;
         private HumanBodyBones fingerbone5r { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.RightThumbDistal;
         private HumanBodyBones fingerbone2l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftLittleDistal;
         private HumanBodyBones fingerbone3l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftMiddleDistal;
         private HumanBodyBones fingerbone4l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftRingDistal;
-        private HumanBodyBones fingerbone5l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } =  HumanBodyBones.LeftThumbDistal;
+        private HumanBodyBones fingerbone5l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftThumbDistal;
 
         /// <summary>
         /// Checks in which direction the button is currently oriented
         /// </summary>
-        private void Start()
+        internal void Start()
         {
+            clickDownAudioClip = AudioClips.WorldButton_clickDownAudioClip;
+            clickUpAudioClip = AudioClips.WorldButton_clickUpAudioClip;
+
+            lod0RendererWhenOnFromStatic = WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic.GetComponent<MeshRenderer>();
+            lod0RendererWhenOffFromStatic = WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic.GetComponent<MeshRenderer>();
+            pushArea = WorldButton_Squared__pushArea.GetComponent<BoxCollider>();
+            dynamicButtonTopOn = WorldButton_Squared_DynamicButton__dynamicButtonTopOn;
+            dynamicButtonTopOff = WorldButton_Squared_DynamicButton__dynamicButtonTopOff;
+            dynamicButtonBase = WorldButton_Squared_DynamicButton__dynamicButtonBase;
+            staticButtonOn = WorldButton_Squared__staticButtonOn;
+            staticButtonOff = WorldButton_Squared__staticButtonOff;
+            buttonPushDirection = WorldButton_Squared__buttonPushDirection.transform;
+
             isOn = isOnAtStart;
             isVR = GameInstances.LocalPlayer.IsUserInVR();
             desktopButtonCollider = this.GetComponent<MeshCollider>();
@@ -201,6 +564,29 @@ namespace ReimajoBoothAssets
             SetupButtonDistances();
             fingerThickness = FINGER_THICKNESS_DEFAULT;
             hasNotFinishedStart = false;
+        }
+        internal void SetText(string text)
+        {
+            if (text.NeedsTextAnimator())
+            {
+                if (TextMeshAnimator == null)
+                {
+                    TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
+                }
+                if (TextMeshAnimator.Fulltext == text) return;
+                //TextMesh.text = text;
+                TextMeshAnimator.SetText(text, false);
+
+            }
+            else
+            {
+                if (TextMeshAnimator != null)
+                {
+                    TextMeshAnimator.DestroyMeLocal(true);
+                }
+                if (TextMesh.text == text) return;
+                TextMesh.text = text;
+            }
         }
 
         /// <summary>
@@ -357,7 +743,6 @@ namespace ReimajoBoothAssets
                         else
                             GameInstances.LocalPlayer.PlayHapticEventInHand(VRC_Pickup.PickupHand.Right, 0.1f, 1.0f, 30f); //seconds, 0-320hz, 0-1 amplitude
                     }
-
                 }
             }
         }
@@ -518,7 +903,6 @@ namespace ReimajoBoothAssets
             }
         }
 
-
         /// <summary>
         /// Call this event from your own scripts to toggle the button
         /// </summary>
@@ -560,7 +944,6 @@ namespace ReimajoBoothAssets
         {
             if (isOn)
             {
-
                 ButtonDownEvent();
                 UpdateButtonState();
             }
@@ -600,7 +983,6 @@ namespace ReimajoBoothAssets
                 UpdateStaticButtonObjects();
         }
 
-
         /// <summary>
         /// Fires when the button goes down and reached the trigger distance while button is dynamic
         /// </summary>
@@ -621,6 +1003,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
                 dynamicButtonTopOn.SetActive(true);
                 dynamicButtonTopOff.SetActive(false);
+                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform);
             }
             else
             {
@@ -628,9 +1011,9 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
                 dynamicButtonTopOn.SetActive(false);
                 dynamicButtonTopOff.SetActive(true);
+                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform);
             }
         }
-
 
         /// <summary>
         /// Updates the static button objects (assuming it is currently in the static state)
@@ -639,18 +1022,19 @@ namespace ReimajoBoothAssets
         {
             if (isOn)
             {
+                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform);
                 staticButtonOn.SetActive(true);
                 staticButtonOff.SetActive(false);
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
+                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform);
                 staticButtonOn.SetActive(false);
                 staticButtonOff.SetActive(true);
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
             }
         }
-
 
         /// <summary>
         /// Fires when button is released after being triggered and reached the un-trigger distance

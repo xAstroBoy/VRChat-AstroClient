@@ -237,17 +237,30 @@
                 return _WorldCleanup;
             }
         }
-        private static AssetBundle _Shuttle;
+        private static AssetBundle _SpaceShuttle;
         internal static AssetBundle SpaceShuttle
         {
             get
             {
-                if (_Shuttle == null)
+                if (_SpaceShuttle == null)
                 {
-                    _Shuttle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}shuttle.assetbundle"), 0u);
-                    _Shuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    _SpaceShuttle = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}shuttle.assetbundle"), 0u);
+                    _SpaceShuttle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 }
-                return _Shuttle;
+                return _SpaceShuttle;
+            }
+        }
+        private static AssetBundle _buttonandsliders;
+        internal static AssetBundle buttonandsliders
+        {
+            get
+            {
+                if (_buttonandsliders == null)
+                {
+                    _buttonandsliders = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}buttonandsliders.assetbundle"), 0u);
+                    _buttonandsliders.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _buttonandsliders;
             }
         }
 

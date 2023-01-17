@@ -59,12 +59,12 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 Passcodes.SetText($"{PasscodeText()}");
             }
             //Passcodes = new WorldButton(new Vector3(-3.0607f, 6.0675f, -4.1859f), new Vector3(0, 180, 0), String.Empty, null);
-            CollectAllCoins = new WorldButton(new Vector3(6.015f, -2.5074f, -3.1304f), new Vector3(0, 270, 0), String.Empty, null);
+            CollectAllCoins = new WorldButton_Squared(new Vector3(6.015f, -2.5074f, -3.1304f), new Vector3(0, 270, 0), String.Empty, null);
             if (CollectAllCoins != null)
             {
                 CollectAllCoins.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
                 CollectAllCoins.SetText("<rainb>Collect All Gold Coins</rainb>");
-                CollectAllCoins.SetAction(() =>
+                CollectAllCoins.Set_OnButtonDown(() =>
                 {
                     var parent = Finder.Find("----INTERACTABLE----/CoinCollection/Coins/");
                     if (parent != null)
@@ -81,12 +81,12 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 });
             }
 
-            TeleportGoldShells = new WorldButton(new Vector3(3.013f, 8.9642f, 8.936f), new Vector3(0, 270, 0), String.Empty, null);
+            TeleportGoldShells = new WorldButton_Squared(new Vector3(3.013f, 8.9642f, 8.936f), new Vector3(0, 270, 0), String.Empty, null);
             if (TeleportGoldShells != null)
             {
                 TeleportGoldShells.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
                 TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
-                TeleportGoldShells.SetAction(() =>
+                TeleportGoldShells.Set_OnButtonDown(() =>
                 {
                     var parent = Finder.Find("----INTERACTABLE----/CrabPuzzle/GoldShells");
                     if (parent != null)
@@ -100,12 +100,12 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 });
             }
 
-            TeleportAllCrabs = new WorldButton(new Vector3(2.9708f, 9.827f, 9.0896f), new Vector3(0, 90, 0), String.Empty, null);
+            TeleportAllCrabs = new WorldButton_Squared(new Vector3(2.9708f, 9.827f, 9.0896f), new Vector3(0, 90, 0), String.Empty, null);
             if (TeleportAllCrabs != null)
             {
                 TeleportAllCrabs.SetScale(new Vector3(0.15f, 0.2f, 0.25f));
                 TeleportAllCrabs.SetText("<rainb>Teleport all Crabs</rainb>");
-                TeleportAllCrabs.SetAction(() =>
+                TeleportAllCrabs.Set_OnButtonDown(() =>
                 {
                     var parent = Finder.Find("----INTERACTABLE----/Crabs/");
                     if (parent != null)
@@ -154,9 +154,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         }
         private static GameObject PlayerPermissionManager = null;
         private static WorldButton Passcodes = null;
-        private static WorldButton CollectAllCoins = null;
-        private static WorldButton TeleportGoldShells = null;
-        private static WorldButton TeleportAllCrabs = null;
+        private static WorldButton_Squared CollectAllCoins = null;
+        private static WorldButton_Squared TeleportGoldShells = null;
+        private static WorldButton_Squared TeleportAllCrabs = null;
         internal static UdonBehaviour_Cached PlayerControllerDone = null;
 
         private static bool _BlockPlayerControllerDone = false;

@@ -300,6 +300,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\HeightAdjuster.cs" />
+    <Compile Include="Developers\xAstroBoy\WorldButton_Squared.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\Base.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\MM\MMPage.cs" />
     <Compile Include="Developers\_1245\WorldAPI\ButtonAPI\MM\MMTab.cs" />
@@ -833,6 +834,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\8Ball.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\WorldCleanup.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\shuttle.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\buttonandsliders.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />

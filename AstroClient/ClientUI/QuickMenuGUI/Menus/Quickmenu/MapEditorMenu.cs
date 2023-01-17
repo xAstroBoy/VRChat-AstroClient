@@ -24,6 +24,18 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
                       btn.RegisterToWorldMenu();
                   }
               }), "Spawn Preset Button");
+            _ = new QMSingleButton(menu, "Spawn Empty Pushable Button", new Action(() =>
+            {
+                Vector3? buttonPosition = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+                Quaternion? buttonRotation = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+                if (buttonPosition.HasValue && buttonRotation.HasValue)
+                {
+                    var btn = new WorldButton_Squared(buttonPosition.Value, buttonRotation.Value, "Template Test", () => {Log.Debug("Pushed Button");}, null);
+                    btn.MakePickupable();
+                    btn.RegisterToWorldMenu();
+                }
+            }), "Spawn Preset Button");
+
             _ = new QMSingleButton(menu,  "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", Color.red);
             new QMSingleButton(menu, "Dumps All udon Events", () => { UdonDumper.Dump_All_UdonBehaviours(false); }, "Dumps all Udon Events in Console & File..");
             new QMSingleButton(menu, "Dumps all Udon Events in Console & File..", () => { UdonDumper.Dump_All_UdonBehaviours(true); }, "Dumps All udon Events & Internals");

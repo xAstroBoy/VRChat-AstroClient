@@ -185,6 +185,28 @@
                 return _SpaceShuttle;
             }
         }
+
+        private static GameObject _WorldButton_Squared;
+
+        /// <summary>
+        ///     Loads WorldButton_Squared bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject WorldButton_Squared
+        {
+            get
+            {
+                if (_WorldButton_Squared == null)
+                {
+                    _WorldButton_Squared = Bundles.buttonandsliders.LoadAsset_Internal("assets/ReimajoBoothAssets/ButtonAndSlider/WorldButton_Squared.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _WorldButton_Squared.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _WorldButton_Squared;
+                }
+
+                return _WorldButton_Squared;
+            }
+        }
+
+
         //private static GameObject _EightBall;
 
         /// <summary>

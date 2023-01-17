@@ -1,3 +1,4 @@
+using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.ClientActions;
 using AstroClient.ClientResources.Loaders;
@@ -202,15 +203,25 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion Super Tower Defense
+            #region Murder 4
+
+            if (WorldUtils.WorldID == WorldIds.Murder4)
+            {
+                CustomSubMenu.AddToggle("Role ESP", JarRoleController.ViewRoles, ToggleValue => { JarRoleController.ViewRoles = ToggleValue; });
+                
+            }
+
+            #endregion Murder 4
 
             #region AmongUS
 
             if (WorldUtils.WorldID == WorldIds.AmongUS)
             {
+                CustomSubMenu.AddToggle("AmongUS Role ESP", JarRoleController.ViewRoles, ToggleValue => { JarRoleController.ViewRoles = ToggleValue; });
                 CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
                 CustomSubMenu.AddSubMenu("Lobby ", () =>
                 {
-                    CustomSubMenu.AddButton("Start Game", () => { AmongUSCheats.AbortGameEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Start Game", () => { AmongUSCheats.StartGameEvent?.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUSCheats.VictoryCrewmateEvent?.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Victory Impostor", () => { AmongUSCheats.VictoryImpostorEvent?.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Abort game", () => { AmongUSCheats.AbortGameEvent?.InvokeBehaviour(); });
