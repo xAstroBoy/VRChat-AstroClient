@@ -543,6 +543,7 @@ namespace ReimajoBoothAssets
             staticButtonOn = WorldButton_Squared__staticButtonOn;
             staticButtonOff = WorldButton_Squared__staticButtonOff;
             buttonPushDirection = WorldButton_Squared__buttonPushDirection.transform;
+            desktopButtonCollider = this.GetComponent<MeshCollider>();
             DesktopInteraction = desktopButtonCollider.GetOrAddComponent<VRC_AstroInteract>();
             if(DesktopInteraction != null)
             {
@@ -551,7 +552,6 @@ namespace ReimajoBoothAssets
             }
             isOn = isOnAtStart;
             isVR = GameInstances.LocalPlayer.IsUserInVR();
-            desktopButtonCollider = this.GetComponent<MeshCollider>();
             if (desktopButtonCollider == null)
             {
                 Log.Error($"[ButtonController] No MeshCollider assigned to button '{this.transform.parent.name}'");
