@@ -527,6 +527,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void Start()
         {
+            TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
             clickDownAudioClip = AudioClips.WorldButton_clickDownAudioClip;
             clickUpAudioClip = AudioClips.WorldButton_clickUpAudioClip;
 
@@ -569,6 +570,10 @@ namespace ReimajoBoothAssets
         {
             if (text.NeedsTextAnimator())
             {
+                if(TextMesh == null)
+                {
+                    TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
+                }
                 if (TextMeshAnimator == null)
                 {
                     TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
@@ -580,6 +585,10 @@ namespace ReimajoBoothAssets
             }
             else
             {
+                if (TextMesh == null)
+                {
+                    TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
+                }
                 if (TextMeshAnimator != null)
                 {
                     TextMeshAnimator.DestroyMeLocal(true);
@@ -609,12 +618,7 @@ namespace ReimajoBoothAssets
         /// </summary>
         private void ReadButtonBounds()
         {
-            //read the bounds from the push area
-#if !ALLOW_BUTTON_TO_MOVE_AND_ROTATE
             pushAreaBounds = pushArea.bounds;
-#else
-            _pushAreaBounds = new Bounds(_pushArea.center, _pushArea.size);
-#endif
         }
 
         /// <summary>
@@ -1003,7 +1007,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
                 dynamicButtonTopOn.SetActive(true);
                 dynamicButtonTopOff.SetActive(false);
-                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform);
+                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform, true);
             }
             else
             {
@@ -1011,7 +1015,7 @@ namespace ReimajoBoothAssets
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
                 dynamicButtonTopOn.SetActive(false);
                 dynamicButtonTopOff.SetActive(true);
-                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform);
+                _WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform, true);
             }
         }
 
@@ -1022,14 +1026,12 @@ namespace ReimajoBoothAssets
         {
             if (isOn)
             {
-                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform);
                 staticButtonOn.SetActive(true);
                 staticButtonOff.SetActive(false);
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
-                _WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform);
                 staticButtonOn.SetActive(false);
                 staticButtonOff.SetActive(true);
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
