@@ -473,6 +473,11 @@ internal class WorldCheatsModule : AstroEvents
                     {
                         CustomSubMenu.AddToggle("Toggle Double Points", PrisonEscape.WorldSettings_DoublePoints.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_DoublePoints = ToggleValue; });
                     }
+                    if (PrisonEscape.WorldSettings_Avatar_Toggle != null)
+                    {
+                        CustomSubMenu.AddToggle("Toggle Avatars", PrisonEscape.WorldSettings_Avatar.GetValueOrDefault(false), ToggleValue => { PrisonEscape.WorldSettings_Avatar = ToggleValue; });
+                    }
+
                 });
                 CustomSubMenu.AddSubMenu("Gun Colors", () =>
                 {
@@ -628,6 +633,7 @@ internal class WorldCheatsModule : AstroEvents
                         PrisonEscape.WorldSettings_GoldenGuns = false;
                         PrisonEscape.WorldSettings_DoublePoints = true;
                         PrisonEscape.WorldSettings_Music = false;
+                        PrisonEscape.WorldSettings_Avatar = false;
                         PrisonEscape.WorldSettings_Subtitles = true;
                     });
                 }

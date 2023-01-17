@@ -152,6 +152,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     WorldSettings_DoublePoints_Toggle = null;
                     WorldSettings_GoldenGuns_Toggle = null;
                     WorldSettings_Subtitles_Toggle = null;
+                    WorldSettings_Avatar_Toggle = null;
+                    WorldSettings_Music_Toggle = null;
+                    WorldSettings_VisualHitBoxes_Toggle = null;
                     Gun_Blue_Color_Button = null;
                     Gun_Green_Color_Button = null;
                     Gun_Purple_Color_Button = null;
@@ -811,8 +814,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     WorldSettings_Music_Toggle = item;
                 }
+                if(item.name.Equals("Toggle Avatars"))
+                {
+                    WorldSettings_Avatar_Toggle = item;
+                }
 
-                if (WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Subtitles_Toggle != null && WorldSettings_Music_Toggle != null)
+                if (WorldSettings_Avatar_Toggle != null && WorldSettings_DoublePoints_Toggle != null && WorldSettings_GoldenGuns_Toggle != null && WorldSettings_VisualHitBoxes_Toggle != null && WorldSettings_Subtitles_Toggle != null && WorldSettings_Music_Toggle != null)
                 {
                     break;
                 }
@@ -1423,6 +1430,27 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     if (WorldSettings_Music_Toggle != null)
                     {
                         WorldSettings_Music_Toggle.isOn = value.Value;
+                    }
+                }
+            }
+        }
+        internal static bool? WorldSettings_Avatar
+        {
+            get
+            {
+                if (WorldSettings_Avatar_Toggle != null)
+                {
+                    return WorldSettings_Avatar_Toggle.isOn;
+                }
+                return null;
+            }
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (WorldSettings_Avatar_Toggle != null)
+                    {
+                        WorldSettings_Avatar_Toggle.isOn = value.Value;
                     }
                 }
             }
@@ -2540,6 +2568,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_Music_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_Subtitles_Toggle { get; set; } = null;
+        internal static Toggle WorldSettings_Avatar_Toggle { get; set; } = null;
 
         internal static Button Gun_Gold_Color_Button { get; set; } = null;
         internal static Button Gun_Green_Color_Button { get; set; } = null;
