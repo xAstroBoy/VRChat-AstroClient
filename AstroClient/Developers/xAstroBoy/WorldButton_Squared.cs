@@ -105,7 +105,6 @@ namespace AstroClient.xAstroBoy
         private void InitializeButton(string label, Action OnButtonDown, Action OnButtonUp)
         {
             ButtonBody.name = $"AstroWorldSquaredButton: {label}";
-            ButtonBody.transform.rotation = Quaternion.Euler(new Vector3(180, 0, 90));
             SetScale(new Vector3(2, 2, 2));
             Controller = ButtonBody.FindObject("ButtonScript").GetOrAddComponent<ButtonController>();
             if(Controller != null)

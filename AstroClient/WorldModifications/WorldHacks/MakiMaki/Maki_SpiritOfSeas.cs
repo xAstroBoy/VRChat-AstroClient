@@ -124,7 +124,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             Passcodes = new WorldButton(new Vector3(-3.0607f, 6.0675f, -4.1859f), new Vector3(0, 180, 0), String.Empty, null);
             if (Passcodes != null)
             {
-                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
+                Passcodes.SetScale(new Vector3(0.15f, 0.4f, 0.5f));
                 Passcodes.RemoveInteractions();
                 Passcodes.SetText($"{PasscodeText()}");
             }
@@ -132,7 +132,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             CollectAllCoins = new WorldButton_Squared(new Vector3(6.015f, -2.6074f, -3.2304f), new Vector3(0, 87, 270), String.Empty, null);
             if (CollectAllCoins != null)
             {
-                CollectAllCoins.SetScale(new Vector3(2,2,2));
                 CollectAllCoins.SetText("<rainb>Collect All Gold Coins</rainb>");
                 CollectAllCoins.Set_OnButtonDown(() =>
                 {
@@ -146,7 +145,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             TeleportGoldShells = new WorldButton_Squared(new Vector3(2.983f, 9.1642f, 8.866f), new Vector3(0f,92.6182f, 270f), String.Empty, null);
             if (TeleportGoldShells != null)
             {
-                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
                 TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
                 TeleportGoldShells.Set_OnButtonDown(() =>
                 {
@@ -164,7 +162,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             TeleportAllCrabs = new WorldButton_Squared(new Vector3(3.0008f, 9.837f, 9.1496f), new Vector3(0f, 270f, 270f), String.Empty, null);
             if (TeleportAllCrabs != null)
             {
-                CollectAllCoins.SetScale(new Vector3(2, 2, 2));
                 TeleportAllCrabs.SetText("<rainb>Teleport all Crabs</rainb>");
                 TeleportAllCrabs.Set_OnButtonDown(() =>
                 {

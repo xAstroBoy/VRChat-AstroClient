@@ -1,12 +1,12 @@
 ﻿using AstroClient;
 using AstroClient.ClientAttributes;
-using AstroClient.febucci;
-using AstroClient.xAstroBoy.Utility;
-using System;
 using AstroClient.ClientResources.Loaders;
+using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.Utility;
+using System;
 using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -363,6 +363,8 @@ namespace ReimajoBoothAssets
         {
             AntiGarbageCollection.Add(this);
         }
+        internal Vector3 DefaultCanvasLocation  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         internal TextAnimator TextMeshAnimator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal TextMeshPro TextMesh { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnButtonUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -529,7 +531,7 @@ namespace ReimajoBoothAssets
             TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
             clickDownAudioClip = AudioClips.WorldButton_clickDownAudioClip;
             clickUpAudioClip = AudioClips.WorldButton_clickUpAudioClip;
-
+            DefaultCanvasLocation = WorldButton_Squared_Canvas.transform.localPosition;
             lod0RendererWhenOnFromStatic = WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic.GetComponent<MeshRenderer>();
             lod0RendererWhenOffFromStatic = WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic.GetComponent<MeshRenderer>();
             pushArea = WorldButton_Squared__pushArea.GetComponent<BoxCollider>();
@@ -564,11 +566,12 @@ namespace ReimajoBoothAssets
             fingerThickness = FINGER_THICKNESS_DEFAULT;
             hasNotFinishedStart = false;
         }
+
         internal void SetText(string text)
         {
             if (text.NeedsTextAnimator())
             {
-                if(TextMesh == null)
+                if (TextMesh == null)
                 {
                     TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
                 }
@@ -579,7 +582,6 @@ namespace ReimajoBoothAssets
                 if (TextMeshAnimator.Fulltext == text) return;
                 //TextMesh.text = text;
                 TextMeshAnimator.SetText(text, false);
-
             }
             else
             {
@@ -609,7 +611,6 @@ namespace ReimajoBoothAssets
             buttonTriggerDistance = buttonPushDistance * BUTTON_TRIGGER_PERCENTAGE;
             buttonUntriggerDistance = buttonPushDistance * BUTTON_UNTRIGGER_PERCENTAGE;
         }
-
 
         /// <summary>
         /// Only run script when target LOD is active
@@ -995,6 +996,7 @@ namespace ReimajoBoothAssets
             {
                 dynamicButtonTopOn.transform.position = currentDynamicButtonTop.position;
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
+                //MoveText(dynamicButtonTopOn);
                 dynamicButtonTopOn.SetActive(true);
                 dynamicButtonTopOff.SetActive(false);
             }
@@ -1002,6 +1004,7 @@ namespace ReimajoBoothAssets
             {
                 dynamicButtonTopOff.transform.position = currentDynamicButtonTop.position;
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
+                //MoveText(dynamicButtonTopOff);
                 dynamicButtonTopOn.SetActive(false);
                 dynamicButtonTopOff.SetActive(true);
             }
@@ -1014,12 +1017,14 @@ namespace ReimajoBoothAssets
         {
             if (isOn)
             {
+                //MoveText(staticButtonOn);
                 staticButtonOn.SetActive(true);
                 staticButtonOff.SetActive(false);
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
+                //MoveText(staticButtonOff);
                 staticButtonOn.SetActive(false);
                 staticButtonOff.SetActive(true);
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
@@ -1045,6 +1050,12 @@ namespace ReimajoBoothAssets
             dynamicButtonTopOff.SetActive(false);
         }
 
+        private void MoveText(GameObject item)
+        {
+            //WorldButton_Squared_Canvas.transform.SetParent(item.transform);
+            //WorldButton_Squared_Canvas.transform.localPosition = DefaultCanvasLocation;
+        }
+
         /// <summary>
         /// Switch button to the static version in which it has one drawcall less and can also be marked as static
         /// This state is always active while the button is not in direct operation
@@ -1056,21 +1067,20 @@ namespace ReimajoBoothAssets
             //turn on static button part
             if (isOn)
             {
+                //MoveText(staticButtonOn);
                 dynamicButtonTopOn.SetActive(false); //turn off dynamic part
                 staticButtonOn.SetActive(true);
-                WorldButton_Squared_Canvas.transform.SetParent(staticButtonOn.transform, true);
 
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
+                //MoveText(staticButtonOff);
                 dynamicButtonTopOff.SetActive(false); //turn off dynamic part
                 staticButtonOff.SetActive(true);
-                WorldButton_Squared_Canvas.transform.SetParent(staticButtonOff.transform, true);
-
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
             }
-            Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to static");
+            //Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to static");
         }
 
         /// <summary>
@@ -1085,19 +1095,16 @@ namespace ReimajoBoothAssets
             if (isOn)
             {
                 staticButtonOn.SetActive(false); //turn of static part
-                dynamicButtonTopOn.SetActive(true); 
-                WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOn.transform, true);
+                dynamicButtonTopOn.SetActive(true);
                 currentDynamicButtonTop = dynamicButtonTopOn.transform;
             }
             else
             {
                 staticButtonOff.SetActive(false); //turn of static part
                 dynamicButtonTopOff.SetActive(true);
-                WorldButton_Squared_Canvas.transform.SetParent(dynamicButtonTopOff.transform, true);
                 currentDynamicButtonTop = dynamicButtonTopOff.transform;
-
             }
-            Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to dynamic");
+            //Log.Debug($"[ButtonController] '{this.gameObject.name}' turned to dynamic");
         }
 
         /// <summary>

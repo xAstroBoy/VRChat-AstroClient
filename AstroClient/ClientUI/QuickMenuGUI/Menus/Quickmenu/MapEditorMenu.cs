@@ -33,6 +33,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.Menus.Quickmenu
                     var btn = new WorldButton_Squared(buttonPosition.Value, buttonRotation.Value, "Template Test", () => {Log.Debug("Pushed Button");}, null);
                     btn.MakePickupable();
                     btn.RegisterToWorldMenu();
+                    btn.RotateButton(new Vector3(180, 0, 90));
                 }
             }), "Spawn Preset Button");
 
