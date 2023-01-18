@@ -169,6 +169,10 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         private void AnswerToggleButton_Pressed()
         {
             ShowAnswers = !ShowAnswers;
+            if(Answer_TextMesh_Animator == null)
+            {
+                Answer_TextMesh_Animator = Answer_TextMesh.GetOrAddComponent<TextAnimator>();
+            }
             if (ShowAnswers)
             {
                 Answer_Text.SetActive(true);

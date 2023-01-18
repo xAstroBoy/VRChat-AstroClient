@@ -34,6 +34,77 @@ namespace AstroClient.Tools.Extensions
             if (obj.GetComponent<VRCPickup>() != null) return true;
             return false;
         }
+        internal static bool isPickupable(this GameObject obj)
+        {
+            if(obj.isPickup())
+            {
+                var SDK1 = obj.GetComponent<VRC_Pickup>();
+                var SDK2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+                var SDK3 = obj.GetComponent<VRCPickup>();
+                if(SDK1 != null)
+                {
+                    if(SDK1.pickupable)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if(SDK2 != null)
+                        {
+                            if (SDK2.pickupable)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                if (SDK3 != null)
+                                {
+                                    if (SDK3.pickupable)
+                                    {
+                                        return true;
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+                else
+                {
+                    if (SDK2 != null)
+                    {
+                        if (SDK2.pickupable)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            if (SDK3 != null)
+                            {
+                                if (SDK3.pickupable)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        if (SDK3 != null)
+                        {
+                            if (SDK3.pickupable)
+                            {
+                                return true;
+                            }
+                        }
+
+                    }
+                }
+            }
+            return false;
+        }
 
         internal static void RespawnPickup(this GameObject obj, bool RestoreBodySettings)
         {

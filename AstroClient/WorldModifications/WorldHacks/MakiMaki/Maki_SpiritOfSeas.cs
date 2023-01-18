@@ -159,7 +159,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 {
                     foreach (var pickup in GoldShells)
                     {
-                        if (pickup.pickupable)
+                        if (pickup.gameObject.isPickupable())
                         {
                             pickup.gameObject.TeleportToMe();
                         }

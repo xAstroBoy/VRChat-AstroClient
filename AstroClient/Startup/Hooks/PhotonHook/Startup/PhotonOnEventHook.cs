@@ -148,11 +148,17 @@ internal class PhotonOnEventHook : AstroEvents
                         // Give a safe copy to patch and replace.
                         if (isCustomData)
                         {
-                            // Feed only the Editable copy and let it process
-                            if (isDictionary)
-                            {
-                                CurrentAction = Photon_PlayerModerationHandler.HandleEvent(ref Dictionary_EditableCopy);
-                            }
+                                // Feed only the Editable copy and let it process
+                                if (isDictionary)
+                                {
+                                    try {
+                                        CurrentAction = Photon_PlayerModerationHandler.HandleEvent(ref Dictionary_EditableCopy);
+                                    }
+                                    catch
+                                    {
+                                        CurrentAction = HookAction.Nothing;
+                                    }
+                                }
                         }
 
                         break;
