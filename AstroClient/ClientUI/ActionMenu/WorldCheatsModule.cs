@@ -237,6 +237,10 @@ internal class WorldCheatsModule : AstroEvents
                 {
                     CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
                     CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Reactor", () => { AmongUSCheats.SabotageReactor?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Oxygen", () => { AmongUSCheats.SabotageOxygen?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Comms", () => { AmongUSCheats.SabotageComms?.InvokeBehaviour(); });
+
                     CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
                 });
 

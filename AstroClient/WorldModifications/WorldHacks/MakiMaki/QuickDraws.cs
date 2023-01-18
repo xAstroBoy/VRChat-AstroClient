@@ -53,7 +53,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             StageCollider = null;
             Customization = null;
             Pen_Pickup = null;
-            Pen_ForceActive = null;
             Pen_PickupController = null;
             AnswerToggleButton = null;
             StageColliderToggleBtn = null;
@@ -94,14 +93,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         private void SetupPenHijacker()
         {
             Pen_PickupController = Pen_Pickup.GetOrAddComponent<PickupController>();
-            Pen_ForceActive = Pen_Pickup.GetOrAddComponent<Enabler>();
-            Pen_InteractionCollider = Pen_Pickup.AddComponent<BoxCollider>();
-            if (Pen_InteractionCollider != null)
-            {
-                Pen_InteractionCollider.isTrigger = true;
-                Pen_InteractionCollider.enabled = false;
-            }
-            Pen_ForceActive.enabled = false;
         }
 
         private void SetupWorldButtons()
@@ -205,15 +196,23 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             ForceStealPencil = !ForceStealPencil;
             if (ForceStealPencil)
             {
-                Pen_ForceActive.enabled = true;
-                Pen_InteractionCollider.enabled = true;
+                if(Pen_InteractionCollider == null)
+                {
+                    Pen_InteractionCollider = Pen_PickupController.GetOrAddComponent<BoxCollider>();
+                    Pen_InteractionCollider.isTrigger = true;
+                }
+                Pen_Pickup.gameObject.SetActive(true);
                 Pen_PickupController.Pickup_Set_Pickupable(true);
                 PenTheftToggleBtn.SetText("<color=green>Restore Normal Pen Interaction!</color>");
             }
             else
             {
-                Pen_ForceActive.enabled = false;
-                Pen_InteractionCollider.enabled = false;
+                if (Pen_InteractionCollider != null)
+                {
+                    Pen_InteractionCollider.DestroyMeLocal(true);
+                }
+                //Pen_Pickup.gameObject.SetActive(true);
+
                 Pen_PickupController.Pickup_RestoreProperties();
                 PenTheftToggleBtn.SetText("<color=red>Force Allow Pen Interaction!</color>");
             }
@@ -224,7 +223,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             if (id.Equals(WorldIds.QuickDraws))
             {
                 isCurrentWorld = true;
-                HasSubscribed = false;
+                HasSubscribed = true;
                 FindEverything();
             }
             else
@@ -242,7 +241,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         private static MeshCollider StageCollider { get; set; }
         private static Transform Customization { get; set; } = null;
         private static Transform Pen_Pickup { get; set; } = null;
-        private static Enabler Pen_ForceActive { get; set; } = null;
         private static BoxCollider Pen_InteractionCollider { get; set; } = null;
 
         private static PickupController Pen_PickupController { get; set; } = null;
@@ -255,9 +253,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 
         private static GameObject MakiKeyboard { get; set; } = null;
 
-        private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader;
-        private static QuickDraws_CustomizationReader _customizationReader;
-        private static QuickDraws_MakiKeyboardReader _MakiKeyboardReader;
+        private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader{ get; set; }
+        private static QuickDraws_CustomizationReader _customizationReader{ get; set; }
+        private static QuickDraws_MakiKeyboardReader _MakiKeyboardReader{ get; set; }
 
         public static QuickDraws_CustomizationReader CustomizationReader
         {

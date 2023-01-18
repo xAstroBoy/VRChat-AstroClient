@@ -58,46 +58,49 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 
 
 
-        internal static bool _RoleSwapper_GetImpostorRole;
+        internal static bool _RoleSwapper_GetImpostorRole{ get; set; }
 
-        private static Vector3 SerializerPos;
-        private static Quaternion SerializerRot;
+        private static Vector3 SerializerPos { get; set; }
+        private static Quaternion SerializerRot{ get; set; }
 
-        private static bool _BodyESps;
+        private static bool _BodyESps{ get; set; }
 
-        internal static QMSingleButton GameStartbtn;
-        internal static QMSingleButton GameAbortbtn;
-        internal static QMSingleButton GameVictoryCrewmateBtn;
-        internal static QMSingleButton GameVictoryImpostorBtn;
-        internal static QMToggleButton GameBodyESPBtn;
+        internal static QMSingleButton GameStartbtn{ get; set; }
+        internal static QMSingleButton GameAbortbtn{ get; set; }
+        internal static QMSingleButton GameVictoryCrewmateBtn{ get; set; }
+        internal static QMSingleButton GameVictoryImpostorBtn{ get; set; }
+        internal static QMToggleButton GameBodyESPBtn{ get; set; }
 
-        internal static QMToggleButton GetImpostorRoleBtn;
-        internal static QMToggleButton ToggleSerializerShortcut;
+        internal static QMToggleButton GetImpostorRoleBtn{ get; set; }
+        internal static QMToggleButton ToggleSerializerShortcut{ get; set; }
 
-        internal static QMNestedGridMenu AmongUsCheatsPage;
+        internal static QMNestedGridMenu AmongUsCheatsPage{ get; set; }
 
-        internal static bool HasAmongUsWorldLoaded;
+        internal static bool HasAmongUsWorldLoaded{ get; set; }
 
-        internal static UdonBehaviour_Cached StartGameEvent;
-        internal static UdonBehaviour_Cached AbortGameEvent;
-        internal static UdonBehaviour_Cached EmergencyMeetingEvent;
+        internal static UdonBehaviour_Cached StartGameEvent{ get; set; }
+        internal static UdonBehaviour_Cached AbortGameEvent{ get; set; }
+        internal static UdonBehaviour_Cached EmergencyMeetingEvent{ get; set; }
 
-        internal static UdonBehaviour_Cached VictoryCrewmateEvent;
-        internal static UdonBehaviour_Cached VictoryImpostorEvent;
+        internal static UdonBehaviour_Cached VictoryCrewmateEvent{ get; set; }
+        internal static UdonBehaviour_Cached VictoryImpostorEvent{ get; set; }
 
-        internal static UdonBehaviour_Cached EmptyGarbage_Storage_A;
-        internal static UdonBehaviour_Cached EmptyGarbage_Storage_B;
+        internal static UdonBehaviour_Cached EmptyGarbage_Storage_A{ get; set; }
+        internal static UdonBehaviour_Cached EmptyGarbage_Storage_B{ get; set; }
 
-        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_A;
+        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_A{ get; set; }
 
-        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_B;
+        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_B{ get; set; }
 
-        internal static UdonBehaviour_Cached CancelAllSabotages;
-        internal static UdonBehaviour_Cached SabotageLights;
+        internal static UdonBehaviour_Cached CancelAllSabotages{ get; set; }
+        internal static UdonBehaviour_Cached SabotageLights{ get; set; }
+        internal static UdonBehaviour_Cached SabotageReactor{ get; set; }
+        internal static UdonBehaviour_Cached SabotageOxygen{ get; set; }
+        internal static UdonBehaviour_Cached SabotageComms{ get; set; }
 
-        internal static UdonBehaviour_Cached SubmitScanTask;
+        internal static UdonBehaviour_Cached SubmitScanTask{ get; set; }
 
-        internal static List<UdonBehaviour_Cached> SabotageAllDoors = new();
+        internal static List<UdonBehaviour_Cached> SabotageAllDoors { get; set; } = new();
         private bool _HasSubscribed = false;
         private bool HasSubscribed
         {
@@ -227,6 +230,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             EmergencyMeetingEvent = null;
             BodyESPs = false;
             SabotageLights = null;
+            SabotageOxygen = null;
+            SabotageComms = null;
+            SabotageReactor = null;
             SabotageAllDoors.Clear();
             SubmitScanTask = null;
             HasSubscribed = false;
@@ -255,6 +261,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             EmergencyMeetingEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncEmergencyMeeting");
             CancelAllSabotages = UdonSearch.FindUdonEvent("Game Logic", "CancelAllSabotage");
             SabotageLights = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageLights");
+            SabotageOxygen = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageOxygen");
+            SabotageReactor = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageReactor");
+            SabotageComms = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageComms");
 
             EmptyGarbage_Storage_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Storage)", "SyncConfirmAnimation");
             EmptyGarbage_Storage_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Storage)", "SyncConfirmAnimation");
