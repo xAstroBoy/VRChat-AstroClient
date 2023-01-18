@@ -88,9 +88,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws
         internal void RevealAnswer()
         {
             if (!WorldModifications.WorldHacks.MakiMaki.QuickDraws.ShowAnswers) return;
-            if (WorldModifications.WorldHacks.MakiMaki.QuickDraws.AnswerRevealer != null)
+            if (WorldModifications.WorldHacks.MakiMaki.QuickDraws.Answer_TextMesh_Animator != null)
             {
-                WorldModifications.WorldHacks.MakiMaki.QuickDraws.AnswerRevealer.SetText("{fade d=5}<rainb>" + __0_mp_word_String + "</rainb>{/fade}");
+                WorldModifications.WorldHacks.MakiMaki.QuickDraws.Answer_TextMesh_Animator.SetText("Answer is : {fade d=5}<rainb>" + __0_mp_word_String + "</rainb>{/fade}", false);
             }
         }
 

@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws;
+﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws;
+using AstroClient.AstroMonos.Components.Tools;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
+using AstroClient.febucci;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
@@ -15,31 +21,160 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
+        private bool _HasSubscribed = false;
+
+        private bool HasSubscribed
+        {
+            get => _HasSubscribed;
+            set
+            {
+                if (_HasSubscribed != value)
+                {
+                    if (value)
+                    {
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                    }
+                    else
+                    {
+                        ClientEventActions.OnRoomLeft -= OnRoomLeft;
+                    }
+                }
+                _HasSubscribed = value;
+            }
+        }
+
+        private void OnRoomLeft()
+        {
+            Text_Clue = null;
+            Answer_Text = null;
+            Answer_TextMesh = null;
+            Answer_TextMesh_Animator = null;
+            PlayerPermissionManager = null;
+            StageCollider = null;
+            Customization = null;
+            Pen_Pickup = null;
+            Pen_ForceActive = null;
+            Pen_PickupController = null;
+            AnswerToggleButton = null;
+            StageColliderToggleBtn = null;
+            PenTheftToggleBtn = null;
+            ShowAnswers = false;
+            DisableStageCollider = false;
+            ForceStealPencil = false;
+            _PlayerPermissionManagerReader = null;
+            _customizationReader = null;
+            _MakiKeyboardReader = null;
+        }
+
         private void FindEverything()
         {
             Customization = Finder.Find("----UI----/RightSettings/Customization");
             MakiKeyboard = Finder.Find("----SYSTEMS----/KeyboardToggle/MakiKeyboard");
             PlayerPermissionManager = Finder.Find("----SYSTEMS----/PlayerManager/PlayerPermissionManager");
+            Text_Clue = Finder.Find("----UI----/RoundInfo/Clue");
+            StageCollider = Finder.Find("scribble/StageCollider").GetComponent<MeshCollider>();
+            Pen_Pickup = Finder.Find("----SYSTEMS----/Pens/Pen/Pickup");
+            Pen_PickupController = Pen_Pickup.GetOrAddComponent<PickupController>();
+            Pen_ForceActive = Pen_Pickup.GetOrAddComponent<Enabler>();
+            Pen_ForceActive.enabled = false;
+
             _ = CustomizationReader;
             _ = MakiKeyboardReader;
-            _ = PlayerPermissionManagerReader; 
+            _ = PlayerPermissionManagerReader;
 
-            if(MakiKeyboardReader != null)
+            if (MakiKeyboardReader != null)
             {
-                AnswerRevealer = new WorldButton(new Vector3(4.6627f, 1.7976f, 10.8649f), new Vector3(0, 320, 0), null, "<rainb>Click Me to Reveal Words!</rainb>", () =>
+                if (Text_Clue != null)
                 {
-
-                    ShowAnswers = !ShowAnswers;
-                    if(!ShowAnswers)
+                    Answer_Text = Object.Instantiate(Text_Clue, Text_Clue.transform.parent);
+                    if (Answer_Text != null)
                     {
-                        AnswerRevealer.SetText("<rainb>Click Me to Reveal Words!</rainb>");
+                        Answer_Text.name = "Solution Viewer";
+                        Answer_Text.transform.localPosition = new Vector3(0, -98, 0);
+                        Answer_TextMesh = Answer_Text.GetComponent<TextMeshPro>();
+                        if (Answer_TextMesh != null)
+                        {
+                            Answer_TextMesh_Animator = Answer_TextMesh.GetOrAddComponent<TextAnimator>();
+                            if(Answer_TextMesh_Animator != null)
+                            {
+                                Answer_TextMesh_Animator.SetText("", false);
+                            }
+                        }
+                        var listener = Text_Clue.GetOrAddComponent<GameObjectListener>();
+                        if (listener != null)
+                        {
+                            listener.OnEnabled += () =>
+                            {
+                                if (ShowAnswers)
+                                {
+                                    Answer_Text.SetActive(true);
+                                    MakiKeyboardReader.RevealAnswer();
+                                }
+                            };
+                            listener.OnDisabled += () =>
+                            {
+                                Answer_Text.SetActive(false);
+                                Answer_TextMesh_Animator.SetText("", false);
+                            };
+                        }
+                    }
+                }
+                AnswerToggleButton = new WorldButton_Squared(new Vector3(-5.081f, 1.284f, 10.159f), new Vector3(0, -330f, -90f), "<rainb>Show Answers!</rainb>", () =>
+                {
+                    ShowAnswers = !ShowAnswers;
+                    if (ShowAnswers)
+                    {
+                        Answer_Text.SetActive(true);
+                        MakiKeyboardReader.RevealAnswer();
+                        AnswerToggleButton.SetText("<color=Red>Hide Answers!</rainb>");
                     }
                     else
                     {
-                        MakiKeyboardReader.RevealAnswer();
+                        Answer_Text.SetActive(false);
+                        Answer_TextMesh_Animator.SetText("", false);
+                        AnswerToggleButton.SetText("<rainb>Show Answers!</rainb>");
                     }
                 });
-                AnswerRevealer.SetScale(new Vector3(0.23f, 0.5f, 1.2527f));
+                AnswerToggleButton.SetScale(1f);
+            }
+
+            if (StageCollider != null)
+            {
+                StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Disable Stage collision Block</color>", () =>
+                {
+                    DisableStageCollider = !DisableStageCollider;
+                    if (DisableStageCollider)
+                    {
+                        StageCollider.IgnoreLocalPlayerCollision(true);
+                        StageColliderToggleBtn.SetText("<color=green>Enable Stage collision Block!</color>");
+                    }
+                    else
+                    {
+                        StageCollider.IgnoreLocalPlayerCollision(false);
+                        StageColliderToggleBtn.SetText("<color=Red>Disable Stage collision Block!</color>");
+                    }
+                });
+                StageColliderToggleBtn.SetScale(1f);
+            }
+            if (Pen_Pickup != null)
+            {
+                PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Force Allow Pen Interaction!</color>", () =>
+                {
+                    ForceStealPencil = !ForceStealPencil;
+                    if (ForceStealPencil)
+                    {
+                        Pen_ForceActive.enabled = true;
+                        Pen_PickupController.Pickup_Set_Pickupable(true);
+                        PenTheftToggleBtn.SetText("<color=green>Restore Normal Pen Interaction!</color>");
+                    }
+                    else
+                    {
+                        Pen_ForceActive.enabled = false;
+                        Pen_PickupController.Pickup_RestoreProperties();
+                        PenTheftToggleBtn.SetText("<color=Red>Force Allow Pen Interaction!</color>");
+                    }
+                });
+                PenTheftToggleBtn.SetScale(1f);
             }
         }
 
@@ -48,23 +183,35 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             if (id.Equals(WorldIds.QuickDraws))
             {
                 isCurrentWorld = true;
+                HasSubscribed = false;
                 FindEverything();
             }
             else
             {
                 isCurrentWorld = false;
-                ShowAnswers = false;
             }
         }
-        private static GameObject PlayerPermissionManager = null;
 
-        internal static WorldButton AnswerRevealer = null;
+        private static GameObject Text_Clue { get; set; }
+        private static GameObject Answer_Text { get; set; }
+        internal static TextMeshPro Answer_TextMesh { get; set; }
+        internal static TextAnimator Answer_TextMesh_Animator { get; set; }
 
-        private static GameObject Customization = null;
-
+        private static GameObject PlayerPermissionManager { get; set; } = null;
+        private static MeshCollider StageCollider { get; set; }
+        private static GameObject Customization { get; set; } = null;
+        private static GameObject Pen_Pickup { get; set; } = null;
+        private static Enabler Pen_ForceActive { get; set; } = null;
+        private static PickupController Pen_PickupController { get; set; } = null;
+        private static WorldButton_Squared AnswerToggleButton { get; set; }
+        private static WorldButton_Squared StageColliderToggleBtn { get; set; }
+        private static WorldButton_Squared PenTheftToggleBtn { get; set; }
+        internal static bool ShowAnswers { get; set; } = false;
+        internal static bool DisableStageCollider { get; set; } = false;
+        internal static bool ForceStealPencil { get; set; } = false;
+        private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader;
         private static QuickDraws_CustomizationReader _customizationReader;
-
-        internal static bool ShowAnswers = false;
+        private static QuickDraws_MakiKeyboardReader _MakiKeyboardReader;
 
         public static QuickDraws_CustomizationReader CustomizationReader
         {
@@ -79,12 +226,10 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                 }
                 return _customizationReader;
-
             }
         }
-        private static GameObject MakiKeyboard = null;
 
-        private static QuickDraws_MakiKeyboardReader _MakiKeyboardReader;
+        private static GameObject MakiKeyboard = null;
 
         public static QuickDraws_MakiKeyboardReader MakiKeyboardReader
         {
@@ -100,10 +245,8 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                 }
                 return _MakiKeyboardReader;
-
             }
         }
-        private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader;
 
         public static QuickDraws_PlayerPermissionReader PlayerPermissionManagerReader
         {
@@ -119,7 +262,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                 }
                 return _PlayerPermissionManagerReader;
-
             }
         }
 

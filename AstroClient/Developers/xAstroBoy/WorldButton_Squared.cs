@@ -80,6 +80,10 @@ namespace AstroClient.xAstroBoy
         {
             ButtonBody.transform.localScale = Scale;
         }
+        internal void SetScale(float Scale)
+        {
+            ButtonBody.transform.localScale = new Vector3(Scale, Scale, Scale);
+        }
 
         internal void SetText(string text)
         {
