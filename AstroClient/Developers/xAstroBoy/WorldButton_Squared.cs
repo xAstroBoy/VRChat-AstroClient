@@ -87,7 +87,7 @@ namespace AstroClient.xAstroBoy
 
         internal void SetText(string text)
         {
-            Controller.SetText(text);
+            Controller.Text = text;
             ButtonBody.name = $"AstroWorldSquaredButton: {text}";
         }
         internal void Set_OnButtonDown(Action action)
@@ -125,7 +125,7 @@ namespace AstroClient.xAstroBoy
                 Controller.Start(); // Since unity is being a slow fucker, let's force a start once added.
                 Controller.OnButtonDown += OnButtonDown;
                 Controller.OnButtonUp += OnButtonUp;
-                Controller.SetText(label);
+                Controller.Text = label;
 
             }
 

@@ -127,10 +127,10 @@ namespace AstroClient.ClientUI.Hud.Notifier
             }
             Messages.Add(msg);
             
-            NotifierTextAnimator.SetText(string.Join("\n", Messages), false);
+            NotifierTextAnimator.Safe_SetText(string.Join("\n", Messages));
             yield return new WaitForSecondsRealtime(duration);
             Messages.Remove(msg);
-            NotifierTextAnimator.SetText(string.Join("\n", Messages), false);
+            NotifierTextAnimator.Safe_SetText(string.Join("\n", Messages));
 
         }
 

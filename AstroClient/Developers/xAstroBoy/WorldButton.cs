@@ -102,7 +102,7 @@ namespace AstroClient.xAstroBoy
                 }
                 if (Animator.Fulltext == text) return;
                 //TextMesh.text = text;
-                Animator.SetText(text, false);
+                Animator.Safe_SetText(text);
 
             }
             else

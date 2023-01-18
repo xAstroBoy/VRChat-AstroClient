@@ -47,7 +47,7 @@ namespace AstroClient.Startup.Hooks
                         if (anim != null)
                         {
                             anim.ShowAllCharacters(true);
-                            anim.SetText(__0, false);
+                            anim.Safe_SetText(__0);
                         }
                     }
                 }

@@ -29,7 +29,6 @@ namespace AstroClient.febucci
             AntiGcList.Add(this);
         }
 
-        #region Types (Structs + Enums)
         /// <summary>
         /// Contains TextAnimator's current time values.
         /// </summary>
@@ -100,8 +99,6 @@ namespace AstroClient.febucci
             Unscaled,
         }
 
-        #endregion
-
         private void Awake()
         {
 
@@ -130,8 +127,6 @@ namespace AstroClient.febucci
             m_time.UpdateDeltaTime(timeScale);
         }
 
-        #region Variables
-
         TAnimPlayerBase _tAnimPlayer;
         /// <summary>
         /// Linked TAnimPlayer to this component
@@ -151,8 +146,6 @@ namespace AstroClient.febucci
                 return _tAnimPlayer;
             }
         }
-
-        #region Inspector
 
         /// <summary>
         /// If true, the typewriter is triggered automatically once the TMPro text changes (requires a TextAnimatorPlayer component). Otherwise, it shows the entire text instantly.
@@ -191,11 +184,6 @@ namespace AstroClient.febucci
         /// </summary>
         public bool isResettingEffectsOnNewText = true;
 
-        
-        #endregion
-
-        #region Public Variables
-
         TMP_Text _tmproText;
 
         /// <summary>
@@ -222,17 +210,12 @@ namespace AstroClient.febucci
             }
         }
 
-        #region Time
-
         /// <summary>
         /// Effects timescale, you can set it to scaled or unscaled.
         /// It also affects the TextAnimatorPlayer, if there is one linked to this TextAnimator.
         /// </summary>
         public TimeScale timeScale = TimeScale.Scaled;
 
-        #endregion
-
-        #region Events
         /// <summary>
         /// Delegate used for TextAnimator's events. Listeners can subscribe to: <see cref="onEvent"/>. <br/>
         /// - Manual: <see href="https://www.febucci.com/text-animator-unity/docs/triggering-events-while-typing/">Triggering Events while typing</see>
@@ -245,7 +228,6 @@ namespace AstroClient.febucci
         /// - Manual: <see href="https://www.febucci.com/text-animator-unity/docs/triggering-events-while-typing/">Triggering Events while typing</see>
         /// </summary>
         public event MessageEvent onEvent;
-        #endregion
 
         string latestText;
         /// <summary>
@@ -303,11 +285,6 @@ namespace AstroClient.febucci
         /// </summary>
         public TMP_CharacterInfo latestCharacterShown { get; private set; } //TODO rename in "latestCharacterVisible" for better clarity, since users can now "decrease" the max visible character visible as well
 
-        #endregion
-
-        #region Managament variables
-        
-        
         /// <summary>
         /// Contains TextAnimator's current time values.
         /// </summary>
@@ -390,10 +367,6 @@ namespace AstroClient.febucci
         int latestTriggeredEvent = 0;
         int latestTriggeredAction = 0;
 
-        #endregion
-
-        #region Text Elements
-
         TMP_TextInfo textInfo;
 
         Character[] characters = new Character[0];
@@ -408,14 +381,16 @@ namespace AstroClient.febucci
 
         List<InternalAction> typewriterActions = new List<InternalAction>();
         List<EventMarker> eventMarkers = new List<EventMarker>();
+        /// <summary>
+        /// Method to set the TextAnimator's text and apply its tags (effects/actions/tmpro/...).
+        /// </summary>
+        /// <param name="newtext">Source text, including rich text tags</param>
+        public void Safe_SetText(string newtext)
+        {
+            if(newtext == Fulltext) return;
+            SetText(newtext, false);
+        }
 
-        #endregion
-
-        #endregion
-
-        #region Public Component Methods
-
-        #region For setting the Text
         /// <summary>
         /// Method to set the TextAnimator's text and apply its tags (effects/actions/tmpro/...).
         /// </summary>
@@ -451,9 +426,7 @@ namespace AstroClient.febucci
             _ApplyTextToCharacters(this.text + _FormatText(text, this.text.Length));
 
         }
-        #endregion
 
-        #region For the typewriter
         /// <summary>
         /// Tries to return the next character in the text.
         /// </summary>
@@ -516,7 +489,6 @@ namespace AstroClient.febucci
 
             latestTriggeredEvent = eventMarkers.Count - 1;
         }
-        #endregion
 
         /// <summary>
         /// Forces refreshing the mesh at the end of the frame
@@ -562,10 +534,6 @@ namespace AstroClient.febucci
             m_time.ResetData();
 
         }
-
-        #endregion
-
-        #region Public Static Methods
 
         /// <summary>
         /// <c>true</c> if behavior effects are enabled globally (in all TextAnimators).
@@ -644,9 +612,6 @@ namespace AstroClient.febucci
             enabled_localAppearances = value;
         }
 
-        #endregion
-
-        #region Effects Database
         bool databaseBuilt = false;
         Dictionary<string, Type> localBehaviors = new Dictionary<string, Type>();
         Dictionary<string, Type> localAppearances = new Dictionary<string, Type>();
@@ -661,8 +626,6 @@ namespace AstroClient.febucci
 
             databaseBuilt = true;
 
-            #region Global built-in effects values
-
             //replaces local appearances data with global scriptable data
             if (scriptable_globalAppearancesValues)
             {
@@ -674,7 +637,6 @@ namespace AstroClient.febucci
             {
                 behaviorValues.defaults = scriptable_globalBehaviorsValues.effectValues;
             }
-            #endregion
 
             //adds local behavior presets
             for (int i = 0; i < behaviorValues.presets.Length; i++)
@@ -687,9 +649,6 @@ namespace AstroClient.febucci
             {
                 TAnimBuilder.TryAddingPresetToDictionary(ref localAppearances, appearancesContainer.values.presets[i].effectTag, typeof(PresetAppearance));
             }
-
-
-            #region Fallback appearing effects
 
             //TODO make a generic method for both
 
@@ -761,13 +720,7 @@ namespace AstroClient.febucci
 
             this.fallbackBehaviorEffects = temp_fallbackBehaviorEffects.ToArray();
 
-            #endregion
-
-
         }
-        #endregion
-
-        #region Effects Creation/Instancing
 
         bool TryGetBehaviorClassFromTag(string tag, string entireRichTextTag, int regionStartIndex, out BehaviorBase effectBase)
         {
@@ -812,11 +765,6 @@ namespace AstroClient.febucci
             return false;
         }
 
-        #endregion
-
-        #region Management Methods
-
-        #region Tags Processing
         const char m_closureSymbol = '/';
         const char m_eventSymbol = '?';
         const char m_disappearanceSymbol = '#';
@@ -856,7 +804,6 @@ namespace AstroClient.febucci
                     //All the tags inside the { } region (without the opening and ending chars, '{' and '}') separated by a space
                     string[] tags = richTextTag.Split(' ');
 
-                    #region Tries adding effect
                     if (TryGetAppearingClassFromTag(tags[0], richTextTag, realTextIndex, out AppearanceBase effectBase))
                     {
                         effectBase.SetDefaultValues(appearancesContainer.values);
@@ -867,8 +814,6 @@ namespace AstroClient.febucci
 
                         return true;
                     }
-
-                    #endregion
 
                     return false;
                 }
@@ -914,8 +859,6 @@ namespace AstroClient.febucci
             {
                 richTextTag = richTextTag.Substring(1, richTextTag.Length - 1);
 
-                #region Tries firing event
-
                 if (richTextTag.Length == 0) //prevents from adding an empty callback
                     return false;
 
@@ -929,13 +872,10 @@ namespace AstroClient.febucci
                 internalEventActionIndex++; //increases internal events and features order
                 return true;
 
-                #endregion
             }
             else if (loweredRichTextTag[0] == m_closureSymbol)
             {
                 loweredRichTextTag = loweredRichTextTag.Substring(1, loweredRichTextTag.Length - 1);
-
-                #region Tries closing effect
 
                 bool closedRegion = false;
 
@@ -956,11 +896,9 @@ namespace AstroClient.febucci
 
                 return closedRegion;
 
-                #endregion
             }
             else
             {
-                #region Tries adding effect
 
                 //Avoids creating a new effect if the same one has already been instanced
                 for (int i = 0; i < behaviorEffects.Count; i++)
@@ -986,7 +924,6 @@ namespace AstroClient.febucci
                 //No effect found
                 return false;
 
-                #endregion
             }
 
         }
@@ -1041,8 +978,6 @@ namespace AstroClient.febucci
 
         }
 
-        #endregion
-
         bool noparseEnabled = false;
         int internalEventActionIndex = 0;
 
@@ -1061,7 +996,6 @@ namespace AstroClient.febucci
             }
             BuildTagsDatabase();
 
-            #region Resets text variables
             Fulltext = text;
             skipAppearanceEffects = false;
             hasActions = false;
@@ -1079,10 +1013,6 @@ namespace AstroClient.febucci
             latestTriggeredAction = 0;
             internalEventActionIndex = 0;
 
-            #endregion
-
-            #region Adds Fallback Effects
-
             //fallback effects are added at the end of the list
             for (int i = 0; i < fallbackAppearanceEffects.Length; i++)
             {
@@ -1098,8 +1028,6 @@ namespace AstroClient.febucci
             {
                 behaviorEffects.Add(fallbackBehaviorEffects[i]);
             }
-
-            #endregion
 
             _ApplyTextToCharacters(_FormatText(text, 0));
 
@@ -1178,7 +1106,7 @@ namespace AstroClient.febucci
 
             for (int i = 0, realTextIndex = startCharacterIndex; i < text.Length; i++)
             {
-                #region Local Methods
+
                 void AppendCurrentCharacterToText()
                 {
                     temp_realText.Append(text[i]);
@@ -1209,8 +1137,6 @@ namespace AstroClient.febucci
                     realTextIndex += entireTag.Length;
                 }
 
-                #endregion
-
                 if (TryGetClosingCharacter(out char closingCharacter))
                 {
                     indexOfNextOpening = text.IndexOf(text[i], i + 1);
@@ -1230,7 +1156,6 @@ namespace AstroClient.febucci
                         richTextTag = entireTag.Substring(1, entireTag.Length - 2);
                         loweredRichTextTag = richTextTag.ToLower();
 
-                        #region Processes Tags
                         if (loweredRichTextTag.Length < 1) //avoids an empty tag
                         {
                             AppendCurrentTagToText();
@@ -1275,7 +1200,6 @@ namespace AstroClient.febucci
 
                             }
                         }
-                        #endregion
 
                         //"skips" all the characters inside the tag, so we'll go back adding letters again
                         i = indexOfClosing;
@@ -1315,9 +1239,6 @@ namespace AstroClient.febucci
             if (characters.Length < textInfo.characterCount)
                 Array.Resize(ref characters, textInfo.characterCount);
 
-
-            #region Effects and Features Initialization
-
             foreach (var effect in this.appearanceEffects)
             {
                 effect.Initialize(characters.Length);
@@ -1333,16 +1254,11 @@ namespace AstroClient.febucci
                 effect.Initialize(characters.Length);
             }
 
-            #endregion
-
-            #region Characters Setup
             for (int i = 0; i < textInfo.characterCount; i++)
             {
                 characters[i].data.tmp_CharInfo = textInfo.characterInfo[i];
 
                 //Calculates which effects are applied to this character
-
-                #region Sources and data
 
                 //Creates sources and data arrays only the first time
                 if (!characters[i].initialized)
@@ -1353,8 +1269,6 @@ namespace AstroClient.febucci
                     characters[i].data.vertices = new Vector3[TextUtilities.verticesPerChar];
                     characters[i].data.colors = new Color32[TextUtilities.verticesPerChar];
                 }
-
-                #endregion
 
                 void SetEffectsDependency<T>(ref int[] indexes, List<T> effects, int fallbackEffectsCount) where T : EffectsBase
                 {
@@ -1381,8 +1295,6 @@ namespace AstroClient.febucci
                 SetEffectsDependency(ref characters[i].indexAppearanceEffects, appearanceEffects, fallbackAppearanceEffects.Length);
                 SetEffectsDependency(ref characters[i].indexDisappearanceEffects, disappearanceEffects, fallbackDisappearanceEffects.Length);
 
-                #region Fallback Effects
-
                 void AssignFallbackEffect<T>(T[] effect, ref int[] indexes) where T : EffectsBase
                 {
 
@@ -1400,8 +1312,6 @@ namespace AstroClient.febucci
                 AssignFallbackEffect(fallbackAppearanceEffects, ref characters[i].indexAppearanceEffects);
                 AssignFallbackEffect(fallbackBehaviorEffects, ref characters[i].indexBehaviorEffects);
                 AssignFallbackEffect(fallbackDisappearanceEffects, ref characters[i].indexDisappearanceEffects);
-
-                #endregion
 
                 //Assigns duration
                 float CalculateAppearanceDuration(int[] effectsIndex, List<AppearanceBase> effects)
@@ -1442,14 +1352,9 @@ namespace AstroClient.febucci
                 characters[i].data.passedTime = 0;
             }
 
-            #endregion
-
-            #region Updates variables
             hasText = text.Length > 0;
             autoSize = tmproText.enableAutoSizing;
             this.text = tmproText.text;
-            #endregion
-
 
             AssertCharacterTimes();
 
@@ -1542,10 +1447,6 @@ namespace AstroClient.febucci
             SetEffectsIntensity(disappearanceEffects);
         }
 
-        #endregion
-
-        #region Mesh
-
         int tmpFirstVisibleCharacter;
         int tmpMaxVisibleCharacters;
         void CopyMeshSources()
@@ -1609,8 +1510,6 @@ namespace AstroClient.febucci
 
             tmproText.UpdateVertexData();
         }
-
-        #endregion
 
         void DebugText()
         {
@@ -1766,8 +1665,6 @@ namespace AstroClient.febucci
             m_time.UpdateDeltaTime(timeScale);
             m_time.IncreaseTime();
 
-            #region Effects Calculation
-            
             for (int i = 0; i < behaviorEffects.Count; i++)
             {
                 behaviorEffects[i].SetAnimatorData(m_time);
@@ -1783,9 +1680,7 @@ namespace AstroClient.febucci
             {
                 disappearanceEffects[i].Calculate();
             }
-            #endregion
 
-            
             for (int i = 0; i < textInfo.characterCount && i < characters.Length; i++)
             {
 

@@ -3,11 +3,11 @@
     using Tools.Extensions;
     using UnityEngine;
 
-    public static class ComponentUtils
+    internal static class ComponentUtils
     {
         #region  GameObject
 
-        public static T GetGetInChildrens_OrAddComponent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrAddComponent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
@@ -18,7 +18,7 @@
             return result;
         }
 
-        public static T GetGetInChildrens<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
@@ -26,7 +26,7 @@
                 result = obj.GetComponentInChildren<T>(IncludeInactive);
             return result;
         }
-        public static T GetGetInChildrens_OrParent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrParent<T>(this GameObject obj, bool IncludeInactive = false) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
@@ -38,7 +38,7 @@
         }
 
 
-        public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
+        internal static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {
             if (obj == null) return null;
             var result = obj.GetComponent<T>();
@@ -86,22 +86,22 @@
         #endregion
 
         #region  Transform
-        public static T GetGetInChildrens_OrAddComponent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrAddComponent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
         {
             return obj.gameObject.GetGetInChildrens_OrAddComponent<T>(IncludeInactive);
         }
 
-        public static T GetGetInChildrens<T>(this Transform obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens<T>(this Transform obj, bool IncludeInactive = false) where T : Component
         {
             return obj.gameObject.GetGetInChildrens<T>(IncludeInactive);
         }
-        public static T GetGetInChildrens_OrParent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrParent<T>(this Transform obj, bool IncludeInactive = false) where T : Component
         {
             return obj.gameObject.GetGetInChildrens_OrParent<T>(IncludeInactive);
         }
 
 
-        public static T GetOrAddComponent<T>(this Transform obj) where T : Component
+        internal static T GetOrAddComponent<T>(this Transform obj) where T : Component
         {
             return  obj.gameObject.GetOrAddComponent<T>();
         }
@@ -126,22 +126,22 @@
             return c.gameObject.AddComponent<T>();
         }
 
-        public static T GetGetInChildrens_OrAddComponent<T>(this Component obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrAddComponent<T>(this Component obj, bool IncludeInactive = false) where T : Component
         {
             return obj.transform.GetGetInChildrens_OrAddComponent<T>(IncludeInactive);
         }
 
-        public static T GetGetInChildrens<T>(this Component obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens<T>(this Component obj, bool IncludeInactive = false) where T : Component
         {
             return obj.transform.GetGetInChildrens<T>(IncludeInactive);
         }
-        public static T GetGetInChildrens_OrParent<T>(this Component obj, bool IncludeInactive = false) where T : Component
+        internal static T GetGetInChildrens_OrParent<T>(this Component obj, bool IncludeInactive = false) where T : Component
         {
             return obj.transform.GetGetInChildrens_OrParent<T>(IncludeInactive);
         }
 
 
-        public static T GetOrAddComponent<T>(this Component obj) where T : Component
+        internal static T GetOrAddComponent<T>(this Component obj) where T : Component
         {
             return obj.transform.GetOrAddComponent<T>();
         }

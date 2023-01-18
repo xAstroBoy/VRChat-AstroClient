@@ -365,6 +365,30 @@ namespace ReimajoBoothAssets
             AntiGarbageCollection.Add(this);
         }
 
+        private string _Text = "";
+        internal string Text
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return _Text;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                _Text = value;
+                if (TextMesh == null)
+                {
+                    TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
+                }
+                if (TextMeshAnimator == null)
+                {
+                    TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
+                }
+                TextMeshAnimator.Safe_SetText(value);
+            }
+        }
+
         internal Vector3 DefaultCanvasLocation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal bool isToggle { get; set; } = true;
         internal TextAnimator TextMeshAnimator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -582,20 +606,6 @@ namespace ReimajoBoothAssets
             }
         }
 
-        internal void SetText(string text)
-        {
-            if (TextMesh == null)
-            {
-                TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
-            }
-            if (TextMeshAnimator == null)
-            {
-                TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
-            }
-            //if (TextMeshAnimator.Fulltext == text) return;
-            //TextMesh.text = text;
-            TextMeshAnimator.SetText(text, false);
-        }
 
         /// <summary>
         /// Determines all button distances at start

@@ -166,7 +166,7 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
                             Animator = TagText.GetOrAddComponent<TextAnimator>();
                         }
                         //TagText.text = text;
-                        Animator.SetText(Text, false);
+                        Animator.Safe_SetText(Text);
 
                     }
                     else
@@ -354,7 +354,7 @@ namespace AstroClient.AstroMonos.Components.UI.SingleTag
                         }
                         if (Animator.Fulltext == value) return;
                         //TagText.text = text;
-                        Animator.SetText(value, false);
+                        Animator.Safe_SetText(value);
 
                     }
                     else
