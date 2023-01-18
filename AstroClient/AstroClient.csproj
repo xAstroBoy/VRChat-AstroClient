@@ -367,6 +367,7 @@
     <Compile Include="Streamer\AbyssalGodDetector.cs" />
     <Compile Include="Tools\Bruteforcer\TextBruteforcer.cs" />
     <Compile Include="Tools\Converters.cs" />
+    <Compile Include="Tools\Extensions\TextMeshPro_ext.cs" />
     <Compile Include="Tools\Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Tools\Extensions\TextAsset_ext.cs" />
     <Compile Include="Tools\PrefabsHelper.cs" />

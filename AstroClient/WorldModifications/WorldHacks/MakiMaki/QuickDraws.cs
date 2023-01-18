@@ -69,6 +69,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             _MakiKeyboardReader = null;
         }
 
+        // Copy all settings from TextMeshProUGui on the new copy
+
+
         private void FindEverything()
         {
             var UI = Finder.Find("----UI----");
@@ -113,9 +116,13 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 {
                     Answer_Text.name = "Solution Viewer";
                     Answer_Text.transform.localPosition = new Vector3(0, -98, 0);
-                    Answer_TextMesh = Answer_Text.GetComponent<TextMeshProUGUI>();
+                    Answer_Text.RemoveComponent<TextMeshProUGUI>(); // Incompatible with TextAnimator.
+
+
+                    Answer_TextMesh = Answer_Text.GetOrAddComponent<TextMeshPro>();
                     if (Answer_TextMesh != null)
                     {
+                        Answer_TextMesh.CopyFrom(Text_Clue.GetComponent<TextMeshProUGUI>()); // Copies all the variables of the textmeshprougui to make a lookalike, but with TextAnimator support.
                         Answer_TextMesh_Animator = Answer_TextMesh.GetOrAddComponent<TextAnimator>();
                         if (Answer_TextMesh_Animator != null)
                         {
@@ -238,7 +245,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 
         private static GameObject Text_Clue { get; set; }
         private static GameObject Answer_Text { get; set; }
-        internal static TextMeshProUGUI Answer_TextMesh { get; set; }
+        internal static TextMeshPro Answer_TextMesh { get; set; }
         internal static TextAnimator Answer_TextMesh_Animator { get; set; }
 
         private static GameObject PlayerPermissionManager { get; set; } = null;
