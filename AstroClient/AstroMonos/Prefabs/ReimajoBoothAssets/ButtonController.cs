@@ -584,6 +584,16 @@ namespace ReimajoBoothAssets
 
         internal void SetText(string text)
         {
+            if (TextMesh == null)
+            {
+                TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
+            }
+            if (TextMeshAnimator == null)
+            {
+                TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
+            }
+            if (TextMeshAnimator.Fulltext == text) return;
+            //TextMesh.text = text;
             TextMeshAnimator.SetText(text, false);
         }
 
