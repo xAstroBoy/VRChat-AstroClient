@@ -1,4 +1,5 @@
 ﻿using AstroClient;
+using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientAttributes;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.febucci;
@@ -7,7 +8,6 @@ using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
 using System;
-using AstroClient.AstroMonos.AstroUdons;
 using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -364,7 +364,8 @@ namespace ReimajoBoothAssets
         {
             AntiGarbageCollection.Add(this);
         }
-        internal Vector3 DefaultCanvasLocation  { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
+        internal Vector3 DefaultCanvasLocation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal TextAnimator TextMeshAnimator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal TextMeshPro TextMesh { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -525,6 +526,7 @@ namespace ReimajoBoothAssets
         private HumanBodyBones fingerbone4l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftRingDistal;
         private HumanBodyBones fingerbone5l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftThumbDistal;
         private bool HasInitialized { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         /// <summary>
         /// Checks in which direction the button is currently oriented
         /// </summary>
@@ -914,7 +916,6 @@ namespace ReimajoBoothAssets
                     return;
                 desktopButtonCollider.enabled = false;
                 DesktopInteraction.enabled = false;
-
             }
         }
 
@@ -948,8 +949,6 @@ namespace ReimajoBoothAssets
             this.isOn = isOn;
             UpdateButtonState();
         }
-
-
 
         internal void UpdateButtonState()
         {
