@@ -592,7 +592,7 @@ namespace ReimajoBoothAssets
             {
                 TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
             }
-            if (TextMeshAnimator.Fulltext == text) return;
+            //if (TextMeshAnimator.Fulltext == text) return;
             //TextMesh.text = text;
             TextMeshAnimator.SetText(text, false);
         }
