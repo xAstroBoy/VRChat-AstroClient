@@ -936,55 +936,16 @@ namespace ReimajoBoothAssets
         }
 
         /// <summary>
-        /// Call this event from your own scripts to turn this button on.
+        /// Sets the button current status without firing the events or animating it.
         /// </summary>
-        internal void TurnButtonOn()
+        /// <param name="isOn"></param>
+        internal void SetButtonToggle(bool isOn)
         {
-            if (!isOn)
-            {
-                ///Log.Debug($"[ButtonController] '{_buttonDebugName}' is set to ON by an external script.");
-                ButtonDownEvent();
-                UpdateButtonState();
-            }
+            this.isOn = isOn;
+            UpdateButtonState();
         }
 
-        /// <summary>
-        /// Call this event from your own scripts to turn this button off.
-        /// </summary>
-        internal void TurnButtonOff()
-        {
-            if (isOn)
-            {
-                ButtonDownEvent();
-                UpdateButtonState();
-            }
-        }
 
-        /// <summary>
-        /// DON'T CALL THIS EVENT. Call _TurnButtonOn instead.
-        /// This here is only called from another button to sync this one instantly without animating it.
-        /// </summary>
-        internal void ButtonSyncSetButtonOn()
-        {
-            if (!isOn)
-            {
-                isOn = true;
-                UpdateButtonState();
-            }
-        }
-
-        /// <summary>
-        /// DON'T CALL THIS EVENT. Call _TurnButtonOff instead.
-        /// This here is only called from another button to sync this one instantly without animating it.
-        /// </summary>
-        internal void ButtonSyncSetButtonOff()
-        {
-            if (isOn)
-            {
-                isOn = false;
-                UpdateButtonState();
-            }
-        }
 
         internal void UpdateButtonState()
         {

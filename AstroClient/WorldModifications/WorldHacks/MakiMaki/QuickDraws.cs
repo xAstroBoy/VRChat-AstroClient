@@ -136,6 +136,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                 });
                 AnswerToggleButton.SetScale(1f);
+                AnswerToggleButton.Controller.SetButtonToggle(ShowAnswers);
             }
 
             if (StageCollider != null)
@@ -155,6 +156,8 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                 });
                 StageColliderToggleBtn.SetScale(1f);
+                StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
+
             }
             if (Pen_Pickup != null)
             {
@@ -174,7 +177,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                         PenTheftToggleBtn.SetText("<color=Red>Force Allow Pen Interaction!</color>");
                     }
                 });
-                PenTheftToggleBtn.SetScale(1f);
+                PenTheftToggleBtn.SetScale(1f); 
+                PenTheftToggleBtn.Controller.SetButtonToggle(ForceStealPencil);
+
             }
         }
 
