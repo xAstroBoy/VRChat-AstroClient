@@ -61,6 +61,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             ShowAnswers = false;
             DisableStageCollider = false;
             ForceStealPencil = false;
+            MakiKeyboard = null;
             _PlayerPermissionManagerReader = null;
             _customizationReader = null;
             _MakiKeyboardReader = null;
@@ -68,12 +69,28 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 
         private void FindEverything()
         {
-            Customization = Finder.Find("----UI----/RightSettings/Customization");
-            MakiKeyboard = Finder.Find("----SYSTEMS----/KeyboardToggle/MakiKeyboard");
-            PlayerPermissionManager = Finder.Find("----SYSTEMS----/PlayerManager/PlayerPermissionManager");
-            Text_Clue = Finder.Find("----UI----/RoundInfo/Clue");
-            StageCollider = Finder.Find("scribble/StageCollider").GetComponent<MeshCollider>();
-            Pen_Pickup = Finder.Find("----SYSTEMS----/Pens/Pen/Pickup");
+            var UI = Finder.Find("----UI----");
+            if (UI != null)
+            {
+                Customization = UI.FindObject("RightSettings/Customization");
+                Text_Clue = UI.FindObject("RoundInfo/Clue");
+            }
+            var Systems = Finder.Find("----SYSTEMS----");
+            if (Systems != null)
+            {
+                MakiKeyboard = Systems.FindObject("KeyboardToggle/MakiKeyboard");
+                PlayerPermissionManager = Systems.FindObject("PlayerManager/PlayerPermissionManager");
+                Pen_Pickup = Systems.FindObject("Pens/Pen/Pickup");
+            }
+            var scribble = Finder.Find("scribble");
+            if (scribble != null)
+            {
+                StageCollider = scribble.FindObject("StageCollider").GetComponent<MeshCollider>();
+            }
+
+
+
+
             Pen_PickupController = Pen_Pickup.GetOrAddComponent<PickupController>();
             Pen_ForceActive = Pen_Pickup.GetOrAddComponent<Enabler>();
             Pen_ForceActive.enabled = false;
@@ -139,26 +156,22 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 AnswerToggleButton.Controller.SetButtonToggle(ShowAnswers);
             }
 
-            if (StageCollider != null)
+            StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Disable Stage collision Block</color>", () =>
             {
-                StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Disable Stage collision Block</color>", () =>
+                DisableStageCollider = !DisableStageCollider;
+                if (DisableStageCollider)
                 {
-                    DisableStageCollider = !DisableStageCollider;
-                    if (DisableStageCollider)
-                    {
-                        StageCollider.IgnoreLocalPlayerCollision(true);
-                        StageColliderToggleBtn.SetText("<color=green>Enable Stage collision Block!</color>");
-                    }
-                    else
-                    {
-                        StageCollider.IgnoreLocalPlayerCollision(false);
-                        StageColliderToggleBtn.SetText("<color=Red>Disable Stage collision Block!</color>");
-                    }
-                });
-                StageColliderToggleBtn.SetScale(1f);
-                StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
-
-            }
+                    StageCollider.IgnoreLocalPlayerCollision(true);
+                    StageColliderToggleBtn.SetText("<color=green>Enable Stage collision Block!</color>");
+                }
+                else
+                {
+                    StageCollider.IgnoreLocalPlayerCollision(false);
+                    StageColliderToggleBtn.SetText("<color=Red>Disable Stage collision Block!</color>");
+                }
+            });
+            StageColliderToggleBtn.SetScale(1f);
+            StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
             if (Pen_Pickup != null)
             {
                 PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Force Allow Pen Interaction!</color>", () =>
@@ -214,6 +227,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         internal static bool ShowAnswers { get; set; } = false;
         internal static bool DisableStageCollider { get; set; } = false;
         internal static bool ForceStealPencil { get; set; } = false;
+
+        private static GameObject MakiKeyboard = null;
+
         private static QuickDraws_PlayerPermissionReader _PlayerPermissionManagerReader;
         private static QuickDraws_CustomizationReader _customizationReader;
         private static QuickDraws_MakiKeyboardReader _MakiKeyboardReader;
@@ -234,7 +250,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             }
         }
 
-        private static GameObject MakiKeyboard = null;
 
         public static QuickDraws_MakiKeyboardReader MakiKeyboardReader
         {

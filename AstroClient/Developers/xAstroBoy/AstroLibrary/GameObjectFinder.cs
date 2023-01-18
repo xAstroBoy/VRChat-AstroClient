@@ -10,6 +10,7 @@
 
     public static class Finder
     {
+        // Todo : Make it split the root, find it first, then use transform.find to get the rest, to bypass Gameobject.find being unable to find inactive childs
         public static GameObject Find(string path)
         {
             var obj = GameObject.Find(path);
