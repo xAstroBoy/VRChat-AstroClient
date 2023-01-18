@@ -31,7 +31,7 @@ namespace AstroClient.Startup.Hooks
         internal void InitPatches()
         {
             new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.Method_Public_Void_String_Single_Sprite_0)), null, GetPatch(nameof(ShowHudNotifier)));
-            new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.OnDisable)), null, GetPatch(nameof(RemoveTextAnimator)));
+            //new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.OnDisable)), null, GetPatch(nameof(RemoveTextAnimator)));
         }
 
         private static void ShowHudNotifier(ref MonoBehaviourPublicTMteCaSiImdiCoUnique __instance, ref string __0)

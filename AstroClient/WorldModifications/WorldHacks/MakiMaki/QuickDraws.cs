@@ -156,7 +156,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 AnswerToggleButton.Controller.SetButtonToggle(ShowAnswers);
             }
 
-            StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Disable Stage collision Block</color>", () =>
+            StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Disable Stage collision Block</color>", () =>
             {
                 DisableStageCollider = !DisableStageCollider;
                 if (DisableStageCollider)
@@ -174,7 +174,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
             if (Pen_Pickup != null)
             {
-                PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=Red>Force Allow Pen Interaction!</color>", () =>
+                PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Force Allow Pen Interaction!</color>", () =>
                 {
                     ForceStealPencil = !ForceStealPencil;
                     if (ForceStealPencil)
