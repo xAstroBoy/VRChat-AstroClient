@@ -366,7 +366,7 @@ namespace ReimajoBoothAssets
         }
 
         internal Vector3 DefaultCanvasLocation { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-
+        internal bool isToggle { get; set; } = true;
         internal TextAnimator TextMeshAnimator { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal TextMeshPro TextMesh { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnButtonUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
@@ -927,13 +927,23 @@ namespace ReimajoBoothAssets
         /// <summary>
         /// Sets the button current status without firing the events or animating it.
         /// </summary>
-        /// <param name="isOn"></param>
-        internal void SetButtonToggle(bool isOn)
+        /// <param name="status"></param>
+        internal void SetButtonToggle(bool status)
         {
-            this.isOn = isOn;
+            if (isToggle)
+            {
+                this.isOn = status;
+            }
+            else
+            {
+                this.isOn = true;
+            }
             UpdateButtonState();
         }
 
+        /// <summary>
+        /// Update the button appearance.
+        /// </summary>
         internal void UpdateButtonState()
         {
             if (wasPushing)
@@ -947,7 +957,14 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void ButtonDownEvent()
         {
-            isOn = !isOn;
+            if (isToggle)
+            {
+                isOn = !isOn;
+            }
+            else
+            {
+                isOn = true;
+            }
             OnButtonDown.SafetyRaise();
         }
 
@@ -981,14 +998,12 @@ namespace ReimajoBoothAssets
         {
             if (isOn)
             {
-                //MoveText(staticButtonOn);
                 staticButtonOn.SetActive(true);
                 staticButtonOff.SetActive(false);
                 lodLevelRenderer = lod0RendererWhenOnFromStatic;
             }
             else
             {
-                //MoveText(staticButtonOff);
                 staticButtonOn.SetActive(false);
                 staticButtonOff.SetActive(true);
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;
@@ -1014,11 +1029,6 @@ namespace ReimajoBoothAssets
             dynamicButtonTopOff.SetActive(false);
         }
 
-        private void MoveText(GameObject item)
-        {
-            //WorldButton_Squared_Canvas.transform.SetParent(item.transform);
-            //WorldButton_Squared_Canvas.transform.localPosition = DefaultCanvasLocation;
-        }
 
         /// <summary>
         /// Switch button to the static version in which it has one drawcall less and can also be marked as static
@@ -1026,12 +1036,10 @@ namespace ReimajoBoothAssets
         /// </summary>
         internal void MakeStatic()
         {
-            //turn off dynamic base
             dynamicButtonBase.SetActive(false);
             //turn on static button part
             if (isOn)
             {
-                //MoveText(staticButtonOn);
                 dynamicButtonTopOn.SetActive(false); //turn off dynamic part
                 staticButtonOn.SetActive(true);
 
@@ -1039,7 +1047,6 @@ namespace ReimajoBoothAssets
             }
             else
             {
-                //MoveText(staticButtonOff);
                 dynamicButtonTopOff.SetActive(false); //turn off dynamic part
                 staticButtonOff.SetActive(true);
                 lodLevelRenderer = lod0RendererWhenOffFromStatic;

@@ -28,7 +28,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         private void EnterWorld(ApiWorld world, ApiWorldInstance instance)
         {
             if (world == null) return;
-            if(world.id.Equals(WorldIds.SpiritsOfTheSea))
+            if (world.id.Equals(WorldIds.SpiritsOfTheSea))
             {
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("get_IsHeld");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnSeekSliderChanged");
@@ -68,6 +68,14 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 
         private void OnRoomLeft()
         {
+            PlayerPermissionManager = null;
+            Passcodes = null;
+            CollectAllCoins = null;
+            TeleportGoldShells = null;
+            TeleportAllCrabs = null;
+            PlayerControllerDone = null;
+            BlockPlayerControllerDone = false;
+            _PlayerPermissionManagerReader = null;
             Coins.Clear();
             Crabs.Clear();
             GoldShells.Clear();
@@ -140,9 +148,10 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                         item.InvokeBehaviour();
                     }
                 });
+                CollectAllCoins.Set_isToggleBtn(false);
             }
 
-            TeleportGoldShells = new WorldButton_Squared(new Vector3(2.983f, 9.1642f, 8.866f), new Vector3(0f,92.6182f, 270f), String.Empty, null);
+            TeleportGoldShells = new WorldButton_Squared(new Vector3(2.983f, 9.1642f, 8.866f), new Vector3(0f, 92.6182f, 270f), String.Empty, null);
             if (TeleportGoldShells != null)
             {
                 TeleportGoldShells.SetText("<rainb>Teleport all Gold Shells</rainb>");
@@ -157,6 +166,8 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                     //TeleportGoldShells.DestroyMe();
                 });
+                TeleportGoldShells.Set_isToggleBtn(false);
+
             }
 
             TeleportAllCrabs = new WorldButton_Squared(new Vector3(3.0008f, 9.837f, 9.1496f), new Vector3(0f, 270f, 270f), String.Empty, null);
@@ -172,6 +183,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     //TeleportAllCrabs.DestroyMe();
 
                 });
+                TeleportAllCrabs.Set_isToggleBtn(false);
             }
 
 
@@ -205,17 +217,21 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 _BlockPlayerControllerDone = false;
             }
         }
-        private static GameObject PlayerPermissionManager = null;
-        private static WorldButton Passcodes = null;
-        private static WorldButton_Squared CollectAllCoins = null;
-        private static WorldButton_Squared TeleportGoldShells = null;
-        private static WorldButton_Squared TeleportAllCrabs = null;
-        internal static UdonBehaviour_Cached PlayerControllerDone = null;
-        internal static List<UdonBehaviour_Cached> Coins = new List<UdonBehaviour_Cached>();
-        internal static List<PickupController> Crabs = new List<PickupController>();
-        internal static List<PickupController> GoldShells = new List<PickupController>();
+        private static GameObject PlayerPermissionManager { get; set; } = null;
+        private static WorldButton Passcodes { get; set; } = null;
+        private static WorldButton_Squared CollectAllCoins { get; set; } = null;
+        private static WorldButton_Squared TeleportGoldShells { get; set; } = null;
+        private static WorldButton_Squared TeleportAllCrabs { get; set; } = null;
+        internal static UdonBehaviour_Cached PlayerControllerDone { get; set; } = null;
+        internal static List<UdonBehaviour_Cached> Coins { get; set; } = new List<UdonBehaviour_Cached>();
+        internal static List<PickupController> Crabs { get; set; } = new List<PickupController>();
+        internal static List<PickupController> GoldShells { get; set; } = new List<PickupController>();
 
-        private static bool _BlockPlayerControllerDone = false;
+        private static bool _BlockPlayerControllerDone { get; set; } = false;
+
+        private static SpiritsOfSeas_PlayerPermissionReader   _PlayerPermissionManagerReader { get; set;}
+
+
         internal static bool BlockPlayerControllerDone
         {
             get => _BlockPlayerControllerDone;
@@ -241,7 +257,6 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
         }
 
 
-        private static SpiritsOfSeas_PlayerPermissionReader _PlayerPermissionManagerReader;
 
         public static SpiritsOfSeas_PlayerPermissionReader PlayerPermissionManagerReader
         {

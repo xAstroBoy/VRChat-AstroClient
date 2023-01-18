@@ -442,7 +442,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
-
+                    TurretTop.Set_isToggleBtn(false);
                     #endregion
 
 
@@ -454,6 +454,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                     });
                     GuardArea.SetScale(new Vector3(1.5f, 1.5f, 1.5f));
+                    GuardArea.Set_isToggleBtn(false);
 
 
 
@@ -505,6 +506,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         item.gameObject.RespawnPickup(false);
                     });
+                    TurretTop.Set_isToggleBtn(false);
                     #endregion
 
 
@@ -515,6 +517,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
 
                     });
+                    GuardArea.Set_isToggleBtn(false);
+
                     #endregion
                     var Control = item.GetOrAddComponent<PickupController>();
                     if (Control != null)
@@ -712,10 +716,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var startgame = item.FindUdonEvent("StartGameCountdown");
                     if (startgame != null)
                     {
-                        new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 90, 270), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
+                        var Button = new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 90, 270), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
                         {
                             startgame.InvokeBehaviour();
                         });
+                        Button.Set_isToggleBtn(false);
                     }
 
                 }
@@ -989,6 +994,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 //btn.MakePickupable();
                 btn.ButtonBody.name = label;
                 btn.RotateButton(rotation);
+                btn.Set_isToggleBtn(false);
              });
         }
 

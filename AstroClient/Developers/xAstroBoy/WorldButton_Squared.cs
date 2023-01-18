@@ -104,7 +104,16 @@ namespace AstroClient.xAstroBoy
                 Controller.OnButtonUp = action;
             }
         }
+        /// <summary>
+        ///  Set this to false, to lock only on green and make it act like a normal button
+        /// Else it will switch between red for off, green for On.
+        /// </summary>
 
+        internal void Set_isToggleBtn(bool toggle)
+        {
+            Controller.isToggle = toggle;
+            Controller.SetButtonToggle(true);
+        }
 
         private void InitializeButton(string label, Action OnButtonDown, Action OnButtonUp)
         {
@@ -117,6 +126,7 @@ namespace AstroClient.xAstroBoy
                 Controller.OnButtonDown += OnButtonDown;
                 Controller.OnButtonUp += OnButtonUp;
                 Controller.SetText(label);
+
             }
 
 
