@@ -89,6 +89,9 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
             {
                 StageCollider = scribble.FindObject("StageCollider").GetComponent<MeshCollider>();
             }
+            _ = CustomizationReader;
+            _ = MakiKeyboardReader;
+            _ = PlayerPermissionManagerReader;
 
 
 
@@ -110,7 +113,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 {
                     Answer_Text.name = "Solution Viewer";
                     Answer_Text.transform.localPosition = new Vector3(0, -98, 0);
-                    Answer_TextMesh = Answer_Text.GetComponent<TextMeshPro>();
+                    Answer_TextMesh = Answer_Text.GetComponent<TextMeshProUGUI>();
                     if (Answer_TextMesh != null)
                     {
                         Answer_TextMesh_Animator = Answer_TextMesh.GetOrAddComponent<TextAnimator>();
@@ -139,72 +142,80 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 }
             }
 
-            _ = CustomizationReader;
-            _ = MakiKeyboardReader;
-            _ = PlayerPermissionManagerReader;
+
 
             if (MakiKeyboardReader != null)
             {
-                AnswerToggleButton = new WorldButton_Squared(new Vector3(-5.081f, 1.284f, 10.159f), new Vector3(0, -330f, -90f), "<rainb>Show Answers!</rainb>", () =>
-                {
-                    ShowAnswers = !ShowAnswers;
-                    if (ShowAnswers)
-                    {
-                        Answer_Text.SetActive(true);
-                        MakiKeyboardReader.RevealAnswer();
-                        AnswerToggleButton.SetText("<color=red>Hide Answers!</color>");
-                    }
-                    else
-                    {
-                        Answer_Text.SetActive(false);
-                        Answer_TextMesh_Animator.SetText("", false);
-                        AnswerToggleButton.SetText("<rainb>Show Answers!</rainb>");
-                    }
-                });
+                AnswerToggleButton = new WorldButton_Squared(new Vector3(-5.081f, 1.284f, 10.159f), new Vector3(0, -330f, -90f), "<rainb>Show Answers!</rainb>", AnswerToggleButton_Pressed);
                 AnswerToggleButton.SetScale(1f);
                 AnswerToggleButton.Controller.SetButtonToggle(ShowAnswers);
             }
-
-            StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Disable Stage collision Block</color>", () =>
+            if (StageCollider != null)
             {
-                DisableStageCollider = !DisableStageCollider;
-                if (DisableStageCollider)
-                {
-                    StageCollider.IgnoreLocalPlayerCollision(true);
-                    StageColliderToggleBtn.SetText("<color=green>Enable Stage collision Block!</color>");
-                }
-                else
-                {
-                    StageCollider.IgnoreLocalPlayerCollision(false);
-                    StageColliderToggleBtn.SetText("<color=red>Disable Stage collision Block!</color>");
-                }
-            });
-            StageColliderToggleBtn.SetScale(1f);
-            StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
+                StageColliderToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 1.065f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Disable Stage collision Block</color>", StageColliderToggleBtn_Pressed);
+                StageColliderToggleBtn.SetScale(1f);
+                StageColliderToggleBtn.Controller.SetButtonToggle(DisableStageCollider);
+            }
             if (Pen_Pickup != null)
             {
-                PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Force Allow Pen Interaction!</color>", () =>
-                {
-                    ForceStealPencil = !ForceStealPencil;
-                    if (ForceStealPencil)
-                    {
-                        Pen_ForceActive.enabled = true;
-                        Pen_InteractionCollider.enabled = true;
-                        Pen_PickupController.Pickup_Set_Pickupable(true);
-                        PenTheftToggleBtn.SetText("<color=green>Restore Normal Pen Interaction!</color>");
-                    }
-                    else
-                    {
-                        Pen_ForceActive.enabled = false;
-                        Pen_InteractionCollider.enabled = false;
-                        Pen_PickupController.Pickup_RestoreProperties();
-                        PenTheftToggleBtn.SetText("<color=red>Force Allow Pen Interaction!</color>");
-                    }
-                });
+                PenTheftToggleBtn = new WorldButton_Squared(new Vector3(-5.081f, 0.83f, 10.159f), new Vector3(0, -330f, -90f), "<color=red>Force Allow Pen Interaction!</color>", PenTheftToggleBtn_Pressed);
                 PenTheftToggleBtn.SetScale(1f); 
                 PenTheftToggleBtn.Controller.SetButtonToggle(ForceStealPencil);
 
             }
+        }
+
+
+        private void AnswerToggleButton_Pressed()
+        {
+            ShowAnswers = !ShowAnswers;
+            if (ShowAnswers)
+            {
+                Answer_Text.SetActive(true);
+                MakiKeyboardReader.RevealAnswer();
+                AnswerToggleButton.SetText("<color=red>Hide Answers!</color>");
+            }
+            else
+            {
+                Answer_Text.SetActive(false);
+                Answer_TextMesh_Animator.SetText("", false);
+                AnswerToggleButton.SetText("<rainb>Show Answers!</rainb>");
+            }
+        }
+
+        private void StageColliderToggleBtn_Pressed()
+        {
+            DisableStageCollider = !DisableStageCollider;
+            if (DisableStageCollider)
+            {
+                StageCollider.IgnoreLocalPlayerCollision(true);
+                StageColliderToggleBtn.SetText("<color=green>Enable Stage collision Block!</color>");
+            }
+            else
+            {
+                StageCollider.IgnoreLocalPlayerCollision(false);
+                StageColliderToggleBtn.SetText("<color=red>Disable Stage collision Block!</color>");
+            }
+
+        }
+        private void PenTheftToggleBtn_Pressed()
+        {
+            ForceStealPencil = !ForceStealPencil;
+            if (ForceStealPencil)
+            {
+                Pen_ForceActive.enabled = true;
+                Pen_InteractionCollider.enabled = true;
+                Pen_PickupController.Pickup_Set_Pickupable(true);
+                PenTheftToggleBtn.SetText("<color=green>Restore Normal Pen Interaction!</color>");
+            }
+            else
+            {
+                Pen_ForceActive.enabled = false;
+                Pen_InteractionCollider.enabled = false;
+                Pen_PickupController.Pickup_RestoreProperties();
+                PenTheftToggleBtn.SetText("<color=red>Force Allow Pen Interaction!</color>");
+            }
+
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -223,7 +234,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
 
         private static GameObject Text_Clue { get; set; }
         private static GameObject Answer_Text { get; set; }
-        internal static TextMeshPro Answer_TextMesh { get; set; }
+        internal static TextMeshProUGUI Answer_TextMesh { get; set; }
         internal static TextAnimator Answer_TextMesh_Animator { get; set; }
 
         private static GameObject PlayerPermissionManager { get; set; } = null;
