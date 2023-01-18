@@ -947,7 +947,6 @@
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Iced.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppMono.Security.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll" />
-    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppNewtonsoft.Json.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Buffers.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Collections.Immutable.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppSystem.Configuration.dll" />
@@ -976,7 +975,6 @@
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.Security.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\netstandard.dll" />
-    <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.Platform.dll" />
     <Analyzer Include="D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Oculus.VR.dll" />
@@ -1199,10 +1197,6 @@
     </Reference>
     <Reference Include="Il2Cppmscorlib">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2Cppmscorlib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Il2CppNewtonsoft.Json">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\Il2CppNewtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Il2CppSystem">
