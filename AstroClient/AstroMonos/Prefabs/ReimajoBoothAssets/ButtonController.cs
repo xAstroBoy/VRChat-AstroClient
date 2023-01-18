@@ -524,56 +524,60 @@ namespace ReimajoBoothAssets
         private HumanBodyBones fingerbone3l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftMiddleDistal;
         private HumanBodyBones fingerbone4l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftRingDistal;
         private HumanBodyBones fingerbone5l { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = HumanBodyBones.LeftThumbDistal;
-
+        private bool HasInitialized { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         /// <summary>
         /// Checks in which direction the button is currently oriented
         /// </summary>
         internal void Start()
         {
-            TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
-            clickDownAudioClip = AudioClips.WorldButton_clickDownAudioClip;
-            clickUpAudioClip = AudioClips.WorldButton_clickUpAudioClip;
-            DefaultCanvasLocation = WorldButton_Squared_Canvas.transform.localPosition;
-            lod0RendererWhenOnFromStatic = WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic.GetComponent<MeshRenderer>();
-            lod0RendererWhenOffFromStatic = WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic.GetComponent<MeshRenderer>();
-            pushArea = WorldButton_Squared__pushArea.GetComponent<BoxCollider>();
-            dynamicButtonTopOn = WorldButton_Squared_DynamicButton__dynamicButtonTopOn;
-            dynamicButtonTopOff = WorldButton_Squared_DynamicButton__dynamicButtonTopOff;
-            dynamicButtonBase = WorldButton_Squared_DynamicButton__dynamicButtonBase;
-            staticButtonOn = WorldButton_Squared__staticButtonOn;
-            staticButtonOff = WorldButton_Squared__staticButtonOff;
-            buttonPushDirection = WorldButton_Squared__buttonPushDirection.transform;
-            desktopButtonCollider = this.GetComponent<MeshCollider>();
-            DesktopInteraction = desktopButtonCollider.GetOrAddComponent<VRC_AstroInteract>();
-            if(DesktopInteraction != null)
+            if (!HasInitialized)
             {
-                DesktopInteraction.OnInteract += Interact;
-                DesktopInteraction.interactText = "Click";
+                TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
+                clickDownAudioClip = AudioClips.WorldButton_clickDownAudioClip;
+                clickUpAudioClip = AudioClips.WorldButton_clickUpAudioClip;
+                DefaultCanvasLocation = WorldButton_Squared_Canvas.transform.localPosition;
+                lod0RendererWhenOnFromStatic = WorldButton_Squared__staticButtonOn__lod0RendererWhenOnFromStatic.GetComponent<MeshRenderer>();
+                lod0RendererWhenOffFromStatic = WorldButton_Squared__staticButtonOff__lod0RendererWhenOffFromStatic.GetComponent<MeshRenderer>();
+                pushArea = WorldButton_Squared__pushArea.GetComponent<BoxCollider>();
+                dynamicButtonTopOn = WorldButton_Squared_DynamicButton__dynamicButtonTopOn;
+                dynamicButtonTopOff = WorldButton_Squared_DynamicButton__dynamicButtonTopOff;
+                dynamicButtonBase = WorldButton_Squared_DynamicButton__dynamicButtonBase;
+                staticButtonOn = WorldButton_Squared__staticButtonOn;
+                staticButtonOff = WorldButton_Squared__staticButtonOff;
+                buttonPushDirection = WorldButton_Squared__buttonPushDirection.transform;
+                desktopButtonCollider = this.GetComponent<MeshCollider>();
+                DesktopInteraction = desktopButtonCollider.GetOrAddComponent<VRC_AstroInteract>();
+                if (DesktopInteraction != null)
+                {
+                    DesktopInteraction.OnInteract += Interact;
+                    DesktopInteraction.interactText = "Click";
+                }
+                isOn = isOnAtStart;
+                isVR = GameInstances.LocalPlayer.IsUserInVR();
+                if (desktopButtonCollider == null)
+                {
+                    Log.Error($"[ButtonController] No MeshCollider assigned to button '{this.transform.parent.name}'");
+                    this.gameObject.SetActive(false);
+                    return;
+                }
+                if (desktopButtonForVrDisabled)
+                {
+                    if (desktopButtonCollider != null) desktopButtonCollider.enabled = !isVR; //disable for VR user, enable for desktop user
+                    if (DesktopInteraction != null) DesktopInteraction.enabled = !isVR;
+                }
+                else
+                {
+                    if (DesktopInteraction != null) desktopButtonCollider.enabled = true; //enable for all users
+                    if (DesktopInteraction != null) DesktopInteraction.enabled = true;
+                }
+                InitializeButtonSwitch();
+                MakeStatic();
+                buttonPushDirection.position = isOn ? dynamicButtonTopOn.transform.position : dynamicButtonTopOff.transform.position;
+                SetupButtonDistances();
+                fingerThickness = FINGER_THICKNESS_DEFAULT;
+                hasNotFinishedStart = false;
+                HasInitialized = true;
             }
-            isOn = isOnAtStart;
-            isVR = GameInstances.LocalPlayer.IsUserInVR();
-            if (desktopButtonCollider == null)
-            {
-                Log.Error($"[ButtonController] No MeshCollider assigned to button '{this.transform.parent.name}'");
-                this.gameObject.SetActive(false);
-                return;
-            }
-            if (desktopButtonForVrDisabled)
-            {
-                if (desktopButtonCollider != null) desktopButtonCollider.enabled = !isVR; //disable for VR user, enable for desktop user
-                if (DesktopInteraction != null) DesktopInteraction.enabled = !isVR;
-            }
-            else
-            {
-                if (DesktopInteraction != null) desktopButtonCollider.enabled = true; //enable for all users
-                if (DesktopInteraction != null) DesktopInteraction.enabled = true;
-            }
-            InitializeButtonSwitch();
-            MakeStatic();
-            buttonPushDirection.position = isOn ? dynamicButtonTopOn.transform.position : dynamicButtonTopOff.transform.position;
-            SetupButtonDistances();
-            fingerThickness = FINGER_THICKNESS_DEFAULT;
-            hasNotFinishedStart = false;
         }
 
         internal void SetText(string text)

@@ -143,7 +143,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     {
                         Answer_Text.SetActive(true);
                         MakiKeyboardReader.RevealAnswer();
-                        AnswerToggleButton.SetText("<color=Red>Hide Answers!</rainb>");
+                        AnswerToggleButton.SetText("<color=red>Hide Answers!</color>");
                     }
                     else
                     {
@@ -167,7 +167,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 else
                 {
                     StageCollider.IgnoreLocalPlayerCollision(false);
-                    StageColliderToggleBtn.SetText("<color=Red>Disable Stage collision Block!</color>");
+                    StageColliderToggleBtn.SetText("<color=red>Disable Stage collision Block!</color>");
                 }
             });
             StageColliderToggleBtn.SetScale(1f);
@@ -187,7 +187,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     {
                         Pen_ForceActive.enabled = false;
                         Pen_PickupController.Pickup_RestoreProperties();
-                        PenTheftToggleBtn.SetText("<color=Red>Force Allow Pen Interaction!</color>");
+                        PenTheftToggleBtn.SetText("<color=red>Force Allow Pen Interaction!</color>");
                     }
                 });
                 PenTheftToggleBtn.SetScale(1f); 

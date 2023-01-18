@@ -94,14 +94,14 @@ namespace AstroClient.xAstroBoy
         {
             if (Controller != null)
             {
-                Controller.OnButtonDown += action;
+                Controller.OnButtonDown = action;
             }
         }
         internal void Set_OnButtonUp(Action action)
         {
             if (Controller != null)
             {
-                Controller.OnButtonUp += action;
+                Controller.OnButtonUp = action;
             }
         }
 
@@ -113,6 +113,7 @@ namespace AstroClient.xAstroBoy
             Controller = ButtonBody.FindObject("ButtonScript").GetOrAddComponent<ButtonController>();
             if(Controller != null)
             {
+                Controller.Start(); // Since unity is being a slow fucker, let's force a start once added.
                 Controller.OnButtonDown += OnButtonDown;
                 Controller.OnButtonUp += OnButtonUp;
                 Controller.SetText(label);
