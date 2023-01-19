@@ -30,7 +30,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\</OutputPath>
+    <OutputPath>..\..\..\SteamLibrary\steamapps\common\VRChat\Mods\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -43,7 +43,7 @@
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
-    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
+    <OutputPath>..\..\..\SteamLibrary\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -53,7 +53,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
-    <OutputPath>D:\SteamLibrary\steamapps\common\VRChat\Mods\</OutputPath>
+    <OutputPath>..\..\..\SteamLibrary\steamapps\common\VRChat\Mods\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>false</Optimize>
@@ -1047,7 +1047,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Accessibility" />
@@ -1060,11 +1060,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="AssetRipper.VersionUtilities">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetRipper.VersionUtilities.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetRipper.VersionUtilities.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AssetsTools.NET">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\AssetsTools.NET.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="AVProVideo.Extensions.Timeline">
@@ -1088,7 +1088,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="bHapticsLib">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\bHapticsLib.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\bHapticsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BlobHandles.Runtime">
@@ -1270,11 +1270,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="IndexRange">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\IndexRange.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\IndexRange.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -1283,19 +1283,19 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Pdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Mono.Cecil.Rocks.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.CompilerServices.SymbolWriter">
@@ -1332,11 +1332,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.RuntimeDetour.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="MonoMod.Utils">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
@@ -1491,7 +1491,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Tomlet">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Tomlet.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\Tomlet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Transmtn">
@@ -1915,7 +1915,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WebSocketDotNet">
-      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\WebSocketDotNet.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\VRChat\MelonLoader\WebSocketDotNet.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -1939,7 +1939,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetPath)" "T:\SteamLibrary\steamapps\common\VRChat\Mods" /Y /I</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetPath)" "T:\SteamLibrary\steamapps\common\VRChat\Mods" /Y /I
+xcopy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\VRChat\Mods" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
