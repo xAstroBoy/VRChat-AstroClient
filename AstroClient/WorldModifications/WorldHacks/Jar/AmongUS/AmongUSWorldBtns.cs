@@ -251,10 +251,9 @@
             #region Reactor
             if (SkipTask_AnnoyingShit == null)
             {
-                SkipTask_AnnoyingShit = new WorldButton_Squared(new Vector3(29.9695f, 0.9636f, 164.9991f), new Vector3(359.3778f, 180.1033f, 328.7444f), 0.3f, "<color=green>Skip Reactor annoying Task</color>", SkipTask_AnnoyingShit_OnButtonDown);
+                SkipTask_AnnoyingShit = new WorldButton_Squared(new Vector3(30.1503f, 0.9826f, 165.0001f), new Vector3(0f, 180.103f, 0f), 0.5f, "<color=green>Skip Reactor annoying Task</color>", SkipTask_AnnoyingShit_OnButtonDown);
                 SkipTask_AnnoyingShit.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
-
             if (SkipTask_Counting == null)
             {
                 SkipTask_Counting = new WorldButton_Squared(new Vector3(31.37037f, 1.147702f, 161.739f), new Vector3(359.0143f, 234.6128f, 279.9955f), 0.7f, "<color=green>Skip Reactor Counting Task</color>", SkipTask_Counting_OnButtonDown);
