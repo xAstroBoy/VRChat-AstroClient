@@ -381,11 +381,22 @@ namespace ReimajoBoothAssets
                 {
                     TextMesh = WorldButton_Squared_Canvas_Text.GetOrAddComponent<TextMeshPro>();
                 }
-                if (TextMeshAnimator == null)
+                if (value.NeedsTextAnimator())
                 {
-                    TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
+                    if (TextMeshAnimator == null)
+                    {
+                        TextMeshAnimator = TextMesh.GetOrAddComponent<TextAnimator>();
+                    }
+                    TextMeshAnimator.Safe_SetText(value);
                 }
-                TextMeshAnimator.Safe_SetText(value);
+                else
+                {
+                    if (TextMeshAnimator != null)
+                    {
+                        TextMeshAnimator.DestroyMeLocal(true);
+                    }
+                    TextMesh.text = value;
+                }
             }
         }
 
