@@ -66,35 +66,35 @@
         {
             #region Lobby
 
+
             if (StartGameBtn == null)
             {
-                StartGameBtn = new WorldButton_Squared(new Vector3(3.882721f, 1.513992f, 8.309f), new Vector3(0f, 135.689f, 270f), 2, "<color=green>Start Game</color>", StartGameBtn_OnButtonDown);
+                StartGameBtn = new WorldButton_Squared(new Vector3(3.882721f, 1.188f, 8.309f), new Vector3(0f, 135.689f, 270f), 0.8f, "<color=green>Start Game</color>", StartGameBtn_OnButtonDown);
                 StartGameBtn.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
 
             if (VictoryCrewmateBtn == null)
             {
-                VictoryCrewmateBtn = new WorldButton_Squared(new Vector3(4.414f, 1.513992f, 7.775f), new Vector3(0f, 135.689f, 270f), 2, "<color=green>Victory Crewmate</color>", VictoryBystanderBtn_OnButtonDown);
+                VictoryCrewmateBtn = new WorldButton_Squared(new Vector3(4.37f, 1.188f, 7.81f), new Vector3(0f, 135.689f, 270f), 0.8000004f, "<color=red>Victory Crewmate</color>", VictoryCrewmateBtn_OnButtonDown);
                 VictoryCrewmateBtn.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
 
             if (VictoryImpostorBtn == null)
             {
-                VictoryImpostorBtn = new WorldButton_Squared(new Vector3(4.414f, 0.954f, 7.775f), new Vector3(0f, 135.689f, 270f), 2, "<color=red>Victory Impostor</color>", VictoryImpostorBtn_OnButtonDown);
+                VictoryImpostorBtn = new WorldButton_Squared(new Vector3(4.221f, 1.188f, 7.963f), new Vector3(0f, 135.689f, 270f), 0.8f, "<color=red>Victory Impostor</color>", VictoryImpostorBtn_OnButtonDown);
                 VictoryImpostorBtn.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
 
             if (AbortGameBtn == null)
             {
-                AbortGameBtn = new WorldButton_Squared(new Vector3(3.882721f, 0.954f, 8.309f), new Vector3(0f, 135.689f, 270f), 2, "<color=red>Abort game</color>", AbortGameBtn_OnButtonDown);
+                AbortGameBtn = new WorldButton_Squared(new Vector3(4.055774f, 1.188f, 8.131964f), new Vector3(0f, 135.689f, 270f), 0.8000004f, "<color=red>Abort game</color>", AbortGameBtn_OnButtonDown);
                 AbortGameBtn.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
-
             #endregion Lobby
 
             #region Cafeteria
 
-            
+
             if (InvokeEmergencyMeetingBtn == null)
             {
                 InvokeEmergencyMeetingBtn = new WorldButton_Squared(new Vector3(1.849f, 0.823f, 157.122f), new Vector3(0f, 272.9732f, 0f), 1, "<color=red>Invoke Emergency Meeting!</color>", InvokeEmergencyMeetingBtn_OnButtonDown);
@@ -270,7 +270,7 @@
 
         internal static void StartGameBtn_OnButtonDown() => AmongUsUdonEvents.StartGameEvent.InvokeBehaviour();
 
-        internal static void VictoryBystanderBtn_OnButtonDown() => AmongUsUdonEvents.VictoryCrewmateEvent.InvokeBehaviour();
+        internal static void VictoryCrewmateBtn_OnButtonDown() => AmongUsUdonEvents.VictoryCrewmateEvent.InvokeBehaviour();
 
         internal static void VictoryImpostorBtn_OnButtonDown() => AmongUsUdonEvents.VictoryImpostorEvent.InvokeBehaviour();
 
