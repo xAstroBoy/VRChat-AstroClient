@@ -52,4 +52,7 @@
     <Compile Include="UIManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(TargetPath)" "T:\SteamLibrary\steamapps\common\VRChat\Mods" /Y /I</PostBuildEvent>
+  </PropertyGroup>
 </Project>
