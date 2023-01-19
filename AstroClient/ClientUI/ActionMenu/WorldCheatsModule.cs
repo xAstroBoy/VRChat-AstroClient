@@ -217,42 +217,44 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.AmongUS)
             {
-                CustomSubMenu.AddToggle("AmongUS Role ESP", JarRoleController.ViewRoles, ToggleValue => { JarRoleController.ViewRoles = ToggleValue; });
+                CustomSubMenu.AddToggle("Role ESP", JarRoleController.ViewRoles, ToggleValue => { JarRoleController.ViewRoles = ToggleValue; });
+                CustomSubMenu.AddToggle("Body ESP", AmongUSCheats.BodyESPs, ToggleValue => { AmongUSCheats.BodyESPs = ToggleValue; });
+
                 CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
                 CustomSubMenu.AddSubMenu("Lobby ", () =>
                 {
-                    CustomSubMenu.AddButton("Start Game", () => { AmongUSCheats.StartGameEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUSCheats.VictoryCrewmateEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Victory Impostor", () => { AmongUSCheats.VictoryImpostorEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Abort game", () => { AmongUSCheats.AbortGameEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Start Game", () => { AmongUsUdonEvents.StartGameEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Abort game", () => { AmongUsUdonEvents.AbortGameEvent?.InvokeBehaviour(); });
                 });
 
 
                 CustomSubMenu.AddSubMenu("Game Events", () =>
                 {
-                    CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUSCheats.EmergencyMeetingEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUsUdonEvents.SyncEmergencyMeeting?.InvokeBehaviour(); });
                 });
 
                 CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                 {
-                    CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUSCheats.CancelAllSabotages?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUSCheats.SabotageLights?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Reactor", () => { AmongUSCheats.SabotageReactor?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Oxygen", () => { AmongUSCheats.SabotageOxygen?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Comms", () => { AmongUSCheats.SabotageComms?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUsUdonEvents.CancelAllSabotages?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUsUdonEvents.Sabotage_Lights?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Reactor", () => { AmongUsUdonEvents.Sabotage_Reactor?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Oxygen", () => { AmongUsUdonEvents.Sabotage_Oxygen?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Comms", () => { AmongUsUdonEvents.Sabotage_Comms?.InvokeBehaviour(); });
 
-                    CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUSCheats.SabotageAllDoors.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUsUdonEvents.SabotageAllDoors.InvokeBehaviour(); });
                 });
 
                 CustomSubMenu.AddSubMenu("Task Faker", () =>
                 {
-                    CustomSubMenu.AddButton("Submit Scan", () => { AmongUSCheats.SubmitScanTask?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Submit Scan", () => { AmongUsUdonEvents.SubmitScanTask?.InvokeBehaviour(); });
                     CustomSubMenu.AddSubMenu("Garbage", () =>
                     {
-                        CustomSubMenu.AddButton("Cafeteria", () => { AmongUSCheats.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Oxygen", () => { AmongUSCheats.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Storage A", () => { AmongUSCheats.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Storage B", () => { AmongUSCheats.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Cafeteria", () => { AmongUsUdonEvents.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Oxygen", () => { AmongUsUdonEvents.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Storage A", () => { AmongUsUdonEvents.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Storage B", () => { AmongUsUdonEvents.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
                     });
                 });
             }

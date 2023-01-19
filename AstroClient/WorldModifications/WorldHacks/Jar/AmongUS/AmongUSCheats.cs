@@ -1,26 +1,18 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.AmongUS;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.ClientActions;
-using AstroClient.Startup.Hooks;
-using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
-using AstroClient.Tools.UdonEditor;
-using VRC.Core;
 
 namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 {
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
+    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
-    using AstroMonos.Components.Cheats.Worlds.JarWorlds.Roles;
-    using AstroMonos.Components.Spoofer;
-    using CustomClasses;
-    using MelonLoader;
     using Tools.Extensions;
     using Tools.Player.Movement.Exploit;
-    using Tools.UdonSearcher;
     using UdonCheats;
     using UnityEngine;
     using VRC;
@@ -35,7 +27,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
-           // ClientEventActions.OnEnterWorld += EnterWorld;
+            // ClientEventActions.OnEnterWorld += EnterWorld;
         }
 
         //private void EnterWorld(ApiWorld world, ApiWorldInstance instance)
@@ -55,53 +47,28 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
         //    }
         //}
 
-
-
-
-        internal static bool _RoleSwapper_GetImpostorRole{ get; set; }
+        internal static bool _RoleSwapper_GetImpostorRole { get; set; }
 
         private static Vector3 SerializerPos { get; set; }
-        private static Quaternion SerializerRot{ get; set; }
+        private static Quaternion SerializerRot { get; set; }
 
-        private static bool _BodyESps{ get; set; }
+        private static bool _BodyESps { get; set; }
 
-        internal static QMSingleButton GameStartbtn{ get; set; }
-        internal static QMSingleButton GameAbortbtn{ get; set; }
-        internal static QMSingleButton GameVictoryCrewmateBtn{ get; set; }
-        internal static QMSingleButton GameVictoryImpostorBtn{ get; set; }
-        internal static QMToggleButton GameBodyESPBtn{ get; set; }
+        internal static QMSingleButton GameStartbtn { get; set; }
+        internal static QMSingleButton GameAbortbtn { get; set; }
+        internal static QMSingleButton GameVictoryCrewmateBtn { get; set; }
+        internal static QMSingleButton GameVictoryImpostorBtn { get; set; }
+        internal static QMToggleButton GameBodyESPBtn { get; set; }
 
-        internal static QMToggleButton GetImpostorRoleBtn{ get; set; }
-        internal static QMToggleButton ToggleSerializerShortcut{ get; set; }
+        internal static QMToggleButton GetImpostorRoleBtn { get; set; }
+        internal static QMToggleButton ToggleSerializerShortcut { get; set; }
 
-        internal static QMNestedGridMenu AmongUsCheatsPage{ get; set; }
+        internal static QMNestedGridMenu AmongUsCheatsPage { get; set; }
 
-        internal static bool HasAmongUsWorldLoaded{ get; set; }
+        internal static bool HasAmongUsWorldLoaded { get; set; }
 
-        internal static UdonBehaviour_Cached StartGameEvent{ get; set; }
-        internal static UdonBehaviour_Cached AbortGameEvent{ get; set; }
-        internal static UdonBehaviour_Cached EmergencyMeetingEvent{ get; set; }
-
-        internal static UdonBehaviour_Cached VictoryCrewmateEvent{ get; set; }
-        internal static UdonBehaviour_Cached VictoryImpostorEvent{ get; set; }
-
-        internal static UdonBehaviour_Cached EmptyGarbage_Storage_A{ get; set; }
-        internal static UdonBehaviour_Cached EmptyGarbage_Storage_B{ get; set; }
-
-        internal static UdonBehaviour_Cached EmptyGarbage_Oxygen_A{ get; set; }
-
-        internal static UdonBehaviour_Cached EmptyGarbage_Cafeteria_B{ get; set; }
-
-        internal static UdonBehaviour_Cached CancelAllSabotages{ get; set; }
-        internal static UdonBehaviour_Cached SabotageLights{ get; set; }
-        internal static UdonBehaviour_Cached SabotageReactor{ get; set; }
-        internal static UdonBehaviour_Cached SabotageOxygen{ get; set; }
-        internal static UdonBehaviour_Cached SabotageComms{ get; set; }
-
-        internal static UdonBehaviour_Cached SubmitScanTask{ get; set; }
-
-        internal static List<UdonBehaviour_Cached> SabotageAllDoors { get; set; } = new();
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             get => _HasSubscribed;
@@ -111,17 +78,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnUdonSyncRPC += OnUdonSyncRPCEvent;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnUdonSyncRPC -= OnUdonSyncRPCEvent;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -170,7 +133,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             }
         }
 
-        private static bool BodyESPs
+        internal static bool BodyESPs
         {
             get => _BodyESps;
             set
@@ -212,29 +175,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
 
         private void OnRoomLeft()
         {
-            StartGameEvent = null;
-            AbortGameEvent = null;
-            VictoryCrewmateEvent = null;
-            VictoryImpostorEvent = null;
             CancellationToken = null;
             RoleSwapper_GetImpostorRole = false;
             SerializerRot = new Quaternion(0, 0, 0, 0);
             SerializerPos = Vector3.zero;
             if (ToggleSerializerShortcut != null) ToggleSerializerShortcut.SetToggleState(false);
-            EmptyGarbage_Storage_A = null;
-            EmptyGarbage_Storage_B = null;
 
-            EmptyGarbage_Oxygen_A = null;
-            EmptyGarbage_Cafeteria_B = null;
-            CancelAllSabotages = null;
-            EmergencyMeetingEvent = null;
             BodyESPs = false;
-            SabotageLights = null;
-            SabotageOxygen = null;
-            SabotageComms = null;
-            SabotageReactor = null;
-            SabotageAllDoors.Clear();
-            SubmitScanTask = null;
+            AmongUsUdonEvents.Cleanup();
+            AmongUsWorldBtns.Cleanup();
             HasSubscribed = false;
         }
 
@@ -253,66 +202,35 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             var invisiblewall_1 = Finder.Find("Environment/Invisible wall (1)");
             if (invisiblewall != null) invisiblewall.DestroyMeLocal();
             if (invisiblewall_1 != null) invisiblewall_1.DestroyMeLocal();
-
-            StartGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncStart");
-            AbortGameEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncAbort");
-            VictoryCrewmateEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryC");
-            VictoryImpostorEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncVictoryI");
-            EmergencyMeetingEvent = UdonSearch.FindUdonEvent("Game Logic", "SyncEmergencyMeeting");
-            CancelAllSabotages = UdonSearch.FindUdonEvent("Game Logic", "CancelAllSabotage");
-            SabotageLights = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageLights");
-            SabotageOxygen = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageOxygen");
-            SabotageReactor = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageReactor");
-            SabotageComms = UdonSearch.FindUdonEvent("Game Logic", "SyncDoSabotageComms");
-
-            EmptyGarbage_Storage_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Storage)", "SyncConfirmAnimation");
-            EmptyGarbage_Storage_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Storage)", "SyncConfirmAnimation");
-
-            EmptyGarbage_Oxygen_A = UdonSearch.FindUdonEvent("Task Empty Garbage A (Oxygen)", "SyncConfirmAnimation");
-            EmptyGarbage_Cafeteria_B = UdonSearch.FindUdonEvent("Task Empty Garbage B (Cafeteria)", "SyncConfirmAnimation");
-            SubmitScanTask = UdonSearch.FindUdonEvent("Task Submit Scan", "SyncStartScan");
-
-            var VictoryCrewMateKeys = VictoryCrewmateEvent.UdonBehaviour.Get_EventKeys();
-            for (int i = 0; i < VictoryCrewMateKeys.Length; i++)
-            {
-                var subaction = VictoryCrewMateKeys[i];
-                if (subaction.StartsWith("SyncDoSabotage"))
-                {
-                    if (subaction.Contains("Doors"))
-                    {
-                        var tmp = new UdonBehaviour_Cached(VictoryCrewmateEvent.UdonBehaviour, subaction);
-                        if (!SabotageAllDoors.Contains(tmp))
-                        {
-                            SabotageAllDoors.Add(tmp);
-                        }
-                    }
-                }
-            }
-
+            AmongUsUdonEvents.SearchEvents();
             if (GameStartbtn != null)
             {
-                GameStartbtn.SetActive(StartGameEvent.IsNotNull());
-                GameStartbtn.SetInteractable(StartGameEvent.IsNotNull());
+                var isValid = AmongUsUdonEvents.StartGameEvent.IsNotNull();
+                GameStartbtn.SetActive(isValid);
+                GameStartbtn.SetInteractable(isValid);
             }
 
             if (GameAbortbtn != null)
             {
-                GameAbortbtn.SetActive(AbortGameEvent.IsNotNull());
-                GameAbortbtn.SetInteractable(AbortGameEvent.IsNotNull());
+                var isValid = AmongUsUdonEvents.AbortGameEvent.IsNotNull();
+                GameAbortbtn.SetActive(isValid);
+                GameAbortbtn.SetInteractable(isValid);
             }
 
             if (GameVictoryCrewmateBtn != null)
             {
-                GameVictoryCrewmateBtn.SetActive(VictoryCrewmateEvent.IsNotNull());
-                GameVictoryCrewmateBtn.SetInteractable(VictoryCrewmateEvent.IsNotNull());
+                var isValid = AmongUsUdonEvents.VictoryCrewmateEvent.IsNotNull();
+                GameVictoryCrewmateBtn.SetActive(isValid);
+                GameVictoryCrewmateBtn.SetInteractable(isValid);
             }
 
             if (GameVictoryImpostorBtn != null)
             {
-                GameVictoryImpostorBtn.SetActive(VictoryImpostorEvent.IsNotNull());
-                GameVictoryImpostorBtn.SetInteractable(VictoryImpostorEvent.IsNotNull());
+                var isValid = AmongUsUdonEvents.VictoryCrewmateEvent.IsNotNull();
+                GameVictoryImpostorBtn.SetActive(isValid);
+                GameVictoryImpostorBtn.SetInteractable(isValid);
             }
-
+            AmongUsWorldBtns.SetupWorldButtons();
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -381,11 +299,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage, "Toggle Serializer", () => { AmongUsSerializer = true; }, "Toggle Serializer", () => { AmongUsSerializer = false; }, "Serialize For Stealth or to frame someone else!");
             GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, "Body ESP", () => { BodyESPs = true; }, "Body ESP", () => { BodyESPs = false; }, "Makes Impostor Kills Visible (Yellow)!");
 
-            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.green);
-            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.green);
+            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { AmongUsUdonEvents.StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.green);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AmongUsUdonEvents.AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.green);
 
-            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { VictoryCrewmateEvent.InvokeBehaviour(); }, "Force Victory Crewmate Event", Color.green);
-            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { VictoryImpostorEvent.InvokeBehaviour(); }, "Force Victory Impostor Event", Color.red);
+            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent.InvokeBehaviour(); }, "Force Victory Crewmate Event", Color.green);
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent.InvokeBehaviour(); }, "Force Victory Impostor Event", Color.red);
         }
 
         internal static AmongUS_ESP FindNodeWithRole(AmongUs_Roles role)
@@ -431,7 +349,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
                 Log.Exception(e);
             }
         }
+
         private static object CancellationToken;
+
         private static IEnumerator SwapRole(AmongUs_Roles Selectedrole)
         {
             while (JarRoleController.CurrentPlayer_AmongUS_ESP.CurrentRole == AmongUs_Roles.None)
@@ -472,6 +392,5 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             if (JarRoleController.CurrentPlayer_AmongUS_ESP != null) JarRoleController.CurrentPlayer_AmongUS_ESP.SetRole(AssignedTargetRole);
             Log.Debug($"Executed Role Swapping!, {TargetESP.Player.DisplayName()} Has Role : {AssignedSelfRole}, You have {AssignedTargetRole}.");
         }
-
     }
 }

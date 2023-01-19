@@ -148,7 +148,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                         item.InvokeBehaviour();
                     }
                 });
-                CollectAllCoins.Set_isToggleBtn(false);
+                CollectAllCoins.Set_isToggleButton(false);
             }
 
             TeleportGoldShells = new WorldButton_Squared(new Vector3(2.983f, 9.1642f, 8.866f), new Vector3(0f, 92.6182f, 270f), String.Empty, null);
@@ -166,7 +166,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     }
                     //TeleportGoldShells.DestroyMe();
                 });
-                TeleportGoldShells.Set_isToggleBtn(false);
+                TeleportGoldShells.Set_isToggleButton(false);
 
             }
 
@@ -183,7 +183,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     //TeleportAllCrabs.DestroyMe();
 
                 });
-                TeleportAllCrabs.Set_isToggleBtn(false);
+                TeleportAllCrabs.Set_isToggleButton(false);
             }
 
 

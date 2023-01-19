@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using AstroClient;
+﻿using AstroClient;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.Utility;
+using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,27 +10,26 @@ using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
 using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
 namespace WorldAPI.ButtonAPI
 {
-    internal class VRCPage 
+    internal class VRCPage
     {
-        internal UIPage page{ get; set; }
-        internal Transform menuContents{ get; set; }
-        internal TextMeshProUGUI pageTitleText{ get; set; }
-        private bool isRoot{ get; set; }
-        private GameObject extButtonGameObject{ get; set; }
+        internal UIPage page { get; set; }
+        internal Transform menuContents { get; set; }
+        internal TextMeshProUGUI pageTitleText { get; set; }
+        private bool isRoot { get; set; }
+        private GameObject extButtonGameObject { get; set; }
         internal RectMask2D menuMask { get; set; }
         internal string menuName { get; set; }
 
         internal VRCPage(string pageTitle, bool root = false, bool backButton = true, bool expandButton = false, Action expandButtonAction = null, string expandButtonTooltip = "", Sprite expandButtonSprite = null, bool preserveColor = false, bool fix = true)
         {
             if (!APIBase.IsReady()) throw new Exception();
-            if (APIBase.MenuTab == null) {
+            if (APIBase.MenuTab == null)
+            {
                 Log.Error("Fatal Error: ButtonAPI.menuPageBase Is Null!");
                 return;
             }
@@ -82,7 +81,8 @@ namespace WorldAPI.ButtonAPI
                 backButtonGameObject.SetActive(backButton);
                 region++;
                 backButtonGameObject.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-                backButtonGameObject.GetComponentInChildren<Button>().onClick.AddListener((Action)delegate {
+                backButtonGameObject.GetComponentInChildren<Button>().onClick.AddListener((Action)delegate
+                {
                     if (isRoot)
                         QuickMenuTools.QuickMenuController.ShowTabContent("QuickMenuDashboard");
                     else
@@ -96,10 +96,12 @@ namespace WorldAPI.ButtonAPI
                     extButtonGameObject.GetComponentInChildren<Button>().onClick.AddListener(expandButtonAction);
                 }
                 extButtonGameObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = expandButtonTooltip;
-                if (expandButtonSprite != null) {
+                if (expandButtonSprite != null)
+                {
                     extButtonGameObject.GetComponentInChildren<Image>().sprite = expandButtonSprite;
                     extButtonGameObject.GetComponentInChildren<Image>().overrideSprite = expandButtonSprite;
-                    if (preserveColor) {
+                    if (preserveColor)
+                    {
                         extButtonGameObject.GetComponentInChildren<Image>().color = Color.white;
                         extButtonGameObject.GetComponentInChildren<StyleElement>(true).enabled = false;
                     }
@@ -125,10 +127,12 @@ namespace WorldAPI.ButtonAPI
                 page.GetComponent<UIPage>().enabled = true; // Fix for Late Menu Creation
                 page.GetComponent<GraphicRaycaster>().enabled = true; // Fix for Late Menu Creation
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 throw new Exception("Exception Caught When Making Page At Region: " + region + "\n\n" + ex);
             }
         }
+
         internal void SetTitle(string text) =>
             pageTitleText.text = text;
 
@@ -143,16 +147,13 @@ namespace WorldAPI.ButtonAPI
             obj.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>().field_Public_String_0 = tooltip;
         }
 
-
         internal void OpenMenu()
         {
             page.gameObject.active = true;
             QuickMenuTools.QuickMenuController.ShowTabContent(page.field_Public_String_0);
         }
 
-
         internal void CloseMenu() =>
             page.Method_Public_Virtual_New_Void_0();
-
     }
 }

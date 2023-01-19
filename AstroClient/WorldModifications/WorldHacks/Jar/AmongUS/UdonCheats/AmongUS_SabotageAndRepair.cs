@@ -60,7 +60,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             {
                 if (_CurrentController == null)
                 {
-                    return _CurrentController = AmongUSCheats.VictoryCrewmateEvent.UdonBehaviour;
+                    return _CurrentController = AmongUsUdonEvents.VictoryCrewmateEvent.UdonBehaviour;
                 }
                 return _CurrentController;
             }

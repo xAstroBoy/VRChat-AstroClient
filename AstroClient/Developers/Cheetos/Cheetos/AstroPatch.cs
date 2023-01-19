@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using AstroClient.Tools.Extensions;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
     #region Imports
 
@@ -11,12 +7,6 @@ namespace AstroClient.Cheetos
     using System;
     using System.Reflection;
     using System.Text;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Reflection;
-    using HarmonyLib;
 
     #endregion Imports
 
@@ -411,6 +401,7 @@ namespace AstroClient.Cheetos
                 }
             }
         }
+
         internal void Unpatch()
         {
             if (isActivePatch)

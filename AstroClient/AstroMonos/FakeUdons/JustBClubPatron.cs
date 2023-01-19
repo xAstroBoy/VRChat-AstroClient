@@ -1,20 +1,10 @@
-﻿
-
-
+﻿using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.AstroMonos.FakeUdons
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using MelonLoader;
-    using VRC.Udon;
-    using UdonSharp;
-    using FakeUdon;
     using AstroClient.AstroMonos.Components.Spoofer;
-    using UdonSharp;
+    using VRC.Udon;
 
     /*
      * Copyright (c) 2023 HookedBehemoth
@@ -31,7 +21,6 @@ namespace AstroClient.AstroMonos.FakeUdons
      * You should have received a copy of the GNU General Public License
      * along with this program.  If not, see <http://www.gnu.org/licenses/>.
      */
-
 
     namespace JustBPatreon
     {
@@ -53,6 +42,10 @@ namespace AstroClient.AstroMonos.FakeUdons
             {
                 return ((string)new Il2CppSystem.String(value.Pointer)) == "_ProcessPatrons";
             }
+
+            //if (WorldUtils.WorldID == WorldIds.JustBClub || WorldUtils.WorldID == WorldIds.JustBClub2 || WorldUtils.WorldID == WorldIds.JustBClub2Lobby)
+            //{
+            //}
             return false;
         }
     }
@@ -69,14 +62,16 @@ namespace AstroClient.AstroMonos.FakeUdons
                 }
             }
 
-            void Start()
+            private void Start()
             {
                 Log.Write("Decoder Start");
                 SendCustomEventDelayedFrames("ReadPatreons", 300);
             }
+
             public string outputString;
             public UdonBehaviour callbackBehaviour;
             public string callbackEventName;
+
             public void ReadPatreons()
             {
                 Log.Write("Hijacking B Club Decoder ReadPatreons...");
@@ -91,11 +86,6 @@ namespace AstroClient.AstroMonos.FakeUdons
                 outputString += ",\n\r";
                 outputString += name + "\n\r";
                 callbackBehaviour.SendCustomEvent(callbackEventName);
-            }
-
-            public void _TestMessage()
-            {
-                Log.Debug("This is a test message from a fake udon behaviour.");
             }
         }
     }

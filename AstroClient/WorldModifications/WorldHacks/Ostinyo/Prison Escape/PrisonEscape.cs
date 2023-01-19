@@ -442,7 +442,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
-                    TurretTop.Set_isToggleBtn(false);
+                    TurretTop.Set_isToggleButton(false);
                     #endregion
 
 
@@ -454,7 +454,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                     });
                     GuardArea.SetScale(new Vector3(1.5f, 1.5f, 1.5f));
-                    GuardArea.Set_isToggleBtn(false);
+                    GuardArea.Set_isToggleButton(false);
 
 
 
@@ -506,7 +506,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         item.gameObject.RespawnPickup(false);
                     });
-                    TurretTop.Set_isToggleBtn(false);
+                    TurretTop.Set_isToggleButton(false);
                     #endregion
 
 
@@ -517,7 +517,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
 
                     });
-                    GuardArea.Set_isToggleBtn(false);
+                    GuardArea.Set_isToggleButton(false);
 
                     #endregion
                     var Control = item.GetOrAddComponent<PickupController>();
@@ -720,7 +720,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         {
                             startgame.InvokeBehaviour();
                         });
-                        Button.Set_isToggleBtn(false);
+                        Button.Set_isToggleButton(false);
                     }
 
                 }
@@ -994,7 +994,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 //btn.MakePickupable();
                 btn.ButtonBody.name = label;
                 btn.RotateButton(rotation);
-                btn.Set_isToggleBtn(false);
+                btn.Set_isToggleButton(false);
              });
         }
 

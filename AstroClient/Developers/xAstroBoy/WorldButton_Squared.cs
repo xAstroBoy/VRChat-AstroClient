@@ -49,6 +49,12 @@ namespace AstroClient.xAstroBoy
             ButtonBody = GameObject.Instantiate(Prefabs.WorldButton_Squared, position, Quaternion.Euler(rotation));
             InitializeButton(label, OnButtonDown, OnButtonUp);
         }
+        internal WorldButton_Squared(Vector3 position, Vector3 rotation, float scale, string label, Action OnButtonDown = null, Action OnButtonUp = null)
+        {
+            ButtonBody = GameObject.Instantiate(Prefabs.WorldButton_Squared, position, Quaternion.Euler(rotation));
+            InitializeButton(label, OnButtonDown, OnButtonUp);
+            SetScale(scale);
+        }
         internal WorldButton_Squared(Vector3 position, Quaternion rotation, string label, Action OnButtonDown = null, Action OnButtonUp = null)
         {
             ButtonBody = GameObject.Instantiate(Prefabs.WorldButton_Squared, position, rotation);
@@ -109,7 +115,7 @@ namespace AstroClient.xAstroBoy
         /// Else it will switch between red for off, green for On.
         /// </summary>
 
-        internal void Set_isToggleBtn(bool toggle)
+        internal void Set_isToggleButton(bool toggle)
         {
             Controller.isToggle = toggle;
             Controller.SetButtonToggle(true);
