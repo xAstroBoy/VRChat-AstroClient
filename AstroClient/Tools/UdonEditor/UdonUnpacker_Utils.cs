@@ -26,7 +26,7 @@ namespace AstroClient.Tools.UdonEditor
                             if (RealProgram.Heap != null)
                             {
                                 var heap = RealProgram.Heap.TryCast<UdonHeap>();
-                                if (RealProgram != null && symbol_table != null && heap != null)
+                                if (heap != null)
                                 {
                                     return new RawUdonBehaviour(udon, RealProgram, symbol_table, heap, udon.transform);
                                 }
@@ -55,7 +55,7 @@ namespace AstroClient.Tools.UdonEditor
                                 if (FakeUdonProgram.Heap != null)
                                 {
                                     var FakeHeap = FakeUdonProgram.Heap.TryCast<FakeUdonHeap>();
-                                    if (FakeUdonProgram != null && symbol_table != null && FakeHeap != null)
+                                    if (FakeHeap != null)
                                     {
                                         return new RawUdonBehaviour(udon, FakeUdonProgram, symbol_table, FakeHeap, udon.transform);
                                     }

@@ -1090,7 +1090,7 @@ namespace AstroClient.Tools.UdonEditor
 
             // before we start, let's try a extra step.
 
-            if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
+            //if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
 
             if (FullName != null && FullName.EndsWith("[]"))
             {
@@ -4145,7 +4145,7 @@ namespace AstroClient.Tools.UdonEditor
 
             // before we start, let's try a extra step.
 
-            if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
+            //if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
 
             if (FullName != null && FullName.EndsWith("[]"))
             {

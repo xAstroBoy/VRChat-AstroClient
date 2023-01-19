@@ -77,6 +77,7 @@ namespace AstroClient.Tools.UdonEditor
             this.UdonHeap = UdonHeap;
             this.Parent = Parent;
             this.behaviour = behaviour;
+            this.isFakeUdon = false;
         }
         internal RawUdonBehaviour(UdonBehaviour behaviour, FakeUdonProgram UdonProgram, UdonSymbolTable UdonSymbolTable, FakeUdonHeap UdonHeap, Transform Parent)
         {

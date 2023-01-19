@@ -47,7 +47,8 @@ namespace AstroClient.Tools.Keypads
             "code1",
             "code2",
             "code3",
-            "code8"
+            "code8",
+            "_KeypadCode",
         };
 
 
