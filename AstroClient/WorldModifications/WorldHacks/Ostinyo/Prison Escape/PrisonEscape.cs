@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms.DataVisualization.Charting;
-using AstroClient.AstroMonos.AstroUdons;
-using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
+﻿using AstroClient.AstroMonos.Components.Cheats.PatronCrackers;
 using AstroClient.AstroMonos.Components.Cheats.PatronUnlocker;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents;
 using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
-using AstroClient.Startup.Hooks;
 using AstroClient.Tools.Extensions;
-using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.Holders;
-using AstroClient.Tools.ObjectEditor;
 using AstroClient.Tools.UdonEditor;
 using AstroClient.Tools.World;
 using AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape.Enums;
@@ -22,15 +15,15 @@ using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
-using VRC.SDKBase;
 using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 {
-
     internal class PrisonEscape : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -38,11 +31,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-
         internal static Action<bool> OnShowRolesPropertyChanged { get; set; }
         internal static Action OnForceWantedEnabled { get; set; }
 
         private static bool _ShowRoles = false;
+
         internal static bool ShowRoles
         {
             get => _ShowRoles;
@@ -51,10 +44,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 _ShowRoles = value;
                 OnShowRolesPropertyChanged.SafetyRaiseWithParams(value);
             }
-
         }
 
         private static bool _DoorsStayOpen = false;
+
         internal static bool DoorsStayOpen
         {
             get => _DoorsStayOpen;
@@ -62,10 +55,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 _DoorsStayOpen = value;
             }
-
         }
 
         private bool _HasSubscribed = false;
+
         private bool HasSubscribed
         {
             get => _HasSubscribed;
@@ -75,17 +68,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnPlayerJoin += OnPlayerJoined;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnPlayerJoin -= OnPlayerJoined;
-
                     }
                 }
                 _HasSubscribed = value;
@@ -94,6 +83,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         internal static QMNestedGridMenu CurrentMenu;
         private static bool _IsCurrentWorld = false;
+
         internal static bool isCurrentWorld
         {
             get => _IsCurrentWorld;
@@ -161,6 +151,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     Gun_Purple_Color_Button = null;
                     Gun_Gold_Color_Button = null;
                     Gun_Red_Color_Button = null;
+                    GateButtonTrigger = null;
+                    OriginalGateButtonPos = Vector3.zero;
                     _Spawn_Area = null;
                     _Gun_Color_Panel = null;
                     _Respawn_Points = null;
@@ -187,8 +179,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     _MoneyPile = null;
                     _Keycards = null;
                     _Keycard = null;
-
-
                 }
             }
         }
@@ -197,27 +187,26 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
         }
+
         internal static void ClickGateButton()
         {
-            if(Lit_Prison.active)
+            if (Lit_GateInteraction != null)
             {
-                if (Lit_GateInteraction != null)
-                {
-                    Lit_GateInteraction.InvokeBehaviour();
-                }
-
+                Lit_GateInteraction.InvokeBehaviour();
             }
-            else
-            {
-                if (Dark_Prison.active)
-                {
-                    if (Dark_GateInteraction != null)
-                    {
-                        Dark_GateInteraction.InvokeBehaviour();
-                    }
-                }
-            }
-
+            //if(Lit_Prison.active)
+            //{
+            //}
+            //else
+            //{
+            //    if (Dark_Prison.active)
+            //    {
+            //        if (Dark_GateInteraction != null)
+            //        {
+            //            Dark_GateInteraction.InvokeBehaviour();
+            //        }
+            //    }
+            //}
         }
 
         private static void PatchYard(GameObject Yard)
@@ -239,25 +228,23 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 AdjustGuardTowerBorders(guardtower_1);
             }
-
         }
 
         private static void PatchPrison(GameObject Prison)
         {
-            if(Prison == null) return;
-            // Fix Fence Collider height 
+            if (Prison == null) return;
+            // Fix Fence Collider height
             var fence = Prison.FindObject("Building/Basketball Court/Colliders/Collider");
             if (fence != null)
             {
                 FixbaseballFence(fence);
             }
-            // Fix Fence Collider height 
+            // Fix Fence Collider height
             var fence1 = Prison.FindObject("Building/Basketball Court/Colliders/Collider (1)");
             if (fence1 != null)
             {
                 FixbaseballFence(fence1);
             }
-
 
             // Remove roof & other useless colliders
             Prison.FindObject("Building/Basketball Court/Colliders/Collider (2)").DestroyMeLocal(true);
@@ -267,7 +254,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             Prison.FindObject("Building/Basketball Court/Colliders/Collider (6)").DestroyMeLocal(true);
             Prison.FindObject("Building/Basketball Court/Colliders/Collider (7)").DestroyMeLocal(true);
             Prison.FindObject("Building/Basketball Court/Colliders/Collider (8)").DestroyMeLocal(true);
-
 
             var fence3 = Prison.FindObject("Building/Back Area/Colliders/Collider");
             if (fence3 != null)
@@ -282,11 +268,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             // Kitchen Roof
             Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
-
         }
+
         private static void AdjustWorld()
         {
-
             //var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
             //if (AprilFoolsPatcher != null)
             //{
@@ -323,7 +308,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    }
             //}
 
-
             var heightlimiter = Finder.Find("Scripts/Avatar Height Checker");
             if (heightlimiter != null)
             {
@@ -346,7 +330,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 PatchYard(Dark_Yard);
             }
 
-            if(PrisonRoot != null)
+            if (PrisonRoot != null)
             {
                 PrisonRoot.FindObject("Guard Objects/Guard Blocker").IgnoreLocalPlayerCollision(true, true, false);
                 PrisonRoot.FindObject("Guard Objects/Guard Blocker (1)").IgnoreLocalPlayerCollision(true, true, false);
@@ -365,14 +349,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 PrisonRoot.FindObject("Guard Objects/Guard Blocker (14)").IgnoreLocalPlayerCollision(true, true, false);
                 PrisonRoot.FindObject("Guard Objects/Guard Blocker (15)").IgnoreLocalPlayerCollision(true, true, false);
                 PrisonRoot.FindObject("Guard Objects/Guard Blocker (16)").IgnoreLocalPlayerCollision(true, true, false);
-
             }
 
             if (Lit_Prison != null)
             {
                 PatchPrison(Lit_Prison);
             }
-            if(Dark_Prison != null)
+            if (Dark_Prison != null)
             {
                 PatchPrison(Dark_Prison);
             }
@@ -388,7 +371,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 var beh = item.gameObject.FindUdonEvent("EnablePatronEffects");
                 if (beh != null)
                 {
-
                     var unlocker = item.GetOrAddComponent<PatronUnlocker>();
                     MiscUtils.DelayFunction(5f, () =>
                     {
@@ -399,7 +381,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 EnableGoldenCamos.Add(unlocker);
                             }
                         }
-
                     });
                 }
 
@@ -431,33 +412,34 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                 }
-                // Worldbuttons for Snipers 
+                // Worldbuttons for Snipers
                 if (item.name.Equals("Sniper"))
                 {
-                    #region  Turret 1 Sniper
+                    #region Turret 1 Sniper
+
                     // Turret Respawn Sniper
 
-                    #region  Turret Area
+                    #region Turret Area
+
                     var TurretTop = new WorldButton_Squared(new Vector3(62.5019f, 12.1777f, 282.378f), new Vector3(0, 180, 270), "<color=orange>Respawn Sniper</color>", () =>
                     {
                         item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.Set_isToggleButton(false);
-                    #endregion
 
+                    #endregion Turret Area
 
-                    #region  Guard Spawn
+                    #region Guard Spawn
+
                     var GuardArea = new WorldButton_Squared(new Vector3(22.8852f, 4.895f, 293.4226f), new Vector3(0f, 273.082f, 270f), 1f, "<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.0804f, 4.925f, 293.2137f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
-
                     });
                     GuardArea.Set_isToggleButton(false);
 
+                    #endregion Guard Spawn
 
-
-                    #endregion
                     var Control = item.GetOrAddComponent<PickupController>();
                     if (Control != null)
                     {
@@ -474,7 +456,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             {
                                 GuardArea.SetText(TeleportSniper);
                             }
-
                         };
                         Control.GetOrAddComponent<PickupController>().OnPickupDrop += () =>
                         {
@@ -491,34 +472,37 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             }
                         };
                     }
-                    #endregion
 
+                    #endregion Turret 1 Sniper
                 }
 
                 if (item.name.Equals("Sniper (1)"))
                 {
-                    #region  Turret 2 Sniper
+                    #region Turret 2 Sniper
+
                     // Turret Respawn Sniper
 
-                    #region  Turret Area
+                    #region Turret Area
+
                     var TurretTop = new WorldButton_Squared(new Vector3(62.5082f, 12.1081f, 317.6093f), new Vector3(0, 180, 270), "<color=orange>Respawn Sniper</color>", () =>
                     {
                         item.gameObject.RespawnPickup(false);
                     });
                     TurretTop.Set_isToggleButton(false);
-                    #endregion
 
+                    #endregion Turret Area
 
-                    #region  Guard Spawn
-                    var GuardArea = new WorldButton_Squared(new Vector3(23.132f, 4.7764f, 306.607f), new Vector3(0f, 90f, 0f), 1f,"<color=orange>Teleport Sniper</color>", () =>
+                    #region Guard Spawn
+
+                    var GuardArea = new WorldButton_Squared(new Vector3(23.132f, 4.7764f, 306.607f), new Vector3(0f, 90f, 0f), 1f, "<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.08039f, 4.925f, 306.7233f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
-
                     });
                     GuardArea.Set_isToggleButton(false);
 
-                    #endregion
+                    #endregion Guard Spawn
+
                     var Control = item.GetOrAddComponent<PickupController>();
                     if (Control != null)
                     {
@@ -535,7 +519,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             {
                                 GuardArea.SetText(TeleportSniper);
                             }
-
                         };
                         Control.GetOrAddComponent<PickupController>().OnPickupDrop += () =>
                         {
@@ -552,12 +535,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             }
                         };
                     }
-                    #endregion
 
+                    #endregion Turret 2 Sniper
                 }
-
             }
         }
+
         private static void RemoveMaxDist()
         {
             if (MoneyPile != null)
@@ -569,7 +552,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             if (Keycard != null)
             {
                 Patch__MaxPickupDist(Keycard);
-
             }
             if (Vents != null)
             {
@@ -597,7 +579,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static void FindGateButton()
         {
-            if (Lit_Gate_Button != null )
+            if (Lit_Gate_Button != null)
             {
                 Lit_GateInteraction = Lit_Gate_Button.FindUdonEvent("_interact");
             }
@@ -605,13 +587,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 Dark_GateInteraction = Dark_Gate_Button.FindUdonEvent("_interact");
             }
-
         }
+
         private static void InstallReaders()
         {
             foreach (var item in Player_Object_Pool.transform.Get_UdonBehaviours())
             {
-
                 var obj = item.FindUdonEvent("__0__SetWantedSynced");
                 if (obj != null)
                 {
@@ -627,11 +608,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+
         private static void DoUdonStuff()
         {
             foreach (var item in WorldUtils_Old.Get_UdonBehaviours())
             {
-
                 if (item == null) continue;
                 if (item.name.Contains("Crate"))
                 {
@@ -683,7 +664,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         // If the unlock is present, add this to bypass the keypad interaction .
                         unlock.gameObject.GetOrAddComponent<PrisonEscape_DoorAssister>();
                     }
-
                 }
                 if (item.name.Contains("Knife"))
                 {
@@ -721,7 +701,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         });
                         Button.Set_isToggleButton(false);
                     }
-
                 }
 
                 if (item.name.Contains("VentMesh"))
@@ -738,10 +717,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 if (item.name.Equals("Patron Control"))
                 {
-                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo 
+                    PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo
                     TogglePatronGuns = item.FindUdonEvent("_TogglePatronGuns");
                     ToggleDoublePoints = item.FindUdonEvent("_ToggleDoublePoints");
-
                 }
             }
         }
@@ -783,7 +761,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             AddSpawnPointDetector(SceneUtils.SpawnPosition, PrimitiveType.Sphere, 50f, PrisonEscape_Roles.Dead);
 
-
             if (SceneUtils.SpawnLocation != null)
             {
                 if (!SpawnPoints_Spawn.Contains(SceneUtils.SpawnLocation.position))
@@ -791,7 +768,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     SpawnPoints_Spawn.Add(SceneUtils.SpawnLocation.position);
                 }
             }
-
         }
 
         private static void GetToggles()
@@ -818,7 +794,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     WorldSettings_Music_Toggle = item;
                 }
-                if(item.name.Equals("Toggle Avatars"))
+                if (item.name.Equals("Toggle Avatars"))
                 {
                     WorldSettings_Avatar_Toggle = item;
                 }
@@ -829,6 +805,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+
         private static void CleanSpawnArea()
         {
             if (Spawn_Area != null)
@@ -869,7 +846,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         Gun_Red_Color_Button = RedButton.GetComponent<Button>();
                     }
-
                 }
                 var blocks = Spawn_Area.FindObject("Building/Colliders");
                 if (blocks != null)
@@ -877,34 +853,50 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     blocks.DestroyMeLocal();
                 }
             }
-
-
         }
 
         private static void CreateEscapeButtons()
         {
-
             CreateEscapeButton(new Vector3(7.9167f, 1.2052f, 293.6856f), new Vector3(0, 180, 270), "ESCAPE 1", () => { InteractWithVent("Openable Vent"); });
-            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), new Vector3(0,0,270), "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(4.0886f, 1.3629f, 294.0434f), new Vector3(0, 0, 270), "ESCAPE 2", () => { InteractWithVent("Openable Vent (1)"); });
 
-            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), new Vector3(0,180,270), "ESCAPE 3", () => { InteractWithVent("Openable Vent (1)"); });
-            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), new Vector3(0,0,270), "ESCAPE 4", () => { InteractWithFloorVent("Floor Vent"); });
+            CreateEscapeButton(new Vector3(-0.0995f, 1.3373f, 293.8687f), new Vector3(0, 180, 270), "ESCAPE 3", () => { InteractWithVent("Openable Vent (1)"); });
+            CreateEscapeButton(new Vector3(-3.9086f, 1.3534f, 294.1103f), new Vector3(0, 0, 270), "ESCAPE 4", () => { InteractWithFloorVent("Floor Vent"); });
 
-            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), new Vector3(0,180,270), "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
+            CreateEscapeButton(new Vector3(-4.0806f, 1.1905f, 306.1707f), new Vector3(0, 180, 270), "ESCAPE 5", () => { InteractWithVent("Openable Vent (2)"); });
 
-            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), new Vector3(0,90,270), "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
-
+            CreateEscapeButton(new Vector3(4.8376f, 1.1809f, 306.921f), new Vector3(0, 90, 270), "ESCAPE 6", () => { InteractWithVent("Openable Vent (5)"); });
         }
 
         private static void AddSpawnDetectors()
         {
             AddSpawnDetector(SpawnPoints_Guards, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Guard);
             AddSpawnDetector(SpawnPoints_Prisoners, PrimitiveType.Sphere, 3, PrisonEscape_Roles.Prisoner);
-
         }
+
+        internal static void SetupGateButtonBypass()
+        {
+            GateButtonCollider = Lit_GateInteraction.UdonBehaviour.GetComponent<BoxCollider>();
+            OriginalGateButtonPos = GateButtonCollider.transform.localPosition;
+            if (Lit_GateInteraction != null)
+            {
+                Lit_GateInteraction.Set_BeforeInvoking_Action(() =>
+                {
+                    if (GateButtonCollider != null)
+                    {
+                        GateButtonCollider.enabled = true;
+                    }
+                    GateButtonCollider.gameObject.TeleportToMe();
+                });
+                Lit_GateInteraction.Set_AfterInvoking_Action(() =>
+                {
+                    GateButtonCollider.gameObject.SetPosition(OriginalGateButtonPos);
+                });
+            }
+        }
+
         internal static void FindEverything()
         {
-
             AdjustWorld();
             AdjustPickups();
             RemoveMaxDist();
@@ -916,30 +908,20 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             CleanSpawnArea();
             AddSpawnDetectors();
             CreateEscapeButtons();
-            //RaycastPatcher.PatchRaycast = true;
-
-
-
-
-            
-
-
+            SetupGateButtonBypass();
 
             //Log.Debug($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
-
 
             //AddSpawnDetector(SpawnPoints_Spawn, PrimitiveType.Cube, 10f, PrisonEscape_Roles.Dead);
             //if (Game_Join_Trigger != null)
             //{
-            //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead); 
+            //    BindRoleToCollider(Game_Join_Trigger, PrisonEscape_Roles.Dead);
             //}
-
 
             Log.Debug($"Registered {CurrentReaders.Count} Player Data Readers!", System.Drawing.Color.Chartreuse);
             Log.Debug($"Registered {SpawnPoints_Spawn.Count} Spawn Area Positions!", System.Drawing.Color.Chartreuse);
             Log.Debug($"Registered {SpawnPoints_Guards.Count} Guard Spawn Positions!", System.Drawing.Color.Chartreuse);
             Log.Debug($"Registered {SpawnPoints_Prisoners.Count} Prisoner Spawn Positions!", System.Drawing.Color.Chartreuse);
-
         }
 
         private static void InteractWithVent(string VentName)
@@ -961,7 +943,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static void MarkPrisonersAsWanted()
         {
             OnForceWantedEnabled.SafetyRaise();
-
         }
 
         private static void InteractWithFloorVent(string VentName)
@@ -980,7 +961,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static void CreateEscapeButton(Vector3 Position, Vector3 rotation, string label, System.Action OnClick)
         {
             // label parameter is only for debug reasons.
@@ -990,13 +970,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
             MiscUtils.DelayFunction(2f, () =>
              {
-                //btn.MakePickupable();
-                btn.ButtonBody.name = label;
-                btn.RotateButton(rotation);
-                btn.Set_isToggleButton(false);
+                 //btn.MakePickupable();
+                 btn.ButtonBody.name = label;
+                 btn.RotateButton(rotation);
+                 btn.Set_isToggleButton(false);
              });
         }
-
 
         private static void CreateSpawnItemButton(UdonBehaviour item, bool flip)
         {
@@ -1019,11 +998,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         btn.RotateButton(180f);
                     }
                 }
-
             }
-
         }
-    
 
         /// <summary>
         ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the tower!
@@ -1032,7 +1008,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         /// <param name="tower"></param>
         private static void AdjustGuardTowerBorders(GameObject tower)
         {
-            foreach(var item in tower.GetComponentsInChildren<BoxCollider>())
+            foreach (var item in tower.GetComponentsInChildren<BoxCollider>())
             {
                 if (item != null)
                 {
@@ -1042,16 +1018,14 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         item.transform.localPosition = new Vector3(item.transform.localPosition.x, 10.9f, item.transform.localPosition.z);
                     }
                 }
-
             }
         }
-
 
         /// <summary>
         ///  This will shrink the border colliders on The guard tower and Adjust their position to allow the player to jump out of the Fence!
         /// </summary>
         /// <param name="fence"></param>
-        
+
         private static void FixbaseballFence(GameObject fence)
         {
             if (fence != null)
@@ -1063,7 +1037,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     box.transform.localPosition = new Vector3(box.transform.localPosition.x, 2f, box.transform.localPosition.z);
                 }
             }
-
         }
 
         /// <summary>
@@ -1082,7 +1055,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     box.transform.localPosition = new Vector3(box.transform.localPosition.x, 1.9f, box.transform.localPosition.z);
                 }
             }
-
         }
 
         /// <summary>
@@ -1101,13 +1073,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     box.transform.localPosition = new Vector3(box.transform.localPosition.x, 2f, box.transform.localPosition.z);
                 }
             }
+        }
 
-        }        
         /// <summary>
         ///  This will add a Trigger collider to assign a role once a player hits it!
         /// </summary>
 
-        private static void AddSpawnDetector(List<Vector3> positions, PrimitiveType detectorshape, float scale,  PrisonEscape_Roles AssignedRole)
+        private static void AddSpawnDetector(List<Vector3> positions, PrimitiveType detectorshape, float scale, PrisonEscape_Roles AssignedRole)
         {
             foreach (var pos in positions)
             {
@@ -1124,7 +1096,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-        private static void AddSpawnPointDetector(Vector3 position, PrimitiveType detectorshape, float scale , PrisonEscape_Roles AssignedRole)
+        private static void AddSpawnPointDetector(Vector3 position, PrimitiveType detectorshape, float scale, PrisonEscape_Roles AssignedRole)
         {
             GameObject sphere = GameObject.CreatePrimitive(detectorshape);
             sphere.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
@@ -1140,20 +1112,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 ren.DestroyMeLocal(true);
             }
             BindRoleToCollider(sphere, AssignedRole);
-
         }
-
 
         private void OnPlayerJoined(Player player)
         {
             if (isCurrentWorld)
             {
                 ComponentUtils.GetOrAddComponent<PrisonEscape_ESP>(player.gameObject);
-
             }
         }
-
-
 
         internal static List<Vector3> SpawnPoints_Guards = new List<Vector3>();
         internal static List<Vector3> SpawnPoints_Prisoners = new List<Vector3>();
@@ -1174,7 +1141,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         //    }
         //    return PrisonEscape_Roles.None;
         //}
-
 
         //internal static bool IsPrisoner(Vector3 position)
         //{
@@ -1222,51 +1188,47 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static List<PrisonEscape_PoolDataReader> CurrentReaders { get; set; } = new();
 
-
         internal static PrisonEscape_PoolDataReader FindAssignedUser(Player player, bool SuppressLogs = false, PrisonEscape_Roles TargetRole = PrisonEscape_Roles.Dead)
         {
-
             foreach (var item in CurrentReaders)
             {
                 var actualreader = GetCorrectReader(item);
                 if (actualreader != null)
                 {
-
                     //if (!actualreader.isPlaying.GetValueOrDefault(false)) continue;
                     if (actualreader.playerName == player.GetAPIUser().displayName)
                     {
-
                         switch (TargetRole)
                         {
                             case PrisonEscape_Roles.Prisoner:
-                            {
-                                if (!actualreader.isGuard.GetValueOrDefault(false))
                                 {
-                                    if (!SuppressLogs)
+                                    if (!actualreader.isGuard.GetValueOrDefault(false))
                                     {
-                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        if (!SuppressLogs)
+                                        {
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
+
+                                        return actualreader;
                                     }
 
-                                    return actualreader;
+                                    break;
                                 }
-
-                                break;
-                            }
 
                             case PrisonEscape_Roles.Guard:
-                            {
-                                if (actualreader.isGuard.GetValueOrDefault(false))
                                 {
-                                    if (!SuppressLogs)
+                                    if (actualreader.isGuard.GetValueOrDefault(false))
                                     {
-                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        if (!SuppressLogs)
+                                        {
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {actualreader.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
+
+                                        return actualreader;
                                     }
 
-                                    return actualreader;
+                                    break;
                                 }
-
-                                break;
-                            }
                             case PrisonEscape_Roles.Dead:
                                 {
                                     if (item.isDead.GetValueOrDefault(false))
@@ -1281,42 +1243,40 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                     break;
                                 }
                         }
-
                     }
                     else if (item.playerName == player.GetAPIUser().displayName)
                     {
-
                         switch (TargetRole)
                         {
                             case PrisonEscape_Roles.Prisoner:
-                            {
-                                if (!item.isGuard.GetValueOrDefault(false))
                                 {
-                                    if (!SuppressLogs)
+                                    if (!item.isGuard.GetValueOrDefault(false))
                                     {
-                                        Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        if (!SuppressLogs)
+                                        {
+                                            Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
+
+                                        return item;
                                     }
 
-                                    return item;
+                                    break;
                                 }
-
-                                break;
-                            }
 
                             case PrisonEscape_Roles.Guard:
-                            {
-                                if (item.isGuard.GetValueOrDefault(false))
                                 {
-                                    if (!SuppressLogs)
+                                    if (item.isGuard.GetValueOrDefault(false))
                                     {
+                                        if (!SuppressLogs)
+                                        {
                                             Log.Debug($"Found {player.GetDisplayName()} player Data Reader : {item.gameObject.name}!", System.Drawing.Color.GreenYellow);
+                                        }
+
+                                        return item;
                                     }
 
-                                    return item;
+                                    break;
                                 }
-
-                                break;
-                            }
                             case PrisonEscape_Roles.Dead:
                                 {
                                     if (item.isDead.GetValueOrDefault(false))
@@ -1339,6 +1299,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static PrisonEscape_PoolDataReader LocalReader { get; set; }
+
         internal static PrisonEscape_PoolDataReader GetLocalReader()
         {
             if (LocalReader != null)
@@ -1357,7 +1318,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var actualreader = GetCorrectReader(item);
                     if (actualreader != null)
                     {
-
                         if (actualreader.isLocal)
                         {
                             Log.Debug($"Found Local player Data Reader : {actualreader.gameObject.name} !", System.Drawing.Color.GreenYellow);
@@ -1368,13 +1328,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                             Log.Debug($"Found Local player Data Reader : {item.gameObject.name} !", System.Drawing.Color.GreenYellow);
                             return LocalReader = actualreader;
                         }
-
                     }
                 }
             }
             return LocalReader;
         }
-
 
         internal static PrisonEscape_PoolDataReader GetCorrectReader(PrisonEscape_PoolDataReader reader)
         {
@@ -1395,7 +1353,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             return null;
         }
 
-        #region  Getter/setters From WorldSettings Menu
+        #region Getter/setters From WorldSettings Menu
+
         internal static bool? WorldSettings_Subtitles
         {
             get
@@ -1439,6 +1398,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+
         internal static bool? WorldSettings_Avatar
         {
             get
@@ -1461,8 +1421,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
-
         internal static bool? WorldSettings_VisualHitBoxes
         {
             get
@@ -1484,8 +1442,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
-
-
 
         internal static bool? WorldSettings_GoldenGuns
         {
@@ -1541,9 +1497,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
-        #endregion
-
+        #endregion Getter/setters From WorldSettings Menu
 
         internal static bool TakeKeyCardOnWanted { get; set; }
         internal static bool TakeKeyCardOnSuspicious { get; set; }
@@ -1572,7 +1526,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                 }
-
             }
         }
 
@@ -1627,7 +1580,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                 }
-
             }
         }
 
@@ -1656,7 +1608,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
                 }
-
             }
         }
 
@@ -1678,7 +1629,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static void ResyncPatronSettings()
         {
             var reader = GetLocalReader();
@@ -1692,10 +1642,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     WorldSettings_GoldenGuns_Toggle.SetIsOnWithoutNotify(reader.goldGuns.GetValueOrDefault(false));
                 }
-
             }
         }
-
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -1735,13 +1683,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             HasSubscribed = false;
         }
+
         private static void SetGuardsCanUse(UdonBehaviour_Cached item, bool guardsCanUse)
         {
             if (item != null)
             {
                 try
                 {
-
                     if (item.RawItem != null)
                     {
                         UdonHeapEditor.PatchHeap(item.RawItem, "guardsCanUse", guardsCanUse, () =>
@@ -1757,6 +1705,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static bool _EveryoneHasGoldenGunCamos { get; set; }
+
         internal static bool EveryoneHasGoldenGunCamos
         {
             get
@@ -1767,25 +1716,19 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 _EveryoneHasGoldenGunCamos = value;
                 Set_GoldenGunsUnlocker(value);
-
             }
         }
-
-
 
         private static void Set_GoldenGunsUnlocker(bool EveryoneHasPatreonPerk)
         {
             foreach (var item in EnableGoldenCamos)
             {
-
                 if (item != null)
                 {
                     item.EveryoneHasPatreonPerk = EveryoneHasPatreonPerk;
                 }
-
             }
         }
-
 
         private static void SetDropOnUse(UdonBehaviour_Cached item, bool dropOnUse)
         {
@@ -1795,18 +1738,18 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 {
                     if (item.RawItem != null)
                     {
-                       UdonHeapEditor.PatchHeap(item.RawItem, "dropOnUse", dropOnUse, () =>
-                       {
-                           Log.Debug($"Setting {item.name} dropOnUse to {dropOnUse}");
-                       });
+                        UdonHeapEditor.PatchHeap(item.RawItem, "dropOnUse", dropOnUse, () =>
+                        {
+                            Log.Debug($"Setting {item.name} dropOnUse to {dropOnUse}");
+                        });
                     }
                 }
-                
                 catch
                 {
                 }
             }
         }
+
         private static void SetunlockPoints(UdonBehaviour_Cached item, int UnlockPoints)
         {
             if (item != null)
@@ -1821,7 +1764,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         });
                     }
                 }
-
                 catch
                 {
                 }
@@ -1830,7 +1772,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static void Patch_canDualWield(GameObject item)
         {
-
             foreach (var udon in item.GetComponentsInChildren<UdonBehaviour>(true))
             {
                 if (udon != null)
@@ -1840,7 +1781,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         var rawitem = udon.ToRawUdonBehaviour();
                         if (rawitem != null)
                         {
-
                             UdonHeapEditor.PatchHeap(rawitem, "canDualWield", true, () =>
                             {
                                 Log.Debug($"Setting {item.name} canDualWield to true");
@@ -1851,9 +1791,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+
         private static void Patch__MaxPickupDist(GameObject item)
         {
-
             foreach (var udon in item.GetComponentsInChildren<UdonBehaviour>(true))
             {
                 if (udon != null)
@@ -1863,7 +1803,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         var rawitem = udon.ToRawUdonBehaviour();
                         if (rawitem != null)
                         {
-
                             UdonHeapEditor.PatchHeap(rawitem, "maxPickupDist", 999999999f, () =>
                             {
                                 Log.Debug($"Setting {item.gameObject.name} maxPickupDist to 999999999");
@@ -1889,7 +1828,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         });
                     }
                 }
-                catch{}
+                catch { }
             }
         }
 
@@ -1922,6 +1861,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 ToggleSmallCrateESP(value);
             }
         }
+
         internal static void OpenAllLargeCrates()
         {
             if (!FreeCratesItems)
@@ -1953,7 +1893,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             foreach (var CrateBehaviour in Small_Crates_udon)
             {
                 if (CrateBehaviour != null)
-                { 
+                {
                     var body = CrateBehaviour.transform.FindObject("Crate");
                     if (body != null)
                     {
@@ -1966,9 +1906,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
-
-    private static void ToggleLargeCrateESP(bool isOn)
+        private static void ToggleLargeCrateESP(bool isOn)
         {
             foreach (var crate in Large_Crates)
             {
@@ -2005,6 +1943,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+
         internal static void TakeKeyCard()
         {
             if (TakeKeycard != null)
@@ -2013,8 +1952,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
             else
             {
-
-
                 if (GetRedCard != null)
                 {
                     if (RedCardBehaviour == null)
@@ -2033,16 +1970,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     }
 
                     GetRedCard.InvokeBehaviour();
-
                 }
             }
         }
 
-
         internal static Ostinyo_World_PatronCracker PatronController { get; set; }
-
-
-
 
         private static GameObject _Spawn_Area;
 
@@ -2062,7 +1994,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
         private static GameObject _Gun_Color_Panel;
+
         internal static GameObject Gun_Color_Panel
         {
             get
@@ -2081,8 +2015,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Respawn_Points;
+
         internal static GameObject Respawn_Points
         {
             get
@@ -2100,8 +2034,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Game_Join_Blocker;
+
         internal static GameObject Game_Join_Blocker
         {
             get
@@ -2139,6 +2073,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static GameObject _Player_Object_Pool;
+
         internal static GameObject Player_Object_Pool
         {
             get
@@ -2155,8 +2090,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
-
-
 
         private static GameObject _Openables;
 
@@ -2177,8 +2110,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Vents;
+
         internal static GameObject Vents
         {
             get
@@ -2196,8 +2129,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Floor_Vents;
+
         internal static GameObject Floor_Vents
         {
             get
@@ -2214,7 +2147,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
-
 
         private static GameObject _PrisonRoot;
 
@@ -2234,6 +2166,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
         private static GameObject _Lit_Prison;
 
         internal static GameObject Lit_Prison
@@ -2253,6 +2186,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
         private static GameObject _Dark_Prison;
 
         internal static GameObject Dark_Prison
@@ -2273,7 +2207,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
         private static GameObject _Dark_Gate_Button;
+
         internal static GameObject Dark_Gate_Button
         {
             get
@@ -2291,8 +2227,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Dark_Guard_Booth;
+
         internal static GameObject Dark_Guard_Booth
         {
             get
@@ -2311,6 +2247,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static GameObject _Dark_Yard;
+
         internal static GameObject Dark_Yard
         {
             get
@@ -2328,7 +2265,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
+
         private static GameObject _Lit_Gate_Button;
+
         internal static GameObject Lit_Gate_Button
         {
             get
@@ -2346,8 +2285,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Lit_Guard_Booth;
+
         internal static GameObject Lit_Guard_Booth
         {
             get
@@ -2366,6 +2305,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static GameObject _Lit_Yard;
+
         internal static GameObject Lit_Yard
         {
             get
@@ -2383,10 +2323,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
- 
-
 
         private static GameObject _Spawn_Points;
+
         internal static GameObject Spawn_Points
         {
             get
@@ -2405,10 +2344,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
-
-
         private static GameObject _Prisoner_Spawns;
+
         internal static GameObject Prisoner_Spawns
         {
             get
@@ -2427,8 +2364,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Guard_Spawns;
+
         internal static GameObject Guard_Spawns
         {
             get
@@ -2446,9 +2383,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 return null;
             }
         }
-
-
-
 
         private static GameObject _ITEMS;
 
@@ -2470,6 +2404,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
 
         private static GameObject _Money;
+
         internal static GameObject Money
         {
             get
@@ -2488,8 +2423,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _MoneyPile;
+
         internal static GameObject MoneyPile
         {
             get
@@ -2508,9 +2443,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
-
         private static GameObject _Keycards;
+
         internal static GameObject Keycards
         {
             get
@@ -2529,8 +2463,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             }
         }
 
-
         private static GameObject _Keycard;
+
         internal static GameObject Keycard
         {
             get
@@ -2562,12 +2496,16 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         private static List<GameObject> Large_Crates { get; set; } = new List<GameObject>();
         private static List<GameObject> Small_Crates { get; set; } = new List<GameObject>();
 
-
         private static List<UdonBehaviour_Cached> Large_Crates_udon { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> Small_Crates_udon { get; set; } = new List<UdonBehaviour_Cached>();
 
         private static List<UdonBehaviour_Cached> Knifes { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes { get; set; } = new List<UdonBehaviour_Cached>();
+        internal static Transform GateButtonTrigger { get; set; }
+
+        internal static BoxCollider GateButtonCollider { get; set; }
+
+        internal static Vector3 OriginalGateButtonPos { get; set; } = Vector3.zero;
         internal static Toggle WorldSettings_GoldenGuns_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_DoublePoints_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;
@@ -2580,6 +2518,5 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Button Gun_Blue_Color_Button { get; set; } = null;
         internal static Button Gun_Purple_Color_Button { get; set; } = null;
         internal static Button Gun_Red_Color_Button { get; set; } = null;
-
     }
 }

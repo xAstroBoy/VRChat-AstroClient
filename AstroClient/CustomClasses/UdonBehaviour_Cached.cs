@@ -161,7 +161,9 @@
             {
                 if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                 {
+                    BeforeInvoking.SafetyRaise();
                     UdonBehaviour.SendUdonEvent(EventKey, EventTarget);
+                    AfterInvoking.SafetyRaise();
                 }
             }
             else
