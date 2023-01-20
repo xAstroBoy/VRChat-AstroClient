@@ -103,11 +103,11 @@ namespace AstroClient.Tools.UdonEditor
                                 string unpackedsymbol;
                                 if(!raw.isFakeUdon)
                                 {
-                                     unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(raw.FakeUdonHeap, address, UnboxVariable);
+                                     unpackedsymbol = UdonHeapUnboxerUtils.RealUdon_UnboxAsString(raw.UdonHeap, address, UnboxVariable);
                                 }
                                 else
                                 {
-                                     unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(raw.UdonHeap, address, UnboxVariable);
+                                     unpackedsymbol = UdonHeapUnboxerUtils.FakeUdon_UnboxAsString(raw.FakeUdonHeap, address, UnboxVariable);
                                 }
                                 builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
@@ -169,7 +169,7 @@ namespace AstroClient.Tools.UdonEditor
                             if (UnboxVariable != null)
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
-                                var unpackedsymbol = UdonHeapUnboxerUtils.UnboxAsString(unpackedudon.UdonHeap, address, UnboxVariable);
+                                var unpackedsymbol = UdonHeapUnboxerUtils.RealUdon_UnboxAsString(unpackedudon.UdonHeap, address, UnboxVariable);
                                 _ = builder.AppendLine($"[Udon Unboxer] : ACTION {udonnode.name} : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
                             }
                         }

@@ -110,7 +110,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 var UdonObj = gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {
-                    var heaptostring = UdonObj.UnboxAsString(item);
+                    var heaptostring = UdonObj.Real_UnboxAsString(item);
                     if (heaptostring.IsNotNullOrEmptyOrWhiteSpace())
                     {
                         var cleaned = heaptostring.RemoveWhitespace();

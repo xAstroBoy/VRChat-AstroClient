@@ -16,7 +16,7 @@ namespace AstroClient.Tools.UdonEditor
         internal static List<string> UnsupportedTypes = new List<string>();
         // TODO : make something to get any Type (Convert them back to system types if Il2cppSystem ones, and Convert them to string!)
 
-        internal static string UnboxAsString(RawUdonBehaviour rawitem, string SymbolName)
+        internal static string Real_UnboxAsString(RawUdonBehaviour rawitem, string SymbolName)
         {
             if (rawitem != null)
             {
@@ -25,14 +25,7 @@ namespace AstroClient.Tools.UdonEditor
                     var address = rawitem.UdonSymbolTable.GetAddressFromSymbol(SymbolName);
                     if (address != null)
                     {
-                        if (!rawitem.isFakeUdon)
-                        {
-                            return UnboxAsString(rawitem.UdonHeap, address, rawitem.UdonHeap.GetHeapVariable(address));
-                        }
-                        else
-                        {
-                            return UnboxAsString(rawitem.FakeUdonHeap, address, rawitem.FakeUdonHeap.GetHeapVariable(address)); 
-                        }
+                        return RealUdon_UnboxAsString(rawitem.UdonHeap, address, rawitem.UdonHeap.GetHeapVariable(address));
                     }
                 }
                 catch
@@ -42,7 +35,27 @@ namespace AstroClient.Tools.UdonEditor
             return null;
         }
 
-        internal static string UnboxAsString(UdonHeap heap, uint address, Il2CppSystem.Object obj)
+        internal static string FakeUdon_UnboxAsString(RawUdonBehaviour rawitem, string SymbolName)
+        {
+            if (rawitem != null)
+            {
+                try
+                {
+                    var address = rawitem.UdonSymbolTable.GetAddressFromSymbol(SymbolName);
+                    if (address != null)
+                    {
+                        return FakeUdon_UnboxAsString(rawitem.FakeUdonHeap, address, rawitem.FakeUdonHeap.GetHeapVariable(address));
+                    }
+                }
+                catch
+                {
+                }
+            }
+            return null;
+
+        }
+
+        internal static string RealUdon_UnboxAsString(UdonHeap heap, uint address, Il2CppSystem.Object obj)
         {
             try
             {
@@ -55,150 +68,159 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "System.String":
                             {
-                                return PrintAsString<string>(heap, address);
+                                return RealUdon_PrintAsString<string>(heap, address);
                             }
                         case "System.String[]":
                             {
-                                return PrintAsString<string[]>(heap, address);
+                                return RealUdon_PrintAsString<string[]>(heap, address);
                             }
                         case "System.StringComparison":
                             {
-                                return PrintAsString<System.StringComparison>(heap, address);
+                                return RealUdon_PrintAsString<System.StringComparison>(heap, address);
                             }
                         case "System.StringComparison[]":
                             {
-                                return PrintAsString<System.StringComparison[]>(heap, address);
+                                return RealUdon_PrintAsString<System.StringComparison[]>(heap, address);
                             }
 
                         case "System.UInt32":
                             {
-                                return PrintAsString<uint>(heap, address);
+                                return RealUdon_PrintAsString<uint>(heap, address);
                             }
                         case "System.UInt32[]":
                             {
-                                return PrintAsString<uint[]>(heap, address);
+                                return RealUdon_PrintAsString<uint[]>(heap, address);
                             }
+                        case "System.UInt64":
+                            {
+                                return RealUdon_PrintAsString<ulong>(heap, address);
+                            }
+                        case "System.UInt64[]":
+                            {
+                                return RealUdon_PrintAsString<ulong[]>(heap, address);
+                            }
+
                         case "System.Int32":
                             {
-                                return PrintAsString<int>(heap, address);
+                                return RealUdon_PrintAsString<int>(heap, address);
                             }
                         case "System.Int32[]":
                             {
-                                return PrintAsString<int[]>(heap, address);
+                                return RealUdon_PrintAsString<int[]>(heap, address);
                             }
                         case "System.Int64":
                             {
-                                return PrintAsString<long>(heap, address);
+                                return RealUdon_PrintAsString<long>(heap, address);
                             }
                         case "System.Int64[]":
                             {
-                                return PrintAsString<long[]>(heap, address);
+                                return RealUdon_PrintAsString<long[]>(heap, address);
                             }
                         case "System.Char":
                             {
-                                return PrintAsString<char>(heap, address);
+                                return RealUdon_PrintAsString<char>(heap, address);
                             }
                         case "System.Char[]":
                             {
-                                return PrintAsString<char[]>(heap, address);
+                                return RealUdon_PrintAsString<char[]>(heap, address);
                             }
                         case "System.Single":
                             {
-                                return PrintAsString<float>(heap, address);
+                                return RealUdon_PrintAsString<float>(heap, address);
                             }
                         case "System.Single[]":
                             {
-                                return PrintAsString<float[]>(heap, address);
+                                return RealUdon_PrintAsString<float[]>(heap, address);
                             }
                         case "System.Boolean":
                             {
-                                return PrintAsString<bool>(heap, address);
+                                return RealUdon_PrintAsString<bool>(heap, address);
                             }
                         case "System.Boolean[]":
                             {
-                                return PrintAsString<bool[]>(heap, address);
+                                return RealUdon_PrintAsString<bool[]>(heap, address);
                             }
                         case "System.Byte":
                             {
-                                return PrintAsString<byte>(heap, address);
+                                return RealUdon_PrintAsString<byte>(heap, address);
                             }
                         case "System.Byte[]":
                             {
-                                return PrintAsString<byte[]>(heap, address);
+                                return RealUdon_PrintAsString<byte[]>(heap, address);
                             }
                         case "System.Int16":
                             {
-                                return PrintAsString<short>(heap, address);
+                                return RealUdon_PrintAsString<short>(heap, address);
                             }
                         case "System.Int16[]":
                             {
-                                return PrintAsString<short[]>(heap, address);
+                                return RealUdon_PrintAsString<short[]>(heap, address);
                             }
 
                         case "System.UInt16":
                             {
-                                return PrintAsString<ushort>(heap, address);
+                                return RealUdon_PrintAsString<ushort>(heap, address);
                             }
                         case "System.UInt16[]":
                             {
-                                return PrintAsString<ushort[]>(heap, address);
+                                return RealUdon_PrintAsString<ushort[]>(heap, address);
                             }
                         case "System.Double":
                             {
-                                return PrintAsString<double>(heap, address);
+                                return RealUdon_PrintAsString<double>(heap, address);
                             }
                         case "System.Double[]":
                             {
-                                return PrintAsString<double[]>(heap, address);
+                                return RealUdon_PrintAsString<double[]>(heap, address);
                             }
                         case "System.TimeSpan":
                             {
-                                return PrintAsString<TimeSpan>(heap, address);
+                                return RealUdon_PrintAsString<TimeSpan>(heap, address);
                             }
                         case "System.TimeSpan[]":
                             {
-                                return PrintAsString<TimeSpan[]>(heap, address);
+                                return RealUdon_PrintAsString<TimeSpan[]>(heap, address);
                             }
                         case "System.Diagnostics.Stopwatch":
                             {
-                                return PrintAsString<System.Diagnostics.Stopwatch>(heap, address);
+                                return RealUdon_PrintAsString<System.Diagnostics.Stopwatch>(heap, address);
                             }
                         case "System.Diagnostics.Stopwatch[]":
                             {
-                                return PrintAsString<System.Diagnostics.Stopwatch[]>(heap, address);
+                                return RealUdon_PrintAsString<System.Diagnostics.Stopwatch[]>(heap, address);
                             }
                         case "System.DateTime":
                             {
-                                return PrintAsString<System.DateTime>(heap, address);
+                                return RealUdon_PrintAsString<System.DateTime>(heap, address);
                             }
                         case "System.DateTime[]":
                             {
-                                return PrintAsString<System.DateTime[]>(heap, address);
+                                return RealUdon_PrintAsString<System.DateTime[]>(heap, address);
                             }
                         case "System.DayOfWeek":
                             {
-                                return PrintAsString<System.DayOfWeek>(heap, address);
+                                return RealUdon_PrintAsString<System.DayOfWeek>(heap, address);
                             }
                         case "System.DayOfWeek[]":
                             {
-                                return PrintAsString<System.DayOfWeek[]>(heap, address);
+                                return RealUdon_PrintAsString<System.DayOfWeek[]>(heap, address);
                             }
 
                         case "System.Object":
                             {
-                                return PrintAsString<System.Object>(heap, address);
+                                return RealUdon_PrintAsString<System.Object>(heap, address);
                             }
                         case "System.Object[]":
                             {
-                                return PrintAsString<System.Object[]>(heap, address);
+                                return RealUdon_PrintAsString<System.Object[]>(heap, address);
                             }
                         case "System.Globalization.NumberStyles":
                             {
-                                return PrintAsString<System.Globalization.NumberStyles>(heap, address);
+                                return RealUdon_PrintAsString<System.Globalization.NumberStyles>(heap, address);
                             }
                         case "System.Globalization.NumberStyles[]":
                             {
-                                return PrintAsString<System.Globalization.NumberStyles[]>(heap, address);
+                                return RealUdon_PrintAsString<System.Globalization.NumberStyles[]>(heap, address);
                             }
 
                         #endregion System Types
@@ -207,627 +229,627 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "UnityEngine.Color":
                             {
-                                return PrintAsString<UnityEngine.Color>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Color>(heap, address);
                             }
                         case "UnityEngine.Color[]":
                             {
-                                return PrintAsString<UnityEngine.Color[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Color[]>(heap, address);
                             }
                         case "UnityEngine.Color32":
                             {
-                                return PrintAsString<UnityEngine.Color32>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Color32>(heap, address);
                             }
                         case "UnityEngine.Color32[]":
                             {
-                                return PrintAsString<UnityEngine.Color32[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Color32[]>(heap, address);
                             }
                         case "UnityEngine.Font":
                             {
-                                return PrintAsString<UnityEngine.Font>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Font>(heap, address);
                             }
                         case "UnityEngine.Font[]":
                             {
-                                return PrintAsString<UnityEngine.Font[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Font[]>(heap, address);
                             }
 
                         case "UnityEngine.Material":
                             {
-                                return PrintAsString<Material>(heap, address);
+                                return RealUdon_PrintAsString<Material>(heap, address);
                             }
                         case "UnityEngine.Material[]":
                             {
-                                return PrintAsString<Material[]>(heap, address);
+                                return RealUdon_PrintAsString<Material[]>(heap, address);
                             }
                         case "UnityEngine.Renderer":
                             {
-                                return PrintAsString<UnityEngine.Renderer>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Renderer>(heap, address);
                             }
                         case "UnityEngine.Renderer[]":
                             {
-                                return PrintAsString<Renderer[]>(heap, address);
+                                return RealUdon_PrintAsString<Renderer[]>(heap, address);
                             }
                         case "UnityEngine.TrailRenderer":
                             {
-                                return PrintAsString<UnityEngine.Renderer>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Renderer>(heap, address);
                             }
                         case "UnityEngine.TrailRenderer[]":
                             {
-                                return PrintAsString<Renderer[]>(heap, address);
+                                return RealUdon_PrintAsString<Renderer[]>(heap, address);
                             }
                         case "UnityEngine.SkinnedMeshRenderer":
                             {
-                                return PrintAsString<UnityEngine.SkinnedMeshRenderer>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.SkinnedMeshRenderer>(heap, address);
                             }
                         case "UnityEngine.SkinnedMeshRenderer[]":
                             {
-                                return PrintAsString<SkinnedMeshRenderer[]>(heap, address);
+                                return RealUdon_PrintAsString<SkinnedMeshRenderer[]>(heap, address);
                             }
 
                         case "UnityEngine.Gradient":
                             {
-                                return PrintAsString<UnityEngine.Gradient>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Gradient>(heap, address);
                             }
                         case "UnityEngine.Gradient[]":
                             {
-                                return PrintAsString<Gradient[]>(heap, address);
+                                return RealUdon_PrintAsString<Gradient[]>(heap, address);
                             }
 
                         case "UnityEngine.MeshRenderer":
                             {
-                                return PrintAsString<MeshRenderer>(heap, address);
+                                return RealUdon_PrintAsString<MeshRenderer>(heap, address);
                             }
                         case "UnityEngine.MeshRenderer[]":
                             {
-                                return PrintAsString<MeshRenderer[]>(heap, address);
+                                return RealUdon_PrintAsString<MeshRenderer[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem":
                             {
-                                return PrintAsString<ParticleSystem>(heap, address);
+                                return RealUdon_PrintAsString<ParticleSystem>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem[]":
                             {
-                                return PrintAsString<ParticleSystem[]>(heap, address);
+                                return RealUdon_PrintAsString<ParticleSystem[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MainModule":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MainModule>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MainModule>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MainModule[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MainModule[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MainModule[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmitParams":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.EmitParams>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmitParams[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.EmitParams[]>(heap, address);
                             }
 
                         case "UnityEngine.Ray":
                             {
-                                return PrintAsString<Ray>(heap, address);
+                                return RealUdon_PrintAsString<Ray>(heap, address);
                             }
                         case "UnityEngine.Ray[]":
                             {
-                                return PrintAsString<Ray[]>(heap, address);
+                                return RealUdon_PrintAsString<Ray[]>(heap, address);
                             }
                         case "UnityEngine.Canvas":
                             {
-                                return PrintAsString<Canvas>(heap, address);
+                                return RealUdon_PrintAsString<Canvas>(heap, address);
                             }
                         case "UnityEngine.Canvas[]":
                             {
-                                return PrintAsString<Canvas[]>(heap, address);
+                                return RealUdon_PrintAsString<Canvas[]>(heap, address);
                             }
 
                         case "UnityEngine.Component":
                             {
-                                return PrintAsString<Component>(heap, address);
+                                return RealUdon_PrintAsString<Component>(heap, address);
                             }
                         case "UnityEngine.Component[]":
                             {
-                                return PrintAsString<Component[]>(heap, address);
+                                return RealUdon_PrintAsString<Component[]>(heap, address);
                             }
                         case "UnityEngine.Transform":
                             {
-                                return PrintAsString<Transform>(heap, address);
+                                return RealUdon_PrintAsString<Transform>(heap, address);
                             }
                         case "UnityEngine.Transform[]":
                             {
-                                return PrintAsString<Transform[]>(heap, address);
+                                return RealUdon_PrintAsString<Transform[]>(heap, address);
                             }
                         case "UnityEngine.GameObject":
                             {
-                                return PrintAsString<GameObject>(heap, address);
+                                return RealUdon_PrintAsString<GameObject>(heap, address);
                             }
                         case "UnityEngine.GameObject[]":
                             {
-                                return PrintAsString<GameObject[]>(heap, address);
+                                return RealUdon_PrintAsString<GameObject[]>(heap, address);
                             }
                         case "UnityEngine.AudioClip":
                             {
-                                return PrintAsString<AudioClip>(heap, address);
+                                return RealUdon_PrintAsString<AudioClip>(heap, address);
                             }
                         case "UnityEngine.AudioClip[]":
                             {
-                                return PrintAsString<AudioClip[]>(heap, address);
+                                return RealUdon_PrintAsString<AudioClip[]>(heap, address);
                             }
                         case "UnityEngine.Vector2":
                             {
-                                return PrintAsString<Vector2>(heap, address);
+                                return RealUdon_PrintAsString<Vector2>(heap, address);
                             }
                         case "UnityEngine.Vector2[]":
                             {
-                                return PrintAsString<Vector2[]>(heap, address);
+                                return RealUdon_PrintAsString<Vector2[]>(heap, address);
                             }
 
                         case "UnityEngine.Vector3":
                             {
-                                return PrintAsString<Vector3>(heap, address);
+                                return RealUdon_PrintAsString<Vector3>(heap, address);
                             }
                         case "UnityEngine.Vector3[]":
                             {
-                                return PrintAsString<Vector3[]>(heap, address);
+                                return RealUdon_PrintAsString<Vector3[]>(heap, address);
                             }
                         case "UnityEngine.Vector4":
                             {
-                                return PrintAsString<Vector4>(heap, address);
+                                return RealUdon_PrintAsString<Vector4>(heap, address);
                             }
                         case "UnityEngine.Vector4[]":
                             {
-                                return PrintAsString<Vector4[]>(heap, address);
+                                return RealUdon_PrintAsString<Vector4[]>(heap, address);
                             }
 
                         case "UnityEngine.Quaternion":
                             {
-                                return PrintAsString<Quaternion>(heap, address);
+                                return RealUdon_PrintAsString<Quaternion>(heap, address);
                             }
                         case "UnityEngine.Quaternion[]":
                             {
-                                return PrintAsString<Quaternion[]>(heap, address);
+                                return RealUdon_PrintAsString<Quaternion[]>(heap, address);
                             }
                         case "UnityEngine.AudioSource":
                             {
-                                return PrintAsString<AudioSource>(heap, address);
+                                return RealUdon_PrintAsString<AudioSource>(heap, address);
                             }
                         case "UnityEngine.AudioSource[]":
                             {
-                                return PrintAsString<AudioSource[]>(heap, address);
+                                return RealUdon_PrintAsString<AudioSource[]>(heap, address);
                             }
                         case "UnityEngine.HumanBodyBones":
                             {
-                                return PrintAsString<HumanBodyBones>(heap, address);
+                                return RealUdon_PrintAsString<HumanBodyBones>(heap, address);
                             }
                         case "UnityEngine.HumanBodyBones[]":
                             {
-                                return PrintAsString<HumanBodyBones[]>(heap, address);
+                                return RealUdon_PrintAsString<HumanBodyBones[]>(heap, address);
                             }
                         case "UnityEngine.BoxCollider":
                             {
-                                return PrintAsString<BoxCollider>(heap, address);
+                                return RealUdon_PrintAsString<BoxCollider>(heap, address);
                             }
                         case "UnityEngine.BoxCollider[]":
                             {
-                                return PrintAsString<BoxCollider[]>(heap, address);
+                                return RealUdon_PrintAsString<BoxCollider[]>(heap, address);
                             }
                         case "UnityEngine.CapsuleCollider":
                             {
-                                return PrintAsString<CapsuleCollider>(heap, address);
+                                return RealUdon_PrintAsString<CapsuleCollider>(heap, address);
                             }
                         case "UnityEngine.CapsuleCollider[]":
                             {
-                                return PrintAsString<CapsuleCollider[]>(heap, address);
+                                return RealUdon_PrintAsString<CapsuleCollider[]>(heap, address);
                             }
                         case "UnityEngine.SphereCollider":
                             {
-                                return PrintAsString<SphereCollider>(heap, address);
+                                return RealUdon_PrintAsString<SphereCollider>(heap, address);
                             }
                         case "UnityEngine.SphereCollider[]":
                             {
-                                return PrintAsString<SphereCollider[]>(heap, address);
+                                return RealUdon_PrintAsString<SphereCollider[]>(heap, address);
                             }
                         case "UnityEngine.MeshCollider":
                             {
-                                return PrintAsString<MeshCollider>(heap, address);
+                                return RealUdon_PrintAsString<MeshCollider>(heap, address);
                             }
                         case "UnityEngine.MeshCollider[]":
                             {
-                                return PrintAsString<MeshCollider[]>(heap, address);
+                                return RealUdon_PrintAsString<MeshCollider[]>(heap, address);
                             }
                         case "UnityEngine.Collider":
                             {
-                                return PrintAsString<Collider>(heap, address);
+                                return RealUdon_PrintAsString<Collider>(heap, address);
                             }
                         case "UnityEngine.Collider[]":
                             {
-                                return PrintAsString<Collider[]>(heap, address);
+                                return RealUdon_PrintAsString<Collider[]>(heap, address);
                             }
                         case "UnityEngine.Sprite":
                             {
-                                return PrintAsString<Sprite>(heap, address);
+                                return RealUdon_PrintAsString<Sprite>(heap, address);
                             }
                         case "UnityEngine.Sprite[]":
                             {
-                                return PrintAsString<Sprite[]>(heap, address);
+                                return RealUdon_PrintAsString<Sprite[]>(heap, address);
                             }
                         case "UnityEngine.TextAsset":
                             {
-                                return PrintAsString<TextAsset>(heap, address);
+                                return RealUdon_PrintAsString<TextAsset>(heap, address);
                             }
                         case "UnityEngine.TextAsset[]":
                             {
-                                return PrintAsString<TextAsset[]>(heap, address);
+                                return RealUdon_PrintAsString<TextAsset[]>(heap, address);
                             }
                         case "UnityEngine.Rigidbody":
                             {
-                                return PrintAsString<Rigidbody>(heap, address);
+                                return RealUdon_PrintAsString<Rigidbody>(heap, address);
                             }
                         case "UnityEngine.Rigidbody[]":
                             {
-                                return PrintAsString<Rigidbody[]>(heap, address);
+                                return RealUdon_PrintAsString<Rigidbody[]>(heap, address);
                             }
                         case "UnityEngine.Bounds":
                             {
-                                return PrintAsString<Bounds>(heap, address);
+                                return RealUdon_PrintAsString<Bounds>(heap, address);
                             }
                         case "UnityEngine.Bounds[]":
                             {
-                                return PrintAsString<Bounds[]>(heap, address);
+                                return RealUdon_PrintAsString<Bounds[]>(heap, address);
                             }
                         case "UnityEngine.Animator":
                             {
-                                return PrintAsString<Animator>(heap, address);
+                                return RealUdon_PrintAsString<Animator>(heap, address);
                             }
                         case "UnityEngine.Animator[]":
                             {
-                                return PrintAsString<Animator[]>(heap, address);
+                                return RealUdon_PrintAsString<Animator[]>(heap, address);
                             }
                         case "UnityEngine.LayerMask":
                             {
-                                return PrintAsString<LayerMask>(heap, address);
+                                return RealUdon_PrintAsString<LayerMask>(heap, address);
                             }
                         case "UnityEngine.LayerMask[]":
                             {
-                                return PrintAsString<LayerMask[]>(heap, address);
+                                return RealUdon_PrintAsString<LayerMask[]>(heap, address);
                             }
                         case "UnityEngine.LineRenderer":
                             {
-                                return PrintAsString<LineRenderer>(heap, address);
+                                return RealUdon_PrintAsString<LineRenderer>(heap, address);
                             }
                         case "UnityEngine.LineRenderer[]":
                             {
-                                return PrintAsString<LineRenderer[]>(heap, address);
+                                return RealUdon_PrintAsString<LineRenderer[]>(heap, address);
                             }
                         case "UnityEngine.SpriteRenderer":
                             {
-                                return PrintAsString<UnityEngine.SpriteRenderer>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.SpriteRenderer>(heap, address);
                             }
                         case "UnityEngine.SpriteRenderer[]":
                             {
-                                return PrintAsString<UnityEngine.SpriteRenderer[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.SpriteRenderer[]>(heap, address);
                             }
 
                         case "UnityEngine.RaycastHit":
                             {
-                                return PrintAsString<RaycastHit>(heap, address);
+                                return RealUdon_PrintAsString<RaycastHit>(heap, address);
                             }
                         case "UnityEngine.RaycastHit[]":
                             {
-                                return PrintAsString<RaycastHit[]>(heap, address);
+                                return RealUdon_PrintAsString<RaycastHit[]>(heap, address);
                             }
                         case "UnityEngine.RectTransform":
                             {
-                                return PrintAsString<RectTransform>(heap, address);
+                                return RealUdon_PrintAsString<RectTransform>(heap, address);
                             }
                         case "UnityEngine.RectTransform[]":
                             {
-                                return PrintAsString<RectTransform[]>(heap, address);
+                                return RealUdon_PrintAsString<RectTransform[]>(heap, address);
                             }
                         case "UnityEngine.Camera":
                             {
-                                return PrintAsString<Camera>(heap, address);
+                                return RealUdon_PrintAsString<Camera>(heap, address);
                             }
                         case "UnityEngine.Camera[]":
                             {
-                                return PrintAsString<Camera[]>(heap, address);
+                                return RealUdon_PrintAsString<Camera[]>(heap, address);
                             }
                         case "UnityEngine.ReflectionProbe":
                             {
-                                return PrintAsString<ReflectionProbe>(heap, address);
+                                return RealUdon_PrintAsString<ReflectionProbe>(heap, address);
                             }
                         case "UnityEngine.ReflectionProbe[]":
                             {
-                                return PrintAsString<ReflectionProbe[]>(heap, address);
+                                return RealUdon_PrintAsString<ReflectionProbe[]>(heap, address);
                             }
                         case "UnityEngine.KeyCode":
                             {
-                                return PrintAsString<KeyCode>(heap, address);
+                                return RealUdon_PrintAsString<KeyCode>(heap, address);
                             }
                         case "UnityEngine.KeyCode[]":
                             {
-                                return PrintAsString<KeyCode[]>(heap, address);
+                                return RealUdon_PrintAsString<KeyCode[]>(heap, address);
                             }
                         case "UnityEngine.Rect":
                             {
-                                return PrintAsString<Rect>(heap, address);
+                                return RealUdon_PrintAsString<Rect>(heap, address);
                             }
                         case "UnityEngine.Rect[]":
                             {
-                                return PrintAsString<Rect[]>(heap, address);
+                                return RealUdon_PrintAsString<Rect[]>(heap, address);
                             }
                         case "UnityEngine.Mesh":
                             {
-                                return PrintAsString<Mesh>(heap, address);
+                                return RealUdon_PrintAsString<Mesh>(heap, address);
                             }
                         case "UnityEngine.Mesh[]":
                             {
-                                return PrintAsString<Mesh[]>(heap, address);
+                                return RealUdon_PrintAsString<Mesh[]>(heap, address);
                             }
                         case "UnityEngine.Texture":
                             {
-                                return PrintAsString<Texture>(heap, address);
+                                return RealUdon_PrintAsString<Texture>(heap, address);
                             }
                         case "UnityEngine.Texture[]":
                             {
-                                return PrintAsString<Texture[]>(heap, address);
+                                return RealUdon_PrintAsString<Texture[]>(heap, address);
                             }
                         case "UnityEngine.Texture2D":
                             {
-                                return PrintAsString<Texture2D>(heap, address);
+                                return RealUdon_PrintAsString<Texture2D>(heap, address);
                             }
                         case "UnityEngine.Texture2D[]":
                             {
-                                return PrintAsString<Texture2D[]>(heap, address);
+                                return RealUdon_PrintAsString<Texture2D[]>(heap, address);
                             }
                         case "UnityEngine.RenderTexture":
                             {
-                                return PrintAsString<RenderTexture>(heap, address);
+                                return RealUdon_PrintAsString<RenderTexture>(heap, address);
                             }
                         case "UnityEngine.RenderTexture[]":
                             {
-                                return PrintAsString<RenderTexture[]>(heap, address);
+                                return RealUdon_PrintAsString<RenderTexture[]>(heap, address);
                             }
                         case "UnityEngine.UI.Text":
                             {
-                                return PrintAsString<UnityEngine.UI.Text>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Text>(heap, address);
                             }
                         case "UnityEngine.UI.Text[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Text[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Text[]>(heap, address);
                             }
                         case "UnityEngine.UI.Toggle":
                             {
-                                return PrintAsString<UnityEngine.UI.Toggle>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Toggle>(heap, address);
                             }
                         case "UnityEngine.UI.Toggle[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Toggle[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Toggle[]>(heap, address);
                             }
                         case "UnityEngine.UI.ScrollRect":
                             {
-                                return PrintAsString<UnityEngine.UI.ScrollRect>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.ScrollRect>(heap, address);
                             }
                         case "UnityEngine.UI.ScrollRect[]":
                             {
-                                return PrintAsString<UnityEngine.UI.ScrollRect[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.ScrollRect[]>(heap, address);
                             }
                         case "UnityEngine.UI.InputField":
                             {
-                                return PrintAsString<UnityEngine.UI.InputField>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.InputField>(heap, address);
                             }
                         case "UnityEngine.UI.InputField[]":
                             {
-                                return PrintAsString<UnityEngine.UI.InputField[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.InputField[]>(heap, address);
                             }
                         case "UnityEngine.UI.Image":
                             {
-                                return PrintAsString<UnityEngine.UI.Image>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Image>(heap, address);
                             }
                         case "UnityEngine.UI.Image[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Image[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Image[]>(heap, address);
                             }
                         case "UnityEngine.UI.Button":
                             {
-                                return PrintAsString<UnityEngine.UI.Button>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Button>(heap, address);
                             }
                         case "UnityEngine.UI.Button[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Button[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Button[]>(heap, address);
                             }
                         case "UnityEngine.UI.Slider":
                             {
-                                return PrintAsString<UnityEngine.UI.Slider>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Slider>(heap, address);
                             }
                         case "UnityEngine.UI.Slider[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Slider[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.Slider[]>(heap, address);
                             }
                         case "UnityEngine.UI.RawImage":
                             {
-                                return PrintAsString<UnityEngine.UI.RawImage>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.RawImage>(heap, address);
                             }
                         case "UnityEngine.UI.RawImage[]":
                             {
-                                return PrintAsString<UnityEngine.UI.RawImage[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.UI.RawImage[]>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshAgent":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshAgent>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AI.NavMeshAgent>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshAgent[]":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshAgent[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AI.NavMeshAgent[]>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshHit":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshHit>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AI.NavMeshHit>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshHit[]":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshHit[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AI.NavMeshHit[]>(heap, address);
                             }
                         case "UnityEngine.ConstantForce":
                             {
-                                return PrintAsString<UnityEngine.ConstantForce>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ConstantForce>(heap, address);
                             }
                         case "UnityEngine.ConstantForce[]":
                             {
-                                return PrintAsString<UnityEngine.ConstantForce[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ConstantForce[]>(heap, address);
                             }
                         case "UnityEngine.AnimatorStateInfo":
                             {
-                                return PrintAsString<UnityEngine.AnimatorStateInfo>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AnimatorStateInfo>(heap, address);
                             }
                         case "UnityEngine.AnimatorStateInfo[]":
                             {
-                                return PrintAsString<UnityEngine.AnimatorStateInfo[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.AnimatorStateInfo[]>(heap, address);
                             }
                         case "UnityEngine.Light":
                             {
-                                return PrintAsString<UnityEngine.Light>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Light>(heap, address);
                             }
                         case "UnityEngine.Light[]":
                             {
-                                return PrintAsString<UnityEngine.Light[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Light[]>(heap, address);
                             }
                         case "UnityEngine.OcclusionPortal":
                             {
-                                return PrintAsString<UnityEngine.OcclusionPortal>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.OcclusionPortal>(heap, address);
                             }
                         case "UnityEngine.OcclusionPortal[]":
                             {
-                                return PrintAsString<UnityEngine.OcclusionPortal[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.OcclusionPortal[]>(heap, address);
                             }
                         case "UnityEngine.Animations.PositionConstraint":
                             {
-                                return PrintAsString<UnityEngine.Animations.PositionConstraint>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Animations.PositionConstraint>(heap, address);
                             }
                         case "UnityEngine.Animations.PositionConstraint[]":
                             {
-                                return PrintAsString<UnityEngine.Animations.PositionConstraint[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Animations.PositionConstraint[]>(heap, address);
                             }
                         case "UnityEngine.Space":
                             {
-                                return PrintAsString<UnityEngine.Space>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Space>(heap, address);
                             }
                         case "UnityEngine.Space[]":
                             {
-                                return PrintAsString<UnityEngine.Space[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Space[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeMode[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmissionModule":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.EmissionModule>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem_EmissionModule[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.EmissionModule[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve[]>(heap, address);
                             }
                         case "UnityEngine.JointMotor":
                             {
-                                return PrintAsString<UnityEngine.JointMotor>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.JointMotor>(heap, address);
                             }
                         case "UnityEngine.JointMotor[]":
                             {
-                                return PrintAsString<UnityEngine.JointMotor[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.JointMotor[]>(heap, address);
                             }
                         case "UnityEngine.ForceMode":
                             {
-                                return PrintAsString<UnityEngine.ForceMode>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ForceMode>(heap, address);
                             }
                         case "UnityEngine.ForceMode[]":
                             {
-                                return PrintAsString<UnityEngine.ForceMode[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.ForceMode[]>(heap, address);
                             }
                         case "UnityEngine.HingeJoint":
                             {
-                                return PrintAsString<UnityEngine.HingeJoint>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.HingeJoint>(heap, address);
                             }
                         case "UnityEngine.HingeJoint[]":
                             {
-                                return PrintAsString<UnityEngine.HingeJoint[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.HingeJoint[]>(heap, address);
                             }
                         case "UnityEngine.CustomRenderTexture":
                             {
-                                return PrintAsString<UnityEngine.CustomRenderTexture>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.CustomRenderTexture>(heap, address);
                             }
                         case "UnityEngine.CustomRenderTexture[]":
                             {
-                                return PrintAsString<UnityEngine.CustomRenderTexture[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.CustomRenderTexture[]>(heap, address);
                             }
                         case "UnityEngine.TextureFormat":
                             {
-                                return PrintAsString<UnityEngine.TextureFormat>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.TextureFormat>(heap, address);
                             }
                         case "UnityEngine.TextureFormat[]":
                             {
-                                return PrintAsString<UnityEngine.TextureFormat[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.TextureFormat[]>(heap, address);
                             }
                         case "UnityEngine.Collision":
                             {
-                                return PrintAsString<UnityEngine.Collision>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Collision>(heap, address);
                             }
                         case "UnityEngine.Collision[]":
                             {
-                                return PrintAsString<UnityEngine.Collision[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Collision[]>(heap, address);
                             }
                         case "UnityEngine.Animations.ParentConstraint":
                             {
-                                return PrintAsString<UnityEngine.Animations.ParentConstraint>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Animations.ParentConstraint>(heap, address);
                             }
                         case "UnityEngine.Animations.ParentConstraint[]":
                             {
-                                return PrintAsString<UnityEngine.Animations.ParentConstraint[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.Animations.ParentConstraint[]>(heap, address);
                             }
                         case "UnityEngine.MaterialPropertyBlock":
                             {
-                                return PrintAsString<UnityEngine.MaterialPropertyBlock>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.MaterialPropertyBlock>(heap, address);
                             }
                         case "UnityEngine.MaterialPropertyBlock[]":
                             {
-                                return PrintAsString<UnityEngine.MaterialPropertyBlock[]>(heap, address);
+                                return RealUdon_PrintAsString<UnityEngine.MaterialPropertyBlock[]>(heap, address);
                             }
 
                         #endregion Unity Engine
@@ -835,192 +857,192 @@ namespace AstroClient.Tools.UdonEditor
                         #region VRChat
                         case "VRC.SDKBase.VRC_Pickup+PickupOrientation":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupOrientation[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+AutoHoldMode":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+AutoHoldMode[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode[]>(heap, address);
                             }
 
 
                         case "VRC.SDKBase.VRCPlayerApi":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(heap, address);
                             }
 
                         case "VRC.SDKBase.VRCUrl":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCUrl>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCUrl>(heap, address);
                             }
                         case "VRC.SDKBase.VRCUrl[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCUrl[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDKBase.VRCUrl[]>(heap, address);
                             }
                         case "VRC.Udon.UdonBehaviour":
                             {
-                                return PrintAsString<VRC.Udon.UdonBehaviour>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.UdonBehaviour>(heap, address);
                             }
                         case "VRC.Udon.UdonBehaviour[]":
                             {
-                                return PrintAsString<VRC.Udon.UdonBehaviour[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.UdonBehaviour[]>(heap, address);
                             }
                         case "VRC.Udon.Common.SerializationResult":
                             {
-                                return PrintAsString<VRC.Udon.Common.SerializationResult>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.SerializationResult>(heap, address);
                             }
                         case "VRC.Udon.Common.SerializationResult[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.SerializationResult[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.SerializationResult[]>(heap, address);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
                             {
-                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget>(heap, address);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(heap, address);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming":
                             {
-                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.Enums.EventTiming>(heap, address);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.Enums.EventTiming[]>(heap, address);
                             }
 
                         case "VRC.SDK3.Components.Video.VideoError":
                             {
-                                return PrintAsString<VRC.SDK3.Components.Video.VideoError>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.Video.VideoError>(heap, address);
                             }
                         case "VRC.SDK3.Components.Video.VideoError[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.Video.VideoError[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.Video.VideoError[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCUrlInputField>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCUrlInputField[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCStation":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCStation>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCStation>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCStation[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCStation[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCStation[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCObjectSync>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCObjectSync[]>(heap, address);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs":
                             {
-                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.UdonInputEventArgs>(heap, address);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.UdonInputEventArgs[]>(heap, address);
                             }
                         case "VRC.Udon.Common.HandType":
                             {
-                                return PrintAsString<VRC.Udon.Common.HandType>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.HandType>(heap, address);
                             }
                         case "VRC.Udon.Common.HandType[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.HandType[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.Udon.Common.HandType[]>(heap, address);
                             }
 
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCPickup":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCPickup>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCPickup>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCPickup[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCPickup[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCPickup[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCObjectPool>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool[]>(heap, address);
+                                return RealUdon_PrintAsString<VRC.SDK3.Components.VRCObjectPool[]>(heap, address);
                             }
 
                         #endregion VRChat
@@ -1029,19 +1051,19 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "TMPro.TextMeshPro":
                             {
-                                return PrintAsString<TMPro.TextMeshPro>(heap, address);
+                                return RealUdon_PrintAsString<TMPro.TextMeshPro>(heap, address);
                             }
                         case "TMPro.TextMeshPro[]":
                             {
-                                return PrintAsString<TMPro.TextMeshPro[]>(heap, address);
+                                return RealUdon_PrintAsString<TMPro.TextMeshPro[]>(heap, address);
                             }
                         case "TMPro.TextMeshProUGUI":
                             {
-                                return PrintAsString<TMPro.TextMeshProUGUI>(heap, address);
+                                return RealUdon_PrintAsString<TMPro.TextMeshProUGUI>(heap, address);
                             }
                         case "TMPro.TextMeshProUGUI[]":
                             {
-                                return PrintAsString<TMPro.TextMeshProUGUI[]>(heap, address);
+                                return RealUdon_PrintAsString<TMPro.TextMeshProUGUI[]>(heap, address);
                             }
 
                         #endregion TMPRo
@@ -1083,14 +1105,14 @@ namespace AstroClient.Tools.UdonEditor
         /// <param name="heap"></param>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal static string PrintAsString<T>(UdonHeap heap, uint address)
+        internal static string RealUdon_PrintAsString<T>(UdonHeap heap, uint address)
         {  
             // Detect if is a array .
             var FullName = typeof(T).FullName;
 
             // before we start, let's try a extra step.
 
-            //if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
+            if (!heap.isHeapVariableValid<T>(address)) return $"Unitialized {FullName}";
 
             if (FullName != null && FullName.EndsWith("[]"))
             {
@@ -3097,7 +3119,14 @@ namespace AstroClient.Tools.UdonEditor
             return null;
         }
 
-        internal static string UnboxAsString(FakeUdonHeap heap, uint address, Il2CppSystem.Object obj)
+
+
+
+
+
+
+
+        internal static string FakeUdon_UnboxAsString(FakeUdonHeap heap, uint address, Il2CppSystem.Object obj)
         {
             try
             {
@@ -3110,150 +3139,159 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "System.String":
                             {
-                                return PrintAsString<string>(heap, address);
+                                return FakeUdon_PrintAsString<string>(heap, address);
                             }
                         case "System.String[]":
                             {
-                                return PrintAsString<string[]>(heap, address);
+                                return FakeUdon_PrintAsString<string[]>(heap, address);
                             }
                         case "System.StringComparison":
                             {
-                                return PrintAsString<System.StringComparison>(heap, address);
+                                return FakeUdon_PrintAsString<System.StringComparison>(heap, address);
                             }
                         case "System.StringComparison[]":
                             {
-                                return PrintAsString<System.StringComparison[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.StringComparison[]>(heap, address);
                             }
 
                         case "System.UInt32":
                             {
-                                return PrintAsString<uint>(heap, address);
+                                return FakeUdon_PrintAsString<uint>(heap, address);
                             }
                         case "System.UInt32[]":
                             {
-                                return PrintAsString<uint[]>(heap, address);
+                                return FakeUdon_PrintAsString<uint[]>(heap, address);
                             }
+                        case "System.UInt64":
+                            {
+                                return FakeUdon_PrintAsString<ulong>(heap, address);
+                            }
+                        case "System.UInt64[]":
+                            {
+                                return FakeUdon_PrintAsString<ulong[]>(heap, address);
+                            }
+
                         case "System.Int32":
                             {
-                                return PrintAsString<int>(heap, address);
+                                return FakeUdon_PrintAsString<int>(heap, address);
                             }
                         case "System.Int32[]":
                             {
-                                return PrintAsString<int[]>(heap, address);
+                                return FakeUdon_PrintAsString<int[]>(heap, address);
                             }
                         case "System.Int64":
                             {
-                                return PrintAsString<long>(heap, address);
+                                return FakeUdon_PrintAsString<long>(heap, address);
                             }
                         case "System.Int64[]":
                             {
-                                return PrintAsString<long[]>(heap, address);
+                                return FakeUdon_PrintAsString<long[]>(heap, address);
                             }
                         case "System.Char":
                             {
-                                return PrintAsString<char>(heap, address);
+                                return FakeUdon_PrintAsString<char>(heap, address);
                             }
                         case "System.Char[]":
                             {
-                                return PrintAsString<char[]>(heap, address);
+                                return FakeUdon_PrintAsString<char[]>(heap, address);
                             }
                         case "System.Single":
                             {
-                                return PrintAsString<float>(heap, address);
+                                return FakeUdon_PrintAsString<float>(heap, address);
                             }
                         case "System.Single[]":
                             {
-                                return PrintAsString<float[]>(heap, address);
+                                return FakeUdon_PrintAsString<float[]>(heap, address);
                             }
                         case "System.Boolean":
                             {
-                                return PrintAsString<bool>(heap, address);
+                                return FakeUdon_PrintAsString<bool>(heap, address);
                             }
                         case "System.Boolean[]":
                             {
-                                return PrintAsString<bool[]>(heap, address);
+                                return FakeUdon_PrintAsString<bool[]>(heap, address);
                             }
                         case "System.Byte":
                             {
-                                return PrintAsString<byte>(heap, address);
+                                return FakeUdon_PrintAsString<byte>(heap, address);
                             }
                         case "System.Byte[]":
                             {
-                                return PrintAsString<byte[]>(heap, address);
+                                return FakeUdon_PrintAsString<byte[]>(heap, address);
                             }
                         case "System.Int16":
                             {
-                                return PrintAsString<short>(heap, address);
+                                return FakeUdon_PrintAsString<short>(heap, address);
                             }
                         case "System.Int16[]":
                             {
-                                return PrintAsString<short[]>(heap, address);
+                                return FakeUdon_PrintAsString<short[]>(heap, address);
                             }
 
                         case "System.UInt16":
                             {
-                                return PrintAsString<ushort>(heap, address);
+                                return FakeUdon_PrintAsString<ushort>(heap, address);
                             }
                         case "System.UInt16[]":
                             {
-                                return PrintAsString<ushort[]>(heap, address);
+                                return FakeUdon_PrintAsString<ushort[]>(heap, address);
                             }
                         case "System.Double":
                             {
-                                return PrintAsString<double>(heap, address);
+                                return FakeUdon_PrintAsString<double>(heap, address);
                             }
                         case "System.Double[]":
                             {
-                                return PrintAsString<double[]>(heap, address);
+                                return FakeUdon_PrintAsString<double[]>(heap, address);
                             }
                         case "System.TimeSpan":
                             {
-                                return PrintAsString<TimeSpan>(heap, address);
+                                return FakeUdon_PrintAsString<TimeSpan>(heap, address);
                             }
                         case "System.TimeSpan[]":
                             {
-                                return PrintAsString<TimeSpan[]>(heap, address);
+                                return FakeUdon_PrintAsString<TimeSpan[]>(heap, address);
                             }
                         case "System.Diagnostics.Stopwatch":
                             {
-                                return PrintAsString<System.Diagnostics.Stopwatch>(heap, address);
+                                return FakeUdon_PrintAsString<System.Diagnostics.Stopwatch>(heap, address);
                             }
                         case "System.Diagnostics.Stopwatch[]":
                             {
-                                return PrintAsString<System.Diagnostics.Stopwatch[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.Diagnostics.Stopwatch[]>(heap, address);
                             }
                         case "System.DateTime":
                             {
-                                return PrintAsString<System.DateTime>(heap, address);
+                                return FakeUdon_PrintAsString<System.DateTime>(heap, address);
                             }
                         case "System.DateTime[]":
                             {
-                                return PrintAsString<System.DateTime[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.DateTime[]>(heap, address);
                             }
                         case "System.DayOfWeek":
                             {
-                                return PrintAsString<System.DayOfWeek>(heap, address);
+                                return FakeUdon_PrintAsString<System.DayOfWeek>(heap, address);
                             }
                         case "System.DayOfWeek[]":
                             {
-                                return PrintAsString<System.DayOfWeek[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.DayOfWeek[]>(heap, address);
                             }
 
                         case "System.Object":
                             {
-                                return PrintAsString<System.Object>(heap, address);
+                                return FakeUdon_PrintAsString<System.Object>(heap, address);
                             }
                         case "System.Object[]":
                             {
-                                return PrintAsString<System.Object[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.Object[]>(heap, address);
                             }
                         case "System.Globalization.NumberStyles":
                             {
-                                return PrintAsString<System.Globalization.NumberStyles>(heap, address);
+                                return FakeUdon_PrintAsString<System.Globalization.NumberStyles>(heap, address);
                             }
                         case "System.Globalization.NumberStyles[]":
                             {
-                                return PrintAsString<System.Globalization.NumberStyles[]>(heap, address);
+                                return FakeUdon_PrintAsString<System.Globalization.NumberStyles[]>(heap, address);
                             }
 
                         #endregion System Types
@@ -3262,627 +3300,627 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "UnityEngine.Color":
                             {
-                                return PrintAsString<UnityEngine.Color>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Color>(heap, address);
                             }
                         case "UnityEngine.Color[]":
                             {
-                                return PrintAsString<UnityEngine.Color[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Color[]>(heap, address);
                             }
                         case "UnityEngine.Color32":
                             {
-                                return PrintAsString<UnityEngine.Color32>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Color32>(heap, address);
                             }
                         case "UnityEngine.Color32[]":
                             {
-                                return PrintAsString<UnityEngine.Color32[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Color32[]>(heap, address);
                             }
                         case "UnityEngine.Font":
                             {
-                                return PrintAsString<UnityEngine.Font>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Font>(heap, address);
                             }
                         case "UnityEngine.Font[]":
                             {
-                                return PrintAsString<UnityEngine.Font[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Font[]>(heap, address);
                             }
 
                         case "UnityEngine.Material":
                             {
-                                return PrintAsString<Material>(heap, address);
+                                return FakeUdon_PrintAsString<Material>(heap, address);
                             }
                         case "UnityEngine.Material[]":
                             {
-                                return PrintAsString<Material[]>(heap, address);
+                                return FakeUdon_PrintAsString<Material[]>(heap, address);
                             }
                         case "UnityEngine.Renderer":
                             {
-                                return PrintAsString<UnityEngine.Renderer>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Renderer>(heap, address);
                             }
                         case "UnityEngine.Renderer[]":
                             {
-                                return PrintAsString<Renderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<Renderer[]>(heap, address);
                             }
                         case "UnityEngine.TrailRenderer":
                             {
-                                return PrintAsString<UnityEngine.Renderer>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Renderer>(heap, address);
                             }
                         case "UnityEngine.TrailRenderer[]":
                             {
-                                return PrintAsString<Renderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<Renderer[]>(heap, address);
                             }
                         case "UnityEngine.SkinnedMeshRenderer":
                             {
-                                return PrintAsString<UnityEngine.SkinnedMeshRenderer>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.SkinnedMeshRenderer>(heap, address);
                             }
                         case "UnityEngine.SkinnedMeshRenderer[]":
                             {
-                                return PrintAsString<SkinnedMeshRenderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<SkinnedMeshRenderer[]>(heap, address);
                             }
 
                         case "UnityEngine.Gradient":
                             {
-                                return PrintAsString<UnityEngine.Gradient>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Gradient>(heap, address);
                             }
                         case "UnityEngine.Gradient[]":
                             {
-                                return PrintAsString<Gradient[]>(heap, address);
+                                return FakeUdon_PrintAsString<Gradient[]>(heap, address);
                             }
 
                         case "UnityEngine.MeshRenderer":
                             {
-                                return PrintAsString<MeshRenderer>(heap, address);
+                                return FakeUdon_PrintAsString<MeshRenderer>(heap, address);
                             }
                         case "UnityEngine.MeshRenderer[]":
                             {
-                                return PrintAsString<MeshRenderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<MeshRenderer[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem":
                             {
-                                return PrintAsString<ParticleSystem>(heap, address);
+                                return FakeUdon_PrintAsString<ParticleSystem>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem[]":
                             {
-                                return PrintAsString<ParticleSystem[]>(heap, address);
+                                return FakeUdon_PrintAsString<ParticleSystem[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MainModule":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MainModule>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MainModule>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MainModule[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MainModule[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MainModule[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem.MinMaxGradient[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxGradient[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmitParams":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.EmitParams>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmitParams[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmitParams[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.EmitParams[]>(heap, address);
                             }
 
                         case "UnityEngine.Ray":
                             {
-                                return PrintAsString<Ray>(heap, address);
+                                return FakeUdon_PrintAsString<Ray>(heap, address);
                             }
                         case "UnityEngine.Ray[]":
                             {
-                                return PrintAsString<Ray[]>(heap, address);
+                                return FakeUdon_PrintAsString<Ray[]>(heap, address);
                             }
                         case "UnityEngine.Canvas":
                             {
-                                return PrintAsString<Canvas>(heap, address);
+                                return FakeUdon_PrintAsString<Canvas>(heap, address);
                             }
                         case "UnityEngine.Canvas[]":
                             {
-                                return PrintAsString<Canvas[]>(heap, address);
+                                return FakeUdon_PrintAsString<Canvas[]>(heap, address);
                             }
 
                         case "UnityEngine.Component":
                             {
-                                return PrintAsString<Component>(heap, address);
+                                return FakeUdon_PrintAsString<Component>(heap, address);
                             }
                         case "UnityEngine.Component[]":
                             {
-                                return PrintAsString<Component[]>(heap, address);
+                                return FakeUdon_PrintAsString<Component[]>(heap, address);
                             }
                         case "UnityEngine.Transform":
                             {
-                                return PrintAsString<Transform>(heap, address);
+                                return FakeUdon_PrintAsString<Transform>(heap, address);
                             }
                         case "UnityEngine.Transform[]":
                             {
-                                return PrintAsString<Transform[]>(heap, address);
+                                return FakeUdon_PrintAsString<Transform[]>(heap, address);
                             }
                         case "UnityEngine.GameObject":
                             {
-                                return PrintAsString<GameObject>(heap, address);
+                                return FakeUdon_PrintAsString<GameObject>(heap, address);
                             }
                         case "UnityEngine.GameObject[]":
                             {
-                                return PrintAsString<GameObject[]>(heap, address);
+                                return FakeUdon_PrintAsString<GameObject[]>(heap, address);
                             }
                         case "UnityEngine.AudioClip":
                             {
-                                return PrintAsString<AudioClip>(heap, address);
+                                return FakeUdon_PrintAsString<AudioClip>(heap, address);
                             }
                         case "UnityEngine.AudioClip[]":
                             {
-                                return PrintAsString<AudioClip[]>(heap, address);
+                                return FakeUdon_PrintAsString<AudioClip[]>(heap, address);
                             }
                         case "UnityEngine.Vector2":
                             {
-                                return PrintAsString<Vector2>(heap, address);
+                                return FakeUdon_PrintAsString<Vector2>(heap, address);
                             }
                         case "UnityEngine.Vector2[]":
                             {
-                                return PrintAsString<Vector2[]>(heap, address);
+                                return FakeUdon_PrintAsString<Vector2[]>(heap, address);
                             }
 
                         case "UnityEngine.Vector3":
                             {
-                                return PrintAsString<Vector3>(heap, address);
+                                return FakeUdon_PrintAsString<Vector3>(heap, address);
                             }
                         case "UnityEngine.Vector3[]":
                             {
-                                return PrintAsString<Vector3[]>(heap, address);
+                                return FakeUdon_PrintAsString<Vector3[]>(heap, address);
                             }
                         case "UnityEngine.Vector4":
                             {
-                                return PrintAsString<Vector4>(heap, address);
+                                return FakeUdon_PrintAsString<Vector4>(heap, address);
                             }
                         case "UnityEngine.Vector4[]":
                             {
-                                return PrintAsString<Vector4[]>(heap, address);
+                                return FakeUdon_PrintAsString<Vector4[]>(heap, address);
                             }
 
                         case "UnityEngine.Quaternion":
                             {
-                                return PrintAsString<Quaternion>(heap, address);
+                                return FakeUdon_PrintAsString<Quaternion>(heap, address);
                             }
                         case "UnityEngine.Quaternion[]":
                             {
-                                return PrintAsString<Quaternion[]>(heap, address);
+                                return FakeUdon_PrintAsString<Quaternion[]>(heap, address);
                             }
                         case "UnityEngine.AudioSource":
                             {
-                                return PrintAsString<AudioSource>(heap, address);
+                                return FakeUdon_PrintAsString<AudioSource>(heap, address);
                             }
                         case "UnityEngine.AudioSource[]":
                             {
-                                return PrintAsString<AudioSource[]>(heap, address);
+                                return FakeUdon_PrintAsString<AudioSource[]>(heap, address);
                             }
                         case "UnityEngine.HumanBodyBones":
                             {
-                                return PrintAsString<HumanBodyBones>(heap, address);
+                                return FakeUdon_PrintAsString<HumanBodyBones>(heap, address);
                             }
                         case "UnityEngine.HumanBodyBones[]":
                             {
-                                return PrintAsString<HumanBodyBones[]>(heap, address);
+                                return FakeUdon_PrintAsString<HumanBodyBones[]>(heap, address);
                             }
                         case "UnityEngine.BoxCollider":
                             {
-                                return PrintAsString<BoxCollider>(heap, address);
+                                return FakeUdon_PrintAsString<BoxCollider>(heap, address);
                             }
                         case "UnityEngine.BoxCollider[]":
                             {
-                                return PrintAsString<BoxCollider[]>(heap, address);
+                                return FakeUdon_PrintAsString<BoxCollider[]>(heap, address);
                             }
                         case "UnityEngine.CapsuleCollider":
                             {
-                                return PrintAsString<CapsuleCollider>(heap, address);
+                                return FakeUdon_PrintAsString<CapsuleCollider>(heap, address);
                             }
                         case "UnityEngine.CapsuleCollider[]":
                             {
-                                return PrintAsString<CapsuleCollider[]>(heap, address);
+                                return FakeUdon_PrintAsString<CapsuleCollider[]>(heap, address);
                             }
                         case "UnityEngine.SphereCollider":
                             {
-                                return PrintAsString<SphereCollider>(heap, address);
+                                return FakeUdon_PrintAsString<SphereCollider>(heap, address);
                             }
                         case "UnityEngine.SphereCollider[]":
                             {
-                                return PrintAsString<SphereCollider[]>(heap, address);
+                                return FakeUdon_PrintAsString<SphereCollider[]>(heap, address);
                             }
                         case "UnityEngine.MeshCollider":
                             {
-                                return PrintAsString<MeshCollider>(heap, address);
+                                return FakeUdon_PrintAsString<MeshCollider>(heap, address);
                             }
                         case "UnityEngine.MeshCollider[]":
                             {
-                                return PrintAsString<MeshCollider[]>(heap, address);
+                                return FakeUdon_PrintAsString<MeshCollider[]>(heap, address);
                             }
                         case "UnityEngine.Collider":
                             {
-                                return PrintAsString<Collider>(heap, address);
+                                return FakeUdon_PrintAsString<Collider>(heap, address);
                             }
                         case "UnityEngine.Collider[]":
                             {
-                                return PrintAsString<Collider[]>(heap, address);
+                                return FakeUdon_PrintAsString<Collider[]>(heap, address);
                             }
                         case "UnityEngine.Sprite":
                             {
-                                return PrintAsString<Sprite>(heap, address);
+                                return FakeUdon_PrintAsString<Sprite>(heap, address);
                             }
                         case "UnityEngine.Sprite[]":
                             {
-                                return PrintAsString<Sprite[]>(heap, address);
+                                return FakeUdon_PrintAsString<Sprite[]>(heap, address);
                             }
                         case "UnityEngine.TextAsset":
                             {
-                                return PrintAsString<TextAsset>(heap, address);
+                                return FakeUdon_PrintAsString<TextAsset>(heap, address);
                             }
                         case "UnityEngine.TextAsset[]":
                             {
-                                return PrintAsString<TextAsset[]>(heap, address);
+                                return FakeUdon_PrintAsString<TextAsset[]>(heap, address);
                             }
                         case "UnityEngine.Rigidbody":
                             {
-                                return PrintAsString<Rigidbody>(heap, address);
+                                return FakeUdon_PrintAsString<Rigidbody>(heap, address);
                             }
                         case "UnityEngine.Rigidbody[]":
                             {
-                                return PrintAsString<Rigidbody[]>(heap, address);
+                                return FakeUdon_PrintAsString<Rigidbody[]>(heap, address);
                             }
                         case "UnityEngine.Bounds":
                             {
-                                return PrintAsString<Bounds>(heap, address);
+                                return FakeUdon_PrintAsString<Bounds>(heap, address);
                             }
                         case "UnityEngine.Bounds[]":
                             {
-                                return PrintAsString<Bounds[]>(heap, address);
+                                return FakeUdon_PrintAsString<Bounds[]>(heap, address);
                             }
                         case "UnityEngine.Animator":
                             {
-                                return PrintAsString<Animator>(heap, address);
+                                return FakeUdon_PrintAsString<Animator>(heap, address);
                             }
                         case "UnityEngine.Animator[]":
                             {
-                                return PrintAsString<Animator[]>(heap, address);
+                                return FakeUdon_PrintAsString<Animator[]>(heap, address);
                             }
                         case "UnityEngine.LayerMask":
                             {
-                                return PrintAsString<LayerMask>(heap, address);
+                                return FakeUdon_PrintAsString<LayerMask>(heap, address);
                             }
                         case "UnityEngine.LayerMask[]":
                             {
-                                return PrintAsString<LayerMask[]>(heap, address);
+                                return FakeUdon_PrintAsString<LayerMask[]>(heap, address);
                             }
                         case "UnityEngine.LineRenderer":
                             {
-                                return PrintAsString<LineRenderer>(heap, address);
+                                return FakeUdon_PrintAsString<LineRenderer>(heap, address);
                             }
                         case "UnityEngine.LineRenderer[]":
                             {
-                                return PrintAsString<LineRenderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<LineRenderer[]>(heap, address);
                             }
                         case "UnityEngine.SpriteRenderer":
                             {
-                                return PrintAsString<UnityEngine.SpriteRenderer>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.SpriteRenderer>(heap, address);
                             }
                         case "UnityEngine.SpriteRenderer[]":
                             {
-                                return PrintAsString<UnityEngine.SpriteRenderer[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.SpriteRenderer[]>(heap, address);
                             }
 
                         case "UnityEngine.RaycastHit":
                             {
-                                return PrintAsString<RaycastHit>(heap, address);
+                                return FakeUdon_PrintAsString<RaycastHit>(heap, address);
                             }
                         case "UnityEngine.RaycastHit[]":
                             {
-                                return PrintAsString<RaycastHit[]>(heap, address);
+                                return FakeUdon_PrintAsString<RaycastHit[]>(heap, address);
                             }
                         case "UnityEngine.RectTransform":
                             {
-                                return PrintAsString<RectTransform>(heap, address);
+                                return FakeUdon_PrintAsString<RectTransform>(heap, address);
                             }
                         case "UnityEngine.RectTransform[]":
                             {
-                                return PrintAsString<RectTransform[]>(heap, address);
+                                return FakeUdon_PrintAsString<RectTransform[]>(heap, address);
                             }
                         case "UnityEngine.Camera":
                             {
-                                return PrintAsString<Camera>(heap, address);
+                                return FakeUdon_PrintAsString<Camera>(heap, address);
                             }
                         case "UnityEngine.Camera[]":
                             {
-                                return PrintAsString<Camera[]>(heap, address);
+                                return FakeUdon_PrintAsString<Camera[]>(heap, address);
                             }
                         case "UnityEngine.ReflectionProbe":
                             {
-                                return PrintAsString<ReflectionProbe>(heap, address);
+                                return FakeUdon_PrintAsString<ReflectionProbe>(heap, address);
                             }
                         case "UnityEngine.ReflectionProbe[]":
                             {
-                                return PrintAsString<ReflectionProbe[]>(heap, address);
+                                return FakeUdon_PrintAsString<ReflectionProbe[]>(heap, address);
                             }
                         case "UnityEngine.KeyCode":
                             {
-                                return PrintAsString<KeyCode>(heap, address);
+                                return FakeUdon_PrintAsString<KeyCode>(heap, address);
                             }
                         case "UnityEngine.KeyCode[]":
                             {
-                                return PrintAsString<KeyCode[]>(heap, address);
+                                return FakeUdon_PrintAsString<KeyCode[]>(heap, address);
                             }
                         case "UnityEngine.Rect":
                             {
-                                return PrintAsString<Rect>(heap, address);
+                                return FakeUdon_PrintAsString<Rect>(heap, address);
                             }
                         case "UnityEngine.Rect[]":
                             {
-                                return PrintAsString<Rect[]>(heap, address);
+                                return FakeUdon_PrintAsString<Rect[]>(heap, address);
                             }
                         case "UnityEngine.Mesh":
                             {
-                                return PrintAsString<Mesh>(heap, address);
+                                return FakeUdon_PrintAsString<Mesh>(heap, address);
                             }
                         case "UnityEngine.Mesh[]":
                             {
-                                return PrintAsString<Mesh[]>(heap, address);
+                                return FakeUdon_PrintAsString<Mesh[]>(heap, address);
                             }
                         case "UnityEngine.Texture":
                             {
-                                return PrintAsString<Texture>(heap, address);
+                                return FakeUdon_PrintAsString<Texture>(heap, address);
                             }
                         case "UnityEngine.Texture[]":
                             {
-                                return PrintAsString<Texture[]>(heap, address);
+                                return FakeUdon_PrintAsString<Texture[]>(heap, address);
                             }
                         case "UnityEngine.Texture2D":
                             {
-                                return PrintAsString<Texture2D>(heap, address);
+                                return FakeUdon_PrintAsString<Texture2D>(heap, address);
                             }
                         case "UnityEngine.Texture2D[]":
                             {
-                                return PrintAsString<Texture2D[]>(heap, address);
+                                return FakeUdon_PrintAsString<Texture2D[]>(heap, address);
                             }
                         case "UnityEngine.RenderTexture":
                             {
-                                return PrintAsString<RenderTexture>(heap, address);
+                                return FakeUdon_PrintAsString<RenderTexture>(heap, address);
                             }
                         case "UnityEngine.RenderTexture[]":
                             {
-                                return PrintAsString<RenderTexture[]>(heap, address);
+                                return FakeUdon_PrintAsString<RenderTexture[]>(heap, address);
                             }
                         case "UnityEngine.UI.Text":
                             {
-                                return PrintAsString<UnityEngine.UI.Text>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Text>(heap, address);
                             }
                         case "UnityEngine.UI.Text[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Text[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Text[]>(heap, address);
                             }
                         case "UnityEngine.UI.Toggle":
                             {
-                                return PrintAsString<UnityEngine.UI.Toggle>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Toggle>(heap, address);
                             }
                         case "UnityEngine.UI.Toggle[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Toggle[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Toggle[]>(heap, address);
                             }
                         case "UnityEngine.UI.ScrollRect":
                             {
-                                return PrintAsString<UnityEngine.UI.ScrollRect>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.ScrollRect>(heap, address);
                             }
                         case "UnityEngine.UI.ScrollRect[]":
                             {
-                                return PrintAsString<UnityEngine.UI.ScrollRect[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.ScrollRect[]>(heap, address);
                             }
                         case "UnityEngine.UI.InputField":
                             {
-                                return PrintAsString<UnityEngine.UI.InputField>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.InputField>(heap, address);
                             }
                         case "UnityEngine.UI.InputField[]":
                             {
-                                return PrintAsString<UnityEngine.UI.InputField[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.InputField[]>(heap, address);
                             }
                         case "UnityEngine.UI.Image":
                             {
-                                return PrintAsString<UnityEngine.UI.Image>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Image>(heap, address);
                             }
                         case "UnityEngine.UI.Image[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Image[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Image[]>(heap, address);
                             }
                         case "UnityEngine.UI.Button":
                             {
-                                return PrintAsString<UnityEngine.UI.Button>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Button>(heap, address);
                             }
                         case "UnityEngine.UI.Button[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Button[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Button[]>(heap, address);
                             }
                         case "UnityEngine.UI.Slider":
                             {
-                                return PrintAsString<UnityEngine.UI.Slider>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Slider>(heap, address);
                             }
                         case "UnityEngine.UI.Slider[]":
                             {
-                                return PrintAsString<UnityEngine.UI.Slider[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.Slider[]>(heap, address);
                             }
                         case "UnityEngine.UI.RawImage":
                             {
-                                return PrintAsString<UnityEngine.UI.RawImage>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.RawImage>(heap, address);
                             }
                         case "UnityEngine.UI.RawImage[]":
                             {
-                                return PrintAsString<UnityEngine.UI.RawImage[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.UI.RawImage[]>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshAgent":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshAgent>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AI.NavMeshAgent>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshAgent[]":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshAgent[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AI.NavMeshAgent[]>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshHit":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshHit>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AI.NavMeshHit>(heap, address);
                             }
                         case "UnityEngine.AI.NavMeshHit[]":
                             {
-                                return PrintAsString<UnityEngine.AI.NavMeshHit[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AI.NavMeshHit[]>(heap, address);
                             }
                         case "UnityEngine.ConstantForce":
                             {
-                                return PrintAsString<UnityEngine.ConstantForce>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ConstantForce>(heap, address);
                             }
                         case "UnityEngine.ConstantForce[]":
                             {
-                                return PrintAsString<UnityEngine.ConstantForce[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ConstantForce[]>(heap, address);
                             }
                         case "UnityEngine.AnimatorStateInfo":
                             {
-                                return PrintAsString<UnityEngine.AnimatorStateInfo>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AnimatorStateInfo>(heap, address);
                             }
                         case "UnityEngine.AnimatorStateInfo[]":
                             {
-                                return PrintAsString<UnityEngine.AnimatorStateInfo[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.AnimatorStateInfo[]>(heap, address);
                             }
                         case "UnityEngine.Light":
                             {
-                                return PrintAsString<UnityEngine.Light>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Light>(heap, address);
                             }
                         case "UnityEngine.Light[]":
                             {
-                                return PrintAsString<UnityEngine.Light[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Light[]>(heap, address);
                             }
                         case "UnityEngine.OcclusionPortal":
                             {
-                                return PrintAsString<UnityEngine.OcclusionPortal>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.OcclusionPortal>(heap, address);
                             }
                         case "UnityEngine.OcclusionPortal[]":
                             {
-                                return PrintAsString<UnityEngine.OcclusionPortal[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.OcclusionPortal[]>(heap, address);
                             }
                         case "UnityEngine.Animations.PositionConstraint":
                             {
-                                return PrintAsString<UnityEngine.Animations.PositionConstraint>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Animations.PositionConstraint>(heap, address);
                             }
                         case "UnityEngine.Animations.PositionConstraint[]":
                             {
-                                return PrintAsString<UnityEngine.Animations.PositionConstraint[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Animations.PositionConstraint[]>(heap, address);
                             }
                         case "UnityEngine.Space":
                             {
-                                return PrintAsString<UnityEngine.Space>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Space>(heap, address);
                             }
                         case "UnityEngine.Space[]":
                             {
-                                return PrintAsString<UnityEngine.Space[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Space[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeMode[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeMode[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeTimeSlicingMode[]>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode>(heap, address);
                             }
                         case "UnityEngine.Rendering.ReflectionProbeRefreshMode[]":
                             {
-                                return PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Rendering.ReflectionProbeRefreshMode[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+EmissionModule":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.EmissionModule>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem_EmissionModule[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.EmissionModule[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.EmissionModule[]>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve>(heap, address);
                             }
                         case "UnityEngine.ParticleSystem+MinMaxCurve[]":
                             {
-                                return PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ParticleSystem.MinMaxCurve[]>(heap, address);
                             }
                         case "UnityEngine.JointMotor":
                             {
-                                return PrintAsString<UnityEngine.JointMotor>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.JointMotor>(heap, address);
                             }
                         case "UnityEngine.JointMotor[]":
                             {
-                                return PrintAsString<UnityEngine.JointMotor[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.JointMotor[]>(heap, address);
                             }
                         case "UnityEngine.ForceMode":
                             {
-                                return PrintAsString<UnityEngine.ForceMode>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ForceMode>(heap, address);
                             }
                         case "UnityEngine.ForceMode[]":
                             {
-                                return PrintAsString<UnityEngine.ForceMode[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.ForceMode[]>(heap, address);
                             }
                         case "UnityEngine.HingeJoint":
                             {
-                                return PrintAsString<UnityEngine.HingeJoint>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.HingeJoint>(heap, address);
                             }
                         case "UnityEngine.HingeJoint[]":
                             {
-                                return PrintAsString<UnityEngine.HingeJoint[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.HingeJoint[]>(heap, address);
                             }
                         case "UnityEngine.CustomRenderTexture":
                             {
-                                return PrintAsString<UnityEngine.CustomRenderTexture>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.CustomRenderTexture>(heap, address);
                             }
                         case "UnityEngine.CustomRenderTexture[]":
                             {
-                                return PrintAsString<UnityEngine.CustomRenderTexture[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.CustomRenderTexture[]>(heap, address);
                             }
                         case "UnityEngine.TextureFormat":
                             {
-                                return PrintAsString<UnityEngine.TextureFormat>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.TextureFormat>(heap, address);
                             }
                         case "UnityEngine.TextureFormat[]":
                             {
-                                return PrintAsString<UnityEngine.TextureFormat[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.TextureFormat[]>(heap, address);
                             }
                         case "UnityEngine.Collision":
                             {
-                                return PrintAsString<UnityEngine.Collision>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Collision>(heap, address);
                             }
                         case "UnityEngine.Collision[]":
                             {
-                                return PrintAsString<UnityEngine.Collision[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Collision[]>(heap, address);
                             }
                         case "UnityEngine.Animations.ParentConstraint":
                             {
-                                return PrintAsString<UnityEngine.Animations.ParentConstraint>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Animations.ParentConstraint>(heap, address);
                             }
                         case "UnityEngine.Animations.ParentConstraint[]":
                             {
-                                return PrintAsString<UnityEngine.Animations.ParentConstraint[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.Animations.ParentConstraint[]>(heap, address);
                             }
                         case "UnityEngine.MaterialPropertyBlock":
                             {
-                                return PrintAsString<UnityEngine.MaterialPropertyBlock>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.MaterialPropertyBlock>(heap, address);
                             }
                         case "UnityEngine.MaterialPropertyBlock[]":
                             {
-                                return PrintAsString<UnityEngine.MaterialPropertyBlock[]>(heap, address);
+                                return FakeUdon_PrintAsString<UnityEngine.MaterialPropertyBlock[]>(heap, address);
                             }
 
                         #endregion Unity Engine
@@ -3890,192 +3928,192 @@ namespace AstroClient.Tools.UdonEditor
                         #region VRChat
                         case "VRC.SDKBase.VRC_Pickup+PickupOrientation":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupOrientation[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupOrientation[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+AutoHoldMode":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+AutoHoldMode[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.AutoHoldMode[]>(heap, address);
                             }
 
 
                         case "VRC.SDKBase.VRCPlayerApi":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingData[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingData[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType>(heap, address);
                             }
                         case "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCPlayerApi.TrackingDataType[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_Pickup+PickupHand[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_Pickup.PickupHand[]>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation>(heap, address);
                             }
                         case "VRC.SDKBase.VRC_SceneDescriptor+SpawnOrientation[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRC_SceneDescriptor.SpawnOrientation[]>(heap, address);
                             }
 
                         case "VRC.SDKBase.VRCUrl":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCUrl>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCUrl>(heap, address);
                             }
                         case "VRC.SDKBase.VRCUrl[]":
                             {
-                                return PrintAsString<VRC.SDKBase.VRCUrl[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDKBase.VRCUrl[]>(heap, address);
                             }
                         case "VRC.Udon.UdonBehaviour":
                             {
-                                return PrintAsString<VRC.Udon.UdonBehaviour>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.UdonBehaviour>(heap, address);
                             }
                         case "VRC.Udon.UdonBehaviour[]":
                             {
-                                return PrintAsString<VRC.Udon.UdonBehaviour[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.UdonBehaviour[]>(heap, address);
                             }
                         case "VRC.Udon.Common.SerializationResult":
                             {
-                                return PrintAsString<VRC.Udon.Common.SerializationResult>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.SerializationResult>(heap, address);
                             }
                         case "VRC.Udon.Common.SerializationResult[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.SerializationResult[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.SerializationResult[]>(heap, address);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget":
                             {
-                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget>(heap, address);
                             }
                         case "VRC.Udon.Common.Interfaces.NetworkEventTarget[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.Interfaces.NetworkEventTarget[]>(heap, address);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming":
                             {
-                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.Enums.EventTiming>(heap, address);
                             }
                         case "VRC.Udon.Common.Enums.EventTiming[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.Enums.EventTiming[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.Enums.EventTiming[]>(heap, address);
                             }
 
                         case "VRC.SDK3.Components.Video.VideoError":
                             {
-                                return PrintAsString<VRC.SDK3.Components.Video.VideoError>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.Video.VideoError>(heap, address);
                             }
                         case "VRC.SDK3.Components.Video.VideoError[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.Video.VideoError[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.Video.VideoError[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCUrlInputField>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCUrlInputField[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCUrlInputField[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCUrlInputField[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCStation":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCStation>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCStation>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCStation[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCStation[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCStation[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCObjectSync>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectSync[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectSync[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCObjectSync[]>(heap, address);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs":
                             {
-                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.UdonInputEventArgs>(heap, address);
                             }
                         case "VRC.Udon.Common.UdonInputEventArgs[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.UdonInputEventArgs[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.UdonInputEventArgs[]>(heap, address);
                             }
                         case "VRC.Udon.Common.HandType":
                             {
-                                return PrintAsString<VRC.Udon.Common.HandType>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.HandType>(heap, address);
                             }
                         case "VRC.Udon.Common.HandType[]":
                             {
-                                return PrintAsString<VRC.Udon.Common.HandType[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.Udon.Common.HandType[]>(heap, address);
                             }
 
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer>(heap, address);
                             }
                         case "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]":
                             {
-                                return PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCPickup":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCPickup>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCPickup>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCPickup[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCPickup[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCPickup[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCAvatarPedestal[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCAvatarPedestal[]>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCObjectPool>(heap, address);
                             }
                         case "VRC.SDK3.Components.VRCObjectPool[]":
                             {
-                                return PrintAsString<VRC.SDK3.Components.VRCObjectPool[]>(heap, address);
+                                return FakeUdon_PrintAsString<VRC.SDK3.Components.VRCObjectPool[]>(heap, address);
                             }
 
                         #endregion VRChat
@@ -4084,19 +4122,19 @@ namespace AstroClient.Tools.UdonEditor
 
                         case "TMPro.TextMeshPro":
                             {
-                                return PrintAsString<TMPro.TextMeshPro>(heap, address);
+                                return FakeUdon_PrintAsString<TMPro.TextMeshPro>(heap, address);
                             }
                         case "TMPro.TextMeshPro[]":
                             {
-                                return PrintAsString<TMPro.TextMeshPro[]>(heap, address);
+                                return FakeUdon_PrintAsString<TMPro.TextMeshPro[]>(heap, address);
                             }
                         case "TMPro.TextMeshProUGUI":
                             {
-                                return PrintAsString<TMPro.TextMeshProUGUI>(heap, address);
+                                return FakeUdon_PrintAsString<TMPro.TextMeshProUGUI>(heap, address);
                             }
                         case "TMPro.TextMeshProUGUI[]":
                             {
-                                return PrintAsString<TMPro.TextMeshProUGUI[]>(heap, address);
+                                return FakeUdon_PrintAsString<TMPro.TextMeshProUGUI[]>(heap, address);
                             }
 
                         #endregion TMPRo
@@ -4138,7 +4176,7 @@ namespace AstroClient.Tools.UdonEditor
         /// <param name="heap"></param>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal static string PrintAsString<T>(FakeUdonHeap heap, uint address)
+        internal static string FakeUdon_PrintAsString<T>(FakeUdonHeap heap, uint address)
         {  
             // Detect if is a array .
             var FullName = typeof(T).FullName;

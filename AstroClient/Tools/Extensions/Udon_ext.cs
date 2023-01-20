@@ -31,9 +31,13 @@
             }
         }
 
-        internal static string UnboxAsString(this RawUdonBehaviour obj, string SymbolName)
+        internal static string Real_UnboxAsString(this RawUdonBehaviour obj, string SymbolName)
         {
-            return UdonHeapUnboxerUtils.UnboxAsString(obj, SymbolName);
+            return UdonHeapUnboxerUtils.Real_UnboxAsString(obj, SymbolName);
+        }
+        internal static string FakeUdon_UnboxAsString(this RawUdonBehaviour obj, string SymbolName)
+        {
+            return UdonHeapUnboxerUtils.FakeUdon_UnboxAsString(obj, SymbolName);
         }
 
         internal static UdonBehaviour_Cached FindUdonEvent(this GameObject obj, string subaction)

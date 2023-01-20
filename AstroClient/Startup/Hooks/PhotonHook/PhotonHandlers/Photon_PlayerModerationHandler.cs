@@ -35,12 +35,6 @@ internal class Photon_PlayerModerationHandler
                     case ModerationCode.Friend_State: // Friend State
                         break;
 
-                    case ModerationCode.VoteKick: // VoteKick
-
-                        HudNotifier.WriteHudMessage("<color=#FFA5F>A Votekick has Been started (Check console!)</color>");
-                        Log.Warn("VOTEKICK DETECTED : ");
-                        break;
-
                     case ModerationCode.Block_Or_Mute:
 
                         #region Blocking and Muting Events.
