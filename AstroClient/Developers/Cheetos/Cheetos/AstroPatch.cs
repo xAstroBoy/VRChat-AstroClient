@@ -27,7 +27,7 @@
         internal Harmony Instance { get; set; }
         private bool HasThrownException { get; set; } = false;
         private bool ShowErrorOnConsole { get; set; } = true;
-        private bool isActivePatch { get; set; } = false;
+        internal bool isActivePatch { get; private set; } = false;
         private bool isMethodInfoPatch { get; set; } = false;
 
         internal string TargetPath_MethodInfo => $"{TargetMethod_MethodInfo?.DeclaringType?.FullName}.{TargetMethod_MethodInfo?.Name}";

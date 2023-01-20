@@ -29,9 +29,9 @@ namespace AstroClient.Startup.Patches
         {
             new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
             new AstroPatch(typeof(PhotonNetwork).GetMethod(nameof(PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+            new AstroPatch(typeof(PhotonNetwork).GetMethod(nameof(PhotonNetwork.Method_Private_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+
         }
-
-
         private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Object __1, ref Photon.Realtime.RaiseEventOptions __2, ref SendOptions __3)
         {
             try
@@ -44,5 +44,7 @@ namespace AstroClient.Startup.Patches
             catch { }
             return true;
         }
+
+
     }
 }

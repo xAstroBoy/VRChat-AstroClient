@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.PlayerList;
@@ -746,5 +747,36 @@ namespace AstroClient.Tools.Extensions
         {
             return item.gameObject.isMirror();
         }
+
+        internal static string ToNewVector3_String(this Vector3 item)
+        {
+            return $"new Vector3({item.x.ToString(CultureInfo.InvariantCulture).Replace(",", ".")}f, {item.y.ToString(CultureInfo.InvariantCulture).Replace(",", ".")}f, {item.z.ToString(CultureInfo.InvariantCulture).Replace(",", ".")}f)";
+        }
+
+        internal static string ToNewVector2_String(this Vector2 item)
+        {
+            return $"new Vector2({item.x.ToString(CultureInfo.InvariantCulture).Replace(",", ".")}f, {item.y.ToString(CultureInfo.InvariantCulture).Replace(",", ".")}f)";
+        }
+
+        // Convert RaycastHit to string using StringBuilder
+        
+        internal static string RaycastHitToString(this RaycastHit item)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine();
+            sb.AppendLine($"Collider collider :{item.collider.name}");
+            sb.AppendLine($"Vector3 point :{item.point.ToNewVector3_String()}");
+            sb.AppendLine($"Vector3 normal :{item.normal.ToNewVector3_String()}");
+            sb.AppendLine($"Vector3 barycentricCoordinate :{item.barycentricCoordinate.ToNewVector3_String()}");
+            sb.AppendLine($"float distance :{item.distance}");
+            sb.AppendLine($"int triangleIndex :{item.triangleIndex}");
+            sb.AppendLine($"Vector2 textureCoord:{item.textureCoord.ToNewVector2_String()}");
+            sb.AppendLine($"Vector2 textureCoord2 :{item.textureCoord2.ToNewVector2_String()}");
+            sb.AppendLine($"Transform transform :{item.transform.name}");
+            sb.AppendLine($"Rigidbody rigidbody:{item.rigidbody.name}");
+            sb.AppendLine($"Vector2 lightmapCoord :{item.collider.name}");
+            return sb.ToString();
+        }
+
     }
 }

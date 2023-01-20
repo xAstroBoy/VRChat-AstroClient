@@ -1,15 +1,12 @@
-﻿using AstroClient.AstroMonos.Components.Tools;
-using AstroClient.ClientUI.Hud.Notifier;
+﻿namespace AstroClient.Startup.Hooks.PhotonHook.PhotonHandlers;
 
-namespace AstroClient.Startup.Hooks.PhotonHook.PhotonHandlers;
-
-using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.UdonEditor;
 using Il2CppSystem;
 using Moderation;
 using Structs;
 using Structs.ModerationStructures;
+using System.Collections.Generic;
 using UnhollowerBaseLib;
 using xAstroBoy.Utility;
 using Exception = System.Exception;
@@ -27,12 +24,18 @@ internal class Photon_PlayerModerationHandler
                 switch (moderationevent)
                 {
                     case ModerationCode.Warning: // Warnings.
+                        return HookAction.Nothing;
                         break;
 
                     case ModerationCode.Mod_Mute: // Mod Mute
+                        return HookAction.Nothing;
                         break;
 
+                    case ModerationCode.VoteKick:
+                        return HookAction.Nothing;
+
                     case ModerationCode.Friend_State: // Friend State
+                        return HookAction.Nothing;
                         break;
 
                     case ModerationCode.Block_Or_Mute:

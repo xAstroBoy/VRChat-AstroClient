@@ -17,6 +17,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
 
+    // PrisonEscape_GateButtonReader
     [RegisterComponent]
     public class PrisonEscape_DoorAssister : MonoBehaviour
     {

@@ -168,8 +168,10 @@ internal class PhotonOnEventHook : AstroEvents
 
                 switch (CurrentAction)
                 {
+                    case HookAction.Nothing:
+                        if (LogCurrentHookActivity) PhotonLogger.PrintEvent(ref __0, CurrentAction);
+                        return true;
                     case HookAction.Patch:
-
                         if (isCustomData)
                         {
                             // Do Patching and Report

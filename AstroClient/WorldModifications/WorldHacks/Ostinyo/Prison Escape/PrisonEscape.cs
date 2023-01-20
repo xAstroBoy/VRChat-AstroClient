@@ -9,6 +9,7 @@ using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
+using AstroClient.Startup.Hooks;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.Tools.Holders;
@@ -441,19 +442,17 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         item.gameObject.RespawnPickup(false);
                     });
-                    TurretTop.SetScale(new Vector3(0.15f, 0.2f, 0.3f));
                     TurretTop.Set_isToggleButton(false);
                     #endregion
 
 
                     #region  Guard Spawn
-                    var GuardArea = new WorldButton_Squared(new Vector3(22.8851f, 5.0563f, 293.2779f), new Vector3(0, 270, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    var GuardArea = new WorldButton_Squared(new Vector3(22.8852f, 4.895f, 293.4226f), new Vector3(0f, 273.082f, 270f), 1f, "<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.0804f, 4.925f, 293.2137f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
 
                     });
-                    GuardArea.SetScale(new Vector3(1.5f, 1.5f, 1.5f));
                     GuardArea.Set_isToggleButton(false);
 
 
@@ -511,7 +510,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
 
                     #region  Guard Spawn
-                    var GuardArea = new WorldButton_Squared(new Vector3(20.6418f, 4.91f, 306.7371f), new Vector3(0 ,90, 0), "<color=orange>Teleport Sniper</color>", () =>
+                    var GuardArea = new WorldButton_Squared(new Vector3(23.132f, 4.7764f, 306.607f), new Vector3(0f, 90f, 0f), 1f,"<color=orange>Teleport Sniper</color>", () =>
                     {
                         item.gameObject.SetPosition(new Vector3(22.08039f, 4.925f, 306.7233f), true);
                         item.gameObject.SetRotation(new Vector3(0f, 90f, 0f), true);
@@ -917,7 +916,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             CleanSpawnArea();
             AddSpawnDetectors();
             CreateEscapeButtons();
-
+            //RaycastPatcher.PatchRaycast = true;
 
 
 
