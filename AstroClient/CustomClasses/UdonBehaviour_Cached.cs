@@ -25,9 +25,21 @@
 
         internal string EventKey { get; set; }
 
-        private Action BeforeInvoking { get; set; } = null;
-        private Action AfterInvoking { get; set; } = null;
-        private Action OnFinish { get; set; } = null;
+        /// <summary>
+        /// Sets Action Before Running InvokeBehaviour()
+        /// </summary>
+
+        internal Action BeforeInvoking { get; set; }
+        /// <summary>
+        /// Sets Action After Running InvokeBehaviour()
+        /// </summary>
+        internal Action AfterInvoking { get; set; }
+
+
+        /// <summary>
+        /// Sets Finish Action on Loop/Repeating stop.
+        /// </summary>
+        internal Action OnFinish { get; set; } = null;
 
         /// <summary>
         /// Default is  NetworkEventTarget.All
@@ -64,32 +76,6 @@
 
             // TODO: Make a EventKey Verifier (Default is on, but Make it disable the verify if is being added from UdonSearch class)
             EventKey = eventKey;
-        }
-
-        /// <summary>
-        /// Sets Action Before Running InvokeBehaviour()
-        /// </summary>
-
-        internal void Set_BeforeInvoking_Action(Action action)
-        {
-            BeforeInvoking = action;
-        }
-
-        /// <summary>
-        /// Sets Action After Running InvokeBehaviour()
-        /// </summary>
-        internal void Set_AfterInvoking_Action(Action action)
-        {
-            AfterInvoking = action;
-        }
-
-        /// <summary>
-        /// Sets Finish Action on Loop/Repeating stop.
-        /// </summary>
-
-        internal void Set_OnFinish_Action(Action action)
-        {
-            OnFinish = action;
         }
 
         /// <summary>

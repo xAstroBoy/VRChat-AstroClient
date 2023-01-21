@@ -151,8 +151,9 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     Gun_Purple_Color_Button = null;
                     Gun_Gold_Color_Button = null;
                     Gun_Red_Color_Button = null;
-                    GateButtonTrigger = null;
-                    OriginalGateButtonPos = Vector3.zero;
+                    GateButton_Transform = null;
+                    GateButton_Collider = null;
+                    GateButton_Respawner = null;
                     _Spawn_Area = null;
                     _Gun_Color_Panel = null;
                     _Respawn_Points = null;
@@ -188,26 +189,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             CurrentMenu = new QMNestedGridMenu(main, "Prison Escape Cheats", "Prison Escape Cheats");
         }
 
-        internal static void ClickGateButton()
-        {
-            if (Lit_GateInteraction != null)
-            {
-                Lit_GateInteraction.InvokeBehaviour();
-            }
-            //if(Lit_Prison.active)
-            //{
-            //}
-            //else
-            //{
-            //    if (Dark_Prison.active)
-            //    {
-            //        if (Dark_GateInteraction != null)
-            //        {
-            //            Dark_GateInteraction.InvokeBehaviour();
-            //        }
-            //    }
-            //}
-        }
 
         private static void PatchYard(GameObject Yard)
         {
@@ -581,11 +562,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             if (Lit_Gate_Button != null)
             {
-                Lit_GateInteraction = Lit_Gate_Button.FindUdonEvent("_interact");
+                Lit_GateInteraction = Lit_Gate_Button.FindUdonEvent("_Interact");
             }
             if (Dark_Gate_Button != null)
             {
-                Dark_GateInteraction = Dark_Gate_Button.FindUdonEvent("_interact");
+                Dark_GateInteraction = Dark_Gate_Button.FindUdonEvent("_Interact");
             }
         }
 
@@ -876,23 +857,53 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         internal static void SetupGateButtonBypass()
         {
-            GateButtonCollider = Lit_GateInteraction.UdonBehaviour.GetComponent<BoxCollider>();
-            OriginalGateButtonPos = GateButtonCollider.transform.localPosition;
+            GateButton_Transform = Lit_GateInteraction.UdonBehaviour.transform;
+
+            GateButton_Respawner = GateButton_Transform.GetOrAddComponent<Respawner>();
+            GateButton_Respawner.CaptureSpawnCoords();
+            GateButton_Collider = GateButton_Transform.GetComponent<BoxCollider>();
+            //GateButton_Position = new Vector3(2.75f, 0.815f, 0);
+
+            Lit_GateInteraction.BeforeInvoking += () =>
+            {
+                GateButton_Collider.enabled = true;
+                var Pos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightIndexProximal);
+                GateButton_Transform.position = Pos.position;
+                Lit_GateInteraction.UdonBehaviour.Interact();
+            };
+
+            Lit_GateInteraction.AfterInvoking += () =>
+            {
+                MiscUtils.DelayFunction(2f, () =>
+                {
+                ;GateButton_Respawner.Respawn(); 
+                });
+            };
+
+
+
+        }
+        internal static void ClickGateButton()
+        {
+
             if (Lit_GateInteraction != null)
             {
-                Lit_GateInteraction.Set_BeforeInvoking_Action(() =>
-                {
-                    if (GateButtonCollider != null)
-                    {
-                        GateButtonCollider.enabled = true;
-                    }
-                    GateButtonCollider.gameObject.TeleportToMe();
-                });
-                Lit_GateInteraction.Set_AfterInvoking_Action(() =>
-                {
-                    GateButtonCollider.gameObject.SetPosition(OriginalGateButtonPos);
-                });
+                Lit_GateInteraction.InvokeBehaviour();
             }
+
+            //if(Lit_Prison.active)
+            //{
+            //}
+            //else
+            //{
+            //    if (Dark_Prison.active)
+            //    {
+            //        if (Dark_GateInteraction != null)
+            //        {
+            //            Dark_GateInteraction.InvokeBehaviour();
+            //        }
+            //    }
+            //}
         }
 
         internal static void FindEverything()
@@ -2501,11 +2512,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
         private static List<UdonBehaviour_Cached> Knifes { get; set; } = new List<UdonBehaviour_Cached>();
         private static List<UdonBehaviour_Cached> VentsMeshes { get; set; } = new List<UdonBehaviour_Cached>();
-        internal static Transform GateButtonTrigger { get; set; }
+        internal static Transform GateButton_Transform { get; set; }
 
-        internal static BoxCollider GateButtonCollider { get; set; }
+        internal static BoxCollider GateButton_Collider { get; set; }
+        internal static Respawner GateButton_Respawner { get; set; }
 
-        internal static Vector3 OriginalGateButtonPos { get; set; } = Vector3.zero;
         internal static Toggle WorldSettings_GoldenGuns_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_DoublePoints_Toggle { get; set; } = null;
         internal static Toggle WorldSettings_VisualHitBoxes_Toggle { get; set; } = null;

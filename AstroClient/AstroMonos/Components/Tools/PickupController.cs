@@ -1088,8 +1088,8 @@ namespace AstroClient.AstroMonos.Components.Tools
                         if (RigidBodyController != null)
                         {
                             var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
-                            if (!will_it_fall_throught) RigidBodyController.RigidBody_Set_isKinematic(false);
-                            else RigidBodyController.RigidBody_Set_isKinematic(true);
+                            if (!will_it_fall_throught) RigidBodyController.RigidBody_Override_isKinematic(false);
+                            else RigidBodyController.RigidBody_Override_isKinematic(true);
                         }
                     }
 
