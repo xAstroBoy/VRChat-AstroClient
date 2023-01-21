@@ -17,6 +17,7 @@ using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using System;
 using System.Collections.Generic;
+using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
@@ -438,7 +439,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                                 GuardArea.SetText(TeleportSniper);
                             }
                         };
-                        Control.GetOrAddComponent<PickupController>().OnPickupDrop += () =>
+                        Control.OnPickupDrop += () =>
                         {
                             var RespawnSniper = "<color=orange>Respawn Sniper</color>";
                             var TeleportSniper = "<color=orange>Teleport Sniper</color>";
@@ -895,6 +896,52 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //}
         }
 
+        private static void PreventSniperDropsInVR()
+        {
+            // only VR mode sniper sucks.
+            if (!GameInstances.LocalPlayer.IsInVR()) return;
+            var Sniper1 = Finder.Find("Items/Static Guns/Sniper");
+            if(Sniper1 != null)
+            {
+                var Control = Sniper1.GetOrAddComponent<PickupController>();
+                Control.OnPickupHeld += () =>
+                {
+                    if(Control.CurrentHolder.isLocal)
+                    {
+                        GameObject_RPC_Firewall.EditRule(Sniper1, "_DropGrip", false, false, true);
+                        GameObject_RPC_Firewall.EditRule(Sniper1, "_DropIfHeld", false, false, true);
+                    }
+                };
+                Control.OnPickupDrop += () =>
+                {
+                    GameObject_RPC_Firewall.RemoveRule(Sniper1, "_DropGrip");
+                    GameObject_RPC_Firewall.RemoveRule(Sniper1, "_DropIfHeld");
+                };
+            }
+            var Sniper2 = Finder.Find("Items/Static Guns/Sniper (1)");
+            if (Sniper2 != null)
+            {
+                var Control = Sniper2.GetOrAddComponent<PickupController>();
+                Control.OnPickupHeld += () =>
+                {
+                    if (Control.CurrentHolder.isLocal)
+                    {
+                        GameObject_RPC_Firewall.EditRule(Sniper2, "_DropGrip", false, false, true);
+                        GameObject_RPC_Firewall.EditRule(Sniper2, "_DropIfHeld", false, false, true);
+                    }
+                };
+                Control.OnPickupDrop += () =>
+                {
+                    GameObject_RPC_Firewall.RemoveRule(Sniper2, "_DropGrip");
+                    GameObject_RPC_Firewall.RemoveRule(Sniper2, "_DropIfHeld");
+                };
+            }
+
+
+
+
+        }
+
         internal static void FindEverything()
         {
             AdjustWorld();
@@ -909,6 +956,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             AddSpawnDetectors();
             CreateEscapeButtons();
             SetupGateButtonBypass();
+            PreventSniperDropsInVR();
+
 
             //Log.Debug($"Registered {WantedTriggersRegistered} Wanted Triggers Detectors!", System.Drawing.Color.Chartreuse);
 
