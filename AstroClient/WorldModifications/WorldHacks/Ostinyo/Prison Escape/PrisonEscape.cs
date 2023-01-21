@@ -903,37 +903,40 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             var Sniper1 = Finder.Find("Items/Static Guns/Sniper");
             if(Sniper1 != null)
             {
+                var udon = Sniper1.GetComponent<UdonBehaviour>();
                 var Control = Sniper1.GetOrAddComponent<PickupController>();
                 Control.OnPickupHeld += () =>
                 {
                     if(Control.CurrentHolder.isLocal)
                     {
-                        GameObject_RPC_Firewall.EditRule(Sniper1, "_DropGrip", false, false, true);
-                        GameObject_RPC_Firewall.EditRule(Sniper1, "_DropIfHeld", false, false, true);
+                        GameObject_RPC_Firewall.Add_UdonFirewall_Rule(udon, "_DropGrip", false, false, true);
+                        GameObject_RPC_Firewall.Add_UdonFirewall_Rule(udon, "_DropIfHeld", false, false, true);
                     }
                 };
                 Control.OnPickupDrop += () =>
                 {
-                    GameObject_RPC_Firewall.RemoveRule(Sniper1, "_DropGrip");
-                    GameObject_RPC_Firewall.RemoveRule(Sniper1, "_DropIfHeld");
+                    GameObject_RPC_Firewall.Remove_UdonFirewall_Rule(udon, "_DropGrip");
+                    GameObject_RPC_Firewall.Remove_UdonFirewall_Rule(udon, "_DropIfHeld");
                 };
             }
             var Sniper2 = Finder.Find("Items/Static Guns/Sniper (1)");
             if (Sniper2 != null)
             {
                 var Control = Sniper2.GetOrAddComponent<PickupController>();
+                var udon = Sniper2.GetComponent<UdonBehaviour>();
+
                 Control.OnPickupHeld += () =>
                 {
                     if (Control.CurrentHolder.isLocal)
                     {
-                        GameObject_RPC_Firewall.EditRule(Sniper2, "_DropGrip", false, false, true);
-                        GameObject_RPC_Firewall.EditRule(Sniper2, "_DropIfHeld", false, false, true);
+                        GameObject_RPC_Firewall.Add_UdonFirewall_Rule(udon, "_DropGrip", false, false, true);
+                        GameObject_RPC_Firewall.Add_UdonFirewall_Rule(udon, "_DropIfHeld", false, false, true);
                     }
                 };
                 Control.OnPickupDrop += () =>
                 {
-                    GameObject_RPC_Firewall.RemoveRule(Sniper2, "_DropGrip");
-                    GameObject_RPC_Firewall.RemoveRule(Sniper2, "_DropIfHeld");
+                    GameObject_RPC_Firewall.Remove_UdonFirewall_Rule(udon, "_DropGrip");
+                    GameObject_RPC_Firewall.Remove_UdonFirewall_Rule(udon, "_DropIfHeld");
                 };
             }
 
