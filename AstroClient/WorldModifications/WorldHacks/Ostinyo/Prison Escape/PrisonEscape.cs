@@ -862,34 +862,23 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             GateButton_Respawner = GateButton_Transform.GetOrAddComponent<Respawner>();
             GateButton_Respawner.CaptureSpawnCoords();
             GateButton_Collider = GateButton_Transform.GetComponent<BoxCollider>();
-            //GateButton_Position = new Vector3(2.75f, 0.815f, 0);
-
-            Lit_GateInteraction.BeforeInvoking += () =>
-            {
-                GateButton_Collider.enabled = true;
-                var Pos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightIndexProximal);
-                GateButton_Transform.position = Pos.position;
-                Lit_GateInteraction.UdonBehaviour.Interact();
-            };
-
-            Lit_GateInteraction.AfterInvoking += () =>
-            {
-                MiscUtils.DelayFunction(2f, () =>
-                {
-                ;GateButton_Respawner.Respawn(); 
-                });
-            };
-
 
 
         }
         internal static void ClickGateButton()
         {
-
+            GateButton_Collider.enabled = true;
+            var Pos = GameInstances.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.RightIndexProximal);
+            GateButton_Transform.position = Pos.position;
+            Lit_GateInteraction.UdonBehaviour.Interact();
             if (Lit_GateInteraction != null)
             {
                 Lit_GateInteraction.InvokeBehaviour();
             }
+            MiscUtils.DelayFunction(2f, () =>
+            {
+                ; GateButton_Respawner.Respawn();
+            });
 
             //if(Lit_Prison.active)
             //{
