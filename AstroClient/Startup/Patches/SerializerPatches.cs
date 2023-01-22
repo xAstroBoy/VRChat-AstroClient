@@ -36,7 +36,7 @@ namespace AstroClient.Startup.Patches
         {
             try
             {
-                if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
+                if (__0 == 12 || __0 == 1)
                 {
                     return !MovementSerializer.SerializerActivated;
                 }

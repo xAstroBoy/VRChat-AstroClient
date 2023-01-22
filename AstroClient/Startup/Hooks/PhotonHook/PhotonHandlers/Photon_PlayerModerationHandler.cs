@@ -23,20 +23,16 @@ internal class Photon_PlayerModerationHandler
                 var moderationevent = Dictionary[ModerationCode.EventCode].Unbox<byte>();
                 switch (moderationevent)
                 {
-                    case ModerationCode.Warning: // Warnings.
-                        return HookAction.Nothing;
-                        break;
+                    //case ModerationCode.Warning: // Warnings.
+                    //    return HookAction.Nothing;
+                    //    break;
 
-                    case ModerationCode.Mod_Mute: // Mod Mute
-                        return HookAction.Nothing;
-                        break;
+                    //case ModerationCode.Mod_Mute: // Mod Mute
+                    //    return HookAction.Nothing;
+                    //    break;
 
-                    case ModerationCode.VoteKick:
-                        return HookAction.Nothing;
-
-                    case ModerationCode.Friend_State: // Friend State
-                        return HookAction.Nothing;
-                        break;
+                    //case ModerationCode.VoteKick:
+                    //    return HookAction.Nothing;
 
                     case ModerationCode.Block_Or_Mute:
 

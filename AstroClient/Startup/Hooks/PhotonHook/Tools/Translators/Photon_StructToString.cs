@@ -10,11 +10,11 @@ internal static class Photon_StructToString
     {
         switch (moderationEvent)
         {
-            case ModerationCode.Warning: return "Warning";
-            case ModerationCode.Mod_Mute: return "Mod Mute";
-            case ModerationCode.Friend_State: return "Friend State";
-            case ModerationCode.VoteKick: return "VoteKick";
-            case ModerationCode.Unknown: return "Unknown";
+            //case ModerationCode.Warning: return "Warning";
+            //case ModerationCode.Mod_Mute: return "Mod Mute";
+            //case ModerationCode.Friend_State: return "Friend State";
+            //case ModerationCode.VoteKick: return "VoteKick";
+            //case ModerationCode.Unknown: return "Unknown";
             case ModerationCode.Block_Or_Mute: return "Block/Mute";
             default:
                 return $"Unknown Moderation Event Byte {moderationEvent}";
