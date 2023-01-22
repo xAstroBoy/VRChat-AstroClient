@@ -196,9 +196,16 @@ namespace AstroClient.AstroMonos.Components.Tools
                 EnableInputEvents = true;
             }
         }
+        public void GrabItem(VRC_Pickup.PickupHand Hand)
+        {
+            if (!IsHeld)
+            {
+                GameInstances.LocalPlayer.SetPickupInHand(this.SDKBase_Pickup, Hand);
+            }
+        }
 
 
-        private  void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
+        private void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
         {
             if (AntiTheft)
             {
