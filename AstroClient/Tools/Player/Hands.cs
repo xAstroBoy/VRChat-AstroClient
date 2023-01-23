@@ -105,19 +105,21 @@
         //    }
         //}
 
-        internal static void SetPickupInRightHand(VRC.SDKBase.VRC_Pickup pickup)
+        internal static void SetPickup_RightHand(VRC.SDKBase.VRC_Pickup pickup)
         {
             if (pickup != null)
             {
                 if (RighthandGrasper != null)
                 {
                     if (RighthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
+                    pickup.gameObject.TakeOwnership();
                     pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.RightIndexProximal, false);
+                    RighthandGrasper.Method_Private_Void_PDM_9();
                 }
             }
         }
 
-        internal static void SetPickupLeftHand(VRC.SDKBase.VRC_Pickup pickup)
+        internal static void SetPickup_LeftHand(VRC.SDKBase.VRC_Pickup pickup)
         {
             if (pickup != null)
             {
@@ -126,6 +128,7 @@
                     if (LefthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
                     pickup.gameObject.TakeOwnership();
                     pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.LeftIndexProximal, false);
+                    LefthandGrasper.Method_Private_Void_PDM_9();
                 }
             }
         }

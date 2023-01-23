@@ -43,8 +43,8 @@ namespace AstroClient.Startup.Patches
 
         private void InitPatch()
         {
-            new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).GetMethod, null, GetPatch(nameof(ForceAllow_Get)));
-            new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).SetMethod, null, GetPatch(nameof(ForceAllow_Set)));
+            new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).GetMethod, GetPatch(nameof(ForceAllow_Get)));
+            new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).SetMethod, GetPatch(nameof(ForceAllow_Set)));
 
         }
 

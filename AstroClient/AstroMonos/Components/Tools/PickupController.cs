@@ -196,11 +196,15 @@ namespace AstroClient.AstroMonos.Components.Tools
                 EnableInputEvents = true;
             }
         }
-        public void GrabItem(VRC_Pickup.PickupHand Hand)
+        internal void GrabItem(VRC_Pickup.PickupHand Hand)
         {
-            if (!IsHeld)
+            if (Hand == VRC_Pickup.PickupHand.Right)
             {
-                GameInstances.LocalPlayer.SetPickupInHand(this.SDKBase_Pickup, Hand);
+                PlayerHands.SetPickup_RightHand(this.SDKBase_Pickup);
+            }
+            else
+            {
+                PlayerHands.SetPickup_LeftHand(SDKBase_Pickup);
             }
         }
 
@@ -218,19 +222,19 @@ namespace AstroClient.AstroMonos.Components.Tools
                             {
                                 if (SDKBase_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupInRightHand(SDKBase_Pickup);
+                                    PlayerHands.SetPickup_RightHand(SDKBase_Pickup);
 
                                     return;
                                 }
                                 if (SDK2_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupInRightHand(SDK2_Pickup);
+                                    PlayerHands.SetPickup_RightHand(SDK2_Pickup);
 
                                     return;
                                 }
                                 if (SDK3_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupInRightHand(SDK3_Pickup);
+                                    PlayerHands.SetPickup_RightHand(SDK3_Pickup);
                                     return;
                                 }
                             }
@@ -256,19 +260,19 @@ namespace AstroClient.AstroMonos.Components.Tools
                             {
                                 if (SDKBase_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupLeftHand(SDKBase_Pickup);
+                                    PlayerHands.SetPickup_LeftHand(SDKBase_Pickup);
 
                                     return;
                                 }
                                 if (SDK2_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupLeftHand(SDK2_Pickup);
+                                    PlayerHands.SetPickup_LeftHand(SDK2_Pickup);
 
                                     return;
                                 }
                                 if (SDK3_Pickup != null)
                                 {
-                                    PlayerHands.SetPickupLeftHand(SDK3_Pickup);
+                                    PlayerHands.SetPickup_LeftHand(SDK3_Pickup);
                                     return;
                                 }
                             }
