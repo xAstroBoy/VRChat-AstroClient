@@ -57,16 +57,69 @@
                 }
             }
         }
-        internal static void RemoveComponents<T>(this GameObject obj) where T : Component
+        internal static void RemoveComponents<T>(this GameObject Parent) where T : Component
         {
-            if (obj != null)
+            if (Parent == null) return;
+            var ParentComp = Parent.GetComponents<T>();
+            if (ParentComp != null)
             {
-                var all = obj.GetComponents<T>();
-                foreach (var exist in all)
+                if (ParentComp.Count != 0)
                 {
-                    if (exist)
+                    foreach (var comp in ParentComp)
                     {
-                        exist.DestroyMeLocal();
+                        if (comp != null)
+                        {
+                            UnityEngine.Object.DestroyImmediate(comp);
+                        }
+                    }
+                }
+            }
+
+            foreach (var child in Parent.transform.Get_All_Childs())
+            {
+                var comps = child.GetComponents<T>();
+                if (comps == null) continue;
+                if (comps.Length != 0) continue;
+                foreach (var comp in comps)
+                {
+                    if (comp != null)
+                    {
+                        UnityEngine.Object.DestroyImmediate(comp);
+                    }
+                }
+            }
+        }
+
+
+
+        public static void ActivateComponents<T>(this GameObject Parent) where T : Behaviour
+        {
+            if (Parent == null) return;
+            var ParentComp = Parent.GetComponents<T>();
+            if (ParentComp != null)
+            {
+                if (ParentComp.Count != 0)
+                {
+                    foreach (var comp in ParentComp)
+                    {
+                        if (comp != null)
+                        {
+                            comp.enabled = true;
+                        }
+                    }
+                }
+            }
+
+            foreach (var child in Parent.transform.Get_All_Childs())
+            {
+                var comps = child.GetComponents<T>();
+                if (comps == null) continue;
+                if (comps.Length != 0) continue;
+                foreach (var comp in comps)
+                {
+                    if (comp != null)
+                    {
+                        comp.enabled = true;
                     }
                 }
             }

@@ -6,6 +6,7 @@ using AstroClient.Tools.Skybox;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI;
+using UnityEngine;
 
 namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 {
@@ -52,7 +53,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
         {
             if (!HasGenerated)
             {
-                if (SkyboxEditor.GeneratedSkyboxesList.Count() == 0)
+                if (!SkyboxEditor.GeneratedSkyboxesList.Any())
                 {
                     var empty = new QMSingleButton(CurrentScrollMenu, "No Skyboxes Found", null, "No Skyboxes Found");
                     GeneratedButtons.Add(empty);
@@ -77,6 +78,8 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
                                     else if (skybox.Back != null) 
                                         btn.SetButtonImage(skybox.Back);
                                     skybox.SetAssignedButton(btn);
+                                    btn.Kill_StyleElement();
+                                    btn.BackgroundImage.color = new Color(1, 1, 1, 1);
                                     GeneratedButtons.Add(btn);
                                 }
                             }

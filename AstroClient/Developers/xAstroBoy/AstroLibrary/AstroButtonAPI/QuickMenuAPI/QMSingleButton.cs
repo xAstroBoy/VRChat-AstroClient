@@ -1,4 +1,5 @@
-﻿using VRC.UI.Elements.Tooltips;
+﻿using VRC.UI.Core.Styles;
+using VRC.UI.Elements.Tooltips;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -244,7 +245,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 case "Menu_SelectedUser_Remote":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform);
                     ButtonObject.EnableComponents();
-                    ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                    //ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     break;
@@ -252,7 +253,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 case "Menu_SelectedUser_Local":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Local.QuickActions.transform);
                     ButtonObject.EnableComponents();
-                    ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                   // ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     break;
@@ -270,32 +271,23 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     break;
 
             }
+            ButtonObject.RemoveComponents<MonoBehaviourPublic28Bu16Vo37Vo16St37VoUnique>(); // Votekick handler
+            ButtonObject.RemoveComponents<UiTooltip>(); // Votekick handler
+            ButtonObject.RemoveComponents<VRC.UI.Elements.Analytics.AnalyticsController>();
+            ButtonObject.RemoveComponents<UIToggleTooltip>();
+            ButtonObject.FindObject("Icon").RemoveComponents<StyleElement>();
+            ButtonObject.FindObject("Icon_Secondary").RemoveComponents<StyleElement>();
+            var TextRoot  = ButtonObject.FindObject("Text_H4");
+            if(TextRoot != null)
+            {
+                ButtonText = TextRoot.GetComponent<TextMeshProUGUIPublicBoUnique>();
+                ButtonText.RemoveComponents<StyleElement>();
+            }
             ButtonObject.SetActive(true);
             Button = ButtonObject.GetComponent<Button>();
             if (Button != null)
             {
                 Button.onClick = new Button.ButtonClickedEvent();
-            }
-            var analytics = ButtonObject.GetComponent<VRC.UI.Elements.Analytics.AnalyticsController>();
-            if(analytics != null)
-            {
-                UnityEngine.Object.DestroyImmediate(analytics);
-            }
-            foreach(var oldtooltip in ButtonObject.GetComponents<UiTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip);
-
-            }
-            foreach (var oldtooltip2 in ButtonObject.GetComponents<UIToggleTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip2);
-
-            }
-
-            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>(true);
-            if(ButtonText == null)
-            {
-                ButtonText = ButtonObject.FindUIObject("Text_H4").GetComponent<TextMeshProUGUIPublicBoUnique>();
             }
             if (ButtonRect == null)
             {
@@ -327,6 +319,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal void SetActive(bool isActive)
         {
             ButtonObject.SetActive(isActive);
+        }
+        internal void Kill_StyleElement()
+        {
+            ButtonObject.RemoveComponents<StyleElement>();
         }
 
         internal void SetButtonText(string buttonText)

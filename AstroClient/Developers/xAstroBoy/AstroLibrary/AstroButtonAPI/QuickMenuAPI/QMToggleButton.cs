@@ -1,4 +1,6 @@
 ﻿using AstroClient.xAstroBoy.Utility;
+using Cinemachine;
+using VRC.UI.Core.Styles;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -213,13 +215,17 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             }
 
             ButtonObject.EnableComponents(); // FUCK YOU VRCHAT
+
             ButtonTitleMesh = Extensions.NewText(ButtonObject, "Text_H4");
             ButtonTitleMesh.text = Title;
+            ButtonTitleMesh.RemoveComponents<StyleElement>();
             ButtonObject.name = id;
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
             ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
             btnOn = ButtonObject.FindUIObject("Icon_On");
             btnOff = ButtonObject.FindUIObject("Icon_Off");
+            btnOn.RemoveComponents<StyleElement>();
+            btnOff.RemoveComponents<StyleElement>();
             btnOff.SetActive(true);
             btnOn.SetActive(false);
             btnOff_Rect = btnOff.GetComponentInChildren<RectTransform>();
@@ -247,6 +253,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             SetToggleState(DefaultState);
         }
 
+        internal void Kill_StyleElement()
+        {
+            ButtonObject.RemoveComponents<StyleElement>();
+        }
         internal void setTextColorHTML(string buttonTextColor)
         {
             CurrentColor = buttonTextColor;

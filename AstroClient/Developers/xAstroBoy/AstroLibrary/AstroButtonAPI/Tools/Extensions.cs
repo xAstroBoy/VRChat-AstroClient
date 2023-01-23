@@ -289,24 +289,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
 
             #endregion
-            #region StyleElement
-
-            var StyleElement = parent.GetComponent<StyleElement>();
-            if (StyleElement != null)
-            {
-                StyleElement.enabled = true;
-            }
-
-            var StyleElements_List = parent.GetComponentsInChildren<StyleElement>(true);
-            for (var i = 0; i < StyleElements_List.Count; i++)
-            {
-                var item = StyleElements_List[i];
-                if (item != null)
-                {
-                    item.enabled = true;
-                }
-            }
-            #endregion
             #region CanvasGroup
 
             var CanvasGroup = parent.GetComponent<CanvasGroup>();
@@ -326,6 +308,24 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
 
 
+            #endregion
+            #region StyleElement
+
+            var StyleElement = parent.GetComponent<StyleElement>();
+            if (StyleElement != null)
+            {
+                StyleElement.enabled = true;
+            }
+
+            var StyleElements_List = parent.GetComponentsInChildren<StyleElement>(true);
+            for (var i = 0; i < StyleElements_List.Count; i++)
+            {
+                var item = StyleElements_List[i];
+                if (item != null)
+                {
+                    item.enabled = true;
+                }
+            }
             #endregion
             #region Image
             var Image = parent.GetComponent<Image>();
@@ -451,6 +451,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
             
 
+
             //var parentcomps = parent.GetComponents<Component>();
             //for (int i = 0; i < parentcomps.Count; i++)
             //{
@@ -474,6 +475,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             //    }
             //}
         }
+
 
         public static TextMeshProUGUIPublicBoUnique NewText(this GameObject Parent, string search)
         {
@@ -519,70 +521,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 }
             }
         }
-        public static void RemoveComponents<T>(this GameObject Parent) where T : Behaviour
-        {
-            if (Parent == null) return;
-            var ParentComp = Parent.GetComponents<T>();
-            if (ParentComp != null)
-            {
-                if (ParentComp.Count != 0)
-                {
-                    foreach (var comp in ParentComp)
-                    {
-                        if (comp != null)
-                        {
-                            UnityEngine.Object.DestroyImmediate(comp);
-                        }
-                    }
-                }
-            }
-
-            foreach (var child in Parent.transform.Get_All_Childs())
-            {
-                var comps = child.GetComponents<T>();
-                if (comps == null) continue;
-                if (comps.Length != 0) continue;
-                foreach (var comp in comps)
-                {
-                    if (comp != null)
-                    {
-                        UnityEngine.Object.DestroyImmediate(comp);
-                    }
-                }
-            }
-        }
-        public static void ActivateComponents<T>(this GameObject Parent) where T : Behaviour
-        {
-            if (Parent == null) return;
-            var ParentComp = Parent.GetComponents<T>();
-            if (ParentComp != null)
-            {
-                if (ParentComp.Count != 0)
-                {
-                    foreach (var comp in ParentComp)
-                    {
-                        if (comp != null)
-                        {
-                            comp.enabled = true;
-                        }
-                    }
-                }
-            }
-
-            foreach (var child in Parent.transform.Get_All_Childs())
-            {
-                var comps = child.GetComponents<T>();
-                if (comps == null) continue;
-                if (comps.Length != 0) continue;
-                foreach (var comp in comps)
-                {
-                    if (comp != null)
-                    {
-                        comp.enabled = true;
-                    }
-                }
-            }
-        }
+        
 
         public static void CleanButtonsWingMenu(this GameObject Parent)
         {

@@ -1,4 +1,6 @@
-﻿using Cinemachine;
+﻿using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using Cinemachine;
+using VRC.UI.Core.Styles;
 
 namespace AstroClient.xAstroBoy.Utility
 {
@@ -17,36 +19,62 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
         /// <summary>
-        ///  this kills The blue effect of vrchat GUI by Destroying StyleElement if present
+        ///  this kills The blue effect of vrchat GUI by Deactivating StyleElement if present
         /// </summary>
         /// <param name="image"></param>
         public static void MakeBackgroundMoreSolid(this Image image)
         {
-            var StyleElement = image.GetComponent<VRC.UI.Core.Styles.StyleElement>();
-            if (StyleElement != null)
+            var white = new Color(1, 1, 1, 1); ;
+            //var parentcomps = image.transform.GetComponents<StyleElement>();
+            //if (parentcomps != null)
+            //{
+            //    foreach (var comp in parentcomps)
+            //    {
+            //        comp.DisableStyleElement();
+            //    }
+            //}
+            //var Childs = image.transform.GetComponentsInChildren<StyleElement>(true);
+            //if (Childs != null)
+            //{
+            //    foreach (var comp in Childs)
+            //    {
+            //        comp.DisableStyleElement();
+            //    }
+            //}
+            image.color = white;
+            MiscUtils.DelayFunction(1f, () =>
             {
-                UnityEngine.Object.DestroyImmediate(StyleElement);
-            }
-
-            // White
-            MiscUtils.DelayFunction(0.5f, () =>
-            {
-                image.color = new Color(1, 1, 1, 1);
+                image.color = white;
             });
         }
 
+        /// <summary>
+        ///  this kills The blue effect of vrchat GUI by Deactivating StyleElement if present
+        /// </summary>
+        /// <param name="image"></param>
         public static void MakeBackgroundMoreSolid(this UIWidgets.ImageAdvanced image)
         {
-            var StyleElement = image.GetComponent<VRC.UI.Core.Styles.StyleElement>();
-            if (StyleElement != null)
+            var white = new Color(1, 1, 1, 1); ;
+            //var parentcomps = image.transform.GetComponents<StyleElement>();
+            //if (parentcomps != null)
+            //{
+            //    foreach (var comp in parentcomps)
+            //    {
+            //        comp.DisableStyleElement();
+            //    }
+            //}
+            //var Childs = image.transform.GetComponentsInChildren<StyleElement>(true);
+            //if (Childs != null)
+            //{
+            //    foreach (var comp in Childs)
+            //    {
+            //        comp.DisableStyleElement();
+            //    }
+            //}
+            image.color = white;
+            MiscUtils.DelayFunction(1f, () =>
             {
-                UnityEngine.Object.DestroyImmediate(StyleElement);
-            }
-
-            // White
-            MiscUtils.DelayFunction(0.5f, () =>
-            {
-                image.color = new Color(1, 1, 1, 1);
+                image.color = white;
             });
         }
 

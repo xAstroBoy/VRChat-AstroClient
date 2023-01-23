@@ -1,4 +1,6 @@
-﻿using VRC.UI.Elements;
+﻿using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Core.Styles;
+using VRC.UI.Elements;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -64,7 +66,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             SetToolTip(btnToolTip);
             SetAction(btnAction);
             ButtonObject.GetComponentInChildren<RectTransform>().SetSiblingIndex(Index);
-
+            var icon = ButtonObject.FindObject("Icon");
+            if(icon != null)
+            {
+                icon.RemoveComponents<StyleElement>();
+            }
             if (LoadSprite != null)
                 ButtonObject.LoadSprite(LoadSprite, "Icon");
 
