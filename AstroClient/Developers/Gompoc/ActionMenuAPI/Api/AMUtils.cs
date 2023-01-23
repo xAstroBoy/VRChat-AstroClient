@@ -1,3 +1,5 @@
+using AstroClient.Streamer;
+
 namespace AstroClient.Gompoc.ActionMenuAPI.Api
 {
     using System;
@@ -44,10 +46,20 @@ namespace AstroClient.Gompoc.ActionMenuAPI.Api
         ///     AddRadialPedalToSubMenu to add buttons to the submenu it creates when clicked
         /// </param>
         /// <param name="icon">(optional) The Button Icon</param>
-        /// <param name="locked">(optional) Starting state of pedal</param>
-        public static void AddToModsFolder(string text, Action openFunc, Texture2D icon = null)
+        /// <param name="ShowMenu">(optional) Show It or not</param>
+        public static void AddToModsFolder(string text, Action openFunc, Texture2D icon = null, bool ShowMenu = true)
         {
-            ModsFolderManager.AddMod(() => { CustomSubMenu.AddSubMenu(text, openFunc, icon); });
+            ModsFolderManager.AddMod(() =>
+            {
+                if (ShowMenu)
+                {
+                    CustomSubMenu.AddSubMenu(text, openFunc, icon);
+                }
+
+            });
         }
+
+
+
     }
 }

@@ -802,6 +802,7 @@
     <Compile Include="WorldModifications\WorldHacks\SuperTowerDefense.cs" />
     <Compile Include="WorldModifications\WorldHacks\SovrenChillHome.cs" />
     <Compile Include="WorldModifications\WorldHacks\VRWare.cs" />
+    <Compile Include="WorldModifications\WorldsIds\WorldIdentifier.cs" />
     <Compile Include="WorldModifications\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldModifications\WorldHacks\VoidClub.cs" />
     <Compile Include="WorldModifications\WorldHacks\JustHParty.cs" />

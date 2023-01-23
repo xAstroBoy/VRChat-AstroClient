@@ -5,6 +5,7 @@ using AstroClient.ClientResources.Loaders;
 using AstroClient.ClientUI.QuickMenuGUI.ESP;
 using AstroClient.Constants;
 using AstroClient.Gompoc.ActionMenuAPI.Api;
+using AstroClient.Streamer;
 using AstroClient.Tools.Bruteforcer;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Player.Movement.Exploit;
@@ -748,7 +749,7 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion VRWare
-        }, Icons.thief);
+        }, Icons.thief, WorldIdentifier.ShowWorldCheatActionMenu);
 
         Log.Write("World Module is ready!", Color.Green);
     }

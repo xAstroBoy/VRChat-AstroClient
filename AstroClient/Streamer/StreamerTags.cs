@@ -48,7 +48,7 @@ namespace AstroClient.Streamer
                 var apiuser = player.GetAPIUser();
                 if (apiuser != null)
                 {
-                    if (StreamerIdentifier.IsAStreamer(apiuser.id))
+                    if (WorldIdentifier.IsAStreamer(apiuser.id))
                     {
 
                         player.AddSingleTag("Streamer", SystemColors.Orange);
@@ -84,7 +84,7 @@ namespace AstroClient.Streamer
                                 player.AddSingleTag("Sensible Squeaky panda!", Color.FromArgb(4, 138, 4));
                                 break;
                             case Streamers.Ruqaa:
-                                player.AddSingleTag("Bnuuy!", Color.FromArgb(142, 13, 217));
+                                player.AddSingleTag("Wolf Girl!", Color.FromArgb(142, 13, 217));
                                 break;
                             case Streamers.Nifty:
                                 player.AddSingleTag("The Legendary Pan Bonker!", Color.FromArgb(166, 143, 12));
