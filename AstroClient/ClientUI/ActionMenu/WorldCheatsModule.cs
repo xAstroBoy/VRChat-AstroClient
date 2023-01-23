@@ -34,7 +34,7 @@ internal class WorldCheatsModule : AstroEvents
 
     private void OnApplicationStart()
     {
-        AMUtils.AddToModsFolder("World Modules", () =>
+        AMUtils.AddToModsFolder_Cheats("World Cheats", () =>
         {
             #region Super Tower Defense
 
@@ -749,7 +749,7 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion VRWare
-        }, Icons.thief, WorldIdentifier.ShowWorldCheatActionMenu);
+        }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);
     }

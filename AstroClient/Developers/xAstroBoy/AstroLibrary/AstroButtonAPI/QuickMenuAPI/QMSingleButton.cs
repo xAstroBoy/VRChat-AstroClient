@@ -76,7 +76,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             if (isUserPage)
             {
                 //ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform, true);
-                ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
+                //ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                 ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
             }
         }

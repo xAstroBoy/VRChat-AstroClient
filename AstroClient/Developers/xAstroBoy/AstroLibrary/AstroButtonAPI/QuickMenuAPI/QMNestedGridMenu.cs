@@ -67,7 +67,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             if (isUserPage)
             {
                 mainButton.GetGameObject().EnableComponents();
-                mainButton.GetGameObject().FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
             }
         }
 
