@@ -155,6 +155,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     GateButton_Transform = null;
                     GateButton_Collider = null;
                     GateButton_Respawner = null;
+                    PowerControl = null;
                     _Spawn_Area = null;
                     _Gun_Color_Panel = null;
                     _Respawn_Points = null;
@@ -295,7 +296,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             {
                 heightlimiter.DestroyMeLocal(true);
             }
-
+            var PowerControlRoot = Finder.Find("Scripts/Power Control");
+            if (PowerControlRoot != null)
+            {
+                PowerControl = PowerControlRoot.GetOrAddComponent<PrisonEscape_PowerControlReader>();
+            }
             var occluder = Finder.FindRootSceneObject("Occlusion");
 
             if (occluder != null)
@@ -1913,6 +1918,25 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 ToggleSmallCrateESP(value);
             }
         }
+        internal static void TurnPowerOff()
+        {
+            if(PowerControl != null)
+            {
+                if(PowerControl.powerOn.GetValueOrDefault(false))
+                {
+                    PowerControl.powerBoxEnableDelay = 0f;
+                    PowerControl.TurnPowerOff(); 
+                }
+            }
+        }
+        internal static void TurnPowerOn()
+        {
+            if (PowerControl != null)
+            {
+                PowerControl.Reset();
+                PowerControl.TurnPowerOn();
+            }
+        }
 
         internal static void OpenAllLargeCrates()
         {
@@ -2025,6 +2049,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 }
             }
         }
+        internal static PrisonEscape_PowerControlReader PowerControl { get; set; }
 
         internal static Ostinyo_World_PatronCracker PatronController { get; set; }
 

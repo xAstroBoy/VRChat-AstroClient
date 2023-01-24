@@ -212,6 +212,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 VRC_AstroPickup.OnPickup += OnPickup;
                 VRC_AstroPickup.OnPickupUseDown += OnPickupUseDown;
                 VRC_AstroPickup.OnDrop += onDrop;
+                CurrentRigidbody.RigidBody_Set_isKinematic(true);
                 if (IsEnabled) VRC_AstroPickup.interactText = "Toggle Off Freeze";
                 else VRC_AstroPickup.interactText = "Toggle On Freeze";
             }

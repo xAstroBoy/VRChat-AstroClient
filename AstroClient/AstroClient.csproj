@@ -135,7 +135,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_ESP.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_HitboxReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PoolDataReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_WantedDetector.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_PowerControlReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_UpgradeEditor.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\RespawnerHelper.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\PickupChair.cs" />

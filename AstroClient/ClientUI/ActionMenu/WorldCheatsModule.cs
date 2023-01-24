@@ -509,7 +509,6 @@ internal class WorldCheatsModule : AstroEvents
                         CustomSubMenu.AddButton("Set Red Color", () => { PrisonEscape.Gun_Red_Color_Button.onClick.Invoke(); });
                     }
                 });
-
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
                 {
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
@@ -525,7 +524,6 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddSubMenu("Game Cheats", () =>
                 {
                     CustomSubMenu.AddToggle("Show Role, Health & Wanted ", PrisonEscape.ShowRoles, ToggleValue => { PrisonEscape.ShowRoles = ToggleValue; });
-
                     CustomSubMenu.AddToggle("Everyone Has Gold Guns", PrisonEscape.EveryoneHasGoldenGunCamos, ToggleValue => { PrisonEscape.EveryoneHasGoldenGunCamos = ToggleValue; });
 
                     var ESP = GameInstances.LocalPlayer.gameObject.GetOrAddComponent<PrisonEscape_ESP>();
@@ -615,6 +613,8 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddButton("Get KeyCard", () => { PrisonEscape.TakeKeyCard(); });
                     CustomSubMenu.AddButton("Open All Small Crates", () => { PrisonEscape.OpenAllSmallCrates(); });
                     CustomSubMenu.AddButton("Open All Large Crates", () => { PrisonEscape.OpenAllLargeCrates(); });
+                    CustomSubMenu.AddButton("Turn Prison Power Off", () => { PrisonEscape.TurnPowerOff(); });
+                    CustomSubMenu.AddButton("Turn Prison Power On", () => { PrisonEscape.TurnPowerOn(); });
 
                 });
 
