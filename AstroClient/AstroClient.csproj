@@ -117,6 +117,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleController.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Murder4_ESP.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\PriceGuess\PriceGuess_Controller_reader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\AmongUs_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\Roles\Murder4_Roles.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\SpiritsOfSeas\SpiritsOfSeas_PlayerPermissionReader.cs" />
@@ -652,6 +653,7 @@
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_GameLogic.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_RoleSwapper.cs" />
     <Compile Include="WorldModifications\WorldHacks\Jar\Murder4\UdonCheats\Murder4_UnfilteredNodes.cs" />
+    <Compile Include="WorldModifications\WorldHacks\Jar\PriceGuess\PriceGuess.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\VRChat_Kmart.cs" />
     <Compile Include="WorldModifications\WorldHacks\Kmarts\SuperKmartCenter.cs" />
     <Compile Include="WorldModifications\WorldHacks\MakiMaki\Maki_SpiritOfSeas.cs" />

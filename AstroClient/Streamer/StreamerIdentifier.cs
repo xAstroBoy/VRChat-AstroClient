@@ -14,10 +14,10 @@ namespace AstroClient.Streamer
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.OnApplicationLateStart += OnApplicationLateStart;
+            ClientEventActions.OnApplicationLateStart += Start;
         }
 
-        private void OnApplicationLateStart()
+        private void Start()
         {
             Streamers structValue = new Streamers();
             foreach (var field in typeof(Streamers).GetFields())

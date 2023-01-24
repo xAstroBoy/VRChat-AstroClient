@@ -20,6 +20,7 @@ namespace AstroClient.Startup.Hooks
 
         private void VRChat_OnUiManagerInit()
         {
+            
             var field0 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
             var field1 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_2;
 

@@ -58,7 +58,9 @@
         public const string VRWare_Test_CrossPlatform = "wrld_e5237774-f905-495d-a97c-ba22a36b2249";
         public const string Infested = "wrld_32402c8f-f897-4ed6-8266-cd22fdce3313";
         public const string SakuraIsland = "wrld_a244ea7c-0c05-4349-b146-b64006347e5d";
-       // public const string VRWare_Quest = "wrld_e5237774-f905-495d-a97c-ba22a36b2249";
+        public const string PriceGuess = "wrld_d1d2318c-5144-4902-a774-876f45c06804";
+
+        // public const string VRWare_Quest = "wrld_e5237774-f905-495d-a97c-ba22a36b2249";
 
     }
 }

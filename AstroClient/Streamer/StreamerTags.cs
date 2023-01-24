@@ -16,10 +16,10 @@ namespace AstroClient.Streamer
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.OnPlayerJoin += OnPlayerJoined;
+            ClientEventActions.OnPlayerStart += onPlayerStart;
         }
 
-        private void OnPlayerJoined(Player player)
+        private void onPlayerStart(Player player)
         {
             MelonCoroutines.Start(AddTag(player));
         }
