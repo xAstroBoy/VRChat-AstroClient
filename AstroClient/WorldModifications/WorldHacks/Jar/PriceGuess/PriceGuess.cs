@@ -47,6 +47,13 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.PriceGuess
 
         private void OnRoomLeft()
         {
+            AnswerToggleButton = null;
+            ShowAnswers = false;
+            Text_Clue = null;
+            Answer_TextTransf = null;
+            Answer_Text = null;
+            Reader = null;
+            StageCanvas = null;
 
             HasSubscribed = false;
         }
