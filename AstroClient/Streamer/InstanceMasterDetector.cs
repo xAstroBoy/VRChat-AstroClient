@@ -22,7 +22,7 @@ namespace AstroClient.Streamer
             ClientEventActions.OnMasterClientSwitched += OnMasterClientSwitched;
             ClientEventActions.OnWorldReveal += OnWorldReveal;
 
-            ClientEventActions.OnRoomLeft += OnRoomJoined;
+            ClientEventActions.OnRoomJoined += OnRoomJoined;
             ClientEventActions.OnRoomLeft += OnRoomLeft;
         }
 
@@ -34,16 +34,23 @@ namespace AstroClient.Streamer
             {
                 if (PlayerSpooferUtils.IsSpooferActive)
                 {
-                    NewHudNotifier.WriteHudMessage($"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
+                    NewHudNotifier.WriteHudMessage($"{PlayerSpooferUtils.SpooferInstance.Original_DisplayName} is now the room master.");
+                }
+                else
+                {
+                    NewHudNotifier.WriteHudMessage($"{player.GetDisplayName()} is now the room master.");
+
                 }
             }
             else
             {
-                NewHudNotifier.WriteHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
+                NewHudNotifier.WriteHudMessage($"{player.GetPhotonPlayer().GetDisplayName()} is now the room master.");
             }
-
-            player.GetVRCPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
-
+            if (CurrentMaster != player || CurrentMaster == null)
+            {
+                CurrentMaster = player;
+                player.GetVRCPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
+            }
         }
 
 
@@ -56,6 +63,7 @@ namespace AstroClient.Streamer
         private void OnRoomLeft()
         {
             Log.Write("You left a room.");
+            CurrentMaster = null;
         }
         
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -65,5 +73,7 @@ namespace AstroClient.Streamer
 
             WorldUtils.InstanceMaster.GetPlayer().AddSingleTag(InstanceMasterTag, System.Drawing.Color.OrangeRed);
         }
+
+        private static Player CurrentMaster { get; set; }
     }
 }
