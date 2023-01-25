@@ -32,15 +32,7 @@ namespace AstroClient.Streamer
 
             if (player.GetPhotonPlayer().GetAPIUser().IsSelf)
             {
-                if (PlayerSpooferUtils.IsSpooferActive)
-                {
-                    NewHudNotifier.WriteHudMessage($"{PlayerSpooferUtils.SpooferInstance.Original_DisplayName} is now the room master.");
-                }
-                else
-                {
-                    NewHudNotifier.WriteHudMessage($"{player.GetDisplayName()} is now the room master.");
-
-                }
+                NewHudNotifier.WriteHudMessage($"You are now the room master.");
             }
             else
             {
