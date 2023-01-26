@@ -180,48 +180,57 @@ namespace AstroClient.WorldModifications.WorldHacks
             "--- Always On ---/Elevator TPs/Kings Game TP",
             "--- Always On ---/Elevator TPs/VIP Room TP (1)",
             "--- Always On ---/Elevator TPs/Board Game TP",
-            "--- Always On ---/Elevator TPs/Card Troubles Off",
-            "--- Always On ---/Elevator TPs/Kings Game OFF",
+            //"--- Always On ---/Elevator TPs/Card Troubles Off",
+            //"--- Always On ---/Elevator TPs/Kings Game OFF",
             "--- Always On ---/Elevator TPs/Outdoor Fun TP",
             "--- Always On ---/Elevator TPs/Card Troubles TP",
             "--- Always On ---/Elevator TPs/Main Floor TP",
             "--- Always On ---/Elevator TPs/Random TP",
-            "--- Always On ---/Elevator TPs/Board Game Off",
-            "--- Always On ---/Elevator TPs/VIP Room TP",
+            //"--- Always On ---/Elevator TPs/Board Game Off",
+            //"--- Always On ---/Elevator TPs/VIP Room TP",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Join Leave Sound Toggle (1)",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/VIP",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Colliders Toggle",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Cylinder (24)",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/VIPPlus",
-            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Chairs Toggle",
-            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Music Toggle",
-            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Join Leave Sound Toggle",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Optimize",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Optimize Normal",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Chairs Toggle",
+            "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Music Toggle",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Discord",
             "--- Rooms ---/Main Room/Entrance Hallway/Spawn Elevator/Buttons/World Toggles/Discord Gold",
 
+
         };
 
+        private static string[] Trash = new[]
+        {
+            "--- Technical ---/Rule System/Rules one/Zone Trigger", // Annoying rule Window trigger.
+            "Poof Go The Clients",
+            "Cubessss",
+            "Turn Off" // Collider that teleports you back to spawn
+        };
 
         private static void FindEverything()
         {
-            var trash1 = Finder.FindRootSceneObject("Cubessss");
-            if(trash1 != null)
+
+            // Bypass the Annoying age check "rule".
+            //var button = Finder.Find("--- Technical ---/Rule System/Rules one/First Rule Set/Age/Button (2)");
+            //if (button != null)
+            //{
+            //    var Click = UdonSearch.FindUdonEvent(button, "Toggle");
+            //    if (Click != null)
+            //    {
+            //        Click.InvokeBehaviour();
+            //    }
+            //}
+
+            foreach (var item in Trash)
             {
-                trash1.DestroyMeLocal();
-            }
-            var VIPRoom = Rooms.FindObject("VIP Room");
-            if (VIPRoom != null)
-            {
-                VIPRoom.gameObject.SetActive(true);
-                VIPRoom.GetOrAddComponent<Enabler>();
-                VIPRoom.Set_UdonBehaviour_DisableInteractive(false);
-                var VIPTP = VIPRoom.FindObject("VIP TP");
-                if (VIPTP != null)
+                var obj = Finder.Find(item);
+                if (obj != null)
                 {
-                    VIPTP.gameObject.SetActive(true);
-                    VIPTP.GetOrAddComponent<Enabler>();
-                    VIPTP.Set_UdonBehaviour_DisableInteractive(false);
+                    obj.DestroyMeLocal();
                 }
             }
             foreach(var item in ElevatorBtnPaths)

@@ -10,21 +10,51 @@
 
     public static class Finder
     {
-        // Todo : Make it split the root, find it first, then use transform.find to get the rest, to bypass Gameobject.find being unable to find inactive childs
+        /// <summary>
+        /// This bypasses Also the Inactive Object bug that Unity has when using .find being unable to find inactive objects.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static GameObject Find(string path)
         {
-            var obj = GameObject.Find(path);
-            if (obj != null)
+            if (path.IsNotNullOrEmptyOrWhiteSpace())
             {
-                return obj;
+                // Get all paths
+                string[] paths = path.Split('/');
+                // Get the root path
+                string RootPath = paths[0];
+                // get the rest of the child path minus the root
+                string[] ChildPaths = paths.Skip(1).ToArray();
+                // Get the root gameobject
+                var Root = GameObject.Find(RootPath);
+                // If the root gameobject is null, return null
+                if (Root == null)
+                {
+                    Root = FindRootSceneObject(RootPath);
+                    if (Root == null)
+                    {
+                        Log.Error($"[ERROR (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Root Object Found!");
+                        return null;
+                    }
+                }
+                if (ChildPaths.Length == 0)
+                {
+                    return Root;
+                }
+                // convert the rest of the childs into a string
+                string ChildPath = string.Join("/", ChildPaths);
+                // Find the child gameobject
+                var result = Root.FindObject(ChildPath, true);
+                if (result == null)
+                {
+                    Log.Error($"[ERROR (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Child Object Found!");
+                    return null;
+                }
+                return result;
             }
-            else
-            {
-                Log.Error($"[ERROR (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
-                return null;
-            }
+            return null;
         }
-        
+
         public static List<GameObject> RootSceneObjects => SceneManager.GetActiveScene().GetRootGameObjects().ToList();
 
         public static List<GameObject> RootSceneObjects_WithoutAvatars => SceneManager.GetActiveScene().GetRootGameObjects().Where(x => !x.gameObject.name.Contains("VRCPlayer")).ToList();
