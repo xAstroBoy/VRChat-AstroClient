@@ -124,10 +124,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             ChangeTeleportDoor(PinkRoom_Door, PinkRoom_Room, "Enter <color=pink>Pink Room</color>");
             #endregion
 
-            #region Orange Room
+            #region Green Room
             var GreenRoom_Door = Finder.Find("SSOS_Room (2)/Door Outer");
             var GreenRoom_Room = Finder.Find("privat room (3)");
-            ChangeTeleportDoor(OrangeRoom_Door, OrangeRoom_Room, "Enter <color=green>Green Room</color>");
+            ChangeTeleportDoor(GreenRoom_Door, GreenRoom_Room, "Enter <color=green>Green Room</color>");
             #endregion
 
 
