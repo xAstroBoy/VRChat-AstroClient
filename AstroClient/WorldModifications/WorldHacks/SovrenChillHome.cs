@@ -114,9 +114,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                         }
 
-                        foreach (var child in Main_PatronPage.Get_Childs())
+                        foreach (var child1 in Main_PatronPage.Get_Childs())
                         {
-                            child.gameObject.SetActive(true);
+                            child1.gameObject.SetActive(true);
+                            foreach(var child2 in child1.Get_Childs())
+                            {
+                                child2.gameObject.SetActive(true);
+
+                            }
                         }
                         // activate transform in parent 
                         

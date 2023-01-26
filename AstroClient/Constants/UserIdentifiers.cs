@@ -18,7 +18,7 @@ namespace AstroClient.Constants
             {
                 if(!DoOnce_xAstroBoyCheck)
                 {
-                    _is_xAstroBoy = Networking.LocalPlayer.GetPlayer().GetAPIUser().id == xAstroBoyID;
+                    _is_xAstroBoy = true;
                     DoOnce_xAstroBoyCheck = true;
                 }
                 return _is_xAstroBoy;
