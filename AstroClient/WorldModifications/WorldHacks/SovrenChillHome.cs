@@ -105,6 +105,22 @@ namespace AstroClient.WorldModifications.WorldHacks
                     {
                         Main_NonPatronsPage.SetActive(false);
                         Main_PatronPage.SetActive(true);
+                        // Activate Patron childs
+                        foreach (var item in Main_PatronPage.GetComponentsInChildren<Button>())
+                        {
+                            if (item != null)
+                            {
+                                item.interactable = true;
+                            }
+                        }
+
+                        foreach (var child in Main_PatronPage.Get_Childs())
+                        {
+                            child.gameObject.SetActive(true);
+                        }
+                        // activate transform in parent 
+                        
+
                     };
                 }
                 //Main_NonPatronsPage.DestroyChildren(); // remove the blank stuff inside.
