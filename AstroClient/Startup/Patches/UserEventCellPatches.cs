@@ -1,5 +1,6 @@
 ﻿using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
+using AstroClient.Tools.Extensions;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -31,7 +32,7 @@ namespace AstroClient.Startup.Hooks
         internal void InitPatches()
         {
             new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.Method_Public_Void_String_Single_Sprite_0)), null, GetPatch(nameof(ShowHudNotifier)));
-            //new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.OnDisable)), null, GetPatch(nameof(RemoveTextAnimator)));
+            new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.OnDisable)), null, GetPatch(nameof(RemoveTextAnimator)));
         }
 
         private static void ShowHudNotifier(ref MonoBehaviourPublicTMteCaSiImdiCoUnique __instance, ref string __0)
@@ -43,7 +44,7 @@ namespace AstroClient.Startup.Hooks
                     __instance.text.richText = true;
                     if (__0.NeedsTextAnimator())
                     {
-                        var anim = __instance.text.gameObject.AddComponent<TextAnimator>();
+                        var anim = __instance.text.gameObject.GetOrAddComponent<TextAnimator>();
                         if (anim != null)
                         {
                             anim.ShowAllCharacters(true);
@@ -58,7 +59,10 @@ namespace AstroClient.Startup.Hooks
         {
             if (__instance != null)
             {
-                __instance.text.RemoveComponent<TextAnimator>();
+                foreach(var anim in __instance.text.GetComponentsInChildren<TextAnimator>())
+                {
+                    anim.DestroyMeLocal(true);
+                }
             }
         }
     }

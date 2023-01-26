@@ -1,5 +1,6 @@
 ﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
@@ -25,15 +26,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
-        private static string[] Trash = new[]
-{
-            "fuck you kill cube",
-            "fuck you kill cube (1)",
-            "fuck you kill cube",
-            "fuck you kill cube",
-            "fuck you kill cube",
-            "fuck you kill cube",
-        };
 
         private static string[] ButtonsToActivate = new[]
         {
@@ -79,12 +71,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void PatchWorld()
         {
-            foreach (var path in Trash)
+            foreach (var item in Finder.RootSceneObjects_WithoutAvatars)
             {
-                var obj = Finder.Find(path);
-                if (obj != null)
+                if (item.name.Contains("fuck you kill cube"))
                 {
-                    obj.DestroyMeLocal();
+                    item.DestroyMeLocal();
                 }
             }
 
@@ -104,13 +95,23 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             var Main_NonPatronsPage = Finder.Find("SSOS/SSOS_Main_Tablet/Main_Canvas/Main_Panel (Add section here)/Section_NoPatreon");
             var Main_PatronPage = Finder.Find("SSOS/SSOS_Main_Tablet/Main_Canvas/Main_Panel (Add section here)/Section Patreon");
-            if(Main_NonPatronsPage != null)
+            if (Main_NonPatronsPage != null)
             {
-                Main_NonPatronsPage.DestroyChildren(); // remove the blank stuff inside.
-                var Patron_Canvas = Main_PatronPage.FindObject("Layout (Add Buttons here)");
-                var Clone = Object.Instantiate(Patron_Canvas, new Vector3(0f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, 0f)), Main_NonPatronsPage.transform);
-                Clone.name = "Layout (Add Buttons here)";
-                
+                var listener = Main_NonPatronsPage.GetOrAddComponent<GameObjectListener>();
+                if(listener != null)
+                {
+                    // Disable this and enable the patron one
+                    listener.OnEnabled += () =>
+                    {
+                        Main_NonPatronsPage.SetActive(false);
+                        Main_PatronPage.SetActive(true);
+                    };
+                }
+                //Main_NonPatronsPage.DestroyChildren(); // remove the blank stuff inside.
+                //var Patron_Canvas = Main_PatronPage.FindObject("Layout (Add Buttons here)");
+                //var Clone = Object.Instantiate(Patron_Canvas, new Vector3(0f, 0f, 0f), Quaternion.Euler(new Vector3(0f, 0f, 0f)), Main_NonPatronsPage.transform);
+                //Clone.name = "Layout (Add Buttons here)";
+
             }
 
             #region Orange Room
