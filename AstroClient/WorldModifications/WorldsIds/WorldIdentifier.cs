@@ -1,16 +1,8 @@
-﻿using AstroClient.ClientActions;
-using AstroClient.WorldModifications.WorldsIds;
+﻿using System.Collections.Generic;
+using AstroClient.ClientActions;
 
-namespace AstroClient.Streamer
+namespace AstroClient.WorldModifications.WorldsIds
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    
-    using Tools.Extensions;
-    using VRC;
-    using xAstroBoy.Utility;
-
     internal class WorldIdentifier : AstroEvents
     {
         internal override void RegisterToEvents()

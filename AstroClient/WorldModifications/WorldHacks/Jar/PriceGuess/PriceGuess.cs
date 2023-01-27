@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.PriceGuess;
 using AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;

@@ -1,6 +1,7 @@
 ﻿
 using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Patching;
 using VRC;
 
 namespace AstroClient.Startup.Hooks

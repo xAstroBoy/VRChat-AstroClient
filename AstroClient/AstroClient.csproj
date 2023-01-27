@@ -370,7 +370,7 @@
     <Compile Include="Startup\Patches\AnalyticsPurger.cs" />
     <Compile Include="Startup\Patches\UserEventCellPatches.cs" />
     <Compile Include="Startup\UnityLogger.cs" />
-    <Compile Include="Streamer\AbyssalGodDetector.cs" />
+    <Compile Include="Startup\Instance\TagsAssigner\AbyssalGodDetector.cs" />
     <Compile Include="Tools\Bruteforcer\TextBruteforcer.cs" />
     <Compile Include="Tools\Converters.cs" />
     <Compile Include="Tools\Extensions\TextMeshPro_ext.cs" />
@@ -553,7 +553,7 @@
     <Compile Include="Startup\Hooks\EventDispatcherHook\Startup\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SoftCloneHook.cs" />
     <Compile Include="Startup\Patches\UnchainedMelonLoader.cs" />
-    <Compile Include="Streamer\WorldAuthorDetector.cs" />
+    <Compile Include="Startup\Instance\TagsAssigner\WorldAuthorDetector.cs" />
     <Compile Include="Tools\Extensions\Collider_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\BouncerExtensions.cs" />
     <Compile Include="Tools\Extensions\Engine_ext.cs" />
@@ -611,7 +611,7 @@
     <Compile Include="Startup\Patches\SerializerPatches.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\JoinLeaveNotifierVRC.cs" />
     <Compile Include="Streamer\Streamers.cs" />
-    <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="Startup\Instance\TagsAssigner\StreamerTags.cs" />
     <Compile Include="Tools\Skybox\CubemapTools\CubeMapAndTexture2D.cs" />
     <Compile Include="Tools\UdonEditor\Disassembler.cs" />
     <Compile Include="Tools\UdonEditor\TypeFinder.cs" />
@@ -713,7 +713,7 @@
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\VRCPlusHider.cs" />
-    <Compile Include="Streamer\InstanceMasterDetector.cs" />
+    <Compile Include="Startup\Instance\TagsAssigner\InstanceMasterDetector.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\MediaController\MediaController.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_Pickup.cs" />
     <Compile Include="AstroMonos\Components\ESP\ESP_Trigger.cs" />

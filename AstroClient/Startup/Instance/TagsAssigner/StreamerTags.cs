@@ -1,15 +1,16 @@
-﻿using AstroClient.AstroMonos.Components.ESP;
+﻿using System.Collections;
+using System.Drawing;
+using AstroClient.AstroMonos.Components.ESP;
 using AstroClient.ClientActions;
+using AstroClient.Streamer;
+using AstroClient.Tools.Extensions;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
+using MelonLoader;
+using VRC;
 
-namespace AstroClient.Streamer
+namespace AstroClient.Startup.Instance.TagsAssigner
 {
-    using System.Collections;
-    using System.Drawing;
-    using Constants;
-    using MelonLoader;
-    using Tools.Extensions;
-    using VRC;
-    using xAstroBoy.Utility;
     using SystemColors = Tools.Colors.SystemColors;
 
     internal class StreamerTags : AstroEvents

@@ -1,14 +1,10 @@
-﻿using Boo.Lang;
+﻿using System.Reflection;
+using Boo.Lang;
+using HarmonyLib;
 
-namespace AstroClient.Cheetos
+namespace AstroClient.xAstroBoy.Patching
 {
     #region Imports
-
-    using Constants;
-    using HarmonyLib;
-    using System;
-    using System.Reflection;
-    using System.Text;
 
     #endregion Imports
 
@@ -17,7 +13,7 @@ namespace AstroClient.Cheetos
         private readonly BindingFlags TargetedFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
 
         private List<AstroPatch> Patches = new List<AstroPatch>();
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        [Obfuscation(Feature = "HarmonyGetPatch")]
         private static HarmonyLib.HarmonyMethod GetPatch(string name)
         {
             return new HarmonyLib.HarmonyMethod(typeof(UnityClassBlocker<T>).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));

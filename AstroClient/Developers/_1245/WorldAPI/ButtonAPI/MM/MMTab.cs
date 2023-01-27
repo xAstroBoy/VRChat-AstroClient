@@ -1,4 +1,5 @@
 ﻿using System;
+using AstroClient.xAstroBoy.Utility;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;

@@ -1,21 +1,18 @@
 ﻿using System;
-using AstroClient.WorldModifications.WorldHacks.Jar.PriceGuess;
+using AstroClient.ClientActions;
+using AstroClient.ClientAttributes;
+using AstroClient.Tools.UdonEditor;
+using AstroClient.Tools.UdonSearcher;
+using AstroClient.WorldModifications.WorldsIds;
+using AstroClient.xAstroBoy.Utility;
+using Il2CppSystem.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 
-namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
+namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.PriceGuess
 {
-    using AstroClient.Tools.UdonSearcher;
-    using ClientAttributes;
-    using Il2CppSystem.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
     using IntPtr = System.IntPtr;
     using Object = Il2CppSystem.Object;
-    using AstroClient.ClientActions;
-    using AstroClient.CustomClasses;
-    using AstroClient.Tools.Extensions;
-    using AstroClient.Tools.UdonEditor;
-    using AstroClient.WorldModifications.WorldsIds;
-    using AstroClient.xAstroBoy.Utility;
 
     [RegisterComponent]
     public class PriceGuess_Controller_reader : MonoBehaviour
@@ -103,8 +100,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 
         internal void RevealAnswer()
         {
-            if (!PriceGuess.ShowAnswers) return;
-            PriceGuess.Answer_Text.text = $"Price is : {Environment.NewLine}{itemValue.ToString()}";
+            if (!WorldModifications.WorldHacks.Jar.PriceGuess.PriceGuess.ShowAnswers) return;
+            WorldModifications.WorldHacks.Jar.PriceGuess.PriceGuess.Answer_Text.text = $"Price is : {Environment.NewLine}{itemValue.ToString()}";
         }
 
 

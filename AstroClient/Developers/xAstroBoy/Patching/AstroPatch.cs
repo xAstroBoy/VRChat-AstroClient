@@ -1,12 +1,12 @@
-﻿namespace AstroClient.Cheetos
+﻿using System;
+using System.Reflection;
+using System.Text;
+using AstroClient.Constants;
+using HarmonyLib;
+
+namespace AstroClient.xAstroBoy.Patching
 {
     #region Imports
-
-    using Constants;
-    using HarmonyLib;
-    using System;
-    using System.Reflection;
-    using System.Text;
 
     #endregion Imports
 
@@ -27,7 +27,7 @@
         internal HarmonyMethod Finalizer { get; set; }
 
         internal HarmonyMethod IlManipulator { get; set; }
-        internal Harmony Instance { get; set; }
+        internal HarmonyLib.Harmony Instance { get; set; }
         private bool HasThrownException { get; set; } = false;
         private bool ShowErrorOnConsole { get; set; } = true;
         private bool ShowSuccessFulPatches { get; set; } = true;
@@ -218,7 +218,7 @@
             this.ShowSuccessFulPatches = ShowSuccessFulPatches;
             this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
             this.isMethodInfoPatch = true;
-            this.Instance = new Harmony(HarmonyInstanceID);
+            this.Instance = new HarmonyLib.Harmony(HarmonyInstanceID);
             this.DoPatch_info(this);
         }
 
@@ -322,7 +322,7 @@
             this.ShowFailedPatches = ShowFailedPatches;
             this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
             this.isMethodInfoPatch = false;
-            this.Instance = new Harmony(HarmonyInstanceID);
+            this.Instance = new HarmonyLib.Harmony(HarmonyInstanceID);
             DoPatch_base(this);
         }
 

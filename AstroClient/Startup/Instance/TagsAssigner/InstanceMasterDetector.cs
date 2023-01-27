@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using AstroClient.AstroMonos.Components.Spoofer;
-using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Hud.Notifier;
-using AstroClient.Constants;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using Photon.Realtime;
 
-namespace AstroClient.Streamer
+namespace AstroClient.Startup.Instance.TagsAssigner
 {
     #region Imports
 

@@ -1,18 +1,17 @@
-﻿using AstroClient.febucci;
+﻿using System.Reflection;
+using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Patching;
+using AstroClient.xAstroBoy.Utility;
 
-namespace AstroClient.Startup.Hooks
+namespace AstroClient.Startup.Patches
 {
     #region Imports
 
-    using Cheetos;
-    using System.Reflection;
-    using xAstroBoy.Utility;
-
     #endregion Imports
 
-    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    [Obfuscation(Feature = "HarmonyRenamer")]
     internal class UserEventCellPatches : AstroEvents
     {
         //internal static
@@ -22,13 +21,13 @@ namespace AstroClient.Startup.Hooks
             InitPatches();
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        [Obfuscation(Feature = "HarmonyGetPatch")]
         private static HarmonyLib.HarmonyMethod GetPatch(string name)
         {
             return new HarmonyLib.HarmonyMethod(typeof(UserEventCellPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
+        [Obfuscation(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
             new AstroPatch(typeof(MonoBehaviourPublicTMteCaSiImdiCoUnique).GetMethod(nameof(MonoBehaviourPublicTMteCaSiImdiCoUnique.Method_Public_Void_String_Single_Sprite_0)), null, GetPatch(nameof(ShowHudNotifier)));
@@ -44,7 +43,7 @@ namespace AstroClient.Startup.Hooks
                     __instance.text.richText = true;
                     if (__0.NeedsTextAnimator())
                     {
-                        var anim = __instance.text.gameObject.GetOrAddComponent<TextAnimator>();
+                        var anim = ComponentUtils.GetOrAddComponent<TextAnimator>(__instance.text.gameObject);
                         if (anim != null)
                         {
                             anim.ShowAllCharacters(true);

@@ -1,16 +1,13 @@
-﻿using AstroClient.AstroMonos.Components.Tools;
+﻿using System.Drawing;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Hud.Notifier;
+using AstroClient.Constants;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Utility;
+using VRC;
 
-namespace AstroClient.Streamer
+namespace AstroClient.Startup.Instance.TagsAssigner
 {
-    using System.Drawing;
-    using Constants;
-    using Tools.Extensions;
-    using VRC;
-    using xAstroBoy.Utility;
-    using SystemColors = Tools.Colors.SystemColors;
-
     internal class WorldAuthorDetector : AstroEvents
     {
         internal override void RegisterToEvents()
