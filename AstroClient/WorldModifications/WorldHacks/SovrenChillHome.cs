@@ -1,7 +1,9 @@
 ﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.AstroMonos.Components.Tools.Listeners;
 using AstroClient.ClientActions;
+using AstroClient.Tools.Colors;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.Utility;
@@ -138,18 +140,32 @@ namespace AstroClient.WorldModifications.WorldHacks
             #region Orange Room
             var OrangeRoom_Door = Finder.Find("SSOS_Room/Door Outer");
             var OrangeRoom_Room = Finder.Find("privat room (1)");
-            ChangeTeleportDoor(OrangeRoom_Door, OrangeRoom_Room, "Enter <color=orange>Orange Room</color>");
+            if (OrangeRoom_Room != null && OrangeRoom_Door != null)
+            {
+                OrangeRoom_Room.GetOrAddComponent<Enabler>();
+                OrangeRoom_Room.SetActive(true);
+                ChangeTeleportDoor(OrangeRoom_Door, OrangeRoom_Room, "Enter <color=orange>Orange Room</color>");
+            }
             #endregion
             #region Pink Room
             var PinkRoom_Door = Finder.Find("SSOS_Room (1)/Door Outer");
             var PinkRoom_Room = Finder.Find("privat room (2)");
-            ChangeTeleportDoor(PinkRoom_Door, PinkRoom_Room, "Enter <color=pink>Pink Room</color>");
+            if (PinkRoom_Room != null && PinkRoom_Door != null)
+            {
+                PinkRoom_Room.GetOrAddComponent<Enabler>();
+                PinkRoom_Room.SetActive(true);
+                ChangeTeleportDoor(PinkRoom_Door, PinkRoom_Room, $"Enter <color={ColorUtility.ToHtmlStringRGB(SystemColors.Pink)}>Pink Room</color>");
+            }
             #endregion
-
             #region Green Room
             var GreenRoom_Door = Finder.Find("SSOS_Room (2)/Door Outer");
             var GreenRoom_Room = Finder.Find("privat room (3)");
-            ChangeTeleportDoor(GreenRoom_Door, GreenRoom_Room, "Enter <color=green>Green Room</color>");
+            if (GreenRoom_Room != null && GreenRoom_Door != null)
+            {
+                GreenRoom_Room.GetOrAddComponent<Enabler>();
+                GreenRoom_Room.SetActive(true);
+                ChangeTeleportDoor(GreenRoom_Door, GreenRoom_Room, "Enter <color=green>Green Room</color>");
+            }
             #endregion
 
 
