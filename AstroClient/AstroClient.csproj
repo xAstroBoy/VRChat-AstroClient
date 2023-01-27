@@ -149,8 +149,7 @@
     <Compile Include="ClientUI\ActionMenu\ActionMenuUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Hud\Notifier\NewHudNotifier.cs" />
-    <Compile Include="Developers\xAstroBoy\Patching\ClassBlocker.cs" />
-    <Compile Include="Developers\xAstroBoy\Patching\UnityClassBlocker.cs" />
+    <Compile Include="Developers\xAstroBoy\Patching\AstroPatchExt.cs" />
     <Compile Include="Developers\Cheetos\ConsoleInitializer.cs" />
     <Compile Include="Developers\HookedBehemoth\WorldCleanup\Avatar.cs" />
     <Compile Include="Developers\HookedBehemoth\WorldCleanup\Polyfill.cs" />
