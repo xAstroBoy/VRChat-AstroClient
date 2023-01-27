@@ -12,14 +12,14 @@ namespace AstroClient.xAstroBoy.Patching
     internal static class AstroPatchExt
     {
         /// <summary>
-        /// 
+        /// This patches all classes with one type of Prefix patch
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="type">Targeted Class</param>
-        /// <param name="TargetPatch">Harmony patch</param>
+        /// <param name="PrefixPatch">Harmony patch</param>
         /// <param name="ShowSuccessFulPatches">Default is false, this is spammy af</param>
-        /// <returns></returns>
-        internal static int PatchAllWith<T>(this T type, HarmonyMethod TargetPatch, bool ShowSuccessFulPatches = false) where T : System.Type
+        /// <returns>How many successful methods Got patched.</returns>
+        internal static int PatchAllMethods<T>(this T type, HarmonyMethod PrefixPatch, bool ShowSuccessFulPatches = false) where T : System.Type
         {
             var flags =  BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static;
             int Success = 0;
@@ -27,7 +27,7 @@ namespace AstroClient.xAstroBoy.Patching
             {
                 if (method.FullDescription().Contains(type.FullDescription()))
                 {
-                    var patch = new AstroPatch(method, TargetPatch, showErrorOnConsole: false, ShowFailedPatches: false, ShowSuccessFulPatches: ShowSuccessFulPatches);
+                    var patch = new AstroPatch(method, PrefixPatch, showErrorOnConsole: false, ShowFailedPatches: false, ShowSuccessFulPatches: ShowSuccessFulPatches);
                     if (patch.isActivePatch)
                     {
                         Success++;

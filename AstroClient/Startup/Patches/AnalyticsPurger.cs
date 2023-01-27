@@ -29,10 +29,10 @@ namespace AstroClient.Startup.Patches
         [Obfuscation(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            Log.Write($"Blocked {typeof(AnalyticsController).PatchAllWith(GetPatch(nameof(Destroy_AnalyticsController_AndReturnFalse)))} {typeof(AnalyticsController).FullDescription()} Methods.");
-            Log.Write($"Blocked {typeof(Analytics).PatchAllWith(GetPatch(nameof(Destroy_Analytics_AndReturnFalse)))} {typeof(Analytics).FullDescription()} Methods.");
-            Log.Write($"Blocked {typeof(AnalyticsInterface).PatchAllWith(GetPatch(nameof(ReturnFalse)))} {typeof(AnalyticsInterface).FullDescription()} Methods.");
-            Log.Write($"Blocked {typeof(AmplitudeWrapper).PatchAllWith(GetPatch(nameof(ReturnFalse)))} {typeof(AmplitudeWrapper).FullDescription()} Methods.");
+            Log.Write($"Blocked {typeof(AnalyticsController).PatchAllMethods(GetPatch(nameof(Destroy_AnalyticsController_AndReturnFalse)))} {typeof(AnalyticsController).FullDescription()} Methods.");
+            Log.Write($"Blocked {typeof(Analytics).PatchAllMethods(GetPatch(nameof(Destroy_Analytics_AndReturnFalse)))} {typeof(Analytics).FullDescription()} Methods.");
+            Log.Write($"Blocked {typeof(AnalyticsInterface).PatchAllMethods(GetPatch(nameof(ReturnFalse)))} {typeof(AnalyticsInterface).FullDescription()} Methods.");
+            Log.Write($"Blocked {typeof(AmplitudeWrapper).PatchAllMethods(GetPatch(nameof(ReturnFalse)))} {typeof(AmplitudeWrapper).FullDescription()} Methods.");
         }
         private static bool Destroy_AnalyticsController_AndReturnFalse(ref AnalyticsController __instance)
         {
