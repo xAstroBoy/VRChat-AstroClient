@@ -27,6 +27,9 @@
         internal Harmony Instance { get; set; }
         private bool HasThrownException { get; set; } = false;
         private bool ShowErrorOnConsole { get; set; } = true;
+        private bool ShowSuccessFulPatches { get; set; } = true;
+
+        private bool ShowFailedPatches { get; set; } = true;
         internal bool isActivePatch { get; private set; } = false;
         private bool isMethodInfoPatch { get; set; } = false;
 
@@ -112,7 +115,7 @@
             }
         }
 
-        internal AstroPatch(MethodInfo TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null, HarmonyMethod Finalizer = null, HarmonyMethod ILmanipulator = null, bool showErrorOnConsole = true)
+        internal AstroPatch(MethodInfo TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null, HarmonyMethod Finalizer = null, HarmonyMethod ILmanipulator = null, bool showErrorOnConsole = true, bool ShowFailedPatches = true, bool ShowSuccessFulPatches = true)
         {
             if (TargetMethod == null || (Prefix == null && PostFix == null && Transpiler == null && Finalizer == null && ILmanipulator == null))
             {
@@ -208,13 +211,15 @@
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
             this.ShowErrorOnConsole = showErrorOnConsole;
+            this.ShowFailedPatches = ShowFailedPatches;
+            this.ShowSuccessFulPatches = ShowSuccessFulPatches;
             this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
             this.isMethodInfoPatch = true;
             this.Instance = new Harmony(HarmonyInstanceID);
             this.DoPatch_info(this);
         }
 
-        internal AstroPatch(MethodBase TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null, HarmonyMethod Finalizer = null, HarmonyMethod ILmanipulator = null, bool showErrorOnConsole = true)
+        internal AstroPatch(MethodBase TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null, HarmonyMethod Finalizer = null, HarmonyMethod ILmanipulator = null, bool showErrorOnConsole = true, bool ShowFailedPatches = true, bool ShowSuccessFulPatches = true)
         {
             if (TargetMethod == null || (Prefix == null && PostFix == null && Transpiler == null && Finalizer == null && ILmanipulator == null))
             {
@@ -310,6 +315,8 @@
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
             this.ShowErrorOnConsole = showErrorOnConsole;
+            this.ShowSuccessFulPatches = ShowSuccessFulPatches;
+            this.ShowFailedPatches = ShowFailedPatches;
             this.HarmonyInstanceID = $"{PatchIdentifier}: {TargetPath_MethodInfo}, {PatchType}";
             this.isMethodInfoPatch = false;
             this.Instance = new Harmony(HarmonyInstanceID);
@@ -335,25 +342,31 @@
                 if (!HasThrownException)
                 {
                     isActivePatch = true;
-                    if (isDevMode)
+                    if (ShowSuccessFulPatches)
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
-                    }
-                    else
-                    {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
+                        if (isDevMode)
+                        {
+                            Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_MethodInfo} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
+                        }
+                        else
+                        {
+                            Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodInfo?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
+                        }
                     }
                 }
                 else
                 {
                     isActivePatch = false;
-                    if (isDevMode)
+                    if (ShowFailedPatches)
                     {
-                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
-                    }
-                    else
-                    {
-                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodInfo?.Name}");
+                        if (isDevMode)
+                        {
+                            Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_MethodInfo} | with {patch.PatchType}");
+                        }
+                        else
+                        {
+                            Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodInfo?.Name}");
+                        }
                     }
                 }
             }
@@ -378,25 +391,31 @@
                 if (!HasThrownException)
                 {
                     isActivePatch = true;
-                    if (isDevMode)
+                    if (ShowSuccessFulPatches)
                     {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
-                    }
-                    else
-                    {
-                        Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
+                        if (isDevMode)
+                        {
+                            Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetPath_base} | with {patch.PatchType}", Cheetah.Color.Crayola.Present.MangoTango);
+                        }
+                        else
+                        {
+                            Log.Debug($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod_MethodBase?.Name}", Cheetah.Color.Crayola.Present.MangoTango);
+                        }
                     }
                 }
                 else
                 {
                     isActivePatch = false;
-                    if (isDevMode)
+                    if (ShowFailedPatches)
                     {
-                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
-                    }
-                    else
-                    {
-                        Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
+                        if (isDevMode)
+                        {
+                            Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath_base} | with {patch.PatchType}");
+                        }
+                        else
+                        {
+                            Log.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod_MethodBase?.Name}");
+                        }
                     }
                 }
             }

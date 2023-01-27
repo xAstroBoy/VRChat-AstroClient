@@ -590,8 +590,6 @@
     <Compile Include="ClientAttributes\RegisterComponent.cs" />
     <Compile Include="Spawnables\AstroEnderPearl.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\EnderPearl.cs" />
-    <Compile Include="Tools\Exploits\Exploit_Exts\Teleport_Ext.cs" />
-    <Compile Include="Tools\Exploits\TeleportExploit.cs" />
     <Compile Include="Tools\Extensions\Click_ext.cs" />
     <Compile Include="Tools\Extensions\Components_exts\RocketExtensions.cs" />
     <Compile Include="Tools\Extensions\Components_exts\ObjectFreezerExtensions.cs" />
@@ -1040,6 +1038,7 @@
     <Folder Include="ClientUI\QuickMenuGUI\ItemTweakerV2\ScrollMenus\GameObjectToggler\" />
     <Folder Include="Developers\Cheetos\CheetoLibrary\Menu\QuickMenuButtons\" />
     <Folder Include="Developers\Cheetos\Utils\" />
+    <Folder Include="Tools\Exploits\Exploit_Exts\" />
     <Folder Include="Tools\Instance\History\" />
     <Folder Include="Tools\QPens\" />
   </ItemGroup>

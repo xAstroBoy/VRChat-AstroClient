@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using VRC.SDKBase;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
     using ObjectEditor.Editor.Position;
@@ -7,6 +9,43 @@
 
     internal static class Position_ext
     {
+        internal static void TeleportTo(this VRCPlayerApi obj, Vector3 position, Quaternion rotation)
+        {
+            if (obj != null)
+            {
+                obj.gameObject.transform.position = position;
+                obj.gameObject.transform.rotation = rotation;
+            }
+        }
+        internal static void TeleportTo(this VRCPlayerApi obj, Vector3 position, Vector3 rotation)
+        {
+            if (obj != null)
+            {
+                obj.gameObject.transform.position = position;
+                obj.gameObject.transform.rotation = Quaternion.Euler(rotation);
+            }
+        }
+
+        internal static void TeleportTo(this VRCPlayerApi obj, GameObject target, bool useRotation = true)
+        {
+            if (obj != null)
+            {
+                obj.TeleportTo(target, useRotation);
+            }
+        }
+
+        internal static void TeleportTo(this VRCPlayerApi obj, Transform target, bool useRotation = true)
+        {
+            if (obj != null)
+            {
+                obj.gameObject.transform.position = target.position;
+                if (useRotation)
+                {
+                    obj.gameObject.transform.rotation = target.rotation;
+                }
+            }
+        }
+
         internal static void TeleportToTarget(this List<GameObject> list)
         {
             foreach (var obj in list)

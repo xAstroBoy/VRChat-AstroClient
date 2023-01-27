@@ -63,7 +63,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         AstroTrigger.OnInteract += () =>
                         {
                             Room.SetActive(true);
-                            GameInstances.LocalPlayer.TeleportTo(OuterDoorTp.transform.position, OuterDoorTp.transform.rotation);
+                            GameInstances.LocalPlayer.TeleportTo(OuterDoorTp);
                         };
                     }
 
