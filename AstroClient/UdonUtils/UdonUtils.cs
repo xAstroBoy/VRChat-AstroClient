@@ -1,5 +1,3 @@
-using AstroClient.ClientActions;
-
 /*
  * Copyright (c) 2021 HookedBehemoth
  *
@@ -15,17 +13,14 @@ using AstroClient.ClientActions;
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-using MelonLoader;
-using System;
 using System.Reflection;
-using AstroClient;
-using AstroClient.Cheetos;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Patching;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 using static UnhollowerRuntimeLib.ClassInjector;
 
-namespace UdonUtils {
+namespace AstroClient.UdonUtils {
     internal class UdonUtils_Starter : AstroEvents {
 
         internal override void RegisterToEvents()

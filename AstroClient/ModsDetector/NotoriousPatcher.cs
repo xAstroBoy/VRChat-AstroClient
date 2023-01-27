@@ -1,4 +1,6 @@
 ﻿
+using AstroClient.xAstroBoy.Patching;
+
 namespace AstroClient.ModsDetector
 {
     using System;

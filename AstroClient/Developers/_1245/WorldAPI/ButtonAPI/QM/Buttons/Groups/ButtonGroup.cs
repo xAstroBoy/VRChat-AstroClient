@@ -1,15 +1,14 @@
 ﻿using System;
+using AstroClient._1245.WorldAPI.ButtonAPI.MM;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Utility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.MM;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Groups;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups;
 
 internal class ButtonGroup : ButtonGrp
 {

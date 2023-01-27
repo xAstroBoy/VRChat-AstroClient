@@ -1,9 +1,9 @@
 ﻿using System;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Controls;
 
-namespace WorldAPI.ButtonAPI.WIng.Controls;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.WIng.Controls;
 
 internal class WingTglControls : Root
 {

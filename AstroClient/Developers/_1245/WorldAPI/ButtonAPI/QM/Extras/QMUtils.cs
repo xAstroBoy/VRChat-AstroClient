@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using VRC.UI.Elements;
-using VRC.UI.Elements.Controls;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Extras
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Extras
 {
     internal static class QMUtils
     {

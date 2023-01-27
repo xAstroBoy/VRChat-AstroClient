@@ -15,18 +15,17 @@
  */
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using VRC.Udon.Common;
-using VRC.Udon.Common.Interfaces;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
-using MelonLoader;
 using VRC.Udon;
+using VRC.Udon.Common;
+using VRC.Udon.Common.Interfaces;
 
-namespace FakeUdon {
+namespace AstroClient.UdonUtils.FakeUdon {
     public class FakeUdonHeap : Il2CppSystem.Object /*, IUdonHeap */ {
         public FakeUdonHeap(System.IntPtr handle) : base(handle) {}
 

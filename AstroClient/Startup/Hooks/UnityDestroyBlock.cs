@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
 using Boo.Lang.Compiler.Ast;
 using Mono.CSharp;

@@ -2,8 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AstroClient.Tools.Extensions;
+using AstroClient.UdonUtils.FakeUdon;
 using AstroClient.xAstroBoy.Extensions;
-using FakeUdon;
 using VRC.Udon.Common;
 
 namespace AstroClient.Tools.UdonEditor

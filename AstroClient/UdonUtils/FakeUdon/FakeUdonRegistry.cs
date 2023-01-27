@@ -14,11 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using VRC.Udon;
 using System;
 using System.Collections.Generic;
+using VRC.Udon;
 
-namespace FakeUdon {
+namespace AstroClient.UdonUtils.FakeUdon {
     public interface UdonMatcher {
         bool Match(UdonBehaviour behaviour);
     }

@@ -1,8 +1,7 @@
-﻿using AstroClient;
+﻿using System;
+using System.Linq;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.Utility;
-using System;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +9,9 @@ using VRC.UI.Core.Styles;
 using VRC.UI.Elements;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM
 {
     internal class VRCPage
     {

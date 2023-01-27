@@ -1,26 +1,18 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Reflection;
+using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
-using Mono.CSharp;
-using UnityEngine;
+using HarmonyLib;
 using VRC;
 using VRC.Core;
 
-namespace AstroClient.Startup.Patches
+namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
-    using System;
-    using System.Reflection;
-    
-    using Cheetos;
-    using HarmonyLib;
-    using Tools.Extensions;
-    using Tools.Input;
-    using UnityEngine.Events;
-
     #endregion Imports
 
-    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    [Obfuscation(Feature = "HarmonyRenamer")]
     internal class ApiUserPatches : AstroEvents
     {
         internal override void RegisterToEvents()
@@ -29,7 +21,7 @@ namespace AstroClient.Startup.Patches
         }
 
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        [Obfuscation(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(ApiUserPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));

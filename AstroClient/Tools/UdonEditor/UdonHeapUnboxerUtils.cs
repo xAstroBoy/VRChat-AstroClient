@@ -1,6 +1,6 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
 using System.Linq;
-using FakeUdon;
+using AstroClient.UdonUtils.FakeUdon;
 using UnityEngine;
 using VRC.Udon.Common;
 using VRC.Udon.Common.Interfaces;

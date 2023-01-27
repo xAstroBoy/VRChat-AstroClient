@@ -1,9 +1,9 @@
 using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
-using static UdonSharp.Internal.UdonSharpInternalUtility;
+using static AstroClient.UdonUtils.UdonSharp.Internal.UdonSharpInternalUtility;
 
-namespace UdonSharp {
+namespace AstroClient.UdonUtils.UdonSharp {
     public class UdonSharpBehaviour {
         public long __refl_const_intnl_udonTypeID;
         public string __refl_const_intnl_udonTypeName;

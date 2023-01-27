@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Startup.Hooks
+﻿using AstroClient.xAstroBoy.Patching;
+
+namespace AstroClient.Startup.Hooks
 {
     using System;
     using System.Reflection;

@@ -1,13 +1,12 @@
 ﻿using System;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
-using WorldAPI.ButtonAPI.Groups;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Buttons
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons
 {
     internal class VRCToggle : ToggleControl
     {

@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Extras;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.UI.Elements.Controls;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Wing.Controls;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.WIng.Controls;
 
 internal class WingBtnControls : Root
 {

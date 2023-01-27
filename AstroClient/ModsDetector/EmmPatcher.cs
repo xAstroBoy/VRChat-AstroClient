@@ -1,5 +1,6 @@
 ﻿
 using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Patching;
 
 namespace AstroClient.ModsDetector
 {

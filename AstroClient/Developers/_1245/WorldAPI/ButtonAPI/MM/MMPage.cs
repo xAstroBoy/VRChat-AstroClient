@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Linq;
-using AstroClient;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
-using VRC.UI.Elements.Controls;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.MM;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.MM;
 
 internal class MMPage
 {

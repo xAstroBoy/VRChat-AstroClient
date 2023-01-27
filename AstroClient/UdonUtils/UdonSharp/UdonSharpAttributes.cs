@@ -1,7 +1,7 @@
 ﻿using System;
 using VRC.Udon.Common.Interfaces;
 
-namespace UdonSharp
+namespace AstroClient.UdonUtils.UdonSharp
 {
     // At the moment Udon syncing is in a very early state.
     // This is very liable to be changed with changes to Udon syncing in the future.

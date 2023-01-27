@@ -4,6 +4,7 @@ using AstroClient.Config;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
 using VRC.SDK3.Components;
 using VRC.SDKBase;

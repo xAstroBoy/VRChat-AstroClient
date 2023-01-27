@@ -1,6 +1,7 @@
 ﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.Tools.ObjectEditor.Online;
+using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
 using Photon.Pun;
 using VRC.SDKBase;

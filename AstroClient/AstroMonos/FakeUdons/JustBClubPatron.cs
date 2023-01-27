@@ -1,11 +1,10 @@
-﻿using AstroClient.WorldModifications.WorldsIds;
-using AstroClient.xAstroBoy.Utility;
+﻿using AstroClient.AstroMonos.Components.Spoofer;
+using AstroClient.UdonUtils.FakeUdon;
+using AstroClient.UdonUtils.UdonSharp;
+using VRC.Udon;
 
 namespace AstroClient.AstroMonos.FakeUdons
 {
-    using AstroClient.AstroMonos.Components.Spoofer;
-    using VRC.Udon;
-
     /*
      * Copyright (c) 2023 HookedBehemoth
      *
@@ -29,12 +28,12 @@ namespace AstroClient.AstroMonos.FakeUdons
             // TODO : turn this into a attribute, to speed things up.
             internal override void ExecutePriorityPatches()
             {
-                FakeUdon.FakeUdonRegistry.RegisterType<AvatarImageReader.JustBClub_1_2_RuntimeDecoder>(new JustBClib_1_2_PatreonMatcher());
+                FakeUdonRegistry.RegisterType<AvatarImageReader.JustBClub_1_2_RuntimeDecoder>(new JustBClib_1_2_PatreonMatcher());
             }
         }
     }
 
-    internal class JustBClib_1_2_PatreonMatcher : FakeUdon.UdonMatcher
+    internal class JustBClib_1_2_PatreonMatcher : UdonMatcher
     {
         public bool Match(UdonBehaviour behaviour)
         {
@@ -52,7 +51,7 @@ namespace AstroClient.AstroMonos.FakeUdons
 
     namespace AvatarImageReader
     {
-        internal class JustBClub_1_2_RuntimeDecoder : UdonSharp.UdonSharpBehaviour
+        internal class JustBClub_1_2_RuntimeDecoder : UdonSharpBehaviour
         {
             public string CurrentDisplayName
             {

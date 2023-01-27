@@ -8,6 +8,7 @@ using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
 using AstroClient.Startup.Hooks.PhotonHook.PhotonHandlers;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.Patching;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;

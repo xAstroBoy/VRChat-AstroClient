@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Patching;
 using Photon.Pun;
 using VRC.SDKBase;
 

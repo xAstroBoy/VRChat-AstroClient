@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroClient._1245.WorldAPI.ButtonAPI.MM;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.MM;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Groups;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups;
 
 internal class CollapsibleButtonGroup : Root
 {

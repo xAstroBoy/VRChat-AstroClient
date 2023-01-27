@@ -1,14 +1,13 @@
 ﻿using System;
-using TMPro;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Extras;
+using AstroClient._1245.WorldAPI.ButtonAPI.WIng;
+using AstroClient._1245.WorldAPI.ButtonAPI.WIng.Buttons;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Extras;
-using WorldAPI.ButtonAPI.Wing;
-using WorldAPI.ButtonAPI.Wing.Buttons;
-using static WorldAPI.APIBase;
+using static AstroClient._1245.WorldAPI.ButtonAPI.APIBase;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.Controls
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls
 {
     internal class ExtentedControl : Root
     {

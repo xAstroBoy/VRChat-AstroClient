@@ -14,21 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using MelonLoader;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using AstroClient.xAstroBoy.Extensions;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Reflection;
-using AstroClient;
-using AstroClient.xAstroBoy.Extensions;
 using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Common;
 using VRC.Udon.Common.Interfaces;
 
-namespace FakeUdon {
+namespace AstroClient.UdonUtils.FakeUdon {
     static class Injector {
         private static bool InitializeUdonContentInjected(UdonBehaviour __instance) {
             /* Early abort */

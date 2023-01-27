@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AstroClient;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using TMPro;
 using UnityEngine;
-using VRC.UI.Elements.Controls;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.QM.Extras;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Extras;
 
 internal class VRCSlider : Root
 {

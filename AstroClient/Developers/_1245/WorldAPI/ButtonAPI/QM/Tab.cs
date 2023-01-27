@@ -1,4 +1,5 @@
 ﻿using System;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using AstroClient.xAstroBoy.Utility;
 using TMPro;
@@ -6,10 +7,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements.Controls;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
 
-namespace WorldAPI.ButtonAPI
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM
 {
     internal class Tab : ExtentedControl
     {

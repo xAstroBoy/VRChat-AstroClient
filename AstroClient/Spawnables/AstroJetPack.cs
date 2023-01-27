@@ -1,9 +1,9 @@
 using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.AstroMonos.Prefabs;
+using AstroClient.AstroMonos.Prefabs.ReimajoBoothAssets;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
-using ReimajoBoothAssets;
 using UnityEngine;
 
 namespace AstroClient.Spawnables

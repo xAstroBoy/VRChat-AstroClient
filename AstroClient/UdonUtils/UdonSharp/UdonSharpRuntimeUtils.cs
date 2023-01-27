@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace UdonSharp {
+namespace AstroClient.UdonUtils.UdonSharp {
     namespace Internal {
         public static class UdonSharpInternalUtility
         {

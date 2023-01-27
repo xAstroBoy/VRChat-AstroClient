@@ -1,16 +1,15 @@
-﻿using AstroClient;
+﻿using System;
+using System.Collections.Generic;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientAttributes;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
-using System;
-using System.Collections.Generic;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace ReimajoBoothAssets
+namespace AstroClient.AstroMonos.Prefabs.ReimajoBoothAssets
 {
     // TODO: Finish and adjust to make it work without udon.
     /// <summary>

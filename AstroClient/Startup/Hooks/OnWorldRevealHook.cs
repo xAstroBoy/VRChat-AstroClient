@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using AstroClient.ClientActions;
+using AstroClient.xAstroBoy.Patching;
 
 namespace AstroClient.Startup.Hooks
 {

@@ -1,4 +1,5 @@
-﻿using VRC.Core;
+﻿using AstroClient.xAstroBoy.Patching;
+using VRC.Core;
 
 namespace AstroClient.Startup.Hooks.PhotonHook.Startup;
 

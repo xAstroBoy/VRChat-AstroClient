@@ -1,7 +1,7 @@
 ﻿using AstroClient.xAstroBoy.Extensions;
 using System;
 using System.Linq;
-using FakeUdon;
+using AstroClient.UdonUtils.FakeUdon;
 using VRC.Udon.Common;
 using VRC.Udon.Common.Interfaces;
 using Enumerable = Il2CppSystem.Linq.Enumerable;

@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using AstroClient.xAstroBoy.Patching;
+using Photon.Pun;
 
 namespace AstroClient.Startup.Patches
 {

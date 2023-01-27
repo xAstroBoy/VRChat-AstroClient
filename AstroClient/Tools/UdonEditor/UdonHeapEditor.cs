@@ -1,4 +1,4 @@
-﻿using FakeUdon;
+﻿using AstroClient.UdonUtils.FakeUdon;
 using VRC.Udon.Common;
 
 namespace AstroClient.Tools.UdonEditor

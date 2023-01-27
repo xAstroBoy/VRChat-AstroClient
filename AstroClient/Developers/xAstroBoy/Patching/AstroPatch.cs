@@ -10,6 +10,9 @@
 
     #endregion Imports
 
+    /// <summary>
+    /// Wrapper for Harmony Patching.
+    /// </summary>
     internal class AstroPatch
     {
         private bool isDevMode { get; } = Bools.IsDeveloper;

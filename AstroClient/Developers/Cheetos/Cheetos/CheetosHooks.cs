@@ -1,6 +1,7 @@
 ﻿using AstroClient.AstroMonos.Components.Tools;
 using AstroClient.ClientActions;
 using AstroClient.ClientUI.Hud.Notifier;
+using AstroClient.xAstroBoy.Patching;
 using Cheetah;
 
 namespace AstroClient.Cheetos

@@ -1,5 +1,6 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
 using VRC.UI.Elements;
 

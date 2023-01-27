@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
+using AstroClient._1245.WorldAPI.ButtonAPI.WIng.Controls;
 using UnityEngine;
-using WorldAPI.ButtonAPI.Wing;
-using WorldAPI.ButtonAPI.Wing.Buttons;
-using WorldAPI.ButtonAPI.WIng.Controls;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.ButtonAPI.WIng.Buttons;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.WIng.Buttons;
 
 internal class WToggle : WingTglControls
 {

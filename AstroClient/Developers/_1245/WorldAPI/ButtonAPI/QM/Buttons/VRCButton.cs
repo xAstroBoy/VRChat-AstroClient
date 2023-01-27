@@ -1,15 +1,13 @@
 ﻿using System;
-using AstroClient;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
-using WorldAPI.ButtonAPI.Controls;
-using WorldAPI.ButtonAPI.Extras;
-using WorldAPI.ButtonAPI.Groups;
 using Object = UnityEngine.Object;
 
-namespace WorldAPI.Buttons
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons
 {
     internal class VRCButton : ExtentedControl
     {

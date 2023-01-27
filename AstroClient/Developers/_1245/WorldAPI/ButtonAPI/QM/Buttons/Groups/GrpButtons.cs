@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Groups;
-using WorldAPI.Buttons;
-using static WorldAPI.ButtonAPI.Controls.ExtentedControl;
+using static AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls.ExtentedControl;
 
-namespace WorldAPI.ButtonAPI.Buttons.Groups
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups
 {
     internal class GrpButtons
     {

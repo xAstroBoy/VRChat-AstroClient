@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.UI;
 using AstroClient.AstroMonos.AstroUdons;
+using AstroClient.AstroMonos.Prefabs.ReimajoBoothAssets;
 using AstroClient.ClientResources.Loaders;
 using AstroClient.febucci;
 using AstroClient.febucci.Utilities;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Extensions.Components_exts;
 using AstroClient.xAstroBoy.Utility;
-using ReimajoBoothAssets;
 using TMPro;
 using UnityEngine;
 using VRC.SDKBase;

@@ -1,4 +1,4 @@
-﻿using AstroClient;
+﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientAttributes;
 using AstroClient.ClientResources.Loaders;
@@ -7,13 +7,12 @@ using AstroClient.febucci.Utilities;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.Utility;
-using System;
 using TMPro;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace ReimajoBoothAssets
+namespace AstroClient.AstroMonos.Prefabs.ReimajoBoothAssets
 {
     [RegisterComponent]
     public class ButtonController : MonoBehaviour

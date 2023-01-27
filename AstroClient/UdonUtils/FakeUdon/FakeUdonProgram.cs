@@ -15,11 +15,11 @@
  */
 
 using System.Reflection;
-using VRC.Udon.Common.Interfaces;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
+using VRC.Udon.Common.Interfaces;
 
-namespace FakeUdon {
+namespace AstroClient.UdonUtils.FakeUdon {
     public class FakeUdonProgram : Il2CppSystem.Object /*, IUdonProgram */ {
         public FakeUdonProgram(System.IntPtr handle) : base(handle) {}
         public FakeUdonProgram() : base(ClassInjector.DerivedConstructorPointer<FakeUdonProgram>()) => ClassInjector.DerivedConstructorBody(this);

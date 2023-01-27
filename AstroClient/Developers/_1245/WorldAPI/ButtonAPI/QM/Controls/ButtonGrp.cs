@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AstroClient.Tools.Extensions;
-using TMPro;
+﻿using AstroClient.Tools.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Buttons;
-using WorldAPI.ButtonAPI.Extras;
-using WorldAPI.Buttons;
 
-namespace WorldAPI.ButtonAPI.Controls
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls
 {
     internal class ButtonGrp : Root
     {

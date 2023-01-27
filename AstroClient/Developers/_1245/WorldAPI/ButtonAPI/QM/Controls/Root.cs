@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AstroClient._1245.WorldAPI.ButtonAPI.MM;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons;
+using AstroClient._1245.WorldAPI.ButtonAPI.QM.Buttons.Groups;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using WorldAPI.ButtonAPI.Buttons;
-using WorldAPI.ButtonAPI.Buttons.Groups;
-using WorldAPI.ButtonAPI.MM;
-using WorldAPI.Buttons;
 
-namespace WorldAPI.ButtonAPI.Controls
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls
 {
     internal class Root
     {

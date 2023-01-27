@@ -1,10 +1,6 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using WorldAPI.Buttons;
+﻿using UnityEngine.UI;
 
-namespace WorldAPI.ButtonAPI.Controls
+namespace AstroClient._1245.WorldAPI.ButtonAPI.QM.Controls
 {
     internal class LableControls : Root
     {

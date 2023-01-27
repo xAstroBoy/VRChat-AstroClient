@@ -1,16 +1,14 @@
-﻿
-using AstroClient;
+﻿using System;
 using AstroClient.AstroMonos.AstroUdons;
 using AstroClient.ClientAttributes;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
-using System;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using IntPtr = System.IntPtr;
 using Object = Il2CppSystem.Object;
 
-namespace ReimajoBoothAssets
+namespace AstroClient.AstroMonos.Prefabs.ReimajoBoothAssets
 {
     /// <summary>
     /// Script can be as many times in the world as you want.

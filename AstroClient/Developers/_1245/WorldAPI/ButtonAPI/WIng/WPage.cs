@@ -1,16 +1,15 @@
 ﻿using System;
+using AstroClient._1245.WorldAPI.ButtonAPI.WIng.Buttons;
 using AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators;
+using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Elements;
-using WorldAPI.ButtonAPI.Extras;
-using WorldAPI.ButtonAPI.Wing.Buttons;
-using WorldAPI.ButtonAPI.WIng.Buttons;
-using static WorldAPI.APIBase;
+using static AstroClient._1245.WorldAPI.ButtonAPI.APIBase;
 using Object = UnityEngine.Object;
-using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
-namespace WorldAPI.ButtonAPI.Wing;
+
+namespace AstroClient._1245.WorldAPI.ButtonAPI.WIng;
 
 internal class WPage
 {

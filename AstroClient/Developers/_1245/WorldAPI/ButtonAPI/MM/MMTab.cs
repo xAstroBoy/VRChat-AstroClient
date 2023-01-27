@@ -1,13 +1,11 @@
 ﻿using System;
-using AstroClient;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.UI.Core.Styles;
 using VRC.UI.Elements.Controls;
 using Object = UnityEngine.Object;
-using AstroClient.xAstroBoy.Utility;
 
-namespace WorldAPI.ButtonAPI.MM;
+namespace AstroClient._1245.WorldAPI.ButtonAPI.MM;
 
 internal class MMTab
 {

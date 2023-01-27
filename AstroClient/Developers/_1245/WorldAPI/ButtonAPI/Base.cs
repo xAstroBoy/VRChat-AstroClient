@@ -1,10 +1,9 @@
-﻿using AstroClient;
+﻿using System;
 using AstroClient.xAstroBoy;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WorldAPI
+namespace AstroClient._1245.WorldAPI.ButtonAPI
 {
     internal class APIBase
     {

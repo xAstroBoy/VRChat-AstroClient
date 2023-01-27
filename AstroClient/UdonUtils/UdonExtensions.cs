@@ -14,10 +14,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using UnhollowerBaseLib;
-using VRC.Udon;
 using System;
 using System.Linq;
+using UnhollowerBaseLib;
+using VRC.Udon;
+
+namespace AstroClient.UdonUtils;
 
 public static class UdonExtensions {
     private static Il2CppSystem.Object GetValue(this UdonBehaviour _this, string name) {

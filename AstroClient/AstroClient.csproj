@@ -149,6 +149,8 @@
     <Compile Include="ClientUI\ActionMenu\ActionMenuUtils.cs" />
     <Compile Include="ClientUI\ActionMenu\WorldCheatsModule.cs" />
     <Compile Include="ClientUI\Hud\Notifier\NewHudNotifier.cs" />
+    <Compile Include="Developers\xAstroBoy\Patching\ClassBlocker.cs" />
+    <Compile Include="Developers\xAstroBoy\Patching\UnityClassBlocker.cs" />
     <Compile Include="Developers\Cheetos\ConsoleInitializer.cs" />
     <Compile Include="Developers\HookedBehemoth\WorldCleanup\Avatar.cs" />
     <Compile Include="Developers\HookedBehemoth\WorldCleanup\Polyfill.cs" />
@@ -490,7 +492,7 @@
     <Compile Include="Developers\Cheetos\CheetosConsole\NativeMethods.cs" />
     <Compile Include="Developers\Cheetos\CheetosConsole\StyledString.cs" />
     <Compile Include="Developers\Cheetos\CheetosConsole\VirtualTerminalSequences.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\AstroPatch.cs" />
+    <Compile Include="Developers\xAstroBoy\Patching\AstroPatch.cs" />
     <Compile Include="AstroMonos\Components\Custom\Random\Crazy.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />

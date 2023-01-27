@@ -1,4 +1,5 @@
-﻿using VRC.SDKBase.Validation.Performance.Stats;
+﻿using AstroClient.xAstroBoy.Patching;
+using VRC.SDKBase.Validation.Performance.Stats;
 
 namespace AstroClient.Startup.Hooks
 {

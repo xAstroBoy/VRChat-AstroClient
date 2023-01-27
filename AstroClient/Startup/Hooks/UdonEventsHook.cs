@@ -2,6 +2,7 @@
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.xAstroBoy.Extensions;
 using System.Linq;
+using AstroClient.xAstroBoy.Patching;
 using VRC;
 using VRC.Networking;
 using VRC.Udon;
