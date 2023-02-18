@@ -49,11 +49,12 @@ namespace AstroClient.xAstroBoy
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)),  GetPatch(nameof(OnQuickMenuOpen_Event)));
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), GetPatch(nameof(OnQuickMenuClose_Event)));
 
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_Boolean_0)), GetPatch(nameof(OnUIPageToggle)));
+            //Method_Public_Void_Boolean_TransitionType_Boolean_0
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
+            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
 
-            new AstroPatch(typeof(UIElement1PublicOb_mGr_gMoCa_m_pStCaUnique).GetMethod(nameof(UIElement1PublicOb_mGr_gMoCa_m_pStCaUnique.OnEnable)), null, GetPatch(nameof(OnBigMenuOpen_Event)));
-            new AstroPatch(typeof(UIElement1PublicOb_mGr_gMoCa_m_pStCaUnique).GetMethod(nameof(UIElement1PublicOb_mGr_gMoCa_m_pStCaUnique.OnDisable)), null, GetPatch(nameof(OnBigMenuClose_Event)));
+            new AstroPatch(typeof(VRC.UI.Elements.MainMenu).GetMethod(nameof(VRC.UI.Elements.MainMenu.OnEnable)), null, GetPatch(nameof(OnBigMenuOpen_Event)));
+            new AstroPatch(typeof(VRC.UI.Elements.MainMenu).GetMethod(nameof(VRC.UI.Elements.MainMenu.OnDisable)), null, GetPatch(nameof(OnBigMenuClose_Event)));
 
 
 
@@ -169,10 +170,10 @@ namespace AstroClient.xAstroBoy
 
         private static void OnQuickMenuClose_Event() => ClientEventActions.OnQuickMenuClose.SafetyRaise();
 
-        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1, bool __2)
+        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
         {
             if (__instance == null) return;
-            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParamsAndNoExceptions(__instance, __0, __1, __2);
+            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParamsAndNoExceptions(__instance, __0, __1);
         }
 
         private static Exception OnQuickMenuIndexAssignedErrorSuppressor(Exception __exception)

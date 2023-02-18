@@ -289,7 +289,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
             IsUIPageListenerActive = true;
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType, bool Toggle2)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

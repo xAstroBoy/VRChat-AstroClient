@@ -216,7 +216,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS.UdonCheats
             }
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType, bool Toggle2)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!_isOpen) return;
             if (Page != null)

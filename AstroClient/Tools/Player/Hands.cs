@@ -114,7 +114,7 @@
                     if (RighthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
                     pickup.gameObject.TakeOwnership();
                     pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.RightIndexProximal, false);
-                    RighthandGrasper.Method_Private_Void_PDM_9();
+                    RighthandGrasper.Method_Private_Void_PDM_7();
                 }
             }
         }
@@ -128,7 +128,7 @@
                     if (LefthandGrasper.Method_Public_VRC_Pickup_0() != null) return;
                     pickup.gameObject.TakeOwnership();
                     pickup.gameObject.TeleportToMeWithRot(HumanBodyBones.LeftIndexProximal, false);
-                    LefthandGrasper.Method_Private_Void_PDM_9();
+                    LefthandGrasper.Method_Private_Void_PDM_7();
                 }
             }
         }

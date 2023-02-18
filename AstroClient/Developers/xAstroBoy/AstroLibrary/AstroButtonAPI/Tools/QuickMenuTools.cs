@@ -52,8 +52,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         private static UIPage _UIPageTemplate_Right{ get; set; }
         private static UIPage _UIPageTemplate_Left{ get; set; }
         private static WingMenu WingmenuInstance { get; set; }= null;
-        private static WingMenu _Wing_Right{ get; set; }
-        private static WingMenu _Wing_Left{ get; set; }
+        private static WingMenu _QM_Wing_Right{ get; set; }
+        private static WingMenu _QM_Wing_Left{ get; set; }
         private static GameObject _WingButtonTemplate_Right { get; set; }
         private static GameObject _WingButtonTemplate_Left { get; set; }
         private static GameObject _WingPageButtonTemplate { get; set; }
@@ -62,7 +62,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         private static MenuStateController _QuickMenuController{ get; set; }
         private static MenuStateController _MainMenuStateController{ get; set; }
 
-        private static SelectedUserMenuQM _SelectedUserMenuQM{ get; set; }
+        private static MonoBehaviourPublicTeSlGrSlImObSiUnique _SelectedUserMenuQM{ get; set; }
         private static UIPage _QuickMenuPage{ get; set; }
 
         private static GameObject _DebugPanelTemplate{ get; set; }
@@ -148,7 +148,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             get
             {
-                if (_Application == null) return _Application = Resources.FindObjectsOfTypeAll<VRC.FeaturePermissionManager>()[0].gameObject.transform;
+                if (_Application == null) return _Application = Resources.FindObjectsOfTypeAll<MonoBehaviourPublicObInSiInInInInInUnique>()[0].gameObject.transform;
                 return _Application;
             }
         }
@@ -362,11 +362,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         }
 
 
-        internal static SelectedUserMenuQM SelectedUserMenuQM
+        internal static MonoBehaviourPublicTeSlGrSlImObSiUnique SelectedUserMenuQM
         {
             get
             {
-                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = Canvas_QuickMenu.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = Canvas_QuickMenu.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<MonoBehaviourPublicTeSlGrSlImObSiUnique>();
                 return _SelectedUserMenuQM;
             }
         }
@@ -377,7 +377,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 if (_UIPageTemplate_Right == null)
                 {
-                    var Buttons = Wing_Right.GetComponentsInChildren<UIPage>(true);
+                    var Buttons = QM_Wing_Right.GetComponentsInChildren<UIPage>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         UIPage button = Buttons[i];
@@ -399,7 +399,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 if (_UIPageTemplate_Left == null)
                 {
-                    var Buttons = Wing_Left.GetComponentsInChildren<UIPage>(true);
+                    var Buttons = QM_Wing_Left.GetComponentsInChildren<UIPage>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         UIPage button = Buttons[i];
@@ -481,68 +481,34 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-        internal static WingMenu Wing_Left
+        internal static WingMenu QM_Wing_Left
         {
             get
             {
-                if (_Wing_Left == null)
+                if (Canvas_QuickMenu == null) return null;
+                if (_QM_Wing_Left == null)
                 {
-                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<WingMenu>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        WingMenu button = Buttons[i];
-                        if (button.name == "Wing_Left")
-                        {
-                            _Wing_Left = button;
-                            break;
-                        }
-                    }
+                    _QM_Wing_Left = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu").GetComponent<WingMenu>();
+
                 }
 
-                return _Wing_Left;
+                return _QM_Wing_Left;
             }
         }
 
-        internal static WingMenu Wing_Right
+        internal static WingMenu QM_Wing_Right
         {
             get
             {
-                if (_Wing_Right == null)
+                if (Canvas_QuickMenu == null) return null;
+                if (_QM_Wing_Right == null)
                 {
-                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<WingMenu>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        WingMenu button = Buttons[i];
-                        if (button.name == "Wing_Right")
-                        {
-                            _Wing_Right = button;
-                            break;
-                        }
-                    }
+                    _QM_Wing_Right = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Right/Container/InnerContainer/WingMenu").GetComponent<WingMenu>();
+
                 }
 
-                return _Wing_Right;
-            }
-        }
-        internal static MenuStateController MainMenuStateController
-        {
-            get
-            {
-                if (_QuickMenuController == null)
-                {
-                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<MenuStateController>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        MenuStateController button = Buttons[i];
-                        if (button.name == "Canvas_MainMenu(Clone)")
-                        {
-                            _MainMenuStateController = button;
-                            break;
-                        }
-                    }
-                }
+                return _QM_Wing_Right;
 
-                return _QuickMenuController;
             }
         }
 
@@ -637,7 +603,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 if (_WingButtonTemplate_Right == null)
                 {
-                    var Buttons = Wing_Right.GetComponentsInChildren<Button>(true);
+                    var Buttons = QM_Wing_Right.GetComponentsInChildren<Button>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Button button = Buttons[i];
@@ -659,7 +625,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 if (_WingButtonTemplate_Left == null)
                 {
-                    var Buttons = Wing_Left.GetComponentsInChildren<Button>(true);
+                    var Buttons = QM_Wing_Left.GetComponentsInChildren<Button>(true);
                     for (int i = 0; i < Buttons.Count; i++)
                     {
                         Button button = Buttons[i];

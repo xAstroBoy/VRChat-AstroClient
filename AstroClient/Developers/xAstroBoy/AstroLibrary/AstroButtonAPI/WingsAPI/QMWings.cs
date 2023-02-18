@@ -158,7 +158,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             {
                 isLeftWing = true;
                 menuName += $"_LEFT_{Guid.NewGuid().ToString()} ";
-                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.Wing_Left.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Left, QuickMenuTools.QM_Wing_Left.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
@@ -196,11 +196,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage(menuName);
+                    QuickMenuTools.QM_Wing_Left.ShowWingPage(menuName);
                 });
                 SetBackButtonAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage("Root");
+                    QuickMenuTools.QM_Wing_Left.ShowWingPage("Root");
 
                 });
             }
@@ -208,7 +208,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             {
                 isLeftWing = false;
                 menuName += $"_RIGHT_{Guid.NewGuid().ToString()} ";
-                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.Wing_Right.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
+                ButtonObject = Object.Instantiate(QuickMenuTools.WingButtonTemplate_Right, QuickMenuTools.QM_Wing_Right.gameObject.FindUIObject("VerticalLayoutGroup").transform, true);
                 ButtonObject.name = QMButtonAPI.identifier + btnType + Index;
                 MenuName = AssignedMenu;
                 ButtonText = ButtonObject.NewText("Text_QM_H3");
@@ -248,11 +248,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Right.ShowWingPage(menuName);
+                    QuickMenuTools.QM_Wing_Right.ShowWingPage(menuName);
                 });
                 SetBackButtonAction(() =>
                 {
-                    QuickMenuTools.Wing_Right.ShowWingPage("Root");
+                    QuickMenuTools.QM_Wing_Right.ShowWingPage("Root");
                 });
 
             }
@@ -312,7 +312,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Left.ShowWingPage(menuName);
+                    QuickMenuTools.QM_Wing_Left.ShowWingPage(menuName);
                 });
 
 
@@ -362,7 +362,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 //PushPage
                 SetAction(() =>
                 {
-                    QuickMenuTools.Wing_Right.ShowWingPage(menuName);
+                    QuickMenuTools.QM_Wing_Right.ShowWingPage(menuName);
                 });
             }
 

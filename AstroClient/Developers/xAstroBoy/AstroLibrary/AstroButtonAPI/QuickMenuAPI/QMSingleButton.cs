@@ -271,7 +271,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     break;
 
             }
-            ButtonObject.RemoveComponents<MonoBehaviourPublic28Bu16Vo37Vo16St37VoUnique>(); // Votekick handler
+            ButtonObject.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>(); // Votekick handler
             ButtonObject.RemoveComponents<UiTooltip>(); // Votekick handler
             ButtonObject.RemoveComponents<VRC.UI.Elements.Analytics.AnalyticsController>();
             ButtonObject.RemoveComponents<UIToggleTooltip>();

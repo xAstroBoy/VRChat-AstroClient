@@ -27,8 +27,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                     Il2CppType.From(typeof(DataModel<APIUser>)).IsAssignableFrom(Il2CppType.From(type)) &&
                     Il2CppType.Of<IUser>().IsAssignableFrom(Il2CppType.From(type)));
 
-            //_apiUserToIUser = typeof(ObjectPublicDi2StObUnique).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0").MakeGenericMethod(iUserImpl, typeof(APIUser));
-            _apiUserToIUser = typeof(DataModelCache).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0").MakeGenericMethod(iUserImpl, typeof(APIUser));
+            _apiUserToIUser = typeof(ObjectPublicDi2StObUnique).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0").MakeGenericMethod(iUserImpl, typeof(APIUser));
+            //_apiUserToIUser = typeof(DataModel).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0").MakeGenericMethod(iUserImpl, typeof(APIUser));
 
         }
         internal static MethodInfo _apiUserToIUser;

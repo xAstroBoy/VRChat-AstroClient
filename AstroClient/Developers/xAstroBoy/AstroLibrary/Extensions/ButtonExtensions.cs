@@ -30,7 +30,7 @@ namespace AstroClient.xAstroBoy.Extensions
             if (tooltip != null)
             {
                 tooltip.field_Public_String_0 = text;
-                tooltip.field_Public_String_1 = text;
+                //tooltip.field_Public_String_1 = text;
             }
         }
 

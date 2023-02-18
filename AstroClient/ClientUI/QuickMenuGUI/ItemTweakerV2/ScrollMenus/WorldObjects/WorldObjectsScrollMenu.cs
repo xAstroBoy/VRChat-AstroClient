@@ -133,7 +133,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.WorldObjec
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType, bool Toggle2)
+        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
         {
             if (!isOpen) return;
 

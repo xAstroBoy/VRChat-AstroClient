@@ -96,7 +96,8 @@ namespace AstroClient.ClientUI.ActionMenu
 
         public static void ResetAvatar()
         {
-            ObjectPublicAbstractSealedApObApStApApUnique.Method_Public_Static_Void_ApiAvatar_String_ApiAvatar_0(API.Fetch<ApiAvatar>("avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11"), "fallbackAvatar");
+            // Method_Public_Static_Void_ApiAvatar_String_ApiAvatar_0
+            ObjectPublicAbstractSealedApObApStApApUnique.Method_Public_Static_Void_ApiAvatar_String_ApiAvatar_Boolean_0(API.Fetch<ApiAvatar>("avtr_c38a1615-5bf5-42b4-84eb-a8b6c37cbd11"), "fallbackAvatar");
         }
 
     }

@@ -153,8 +153,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
         public static IUser ToIUser(this APIUser value)
         {
-            //return ((Object)UiMethods._apiUserToIUser.Invoke(MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique.field_Private_Static_MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique_0.field_Private_ObjectPublicDi2StObUnique_0, new object[3] { value.id, value, false })).Cast<IUser>();
-            return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
+            return ((Object)UiMethods._apiUserToIUser.Invoke(MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique.field_Private_Static_MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique_0.field_Private_ObjectPublicDi2StObUnique_0, new object[3] { value.id, value, false })).Cast<IUser>();
+           // return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
 
         }
 
@@ -171,16 +171,16 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
         internal static void ShowWingPage(this WingMenu instance, string pagename)
         {
-            instance.field_Private_MenuStateController_0.ShowTabContent(pagename);
+            instance.field_Private_UIMenu_0.prop_MenuStateController_0.ShowTabContent(pagename);
         }
 
-        internal static Player GetSelectedPlayer(this SelectedUserMenuQM instance)
+        internal static Player GetSelectedPlayer(this MonoBehaviourPublicTeSlGrSlImObSiUnique instance)
         {
             return instance.field_Private_IUser_0.ToAPIUser().GetPlayer();
             //return instance.field_Private_Player_0;
         }
 
-        internal static APIUser GetSelectedApiUser(this SelectedUserMenuQM instance)
+        internal static APIUser GetSelectedApiUser(this MonoBehaviourPublicTeSlGrSlImObSiUnique instance)
         {
             return instance.field_Private_IUser_0.ToAPIUser();
             //return instance.field_Private_Player_0;
@@ -571,11 +571,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             if (pagename.isLeftWing)
             {
-                QuickMenuTools.Wing_Left.ShowWingPage(pagename.GetMenuName());
+                QuickMenuTools.QM_Wing_Left.ShowWingPage(pagename.GetMenuName());
             }
             else
             {
-                QuickMenuTools.Wing_Right.ShowWingPage(pagename.GetMenuName());
+                QuickMenuTools.QM_Wing_Right.ShowWingPage(pagename.GetMenuName());
             }
         }
 
@@ -583,11 +583,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             if (page.isLeftWing)
             {
-                QuickMenuTools.Wing_Left.ShowWingPage(Page);
+                QuickMenuTools.QM_Wing_Left.ShowWingPage(Page);
             }
             else
             {
-                QuickMenuTools.Wing_Right.ShowWingPage(Page);
+                QuickMenuTools.QM_Wing_Right.ShowWingPage(Page);
             }
         }
 
