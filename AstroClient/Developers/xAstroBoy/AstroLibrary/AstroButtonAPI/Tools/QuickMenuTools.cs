@@ -1,32 +1,25 @@
-﻿
-namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
+﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
     using QuickMenuAPI;
     using UnityEngine;
     using UnityEngine.UI;
-    using Utility;
     using VRC.UI.Elements;
-    using VRC.UI.Elements.Menus;
     using Color = System.Drawing.Color;
-    
+
     internal static class QuickMenuTools
     {
-        //Templates and references
-        internal static bool SelectSelf  { get; set; }= false;
         private static Transform _UnscaledUI { get; set; }
-        private static Transform _Application  { get; set; }
+        private static Transform _Application { get; set; }
 
-        private static Transform _UserInterface  { get; set; }
-        private static Transform SingleButtonReference  { get; set; } = null;
+        private static Transform _UserInterface { get; set; }
         private static Vector3? _SingleButtonTemplatePosition { get; set; }
         private static Transform _ToggleButtonTemplate { get; set; }
         private static Transform _NestedMenuTemplate { get; set; }
-        private static Transform SelectedUserPageReference { get; set; }
         private static Transform _SelectedUserPage_ButtonsSection { get; set; }
         private static Transform _NestedPages { get; set; }
         private static Transform _MenuDashboard_ButtonsSection { get; set; }
         private static Transform _TabButtonTemplate { get; set; }
-        
+
         private static Transform _Header_DashboardTemplate { get; set; }
         private static Transform _SliderTemplate { get; set; }
         private static Transform _ToolTipPanel { get; set; }
@@ -36,47 +29,42 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         private static Transform _SingleButtonTemplate { get; set; }
 
         //VRC
-        private static Transform _Carousel_Banners  { get; set; }
+        private static Transform _Carousel_Banners { get; set; }
 
         private static QuickMenu _QuickMenuInstance { get; set; }
-        internal static VRCUiManager vrcuimInstance  { get; set; } = null; // Dead
-        private static GameObject shortcutMenu  { get; set; } = null;
-        private static GameObject userInteractMenu  { get; set; } = null;
-        private static Transform _SelectedUserPage_Remote  { get; set; } = null;
-        private static Transform _SelectedUserPage_Local  { get; set; } = null;
+        private static Transform _SelectedUserPage_Remote { get; set; } = null;
+        private static Transform _SelectedUserPage_Local { get; set; } = null;
 
-        private static Transform _SelectedUserPage_Remote_VerticalLayoutGroup { get; set; }= null;
-        private static Transform _SelectedUserPage_Local_VerticalLayoutGroup { get; set; }= null;
-        private static Transform _MenuDashboard_VerticalLayoutGroup { get; set; }= null;
+        private static Transform _SelectedUserPage_Remote_VerticalLayoutGroup { get; set; } = null;
+        private static Transform _SelectedUserPage_Local_VerticalLayoutGroup { get; set; } = null;
+        private static Transform _MenuDashboard_VerticalLayoutGroup { get; set; } = null;
 
-        private static UIPage _UIPageTemplate_Right{ get; set; }
-        private static UIPage _UIPageTemplate_Left{ get; set; }
-        private static WingMenu WingmenuInstance { get; set; }= null;
-        private static WingMenu _QM_Wing_Right{ get; set; }
-        private static WingMenu _QM_Wing_Left{ get; set; }
+        private static UIPage _UIPageTemplate_Right { get; set; }
+        private static UIPage _UIPageTemplate_Left { get; set; }
+        private static MenuStateController _QM_Wing_Right { get; set; }
+        private static MenuStateController _QM_Wing_Left { get; set; }
         private static GameObject _WingButtonTemplate_Right { get; set; }
         private static GameObject _WingButtonTemplate_Left { get; set; }
         private static GameObject _WingPageButtonTemplate { get; set; }
-        private static MenuStateController _WingMenuStateControllerRight{ get; set; }
-        private static MenuStateController _WingMenuStateControllerLeft{ get; set; }
-        private static MenuStateController _QuickMenuController{ get; set; }
-        private static MenuStateController _MainMenuStateController{ get; set; }
+        private static MenuStateController _QuickMenuController { get; set; }
+        private static MonoBehaviourPublicTeSlGrSlImObSiUnique _SelectedUserMenuQM { get; set; }
+        private static UIPage _QuickMenuPage { get; set; }
 
-        private static MonoBehaviourPublicTeSlGrSlImObSiUnique _SelectedUserMenuQM{ get; set; }
-        private static UIPage _QuickMenuPage{ get; set; }
+        private static GameObject _DebugPanelTemplate { get; set; }
+        private static Transform _Canvas_QuickMenu { get; set; }
 
-        private static GameObject _DebugPanelTemplate{ get; set; }
-        private static Transform _Canvas_QuickMenu{ get; set; }
         internal static Transform Canvas_QuickMenu
         {
             get
             {
                 if (UserInterface == null) return null;
-                if (_Canvas_QuickMenu == null)  _Canvas_QuickMenu = UserInterface.Find("Canvas_QuickMenu(Clone)");
+                if (_Canvas_QuickMenu == null) _Canvas_QuickMenu = UserInterface.Find("Canvas_QuickMenu(Clone)");
                 return _Canvas_QuickMenu;
             }
         }
+
         private static Transform _Canvas_MainMenu;
+
         internal static Transform Canvas_MainMenu
         {
             get
@@ -86,6 +74,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 return _Canvas_MainMenu;
             }
         }
+
         internal static QuickMenu QuickMenuInstance
         {
             get
@@ -144,6 +133,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 return _UserInterface;
             }
         }
+
         internal static Transform Application
         {
             get
@@ -161,7 +151,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 return _UnscaledUI;
             }
         }
-
 
         internal static UIPage QuickMenuPage
         {
@@ -346,7 +335,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-
         internal static Transform NestedPages
         {
             get
@@ -354,13 +342,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 if (_NestedPages == null)
                 {
                     _NestedPages = NestedMenuTemplate.transform.parent;
-                    
                 }
 
                 return _NestedPages;
             }
         }
-
 
         internal static MonoBehaviourPublicTeSlGrSlImObSiUnique SelectedUserMenuQM
         {
@@ -437,78 +423,33 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-        internal static MenuStateController WingMenuStateControllerRight
-        {
-            get
-            {
-                if (_WingMenuStateControllerRight == null)
-                {
-                    var Buttons = Canvas_QuickMenu.GetComponentsInChildren<MenuStateController>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        MenuStateController button = Buttons[i];
-                        if (button.name == "Wing_Right")
-                        {
-                            _WingMenuStateControllerRight = button;
-                            break;
-                        }
-                    }
-                }
 
-                return _WingMenuStateControllerRight;
-            }
-        }
 
-        internal static MenuStateController WingMenuStateControllerLeft
-        {
-            get
-            {
-                if (_WingMenuStateControllerLeft == null)
-                {
-                    var Buttons = QuickMenuInstance.GetComponentsInChildren<MenuStateController>(true);
-                    for (int i = 0; i < Buttons.Count; i++)
-                    {
-                        MenuStateController button = Buttons[i];
-                        if (button.name == "Wing_Left")
-                        {
-                            _WingMenuStateControllerLeft = button;
-                            break;
-                        }
-                    }
-                }
-
-                return _WingMenuStateControllerLeft;
-            }
-        }
-
-        internal static WingMenu QM_Wing_Left
+        internal static MenuStateController QM_Wing_Left
         {
             get
             {
                 if (Canvas_QuickMenu == null) return null;
                 if (_QM_Wing_Left == null)
                 {
-                    _QM_Wing_Left = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Left/Container/InnerContainer/WingMenu").GetComponent<WingMenu>();
-
+                    _QM_Wing_Left = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Left").GetComponent<MenuStateController>();
                 }
 
                 return _QM_Wing_Left;
             }
         }
 
-        internal static WingMenu QM_Wing_Right
+        internal static MenuStateController QM_Wing_Right
         {
             get
             {
                 if (Canvas_QuickMenu == null) return null;
                 if (_QM_Wing_Right == null)
                 {
-                    _QM_Wing_Right = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Right/Container/InnerContainer/WingMenu").GetComponent<WingMenu>();
-
+                    _QM_Wing_Right = Canvas_QuickMenu.FindObject("CanvasGroup/Container/Window/Wing_Right").GetComponent<MenuStateController>();
                 }
 
                 return _QM_Wing_Right;
-
             }
         }
 
@@ -640,20 +581,19 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 return _WingButtonTemplate_Left;
             }
         }
+
         internal static Transform SelectedUserPage_Remote_VerticalLayoutGroup
         {
             get
             {
                 if (_SelectedUserPage_Remote_VerticalLayoutGroup == null)
                 {
-                   return _SelectedUserPage_Remote_VerticalLayoutGroup = SelectedUserPage_Remote.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
+                    return _SelectedUserPage_Remote_VerticalLayoutGroup = SelectedUserPage_Remote.FindObject("ScrollRect/Viewport/VerticalLayoutGroup");
                 }
 
                 return _SelectedUserPage_Remote_VerticalLayoutGroup;
             }
         }
-
-
 
         internal static Transform SelectedUserPage_Local_VerticalLayoutGroup
         {
@@ -690,7 +630,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
         }
 
-
         internal static Transform SelectedUserPage_Local
         {
             get
@@ -712,7 +651,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                 return _SelectedUserPage_Local;
             }
         }
-
 
         internal static Transform SelectedUserPage_ButtonsSection
         {

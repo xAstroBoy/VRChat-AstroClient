@@ -571,11 +571,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             if (pagename.isLeftWing)
             {
-                QuickMenuTools.QM_Wing_Left.ShowWingPage(pagename.GetMenuName());
+                QuickMenuTools.QM_Wing_Left.ShowTabContent(pagename.GetMenuName());
             }
             else
             {
-                QuickMenuTools.QM_Wing_Right.ShowWingPage(pagename.GetMenuName());
+                QuickMenuTools.QM_Wing_Right.ShowTabContent(pagename.GetMenuName());
             }
         }
 
@@ -583,11 +583,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             if (page.isLeftWing)
             {
-                QuickMenuTools.QM_Wing_Left.ShowWingPage(Page);
+                QuickMenuTools.QM_Wing_Left.ShowTabContent(Page);
             }
             else
             {
-                QuickMenuTools.QM_Wing_Right.ShowWingPage(Page);
+                QuickMenuTools.QM_Wing_Right.ShowTabContent(Page);
             }
         }
 
