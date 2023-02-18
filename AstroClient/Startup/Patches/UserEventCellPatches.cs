@@ -46,8 +46,16 @@ namespace AstroClient.Startup.Patches
                         var anim = ComponentUtils.GetOrAddComponent<TextAnimator>(__instance.text.gameObject);
                         if (anim != null)
                         {
-                            anim.ShowAllCharacters(true);
-                            anim.Safe_SetText(__0);
+                            try
+                            {
+                                anim.ShowAllCharacters(true);
+                            }
+                            catch { }
+                            try
+                            {
+                                anim.Safe_SetText(__0);
+                            }
+                            catch { }
                         }
                     }
                 }

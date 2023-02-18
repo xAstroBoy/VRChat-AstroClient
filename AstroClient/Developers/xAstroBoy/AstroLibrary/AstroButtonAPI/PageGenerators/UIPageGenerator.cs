@@ -28,7 +28,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                     controller.AddPage(result);
                 }
             }
-
+            result.enabled = true;
             return result;
         }
 
@@ -50,7 +50,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
                     controller.AddPage(result);
                 }
             }
-
+            result.enabled = true;
             return result;
         }
 

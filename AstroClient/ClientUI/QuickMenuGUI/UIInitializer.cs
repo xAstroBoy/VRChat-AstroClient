@@ -23,7 +23,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.VRChat_OnUiManagerInit += InitGUI;
+            ClientEventActions.OnQuickMenuOpen += InitGUI;
         }
 
         #region Buttons
@@ -53,6 +53,7 @@ namespace AstroClient.ClientUI.QuickMenuGUI
         private static void InitGUI()
         {
            DoAfterTemplateIsLoaded(InitMainsButtons);
+            ClientEventActions.OnQuickMenuOpen -= InitGUI;
         }
 
         internal static void InitMainsButtons()

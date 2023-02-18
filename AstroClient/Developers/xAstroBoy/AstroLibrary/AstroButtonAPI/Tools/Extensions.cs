@@ -577,19 +577,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 QuickMenuTools.QM_Wing_Right.ShowTabContent(pagename.GetMenuName());
             }
+            pagename.SetComponentState(true);
         }
 
-        internal static void ShowWingsPage(this QMWings page, string Page)
-        {
-            if (page.isLeftWing)
-            {
-                QuickMenuTools.QM_Wing_Left.ShowTabContent(Page);
-            }
-            else
-            {
-                QuickMenuTools.QM_Wing_Right.ShowTabContent(Page);
-            }
-        }
 
         internal static GameObject CreateMainBackButton(this GameObject NestedPart)
         {

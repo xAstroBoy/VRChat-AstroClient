@@ -1,4 +1,6 @@
 ﻿using AstroClient.CheetoLibrary;
+using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
@@ -109,6 +111,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 Object.Destroy(NestedPart.GetComponentInChildren<CameraMenu>());
             }
             catch { }
+            ActivatePage();
             ButtonsMenu = NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup/Buttons (1)");
             NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup").gameObject.CleanCameraMenu();
             ButtonsMenu.name = "Buttons";
@@ -139,6 +142,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 Wing_OnOpenAction.SafetyRaise();
                 OnOpenAction.SafetyRaise();
                 NestedPart.SetActive(true);
+                ActivatePage();
             }, btnToolTip, TextColorHTML, btnHalf);
 
             switch (Title)
@@ -151,6 +155,14 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_Menu_" + "Main Menu");
                     break;
             }
+        }
+        internal void ActivatePage()
+        {
+            NestedPart.ActivateComponents<UnityEngine.Canvas>();
+            NestedPart.ActivateComponents<UnityEngine.CanvasGroup>();
+            NestedPart.ActivateComponents<AudioSource>();
+            NestedPart.ActivateComponents<GraphicRaycaster>();
+            NestedPart.ActivateComponents<RectMask2DEx>();
         }
 
         internal void SetTextColor(Color buttonTextColor)

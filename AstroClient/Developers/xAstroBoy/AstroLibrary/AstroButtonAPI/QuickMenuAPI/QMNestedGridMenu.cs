@@ -97,6 +97,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
         }
 
+        
 
         internal void InitButton(float btnXLocation, float btnYLocation, string btnText, string btnToolTip, string Title = "", Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
@@ -109,12 +110,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 Object.DestroyImmediate(NestedPart.GetComponentInChildren<CameraMenu>());
             }
             catch { }
-            NestedPart.ActivateComponents<UnityEngine.Canvas>();
-            NestedPart.ActivateComponents<UnityEngine.CanvasGroup>();
-            NestedPart.ActivateComponents<AudioSource>();
-            NestedPart.ActivateComponents<GraphicRaycaster>();
-            NestedPart.ActivateComponents<RectMask2DEx>();
-
+            ActivatePage();
             ButtonsMenu = NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup/Buttons (1)");
             NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup").gameObject.CleanCameraMenu();
             NestedPart.ActivateComponents<UnityEngine.Canvas>();
@@ -135,6 +131,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
+                ActivatePage();
                 Wing_OnOpenAction.SafetyRaise();
                 OnOpenAction.SafetyRaise();
                 NestedPart.SetActive(true);
@@ -157,6 +154,15 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
                     break;
             }
+        }
+
+        internal void ActivatePage()
+        {
+            NestedPart.ActivateComponents<UnityEngine.Canvas>();
+            NestedPart.ActivateComponents<UnityEngine.CanvasGroup>();
+            NestedPart.ActivateComponents<AudioSource>();
+            NestedPart.ActivateComponents<GraphicRaycaster>();
+            NestedPart.ActivateComponents<RectMask2DEx>();
         }
 
         internal void SetTextColor(Color buttonTextColor)

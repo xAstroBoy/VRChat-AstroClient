@@ -46,8 +46,8 @@ namespace AstroClient.xAstroBoy
         internal static void Init()
         {
 
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)),  GetPatch(nameof(OnQuickMenuOpen_Event)));
-            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), GetPatch(nameof(OnQuickMenuClose_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)),  null,GetPatch(nameof(OnQuickMenuOpen_Event)));
+            new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null,GetPatch(nameof(OnQuickMenuClose_Event)));
 
             //Method_Public_Void_Boolean_TransitionType_Boolean_0
             new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));

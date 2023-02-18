@@ -1,4 +1,7 @@
 ﻿using AstroClient.CheetoLibrary;
+using AstroClient.xAstroBoy.Utility;
+using UnityEngine.UI;
+using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Menus;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
@@ -62,11 +65,20 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 QuickMenuTools.ShowQuickmenuPage(menuName);
                 OnOpenAction.SafetyRaise();
                 NestedPart.SetActive(true);
+                ActivatePage();
             }, Title, btnBackgroundColor, icon);
             mainButton.SetGlowEffect(page);
             backButton = NestedPart.CreateBackButton(QMButtonAPI.identifier + "_Nested_GridMenu_" + "Main Menu");
         }
 
+        internal void ActivatePage()
+        {
+            NestedPart.ActivateComponents<UnityEngine.Canvas>();
+            NestedPart.ActivateComponents<UnityEngine.CanvasGroup>();
+            NestedPart.ActivateComponents<AudioSource>();
+            NestedPart.ActivateComponents<GraphicRaycaster>();
+            NestedPart.ActivateComponents<RectMask2DEx>();
+        }
 
         internal void SetBackButtonMenuToDashboard()
         {

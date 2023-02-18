@@ -1,4 +1,6 @@
 ﻿using AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators;
+using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Elements.Controls;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 {
@@ -256,7 +258,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 });
 
             }
-
+            CurrentPage.RemoveComponents<MonoBehaviourPublicObBuGaTeGaOb1ILGaObUnique>();
             ButtonObject.LoadSprite(icon, "Icon");
             SetActive(true);
         }
@@ -313,6 +315,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 SetAction(() =>
                 {
                     QuickMenuTools.QM_Wing_Left.ShowTabContent(menuName);
+                    OpenMe();
                 });
 
 
@@ -363,9 +366,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 SetAction(() =>
                 {
                     QuickMenuTools.QM_Wing_Right.ShowTabContent(menuName);
+                    SetComponentState(true);
+                    isOpened = true;
                 });
             }
-
+            CurrentPage.RemoveComponents<MonoBehaviourPublicObBuGaTeGaOb1ILGaObUnique>();
             ButtonObject.LoadSprite(icon, "Icon");
             SetActive(true);
         }
@@ -414,10 +419,21 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
             }
             ButtonObject.gameObject.SetActive(isActive);
         }
+        internal void SetComponentState(bool state)
+        {
+            CurrentPage.transform.gameObject.SetComponentState<UnityEngine.Canvas>(state);
+            CurrentPage.transform.gameObject.SetComponentState<UnityEngine.CanvasGroup>(state);
+            CurrentPage.transform.gameObject.SetComponentState<GraphicRaycaster>(state);
+            CurrentPage.transform.gameObject.SetComponentState<RectMask2DEx>(state);
+            //CurrentPage.transform.gameObject.ActivateComponents<UIPage>();
+
+        }
 
         internal void CloseMe()
         {
             BackButton.onClick.Invoke();
+            SetComponentState(false);
+            isOpened = false;
         }
         internal void SetButtonShortcut(QMNestedButton btn)
         {
@@ -445,6 +461,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         internal void OpenMe()
         {
             OpenButton.onClick.Invoke();
+            SetComponentState(true);
+            isOpened = true;
         }
 
         internal void SetInteractable(bool isIntractable)
@@ -499,6 +517,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 {
                     if (buttonAction != null) buttonAction();
                     isOpened = false;
+                    SetComponentState(false);
                     if (OnWingClose != null) OnWingClose();
 
                 }));
@@ -514,6 +533,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                 {
                     if (buttonAction != null) buttonAction();
                     isOpened = true;
+                    SetComponentState(true);
                     if (OnWingOpen != null) OnWingOpen();
 
                 }));
