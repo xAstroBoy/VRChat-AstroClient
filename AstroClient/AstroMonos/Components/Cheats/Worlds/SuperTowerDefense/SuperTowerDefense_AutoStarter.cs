@@ -140,14 +140,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                     {
                         if (KeepAutoStarterInactive)
                         {
-                            AutoStarter_SetInactive?.InvokeBehaviour();
+                            AutoStarter_SetInactive?.Invoke();
                         }
                     }
                     else
                     {
                         if (KeepAutoStarterActive)
                         {
-                            AutoStarter_SetActive?.InvokeBehaviour();
+                            AutoStarter_SetActive?.Invoke();
                         }
                     }
         }

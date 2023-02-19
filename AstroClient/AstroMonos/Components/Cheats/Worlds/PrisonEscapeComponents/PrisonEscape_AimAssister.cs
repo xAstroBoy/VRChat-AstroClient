@@ -137,17 +137,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                             {
                                 if (ESP.isWanted || ESP.isSuspicious)
                                 {
-                                    ShootInteraction.InvokeBehaviour();
+                                    ShootInteraction.Invoke();
                                 }
                             }
                             else if (ESP.CurrentRole == PrisonEscape_Roles.Guard && LocalUserData.CurrentRole == PrisonEscape_Roles.Prisoner)
                             {
-                                ShootInteraction.InvokeBehaviour();
+                                ShootInteraction.Invoke();
                             }
                         }
                         else
                         {
-                            ShootInteraction.InvokeBehaviour();
+                            ShootInteraction.Invoke();
                         }
                     }
                 }

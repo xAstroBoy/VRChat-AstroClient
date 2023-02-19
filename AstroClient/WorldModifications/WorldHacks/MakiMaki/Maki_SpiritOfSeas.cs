@@ -145,7 +145,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                 {
                     foreach (var item in Coins)
                     {
-                        item.InvokeBehaviour();
+                        item.Invoke();
                     }
                 });
                 CollectAllCoins.Set_isToggleButton(false);
@@ -247,7 +247,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MakiMaki
                     GameObject_RPC_Firewall.RemoveRule("PlayerPermissionManager", "__0__AddAuthorizedPlayers");
                     if (PlayerControllerDone != null)
                     {
-                        PlayerControllerDone.InvokeBehaviour();
+                        PlayerControllerDone.Invoke();
                     }
                 }
                 _BlockPlayerControllerDone = value;

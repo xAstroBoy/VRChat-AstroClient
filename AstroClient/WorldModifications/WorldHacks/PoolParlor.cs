@@ -119,7 +119,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (CreateMatchOnGameEnd)
             {
-                StartNewMatchCreation.InvokeBehaviour();
+                StartNewMatchCreation.Invoke();
                 CreateMatchOnGameEnd = false;
             }
         }
@@ -303,7 +303,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                             }
                             //Log.Debug($"Testing command : {a}");
                             CommandInput.Value = a;
-                            SendCommand.InvokeBehaviour();
+                            SendCommand.Invoke();
                             if(popcat.gameObject.active)
                             {
                                 Log.Debug("Command for Popcat is : " + a);
@@ -381,16 +381,16 @@ namespace AstroClient.WorldModifications.WorldHacks
             SetTableSkin_NetworkingManager(skin);
             if (BilliardModule_TriggerGlobalSettingsUpdated != null)
             {
-                BilliardModule_TriggerGlobalSettingsUpdated.InvokeBehaviour();
+                BilliardModule_TriggerGlobalSettingsUpdated.Invoke();
             }
             if (NetworkingManager_OnGlobalSettingsChanged != null)
             {
-                NetworkingManager_OnGlobalSettingsChanged.InvokeBehaviour();
+                NetworkingManager_OnGlobalSettingsChanged.Invoke();
             }
 
             if (UpdateColorScheme_Table != null)
             {
-                UpdateColorScheme_Table.InvokeBehaviour();
+                UpdateColorScheme_Table.Invoke();
             }
         }
 

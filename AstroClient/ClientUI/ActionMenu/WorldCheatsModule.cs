@@ -74,9 +74,9 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("Cheats", () =>
                 {
-                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Remove a Heart", () => { SuperTowerDefense.LoseHealth?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.Invoke(); });
+                    CustomSubMenu.AddButton("Remove a Heart", () => { SuperTowerDefense.LoseHealth?.Invoke(); });
+                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.Invoke(); });
                     CustomSubMenu.AddToggle("Automatic Wave", SuperTowerDefense.AutomaticWaveStart, ToggleValue => { SuperTowerDefense.AutomaticWaveStart = ToggleValue; });
                     CustomSubMenu.AddToggle("Automatic God Mode", SuperTowerDefense.GodMode.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.GodMode = ToggleValue; });
                     CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
@@ -108,15 +108,15 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("Auto Starter Control", () =>
                 {
-                    CustomSubMenu.AddButton("Place AutoStarter", () => { SuperTowerDefense.AutoStarter_Place?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Activate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetActive?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Deactivate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetInactive?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Place AutoStarter", () => { SuperTowerDefense.AutoStarter_Place?.Invoke(); });
+                    CustomSubMenu.AddButton("Activate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetActive?.Invoke(); });
+                    CustomSubMenu.AddButton("Deactivate AutoStarter", () => { SuperTowerDefense.AutoStarter_SetInactive?.Invoke(); });
                     CustomSubMenu.AddToggle("Keep AutoStart ON", SuperTowerDefense.KeepAutoStarterActive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterActive = ToggleValue; });
                     CustomSubMenu.AddToggle("Keep AutoStart OFF", SuperTowerDefense.KeepAutoStarterInactive.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.KeepAutoStarterInactive = ToggleValue; });
                 });
                 CustomSubMenu.AddSubMenu("Bank Mods", () =>
                 {
-                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Reset Bank Amount", () => { SuperTowerDefense.ResetBalance?.Invoke(); });
                     CustomSubMenu.AddToggle("Freeze Money Balance", SuperTowerDefense.FreezeMoney.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FreezeMoney = ToggleValue; });
                     CustomSubMenu.AddToggle("Anti-negative Balance", SuperTowerDefense.FixBalanceNegative.GetValueOrDefault(false), ToggleValue => { SuperTowerDefense.FixBalanceNegative = ToggleValue; });
 
@@ -151,7 +151,7 @@ internal class WorldCheatsModule : AstroEvents
                 });
                 CustomSubMenu.AddSubMenu("Health Mods", () =>
                 {
-                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Reset Heart", () => { SuperTowerDefense.ResetHealth?.Invoke(); });
                     CustomSubMenu.AddButton("Heart +1", () =>
                     {
                         if (SuperTowerDefense.HealthEditor != null && SuperTowerDefense.HealthEditor.CurrentHealth.HasValue)
@@ -224,38 +224,38 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddToggle("AmongUS Serializer", AmongUSCheats.AmongUsSerializer, ToggleValue => { AmongUSCheats.AmongUsSerializer = ToggleValue; });
                 CustomSubMenu.AddSubMenu("Lobby ", () =>
                 {
-                    CustomSubMenu.AddButton("Start Game", () => { AmongUsUdonEvents.StartGameEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Abort game", () => { AmongUsUdonEvents.AbortGameEvent?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Start Game", () => { AmongUsUdonEvents.StartGameEvent?.Invoke(); });
+                    CustomSubMenu.AddButton("Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent?.Invoke(); });
+                    CustomSubMenu.AddButton("Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent?.Invoke(); });
+                    CustomSubMenu.AddButton("Abort game", () => { AmongUsUdonEvents.AbortGameEvent?.Invoke(); });
                 });
 
 
                 CustomSubMenu.AddSubMenu("Game Events", () =>
                 {
-                    CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUsUdonEvents.SyncEmergencyMeeting?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Emergency Meeting", () => { AmongUsUdonEvents.SyncEmergencyMeeting?.Invoke(); });
                 });
 
                 CustomSubMenu.AddSubMenu("Sabotage & Repair", () =>
                 {
-                    CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUsUdonEvents.CancelAllSabotages?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUsUdonEvents.Sabotage_Lights?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Reactor", () => { AmongUsUdonEvents.Sabotage_Reactor?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Oxygen", () => { AmongUsUdonEvents.Sabotage_Oxygen?.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Sabotage Comms", () => { AmongUsUdonEvents.Sabotage_Comms?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Cancel Sabotages", () => { AmongUsUdonEvents.CancelAllSabotages?.Invoke(); });
+                    CustomSubMenu.AddButton("Sabotage Lights", () => { AmongUsUdonEvents.Sabotage_Lights?.Invoke(); });
+                    CustomSubMenu.AddButton("Sabotage Reactor", () => { AmongUsUdonEvents.Sabotage_Reactor?.Invoke(); });
+                    CustomSubMenu.AddButton("Sabotage Oxygen", () => { AmongUsUdonEvents.Sabotage_Oxygen?.Invoke(); });
+                    CustomSubMenu.AddButton("Sabotage Comms", () => { AmongUsUdonEvents.Sabotage_Comms?.Invoke(); });
 
                     CustomSubMenu.AddButton("Sabotage Doors", () => { AmongUsUdonEvents.SabotageAllDoors.InvokeBehaviour(); });
                 });
 
                 CustomSubMenu.AddSubMenu("Task Faker", () =>
                 {
-                    CustomSubMenu.AddButton("Submit Scan", () => { AmongUsUdonEvents.SubmitScanTask?.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Submit Scan", () => { AmongUsUdonEvents.SubmitScanTask?.Invoke(); });
                     CustomSubMenu.AddSubMenu("Garbage", () =>
                     {
-                        CustomSubMenu.AddButton("Cafeteria", () => { AmongUsUdonEvents.EmptyGarbage_Cafeteria_B?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Oxygen", () => { AmongUsUdonEvents.EmptyGarbage_Oxygen_A?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Storage A", () => { AmongUsUdonEvents.EmptyGarbage_Storage_A?.InvokeBehaviour(); });
-                        CustomSubMenu.AddButton("Storage B", () => { AmongUsUdonEvents.EmptyGarbage_Storage_B?.InvokeBehaviour(); });
+                        CustomSubMenu.AddButton("Cafeteria", () => { AmongUsUdonEvents.EmptyGarbage_Cafeteria_B?.Invoke(); });
+                        CustomSubMenu.AddButton("Oxygen", () => { AmongUsUdonEvents.EmptyGarbage_Oxygen_A?.Invoke(); });
+                        CustomSubMenu.AddButton("Storage A", () => { AmongUsUdonEvents.EmptyGarbage_Storage_A?.Invoke(); });
+                        CustomSubMenu.AddButton("Storage B", () => { AmongUsUdonEvents.EmptyGarbage_Storage_B?.Invoke(); });
                     });
                 });
             }
@@ -292,10 +292,10 @@ internal class WorldCheatsModule : AstroEvents
 
                 CustomSubMenu.AddSubMenu("Match Settings", () =>
                 {
-                    CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.Invoke(); });
+                    CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.Invoke(); });
+                    CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.Invoke(); });
+                    CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.Invoke(); });
 
 
                 });
@@ -381,39 +381,39 @@ internal class WorldCheatsModule : AstroEvents
                                         });
                 CustomSubMenu.AddButton("Armory Disable Lock & Unlock Everything", () =>
                 {
-                    GhostGame.Armory_CraftGun.InvokeBehaviour();
-                    GhostGame.Armory_CraftSniper.InvokeBehaviour();
-                    GhostGame.Armory_CraftClue.InvokeBehaviour();
-                    GhostGame.Armory_OpenCabinet_1.InvokeBehaviour();
-                    GhostGame.Armory_OpenCabinet_2.InvokeBehaviour();
-                    GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5);
-                    GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(15);
+                    GhostGame.Armory_CraftGun.Invoke();
+                    GhostGame.Armory_CraftSniper.Invoke();
+                    GhostGame.Armory_CraftClue.Invoke();
+                    GhostGame.Armory_OpenCabinet_1.Invoke();
+                    GhostGame.Armory_OpenCabinet_2.Invoke();
+                    GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvoke(5);
+                    GhostGame.Armory_GetMoneyReward.RepeatInvoke(15);
                 });
 
                 CustomSubMenu.AddButton("Click Money Reward 40 times",
-                    () => { GhostGame.Armory_GetMoneyReward.RepeatInvokeBehaviour(40); });
+                    () => { GhostGame.Armory_GetMoneyReward.RepeatInvoke(40); });
 
                 CustomSubMenu.AddSubMenu("Armory Manual Control", () =>
                 {
                     CustomSubMenu.AddButton("Disable Lock (Clicks it 5 times!)",
-                        () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvokeBehaviour(5); });
+                        () => { GhostGame.ArmoryDoor_AddKeyOnDoor.RepeatInvoke(5); });
                     CustomSubMenu.AddButton("Start Armory Weapons crafting.", () =>
                     {
-                        GhostGame.Armory_CraftGun.InvokeBehaviour();
-                        GhostGame.Armory_CraftSniper.InvokeBehaviour();
+                        GhostGame.Armory_CraftGun.Invoke();
+                        GhostGame.Armory_CraftSniper.Invoke();
                     });
                     CustomSubMenu.AddButton("Relock Armory Door",
-                        () => { GhostGame.ArmoryDoor_LockDoor.InvokeBehaviour(); });
+                        () => { GhostGame.ArmoryDoor_LockDoor.Invoke(); });
 
                     CustomSubMenu.AddButton("Open Armory Door Clockwise",
-                        () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.InvokeBehaviour(); });
+                        () => { GhostGame.ArmoryDoor_OpenDoor_Clockwise.Invoke(); });
                     CustomSubMenu.AddButton("Open Armory Door CounterClockWise",
-                        () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.InvokeBehaviour(); });
+                        () => { GhostGame.ArmoryDoor_OpenDoor_CounterClockwise.Invoke(); });
 
                     CustomSubMenu.AddButton("Close Armory Door Clockwise",
-                        () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.InvokeBehaviour(); });
+                        () => { GhostGame.ArmoryDoor_CloseDoor_Clockwise.Invoke(); });
                     CustomSubMenu.AddButton("Close Armory Door CounterClockWise",
-                        () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.InvokeBehaviour(); });
+                        () => { GhostGame.ArmoryDoor_CloseDoor_CounterClockwise.Invoke(); });
                 });
             }
 
@@ -450,13 +450,13 @@ internal class WorldCheatsModule : AstroEvents
             {
                 CustomSubMenu.AddSubMenu("Money Hacks", () =>
                 {
-                    CustomSubMenu.AddButton("Get Money", () => { PrisonEscape.MoneyInteraction.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Get Money x10", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(10); });
-                    CustomSubMenu.AddButton("Get Money x20", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(20); });
-                    CustomSubMenu.AddButton("Get Money x30", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(30); });
-                    CustomSubMenu.AddButton("Get Money x40", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(40); });
-                    CustomSubMenu.AddButton("Get Money x50", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(50); });
-                    CustomSubMenu.AddButton("Get Money x100", () => { PrisonEscape.MoneyInteraction.RepeatInvokeBehaviour(100); });
+                    CustomSubMenu.AddButton("Get Money", () => { PrisonEscape.MoneyInteraction.Invoke(); });
+                    CustomSubMenu.AddButton("Get Money x10", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(10); });
+                    CustomSubMenu.AddButton("Get Money x20", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(20); });
+                    CustomSubMenu.AddButton("Get Money x30", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(30); });
+                    CustomSubMenu.AddButton("Get Money x40", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(40); });
+                    CustomSubMenu.AddButton("Get Money x50", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(50); });
+                    CustomSubMenu.AddButton("Get Money x100", () => { PrisonEscape.MoneyInteraction.RepeatInvoke(100); });
                 });
                 CustomSubMenu.AddSubMenu("World Settings", () =>
                 {
@@ -512,8 +512,8 @@ internal class WorldCheatsModule : AstroEvents
                 CustomSubMenu.AddSubMenu("Patreon System Control", () =>
                 {
                     CustomSubMenu.AddToggle("Patron Mode", PrisonEscape.isPatron.GetValueOrDefault(false), ToggleValue => { PrisonEscape.isPatron = ToggleValue; });
-                    CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.InvokeBehaviour(); });
-                    CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Toggle Patron Guns", () => { PrisonEscape.TogglePatronGuns.Invoke(); });
+                    CustomSubMenu.AddButton("Toggle Double Points", () => { PrisonEscape.ToggleDoublePoints.Invoke(); });
                 });
                 CustomSubMenu.AddSubMenu("Game Settings", () =>
                 {
@@ -662,10 +662,16 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.FBTHeaven)
             {
-                CustomSubMenu.AddButton("Toggle Room 1", () => { FBTHeaven.ToggleDoor(1); });
-                CustomSubMenu.AddButton("Toggle Room 2", () => { FBTHeaven.ToggleDoor(2); });
-                CustomSubMenu.AddButton("Toggle Room 3", () => { FBTHeaven.ToggleDoor(3); });
-                CustomSubMenu.AddButton("Toggle Room 4", () => { FBTHeaven.ToggleDoor(4); });
+                CustomSubMenu.AddButton("Toggle Room 1", () => { FBTHeaven.ToggleDoor_1(); });
+                CustomSubMenu.AddButton("Toggle Room 2", () => { FBTHeaven.ToggleDoor_2(); });
+                CustomSubMenu.AddButton("Toggle Room 3", () => { FBTHeaven.ToggleDoor_3(); });
+                CustomSubMenu.AddButton("Toggle Room 4", () => { FBTHeaven.ToggleDoor_4(); });
+
+                CustomSubMenu.AddButton("Enter Room 1", () => { FBTHeaven.TeleportToRoom_1(); });
+                CustomSubMenu.AddButton("Enter Room 2", () => { FBTHeaven.TeleportToRoom_2(); });
+                CustomSubMenu.AddButton("Enter Room 3", () => { FBTHeaven.TeleportToRoom_3(); });
+                CustomSubMenu.AddButton("Enter Room 4", () => { FBTHeaven.TeleportToRoom_4(); });
+
             }
 
             #endregion FBT Heaven
@@ -688,7 +694,7 @@ internal class WorldCheatsModule : AstroEvents
 
                 if (JustBClub1.EjectNonVips != null)
                 {
-                    CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { JustBClub1.EjectNonVips.InvokeBehaviour(); });
+                    CustomSubMenu.AddButton("Eject Non VIPs (VIP Room)", () => { JustBClub1.EjectNonVips.Invoke(); });
                 }
             }
 
@@ -736,14 +742,14 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.VRWare || WorldUtils.WorldID == WorldIds.VRWare_Test_CrossPlatform)
             {
-                CustomSubMenu.AddButton("Toggle Console", () => { VRWare.ToggleConsole.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Toggle Music", () => { VRWare.ToggleMusic.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Toggle Console", () => { VRWare.ToggleConsole.Invoke(); });
+                CustomSubMenu.AddButton("Toggle Music", () => { VRWare.ToggleMusic.Invoke(); });
 
-                CustomSubMenu.AddButton("Force Devouring Minigame", () => { VRWare.Trigger_Devouring_Level?.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Force Break The Target Minigame", () => { VRWare.Trigger_BreakTheTargets_Level?.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Force Japan World Minigame", () => { VRWare.Trigger_JapanWorld_Level?.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Force Race Minigame", () => { VRWare.Trigger_Race_Level?.InvokeBehaviour(); });
-                CustomSubMenu.AddButton("Force Exit VRChat Minigame", () => { VRWare.Trigger_ExitVRChat_Level?.InvokeBehaviour(); });
+                CustomSubMenu.AddButton("Force Devouring Minigame", () => { VRWare.Trigger_Devouring_Level?.Invoke(); });
+                CustomSubMenu.AddButton("Force Break The Target Minigame", () => { VRWare.Trigger_BreakTheTargets_Level?.Invoke(); });
+                CustomSubMenu.AddButton("Force Japan World Minigame", () => { VRWare.Trigger_JapanWorld_Level?.Invoke(); });
+                CustomSubMenu.AddButton("Force Race Minigame", () => { VRWare.Trigger_Race_Level?.Invoke(); });
+                CustomSubMenu.AddButton("Force Exit VRChat Minigame", () => { VRWare.Trigger_ExitVRChat_Level?.Invoke(); });
 
 
             }

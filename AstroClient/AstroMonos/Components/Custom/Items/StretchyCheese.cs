@@ -55,7 +55,7 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             {
                 HasSubscribed = true;
                 var PickupBehaviour = gameObject.AddComponent<VRC_AstroPickup>();
-                if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.InvokeBehaviour(); };
+                if (PickupBehaviour != null) PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.Invoke(); };
             }
             else
             {

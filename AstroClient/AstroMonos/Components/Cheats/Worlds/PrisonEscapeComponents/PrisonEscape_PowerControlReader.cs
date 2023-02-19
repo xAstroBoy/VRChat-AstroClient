@@ -87,17 +87,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
 
         internal void TurnPowerOff()
         {
-            TurnPower_Off_Event.InvokeBehaviour();
+            TurnPower_Off_Event.Invoke();
         }
 
         internal void TurnPowerOn()
         {
-            TurnPower_On_Event.InvokeBehaviour();
+            TurnPower_On_Event.Invoke();
         }
 
         internal void Reset()
         {
-            ResetPowerEvent.InvokeBehaviour();
+            ResetPowerEvent.Invoke();
         }
 
         private UdonBehaviour_Cached ResetPowerEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

@@ -684,7 +684,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         var Button = new WorldButton_Squared(new Vector3(-4.4181f, 1.4965f, 14.7982f), new Vector3(0, 90, 270), "<color=red>Start Game!</color> \n <rainb>Bypass Master Lock!</rainb> ", () =>
                         {
-                            startgame.InvokeBehaviour();
+                            startgame.Invoke();
                         });
                         Button.Set_isToggleButton(false);
                     }
@@ -879,7 +879,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             Lit_GateInteraction.UdonBehaviour.Interact();
             if (Lit_GateInteraction != null)
             {
-                Lit_GateInteraction.InvokeBehaviour();
+                Lit_GateInteraction.Invoke();
             }
             MiscUtils.DelayFunction(2f, () =>
             {
@@ -991,7 +991,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var interact = trigger.FindUdonEvent("_interact");
                     if (interact != null)
                     {
-                        interact.InvokeBehaviour();
+                        interact.Invoke();
                     }
                 }
             }
@@ -1012,7 +1012,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     var interact = trigger.FindUdonEvent("_interact");
                     if (interact != null)
                     {
-                        interact.InvokeBehaviour();
+                        interact.Invoke();
                     }
                 }
             }
@@ -1042,7 +1042,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                 var rend = udonevent.gameObject.GetGetInChildrens<Renderer>(true); ;
                 if (rend != null)
                 {
-                    var btn = new WorldButton(item.transform.position + new Vector3(-0.5f, 1f, 0), Vector3.zero, rend.transform, "Spawn Weapon", () => { udonevent.InvokeBehaviour(); });
+                    var btn = new WorldButton(item.transform.position + new Vector3(-0.5f, 1f, 0), Vector3.zero, rend.transform, "Spawn Weapon", () => { udonevent.Invoke(); });
 
                     //btn.ButtonBody.transform.parent = rend.transform;
                     //// Flip Button On the other side.
@@ -1953,7 +1953,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         if (body.gameObject.active)
                         {
-                            CrateBehaviour.InvokeBehaviour();
+                            CrateBehaviour.Invoke();
                         }
                     }
                 }
@@ -1975,7 +1975,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     {
                         if (body.gameObject.active)
                         {
-                            CrateBehaviour.InvokeBehaviour();
+                            CrateBehaviour.Invoke();
                         }
                     }
                 }
@@ -2024,7 +2024,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             if (TakeKeycard != null)
             {
-                TakeKeycard.InvokeBehaviour();
+                TakeKeycard.Invoke();
             }
             else
             {
@@ -2045,7 +2045,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                         }
                     }
 
-                    GetRedCard.InvokeBehaviour();
+                    GetRedCard.Invoke();
                 }
             }
         }

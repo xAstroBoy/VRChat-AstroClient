@@ -100,7 +100,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -113,7 +113,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -126,7 +126,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -139,7 +139,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -152,7 +152,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -165,7 +165,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -178,7 +178,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -191,7 +191,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -204,7 +204,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }
@@ -217,7 +217,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 if (CubeClicker != null)
                 {
-                    CubeClicker.InvokeBehaviour();
+                    CubeClicker.Invoke();
                 }
                 yield return null;
             }

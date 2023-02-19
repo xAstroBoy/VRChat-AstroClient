@@ -94,7 +94,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds.AmongUS
             if (!__10_const_intnl_SystemString.isMatchWholeWord(GameInstances.CurrentUser.GetDisplayName()))
             {
                 __10_const_intnl_SystemString = GameInstances.CurrentUser.GetDisplayName();
-                ForceRestart.InvokeBehaviour();
+                ForceRestart.Invoke();
             }
         }
 

@@ -189,13 +189,13 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (!UsesUnlockTrigger)
                 {
-                    OpenDoorInteract.InvokeBehaviour();
+                    OpenDoorInteract.Invoke();
                 }
                 else
                 {
                     if (NeedsToInteractWithDoor)
                     {
-                        OpenDoorInteract.InvokeBehaviour();
+                        OpenDoorInteract.Invoke();
                     }
                 }
             }
@@ -210,15 +210,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             //}
             if (KeypadDoorEvent != null && KeypadDoorEvent.gameObject.active)
             {
-                KeypadDoorEvent.InvokeBehaviour();
+                KeypadDoorEvent.Invoke();
             }
             else if (KeypadDoorEvent_1 != null && KeypadDoorEvent_1.gameObject.active)
             {
-                KeypadDoorEvent_1.InvokeBehaviour();
+                KeypadDoorEvent_1.Invoke();
             }
             else if (KeypadDoorEvent_2 != null && KeypadDoorEvent_2.gameObject.active)
             {
-                KeypadDoorEvent_2.InvokeBehaviour();
+                KeypadDoorEvent_2.Invoke();
             }
         }
 
@@ -229,7 +229,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             {
                 if (OpenDoorSynced != null)
                 {
-                    OpenDoorSynced.InvokeBehaviour();
+                    OpenDoorSynced.Invoke();
                 }
             }
         }

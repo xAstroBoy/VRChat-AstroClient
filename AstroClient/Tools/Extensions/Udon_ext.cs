@@ -75,7 +75,7 @@
             }
             for (int i = 0; i < udonlist.Count; i++)
             {
-                udonlist[i].InvokeBehaviour();
+                udonlist[i].Invoke();
             }
         }
 

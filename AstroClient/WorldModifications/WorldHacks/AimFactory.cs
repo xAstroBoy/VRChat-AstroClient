@@ -207,13 +207,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                         if (udonevent1 != null)
                         {
                             Log.Debug($"Sent Hit Event on {RandomTarget.name}");
-                            udonevent1.InvokeBehaviour();
+                            udonevent1.Invoke();
                         }
                         var udonevent = UdonSearch.FindUdonEvent(RandomTarget, "AllwaysHit");
                         if (udonevent != null)
                         {
                             Log.Debug($"Sent AllwaysHit Event on {RandomTarget.name}");
-                            udonevent.InvokeBehaviour();
+                            udonevent.Invoke();
                         }
                     }
                 }

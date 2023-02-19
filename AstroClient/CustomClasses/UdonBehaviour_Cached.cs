@@ -119,7 +119,7 @@
                 _InvokeOnLoop = value;
                 if (value)
                 {
-                    Stop_RepeatInvokeBehaviour();
+                    Stop_RepeatInvoke();
                     if (InvokeOnLoopObject == null)
                     {
                         InvokeOnLoopObject = MelonCoroutines.Start(InvokeOnLoopRoutine());
@@ -141,7 +141,7 @@
         /// Manually Invoke UdonBehaviour Event (will clean itself if it detects the behaviour is null!)
         /// </summary>
 
-        internal void InvokeBehaviour()
+        internal void Invoke()
         {
             if (UdonBehaviour != null)
             {
@@ -237,7 +237,7 @@
         /// Halts InvokeOnLoop Routine.
         /// </summary>
 
-        internal void Stop_InvokeOnLoopRoutine()
+        internal void Stop_InvokeLoop()
         {
             if (InvokeOnLoopObject != null)
             {
@@ -251,7 +251,7 @@
         /// Halts RepeatInvokeBehaviour Routine.
         /// </summary>
 
-        internal void Stop_RepeatInvokeBehaviour()
+        internal void Stop_RepeatInvoke()
         {
             if (InvokeBehaviourRepeater != null)
             {
@@ -264,13 +264,13 @@
         /// <summary>
         /// This invokes the Behaviour Event for a certain amount (This will halt the Repeat loop).
         /// </summary>
-        internal object RepeatInvokeBehaviour(int amount)
+        internal object RepeatInvoke(int amount)
         {
             InvokeOnLoop = false;
             // Avoid To spam the same routine.
             if (InvokeBehaviourRepeater == null)
             {
-                return InvokeBehaviourRepeater = MelonCoroutines.Start(RepeatInvokeBehaviourRoutine(amount));
+                return InvokeBehaviourRepeater = MelonCoroutines.Start(RepeatInvokeRoutine(amount));
             }
             return InvokeBehaviourRepeater;
         }
@@ -280,7 +280,7 @@
             while (InvokeOnLoop)
             {
                 BeforeInvoking?.Invoke();
-                InvokeBehaviour();
+                Invoke();
                 AfterInvoking?.Invoke();
                 yield return new WaitForSeconds(LoopDelay);
             }
@@ -289,12 +289,12 @@
             yield return null;
         }
 
-        private IEnumerator RepeatInvokeBehaviourRoutine(int amount)
+        private IEnumerator RepeatInvokeRoutine(int amount)
         {
             for (int i = 0; i < amount; i++)
             {
                 BeforeInvoking?.Invoke();
-                InvokeBehaviour();
+                Invoke();
                 AfterInvoking?.Invoke();
                 yield return new WaitForSeconds(RepeatDelay);
             }

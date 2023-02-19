@@ -906,7 +906,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 for (int i = 0; i < ColorActions.Count; i++)
                 {
-                    ColorActions[i]?.InvokeBehaviour();
+                    ColorActions[i]?.Invoke();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -934,7 +934,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     yield break;
                 }
 
-                MoanSpamBehaviour?.InvokeBehaviour();
+                MoanSpamBehaviour?.Invoke();
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -949,7 +949,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     yield break;
                 }
 
-                FallSpamBehaviour?.InvokeBehaviour();
+                FallSpamBehaviour?.Invoke();
                 yield return new WaitForSeconds(0.5f);
             }
         }

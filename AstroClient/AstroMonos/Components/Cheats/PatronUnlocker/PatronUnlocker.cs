@@ -200,7 +200,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
                                     if (PatronSkinEvent != null)
                                     {
                                         IgnoreEventReceiver = true;
-                                        PatronSkinEvent.InvokeBehaviour();
+                                        PatronSkinEvent.Invoke();
                                         IgnoreEventReceiver = false;
                                     }
                                 });
@@ -213,7 +213,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
                                         if (PatronSkinEvent != null)
                                         {
                                             IgnoreEventReceiver = true;
-                                            PatronSkinEvent.InvokeBehaviour();
+                                            PatronSkinEvent.Invoke();
                                             IgnoreEventReceiver = false;
                                         }
                                     });
@@ -242,7 +242,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             if (PatronSkinEvent != null)
             {
                 IgnoreEventReceiver = true;
-                PatronSkinEvent.InvokeBehaviour();
+                PatronSkinEvent.Invoke();
                 IgnoreEventReceiver = false;
             }
         }
@@ -252,7 +252,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             if (PatronSkinEvent != null)
             {
                 IgnoreEventReceiver = true;
-                NonPatronSkinEvent.InvokeBehaviour();
+                NonPatronSkinEvent.Invoke();
                 IgnoreEventReceiver = false;
             }
         }
@@ -262,7 +262,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
             if (PatronSkinEvent != null)
             {
                 IgnoreEventReceiver = true;
-                PatronSkinEvent.InvokeBehaviour();
+                PatronSkinEvent.Invoke();
                 IgnoreEventReceiver = false;
             }
         }

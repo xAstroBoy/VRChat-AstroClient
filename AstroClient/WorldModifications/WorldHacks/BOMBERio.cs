@@ -234,42 +234,42 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (ShootBomb0 != null)
                     {
-                        ShootBomb0.InvokeBehaviour();
+                        ShootBomb0.Invoke();
                     }
                 }
                 else if (Override_ShootBomb_1_Toggle)
                 {
                     if (ShootBomb1 != null)
                     {
-                        ShootBomb1.InvokeBehaviour();
+                        ShootBomb1.Invoke();
                     }
                 }
                 else if (Override_ShootBomb_2_Toggle)
                 {
                     if (ShootBomb2 != null)
                     {
-                        ShootBomb2.InvokeBehaviour();
+                        ShootBomb2.Invoke();
                     }
                 }
                 else if (Override_ShootBomb_3_Toggle)
                 {
                     if (ShootBomb3 != null)
                     {
-                        ShootBomb3.InvokeBehaviour();
+                        ShootBomb3.Invoke();
                     }
                 }
                 else if (Override_ShootBomb_4_Toggle)
                 {
                     if (ShootBomb4 != null)
                     {
-                        ShootBomb4.InvokeBehaviour();
+                        ShootBomb4.Invoke();
                     }
                 }
                 else if (Override_ShootBomb_5_Toggle)
                 {
                     if (ShootBombEx != null)
                     {
-                        ShootBombEx.InvokeBehaviour();
+                        ShootBombEx.Invoke();
                     }
                 }
             }

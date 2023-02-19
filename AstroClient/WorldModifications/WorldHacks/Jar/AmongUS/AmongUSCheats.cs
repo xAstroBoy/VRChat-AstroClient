@@ -299,11 +299,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.AmongUS
             ToggleSerializerShortcut = new QMToggleButton(AmongUsCheatsPage, "Toggle Serializer", () => { AmongUsSerializer = true; }, "Toggle Serializer", () => { AmongUsSerializer = false; }, "Serialize For Stealth or to frame someone else!");
             GameBodyESPBtn = new QMToggleButton(AmongUsCheatsPage, "Body ESP", () => { BodyESPs = true; }, "Body ESP", () => { BodyESPs = false; }, "Makes Impostor Kills Visible (Yellow)!");
 
-            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { AmongUsUdonEvents.StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.green);
-            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AmongUsUdonEvents.AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.green);
+            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, "Start Game", () => { AmongUsUdonEvents.StartGameEvent.Invoke(); }, "Force Start Game Event", Color.green);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, "Abort Game", () => { AmongUsUdonEvents.AbortGameEvent.Invoke(); }, "Force Abort Game Event", Color.green);
 
-            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent.InvokeBehaviour(); }, "Force Victory Crewmate Event", Color.green);
-            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent.InvokeBehaviour(); }, "Force Victory Impostor Event", Color.red);
+            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Crewmate", () => { AmongUsUdonEvents.VictoryCrewmateEvent.Invoke(); }, "Force Victory Crewmate Event", Color.green);
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, "Victory Impostor", () => { AmongUsUdonEvents.VictoryImpostorEvent.Invoke(); }, "Force Victory Impostor Event", Color.red);
         }
 
         internal static AmongUS_ESP FindNodeWithRole(AmongUs_Roles role)

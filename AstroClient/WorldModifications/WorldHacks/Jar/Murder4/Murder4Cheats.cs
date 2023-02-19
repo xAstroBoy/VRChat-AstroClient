@@ -609,32 +609,32 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
             _ = new QMSingleButton(MurderItemTeleporter, "Shotgun!", () =>
             {
                 item_Shotgun.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Shotgun Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Detective Gun!", () =>
             {
                 item_DetectiveRevolver.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Detective Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Silenced Gun 1!", () =>
             {
                 item_Silenced_Revolver_0.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Silenced Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Silenced Gun 2!", () =>
             {
                 item_Silenced_Revolver_1.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Silenced Gun Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Grenade!", () =>
             {
                 item_Grenade.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Grenade Teleporter!");
             _ = new QMSingleButton(MurderItemTeleporter, "Traps!", () =>
             {
                 BearTraps.TeleportToMe();
-                if (DoUnlockedSound) OnPlayerUnlockedClues.InvokeBehaviour();
+                if (DoUnlockedSound) OnPlayerUnlockedClues.Invoke();
             }, "Silenced Gun Teleporter!");
             PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 2, "Present!", () => { Clue_Present.TeleportToMe(); }, "Clue Teleporter!");
 
@@ -814,10 +814,10 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4
             Murder4_UnfilteredNodes.InitButtons(Cheats);
             Murder4_RoleSwapper.InitButtons(Cheats);
 
-            GameAbortbtn = new QMSingleButton(Cheats, "Abort Game", () => { AbortGameEvent.InvokeBehaviour(); }, "Force Abort Game Event", Color.Red);
-            GameVictoryBystanderBtn = new QMSingleButton(Cheats, "Victory Bystander", () => { VictoryBystanderEvent.InvokeBehaviour(); }, "Force Victory Bystander Event", Color.Red);
-            GameVictoryMurdererBtn = new QMSingleButton(Cheats, "Victory Murderer", () => { VictoryMurdererEvent.InvokeBehaviour(); }, "Force Victory Murderer Event", Color.Red);
-            GameStartbtn = new QMSingleButton(Cheats, "Start Game", () => { StartGameEvent.InvokeBehaviour(); }, "Force Start Game Event", Color.GreenYellow);
+            GameAbortbtn = new QMSingleButton(Cheats, "Abort Game", () => { AbortGameEvent.Invoke(); }, "Force Abort Game Event", Color.Red);
+            GameVictoryBystanderBtn = new QMSingleButton(Cheats, "Victory Bystander", () => { VictoryBystanderEvent.Invoke(); }, "Force Victory Bystander Event", Color.Red);
+            GameVictoryMurdererBtn = new QMSingleButton(Cheats, "Victory Murderer", () => { VictoryMurdererEvent.Invoke(); }, "Force Victory Murderer Event", Color.Red);
+            GameStartbtn = new QMSingleButton(Cheats, "Start Game", () => { StartGameEvent.Invoke(); }, "Force Start Game Event", Color.GreenYellow);
         }
 
         internal static void ToggleKnifesGrab(bool Pickupable)

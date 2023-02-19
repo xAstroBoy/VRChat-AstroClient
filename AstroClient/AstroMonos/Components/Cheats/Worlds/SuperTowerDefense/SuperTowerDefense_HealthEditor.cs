@@ -146,7 +146,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
                             {
                                 if (ResetHealth != null)
                                 {
-                                    ResetHealth.InvokeBehaviour();
+                                    ResetHealth.Invoke();
                                 }
                             }
 

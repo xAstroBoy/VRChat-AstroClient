@@ -81,7 +81,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki.QuickDraws
                     __6_intnl_SystemInt32 = int.MaxValue;
                     __7_intnl_SystemBoolean = true;
 
-                    RefreshPatronSystem.InvokeBehaviour(); // call it and everything gets unlocked for free LMAO
+                    RefreshPatronSystem.Invoke(); // call it and everything gets unlocked for free LMAO
 
                 }
                 else

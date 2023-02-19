@@ -446,7 +446,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo
 
                 foreach (var udon in ColorActions)
                 {
-                    udon?.InvokeBehaviour();
+                    udon?.Invoke();
                     yield return new WaitForSeconds(0.05f);
                 }
 

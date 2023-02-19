@@ -321,18 +321,18 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
             {
                 case AmongUs_Roles.Crewmate:
                     {
-                        GetCrewmateEvent?.InvokeBehaviour();
+                        GetCrewmateEvent?.Invoke();
                         break;
                     }
                 case AmongUs_Roles.Impostor:
                     {
-                        GetImpostorEvent?.InvokeBehaviour();
+                        GetImpostorEvent?.Invoke();
                         break;
                     }
                 case AmongUs_Roles.None:
                     if (CurrentRole == AmongUs_Roles.Impostor || CurrentRole == AmongUs_Roles.Crewmate)
                     {
-                        GetKillEvent?.InvokeBehaviour();
+                        GetKillEvent?.Invoke();
                     }
 
                     break;

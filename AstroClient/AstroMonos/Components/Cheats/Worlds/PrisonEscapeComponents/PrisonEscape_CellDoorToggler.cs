@@ -147,7 +147,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     if (OpenCell != null)
                     {
-                        OpenCell.InvokeBehaviour();
+                        OpenCell.Invoke();
                     }
                     if(Trigger != null)
                     {
@@ -158,7 +158,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
                 {
                     if (CloseCell != null)
                     {
-                        CloseCell.InvokeBehaviour();
+                        CloseCell.Invoke();
                     }
                     if (Trigger != null)
                     {

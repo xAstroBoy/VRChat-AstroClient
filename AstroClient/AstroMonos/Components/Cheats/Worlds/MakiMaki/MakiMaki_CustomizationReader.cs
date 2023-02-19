@@ -89,7 +89,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.MakiMaki
                     HasSubscribed = true;
                     __0_tier__param = int.MaxValue;
                     _authorizedTier = int.MaxValue; 
-                    RefreshPatronSystem.InvokeBehaviour(); // call it and everything gets unlocked for free LMAO
+                    RefreshPatronSystem.Invoke(); // call it and everything gets unlocked for free LMAO
 
                 }
                 else

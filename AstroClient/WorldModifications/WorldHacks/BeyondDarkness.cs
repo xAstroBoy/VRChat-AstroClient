@@ -227,7 +227,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         {
                             pickupsystem.OnPickupUseDown += () =>
                             {
-                                OnBulletPickup?.InvokeBehaviour();
+                                OnBulletPickup?.Invoke();
                             };
                             pickupsystem.InteractionText = "Force Reload & Shoot";
                         }

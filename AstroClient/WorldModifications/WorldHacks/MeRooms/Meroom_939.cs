@@ -49,7 +49,7 @@ namespace AstroClient.WorldModifications.WorldHacks.MeRooms
                                 {
                                     interact.OnInteract = () =>
                                     {
-                                        LockEvent.InvokeBehaviour();
+                                        LockEvent.Invoke();
                                     };
                                     MiscUtils.DelayFunction(2f, () =>
                                     {

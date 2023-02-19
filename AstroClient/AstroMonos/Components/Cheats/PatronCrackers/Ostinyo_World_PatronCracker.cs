@@ -204,7 +204,7 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
 
 
         this.isPatron = isPatron;
-        RefreshPatronList?.InvokeBehaviour();
+        RefreshPatronList?.Invoke();
     }
 
     // Use this for initialization

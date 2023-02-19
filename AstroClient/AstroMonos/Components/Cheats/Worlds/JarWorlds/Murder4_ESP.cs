@@ -262,22 +262,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
             {
                 case Murder4_Roles.Bystander:
                     {
-                        GetBystanderEvent?.InvokeBehaviour();
+                        GetBystanderEvent?.Invoke();
                         break;
                     }
                 case Murder4_Roles.Detective:
                     {
-                        GetDetectiveEvent?.InvokeBehaviour();
+                        GetDetectiveEvent?.Invoke();
                         break;
                     }
                 case Murder4_Roles.Murderer:
                     {
-                        GetMurdererEvent?.InvokeBehaviour();
+                        GetMurdererEvent?.Invoke();
                         break;
                     }
                 case Murder4_Roles.None:
                     if (CurrentRole == Murder4_Roles.Detective || CurrentRole == Murder4_Roles.Murderer || CurrentRole == Murder4_Roles.Bystander)
-                        GetKillEvent?.InvokeBehaviour();
+                        GetKillEvent?.Invoke();
                     break;
 
                 default:

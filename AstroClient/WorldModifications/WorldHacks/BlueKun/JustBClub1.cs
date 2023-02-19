@@ -1248,7 +1248,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                         Trigger.OnInteract = () =>
                         {
                             BlockVIPRoom_Kick = false;
-                            TeleportToBedroomOutside7.InvokeBehaviour();
+                            TeleportToBedroomOutside7.Invoke();
                         };
                     }
                 }
@@ -1340,7 +1340,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 for (int i = 0; i < ColorActions.Count; i++)
                 {
-                    ColorActions[i]?.InvokeBehaviour();
+                    ColorActions[i]?.Invoke();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -1378,7 +1378,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     yield break;
                 }
 
-                MoanSpamBehaviour?.InvokeBehaviour();
+                MoanSpamBehaviour?.Invoke();
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -1393,7 +1393,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                     yield break;
                 }
 
-                FallSpamBehaviour?.InvokeBehaviour();
+                FallSpamBehaviour?.Invoke();
                 yield return new WaitForSeconds(0.5f);
             }
         }
@@ -1459,7 +1459,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 for (int i = 0; i < Bells.Count; i++)
                 {
-                    Bells[i]?.InvokeBehaviour();
+                    Bells[i]?.Invoke();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -1503,7 +1503,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
 
                 for (int i = 0; i < Chairs.Count; i++)
                 {
-                    Chairs[i]?.InvokeBehaviour();
+                    Chairs[i]?.Invoke();
                     yield return new WaitForSeconds(0.1f);
                 }
 
@@ -1515,11 +1515,11 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
         {
             if (doorID <= 6)
             {
-                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}")?.InvokeBehaviour();
+                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}")?.Invoke();
             }
             else if (doorID == 7)
             {
-                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.InvokeBehaviour();
+                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.Invoke();
             }
         }
 
@@ -1800,7 +1800,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             clone.AddCollider();
 
                             var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
-                            void action() { udonEvent.InvokeBehaviour(); }
+                            void action() { udonEvent.Invoke(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -1851,7 +1851,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             clone.RenameObject($"Lock {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
-                            void action() { udonEvent.InvokeBehaviour(); }
+                            void action() { udonEvent.Invoke(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -1901,7 +1901,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             clone.RenameObject($"Looking {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
-                            void action() { udonEvent.InvokeBehaviour(); }
+                            void action() { udonEvent.Invoke(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -1953,7 +1953,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             clone.AddCollider();
 
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
-                            void action() { udonEvent.InvokeBehaviour(); }
+                            void action() { udonEvent.Invoke(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {
@@ -2004,7 +2004,7 @@ namespace AstroClient.WorldModifications.WorldHacks.BlueKun
                             clone.RenameObject($"Do Not Disturb {doorID}");
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
-                            void action() { udonEvent.InvokeBehaviour(); }
+                            void action() { udonEvent.Invoke(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent.Count() != 0)
                             {

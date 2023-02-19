@@ -268,25 +268,25 @@
 
         #region Lobby
 
-        internal static void StartGameBtn_OnButtonDown() => AmongUsUdonEvents.StartGameEvent.InvokeBehaviour();
+        internal static void StartGameBtn_OnButtonDown() => AmongUsUdonEvents.StartGameEvent.Invoke();
 
-        internal static void VictoryCrewmateBtn_OnButtonDown() => AmongUsUdonEvents.VictoryCrewmateEvent.InvokeBehaviour();
+        internal static void VictoryCrewmateBtn_OnButtonDown() => AmongUsUdonEvents.VictoryCrewmateEvent.Invoke();
 
-        internal static void VictoryImpostorBtn_OnButtonDown() => AmongUsUdonEvents.VictoryImpostorEvent.InvokeBehaviour();
+        internal static void VictoryImpostorBtn_OnButtonDown() => AmongUsUdonEvents.VictoryImpostorEvent.Invoke();
 
-        internal static void AbortGameBtn_OnButtonDown() => AmongUsUdonEvents.AbortGameEvent.InvokeBehaviour();
+        internal static void AbortGameBtn_OnButtonDown() => AmongUsUdonEvents.AbortGameEvent.Invoke();
 
         #endregion Lobby
 
         #region Cafeteria        
-        internal static void InvokeEmergencyMeetingBtn_OnButtonDown() => AmongUsUdonEvents.SyncEmergencyMeeting.InvokeBehaviour();
+        internal static void InvokeEmergencyMeetingBtn_OnButtonDown() => AmongUsUdonEvents.SyncEmergencyMeeting.Invoke();
 
         #endregion Cafeteria
 
         #region  Fake Task (Trash)
-        internal static void Fake_Trash_garbage_Cafeteria_B_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Cafeteria_B.InvokeBehaviour();
-        internal static void Fake_Trash_garbage_Storage_B_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Storage_B.InvokeBehaviour();
-        internal static void Fake_Trash_garbage_Storage_A_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Storage_A.InvokeBehaviour();
+        internal static void Fake_Trash_garbage_Cafeteria_B_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Cafeteria_B.Invoke();
+        internal static void Fake_Trash_garbage_Storage_B_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Storage_B.Invoke();
+        internal static void Fake_Trash_garbage_Storage_A_OnButtonDown() => AmongUsUdonEvents.EmptyGarbage_Storage_A.Invoke();
 
 
 
@@ -295,24 +295,24 @@
         #region Skip Tasks
 
         #region Transfer Data
-        internal static void SkipTask_DataTransfer_Cafeteria_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_A__Cafeteria_.InvokeBehaviour();
-        internal static void SkipTask_DataTransfer_Weapons_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_B__Weapons_.InvokeBehaviour();
-        internal static void SkipTask_DataTransfer_Navigations_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_C__Navigation_.InvokeBehaviour();
-        internal static void SkipTask_DataTransfer_Communication_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_D__Communications_.InvokeBehaviour();
-        internal static void SkipTask_DataTransfer_Electrical_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_E__Electrical_.InvokeBehaviour();
-        internal static void SkipTask_DataTransfer_Admin_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Data_Transfer_Z__Admin_.InvokeBehaviour();
+        internal static void SkipTask_DataTransfer_Cafeteria_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_A__Cafeteria_.Invoke();
+        internal static void SkipTask_DataTransfer_Weapons_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_B__Weapons_.Invoke();
+        internal static void SkipTask_DataTransfer_Navigations_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_C__Navigation_.Invoke();
+        internal static void SkipTask_DataTransfer_Communication_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_D__Communications_.Invoke();
+        internal static void SkipTask_DataTransfer_Electrical_OnButtonDown()  => AmongUsUdonEvents.Complete_Task_Data_Transfer_E__Electrical_.Invoke();
+        internal static void SkipTask_DataTransfer_Admin_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Data_Transfer_Z__Admin_.Invoke();
 
 
 
         #endregion
 
         #region Wires
-        internal static void SkipTask_WireRepair_Navigation_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Navigation_.InvokeBehaviour();
-        internal static void SkipTask_WireRepair_Cafeteria_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Cafeteria_.InvokeBehaviour();
-        internal static void SkipTask_WireRepair_Security_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Security_.InvokeBehaviour();
-        internal static void SkipTask_WireRepair_Admin_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Admin_.InvokeBehaviour();
-        internal static void SkipTask_WireRepair_Storage_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Storage_.InvokeBehaviour();
-        internal static void SkipTask_WireRepair_Electrical_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Electrical_.InvokeBehaviour();
+        internal static void SkipTask_WireRepair_Navigation_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Navigation_.Invoke();
+        internal static void SkipTask_WireRepair_Cafeteria_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Cafeteria_.Invoke();
+        internal static void SkipTask_WireRepair_Security_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Security_.Invoke();
+        internal static void SkipTask_WireRepair_Admin_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Admin_.Invoke();
+        internal static void SkipTask_WireRepair_Storage_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Storage_.Invoke();
+        internal static void SkipTask_WireRepair_Electrical_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Fix_Wiring__Electrical_.Invoke();
 
 
 
@@ -320,27 +320,27 @@
 
         #region Electrical
 
-        internal static void SkipTask_CalibrateDistributor_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Calibrate_Distributor.InvokeBehaviour();
+        internal static void SkipTask_CalibrateDistributor_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Calibrate_Distributor.Invoke();
 
 
         #endregion
 
         #region Admin
 
-        internal static void SkipTask_CardSwipe_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Card_Swipe.InvokeBehaviour();
+        internal static void SkipTask_CardSwipe_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Card_Swipe.Invoke();
 
 
 
         #endregion
 
         #region  MedBay
-        internal static void SkipTask_InspectSample_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Inspect_Sample.InvokeBehaviour();
+        internal static void SkipTask_InspectSample_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Inspect_Sample.Invoke();
         #endregion
 
         #region Reactor
 
-        internal static void SkipTask_AnnoyingShit_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Simon_Says.InvokeBehaviour();
-        internal static void SkipTask_Counting_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Counting.InvokeBehaviour();
+        internal static void SkipTask_AnnoyingShit_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Simon_Says.Invoke();
+        internal static void SkipTask_Counting_OnButtonDown() => AmongUsUdonEvents.Complete_Task_Counting.Invoke();
 
 
 

@@ -142,7 +142,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (HammerPickup != null)
                     {
                         HammerPickup.OnPickupUseUp = null;
-                        HammerPickup.OnPickupUseUp += new System.Action(() => { LoseHealth.InvokeBehaviour(); });
+                        HammerPickup.OnPickupUseUp += new System.Action(() => { LoseHealth.Invoke(); });
                         HammerPickup.enabled = false;
                     }
                 }
@@ -371,9 +371,9 @@ namespace AstroClient.WorldModifications.WorldHacks
             LoseLifeHammerToolBtn = new QMToggleButton(ToolMods, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, () => { LoseLifeHammer = false; }, "Hammer = Lose health (useful to troll)!");
 
             var AutoStarterManagement = new QMNestedGridMenu(SuperTowerDefensecheatPage, "AutoStarter Control", "Control Map AutoStarter");
-            new QMSingleButton(AutoStarterManagement, "Place AutoStarter", () => { AutoStarter_Place?.InvokeBehaviour(); }, "Spawn AutoStarter");
-            new QMSingleButton(AutoStarterManagement, "Activate AutoStarter", () => { AutoStarter_SetActive?.InvokeBehaviour(); }, "Activate AutoStarter");
-            new QMSingleButton(AutoStarterManagement, "Deactivate AutoStarter", () => { AutoStarter_SetInactive?.InvokeBehaviour(); }, "Deactivate AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Place AutoStarter", () => { AutoStarter_Place?.Invoke(); }, "Spawn AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Activate AutoStarter", () => { AutoStarter_SetActive?.Invoke(); }, "Activate AutoStarter");
+            new QMSingleButton(AutoStarterManagement, "Deactivate AutoStarter", () => { AutoStarter_SetInactive?.Invoke(); }, "Deactivate AutoStarter");
             AutoStartKeepActiveBtn = new QMToggleButton(AutoStarterManagement, "Keep AutoStart ON", () => { KeepAutoStarterActive = true; }, () => { KeepAutoStarterActive = false; }, "Locks AutoStarter on Active Status!");
             AutoStartKeepInactiveBtn = new QMToggleButton(AutoStarterManagement, "Keep AutoStart OFF", () => { KeepAutoStarterInactive = true; }, () => { KeepAutoStarterInactive = false; }, "Locks AutoStarter on Inactive Status!");
 
@@ -965,10 +965,13 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             set
             {
-                var beh = HammerPickup.GetOrAddComponent<PickupController>();
-                if (beh != null)
+                if (HammerPickup != null)
                 {
-                    beh.AntiTheft = value;
+                    var beh = HammerPickup.GetOrAddComponent<PickupController>();
+                    if (beh != null)
+                    {
+                        beh.AntiTheft = value;
+                    }
                 }
             }
         }
@@ -1262,7 +1265,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 yield return new WaitForSeconds(1);
                 if (WaveEvent != null)
                 {
-                    WaveEvent.InvokeBehaviour();
+                    WaveEvent.Invoke();
                 }
                 yield return null;
             }

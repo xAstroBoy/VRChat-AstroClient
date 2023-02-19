@@ -1,15 +1,11 @@
-﻿using AstroClient.AstroMonos.Components.Tools.Listeners;
-using AstroClient.ClientActions;
+﻿using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
-using AstroClient.Tools.UdonSearcher;
-using AstroClient.xAstroBoy.Extensions;
-using Oculus.Platform.Models;
+using AstroClient.xAstroBoy.Utility;
 using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
-    using AstroMonos.AstroUdons;
     using System.Collections.Generic;
     using Tools.Extensions;
     using Tools.Skybox;
@@ -17,7 +13,6 @@ namespace AstroClient.WorldModifications.WorldHacks
     using WorldsIds;
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-    using xAstroBoy.Utility;
 
     internal class FBTHeaven : AstroEvents
     {
@@ -28,140 +23,38 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static readonly string[] Trash = new[]
         {
-            "FBT/FBT_Heaven_Occluder",
-            "FBT/Blindbox",
-            "FBT/Blindbox (3)/Blindbox (7)/Blindbox_Top",
-            "FBT/Blindbox (1)",
-            "FBT/Blindbox/Blindbox (4)",
-            "FBT/Blindbox (2)/Blindbox_Top (2)",
-            "FBT/Blindbox (2)",
-            "FBT/Blindbox (2)/Blindbox (6)/Blindbox_Top",
-            "FBT/Blindbox (1)/Blindbox (5)",
-            "FBT/Blindbox (3)/Blindbox (7)",
-            "FBT/Blindbox (2)/Blindbox (6)",
-            "FBT/Blindbox (3)/Blindbox_Top (3)",
-            "FBT/Blindbox (3)",
-            "FBT/Blindbox/Blindbox_Top",
-            "FBT/Blindbox (1)/Blindbox (5)/Blindbox_Top",
-            "FBT/Blindbox (1)/Blindbox_Top (1)",
-            "FBT/Blindbox/Blindbox (4)/Blindbox_Top",
-            "FBT/[OCCLUSION]",
-            "FBT/[AREA_DEVIDERS]",
-            "Occlusion Walls",
-            "I Need Frames/Occlusion walls",
+            "FBT_Heaven_Extend V3/[Prefebs]/FBT Heaven Extension V3_Compressed/Foyer Blind Box",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (1)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (3)/Blindbox (7)/Blindbox_Top",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (2)/Blindbox_Top (2)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox/Blindbox (4)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (2)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (2)/Blindbox (6)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (3)/Blindbox (7)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (3)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (3)/Blindbox_Top (3)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox/Blindbox_Top",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (1)/Blindbox (5)/Blindbox_Top",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (1)/Blindbox_Top (1)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox/Blindbox (4)/Blindbox_Top",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (2)/Blindbox (6)/Blindbox_Top",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]/Blindbox (1)/Blindbox (5)",
+            "FBT Heaven Main Area/[AREA_DEVIDERS]",
+            "FBT Heaven Main Area/[OCCLUSION]",
+            "We stand with EAC template [Collider]",
+            "World Admin Panel/AdminTool/FunArea/_areaObj/_allowedArea"
         };
 
-        private static BoxCollider _Room_1_Bounds;
-        internal static BoxCollider Room_1_Bounds
+        private static readonly string[] SecureAreas = new[]
         {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if(_Room_1_Bounds == null)
-                {
-                    _Room_1_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Room Trigger").GetComponent<BoxCollider>();
-                }
-                return _Room_1_Bounds;
-            }
-        }
-        private static BoxCollider _Room_2_Bounds;
-        internal static BoxCollider Room_2_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_Room_2_Bounds == null)
-                {
-                    _Room_2_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Room Trigger (1)").GetComponent<BoxCollider>();
-                }
-                return _Room_2_Bounds;
-            }
-        }
-
-        private static BoxCollider _Room_3_Bounds;
-        internal static BoxCollider Room_3_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_Room_3_Bounds == null)
-                {
-                    _Room_3_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Room Trigger (2)").GetComponent<BoxCollider>();
-                }
-                return _Room_3_Bounds;
-            }
-        }
-        private static BoxCollider _Room_4_Bounds;
-        internal static BoxCollider Room_4_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (_Room_4_Bounds == null)
-                {
-                    _Room_4_Bounds = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Room Trigger (3)").GetComponent<BoxCollider>();
-                }
-                return _Room_4_Bounds;
-            }
-        }
-        private static Vector3? _Room_1_Original_Bounds;
-        internal static Vector3? Room_1_Original_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Room_1_Bounds == null) return null;
-                if (_Room_1_Original_Bounds == null)
-                {
-                    _Room_1_Original_Bounds = Room_1_Bounds.size;
-                }
-                return _Room_1_Original_Bounds;
-            }
-        }
-        private static Vector3? _Room_2_Original_Bounds;
-        internal static Vector3? Room_2_Original_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Room_2_Bounds == null) return null;
-                if (_Room_2_Original_Bounds == null)
-                {
-                    _Room_2_Original_Bounds = Room_2_Bounds.size;
-                }
-                return _Room_2_Original_Bounds;
-            }
-        }
-
-        private static Vector3? _Room_3_Original_Bounds;
-        internal static Vector3? Room_3_Original_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Room_3_Bounds == null) return null;
-                if (_Room_3_Original_Bounds == null)
-                {
-                    _Room_3_Original_Bounds = Room_3_Bounds.size;
-                }
-                return _Room_3_Original_Bounds;
-            }
-        }
-        private static Vector3? _Room_4_Original_Bounds;
-        internal static Vector3? Room_4_Original_Bounds
-        {
-            get
-            {
-                if (!isCurrentWorld) return null;
-                if (Room_4_Bounds == null) return null;
-                if (_Room_4_Original_Bounds == null)
-                {
-                    _Room_4_Original_Bounds = Room_4_Bounds.size;
-                }
-                return _Room_4_Original_Bounds;
-            }
-        }
-
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/PrivateDoorSet/SecureArea",
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/PrivateDoorSet/SecureArea",
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/SecureArea",
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/SecureArea",
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/SecureArea",
+            "[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/SecureArea",
+        };
 
         private bool _HasSubscribed = false;
 
@@ -184,95 +77,25 @@ namespace AstroClient.WorldModifications.WorldHacks
                 _HasSubscribed = value;
             }
         }
-        private static bool _UseUdonCustomEvent = false;
-        private static bool UseUdonCustomEvent 
-        {
-            get => _UseUdonCustomEvent;
-            set
-            {
-                if (!isCurrentWorld) return;
-                if (_UseUdonCustomEvent != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.Udon_SendCustomEvent += UdonSendCustomEvent;
-                    }
-                    else
-                    {
-                        ClientEventActions.Udon_SendCustomEvent -= UdonSendCustomEvent;
-                    }
-                }
-                _UseUdonCustomEvent = value;
-            }
-        }
-
-        private static bool WaitForCollider1Check;
-        private static bool WaitForCollider2Check;
-        private static bool WaitForCollider3Check;
-        private static bool WaitForCollider4Check;
-
-        private static void UdonSendCustomEvent(UdonBehaviour instance, string udonevent)
-        {
-            if (udonevent.isMatch("_InBoundsCheck"))
-            {
-
-                if (WaitForCollider1Check)
-                {
-                    if(instance.Equals(Room_1_Bounds.gameObject.GetComponent<UdonBehaviour>()))
-                    {
-                        Room_1_Bounds.size = Room_1_Original_Bounds.Value;
-                        WaitForCollider1Check = false;
-                    }
-                }
-                if (WaitForCollider2Check)
-                {
-                    if (instance.Equals(Room_2_Bounds.gameObject.GetComponent<UdonBehaviour>()))
-                    {
-                        Room_2_Bounds.size = Room_2_Original_Bounds.Value;
-                        WaitForCollider2Check = false;
-                    }
-
-                }
-                if (WaitForCollider3Check)
-                {
-                    if (instance.Equals(Room_3_Bounds.gameObject.GetComponent<UdonBehaviour>()))
-                    {
-                        Room_3_Bounds.size = Room_3_Original_Bounds.Value;
-                        WaitForCollider3Check = false;
-                    }
-
-                }
-                if (WaitForCollider4Check)
-                {
-                    if (instance.Equals(Room_4_Bounds.gameObject.GetComponent<UdonBehaviour>()))
-                    {
-                        Room_4_Bounds.size = Room_4_Original_Bounds.Value;
-                        WaitForCollider4Check = false;
-                    }
-
-                }
-            }
-            if (!WaitForCollider1Check && !WaitForCollider2Check && !WaitForCollider3Check && !WaitForCollider4Check)
-            {
-                UseUdonCustomEvent = false;
-            }
-
-        }
 
         internal static QMNestedGridMenu FBTExploitsPage;
-        internal static float ButtonUpdateTime = 0f;
         private static bool isCurrentWorld;
-
-
+        internal static WorldButton_Squared ToggleLock_4 { get; set; } = null;
+        internal static WorldButton_Squared ToggleLock_1 { get; set; } = null;
+        internal static WorldButton_Squared EnterRoom_3 { get; set; } = null;
+        internal static WorldButton_Squared EnterRoom_4 { get; set; } = null;
+        internal static WorldButton_Squared ToggleLock_3 { get; set; } = null;
+        internal static WorldButton_Squared EnterRoom_2 { get; set; } = null;
+        internal static WorldButton_Squared EnterRoom_1 { get; set; } = null;
+        internal static WorldButton_Squared ToggleLock_2 { get; set; } = null;
 
         internal static void InitButtons(QMGridTab main)
         {
             FBTExploitsPage = new QMNestedGridMenu(main, "FBTHeaven Exploits", "FBTHeaven Exploits");
-
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n1", () => { ToggleDoor(1); }, "Toggle Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n2", () => { ToggleDoor(2); }, "Toggle Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n3", () => { ToggleDoor(3); }, "Toggle Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n4", () => { ToggleDoor(4); }, "Toggle Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n1", () => { ToggleDoor_1(); }, "Toggle Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n2", () => { ToggleDoor_2(); }, "Toggle Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n3", () => { ToggleDoor_3(); }, "Toggle Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n4", () => { ToggleDoor_4(); }, "Toggle Door 4");
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -287,7 +110,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 HasSubscribed = true;
 
                 GameObject_RPC_Firewall.EditRule("Main Code", "_RoomDestroy", false, false, true);
-                
+
                 isCurrentWorld = true;
                 Log.Debug($"Recognized {Name} World,  Removing Blinders and Dividers...");
 
@@ -304,54 +127,31 @@ namespace AstroClient.WorldModifications.WorldHacks
                     catch { }
                 }
 
-
-                if (Room_1_main_script != null)
-                {
-                    Toggle_Door_1 = Room_1_main_script.FindUdonEvent("_RoomLockToggle");
-                }
-
-                if (Room_2_main_script != null)
-                {
-                    Toggle_Door_2 = Room_2_main_script.FindUdonEvent("_RoomLockToggle");
-                }
-                if (Room_3_main_script != null)
-                {
-                    Toggle_Door_3 = Room_3_main_script.FindUdonEvent("_RoomLockToggle");
-                }
-                if (Room_4_main_script != null)
-                {
-                    Toggle_Door_4 = Room_4_main_script.FindUdonEvent("_RoomLockToggle");
-                }
-
-                if (SkyboxEditor.SetSkyboxByFileName("Moon"))
+                if (SkyboxEditor.SetSkyboxByFileName("Skybox_Space 2 Large"))
                 {
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
-                var doorinvisibleplane = Finder.Find("FBT/Plane");
-                if (doorinvisibleplane != null)
+                
+                if(Room_1_LockObject != null)
                 {
-                    // make invisible this shit.
-                    var renderers = doorinvisibleplane.GetComponentsInChildren<Renderer>(true);
-                    for (int i = 0; i < renderers.Count; i++)
-                    {
-                        Renderer rend = renderers[i];
-                        if (rend != null)
-                        {
-                            rend.enabled = false;
-                            rend.DestroyMeLocal();
-                        }
-                    }
+                    Room_1_LockInteract = Room_1_LockObject.gameObject.FindUdonEvent("_interact");
                 }
-                _ = Room_1_Original_Bounds;
-                _ = Room_2_Original_Bounds;
-                _ = Room_3_Original_Bounds;
-                _ = Room_4_Original_Bounds;
+                if (Room_2_LockObject != null)
+                {
+                    Room_2_LockInteract = Room_2_LockObject.gameObject.FindUdonEvent("_interact");
+                }
+                if (Room_3_LockObject != null)
+                {
+                    Room_3_LockInteract = Room_3_LockObject.gameObject.FindUdonEvent("_interact");
+                }
+                if (Room_4_LockObject != null)
+                {
+                    Room_4_LockInteract = Room_4_LockObject.gameObject.FindUdonEvent("_interact");
+                }
 
+                CreateWorldButtons();
+                PatchSecureZones();
 
-                AddLockPickButton(Room_1_ExternalBtn, 1);
-                AddLockPickButton(Room_2_ExternalBtn, 2);
-                AddLockPickButton(Room_3_ExternalBtn, 3);
-                AddLockPickButton(Room_4_ExternalBtn, 4);
             }
             else
             {
@@ -363,23 +163,121 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static void AttachListener(GameObject button, System.Action OnEnable, System.Action OnDisable)
+        private static void CreateWorldButtons()
         {
-            var rend = button.GetComponentInChildren<Renderer>(true);
-            if (rend != null) // Attach preferrably where the renderer is to increase accuracy!
+            if (ToggleLock_4 == null)
             {
-                var listener = rend.gameObject.GetOrAddComponent<GameObjectListener>();
-                if (listener != null)
+                ToggleLock_4 = new WorldButton_Squared(new Vector3(-17.992f, 7.9996f, 3.2f), new Vector3(0f, 0f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_4);
+                ToggleLock_4.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (ToggleLock_1 == null)
+            {
+                ToggleLock_1 = new WorldButton_Squared(new Vector3(-5.299f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_1);
+                ToggleLock_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (EnterRoom_3 == null)
+            {
+                EnterRoom_3 = new WorldButton_Squared(new Vector3(-16.2865f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_3);
+                EnterRoom_3.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (EnterRoom_4 == null)
+            {
+                EnterRoom_4 = new WorldButton_Squared(new Vector3(-17.992f, 8.1337f, 3.2f), new Vector3(0f, 0f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_4);
+                EnterRoom_4.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (ToggleLock_3 == null)
+            {
+                ToggleLock_3 = new WorldButton_Squared(new Vector3(-16.2865f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_3);
+                ToggleLock_3.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (EnterRoom_2 == null)
+            {
+                EnterRoom_2 = new WorldButton_Squared(new Vector3(-10.7829f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_2);
+                EnterRoom_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (EnterRoom_1 == null)
+            {
+                EnterRoom_1 = new WorldButton_Squared(new Vector3(-5.299f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_1);
+                EnterRoom_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+
+            if (ToggleLock_2 == null)
+            {
+                ToggleLock_2 = new WorldButton_Squared(new Vector3(-10.7829f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_2);
+                ToggleLock_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            }
+        }
+
+        internal static void TeleportToRoom_1()
+        {
+            if (Room_1_Inside_Teleport != null)
+            {
+                GameInstances.LocalPlayer.TeleportTo(Room_1_Inside_Teleport, true);
+            }
+        }
+
+        internal static void TeleportToRoom_2()
+        {
+            if (Room_2_Inside_Teleport != null)
+            {
+                GameInstances.LocalPlayer.TeleportTo(Room_2_Inside_Teleport, true);
+            }
+        }
+
+        internal static void TeleportToRoom_3()
+        {
+            if (Room_3_Inside_Teleport != null)
+            {
+                GameInstances.LocalPlayer.TeleportTo(Room_3_Inside_Teleport, true);
+            }
+        }
+
+        internal static void TeleportToRoom_4()
+        {
+            if (Room_4_Inside_Teleport != null)
+            {
+                GameInstances.LocalPlayer.TeleportTo(Room_4_Inside_Teleport, true);
+            }
+        }
+
+        internal static void ToggleDoor_1()
+        {
+            Room_1_LockInteract.Invoke();
+        }
+
+        internal static void ToggleDoor_2()
+        {
+            Room_2_LockInteract.Invoke();
+        }
+
+        internal static void ToggleDoor_3()
+        {
+            Room_3_LockInteract.Invoke();
+        }
+
+        internal static void ToggleDoor_4()
+        {
+            Room_4_LockInteract.Invoke();
+        }
+
+        private void PatchSecureZones()
+        {
+            var PatchColl = 999999999f;
+            foreach (var item in SecureAreas)
+            {
+                var obj = Finder.Find(item);
+                if (obj != null)
                 {
-                    listener.OnEnabled += OnEnable;
-                    listener.OnDisabled += OnDisable;
-                    if (rend.gameObject.active)
+                    var coll = obj.GetComponent<BoxCollider>();
+                    if (coll != null)
                     {
-                        OnEnable?.Invoke();
-                    }
-                    else
-                    {
-                        OnDisable?.Invoke();
+                        coll.size = new Vector3(PatchColl, PatchColl, PatchColl);
                     }
                 }
             }
@@ -387,393 +285,221 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private void OnRoomLeft()
         {
-            isCurrentWorld = false;
-            Toggle_Door_1 = null;
-            Toggle_Door_2 = null;
-            Toggle_Door_3 = null;
-            Toggle_Door_4 = null;
-            _Room_1_Original_Bounds = null;
-            _Room_2_Original_Bounds = null;
-            _Room_3_Original_Bounds = null;
-            _Room_4_Original_Bounds = null;
-            UseUdonCustomEvent = false;
+            //UseUdonCustomEvent = false;
             HasSubscribed = false;
+            ToggleLock_4 = null;
+            ToggleLock_1 = null;
+            EnterRoom_3 = null;
+            EnterRoom_4 = null;
+            ToggleLock_3 = null;
+            EnterRoom_2 = null;
+            EnterRoom_1 = null;
+            ToggleLock_2 = null;
+            _Room_1_Inside_Teleport = null;
+            _Room_1_outside_Teleport = null;
+            _Room_2_Inside_Teleport = null;
+            _Room_2_outside_Teleport = null;
+            _Room_3_Inside_Teleport = null;
+            _Room_3_outside_Teleport = null;
+            _Room_4_Inside_Teleport = null;
+            _Room_4_outside_Teleport = null;
+            _Room_1_LockObject = null;
+            _Room_2_LockObject = null;
+            _Room_3_LockObject = null;
+            _Room_4_LockObject = null;
+            Room_1_LockInteract = null;
+            Room_2_LockInteract = null;
+            Room_3_LockInteract = null;
+            Room_4_LockInteract = null;
         }
 
-        private static void AddLockPickButton(GameObject HandleSign, int doorID)
-        {
-            if (HandleSign != null)
-            {
-                var collider = HandleSign.GetOrAddComponent<SphereCollider>();
-                if (collider != null)
-                {
-                    collider.isTrigger = true;
-                }
+        private static Transform _Room_1_Inside_Teleport;
 
-                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteract>();
-                if (AstroTrigger != null)
-                {
-                    AstroTrigger.interactText = "Open Room " + doorID + " (AstroClient)";
-                    AstroTrigger.OnInteract += () =>
-                    {
-                        ToggleDoor(doorID); 
-                        MiscUtils.DelayFunction(5f, () =>
-                        {
-                            switch (doorID)
-                            {
-                                case 1:
-                                    if (WaitForCollider1Check)
-                                    {
-                                        WaitForCollider1Check = false;
-                                        if (Room_1_Original_Bounds != null)
-                                            Room_1_Bounds.size = Room_1_Original_Bounds.Value;
-                                    }
-                                    break;
-
-                                case 2:
-                                    if (WaitForCollider2Check)
-                                    {
-                                        WaitForCollider2Check = false;
-                                        if (Room_2_Original_Bounds != null)
-                                            Room_2_Bounds.size = Room_2_Original_Bounds.Value;
-                                    }
-
-                                    break;
-
-                                case 3:
-                                    if (WaitForCollider3Check)
-                                    {
-                                        WaitForCollider3Check = false;
-                                        if (Room_3_Original_Bounds != null)
-                                            Room_3_Bounds.size = Room_3_Original_Bounds.Value;
-                                    }
-
-
-                                    break;
-
-                                case 4:
-                                    if (WaitForCollider4Check)
-                                    {
-                                        WaitForCollider4Check = false;
-                                        if (Room_4_Original_Bounds != null)
-                                            Room_4_Bounds.size = Room_4_Original_Bounds.Value;
-                                    }
-                                    break;
-
-                                default:
-                                    return;
-                            }
-                        });
-                    };
-                }
-                //var parent = HandleSign.transform.parent.FindObject($"Door_Teleport_In_{doorID} (1)");
-                //if (parent != null)
-                //{
-                //    // Get the Boxcollider and remove it.
-                //    var col2 = parent.GetComponent<BoxCollider>();
-                //    if(col2 != null)
-                //    {
-                //        col2.isTrigger = true;
-
-                //       // col2.center = col2.center.SetX(0);
-                //        //col2.center = col2.center.SetY(0);
-                //        //col2.center = col2.center.SetZ(-0.04958916f);
-
-
-                //        col2.size = col2.size.SetX(1.2f);
-                //        col2.size = col2.size.SetY(2.5f);
-                //        col2.size = col2.size.SetZ(0);
-
-
-                //    }
-
-
-                //}
-            }
-        }
-
-        internal static void ToggleDoor(int doorID)
-        {
-            switch (doorID)
-            {
-                case 1:
-                    SpecialInvoke(Toggle_Door_1, Room_1_Bounds);
-                    WaitForCollider1Check = true;
-                    break;
-
-                case 2:
-                    SpecialInvoke(Toggle_Door_2, Room_2_Bounds);
-                    WaitForCollider2Check = true;
-                    break;
-
-                case 3:
-                    SpecialInvoke(Toggle_Door_3, Room_3_Bounds);
-                    WaitForCollider3Check = true;
-
-                    break;
-
-                case 4:
-                    SpecialInvoke(Toggle_Door_4, Room_4_Bounds);
-                    WaitForCollider4Check = true;
-                    break;
-
-                default:
-                    return;
-            }
-        }
-
-
-        /// <summary>
-        /// FBT made a Collider trigger to check if a person is in the room, the workaround is to set this collider and then restore it.
-        /// Challenge accepted Azuki :3
-        /// </summary>
-        private static void SpecialInvoke(UdonBehaviour_Cached udon, BoxCollider collider)
-        {
-
-            if (udon != null && collider != null)
-            {
-                UseUdonCustomEvent = true;
-                // Azuki, you tried LMAO
-                collider.size = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-                // KEK
-                udon.InvokeBehaviour();
-
-
-            }
-        }
-
-        private static GameObject _Room_1_ExternalBtn;
-        internal static GameObject Room_1_ExternalBtn
+        internal static Transform Room_1_Inside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_Room_1_ExternalBtn == null)
+                if (_Room_1_Inside_Teleport == null)
                 {
-                    return _Room_1_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 1/Door_Handle_Sign_1 (1)");
+                    return _Room_1_Inside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_1_ExternalBtn;
+                return _Room_1_Inside_Teleport;
             }
         }
-        private static GameObject _Room_2_ExternalBtn;
-        internal static GameObject Room_2_ExternalBtn
+
+        private static Transform _Room_1_outside_Teleport;
+
+        internal static Transform Room_1_outside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_Room_2_ExternalBtn == null)
+                if (_Room_1_outside_Teleport == null)
                 {
-                    return _Room_2_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 2/Door_Handle_Sign_2 (1)");
+                    return _Room_1_outside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_2_ExternalBtn;
+                return _Room_1_outside_Teleport;
             }
         }
-        private static GameObject _Room_3_ExternalBtn;
-        internal static GameObject Room_3_ExternalBtn
+
+        private static Transform _Room_2_Inside_Teleport;
+
+        internal static Transform Room_2_Inside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_Room_3_ExternalBtn == null)
+                if (_Room_2_Inside_Teleport == null)
                 {
-                    return _Room_3_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 3/Door_Handle_Sign_3 (1)");
+                    return _Room_2_Inside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_3_ExternalBtn;
+                return _Room_2_Inside_Teleport;
             }
         }
-        private static GameObject _Room_4_ExternalBtn;
-        internal static GameObject Room_4_ExternalBtn
+
+        private static Transform _Room_2_outside_Teleport;
+
+        internal static Transform Room_2_outside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_Room_4_ExternalBtn == null)
+                if (_Room_2_outside_Teleport == null)
                 {
-                    return _Room_4_ExternalBtn = Finder.Find("Scripts/WunderCrossPrivateRoom/Room 4/Door_Handle_Sign_4 (1)");
+                    return _Room_2_outside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_4_ExternalBtn;
+                return _Room_2_outside_Teleport;
             }
         }
-        private static GameObject _Scripts;
 
-        internal static GameObject Scripts
+        private static Transform _Room_3_Inside_Teleport;
+
+        internal static Transform Room_3_Inside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (_Scripts == null)
+                if (_Room_3_Inside_Teleport == null)
                 {
-                    return _Scripts = Finder.FindRootSceneObject("Scripts");
+                    return _Room_3_Inside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Scripts;
+                return _Room_3_Inside_Teleport;
             }
         }
 
-        private static GameObject _Room_Scripts;
+        private static Transform _Room_3_outside_Teleport;
 
-        internal static GameObject Room_Scripts
+        internal static Transform Room_3_outside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Scripts == null) return null;
-                if (_Room_Scripts == null)
+                if (_Room_3_outside_Teleport == null)
                 {
-                    return _Room_Scripts = Scripts.FindObject("WunderCrossPrivateRoom");
+                    return _Room_3_outside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_Scripts;
+                return _Room_3_outside_Teleport;
             }
         }
 
-        private static GameObject _Room_1_main_script;
+        private static Transform _Room_4_Inside_Teleport;
 
-        internal static GameObject Room_1_main_script
+        internal static Transform Room_4_Inside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Room_Scripts == null) return null;
-                if (_Room_1_main_script == null)
+                if (_Room_4_Inside_Teleport == null)
                 {
-                    return _Room_1_main_script = Room_Scripts.FindObject("Room 1");
+                    return _Room_4_Inside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_1_main_script;
+                return _Room_4_Inside_Teleport;
             }
         }
 
-        private static GameObject _Room_2_main_script;
+        private static Transform _Room_4_outside_Teleport;
 
-        internal static GameObject Room_2_main_script
+        internal static Transform Room_4_outside_Teleport
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Room_Scripts == null) return null;
-                if (_Room_2_main_script == null)
+                if (_Room_4_outside_Teleport == null)
                 {
-                    return _Room_2_main_script = Room_Scripts.FindObject("Room 2");
+                    return _Room_4_outside_Teleport = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/DoorInside/TeleportTarget").transform;
                 }
-
-                return _Room_2_main_script;
+                return _Room_4_outside_Teleport;
             }
         }
 
-        private static GameObject _Room_3_main_script;
+        private static Transform _Room_1_LockObject;
 
-        internal static GameObject Room_3_main_script
+        internal static Transform Room_1_LockObject
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Room_Scripts == null) return null;
-                if (_Room_3_main_script == null)
+                if (_Room_1_LockObject == null)
                 {
-                    return _Room_3_main_script = Room_Scripts.FindObject("Room 3");
+                    return _Room_1_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/DoorInside/Lock").transform;
                 }
-
-                return _Room_3_main_script;
+                return _Room_1_LockObject;
             }
         }
 
-        private static GameObject _Room_4_main_script;
+        private static Transform _Room_2_LockObject;
 
-        internal static GameObject Room_4_main_script
+        internal static Transform Room_2_LockObject
         {
             get
             {
                 if (!isCurrentWorld) return null;
-                if (Room_Scripts == null) return null;
-                if (_Room_4_main_script == null)
+                if (_Room_2_LockObject == null)
                 {
-                    return _Room_4_main_script = Room_Scripts.FindObject("Room 4");
+                    return _Room_2_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/DoorInside/Lock").transform;
                 }
-
-                return _Room_4_main_script;
+                return _Room_2_LockObject;
             }
         }
 
-        private static UdonBehaviour_Cached Toggle_Door_1 { get; set; } = null;
-        private static UdonBehaviour_Cached Toggle_Door_2 { get; set; } = null;
-        private static UdonBehaviour_Cached Toggle_Door_3 { get; set; } = null;
-        private static UdonBehaviour_Cached Toggle_Door_4 { get; set; } = null;
+        private static Transform _Room_3_LockObject;
 
-        private static bool _IsRoom1Locked { get; set; } = false;
-
-        private static bool isRoom1Locked
+        internal static Transform Room_3_LockObject
         {
             get
             {
-                return _IsRoom1Locked;
-            }
-            set
-            {
-                _IsRoom1Locked = value;
-                //if (LockButton1 != null)
-                //{
-                //    LockButton1.SetToggleState(value);
-                //}
+                if (!isCurrentWorld) return null;
+                if (_Room_3_LockObject == null)
+                {
+                    return _Room_3_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/DoorInside/Lock").transform;
+                }
+                return _Room_3_LockObject;
             }
         }
 
-        private static bool _IsRoom2Locked { get; set; } = false;
+        private static Transform _Room_4_LockObject;
 
-        private static bool isRoom2Locked
+        internal static Transform Room_4_LockObject
         {
             get
             {
-                return _IsRoom2Locked;
-            }
-            set
-            {
-                _IsRoom2Locked = value;
-                // if (LockButton2 != null)
-                // {
-                //     LockButton2.SetToggleState(value);
-                // }
+                if (!isCurrentWorld) return null;
+                if (_Room_4_LockObject == null)
+                {
+                    return _Room_4_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/DoorInside/Lock").transform;
+                }
+                return _Room_4_LockObject;
             }
         }
 
-        private static bool _IsRoom3Locked { get; set; } = false;
+        private static UdonBehaviour_Cached Room_1_LockInteract { get; set; }
+        private static UdonBehaviour_Cached Room_2_LockInteract { get; set; }
 
-        private static bool isRoom3Locked
-        {
-            get
-            {
-                return _IsRoom3Locked;
-            }
-            set
-            {
-                _IsRoom3Locked = value;
-                // if (LockButton3 != null)
-                // {
-                //     LockButton3.SetToggleState(value);
-                // }
-            }
-        }
+        private static UdonBehaviour_Cached Room_3_LockInteract { get; set; }
 
-        private static bool _IsRoom4Locked { get; set; } = false;
+        private static UdonBehaviour_Cached Room_4_LockInteract { get; set; }
 
-        private static bool isRoom4Locked
-        {
-            get
-            {
-                return _IsRoom4Locked;
-            }
-            set
-            {
-                _IsRoom4Locked = value;
-                // if (LockButton4 != null)
-                // {
-                //     LockButton4.SetToggleState(value);
-                // }
-            }
-        }
+
     }
 }
