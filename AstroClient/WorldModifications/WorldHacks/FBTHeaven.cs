@@ -2,7 +2,6 @@
 using AstroClient.CustomClasses;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.xAstroBoy.Utility;
-using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -131,27 +130,128 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
-                
-                if(Room_1_LockObject != null)
+
+                if(Room_1_SecureArea != null)
+                {
+                    Room_1_SecureArea_Orig_Size = Room_1_SecureArea.size;
+                }
+
+                if (Room_2_SecureArea != null)
+                {
+                    Room_2_SecureArea_Orig_Size = Room_2_SecureArea.size;
+                }
+                if (Room_3_SecureArea != null)
+                {
+                    Room_3_SecureArea_Orig_Size = Room_3_SecureArea.size;
+                }
+                if (Room_4_SecureArea != null)
+                {
+                    Room_4_SecureArea_Orig_Size = Room_4_SecureArea.size;
+                }
+
+                var RestoreDelay = 1f;
+
+                if (Room_1_LockObject != null)
                 {
                     Room_1_LockInteract = Room_1_LockObject.gameObject.FindUdonEvent("_interact");
+                    if (Room_1_LockInteract != null)
+                    {
+                        Room_1_LockInteract.BeforeInvoking += () =>
+                        {
+                            if (Room_1_SecureArea != null)
+                            {
+                                Room_1_SecureArea.size = new Vector3(999999999, 999999999, 999999999);
+                            }
+                        };
+                        Room_1_LockInteract.AfterInvoking += () =>
+                        {
+                            MiscUtils.DelayFunction(RestoreDelay, () =>
+                            {
+                                if (Room_1_SecureArea != null)
+                                {
+                                    Room_1_SecureArea.size = Room_1_SecureArea_Orig_Size;
+                                }
+                            });
+                        };
+
+                    }
                 }
                 if (Room_2_LockObject != null)
                 {
                     Room_2_LockInteract = Room_2_LockObject.gameObject.FindUdonEvent("_interact");
+                    if (Room_2_LockInteract != null)
+                    {
+                        Room_2_LockInteract.BeforeInvoking += () =>
+                        {
+                            if (Room_2_SecureArea != null)
+                            {
+                                Room_2_SecureArea.size = new Vector3(999999999, 999999999, 999999999);
+                            }
+                        };
+                        Room_2_LockInteract.AfterInvoking += () =>
+                        {
+                            MiscUtils.DelayFunction(RestoreDelay, () =>
+                            {
+                                if (Room_2_SecureArea != null)
+                                {
+                                    Room_2_SecureArea.size = Room_2_SecureArea_Orig_Size;
+                                }
+                            });
+                        };
+
+                    }
                 }
                 if (Room_3_LockObject != null)
                 {
                     Room_3_LockInteract = Room_3_LockObject.gameObject.FindUdonEvent("_interact");
+                    if (Room_3_LockInteract != null)
+                    {
+                        Room_3_LockInteract.BeforeInvoking += () =>
+                        {
+                            if (Room_3_SecureArea != null)
+                            {
+                                Room_3_SecureArea.size = new Vector3(999999999, 999999999, 999999999);
+                            }
+                        };
+                        Room_3_LockInteract.AfterInvoking += () =>
+                        {
+                            MiscUtils.DelayFunction(RestoreDelay, () =>
+                            {
+                                if (Room_3_SecureArea != null)
+                                {
+                                    Room_3_SecureArea.size = Room_3_SecureArea_Orig_Size;
+                                }
+                            });
+                        };
+
+                    }
                 }
                 if (Room_4_LockObject != null)
                 {
                     Room_4_LockInteract = Room_4_LockObject.gameObject.FindUdonEvent("_interact");
+                    if (Room_4_LockInteract != null)
+                    {
+                        Room_4_LockInteract.BeforeInvoking += () =>
+                        {
+                            if (Room_4_SecureArea != null)
+                            {
+                                Room_4_SecureArea.size = new Vector3(999999999, 999999999, 999999999);
+                            }
+                        };
+                        Room_4_LockInteract.AfterInvoking += () =>
+                        {
+                            MiscUtils.DelayFunction(RestoreDelay, () =>
+                            {
+                                if (Room_4_SecureArea != null)
+                                {
+                                    Room_4_SecureArea.size = Room_4_SecureArea_Orig_Size;
+                                }
+                            });
+                        };
+
+                    }
                 }
-
                 CreateWorldButtons();
-                PatchSecureZones();
-
             }
             else
             {
@@ -253,6 +353,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static void ToggleDoor_2()
         {
+            
             Room_2_LockInteract.Invoke();
         }
 
@@ -266,22 +367,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             Room_4_LockInteract.Invoke();
         }
 
-        private void PatchSecureZones()
-        {
-            var PatchColl = 999999999f;
-            foreach (var item in SecureAreas)
-            {
-                var obj = Finder.Find(item);
-                if (obj != null)
-                {
-                    var coll = obj.GetComponent<BoxCollider>();
-                    if (coll != null)
-                    {
-                        coll.size = new Vector3(PatchColl, PatchColl, PatchColl);
-                    }
-                }
-            }
-        }
 
         private void OnRoomLeft()
         {
@@ -295,6 +380,15 @@ namespace AstroClient.WorldModifications.WorldHacks
             EnterRoom_2 = null;
             EnterRoom_1 = null;
             ToggleLock_2 = null;
+            Room_1_LockInteract = null;
+            Room_2_LockInteract = null;
+            Room_3_LockInteract = null;
+            Room_4_LockInteract = null;
+
+            Room_1_SecureArea_Orig_Size = Vector3.zero;
+            Room_2_SecureArea_Orig_Size = Vector3.zero;
+            Room_3_SecureArea_Orig_Size = Vector3.zero;
+            Room_4_SecureArea_Orig_Size = Vector3.zero;
             _Room_1_Inside_Teleport = null;
             _Room_1_outside_Teleport = null;
             _Room_2_Inside_Teleport = null;
@@ -307,10 +401,14 @@ namespace AstroClient.WorldModifications.WorldHacks
             _Room_2_LockObject = null;
             _Room_3_LockObject = null;
             _Room_4_LockObject = null;
-            Room_1_LockInteract = null;
-            Room_2_LockInteract = null;
-            Room_3_LockInteract = null;
-            Room_4_LockInteract = null;
+            _Room_1_SecureAreaObject = null;
+            _Room_2_SecureAreaObject = null;
+            _Room_3_SecureAreaObject = null;
+            _Room_4_SecureAreaObject = null;
+            _Room_1_SecureArea = null;
+            _Room_2_SecureArea = null;
+            _Room_3_SecureArea = null;
+            _Room_4_SecureArea = null;
         }
 
         private static Transform _Room_1_Inside_Teleport;
@@ -493,6 +591,130 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        private static Transform _Room_1_SecureAreaObject;
+
+        internal static Transform Room_1_SecureAreaObject
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Room_1_SecureAreaObject == null)
+                {
+                    return _Room_1_SecureAreaObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/SecureArea").transform;
+                }
+                return _Room_1_SecureAreaObject;
+            }
+        }
+
+        private static Transform _Room_2_SecureAreaObject;
+
+        internal static Transform Room_2_SecureAreaObject
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Room_2_SecureAreaObject == null)
+                {
+                    return _Room_2_SecureAreaObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/SecureArea").transform;
+                }
+                return _Room_2_SecureAreaObject;
+            }
+        }
+
+        private static Transform _Room_3_SecureAreaObject;
+
+        internal static Transform Room_3_SecureAreaObject
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Room_3_SecureAreaObject == null)
+                {
+                    return _Room_3_SecureAreaObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/SecureArea").transform;
+                }
+                return _Room_3_SecureAreaObject;
+            }
+        }
+
+        private static Transform _Room_4_SecureAreaObject;
+
+        internal static Transform Room_4_SecureAreaObject
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_Room_4_SecureAreaObject == null)
+                {
+                    return _Room_4_SecureAreaObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/SecureArea").transform;
+                }
+                return _Room_4_SecureAreaObject;
+            }
+        }
+
+        private static BoxCollider _Room_1_SecureArea;
+
+        internal static BoxCollider Room_1_SecureArea
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_1_SecureAreaObject == null) return null;
+                if (_Room_1_SecureArea == null)
+                {
+                    return _Room_1_SecureArea = Room_1_SecureAreaObject.GetComponent<BoxCollider>();
+                }
+                return _Room_1_SecureArea;
+            }
+        }
+
+        private static BoxCollider _Room_2_SecureArea;
+
+        internal static BoxCollider Room_2_SecureArea
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_2_SecureAreaObject == null) return null;
+                if (_Room_2_SecureArea == null)
+                {
+                    return _Room_2_SecureArea = Room_2_SecureAreaObject.GetComponent<BoxCollider>();
+                }
+                return _Room_2_SecureArea;
+            }
+        }
+
+        private static BoxCollider _Room_3_SecureArea;
+
+        internal static BoxCollider Room_3_SecureArea
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_3_SecureAreaObject == null) return null;
+                if (_Room_3_SecureArea == null)
+                {
+                    return _Room_3_SecureArea = Room_3_SecureAreaObject.GetComponent<BoxCollider>();
+                }
+                return _Room_3_SecureArea;
+            }
+        }
+
+        private static BoxCollider _Room_4_SecureArea;
+
+        internal static BoxCollider Room_4_SecureArea
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (Room_4_SecureAreaObject == null) return null;
+                if (_Room_4_SecureArea == null)
+                {
+                    return _Room_4_SecureArea = Room_4_SecureAreaObject.GetComponent<BoxCollider>();
+                }
+                return _Room_4_SecureArea;
+            }
+        }
+
         private static UdonBehaviour_Cached Room_1_LockInteract { get; set; }
         private static UdonBehaviour_Cached Room_2_LockInteract { get; set; }
 
@@ -500,6 +722,10 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static UdonBehaviour_Cached Room_4_LockInteract { get; set; }
 
+        private static Vector3 Room_1_SecureArea_Orig_Size { get; set; } = Vector3.zero;
 
+        private static Vector3 Room_2_SecureArea_Orig_Size { get; set; } = Vector3.zero;
+        private static Vector3 Room_3_SecureArea_Orig_Size { get; set; } = Vector3.zero;
+        private static Vector3 Room_4_SecureArea_Orig_Size { get; set; } = Vector3.zero;
     }
 }
