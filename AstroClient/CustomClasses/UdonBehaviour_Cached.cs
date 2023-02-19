@@ -1,4 +1,7 @@
-﻿namespace AstroClient.CustomClasses
+﻿using AstroClient.xAstroBoy.Utility;
+using UnityEngine.UI;
+
+namespace AstroClient.CustomClasses
 {
     using MelonLoader;
     using System;
@@ -147,8 +150,18 @@
             {
                 if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                 {
-                    BeforeInvoking.SafetyRaise();
-                    UdonBehaviour.SendUdonEvent(EventKey, EventTarget);
+                    if(BeforeInvoking != null)
+                    {
+                        BeforeInvoking.SafetyRaise();
+                        MiscUtils.DelayFunction(0.6f, () =>
+                        {
+                            UdonBehaviour.SendUdonEvent(EventKey, EventTarget);
+                        });
+                    }
+                    else
+                    {
+                        UdonBehaviour.SendUdonEvent(EventKey, EventTarget);
+                    }
                     AfterInvoking.SafetyRaise();
                 }
             }

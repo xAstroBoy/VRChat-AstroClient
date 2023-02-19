@@ -91,10 +91,15 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static void InitButtons(QMGridTab main)
         {
             FBTExploitsPage = new QMNestedGridMenu(main, "FBTHeaven Exploits", "FBTHeaven Exploits");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n1", () => { ToggleDoor_1(); }, "Toggle Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n2", () => { ToggleDoor_2(); }, "Toggle Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n3", () => { ToggleDoor_3(); }, "Toggle Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n4", () => { ToggleDoor_4(); }, "Toggle Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, "Enter Room\n1", () => { TeleportToRoom_1(); }, "Enter Room 1");
+            _ = new QMSingleButton(FBTExploitsPage, "Enter Room\n2", () => { TeleportToRoom_2(); }, "Enter Room 2");
+            _ = new QMSingleButton(FBTExploitsPage, "Enter Room\n3", () => { TeleportToRoom_3(); }, "Enter Room 3");
+            _ = new QMSingleButton(FBTExploitsPage, "Enter Room\n4", () => { TeleportToRoom_4(); }, "Enter Room 4");
+
+            //_ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n1", () => { ToggleDoor_1(); }, "Toggle Door 1");
+            //_ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n2", () => { ToggleDoor_2(); }, "Toggle Door 2");
+            //_ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n3", () => { ToggleDoor_3(); }, "Toggle Door 3");
+            //_ = new QMSingleButton(FBTExploitsPage, "Toggle Door\n4", () => { ToggleDoor_4(); }, "Toggle Door 4");
         }
 
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -131,7 +136,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Log.Debug("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                 }
 
-                if(Room_1_SecureArea != null)
+                if (Room_1_SecureArea != null)
                 {
                     Room_1_SecureArea_Orig_Size = Room_1_SecureArea.size;
                 }
@@ -153,7 +158,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 if (Room_1_LockObject != null)
                 {
-                    Room_1_LockInteract = Room_1_LockObject.gameObject.FindUdonEvent("_interact");
+                    Room_1_LockInteract = Room_1_LockObject.gameObject.FindUdonEvent("__0_ToggleDoorLock");
                     if (Room_1_LockInteract != null)
                     {
                         Room_1_LockInteract.BeforeInvoking += () =>
@@ -173,12 +178,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 }
                             });
                         };
-
                     }
                 }
                 if (Room_2_LockObject != null)
                 {
-                    Room_2_LockInteract = Room_2_LockObject.gameObject.FindUdonEvent("_interact");
+                    Room_2_LockInteract = Room_2_LockObject.gameObject.FindUdonEvent("__0_ToggleDoorLock");
                     if (Room_2_LockInteract != null)
                     {
                         Room_2_LockInteract.BeforeInvoking += () =>
@@ -198,12 +202,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 }
                             });
                         };
-
                     }
                 }
                 if (Room_3_LockObject != null)
                 {
-                    Room_3_LockInteract = Room_3_LockObject.gameObject.FindUdonEvent("_interact");
+                    Room_3_LockInteract = Room_3_LockObject.gameObject.FindUdonEvent("__0_ToggleDoorLock");
                     if (Room_3_LockInteract != null)
                     {
                         Room_3_LockInteract.BeforeInvoking += () =>
@@ -223,12 +226,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 }
                             });
                         };
-
                     }
                 }
                 if (Room_4_LockObject != null)
                 {
-                    Room_4_LockInteract = Room_4_LockObject.gameObject.FindUdonEvent("_interact");
+                    Room_4_LockInteract = Room_4_LockObject.gameObject.FindUdonEvent("__0_ToggleDoorLock");
                     if (Room_4_LockInteract != null)
                     {
                         Room_4_LockInteract.BeforeInvoking += () =>
@@ -248,7 +250,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                                 }
                             });
                         };
-
                     }
                 }
                 CreateWorldButtons();
@@ -265,16 +266,15 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void CreateWorldButtons()
         {
-            if (ToggleLock_4 == null)
+            if (EnterRoom_1 == null)
             {
-                ToggleLock_4 = new WorldButton_Squared(new Vector3(-17.992f, 7.9996f, 3.2f), new Vector3(0f, 0f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_4);
-                ToggleLock_4.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+                EnterRoom_1 = new WorldButton_Squared(new Vector3(-5.299f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_1);
+                EnterRoom_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
-
-            if (ToggleLock_1 == null)
+            if (EnterRoom_2 == null)
             {
-                ToggleLock_1 = new WorldButton_Squared(new Vector3(-5.299f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_1);
-                ToggleLock_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+                EnterRoom_2 = new WorldButton_Squared(new Vector3(-10.7829f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_2);
+                EnterRoom_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
 
             if (EnterRoom_3 == null)
@@ -289,29 +289,27 @@ namespace AstroClient.WorldModifications.WorldHacks
                 EnterRoom_4.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
             }
 
-            if (ToggleLock_3 == null)
-            {
-                ToggleLock_3 = new WorldButton_Squared(new Vector3(-16.2865f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_3);
-                ToggleLock_3.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
-            }
+            //if (ToggleLock_1 == null)
+            //{
+            //    ToggleLock_1 = new WorldButton_Squared(new Vector3(-5.299f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_1);
+            //    ToggleLock_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            //}
+            //if (ToggleLock_3 == null)
+            //{
+            //    ToggleLock_3 = new WorldButton_Squared(new Vector3(-16.2865f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_3);
+            //    ToggleLock_3.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            //}
 
-            if (EnterRoom_2 == null)
-            {
-                EnterRoom_2 = new WorldButton_Squared(new Vector3(-10.7829f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_2);
-                EnterRoom_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
-            }
-
-            if (EnterRoom_1 == null)
-            {
-                EnterRoom_1 = new WorldButton_Squared(new Vector3(-5.299f, 8.0709f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Enter Room</color>", TeleportToRoom_1);
-                EnterRoom_1.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
-            }
-
-            if (ToggleLock_2 == null)
-            {
-                ToggleLock_2 = new WorldButton_Squared(new Vector3(-10.7829f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_2);
-                ToggleLock_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
-            }
+            //if (ToggleLock_2 == null)
+            //{
+            //    ToggleLock_2 = new WorldButton_Squared(new Vector3(-10.7829f, 7.9368f, 5.9999f), new Vector3(0f, 90f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_2);
+            //    ToggleLock_2.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            //}
+            //if (ToggleLock_4 == null)
+            //{
+            //    ToggleLock_4 = new WorldButton_Squared(new Vector3(-17.992f, 7.9996f, 3.2f), new Vector3(0f, 0f, 270f), 0.6f, "<color=green>Lockpick Room</color>", ToggleDoor_4);
+            //    ToggleLock_4.Set_isToggleButton(false); // Remove this line if you want to be a toggle button.
+            //}
         }
 
         internal static void TeleportToRoom_1()
@@ -353,7 +351,6 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static void ToggleDoor_2()
         {
-            
             Room_2_LockInteract.Invoke();
         }
 
@@ -366,7 +363,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             Room_4_LockInteract.Invoke();
         }
-
 
         private void OnRoomLeft()
         {
@@ -540,7 +536,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_1_LockObject == null)
                 {
-                    return _Room_1_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/DoorInside/Lock").transform;
+                    return _Room_1_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 1/PrivateDoorMain").transform;
                 }
                 return _Room_1_LockObject;
             }
@@ -555,7 +551,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_2_LockObject == null)
                 {
-                    return _Room_2_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/DoorInside/Lock").transform;
+                    return _Room_2_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 2/PrivateDoorMain").transform;
                 }
                 return _Room_2_LockObject;
             }
@@ -570,7 +566,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_3_LockObject == null)
                 {
-                    return _Room_3_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/DoorInside/Lock").transform;
+                    return _Room_3_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 3/PrivateDoorMain").transform;
                 }
                 return _Room_3_LockObject;
             }
@@ -585,7 +581,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (!isCurrentWorld) return null;
                 if (_Room_4_LockObject == null)
                 {
-                    return _Room_4_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/DoorInside/Lock").transform;
+                    return _Room_4_LockObject = Finder.Find("[Scripts]/Frenzy's Script/Club Private Room Doors/Private Room Door Locks[KillFrenzyScript]/Room 4/PrivateDoorMain").transform;
                 }
                 return _Room_4_LockObject;
             }

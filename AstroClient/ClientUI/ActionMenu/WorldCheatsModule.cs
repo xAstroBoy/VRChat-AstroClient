@@ -662,10 +662,10 @@ internal class WorldCheatsModule : AstroEvents
 
             if (WorldUtils.WorldID == WorldIds.FBTHeaven)
             {
-                CustomSubMenu.AddButton("Toggle Room 1", () => { FBTHeaven.ToggleDoor_1(); });
-                CustomSubMenu.AddButton("Toggle Room 2", () => { FBTHeaven.ToggleDoor_2(); });
-                CustomSubMenu.AddButton("Toggle Room 3", () => { FBTHeaven.ToggleDoor_3(); });
-                CustomSubMenu.AddButton("Toggle Room 4", () => { FBTHeaven.ToggleDoor_4(); });
+                //CustomSubMenu.AddButton("Toggle Room 1", () => { FBTHeaven.ToggleDoor_1(); });
+                //CustomSubMenu.AddButton("Toggle Room 2", () => { FBTHeaven.ToggleDoor_2(); });
+                //CustomSubMenu.AddButton("Toggle Room 3", () => { FBTHeaven.ToggleDoor_3(); });
+                //CustomSubMenu.AddButton("Toggle Room 4", () => { FBTHeaven.ToggleDoor_4(); });
 
                 CustomSubMenu.AddButton("Enter Room 1", () => { FBTHeaven.TeleportToRoom_1(); });
                 CustomSubMenu.AddButton("Enter Room 2", () => { FBTHeaven.TeleportToRoom_2(); });
