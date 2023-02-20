@@ -278,24 +278,24 @@ internal class WorldCheatsModule : AstroEvents
             {
                 CustomSubMenu.AddSubMenu("Pool Table Settings", () =>
                 {
-                    CustomSubMenu.AddToggle("Longer Guideline", PoolParlor.LongerGuideline, ToggleValue => { PoolParlor.LongerGuideline = ToggleValue; });
-                    CustomSubMenu.AddToggle("Force Guideline", PoolParlor.BilliardsModule.ForceGuidelineOn, ToggleValue => { PoolParlor.BilliardsModule.ForceGuidelineOn = ToggleValue; });
-                    CustomSubMenu.AddToggle("Force Locking Cue", PoolParlor.BilliardsModule.ForceLockingOn, ToggleValue => { PoolParlor.BilliardsModule.ForceLockingOn = ToggleValue; });
-                    CustomSubMenu.AddToggle("Can Hit Cue Ball", PoolParlor.BilliardsModule.canHitCueBall.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.canHitCueBall = ToggleValue; });
-                    CustomSubMenu.AddToggle("Practice mode", PoolParlor.BilliardsModule.isPracticeMode.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.isPracticeMode = ToggleValue; });
+                    CustomSubMenu.AddToggle("Longer Guideline", PoolParlorWorld.LongerGuideline, ToggleValue => { PoolParlorWorld.LongerGuideline = ToggleValue; });
+                    CustomSubMenu.AddToggle("Force Guideline", PoolParlorWorld.BilliardsModule.ForceGuidelineOn, ToggleValue => { PoolParlorWorld.BilliardsModule.ForceGuidelineOn = ToggleValue; });
+                    CustomSubMenu.AddToggle("Force Locking Cue", PoolParlorWorld.BilliardsModule.ForceLockingOn, ToggleValue => { PoolParlorWorld.BilliardsModule.ForceLockingOn = ToggleValue; });
+                    CustomSubMenu.AddToggle("Can Hit Cue Ball", PoolParlorWorld.BilliardsModule.canHitCueBall.GetValueOrDefault(false), ToggleValue => { PoolParlorWorld.BilliardsModule.canHitCueBall = ToggleValue; });
+                    CustomSubMenu.AddToggle("Practice mode", PoolParlorWorld.BilliardsModule.isPracticeMode.GetValueOrDefault(false), ToggleValue => { PoolParlorWorld.BilliardsModule.isPracticeMode = ToggleValue; });
                     if (UserIdentifiers.is_xAstroBoy)
                     {
-                        CustomSubMenu.AddButton("Set Holystar Camo", () => { PoolParlor.CurrentTableSkin = PoolParlor.TableSkins.HolyStar;});
+                        CustomSubMenu.AddButton("Set Holystar Camo", () => { PoolParlorWorld.CurrentTableSkin = PoolParlorWorld.TableSkins.HolyStar;});
                     }
 
                 });
 
                 CustomSubMenu.AddSubMenu("Match Settings", () =>
                 {
-                    CustomSubMenu.AddButton("Create Match", () => { PoolParlor.StartNewMatchCreation.Invoke(); });
-                    CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlor.CloseNewMatchCreation.Invoke(); });
-                    CustomSubMenu.AddButton("Start Match", () => { PoolParlor.StartMatch.Invoke(); });
-                    CustomSubMenu.AddButton("Reset Match", () => { PoolParlor.ResetMatch.Invoke(); });
+                    CustomSubMenu.AddButton("Create Match", () => { PoolParlorWorld.StartNewMatchCreation.Invoke(); });
+                    CustomSubMenu.AddButton("Abort Match Creation", () => { PoolParlorWorld.CloseNewMatchCreation.Invoke(); });
+                    CustomSubMenu.AddButton("Start Match", () => { PoolParlorWorld.StartMatch.Invoke(); });
+                    CustomSubMenu.AddButton("Reset Match", () => { PoolParlorWorld.ResetMatch.Invoke(); });
 
 
                 });

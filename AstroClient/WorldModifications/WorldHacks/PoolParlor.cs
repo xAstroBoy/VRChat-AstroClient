@@ -1,8 +1,15 @@
-﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
+﻿using System.Linq;
+using System.Text;
+using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
+using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
+using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
+using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
+using Iced.Intel;
+using VRC.Core;
 using VRC.Udon;
 
 namespace AstroClient.WorldModifications.WorldHacks
@@ -22,11 +29,57 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
     // TODO: update
-    internal class PoolParlor : AstroEvents
+    internal class PoolParlorWorld : AstroEvents
     {
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
+            ClientEventActions.OnEnterWorld += OnWorldEnter;
+        }
+        private void OnWorldEnter(ApiWorld world, ApiWorldInstance instance)
+        {
+            if (world == null) return;
+
+            if (world.id.Equals(WorldIds.PoolParlor))
+            {
+                isCurrentWorld = true;
+                //BlockCallbackProcessor = true;
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Tick");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FixedTick");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnSeekSliderChanged");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("IsInVideoMode");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoManager");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoTexture");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetDuration");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetTime");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsInUI");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Get");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsShooting");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetDesktopMarker");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_BeginPerf");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EndPerf");
+                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FlushBuffer");
+
+
+                HasSubscribed = true;
+            }
+        }
+
+        private static UdonBehaviour_Cached _CallbackProcessor;
+
+        internal static UdonBehaviour_Cached CallbackProcessor
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_CallbackProcessor == null)
+                {
+                    return _CallbackProcessor = UdonSearch.FindUdonEvent("PoolParlorModule", "_OnDataDecoded");
+                }
+                return _CallbackProcessor;
+            }
         }
 
         internal static bool CreateMatchOnGameEnd { get; set; } = false;
@@ -52,6 +105,29 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
                 _HasSubscribed = value;
+            }
+        }
+
+        private static bool _BlockCallbackProcessor = false;
+        private static bool BlockCallbackProcessor
+        {
+            get => _BlockCallbackProcessor;
+            set
+            {
+                if (_BlockCallbackProcessor != value)
+                {
+                    if (value)
+                    {
+                        GameObject_RPC_Firewall.EditRule("PoolParlorModule", "_OnDataDecoded", false, false, true);
+                        CallbackProcessor.Add_UdonFirewall_Rule(false, false, true);
+                    }
+                    else
+                    {
+                        GameObject_RPC_Firewall.RemoveRule("PoolParlorModule", "_OnDataDecoded");
+
+                    }
+                }
+                _BlockCallbackProcessor = value;
             }
         }
 
@@ -83,11 +159,22 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
-
+        private static bool hasPatched { get; set; } = false;
         private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
         {
             if (item != null)
             {
+                //if (item.gameObject.name.isMatchWholeWord("PoolParlorModule"))
+                //{
+                //    if (eventkey.Equals("_OnDataDecoded"))
+                //    {
+                //        if (!hasPatched)
+                //        {
+                //            HijackDecodedList();
+                //        }
+                //    }
+                //}
+
                 if (item.gameObject.name.isMatchWholeWord("NetworkingManager"))
                 {
                     if (eventkey.isMatchWholeWord("_OnGameReset"))
@@ -109,6 +196,151 @@ namespace AstroClient.WorldModifications.WorldHacks
                         StartANewMatch();
                     }
                 }
+            }
+        }
+        public static string CurrentDisplayName
+        {
+            get
+            {
+                return PlayerSpooferUtils.Original_DisplayName;
+            }
+        }
+
+        private static void HijackDecodedList()
+        {
+            if(DecoderModule != null)
+            {
+                var Output = DecoderModule.outputString;
+                // split string into multiple lines
+                var Lines = Output.Split('\n');
+                // rebuild the output string
+                DecoderModule.outputString = "";
+                // generate a new output string based of the old one with our changes
+                // stringbuilder that will be used to rebuild the output string
+                StringBuilder sb = new StringBuilder();
+                foreach (var line in Lines)
+                {
+                    // strip string of /n/r and other characters at the end of the line.
+                    var processedline = line;
+
+                    Log.Debug($"Processing line \"{line}\" ..."); 
+                    if(line.StartsWith("version"))
+                    {
+                        sb.AppendLine("version 1");
+                        continue;
+                    }
+                    if (line.StartsWith("tournament"))
+                    {
+                        Log.Debug("Patched tournament winners");
+                        sb.AppendLine(line + "\t" + CurrentDisplayName);
+                        continue;
+                    }
+                    if (line.StartsWith("announcement"))
+                    {
+                        Log.Debug("Patched announcement");
+                        sb.AppendLine(line + " World Config Edited by AstroClient");
+                        continue;
+                    }
+                    if (line.StartsWith("moderators"))
+                    {
+                        Log.Debug("Patched Moderator List");
+                        sb.AppendLine(line + "\t" + CurrentDisplayName);
+                        continue;
+                    }
+                    if (line.StartsWith("color"))
+                    {
+                        var split = line.Split('\t');
+                        if (split.Length > 1)
+                        {
+                            if (split[1].Equals("metaphira"))
+                            {
+                                Log.Debug("Patched Color");
+                                sb.AppendLine(line);
+                                sb.AppendLine("color\t" + CurrentDisplayName + "\t" + "rainbow");
+                                continue;
+                            }
+                        }
+                    }
+                    if (line.StartsWith("table"))
+                    {
+                        var split = line.Split('\t');
+                        if (split.Length > 2)
+                        {
+                            if (!split[2].Contains("~"))
+                            {
+                                Log.Debug("Patched Table");
+                                sb.AppendLine(line + "\t" + CurrentDisplayName);
+                                continue;
+                            }
+                        }
+                    }
+                    if (line.StartsWith("contributor-table"))
+                    {
+                        // if ~ is in the name, it means everyone can use it
+                        // if not, it means only the people in the list can use it and we need to add our name to the list
+                        // contributor-table	 username1 username2 6
+
+                        var split = line.Split('\t');
+                        if (split.Length > 1)
+                        {
+                            if (!split[1].Contains("~"))
+                            {
+                                // if the name is not in the list, add it
+                                if (!split[1].Contains(CurrentDisplayName))
+                                {
+                                    // replace the split in the line with the modified one using string.replace
+                                    Log.Debug("Patched Contributor Table");
+                                    sb.AppendLine(line.Replace(split[1], split[1] + "\t" + CurrentDisplayName));
+                                    continue;
+                                }
+                            }
+                        }
+
+                    }
+                    if (line.StartsWith("cue"))
+                    {
+                        var split = line.Split('\t');
+                        if (split.Length > 2)
+                        {
+                            // if ~ is in the name, it means everyone can use it
+                            // if not, it means only the people in the list can use it and we need to add our name to the list
+                            if (!split[2].Contains("~"))
+                            {
+                                Log.Debug("Patched Cue");
+                                sb.AppendLine(line + "\t" + CurrentDisplayName);
+                                continue;
+                            }
+                        }
+                    }
+                    if (line.StartsWith("contributor-cue"))
+                    {
+                        var split = line.Split('\t');
+                        if (split.Length > 1)
+                        {
+                            if (!split[1].Contains("~"))
+                            {
+                                // if the name is not in the list, add it
+                                if (!split[1].Contains(CurrentDisplayName))
+                                {
+                                    // replace the split in the line with the modified one using string.replace
+                                    Log.Debug("Patched contributor Cue");
+                                    sb.AppendLine(line.Replace(split[1], split[1] + "\t" + CurrentDisplayName));
+                                    continue;
+                                }
+                            }
+                        }
+
+                    }
+
+                    
+                    sb.AppendLine(line);
+                }
+                DecoderModule.outputString = sb.ToString();
+                BlockCallbackProcessor = false;
+                hasPatched = true;
+                CallbackProcessor.Invoke();
+
+
             }
         }
 
@@ -137,28 +369,14 @@ namespace AstroClient.WorldModifications.WorldHacks
             CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "Override Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
         }
 
+        private static bool isCurrentWorld { get; set; }
         private static void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.PoolParlor)
             {
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Tick");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FixedTick");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnSeekSliderChanged");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("IsInVideoMode");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoManager");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetVideoTexture");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetDuration");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("GetTime");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsInUI");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetCuetip");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Get");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_IsShooting");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_GetDesktopMarker");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_BeginPerf");
-                EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EndPerf");
+                isCurrentWorld = true;
 
-                HasSubscribed = true;
+                
                 if (PoolParlorCheats != null)
                 {
                     PoolParlorCheats.SetInteractable(true);
@@ -169,7 +387,14 @@ namespace AstroClient.WorldModifications.WorldHacks
                 Log.Write("Use the Customization Menu to Access Table and Cue skins!");
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 SetGuidelineCheat();
-
+                try
+                {
+                    Initialize_DecoderModule();
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
                 try
                 {
                     Initialize_BilliardModule();
@@ -234,6 +459,14 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
+        private static void Initialize_DecoderModule()
+        {
+            var DecoderReader = UdonSearch.FindUdonEvent("DynamicReader", "_ReadPictureStep");
+            if(DecoderReader != null )
+            {
+                DecoderModule = DecoderReader.gameObject.GetOrAddComponent<PoolParlor_DecoderReader>();
+            }
+        }
         private static void Initialize_PoolParlorModule()
         {
             var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
@@ -248,6 +481,11 @@ namespace AstroClient.WorldModifications.WorldHacks
             var networkingpath = Finder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
             if (networkingpath != null)
             {
+                NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("__0__OnGlobalSettingsChanged");
+                if (NetworkingManager_OnGlobalSettingsChanged == null)
+                {
+                    Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
+                }
                 var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
                 if (NetworkingManagerEvent != null)
                 {
@@ -261,11 +499,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     Log.Warn("failed to Find NetworkingManager");
                 }
-                NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("_OnGlobalSettingsChanged");
-                if (NetworkingManager_OnGlobalSettingsChanged == null)
-                {
-                    Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
-                }
+
             }
             else
             {
@@ -621,6 +855,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             GuidelineOriginalLenght = 0f;
             GuidelineOriginalLenghtPos = 0f;
             LongerGuideline = false;
+            hasPatched = false;
         }
 
         private static void OnDrop()
@@ -655,6 +890,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static PoolParlor_PoolParlorModuleReader PoolParlorModule { get; private set; }
         internal static PoolParlor_NetworkingManagerReader_One NetworkingManager { get; private set; }
         internal static PoolParlor_BilliardsModuleReader BilliardsModule { get; private set; }
+        internal static PoolParlor_DecoderReader DecoderModule { get; private set; }
 
         internal static QMNestedButton PoolParlorCheats { get; set; }
 

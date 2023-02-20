@@ -6,6 +6,7 @@ using AstroClient.WorldModifications.WorldsIds;
 using AstroClient.xAstroBoy.Utility;
 using Il2CppSystem.Collections.Generic;
 using System;
+using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using Object = Il2CppSystem.Object;
@@ -88,6 +89,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Destroy(this);
         }
 
+
         internal void Start()
         {
             if (WorldUtils.WorldID.Equals(WorldIds.PoolParlor))
@@ -111,6 +113,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 Destroy(this);
             }
         }
+
 
         internal bool ForceGuidelineOn { get; set; } = false;
         internal bool ForceLockingOn { get; set; } = false;

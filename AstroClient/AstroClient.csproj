@@ -124,6 +124,7 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_PlayerPermissionReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_MakiKeyboardReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_CustomizationReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_DecoderReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_CueReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader_One.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_PoolParlorModuleReader.cs" />
@@ -1009,6 +1010,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\FakeUdon\" />
     <Folder Include="AstroMonos\Components\Cheats\Worlds\PuttPuttPond\" />
     <Folder Include="AstroMonos\Components\Player\Fly\" />
     <Folder Include="ClientResources\ProgramsArchive\" />
