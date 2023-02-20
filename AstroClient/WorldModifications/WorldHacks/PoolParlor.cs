@@ -672,7 +672,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (TableSkins)(-1))
                     {
-                        value = TableSkins.Shigamin;
+                        value = TableSkins.table_25;
                     }
                     else
                     {
@@ -704,7 +704,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (CueSkins)(-1))
                     {
-                        value = CueSkins.BetaTester;
+                        value = CueSkins.fantasyprogram;
                     }
                     else
                     {
