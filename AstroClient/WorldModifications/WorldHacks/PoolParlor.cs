@@ -235,18 +235,28 @@ namespace AstroClient.WorldModifications.WorldHacks
                     PoolParlorModule = PoolParlorModule_unpacked.gameObject.GetOrAddComponent<PoolParlor_PoolParlorModuleReader>();
                 }
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
-                GetCurrentTable();
-                GetCurrentCue();
-                SetupCues();
-                SetupBruteforcerForPopCat();
-                var guideline = Finder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
-                if (guideline != null)
-                {
-                    Guideline = guideline;
-                    GuidelineOriginalLenghtPos = guideline.transform.localPosition.x;
 
-                    GuidelineOriginalLenght = guideline.transform.localScale.x;
+                SetGuidelineCheat();
+                try
+                {
+                    GetCurrentTable();
                 }
+                catch{}
+                try
+                {
+                    GetCurrentCue();
+                }
+                catch { }
+                try
+                {
+                    SetupCues();
+                }
+                catch { }
+                try
+                {
+                    SetupBruteforcerForPopCat();
+                }
+                catch { }
             }
             else
             {
@@ -254,6 +264,21 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     PoolParlorCheats.SetInteractable(false);
                     PoolParlorCheats.SetTextColor(Color.red);
+                }
+            }
+        }
+
+        private static void SetGuidelineCheat()
+        {
+            var guideline = Finder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
+            if (guideline != null)
+            {
+                if (Guideline == null)
+                {
+                    Guideline = guideline;
+                    GuidelineOriginalLenghtPos = guideline.transform.localPosition.x;
+
+                    GuidelineOriginalLenght = guideline.transform.localScale.x;
                 }
             }
         }
