@@ -73,19 +73,16 @@ namespace AstroClient.WorldModifications.WorldHacks
                     {
                         Guideline.transform.localPosition = Guideline.transform.localPosition.SetX(26.49f);
                         Guideline.transform.localScale = Guideline.transform.localScale.SetX(52.6869f);
-
                     }
                     else
                     {
                         Guideline.transform.localPosition = Guideline.transform.localPosition.SetX(GuidelineOriginalLenghtPos);
                         Guideline.transform.localScale = Guideline.transform.localScale.SetX(GuidelineOriginalLenght);
-
                     }
                     _LongerGuideline = value;
                 }
             }
         }
-
 
         private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
         {
@@ -170,78 +167,47 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 Log.Write($"Recognized {Name} World, Patching Skins....");
                 Log.Write("Use the Customization Menu to Access Table and Cue skins!");
-
-                var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "__0__CanUseTableSkin");
-                if (BilliardsModuleEvent != null)
-                {
-                    BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
-                    BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
-                    StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyOpen");
-                    CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
-                    StartMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameStart");
-                    ResetMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameReset");
-                }
-                else
-                {
-                    Log.Warn("failed to Find BilliardsModule");
-                }
-
-                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "__0__SetAuthorizedOwners");
-                if (cue_0_unpacked != null)
-                {
-                    Cue_0 = cue_0_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
-                }
-                else
-                {
-                    Log.Warn("failed to Find intl.cue-0");
-                }
-
-                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "__0__SetAuthorizedOwners");
-                if (cue_1_unpacked != null)
-                {
-                    Cue_1 = cue_1_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
-                }
-                else
-                {
-                    Log.Warn("failed to Find intl.cue-1");
-                }
-
-                var networkingpath = Finder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
-                if (networkingpath != null)
-                {
-                    var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
-                    if (NetworkingManagerEvent != null)
-                    {
-                        NetworkingManager = NetworkingManagerEvent.gameObject.GetOrAddComponent<PoolParlor_NetworkingManagerReader_One>();
-                    }
-                    else
-                    {
-                        Log.Warn("failed to Find NetworkingManager");
-                    }
-                    NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("_OnGlobalSettingsChanged");
-                    if (NetworkingManager_OnGlobalSettingsChanged == null)
-                    {
-                        Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
-                    }
-                }
-                else
-                {
-                    Log.Warn("failed to Find NetworkingManager");
-                }
-
-                var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
-                if (PoolParlorModule_unpacked != null)
-                {
-                    PoolParlorModule = PoolParlorModule_unpacked.gameObject.GetOrAddComponent<PoolParlor_PoolParlorModuleReader>();
-                }
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
-
                 SetGuidelineCheat();
+
+                try
+                {
+                    Initialize_BilliardModule();
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+                try
+                {
+                    Initialize_CueModule();
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+                try
+                {
+                    Initialize_NetworkingModule();
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+                try
+                {
+                    Initialize_PoolParlorModule();
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+
                 try
                 {
                     GetCurrentTable();
                 }
-                catch{}
+                catch { }
                 try
                 {
                     GetCurrentCue();
@@ -265,6 +231,86 @@ namespace AstroClient.WorldModifications.WorldHacks
                     PoolParlorCheats.SetInteractable(false);
                     PoolParlorCheats.SetTextColor(Color.red);
                 }
+            }
+        }
+
+        private static void Initialize_PoolParlorModule()
+        {
+            var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
+            if (PoolParlorModule_unpacked != null)
+            {
+                PoolParlorModule = PoolParlorModule_unpacked.gameObject.GetOrAddComponent<PoolParlor_PoolParlorModuleReader>();
+            }
+        }
+
+        private static void Initialize_NetworkingModule()
+        {
+            var networkingpath = Finder.Find("Modules/BilliardsModule/Managers/NetworkingManager");
+            if (networkingpath != null)
+            {
+                var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
+                if (NetworkingManagerEvent != null)
+                {
+                    NetworkingManager = NetworkingManagerEvent.gameObject.GetOrAddComponent<PoolParlor_NetworkingManagerReader_One>();
+                    if (NetworkingManager != null)
+                    {
+                        NetworkingManager.Initialize();
+                    }
+                }
+                else
+                {
+                    Log.Warn("failed to Find NetworkingManager");
+                }
+                NetworkingManager_OnGlobalSettingsChanged = networkingpath.FindUdonEvent("_OnGlobalSettingsChanged");
+                if (NetworkingManager_OnGlobalSettingsChanged == null)
+                {
+                    Log.Warn("Unable to Find NetworkingManager _OnGlobalSettingsChanged");
+                }
+            }
+            else
+            {
+                Log.Warn("failed to Find NetworkingManager");
+            }
+        }
+
+        private static void Initialize_CueModule()
+        {
+            var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "__0__SetAuthorizedOwners");
+            if (cue_0_unpacked != null)
+            {
+                Cue_0 = cue_0_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
+            }
+            else
+            {
+                Log.Warn("failed to Find intl.cue-0");
+            }
+
+            var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "__0__SetAuthorizedOwners");
+            if (cue_1_unpacked != null)
+            {
+                Cue_1 = cue_1_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
+            }
+            else
+            {
+                Log.Warn("failed to Find intl.cue-1");
+            }
+        }
+
+        private static void Initialize_BilliardModule()
+        {
+            var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "__0__CanUseTableSkin");
+            if (BilliardsModuleEvent != null)
+            {
+                BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
+                BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
+                StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyOpen");
+                CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
+                StartMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameStart");
+                ResetMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameReset");
+            }
+            else
+            {
+                Log.Warn("failed to Find BilliardsModule");
             }
         }
 
@@ -299,15 +345,13 @@ namespace AstroClient.WorldModifications.WorldHacks
            "sync",
         };
 
-        
         private static void SetupBruteforcerForPopCat()
         {
-
             var popcat = GameObject.Find("Pool Parlour/Dynamic/EasterEggs/PortablePopCat");
             if (popcat != null)
             {
                 var listener = popcat.gameObject.GetOrAddComponent<GameObjectListener>();
-                if(listener != null)
+                if (listener != null)
                 {
                     listener.OnEnabled += () =>
                     {
@@ -329,12 +373,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                             //Log.Debug($"Testing command : {a}");
                             CommandInput.Value = a;
                             SendCommand.Invoke();
-                            if(popcat.gameObject.active)
+                            if (popcat.gameObject.active)
                             {
                                 Log.Debug("Command for Popcat is : " + a);
                             }
                         };
-
                     }
                     else
                     {
@@ -361,7 +404,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             var result = NetworkingManager.Two.tableSkinSynced;
             if (result != null)
             {
-                currentskin = (int) result;
+                currentskin = (int)result;
             }
             if (Enum.IsDefined(typeof(TableSkins), currentskin))
             {
@@ -430,7 +473,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void SetTableSkin_PoolParlorModule(int value)
         {
-           // PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
+            // PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
             //PoolParlorModule.__1_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
         }
 
@@ -471,8 +514,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             metaphira = 13,
             HolyStar = 9,
             Fre = 10,
-            Sezuha = 11, 
-            Shigamin = 12, 
+            Sezuha = 11,
+            Shigamin = 12,
             TheLoneCone = 14,
             table_15 = 15,
             table_16 = 16,
@@ -485,7 +528,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             table_23 = 23,
             table_24 = 24,
             table_25 = 25,
-
         }
 
         internal enum CueSkins
@@ -579,7 +621,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             GuidelineOriginalLenght = 0f;
             GuidelineOriginalLenghtPos = 0f;
             LongerGuideline = false;
-            
         }
 
         private static void OnDrop()
@@ -627,7 +668,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
             set
             {
-                
                 if (!Enum.IsDefined(typeof(TableSkins), value))
                 {
                     if (value == (TableSkins)(-1))

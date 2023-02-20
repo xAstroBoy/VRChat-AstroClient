@@ -39,15 +39,27 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
 
         internal void Start()
         {
+            Initialize();
+        }
+
+        internal void Initialize()
+        {
             if (WorldUtils.WorldID.Equals(WorldIds.PoolParlor))
             {
                 var one = gameObject.FindUdonEvent("__0__AuthorizeUsers");
                 if (one != null)
                 {
-                    ClientEventActions.OnRoomLeft += OnRoomLeft;
-                    NetworkingManager = one.UdonBehaviour.ToRawUdonBehaviour();
-                    Initialize_NetworkingManager();
-                    Two = NetworkingManager.udonBehaviour.GetOrAddComponent<PoolParlor_NetworkingManagerReader_Two>();
+                    if (NetworkingManager == null)
+                    {
+                        NetworkingManager = one.UdonBehaviour.ToRawUdonBehaviour();
+                        ClientEventActions.OnRoomLeft += OnRoomLeft;
+                        Initialize_NetworkingManager();
+                        Two = NetworkingManager.udonBehaviour.GetOrAddComponent<PoolParlor_NetworkingManagerReader_Two>();
+                        if(Two != null)
+                        {
+                            Two.Initialize();
+                        }
+                    }
                 }
                 else
                 {
@@ -59,6 +71,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 Destroy(this);
             }
+
         }
 
         private void OnDestroy()
