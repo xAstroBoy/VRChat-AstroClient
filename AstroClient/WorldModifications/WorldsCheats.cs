@@ -41,8 +41,8 @@ namespace AstroClient.WorldModifications
             JustHParty.InitButtons(WorldCheats);
             VoidClub.InitButtons(WorldCheats);
             FBTHeaven.InitButtons(WorldCheats);
-            SuperTowerDefense.InitButtons(WorldCheats);
-            //PoolParlor.InitButtons(WorldCheats);
+            SuperTowerDefense.InitButtons(WorldCheats); 
+            PoolParlor.InitButtons(WorldCheats);
             ClickerGame.InitButtons(WorldCheats);
             PuttPuttPond.InitButtons(WorldCheats);
             
