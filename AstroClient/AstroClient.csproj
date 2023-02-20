@@ -125,8 +125,9 @@
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_MakiKeyboardReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\MakiMaki\QuickDraws\QuickDraws_CustomizationReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_CueReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader_One.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_PoolParlorModuleReader.cs" />
-    <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_NetworkingManagerReader_Two.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PoolParlor\PoolParlor_BilliardsModuleReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_AimAssister.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\PrisonEscapeComponents\PrisonEscape_CellDoorToggler.cs" />

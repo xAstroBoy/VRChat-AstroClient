@@ -171,7 +171,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 Log.Write($"Recognized {Name} World, Patching Skins....");
                 Log.Write("Use the Customization Menu to Access Table and Cue skins!");
 
-                var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "_CanUseTableSkin");
+                var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "__0__CanUseTableSkin");
                 if (BilliardsModuleEvent != null)
                 {
                     BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
@@ -212,7 +212,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     var NetworkingManagerEvent = networkingpath.FindUdonEvent("_OnPlayerPrepareShoot");
                     if (NetworkingManagerEvent != null)
                     {
-                        NetworkingManager = NetworkingManagerEvent.gameObject.GetOrAddComponent<PoolParlor_NetworkingManagerReader>();
+                        NetworkingManager = NetworkingManagerEvent.gameObject.GetOrAddComponent<PoolParlor_NetworkingManagerReader_One>();
                     }
                     else
                     {
@@ -240,7 +240,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 SetupCues();
                 SetupBruteforcerForPopCat();
                 var guideline = Finder.Find("Modules/BilliardsModule/intl.balls/guide/guide_display");
-                if(guideline != null)
+                if (guideline != null)
                 {
                     Guideline = guideline;
                     GuidelineOriginalLenghtPos = guideline.transform.localPosition.x;
@@ -333,7 +333,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static void GetCurrentTable()
         {
             int currentskin = 0;
-            var result = NetworkingManager.tableSkinSynced;
+            var result = NetworkingManager.Two.tableSkinSynced;
             if (result != null)
             {
                 currentskin = (int) result;
@@ -397,22 +397,22 @@ namespace AstroClient.WorldModifications.WorldHacks
         private static void SetTableSkin_BilliardsModule(int value)
         {
             BilliardsModule.tableSkinLocal = value;
-            BilliardsModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
-            BilliardsModule.__0_mp_72681C8A3F190167F4664BA51221AA32_Int32 = value;
-            BilliardsModule.__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte = (byte)value;
-            BilliardsModule.__0_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
+            //BilliardsModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
+            //BilliardsModule.__0_mp_72681C8A3F190167F4664BA51221AA32_Int32 = value;
+            //BilliardsModule.__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte = (byte)value;
+            //BilliardsModule.__0_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
         }
 
         private static void SetTableSkin_PoolParlorModule(int value)
         {
-            PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
-            PoolParlorModule.__1_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
+           // PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
+            //PoolParlorModule.__1_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
         }
 
         private static void SetTableSkin_NetworkingManager(int value)
         {
-            NetworkingManager.tableSkinSynced = (byte)value;
-            NetworkingManager.__0_mp_72681C8A3F190167F4664BA51221AA32_Byte = (byte)value;
+            NetworkingManager.Two.tableSkinSynced = (byte)value;
+            //NetworkingManager.__0_mp_72681C8A3F190167F4664BA51221AA32_Byte = (byte)value;
         }
 
         internal static void SetCueSkin(int skin)
@@ -465,7 +465,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         public static void SetupCues()
         {
-            var cue1 = Finder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0");
+            var cue1 = Finder.Find("Modules/BilliardsModule/intl.cue-0");
             if (cue1 != null)
             {
                 var Primary = cue1.FindObject("primary");
@@ -491,7 +491,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
             }
-            var cue2 = Finder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-1");
+            var cue2 = Finder.Find("Modules/BilliardsModule/intl.cue-1");
             if (cue2 != null)
             {
                 var Primary_2 = cue2.FindObject("primary");
@@ -503,7 +503,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Cue2_Primary.OnPickup = onPickup;
                     Cue2_Primary.OnPickupUseUp = onPickup;
                     Cue2_Primary.OnPickupUseDown = onPickup;
-
                     Cue2_Primary.OnDrop = OnDrop;
                 }
                 if (Secondary_2 != null)
@@ -556,7 +555,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static PoolParlor_CueReader Cue_1 { get; private set; }
 
         internal static PoolParlor_PoolParlorModuleReader PoolParlorModule { get; private set; }
-        internal static PoolParlor_NetworkingManagerReader NetworkingManager { get; private set; }
+        internal static PoolParlor_NetworkingManagerReader_One NetworkingManager { get; private set; }
         internal static PoolParlor_BilliardsModuleReader BilliardsModule { get; private set; }
 
         internal static QMNestedButton PoolParlorCheats { get; set; }
