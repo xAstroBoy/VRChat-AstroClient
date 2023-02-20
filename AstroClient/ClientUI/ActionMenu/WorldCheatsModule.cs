@@ -285,7 +285,7 @@ internal class WorldCheatsModule : AstroEvents
                     CustomSubMenu.AddToggle("Practice mode", PoolParlor.BilliardsModule.isPracticeMode.GetValueOrDefault(false), ToggleValue => { PoolParlor.BilliardsModule.isPracticeMode = ToggleValue; });
                     if (UserIdentifiers.is_xAstroBoy)
                     {
-                        CustomSubMenu.AddButton("Set Holystar Camo", () => { PoolParlor.CurrentTableSkin = PoolParlor.TableSkins.Holystar;});
+                        CustomSubMenu.AddButton("Set Holystar Camo", () => { PoolParlor.CurrentTableSkin = PoolParlor.TableSkins.HolyStar;});
                     }
 
                 });

@@ -186,7 +186,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Log.Warn("failed to Find BilliardsModule");
                 }
 
-                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_SetAuthorizedOwners");
+                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "__0__SetAuthorizedOwners");
                 if (cue_0_unpacked != null)
                 {
                     Cue_0 = cue_0_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
@@ -196,7 +196,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Log.Warn("failed to Find intl.cue-0");
                 }
 
-                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_SetAuthorizedOwners");
+                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "__0__SetAuthorizedOwners");
                 if (cue_1_unpacked != null)
                 {
                     Cue_1 = cue_1_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
@@ -440,13 +440,27 @@ namespace AstroClient.WorldModifications.WorldHacks
             Purple = 3,
             Black = 4,
             Red = 5,
-            Toaster = 6,
-            Chintzy = 7,
-            Yuuta = 8,
-            Holystar = 9,
+            ToastersPlease = 6,
+            Chintzykid = 7,
+            Yuutashoe = 8,
+            metaphira = 13,
+            HolyStar = 9,
             Fre = 10,
-            Sezuha = 11,
-            shiga = 12,
+            Sezuha = 11, 
+            Shigamin = 12, 
+            TheLoneCone = 14,
+            table_15 = 15,
+            table_16 = 16,
+            table_17 = 17,
+            table_18 = 18,
+            table_19 = 19,
+            table_20 = 20,
+            table_21 = 21,
+            table_22 = 22,
+            table_23 = 23,
+            table_24 = 24,
+            table_25 = 25,
+
         }
 
         internal enum CueSkins
@@ -456,11 +470,29 @@ namespace AstroClient.WorldModifications.WorldHacks
             Trickshotter = 2,
             Toaster = 3,
             Yuuta = 4,
-            Chintzy = 5,
-            Meta = 6,
+            Chintzykid = 5,
+            metaphira = 6,
             HolyStar = 7,
             DefaultLight = 8,
             BetaTester = 9,
+            Tumeski = 10,
+            Sezuha = 11,
+            Shigamin = 12,
+            cue_13 = 13,
+            cue_14 = 14,
+            cue_15 = 15,
+            cue_16 = 16,
+            cue_17 = 17,
+            cue_18 = 18,
+            cue_19 = 19,
+            cue_20 = 20,
+            cue_21 = 21,
+            cue_22 = 22,
+            cue_23 = 23,
+            Totally_Not_Tim = 24,
+            TheLoneCone = 25,
+            Blackøut = 26,
+            fantasyprogram = 27,
         }
 
         public static void SetupCues()
@@ -575,7 +607,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (TableSkins)(-1))
                     {
-                        value = TableSkins.shiga;
+                        value = TableSkins.Shigamin;
                     }
                     else
                     {
