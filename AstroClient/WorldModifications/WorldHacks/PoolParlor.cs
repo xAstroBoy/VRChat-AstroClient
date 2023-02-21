@@ -202,6 +202,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (HasEditedWorldConfig) return;
             if (DecoderModule == null) return;
+            var PlayerName = GameInstances.LocalPlayer.GetDisplayName();
             string TableTemplate = null;
             string CueTemplate = null;
             string colortemplate = null;
@@ -222,23 +223,70 @@ namespace AstroClient.WorldModifications.WorldHacks
                         DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"version {version}");
                     }
 
-                    if (PlayerSpooferUtils.Original_DisplayName.IsNotNullOrEmptyOrWhiteSpace())
+                    //announcement	Congratulations to sohwi for winning the most recent tournament! Join the Discord at https://discord.gg/poolparlor or the VRC Group at https://vrc.group/POOL.1053
+                    // add a message to the announcement
+                    if (line.StartsWith("announcement"))
                     {
-                        // color	Chintzykid	rainbow
-                        // once it reaches the color line, replace the name with the original name
-                        if (!HasAddedColorName)
+                        // add the message to the announcement
+                        DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}, World Config Edited by AstroClient <3");
+                        Log.Write($"Added message to the announcement");
+                    }
+
+                    //tournament	1662081433165	TheLoneCone	Tumeski	Saryn	metaphira
+                    // add the current player to the tournament list
+                    if (line.StartsWith("tournament"))
+                    {
+                        // get the current player name
+                        // add the player name to the tournament list
+                        // check if the player name is already in the list
+                        if (!line.Contains(PlayerName))
                         {
-                            if (line.StartsWith("color"))
+                            // add the player name to the tournament list
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}	{PlayerName}");
+                            Log.Write($"Added {PlayerName} to the tournament list");
+                        }
+                    }
+
+                    // moderators	metaphira	Yuutashoe｜兎	ToastersPlease
+                    // add the current player to the moderators list
+                    if (line.StartsWith("moderators"))
+                    {
+                        // get the current player name
+                        // add the player name to the moderators list
+                        // check if the player name is already in the list
+                        if (!line.Contains(PlayerName))
+                        {
+                            // add the player name to the moderators list
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}	{PlayerName}");
+                            Log.Write($"Added {PlayerName} to the moderators list");
+                        }   
+                    }
+
+                    // color	Chintzykid	rainbow
+                    // once it reaches the color line, replace the name with the original name
+                    if (!HasAddedColorName)
+                    {
+                        if (line.StartsWith("color"))
+                        {
+                            // check if Chintzykid is in the line , use it as a template
+                            if (line.Contains("Chintzykid"))
                             {
-                                // use the chintzykid line as a template
-                                colortemplate = line;
-                                // add a new line with the original
-                                var ColoredName = colortemplate.Replace("Chintzykid", PlayerSpooferUtils.Original_DisplayName);
-                                // add the new line to the outputString using string.Replace
-                                DecoderModule.outputString = DecoderModule.outputString.Replace(colortemplate, $"{colortemplate}{Environment.NewLine}{ColoredName}");
-                                Log.Write($"Added Rainbow Username for {PlayerSpooferUtils.Original_DisplayName}");
-                                HasAddedColorName = true;
+                                //colortemplate = line;
+                                //Log.Debug($"Color Template Found {colortemplate}");
+                                // replace with current player name\
+                                var newcolor = line.Replace("Chintzykid", PlayerName);
+                                // replace the old line with the new one
+                                DecoderModule.outputString = DecoderModule.outputString.Replace(line, newcolor);
                             }
+                            //if (colortemplate.IsNotNullOrEmptyOrWhiteSpace())
+                            //{
+                            //    // replace the name with the original name
+                            //    var newcolor = colortemplate.Replace("Chintzykid", PlayerName);
+                            //    // add the new color line to the outputString without removing the old one using string.Replace
+                            //    DecoderModule.outputString = DecoderModule.outputString.Insert(DecoderModule.outputString.IndexOf(line, StringComparison.InvariantCulture), $"{newcolor}{Environment.NewLine}");
+                            //    Log.Write($"Added {PlayerName} to the color list");
+                            //    HasAddedColorName = true;
+                            //}
                         }
                     }
 
