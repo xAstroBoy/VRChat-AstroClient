@@ -92,7 +92,8 @@ namespace AstroClient.UdonUtils.FakeUdon {
             __instance._program = new IUdonProgram(program.Pointer);
 
             var variableTable = __instance.publicVariables.Cast<UdonVariableTable>();
-            foreach (var variableSymbol in variableTable._publicVariables.keys) {
+            foreach (var variableSymbol in variableTable._publicVariables.keys)
+            {
                 if (!symbolTable.HasAddressForSymbol(variableSymbol))
                 {
                     continue;
@@ -116,7 +117,19 @@ namespace AstroClient.UdonUtils.FakeUdon {
                     }
                 }
 
-                heap.SetHeapVariable(symbolAddress, value, declaredType);
+                try
+                {
+                    heap.SetHeapVariable(symbolAddress, value, declaredType);
+                }
+                catch (Exception ex)
+                {
+
+                    Log.Debug($"Failed to set {variableSymbol} , with address {symbolAddress} and type {declaredType.FullName}");
+                    if (value != null)
+                    {
+                        Log.Exception(ex);
+                    }
+                }
             }
 
             // Let UdonManager apply any processing or scans.

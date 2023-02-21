@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Text;
-using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
+﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
 using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
-using AstroClient.Startup.Hooks.EventDispatcherHook.Tools.Ext;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
-using Iced.Intel;
+using System.IO;
+using System.Text.RegularExpressions;
 using VRC.Core;
 using VRC.Udon;
 
@@ -36,14 +34,17 @@ namespace AstroClient.WorldModifications.WorldHacks
             ClientEventActions.OnWorldReveal += OnWorldReveal;
             ClientEventActions.OnEnterWorld += OnWorldEnter;
         }
+
         private void OnWorldEnter(ApiWorld world, ApiWorldInstance instance)
         {
             if (world == null) return;
 
             if (world.id.Equals(WorldIds.PoolParlor))
             {
+                HasSubscribed = true;
                 isCurrentWorld = true;
-                //BlockCallbackProcessor = true;
+                BlockCallbackProcessor = true;
+                Initialize_DecoderModule();
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_Tick");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FixedTick");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("OnSeekSliderChanged");
@@ -61,9 +62,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_BeginPerf");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_EndPerf");
                 EventDispatcher_HandleUdonEvent.IgnoreLogEventKey("_FlushBuffer");
-
-
-                HasSubscribed = true;
             }
         }
 
@@ -109,6 +107,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
         private static bool _BlockCallbackProcessor = false;
+
         private static bool BlockCallbackProcessor
         {
             get => _BlockCallbackProcessor;
@@ -119,12 +118,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                     if (value)
                     {
                         GameObject_RPC_Firewall.EditRule("PoolParlorModule", "_OnDataDecoded", false, false, true);
-                        CallbackProcessor.Add_UdonFirewall_Rule(false, false, true);
                     }
                     else
                     {
                         GameObject_RPC_Firewall.RemoveRule("PoolParlorModule", "_OnDataDecoded");
-
                     }
                 }
                 _BlockCallbackProcessor = value;
@@ -159,21 +156,23 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
-        private static bool hasPatched { get; set; } = false;
+
+        private static bool HasEditedWorldConfig { get; set; } = false;
+
         private static void UdonSendCustomEvent(UdonBehaviour item, string eventkey)
         {
             if (item != null)
             {
-                //if (item.gameObject.name.isMatchWholeWord("PoolParlorModule"))
-                //{
-                //    if (eventkey.Equals("_OnDataDecoded"))
-                //    {
-                //        if (!hasPatched)
-                //        {
-                //            HijackDecodedList();
-                //        }
-                //    }
-                //}
+                if (item.gameObject.name.isMatchWholeWord("PoolParlorModule"))
+                {
+                    if (eventkey.Equals("_OnDataDecoded"))
+                    {
+                        if (!HasEditedWorldConfig)
+                        {
+                            PatchOutputString();
+                        }
+                    }
+                }
 
                 if (item.gameObject.name.isMatchWholeWord("NetworkingManager"))
                 {
@@ -198,150 +197,94 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
-        public static string CurrentDisplayName
-        {
-            get
-            {
-                return PlayerSpooferUtils.Original_DisplayName;
-            }
-        }
 
-        private static void HijackDecodedList()
+        private static void PatchOutputString()
         {
-            if(DecoderModule != null)
+            if (HasEditedWorldConfig) return;
+            if (DecoderModule == null) return;
+            string TableTemplate = null;
+            string CueTemplate = null;
+            string colortemplate = null;
+            bool HasAddedColorName = false;
+            using (StringReader sr = new StringReader(DecoderModule.outputString))
             {
-                var Output = DecoderModule.outputString;
-                // split string into multiple lines
-                var Lines = Output.Split('\n');
-                // rebuild the output string
-                DecoderModule.outputString = "";
-                // generate a new output string based of the old one with our changes
-                // stringbuilder that will be used to rebuild the output string
-                StringBuilder sb = new StringBuilder();
-                foreach (var line in Lines)
+                string line;
+                while ((line = sr.ReadLine()) != null)
                 {
-                    // strip string of /n/r and other characters at the end of the line.
-                    var processedline = line;
+                    //version	1
+                    // get the version number
+                    if (line.StartsWith("version"))
+                    {
+                        // get the number using regex
+                        var version = Regex.Match(line, @"\d+").Value;
+                        Log.Debug($"Fixed Config Version Number {version}");
+                        // replace outputString version line with a fixed one
+                        DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"version {version}");
+                    }
 
-                    Log.Debug($"Processing line \"{line}\" ..."); 
-                    if(line.StartsWith("version"))
+                    if (PlayerSpooferUtils.Original_DisplayName.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        sb.AppendLine("version 1");
-                        continue;
-                    }
-                    if (line.StartsWith("tournament"))
-                    {
-                        Log.Debug("Patched tournament winners");
-                        sb.AppendLine(line + "\t" + CurrentDisplayName);
-                        continue;
-                    }
-                    if (line.StartsWith("announcement"))
-                    {
-                        Log.Debug("Patched announcement");
-                        sb.AppendLine(line + " World Config Edited by AstroClient");
-                        continue;
-                    }
-                    if (line.StartsWith("moderators"))
-                    {
-                        Log.Debug("Patched Moderator List");
-                        sb.AppendLine(line + "\t" + CurrentDisplayName);
-                        continue;
-                    }
-                    if (line.StartsWith("color"))
-                    {
-                        var split = line.Split('\t');
-                        if (split.Length > 1)
+                        // color	Chintzykid	rainbow
+                        // once it reaches the color line, replace the name with the original name
+                        if (!HasAddedColorName)
                         {
-                            if (split[1].Equals("metaphira"))
+                            if (line.StartsWith("color"))
                             {
-                                Log.Debug("Patched Color");
-                                sb.AppendLine(line);
-                                sb.AppendLine("color\t" + CurrentDisplayName + "\t" + "rainbow");
-                                continue;
+                                // use the chintzykid line as a template
+                                colortemplate = line;
+                                // add a new line with the original
+                                var ColoredName = colortemplate.Replace("Chintzykid", PlayerSpooferUtils.Original_DisplayName);
+                                // add the new line to the outputString using string.Replace
+                                DecoderModule.outputString = DecoderModule.outputString.Replace(colortemplate, $"{colortemplate}{Environment.NewLine}{ColoredName}");
+                                Log.Write($"Added Rainbow Username for {PlayerSpooferUtils.Original_DisplayName}");
+                                HasAddedColorName = true;
                             }
                         }
                     }
+
+                    // table	0	~
+                    // once we find the table 0 line, we can use it as a template for the other tables
+                    if (line.StartsWith("table	0	~"))
+                    {
+                        TableTemplate = line;
+                        Log.Debug($"TableTemplate Found {TableTemplate}");
+                    }
+                    // if a line is a table
                     if (line.StartsWith("table"))
                     {
-                        var split = line.Split('\t');
-                        if (split.Length > 2)
+                        // if is not table 0 check if it ends with ~
+                        if (!line.EndsWith("~"))
                         {
-                            if (!split[2].Contains("~"))
-                            {
-                                Log.Debug("Patched Table");
-                                sb.AppendLine(line + "\t" + CurrentDisplayName);
-                                continue;
-                            }
+                            // using the table 0, replace the table number with the current table number
+                            var tableNumber = line.Split('\t')[1];
+                            var newLine = TableTemplate.Replace("0", tableNumber);
+                            Log.Debug($"Replacing {line} with {newLine}");
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, newLine);
                         }
                     }
-                    if (line.StartsWith("contributor-table"))
+
+                    // do the same thing with cues
+                    if (line.StartsWith("cue	0	~"))
                     {
-                        // if ~ is in the name, it means everyone can use it
-                        // if not, it means only the people in the list can use it and we need to add our name to the list
-                        // contributor-table	 username1 username2 6
-
-                        var split = line.Split('\t');
-                        if (split.Length > 1)
-                        {
-                            if (!split[1].Contains("~"))
-                            {
-                                // if the name is not in the list, add it
-                                if (!split[1].Contains(CurrentDisplayName))
-                                {
-                                    // replace the split in the line with the modified one using string.replace
-                                    Log.Debug("Patched Contributor Table");
-                                    sb.AppendLine(line.Replace(split[1], split[1] + "\t" + CurrentDisplayName));
-                                    continue;
-                                }
-                            }
-                        }
-
+                        CueTemplate = line;
+                        Log.Debug($"CueTemplate Found {CueTemplate}");
                     }
                     if (line.StartsWith("cue"))
                     {
-                        var split = line.Split('\t');
-                        if (split.Length > 2)
+                        if (!line.EndsWith("~"))
                         {
-                            // if ~ is in the name, it means everyone can use it
-                            // if not, it means only the people in the list can use it and we need to add our name to the list
-                            if (!split[2].Contains("~"))
-                            {
-                                Log.Debug("Patched Cue");
-                                sb.AppendLine(line + "\t" + CurrentDisplayName);
-                                continue;
-                            }
+                            var cueNumber = line.Split('\t')[1];
+                            var newLine = CueTemplate.Replace("0", cueNumber);
+                            Log.Debug($"Replacing {line} with {newLine}");
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, newLine);
                         }
                     }
-                    if (line.StartsWith("contributor-cue"))
-                    {
-                        var split = line.Split('\t');
-                        if (split.Length > 1)
-                        {
-                            if (!split[1].Contains("~"))
-                            {
-                                // if the name is not in the list, add it
-                                if (!split[1].Contains(CurrentDisplayName))
-                                {
-                                    // replace the split in the line with the modified one using string.replace
-                                    Log.Debug("Patched contributor Cue");
-                                    sb.AppendLine(line.Replace(split[1], split[1] + "\t" + CurrentDisplayName));
-                                    continue;
-                                }
-                            }
-                        }
-
-                    }
-
-                    
-                    sb.AppendLine(line);
                 }
-                DecoderModule.outputString = sb.ToString();
-                BlockCallbackProcessor = false;
-                hasPatched = true;
-                CallbackProcessor.Invoke();
-
-
             }
+
+            HasEditedWorldConfig = true;
+            BlockCallbackProcessor = false;
+            CallbackProcessor.Invoke();
         }
 
         private static void StartANewMatch()
@@ -370,13 +313,13 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
         private static bool isCurrentWorld { get; set; }
+
         private static void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.PoolParlor)
             {
                 isCurrentWorld = true;
 
-                
                 if (PoolParlorCheats != null)
                 {
                     PoolParlorCheats.SetInteractable(true);
@@ -461,18 +404,25 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void Initialize_DecoderModule()
         {
-            var DecoderReader = UdonSearch.FindUdonEvent("DynamicReader", "_ReadPictureStep");
-            if(DecoderReader != null )
+            if (DecoderModule == null)
             {
-                DecoderModule = DecoderReader.gameObject.GetOrAddComponent<PoolParlor_DecoderReader>();
+                Finder.Find("Modules/PrivateModules/DynamicReader").AddToWorldUtilsMenu();
+
+                var DecoderReader = UdonSearch.FindUdonEvent("DynamicReader", "_ReadPictureStep");
+                if (DecoderReader != null)
+                {
+                    DecoderModule = DecoderReader.gameObject.GetOrAddComponent<PoolParlor_DecoderReader>();
+                }
             }
         }
+
         private static void Initialize_PoolParlorModule()
         {
             var PoolParlorModule_unpacked = UdonSearch.FindUdonEvent("PoolParlorModule", "_GetSAOMenu");
             if (PoolParlorModule_unpacked != null)
             {
                 PoolParlorModule = PoolParlorModule_unpacked.gameObject.GetOrAddComponent<PoolParlor_PoolParlorModuleReader>();
+                PoolParlorModule.gameObject.AddToWorldUtilsMenu();
             }
         }
 
@@ -499,7 +449,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     Log.Warn("failed to Find NetworkingManager");
                 }
-
             }
             else
             {
@@ -509,20 +458,20 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void Initialize_CueModule()
         {
-            var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "__0__SetAuthorizedOwners");
-            if (cue_0_unpacked != null)
+            Cue_0_RefreshSkin = UdonSearch.FindUdonEvent("intl.cue-0", "_OnPrimaryPickup");
+            if (Cue_0_RefreshSkin != null)
             {
-                Cue_0 = cue_0_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
+                Cue_0 = Cue_0_RefreshSkin.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
             }
             else
             {
                 Log.Warn("failed to Find intl.cue-0");
             }
 
-            var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "__0__SetAuthorizedOwners");
-            if (cue_1_unpacked != null)
+            Cue_1_RefreshSkin = UdonSearch.FindUdonEvent("intl.cue-1", "_OnPrimaryPickup");
+            if (Cue_1_RefreshSkin != null)
             {
-                Cue_1 = cue_1_unpacked.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
+                Cue_1 = Cue_1_RefreshSkin.gameObject.GetOrAddComponent<PoolParlor_CueReader>();
             }
             else
             {
@@ -676,11 +625,39 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal static void SetTableSkin(int skin)
+        internal static void SetTableSkin(int value)
         {
-            SetTableSkin_BilliardsModule(skin);
-            SetTableSkin_PoolParlorModule(skin);
-            SetTableSkin_NetworkingManager(skin);
+            PoolParlorModule.selectedTableSkin = value;
+            PoolParlorModule.inSkin = value;
+            PoolParlorModule.__1_skin__param = value;
+
+            BilliardsModule.__0_newTableSkin__param = value;
+            BilliardsModule.__0_skin__param = (byte)value;
+            BilliardsModule.tableSkinLocal= value;
+            BilliardsModule.__0_tableSkinSynced__param = (byte)value;
+
+
+            NetworkingManager.Two.__0_newTableSkin__param = (byte)value;
+            NetworkingManager.Two.tableSkinSynced = (byte)value;
+
+            UpdateSettings();
+            RefreshTableSkin();
+        }
+
+        internal static void SetCueSkin(int value)
+        {
+            BilliardsModule.activeCueSkin = value;
+            PoolParlorModule.selectedCueSkin = value;
+
+
+            Cue_0.syncedCueSkin = value;
+            Cue_1.syncedCueSkin = value;
+            UpdateSettings();
+            RefreshCueSkin();
+        }
+
+        internal static void UpdateSettings()
+        {
             if (BilliardModule_TriggerGlobalSettingsUpdated != null)
             {
                 BilliardModule_TriggerGlobalSettingsUpdated.Invoke();
@@ -689,49 +666,26 @@ namespace AstroClient.WorldModifications.WorldHacks
             {
                 NetworkingManager_OnGlobalSettingsChanged.Invoke();
             }
+        }
 
+        internal static void RefreshCueSkin()
+        {
+            if(Cue_0_RefreshSkin != null)
+            {
+                Cue_0_RefreshSkin.Invoke();
+            }
+            if(Cue_1_RefreshSkin != null)
+            {
+                Cue_1_RefreshSkin.Invoke();
+            }
+        }
+
+        internal static void RefreshTableSkin()
+        {
             if (UpdateColorScheme_Table != null)
             {
                 UpdateColorScheme_Table.Invoke();
             }
-        }
-
-        private static void SetTableSkin_BilliardsModule(int value)
-        {
-            BilliardsModule.tableSkinLocal = value;
-            //BilliardsModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
-            //BilliardsModule.__0_mp_72681C8A3F190167F4664BA51221AA32_Int32 = value;
-            //BilliardsModule.__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte = (byte)value;
-            //BilliardsModule.__0_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
-        }
-
-        private static void SetTableSkin_PoolParlorModule(int value)
-        {
-            // PoolParlorModule.__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32 = value;
-            //PoolParlorModule.__1_mp_680845797CF11D637DB85E28135E758C_Int32 = value;
-        }
-
-        private static void SetTableSkin_NetworkingManager(int value)
-        {
-            NetworkingManager.Two.tableSkinSynced = (byte)value;
-            //NetworkingManager.__0_mp_72681C8A3F190167F4664BA51221AA32_Byte = (byte)value;
-        }
-
-        internal static void SetCueSkin(int skin)
-        {
-            SetActiveCueSkin(skin);
-            SetSyncedCueSkin(skin);
-        }
-
-        private static void SetActiveCueSkin(int value)
-        {
-            BilliardsModule.activeCueSkin = value;
-        }
-
-        private static void SetSyncedCueSkin(int value)
-        {
-            Cue_0.syncedCueSkin = value;
-            Cue_1.syncedCueSkin = value;
         }
 
         internal enum TableSkins
@@ -772,8 +726,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             Toaster = 3,
             Yuuta = 4,
             Chintzykid = 5,
-            metaphira = 6,
-            HolyStar = 7,
+            holystar = 6,
+            metaphira = 7,
             DefaultLight = 8,
             BetaTester = 9,
             Tumeski = 10,
@@ -792,8 +746,8 @@ namespace AstroClient.WorldModifications.WorldHacks
             cue_23 = 23,
             Totally_Not_Tim = 24,
             TheLoneCone = 25,
-            Blackøut = 26,
-            fantasyprogram = 27,
+            blahaj = 26,
+            referee = 27,
         }
 
         public static void SetupCues()
@@ -855,7 +809,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             GuidelineOriginalLenght = 0f;
             GuidelineOriginalLenghtPos = 0f;
             LongerGuideline = false;
-            hasPatched = false;
+            HasEditedWorldConfig = false;
         }
 
         private static void OnDrop()
@@ -883,6 +837,8 @@ namespace AstroClient.WorldModifications.WorldHacks
         internal static UdonBehaviour_Cached CloseNewMatchCreation { get; private set; }
         internal static UdonBehaviour_Cached StartMatch { get; private set; }
         internal static UdonBehaviour_Cached ResetMatch { get; private set; }
+        internal static UdonBehaviour_Cached Cue_0_RefreshSkin { get; private set; }
+        internal static UdonBehaviour_Cached Cue_1_RefreshSkin { get; private set; }
 
         internal static PoolParlor_CueReader Cue_0 { get; private set; }
         internal static PoolParlor_CueReader Cue_1 { get; private set; }
@@ -926,7 +882,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static QMSingleButton TableSkinBtn { get; set; }
 
-        private static CueSkins _CurrentCueSkin = CueSkins.DefaultLight;
+        private static CueSkins _CurrentCueSkin = CueSkins.DefaultDark;
 
         internal static CueSkins CurrentCueSkin
         {
@@ -940,7 +896,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (CueSkins)(-1))
                     {
-                        value = CueSkins.fantasyprogram;
+                        value = CueSkins.referee;
                     }
                     else
                     {

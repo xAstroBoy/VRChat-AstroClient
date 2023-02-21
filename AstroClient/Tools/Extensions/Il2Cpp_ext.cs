@@ -1,4 +1,7 @@
-﻿namespace AstroClient.Tools.Extensions
+﻿using Il2CppSystem.Xml;
+using UnhollowerBaseLib;
+
+namespace AstroClient.Tools.Extensions
 {
     using System.Collections.Generic;
     using Il2CppSystem;
@@ -39,5 +42,16 @@
             return result;
         }
 
+        internal static string[] ToManagedArray(this Il2CppStringArray item)
+        {
+            var Result = new List<string>();
+            foreach(var entry in item)
+            {
+                //Log.Debug($"Processing Entry : {entry}");
+                Result.Add(entry);
+            }
+
+            return Result.ToArray();
+        }
     }
 }
