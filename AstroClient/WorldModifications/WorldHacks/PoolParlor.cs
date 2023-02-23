@@ -1,10 +1,10 @@
 ﻿using AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor;
-using AstroClient.AstroMonos.Components.Spoofer;
 using AstroClient.ClientActions;
 using AstroClient.Startup.Hooks.EventDispatcherHook.Handlers;
 using AstroClient.Startup.Hooks.EventDispatcherHook.RPCFirewall;
 using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.Extensions;
+using AstroClient.xAstroBoy.UIPaths;
 using System.IO;
 using System.Text.RegularExpressions;
 using VRC.Core;
@@ -15,7 +15,6 @@ namespace AstroClient.WorldModifications.WorldHacks
     using AstroClient.AstroMonos.Components.Tools.Listeners;
     using AstroClient.Tools.Bruteforcer;
     using AstroClient.xAstroBoy.Utility;
-    using AstroMonos.AstroUdons;
     using CustomClasses;
     using System;
     using System.Collections.Generic;
@@ -227,9 +226,19 @@ namespace AstroClient.WorldModifications.WorldHacks
                     // add a message to the announcement
                     if (line.StartsWith("announcement"))
                     {
-                        // add the message to the announcement
-                        DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}, World Config Edited by AstroClient <3");
-                        Log.Write($"Added message to the announcement");
+                        var message = "World Config Edited by xAstroBoy <3";
+                        // check if the message is already in the announcement
+                        if (!line.Contains(message))
+                        {
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}, {message}");
+                            Log.Write($"Added message to the announcement");
+                        }
+                        else
+                        {
+                            // config already edited, halt and let the event continue
+                            HasEditedWorldConfig = true;
+                            break;
+                        }
                     }
 
                     //tournament	1662081433165	TheLoneCone	Tumeski	Saryn	metaphira
@@ -241,9 +250,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                         // check if the player name is already in the list
                         if (!line.Contains(PlayerName))
                         {
-                            // add the player name to the tournament list
-                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}	{PlayerName}");
-                            Log.Write($"Added {PlayerName} to the tournament list");
+                            // replace metaphira with the current player name
+                            var newline = line.Replace("metaphira", PlayerName);
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, newline);
+                            Log.Debug("Patched Tournament winners"!);
                         }
                     }
 
@@ -251,15 +261,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                     // add the current player to the moderators list
                     if (line.StartsWith("moderators"))
                     {
-                        // get the current player name
-                        // add the player name to the moderators list
-                        // check if the player name is already in the list
                         if (!line.Contains(PlayerName))
                         {
-                            // add the player name to the moderators list
-                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, $"{line}	{PlayerName}");
-                            Log.Write($"Added {PlayerName} to the moderators list");
-                        }   
+                            // replace metaphira with the current player name
+                            var newline = line.Replace("metaphira", PlayerName);
+                            DecoderModule.outputString = DecoderModule.outputString.Replace(line, newline);
+                            Log.Debug("Patched Moderators"!);
+                        }
                     }
 
                     // color	Chintzykid	rainbow
@@ -331,7 +339,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
 
             HasEditedWorldConfig = true;
-            BlockCallbackProcessor = false;
             CallbackProcessor.Invoke();
         }
 
@@ -376,8 +383,14 @@ namespace AstroClient.WorldModifications.WorldHacks
 
                 Log.Write($"Recognized {Name} World, Patching Skins....");
                 Log.Write("Use the Customization Menu to Access Table and Cue skins!");
+                PlayerCameraEditor.PlayerCamera.farClipPlane = 5000f;
+                foreach (var occluder in Resources.FindObjectsOfTypeAll<OcclusionArea>())
+                {
+                    occluder.DestroyMeLocal();
+                }
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 SetGuidelineCheat();
+                MakeMoonWalkable();
                 try
                 {
                     Initialize_DecoderModule();
@@ -431,11 +444,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 catch { }
                 try
                 {
-                    SetupCues();
-                }
-                catch { }
-                try
-                {
                     SetupBruteforcerForPopCat();
                 }
                 catch { }
@@ -446,6 +454,20 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     PoolParlorCheats.SetInteractable(false);
                     PoolParlorCheats.SetTextColor(Color.red);
+                }
+            }
+        }
+
+        private static void MakeMoonWalkable()
+        {
+            var moon = Finder.Find("Pool Parlour/Static/Moon");
+            if (moon != null)
+            {
+                var col = moon.GetOrAddComponent<SphereCollider>();
+                if (col != null)
+                {
+                    col.center = Vector3.zero;
+                    col.radius = 1;
                 }
             }
         }
@@ -578,7 +600,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void SetupBruteforcerForPopCat()
         {
-            var popcat = GameObject.Find("Pool Parlour/Dynamic/EasterEggs/PortablePopCat");
+            var popcat = Finder.Find("Pool Parlour/Dynamic/EasterEggs/PortablePopCat");
             if (popcat != null)
             {
                 var listener = popcat.gameObject.GetOrAddComponent<GameObjectListener>();
@@ -681,9 +703,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             BilliardsModule.__0_newTableSkin__param = value;
             BilliardsModule.__0_skin__param = (byte)value;
-            BilliardsModule.tableSkinLocal= value;
+            BilliardsModule.tableSkinLocal = value;
             BilliardsModule.__0_tableSkinSynced__param = (byte)value;
-
 
             NetworkingManager.Two.__0_newTableSkin__param = (byte)value;
             NetworkingManager.Two.tableSkinSynced = (byte)value;
@@ -696,7 +717,6 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             BilliardsModule.activeCueSkin = value;
             PoolParlorModule.selectedCueSkin = value;
-
 
             Cue_0.syncedCueSkin = value;
             Cue_1.syncedCueSkin = value;
@@ -718,11 +738,11 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal static void RefreshCueSkin()
         {
-            if(Cue_0_RefreshSkin != null)
+            if (Cue_0_RefreshSkin != null)
             {
                 Cue_0_RefreshSkin.Invoke();
             }
-            if(Cue_1_RefreshSkin != null)
+            if (Cue_1_RefreshSkin != null)
             {
                 Cue_1_RefreshSkin.Invoke();
             }
@@ -798,59 +818,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             referee = 27,
         }
 
-        public static void SetupCues()
-        {
-            var cue1 = Finder.Find("Modules/BilliardsModule/intl.cue-0");
-            if (cue1 != null)
-            {
-                var Primary = cue1.FindObject("primary");
-                var Secondary = cue1.FindObject("secondary");
-                // Do  stuff;
-                if (Primary != null)
-                {
-                    if (Primary != null)
-                    {
-                        Cue1_Primary = Primary.gameObject.AddComponent<VRC_AstroPickup>();
-                        Cue1_Primary.OnPickup = onPickup;
-                        Cue1_Primary.OnPickupUseUp = onPickup;
-                        Cue1_Primary.OnPickupUseDown = onPickup;
-                        Cue1_Primary.OnDrop = OnDrop;
-                    }
-                    if (Secondary != null)
-                    {
-                        Cue1_Secondary = Secondary.gameObject.AddComponent<VRC_AstroPickup>();
-                        Cue1_Secondary.OnPickup = onPickup;
-                        Cue1_Secondary.OnPickupUseUp = onPickup;
-                        Cue1_Secondary.OnPickupUseDown = onPickup;
-                        Cue1_Secondary.OnDrop = OnDrop;
-                    }
-                }
-            }
-            var cue2 = Finder.Find("Modules/BilliardsModule/intl.cue-1");
-            if (cue2 != null)
-            {
-                var Primary_2 = cue2.FindObject("primary");
-                var Secondary_2 = cue2.FindObject("secondary");
-                // Do  stuff;
-                if (Primary_2 != null)
-                {
-                    Cue2_Primary = Primary_2.gameObject.AddComponent<VRC_AstroPickup>();
-                    Cue2_Primary.OnPickup = onPickup;
-                    Cue2_Primary.OnPickupUseUp = onPickup;
-                    Cue2_Primary.OnPickupUseDown = onPickup;
-                    Cue2_Primary.OnDrop = OnDrop;
-                }
-                if (Secondary_2 != null)
-                {
-                    Cue2_Secondary = Secondary_2.gameObject.AddComponent<VRC_AstroPickup>();
-                    Cue2_Secondary.OnPickup = onPickup;
-                    Cue2_Secondary.OnPickupUseUp = onPickup;
-                    Cue2_Secondary.OnPickupUseDown = onPickup;
-                    Cue2_Secondary.OnDrop = OnDrop;
-                }
-            }
-        }
-
         private static void OnRoomLeft()
         {
             HasSubscribed = false;
@@ -859,24 +826,6 @@ namespace AstroClient.WorldModifications.WorldHacks
             LongerGuideline = false;
             HasEditedWorldConfig = false;
         }
-
-        private static void OnDrop()
-        {
-        }
-
-        private static void onPickup()
-        {
-            if (OverrideCurrentSkins)
-            {
-                SetCueSkin((int)_CurrentCueSkin);
-            }
-        }
-
-        internal static VRC_AstroPickup Cue1_Primary { get; private set; }
-        internal static VRC_AstroPickup Cue1_Secondary { get; private set; }
-
-        internal static VRC_AstroPickup Cue2_Primary { get; private set; }
-        internal static VRC_AstroPickup Cue2_Secondary { get; private set; }
 
         internal static UdonBehaviour_Cached UpdateColorScheme_Table { get; private set; }
         internal static UdonBehaviour_Cached BilliardModule_TriggerGlobalSettingsUpdated { get; private set; }

@@ -168,20 +168,16 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal string ButtonText_Off { get; set; }
         private UIToggleTooltip _ButtonToolTip;
         internal GameObject ButtonObject { get; set; }
-
-        internal UIToggleTooltip ButtonToolTip
+        private UIToggleTooltip _toolTipCache;
+        public UIToggleTooltip ButtonToolTip
         {
             get
             {
-                if (_ButtonToolTip == null)
-                {
-                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<UIToggleTooltip>(true);
-                }
-
-                return _ButtonToolTip;
+                if (_toolTipCache != null) return _toolTipCache;
+                var attempt1 = (ButtonObject.GetComponent<UIToggleTooltip>() ?? ButtonObject.GetComponentInChildren<UIToggleTooltip>(true)) ?? ButtonObject.AddComponent<UIToggleTooltip>();
+                return attempt1 != null ? _toolTipCache = attempt1 : _toolTipCache;
             }
         }
-
         internal string ToolTipText { get; set; }
 
         internal TextMeshProUGUIPublicBoUnique ButtonTitleMesh { get; set; }
@@ -197,25 +193,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 if (Part1 != null) ButtonsMenu = Part1.FindUIObject("Buttons");
             }
 
-            ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true);
-            var analytics = ButtonObject.GetComponent<VRC.UI.Elements.Analytics.AnalyticsController>();
-            if (analytics != null)
-            {
-                UnityEngine.Object.DestroyImmediate(analytics);
-            }
-            foreach (var oldtooltip in ButtonObject.GetComponents<UiTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip);
-
-            }
-            foreach (var oldtooltip2 in ButtonObject.GetComponents<UIToggleTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip2);
-
-            }
-
-            ButtonObject.EnableComponents(); // FUCK YOU VRCHAT
-
+            ButtonObject = Object.Instantiate(QuickMenuTools.ToggleButtonTemplate.gameObject, ButtonsMenu.transform, true); 
+            ButtonObject.EnableUIComponents();
             ButtonTitleMesh = Extensions.NewText(ButtonObject, "Text_H4");
             ButtonTitleMesh.text = Title;
             ButtonTitleMesh.RemoveComponents<StyleElement>();

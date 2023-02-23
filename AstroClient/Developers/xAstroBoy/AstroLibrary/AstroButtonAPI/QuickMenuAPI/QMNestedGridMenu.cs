@@ -66,7 +66,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
             if (isUserPage)
             {
-                mainButton.GetGameObject().EnableComponents();
+                mainButton.GetGameObject().EnableUIComponents();
             }
         }
 
@@ -110,10 +110,9 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 Object.DestroyImmediate(NestedPart.GetComponentInChildren<CameraMenu>());
             }
             catch { }
-            ActivatePage();
+            NestedPart.EnableUIComponents();
             ButtonsMenu = NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup/Buttons (1)");
             NestedPart.FindObject("Scrollrect/Viewport/VerticalLayoutGroup").gameObject.CleanCameraMenu();
-            NestedPart.ActivateComponents<UnityEngine.Canvas>();
             ButtonsMenu.name = "Buttons";
             NestedPart.ToggleScrollRectOnExistingMenu(true);
             //UnityEngine.GameObject.Destroy(ButtonsMenu.GetComponentInChildren<GridLayoutGroup>());
@@ -131,7 +130,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             mainButton = new QMSingleButton(Parent, btnQMLoc, btnXLocation, btnYLocation, btnText, () =>
             {
                 QuickMenuTools.ShowQuickmenuPage(menuName);
-                ActivatePage();
                 Wing_OnOpenAction.SafetyRaise();
                 OnOpenAction.SafetyRaise();
                 NestedPart.SetActive(true);
@@ -156,14 +154,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             }
         }
 
-        internal void ActivatePage()
-        {
-            NestedPart.ActivateComponents<UnityEngine.Canvas>();
-            NestedPart.ActivateComponents<UnityEngine.CanvasGroup>();
-            NestedPart.ActivateComponents<AudioSource>();
-            NestedPart.ActivateComponents<GraphicRaycaster>();
-            NestedPart.ActivateComponents<RectMask2DEx>();
-        }
 
         internal void SetTextColor(Color buttonTextColor)
         {

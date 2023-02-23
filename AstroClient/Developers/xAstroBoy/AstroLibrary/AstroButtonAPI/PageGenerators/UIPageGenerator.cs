@@ -39,6 +39,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
             if (template != null)
             {
                 result = Object.Instantiate(template, template.transform.parent, true);
+                result.gameObject.EnableUIComponents();
                 if (result != null)
                 {
                     result.name = menuName;
@@ -55,6 +56,19 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators
         }
 
 
+        internal static void SetupPage(this UIPage page, MenuStateController controller, string menuName)
+        {
+            if (page != null)
+            {
+                page.name = menuName;
+                page.field_Protected_MenuStateController_0 = controller;
+                page.SetName(menuName);
+                page.field_Private_Boolean_1 = true;
+                page.field_Private_List_1_UIPage_0 = new List<UIPage>();
+                page.field_Private_List_1_UIPage_0.Add(page);
+                controller.AddPage(page);
+            }
+        }
 
         internal static void AddPage(this MenuStateController controller, UIPage page)
         {

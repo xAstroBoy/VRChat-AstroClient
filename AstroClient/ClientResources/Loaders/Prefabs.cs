@@ -1,10 +1,5 @@
 ﻿namespace AstroClient.ClientResources.Loaders
 {
-    using System.Reflection;
-    using CheetoLibrary.Utility;
-    using ClientAttributes;
-    using Helpers;
-    using Paths;
     using UnhollowerRuntimeLib;
     using UnityEngine;
 
@@ -33,6 +28,7 @@
         }
 
         #endregion Flashlight_normal
+
         #region Flashlight_gold
 
         private static GameObject _Flashlight_gold;
@@ -81,7 +77,6 @@
 
         #endregion PlayerListMod
 
-
         #region PlayerListMenuButton
 
         private static GameObject _PlayerListMenuButton;
@@ -105,8 +100,6 @@
         }
 
         #endregion PlayerListMenuButton
-
-
 
         private static GameObject _WorldButton;
 
@@ -147,6 +140,7 @@
                 return _VRJetpack;
             }
         }
+
         private static GameObject _DesktopJetpack;
 
         /// <summary>
@@ -166,6 +160,7 @@
                 return _DesktopJetpack;
             }
         }
+
         private static GameObject _SpaceShuttle;
 
         /// <summary>
@@ -205,7 +200,6 @@
                 return _WorldButton_Squared;
             }
         }
-
 
         //private static GameObject _EightBall;
 

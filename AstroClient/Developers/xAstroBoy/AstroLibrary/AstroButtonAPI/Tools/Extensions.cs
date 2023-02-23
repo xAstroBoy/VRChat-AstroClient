@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MelonLoader;
+using VRC.UI.Elements.Analytics;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
@@ -227,28 +228,29 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             return null;
         }
 
-        private static List<string> ComponentsToNotDelete { get; } = new List<string>()
+        internal static bool IsObfuscated(this string str)
         {
-            typeof(Button).FullName,
-            typeof(LayoutElement).FullName,
-            typeof(CanvasGroup).FullName,
-            typeof(Image).FullName,
-            typeof(TextMeshProUGUI).FullName,
-            typeof(RectTransform).FullName,
-            typeof(CanvasRenderer).FullName,
-            typeof(VRC.UI.Core.Styles.StyleElement).FullName,
-            typeof(UIToggleTooltip).FullName, 
-            typeof(VRC.UI.Elements.Tooltips.UiTooltip).FullName,
-            typeof(UnityEngine.UI.Toggle).FullName,
-            typeof(UIInvisibleGraphic).FullName,
-            typeof(TextMeshProUGUIPublicBoUnique).FullName,
-            typeof(MonoBehaviourPublicLi1ObUnique).FullName, // BindingComponent
-            typeof(UIWidgets.ImageAdvanced).FullName,
+            foreach (var it in str)
+                if (!char.IsDigit(it) && !((it >= 'a' && it <= 'z') || (it >= 'A' && it <= 'Z')) && it != '_' &&
+                    it != '`' && it != '.' && it != '<' && it != '>')
+                    return true;
 
-        };
+            return false;
+        }
 
-        public static void EnableComponents(this GameObject parent)
+        public static void EnableUIComponents(this GameObject parent)
         {
+
+            parent.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>();
+            parent.RemoveComponents<CameraMenu>();
+            parent.RemoveComponents<AnalyticsController>();
+            parent.RemoveComponents<MonoBehaviourPublicLi1ObUnique>();
+            parent.RemoveComponents<MonoBehaviourPublicBuAcUnique>();
+            parent.RemoveComponents<MonoBehaviourPublicObBuGaTeGaOb1ILGaObUnique>();
+            parent.RemoveComponents<UiTooltip>(); // Votekick handler
+            parent.RemoveComponents<UIToggleTooltip>();
+
+
             #region Button
 
             var Button = parent.GetComponent<Button>();
@@ -442,38 +444,14 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
 
 
-            var childs = parent.GetComponentsInChildren<VRC.UI.Elements.Analytics.AnalyticsController>(true);
-            for (int i = 0; i < childs.Count; i++)
+
+            foreach (var item in parent.GetComponentsInChildren<Behaviour>(true))
             {
-                var name = childs[i].GetIl2CppType().FullName;
-                //Log.Debug($"Found {name}");
-                UnityEngine.Object.DestroyImmediate(childs[i]);
+                
+                item.enabled = true;
             }
-            
-
-
-            //var parentcomps = parent.GetComponents<Component>();
-            //for (int i = 0; i < parentcomps.Count; i++)
-            //{
-            //    var name = parentcomps[i].GetIl2CppType().FullName;
-            //    //Log.Debug($"Found {name}");
-            //    if (!ComponentsToNotDelete.Contains(name))
-            //    {
-            //        UnityEngine.Object.DestroyImmediate(parentcomps[i]);
-            //    }
-            //}
 
             
-            //var childs = parent.GetComponentsInChildren<Component>(true);
-            //for (int i = 0; i < childs.Count; i++)
-            //{
-            //    var name = childs[i].GetIl2CppType().FullName;
-            //    //Log.Debug($"Found {name}");
-            //    if (!ComponentsToNotDelete.Contains(name))
-            //    {
-            //        UnityEngine.Object.DestroyImmediate(childs[i]);
-            //    }
-            //}
         }
 
 
@@ -523,22 +501,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         }
         
 
-        public static void CleanButtonsWingMenu(this GameObject Parent)
-        {
-            var ButtonToDelete = Parent.GetComponentsInChildren<Transform>(true);
-            //foreach (var Button in ButtonToDelete)
-            //{
-            //    if ( Button.name == "Cell_Wing_UserCompact(Clone)" || Button.name == "Cell_Wing_UserCompact(Clone)" || Button.name == "Header_Wing_H3"
-            //        /*|| Button.name == "AV3_Text" || Button.name == "Button_ActionMenu"*/)
-            //        UnityEngine.Object.Destroy(Button.gameObject);
-            //}
-            //foreach (var Button in ButtonToDelete)
-            //{
-            //    if (Button.name.Contains("Wing_Button_") || Button.name == "Expressions_SDK3" || Button.name == "Emotes_SDK2"
-            //        || Button.name == "AV3_Text" || Button.name == "Button_ActionMenu")
-            //        UnityEngine.Object.Destroy(Button.gameObject);
-            //}
-        }
 
         internal static void ShowTabContent(this MenuStateController MenuController, string PageName)
         {
@@ -556,7 +518,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
                             {
                                 if (page.GetName() == PageName)
                                 {
-                                    MenuController.ShowTabContent(i, true);
+                                    MenuController.ShowTabContent(i);
                                     break;
                                 }
                             }
@@ -577,7 +539,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             {
                 QuickMenuTools.QM_Wing_Right.ShowTabContent(pagename.GetMenuName());
             }
-            pagename.SetComponentState(true);
         }
 
 

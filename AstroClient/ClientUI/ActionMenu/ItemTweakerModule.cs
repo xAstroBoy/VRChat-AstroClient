@@ -2,6 +2,8 @@ using AstroClient.ClientActions;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Selector;
 using AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic;
 using AstroClient.Spawnables;
+using AstroClient.Tools.Extensions;
+using AstroClient.Tools.ObjectEditor;
 
 namespace AstroClient.ClientUI.ActionMenu
 {
@@ -29,6 +31,7 @@ namespace AstroClient.ClientUI.ActionMenu
             {
                 CustomSubMenu.AddButton("Spawn Item Tweaker Object Selector Sphere", () => { TweakerSphere.Spawn(); }, null);
                 CustomSubMenu.AddButton("Get Held Item", () => { Tweaker_Object.GetGameObjectToEdit(); }, null);
+                CustomSubMenu.AddButton("Teleport To Item", () => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }, null);
 
                 CustomSubMenu.AddToggle("Lock Item", Tweaker_Object.LockItem, (toggle) => { Tweaker_Object.LockItem = toggle; }, null);
                 CustomSubMenu.AddToggle("AntiTheft", Tweaker_Object.GetGameObjectToEdit().Pickup_Get_AntiTheft(), (toggle) => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AntiTheft(toggle); }, null);
@@ -39,12 +42,6 @@ namespace AstroClient.ClientUI.ActionMenu
                     CustomSubMenu.AddToggle("Use Gravity", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().useGravity, (toggle) => { PhysicsSubmenu.Modified_SetGravity(toggle); }, null);
                     CustomSubMenu.AddToggle("is Kinematic", Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<RigidBodyController>().isKinematic, (toggle) => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(toggle); }, null);
                 });
-                //CustomSubMenu.AddSubMenu("Component Editor", () =>
-                //{
-
-                //});
-
-                // TODO: Add Textures!
             }, Icons.box);
 
             Log.Write("Item Tweaker Module is ready!", Color.Green);

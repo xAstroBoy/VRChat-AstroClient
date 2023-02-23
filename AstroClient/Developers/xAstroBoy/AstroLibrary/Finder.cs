@@ -183,23 +183,5 @@
                 return list;
             }
         }
-
-        /// <summary>
-        /// fixed With knah's UIX Inactive finder.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static Transform InactiveFind(string path)
-        {
-            Transform obj = UnityUtils.FindInactiveObjectInActiveRoot(path);
-
-            if (obj == null)
-            {
-                Log.Warn($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
-                return null;
-            }
-            return obj;
-        }
-
     }
 }

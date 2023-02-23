@@ -49,7 +49,7 @@ namespace AstroClient.Startup.Instance.TagsAssigner
                 var apiuser = player.GetAPIUser();
                 if (apiuser != null)
                 {
-                    if (WorldIdentifier.IsAStreamer(apiuser.id))
+                    if (StreamerIdentifier.IsAStreamer(apiuser.id))
                     {
 
                         player.AddSingleTag("Streamer", SystemColors.Orange);

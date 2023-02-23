@@ -97,6 +97,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         private void OnDestroy()
         {
             ClientEventActions.OnRoomLeft -= OnRoomLeft;
+            Cleanup_NetworkingManager();
         }
 
         private RawUdonBehaviour NetworkingManager { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;

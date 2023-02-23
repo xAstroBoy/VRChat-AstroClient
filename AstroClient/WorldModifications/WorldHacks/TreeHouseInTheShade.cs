@@ -1,14 +1,10 @@
-﻿using AstroClient.AstroMonos.Prefabs;
-using AstroClient.ClientActions;
-using AstroClient.xAstroBoy.Extensions;
+﻿using AstroClient.ClientActions;
 using System.Text;
-using UnityEngine.Animations;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
     using System.Collections;
     using System.Collections.Generic;
-    using Tools.Extensions;
     using UnityEngine;
     using WorldsIds;
     using xAstroBoy;
@@ -218,7 +214,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             while (isCurrentWorld)
             {
                 ShaderSphereRenderer.bounds.Expand(float.MaxValue);
-                // Log.Debug("Forcing Bounds to be higher than 2000f...");
+                Log.Debug("Forcing Bounds to be higher than 2000f...");
                 yield return null;
             }
 
@@ -238,13 +234,57 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            //// Expand the exploration area.
+            // Expand the exploration area.
 
-            //if(ShaderSphere != null)
-            //{
-            //    ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-            //    MelonCoroutines.Start(FixRenderSphere());
-            //}
+            if (ShaderSphere != null)
+            {
+                var meshrenderer = ShaderSphere.GetComponent<MeshFilter>();
+                if (meshrenderer != null)
+                {
+                    var primitive = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    // get the primitive mesh
+                    if (primitive != null)
+                    {
+                        var primitivemesh = primitive.GetComponent<MeshFilter>();
+                        if (primitivemesh != null)
+                        {
+                            // replace meshrenderer mesh with a sphere
+                            meshrenderer.mesh = primitivemesh.mesh;
+                        }
+                        // get rid of the primitive
+                        UnityEngine.Object.Destroy(primitive);
+                    }
+                }
+
+                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+            }
+
+            var soundrange = Finder.Find("ui panel example/Canvas/VRCVideoSync/Sound");
+            // increase audiosource range
+            if (soundrange != null)
+            {
+                var audiosource = soundrange.GetComponent<AudioSource>();
+                if (audiosource != null)
+                {
+                    audiosource.maxDistance = float.MaxValue;
+                }
+                //var onspaudiosource = soundrange.GetComponent<ONSPAudioSource>();
+                //if(onspaudiosource != null)
+                //{
+                //    onspaudiosource.
+                //}
+            }
+            var Time = Finder.Find("ui panel example/Canvas/VRCVideoSync/Time");
+            if (Time != null)
+            {
+                Time.SetActive(true);
+            }
+
+            var camerapanel = Finder.Find("Camera panel");
+            if (camerapanel != null)
+            {
+                camerapanel.SetActive(true);
+            }
             var UpdateText = Finder.Find("ui panel example/Canvas/UpdatesPanel/Extra Text");
             if (UpdateText != null)
             {
@@ -255,7 +295,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     text.text = UpdatedPanelExtraText();
                 }
             }
-
+            var christmasglobe = Finder.Find("Christmas Globe");
+            if(christmasglobe != null)
+            {
+                christmasglobe.SetActive(true);
+            }
             //foreach (var prefab in SceneUtils.DynamicPrefabs)
             //{
             //    if (prefab != null)
@@ -278,6 +322,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             HasSubscribed = true;
             isCurrentWorld = true;
+            SceneUtils.RespawnHeightY = -100000f;
         }
 
         private static string UpdatedPanelExtraText()

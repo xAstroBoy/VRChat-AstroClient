@@ -106,7 +106,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 case "Dashboard":
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection, true);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     break;
 
@@ -130,27 +130,17 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                     }
 
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform, true);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnONText;
                     SetLocation(btnXLocation, btnYLocation);
                     break;
             }
+            ButtonObject.EnableUIComponents();
             var analytics = ButtonObject.GetComponent<VRC.UI.Elements.Analytics.AnalyticsController>();
             if (analytics != null)
             {
                 UnityEngine.Object.DestroyImmediate(analytics);
             }
-            foreach (var oldtooltip in ButtonObject.GetComponents<UiTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip);
-
-            }
-            foreach (var oldtooltip2 in ButtonObject.GetComponents<UIToggleTooltip>())
-            {
-                UnityEngine.Object.DestroyImmediate(oldtooltip2);
-
-            }
-
             ButtonObject.transform.Find("Icon").GetComponentInChildren<UIWidgets.ImageAdvanced>().gameObject.SetActive(false);
             ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
             SetButtonText(defaultstate ? btnONText : btnOffText);

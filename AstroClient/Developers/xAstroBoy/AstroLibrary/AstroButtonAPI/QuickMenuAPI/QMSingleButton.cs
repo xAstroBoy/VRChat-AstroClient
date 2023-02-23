@@ -23,21 +23,16 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal string btnType { get; set; }
 
 
-        private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
-
-        internal VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
+        private VRC.UI.Elements.Tooltips.UiTooltip _toolTipCache;
+        public VRC.UI.Elements.Tooltips.UiTooltip ButtonToolTip
         {
             get
             {
-                if (_ButtonToolTip == null)
-                {
-                    return _ButtonToolTip = ButtonObject.GetGetInChildrens_OrAddComponent<VRC.UI.Elements.Tooltips.UiTooltip>(true);
-                }
-
-                return _ButtonToolTip;
+                if (_toolTipCache != null) return _toolTipCache;
+                var attempt1 = (ButtonObject.GetComponent<VRC.UI.Elements.Tooltips.UiTooltip>() ?? ButtonObject.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>(true)) ?? ButtonObject.AddComponent<VRC.UI.Elements.Tooltips.UiTooltip>();
+                return attempt1 != null ? _toolTipCache = attempt1 : _toolTipCache;
             }
         }
-
         private GameObject ButtonsMenu { get; set; }
         internal GameObject Background { get; set; }
         internal UIWidgets.ImageAdvanced BackgroundImage { get; set; }
@@ -232,7 +227,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 case "Dashboard":
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, QuickMenuTools.MenuDashboard_ButtonsSection);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     break;
@@ -244,7 +239,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
                 case "Menu_SelectedUser_Remote":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Remote.QuickActions.transform);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                     //ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
@@ -252,7 +247,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 
                 case "Menu_SelectedUser_Local":
                     ButtonObject = UnityEngine.Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, MenuAPI_New.QA_SelectedUser_Local.QuickActions.transform);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                    // ButtonObject.FindUIObject("Text_H4").GetComponent<VRC.UI.Core.Styles.StyleElement>().enabled = true;
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
@@ -264,17 +259,13 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                         ButtonsMenu = Part1.FindUIObject("Buttons");
                     }
                     ButtonObject = Object.Instantiate(QuickMenuTools.SingleButtonTemplate.gameObject, ButtonsMenu.transform);
-                    ButtonObject.EnableComponents();
+                    ButtonObject.EnableUIComponents();
                     ButtonObject.name = QMButtonAPI.identifier + "_" + btnType + "_" + btnText;
                     ButtonRect = ButtonObject.GetComponent<RectTransform>();
                     SetLocation(btnXLocation, btnYLocation);
                     break;
 
             }
-            ButtonObject.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>(); // Votekick handler
-            ButtonObject.RemoveComponents<UiTooltip>(); // Votekick handler
-            ButtonObject.RemoveComponents<VRC.UI.Elements.Analytics.AnalyticsController>();
-            ButtonObject.RemoveComponents<UIToggleTooltip>();
             ButtonObject.FindObject("Icon").RemoveComponents<StyleElement>();
             ButtonObject.FindObject("Icon_Secondary").RemoveComponents<StyleElement>();
             var TextRoot  = ButtonObject.FindObject("Text_H4");
@@ -297,7 +288,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             SetButtonText(btnText);
             SetToolTip(btnToolTip);
             SetAction(btnAction);
-            
+            SetToolTip(btnToolTip);
             ButtonObject.transform.Find("Icon").GetComponentInChildren<UIWidgets.ImageAdvanced>().gameObject.SetActive(false);
             Background = ButtonObject.transform.Find("Background").gameObject;
             if (Background != null)
@@ -313,8 +304,10 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 SetTextColor(Color.white);
 
             SetActive(true);
+
             //QMButtonAPI.allSingleButtons.Add(this);
         }
+
 
         internal void SetActive(bool isActive)
         {

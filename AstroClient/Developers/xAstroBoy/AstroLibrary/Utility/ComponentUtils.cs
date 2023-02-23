@@ -71,22 +71,22 @@
                     {
                         if (comp != null)
                         {
-                            UnityEngine.Object.DestroyImmediate(comp);
+                            comp.DestroyMeLocal(true);
                         }
                     }
                 }
             }
-
-            foreach (var child in Parent.transform.Get_All_Childs())
+            var childs1 = Parent.GetComponentsInChildren<T>(true);
+            if (childs1 != null)
             {
-                var comps = child.GetComponents<T>();
-                if (comps == null) continue;
-                if (comps.Length != 0) continue;
-                foreach (var comp in comps)
+                if (childs1.Count != 0)
                 {
-                    if (comp != null)
+                    foreach (var comp in childs1)
                     {
-                        UnityEngine.Object.DestroyImmediate(comp);
+                        if (comp != null)
+                        {
+                            comp.DestroyMeLocal(true);
+                        }
                     }
                 }
             }

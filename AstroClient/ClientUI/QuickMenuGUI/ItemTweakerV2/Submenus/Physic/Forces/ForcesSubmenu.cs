@@ -16,17 +16,17 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Forces
 
             QMNestedGridMenu ForceAddControl = new QMNestedGridMenu(ForceSubMenu, 5, 0, "Tweak Force Amounts", "Force Tweaker Menu!", null, null, null, null);
 
-            ForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Force Power :", delegate (float value)
-            {
-                Force = (int)value;
-            }, "Change Force", 1000, DefaultForce, true);
-            Force = DefaultForce;
+            //ForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Force Power :", delegate (float value)
+            //{
+            //    Force = (int)value;
+            //}, "Change Force", 1000, DefaultForce, true);
+            //Force = DefaultForce;
 
-            SpinForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Spin Power : ", delegate (float value)
-            {
-                SpinForce = (int)value;
-            }, "Change Spin Force", 1000, DefaultForce, true);
-            SpinForce = DefaultSpinForce;
+            //SpinForceSlider = new QMSlider(ForceAddControl.ButtonsMenu.transform, "Spin Power : ", delegate (float value)
+            //{
+            //    SpinForce = (int)value;
+            //}, "Change Spin Force", 1000, DefaultForce, true);
+            //SpinForce = DefaultSpinForce;
 
             _ = new QMSingleButton(ForceSubMenu, 5, 1, "Kill Any Object Forces", new Action(() => { Tweaker_Object.GetGameObjectToEdit().KillForces(); }), "Kill Obj Forces", null, null);
             var right = new QMSingleButton(ForceSubMenu, 4, 2, "→", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Right(); }), string.Empty, null, null);
@@ -41,8 +41,8 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Forces
             _ = new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
         }
 
-        internal static QMSlider ForceSlider { get; private set; }
-        internal static QMSlider SpinForceSlider { get; private set; }
+        //internal static QMSlider ForceSlider { get; private set; }
+        //internal static QMSlider SpinForceSlider { get; private set; }
 
         internal static QMSingleButton ForceAmnt1;
         internal static QMSingleButton SpinForceAmnt1;
@@ -62,10 +62,10 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Forces
                 {
                     ForceAmnt1.SetButtonText("Force : " + value.ToString());
                 }
-                if (ForceSlider != null)
-                {
-                    ForceSlider.SetValue(value);
-                }
+                //if (ForceSlider != null)
+                //{
+                //    ForceSlider.SetValue(value);
+                //}
             }
         }
 
@@ -84,10 +84,10 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.Submenus.Physic.Forces
                 {
                     SpinForceAmnt1.SetButtonText("Spin Force : " + SpinForce.ToString());
                 }
-                if (SpinForceSlider != null)
-                {
-                    SpinForceSlider.SetValue(value);
-                }
+                //if (SpinForceSlider != null)
+                //{
+                //    SpinForceSlider.SetValue(value);
+                //}
             }
         }
 

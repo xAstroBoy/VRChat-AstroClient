@@ -54,6 +54,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         {
             btnType = "_QMTabButton_";
             ButtonObject = Object.Instantiate(QuickMenuTools.TabButtonTemplate.gameObject, QuickMenuTools.TabButtonTemplate.parent, true);
+            ButtonObject.EnableUIComponents();
             var pagename = QMButtonAPI.identifier + btnType + Index;
             ButtonObject.name = pagename;
             _MenuTab = ButtonObject.GetComponent<VRC.UI.Elements.Controls.MenuTab>();

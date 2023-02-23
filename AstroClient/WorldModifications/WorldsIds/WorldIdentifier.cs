@@ -30,7 +30,7 @@ namespace AstroClient.WorldModifications.WorldsIds
 
         private static List<string> WorldIds { get; } = new List<string>();
 
-        internal static bool IsAStreamer(string UserID)
+        internal static bool isCheatWorldSupported(string UserID)
         {
             return WorldIds.Contains(UserID);
         }

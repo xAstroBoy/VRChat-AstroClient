@@ -104,6 +104,10 @@ namespace AstroClient.Tools.Player.Movement.QuickMenu
                 {
                     FreezePlayerOnQMOpenToggle.SetToggleState(value);
                 }
+                if(!value)
+                {
+                    Unfreeze();
+                }
             }
         }
     
