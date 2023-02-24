@@ -1,5 +1,6 @@
 ﻿using AstroClient.ClientActions;
 using System.Text;
+using AstroClient.xAstroBoy.UIPaths;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -223,6 +224,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void FindEverything()
         {
+            var distance = 9999999;
+            PlayerCameraEditor.PlayerCamera.farClipPlane = distance;
             if (TextCooldown != null)
             {
                 var text = TextCooldown.GetComponent<UnityEngine.UI.Text>();
@@ -256,7 +259,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
 
-                ShaderSphere.localScale = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
+                ShaderSphere.localScale = new Vector3(distance, distance, distance);
             }
 
             var soundrange = Finder.Find("ui panel example/Canvas/VRCVideoSync/Sound");
@@ -266,7 +269,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var audiosource = soundrange.GetComponent<AudioSource>();
                 if (audiosource != null)
                 {
-                    audiosource.maxDistance = float.MaxValue;
+                    audiosource.maxDistance = distance;
                 }
                 //var onspaudiosource = soundrange.GetComponent<ONSPAudioSource>();
                 //if(onspaudiosource != null)
