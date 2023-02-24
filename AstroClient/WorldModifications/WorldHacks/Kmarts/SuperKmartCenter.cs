@@ -2,7 +2,9 @@
 using AstroClient.Tools.Extensions;
 using AstroClient.WorldModifications.WorldsIds;
 using System.Collections.Generic;
+using AstroClient.Tools.UdonEditor;
 using AstroClient.xAstroBoy;
+using AstroClient.xAstroBoy.Utility;
 
 namespace AstroClient.WorldModifications.WorldHacks.Kmarts
 {
@@ -98,8 +100,24 @@ namespace AstroClient.WorldModifications.WorldHacks.Kmarts
                     obj.DestroyMeLocal(true);
                 }
             }
+            GetAccessToEverything();
         }
 
+        private static void GetAccessToEverything()
+        {
+            foreach (var udon in WorldUtils.UdonScripts)
+            {
+                var raw = UdonUnpacker_Utils.ToRawUdonBehaviour(udon);
+                if (raw != null)
+                {
+                    try
+                    {
+                        UdonHeapEditor.PatchHeap(raw, "RequireAssociate", false, null, null, false, false);
+                    }
+                    catch { }
+                }
+            }
+        }
         private void OnRoomLeft()
         {
             HasSubscribed = false;

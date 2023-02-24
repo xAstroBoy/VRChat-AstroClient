@@ -1,14 +1,11 @@
-﻿
-
-using System;
-using AstroClient.Tools.Extensions;
+﻿using AstroClient.Tools.Extensions;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
-using Mono.CSharp;
+using System;
 
 namespace AstroClient.xAstroBoy.Utility
 {
-    using System.Collections.Generic;
     using ClientActions;
+    using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
     using VRC.SDKBase;
@@ -19,7 +16,6 @@ namespace AstroClient.xAstroBoy.Utility
         {
             ClientEventActions.OnWorldReveal += OnWorldReveal;
             ClientEventActions.OnRoomLeft += OnRoomLeft;
-
         }
 
         private void OnRoomLeft()
@@ -39,7 +35,7 @@ namespace AstroClient.xAstroBoy.Utility
             {
                 OriginalRespawnHeightY = RespawnHeightY;
             }
-            if(ForbidUserPortals)
+            if (ForbidUserPortals)
             {
                 Log.Debug("This World has User Portals Placement Forbidden! Removing...");
                 ForbidUserPortals = false;
@@ -48,13 +44,13 @@ namespace AstroClient.xAstroBoy.Utility
 
         private static bool HasRespawnHeightYModified = false;
 
-
         internal static void Set_Scene_RespawnHeightY(float NewRespawnHeightY)
         {
-            if(!HasRespawnHeightYModified)
+            if (!HasRespawnHeightYModified)
             {
                 HasRespawnHeightYModified = true;
             }
+            GameInstances.CurrentUser.Set_RespawnHeightY(NewRespawnHeightY);
             RespawnHeightY = NewRespawnHeightY;
         }
 
@@ -63,9 +59,9 @@ namespace AstroClient.xAstroBoy.Utility
             if (HasRespawnHeightYModified)
             {
                 RespawnHeightY = OriginalRespawnHeightY;
+                GameInstances.CurrentUser.Set_RespawnHeightY(OriginalRespawnHeightY);
                 HasRespawnHeightYModified = true;
             }
-
         }
 
         /// <summary>
@@ -75,7 +71,6 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-
                 if (SDK_2 != null)
                 {
                     return SDK_2.ForbidUserPortals;
@@ -91,7 +86,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
             set
             {
-
                 if (SDK_2 != null)
                 {
                     SDK_2.ForbidUserPortals = value;
@@ -101,7 +95,6 @@ namespace AstroClient.xAstroBoy.Utility
                     SDK_3.ForbidUserPortals = value;
                 }
                 RoomUtils.userPortalsForbidden = value;
-
             }
         }
 
@@ -112,12 +105,10 @@ namespace AstroClient.xAstroBoy.Utility
             return scenes.Contains(lower);
         }
 
-
         internal static Transform[] Spawns
         {
             get
             {
-
                 if (SDK_2 != null)
                 {
                     if (SDK_2.spawns != null)
@@ -135,11 +126,11 @@ namespace AstroClient.xAstroBoy.Utility
                 return null;
             }
         }
+
         internal static Vector3 SpawnPosition
         {
             get
             {
-
                 if (SDK_2 != null)
                 {
                     return SDK_2.SpawnPosition;
@@ -151,11 +142,11 @@ namespace AstroClient.xAstroBoy.Utility
                 return default(Vector3);
             }
         }
+
         internal static Transform SpawnLocation
         {
             get
             {
-
                 if (SDK_2 != null)
                 {
                     if (SDK_2.SpawnLocation != null)
@@ -194,9 +185,7 @@ namespace AstroClient.xAstroBoy.Utility
                 }
                 return null;
             }
-            
         }
-
 
         public static int SDKVersion
         {
@@ -215,13 +204,12 @@ namespace AstroClient.xAstroBoy.Utility
         private static float OriginalRespawnHeightY { get; set; } = -100f;
 
         /// <summary>
-        ///  returns RespawnHeightY from Scene descriptor of the current world\
-        ///  Editing this will set only the pickup ones, to set the player's one you need to edit VRCPlayer.field_Private_Single_2
+        ///  returns RespawnHeightY from Scene descriptor of the current world.
         /// </summary>
         internal static float RespawnHeightY
         {
             get
-            { 
+            {
                 if (SDK_2 != null)
                 {
                     return SDK_2.RespawnHeightY;
@@ -235,8 +223,8 @@ namespace AstroClient.xAstroBoy.Utility
                     return -100f;
                 }
             }
-            set
-            { 
+            private set
+            {
                 if (SDK_2 != null)
                 {
                     SDK_2.RespawnHeightY = value;
@@ -255,7 +243,7 @@ namespace AstroClient.xAstroBoy.Utility
         {
             get
             {
-                 if (SDK_2 != null)
+                if (SDK_2 != null)
                 {
                     return SDK_2.ObjectBehaviourAtRespawnHeight;
                 }
@@ -269,7 +257,7 @@ namespace AstroClient.xAstroBoy.Utility
                 }
             }
             set
-            { 
+            {
                 if (SDK_2 != null)
                 {
                     SDK_2.ObjectBehaviourAtRespawnHeight = value;
@@ -280,7 +268,9 @@ namespace AstroClient.xAstroBoy.Utility
                 }
             }
         }
+
         private static VRC_SceneDescriptor _SDK_Base = null;
+
         internal static VRC_SceneDescriptor SDK_Base
         {
             get
@@ -294,19 +284,21 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
         private static VRCSDK2.VRC_SceneDescriptor _SDK_2 = null;
+
         internal static VRCSDK2.VRC_SceneDescriptor SDK_2
         {
             get
             {
-                if(_SDK_2 == null)
+                if (_SDK_2 == null)
                 {
-                   return _SDK_2 = UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>(); 
+                    return _SDK_2 = UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
                 }
                 return _SDK_2;
             }
         }
 
         private static VRC.SDK3.Components.VRCSceneDescriptor _SDK_3 = null;
+
         internal static VRC.SDK3.Components.VRCSceneDescriptor SDK_3
         {
             get
@@ -318,7 +310,6 @@ namespace AstroClient.xAstroBoy.Utility
                 return _SDK_3;
             }
         }
-
 
         private static bool _NoFallHeightLimit = false;
 
@@ -333,12 +324,10 @@ namespace AstroClient.xAstroBoy.Utility
                     {
                         // this is more than enought lol
                         SceneUtils.Set_Scene_RespawnHeightY(-99999);
-                        GameInstances.CurrentUser.Set_RespawnHeightY(-99999);
                     }
                     else
                     {
                         SceneUtils.Restore_DefaultRespawnHeightY();
-                        GameInstances.CurrentUser.Set_RespawnHeightY(SceneUtils.RespawnHeightY);
                     }
                 }
                 else
@@ -356,6 +345,5 @@ namespace AstroClient.xAstroBoy.Utility
 
         internal static QMToggleButton ToggleNoFallHeightLimiter;
         internal static Action OnNoFallHeightLimitToggled { get; set; }
-
     }
 }

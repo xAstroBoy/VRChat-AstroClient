@@ -21,81 +21,21 @@ namespace AstroClient.WorldModifications.WorldHacks
     {
         internal override void RegisterToEvents()
         {
-            ClientEventActions.OnEnterWorld += OnWorldEnter;
             ClientEventActions.OnWorldReveal += OnWorldReveal;
         }
 
-        private void OnWorldEnter(ApiWorld world, ApiWorldInstance instance)
-        {
-            if (world == null) return;
-
-            if (world.id.Equals(WorldIds.Udon_Bird_Santuary))
-            {
-                try
-                {
-                    InstallSkybox();
-                }
-                catch { }
-                try
-                {
-                    FixMoss();
-                }
-                catch { }
-                try
-                {
-                    GetRidOftrash();
-                }
-                catch { }
-                try
-                {
-                    FixWater();
-                }
-                catch { }
-                try
-                {
-                    MakeLandWalkable();
-                }
-                catch { }
-
-                 // make the scenery actually walkable, not ugly 
-            }
-        }
         private void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id.Equals(WorldIds.Udon_Bird_Santuary))
             {
-                SceneUtils.RespawnHeightY = -150f; 
+                SceneUtils.Set_Scene_RespawnHeightY(-150f); 
                 PlayerCameraEditor.PlayerCamera.farClipPlane = 5000f;
                 RenderSettings.fog = false;
-                try
-                {
-                    InstallSkybox();
-                }
-                catch { }
-                try
-                {
-                    FixMoss();
-                }
-                catch { }
-                try
-                {
-                    GetRidOftrash();
-                }
-                catch { }
-                try
-                {
-                    FixWater();
-                }
-                catch { }
-                try
-                {
-                    MakeLandWalkable();
-                }
-                catch { }
-
+                InstallSkybox();
+                FixMoss();
+                GetRidOftrash();
             }
         }
-        private static GameObject MossExpander = null;
         private static string[] Trash = new[]
         {
             "fog",
@@ -142,50 +82,24 @@ namespace AstroClient.WorldModifications.WorldHacks
             var moss = Finder.Find("Mossy Ground");
             if (moss != null)
             {
+                var MossExpander = Finder.Find("Moss Expander");
                 if (MossExpander == null)
                 {
                     // make a primitive plane
                     MossExpander = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     MossExpander.name = "Moss Expander";
                 }
-                if (MossExpander != null)
-                {
-                    MossExpander.transform.position = new Vector3(0f, -1.238f, -1.23f);
-                    var scale = moss.transform.localScale;
-                    scale.x = 250f;
-                    scale.z = 250f;
-                    // get both renderers
-                    var mossRenderer = moss.GetComponent<MeshRenderer>();
-                    var planeRenderer = MossExpander.GetComponent<MeshRenderer>();
-                    // copy the material
-                    planeRenderer.material = mossRenderer.material;
-                }
+                MossExpander.transform.position = new Vector3(0f, -1.238f, -1.23f);
+                moss.transform.localScale.SetX(250f);
+                moss.transform.localScale.SetZ(250f);
+                // get both renderers
+                var mossRenderer = moss.GetComponent<MeshRenderer>();
+                var planeRenderer = MossExpander.GetComponent<MeshRenderer>();
+                // copy the material
+                planeRenderer.material = mossRenderer.material;
 
             }
 
-        }
-
-        private static readonly string[] Lands = new[]
-{
-            "TerrainTestHifi (1)",
-            "TerrainTestHifi",
-            "Terrain (ID_16228)/Terrain_ID_16228",
-        };
-
-
-
-        private static void MakeLandWalkable()
-        {
-            foreach(var item in Lands)
-            {
-                var land = Finder.Find(item);
-                if (land != null)
-                {
-                    land.isStatic = true;
-                    land.GetOrAddComponent<MeshCollider>();
-                }
-
-            }
         }
 
 

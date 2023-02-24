@@ -555,7 +555,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             if (BilliardsModuleEvent != null)
             {
                 BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
-                BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "_TriggerGlobalSettingsUpdated");
+                BilliardModule_TriggerGlobalSettingsUpdated = BilliardsModule.gameObject.FindUdonEvent("BilliardsModule", "__0__TriggerGlobalSettingsUpdated");
                 StartNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyOpen");
                 CloseNewMatchCreation = BilliardsModule.gameObject.FindUdonEvent("_TriggerLobbyClosed");
                 StartMatch = BilliardsModule.gameObject.FindUdonEvent("_TriggerGameStart");

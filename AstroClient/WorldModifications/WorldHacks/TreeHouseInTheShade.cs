@@ -206,6 +206,16 @@ namespace AstroClient.WorldModifications.WorldHacks
                     Spawn_Desktop.gameObject.SetActive(true);
                 }
             }
+
+            // every 8 seconds update the farclipplane of all cameras using a float variable
+            if (Time.frameCount % 240 == 0)
+            {
+                foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
+                {
+                    camera.farClipPlane = FarClipPlane;
+                }
+            }
+
         }
 
         private static IEnumerator FixRenderSphere()
@@ -222,10 +232,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             yield return null;
         }
 
+        private static float FarClipPlane { get; } =  9999999f;
+
         private static void FindEverything()
         {
-            var distance = 9999999;
-            PlayerCameraEditor.PlayerCamera.farClipPlane = distance;
             if (TextCooldown != null)
             {
                 var text = TextCooldown.GetComponent<UnityEngine.UI.Text>();
@@ -237,7 +247,8 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-            // Expand the exploration area.
+            // patch all cameras farclipplane
+
 
             if (ShaderSphere != null)
             {
@@ -259,7 +270,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                     }
                 }
 
-                ShaderSphere.localScale = new Vector3(distance, distance, distance);
+                ShaderSphere.localScale = new Vector3(FarClipPlane, FarClipPlane, FarClipPlane);
             }
 
             var soundrange = Finder.Find("ui panel example/Canvas/VRCVideoSync/Sound");
@@ -269,7 +280,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 var audiosource = soundrange.GetComponent<AudioSource>();
                 if (audiosource != null)
                 {
-                    audiosource.maxDistance = distance;
+                    audiosource.maxDistance = FarClipPlane;
                 }
                 //var onspaudiosource = soundrange.GetComponent<ONSPAudioSource>();
                 //if(onspaudiosource != null)
@@ -325,7 +336,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
             HasSubscribed = true;
             isCurrentWorld = true;
-            SceneUtils.RespawnHeightY = -100000f;
+            PlayerCameraEditor.PlayerCamera.farClipPlane = FarClipPlane;
+            SceneUtils.Set_Scene_RespawnHeightY(-100000f);
         }
 
         private static string UpdatedPanelExtraText()
@@ -337,7 +349,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             text.AppendLine("- removed kali sunset");
             text.AppendLine("- Removed Jetpack Cooldown (AstroClient)");
             text.AppendLine();
-            // text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
+            text.AppendLine("- Expanded Radius of Shader Sphere (AstroClient)");
             text.AppendLine();
             text.AppendLine("visit our other worlds too:");
             text.AppendLine("fractal explorer");
