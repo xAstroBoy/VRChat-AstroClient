@@ -90,8 +90,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MossExpander.name = "Moss Expander";
                 }
                 MossExpander.transform.position = new Vector3(0f, -1.238f, -1.23f);
-                moss.transform.localScale.SetX(250f);
-                moss.transform.localScale.SetZ(250f);
+                var expansion = 150f;
+                var scale = moss.transform.localScale;
+                scale.x = expansion;
+                scale.z = expansion;
+                moss.transform.localScale = scale;
                 // get both renderers
                 var mossRenderer = moss.GetComponent<MeshRenderer>();
                 var planeRenderer = MossExpander.GetComponent<MeshRenderer>();
