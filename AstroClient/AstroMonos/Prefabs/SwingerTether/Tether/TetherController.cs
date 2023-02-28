@@ -21,11 +21,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
             AntiGarbageCollection.Add(this);
         }
 
-        /// <summary>
-        /// "Properties"
-        /// "A TetherProperties script that determines the physical properties of grappling. Can be shared, so that all grapples in a scene share the same properties."
-        /// </summary>
-        internal TetherProperties properties { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal float tetherInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.0f;
         internal bool tethering { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
         internal bool tetheringRigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
@@ -39,7 +34,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
         internal void Update()
         {
-            if (tetherInput > properties.tetherInputDeadzone)
+            if (tetherInput > TetherProperties.tetherInputDeadzone)
             {
                 if (!tethering)
                 {
@@ -47,12 +42,12 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                     RaycastHit hit = new RaycastHit();
 
                     // auto aim in incremental sizes
-                    detected = Physics.Raycast(transform.position, transform.forward, out hit, properties.tetherMaximumLength, properties.tetherDetectionMask);
+                    detected = Physics.Raycast(transform.position, transform.forward, out hit, TetherProperties.tetherMaximumLength, TetherProperties.tetherDetectionMask);
                     if (!detected)
                     {
-                        for (int i = properties.tetherDetectionIncrements; detected == false && i > 0; i--)
+                        for (int i = TetherProperties.tetherDetectionIncrements; detected == false && i > 0; i--)
                         {
-                            detected = Physics.SphereCast(transform.position, properties.tetherDetectionSize / i, transform.forward, out hit, properties.tetherMaximumLength, properties.tetherDetectionMask);
+                            detected = Physics.SphereCast(transform.position, TetherProperties.tetherDetectionSize / i, transform.forward, out hit, TetherProperties.tetherMaximumLength, TetherProperties.tetherDetectionMask);
                         }
                     }
 
@@ -66,7 +61,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                         tetherLength = Vector3.Distance(transform.position, hit.point);
 
                         tethering = true;
-                        tetheringRigidbody = properties.manipulatesRigidbodies && tetherRigidbody != null;
+                        tetheringRigidbody = TetherProperties.manipulatesRigidbodies && tetherRigidbody != null;
                         if (tetheringRigidbody)
                         {
                             tetherObject.TakeOwnership();
@@ -77,10 +72,10 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                 if (tethering)
                 {
                     // unreeling
-                    if (properties.allowUnwinding && !IsInputHeld())
+                    if (TetherProperties.allowUnwinding && !IsInputHeld())
                     {
-                        tetherUnwindRate = properties.unwindRate * (1.0f - ((tetherInput - properties.tetherInputDeadzone) / (properties.tetherHoldDeadzone - properties.tetherInputDeadzone)));
-                        tetherLength = Mathf.Clamp(tetherLength + tetherUnwindRate * Time.deltaTime, 0.0f, properties.tetherMaximumLength);
+                        tetherUnwindRate = TetherProperties.unwindRate * (1.0f - ((tetherInput - TetherProperties.tetherInputDeadzone) / (TetherProperties.tetherHoldDeadzone - TetherProperties.tetherInputDeadzone)));
+                        tetherLength = Mathf.Clamp(tetherLength + tetherUnwindRate * Time.deltaTime, 0.0f, TetherProperties.tetherMaximumLength);
                     }
 
                     Vector3 worldTetherPoint = GetTetherPoint();
@@ -89,17 +84,17 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                     // we are beyond the tether length, so project our velocity along the invisible sphere and push us back inside
                     if (distance > tetherLength)
                     {
-                        if (!tetheringRigidbody || (tetheringRigidbody && properties.playerMass <= tetherRigidbody.mass))
+                        if (!tetheringRigidbody || (tetheringRigidbody && TetherProperties.playerMass <= tetherRigidbody.mass))
                         {
                             Vector3 normal = worldTetherPoint - transform.position;
                             normal = normal.normalized;
 
-                            Vector3 spring = normal * (distance - tetherLength) * properties.tetherSpringFactor;
-                            spring = Vector3.ClampMagnitude(spring * Time.deltaTime, properties.tetherMaximumSpringForce);
+                            Vector3 spring = normal * (distance - tetherLength) * TetherProperties.tetherSpringFactor;
+                            spring = Vector3.ClampMagnitude(spring * Time.deltaTime, TetherProperties.tetherMaximumSpringForce);
 
                             Vector3 velocity = GameInstances.LocalPlayer.GetVelocity();
                             Vector3 projected = Vector3.ProjectOnPlane(velocity, normal);
-                            GameInstances.LocalPlayer.SetVelocity(Vector3.MoveTowards(velocity, projected, properties.tetherProjectionRate * Time.deltaTime) + spring);
+                            GameInstances.LocalPlayer.SetVelocity(Vector3.MoveTowards(velocity, projected, TetherProperties.tetherProjectionRate * Time.deltaTime) + spring);
                         }
                     }
                 }
@@ -129,11 +124,12 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                     Vector3 normal = transform.position - worldTetherPoint;
                     normal = normal.normalized;
 
-                    Vector3 spring = normal * (distance - tetherLength) * properties.rigidbodySpringFactor * properties.playerMass;
-                    spring = Vector3.ClampMagnitude(spring, properties.rigidbodyMaximumSpringForce * properties.playerMass);
+                    Vector3 spring = normal * (distance - tetherLength) * TetherProperties.rigidbodySpringFactor * TetherProperties.playerMass;
+                    spring = Vector3.ClampMagnitude(spring, TetherProperties.rigidbodyMaximumSpringForce * TetherProperties.playerMass);
 
                     Vector3 projected = Vector3.ProjectOnPlane(tetherRigidbody.velocity, normal);
-                    tetherRigidbody.velocity = Vector3.MoveTowards(tetherRigidbody.velocity, projected, properties.rigidbodyProjectionRate * properties.playerMass * Time.deltaTime);
+                    tetherRigidbody.gameObject.TakeOwnership();
+                    tetherRigidbody.velocity = Vector3.MoveTowards(tetherRigidbody.velocity, projected, TetherProperties.rigidbodyProjectionRate * TetherProperties.playerMass * Time.deltaTime);
                     tetherRigidbody.AddForceAtPosition(spring, worldTetherPoint);
                 }
             }
@@ -147,7 +143,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
         internal float GetInput()
         {
-            return tetherInput > properties.tetherInputDeadzone ? tetherInput : 0.0f;
+            return tetherInput > TetherProperties.tetherInputDeadzone ? tetherInput : 0.0f;
         }
 
         internal void SetInput(float value)
@@ -157,7 +153,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
         internal bool IsInputHeld()
         {
-            return tetherInput > properties.tetherHoldDeadzone;
+            return tetherInput > TetherProperties.tetherHoldDeadzone;
         }
 
         internal bool GetTethering()
@@ -171,7 +167,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
             {
                 return 1.0f;
             }
-            return tetherLength / properties.tetherMaximumLength;
+            return tetherLength / TetherProperties.tetherMaximumLength;
         }
 
         internal float GetActualTetherLength()
@@ -205,7 +201,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
         internal float GetTetherUnwindRate()
         {
-            return tetherUnwindRate == 0.0f ? 0.0f : tetherUnwindRate / properties.unwindRate;
+            return tetherUnwindRate == 0.0f ? 0.0f : tetherUnwindRate / TetherProperties.unwindRate;
         }
     }
 }

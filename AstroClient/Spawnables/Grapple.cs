@@ -11,19 +11,6 @@ namespace AstroClient.Spawnables
         private static VRTetherPrefabController VRTether { get; set; } = null;
         private static GameObject VRTetherObject { get; set; } = null;
 
-        private static bool _ManipulateRigidbodies = false;
-        internal static bool ManipulateRigidbodies
-        {
-            get => _ManipulateRigidbodies;
-            set
-            {
-                _ManipulateRigidbodies = value;
-                if (VRTether != null)
-                {
-                    VRTether.Properties.manipulatesRigidbodies = value;
-                }
-            }   
-        } 
         internal static void SpawnVR()
         {
             if (VRTetherObject != null)
@@ -40,10 +27,6 @@ namespace AstroClient.Spawnables
                 VRTetherObject = Object.Instantiate(ClientResources.Loaders.Prefabs.Grapple_VR, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
                 VRTetherObject.AddToWorldUtilsMenu();
                 VRTether = ComponentUtils.GetOrAddComponent<VRTetherPrefabController>(VRTetherObject);
-                if(VRTether != null)
-                {
-                    VRTether.Properties.manipulatesRigidbodies = ManipulateRigidbodies;
-                }
                 ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(VRTetherObject);
             }
         }

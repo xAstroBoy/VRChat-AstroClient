@@ -23,7 +23,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
         }
 
 
-        internal TetherProperties Properties { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal TrackedObject HeadRig { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         internal TetherController LeftController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
@@ -47,8 +46,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
         {
             if (Root != null)
             {
-                Properties = Root.GetOrAddComponent<TetherProperties>();
-
                 if (Root_HeadRig != null)
                 {
                     HeadRig = Root_HeadRig.GetOrAddComponent<TrackedObject>();
@@ -63,10 +60,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                 if (Root_LeftTetherPickup_Forward_Controller != null)
                 {
                     LeftController = Root_LeftTetherPickup_Forward_Controller.GetOrAddComponent<TetherController>();
-                    if (LeftController != null)
-                    {
-                        LeftController.properties = Properties;
-                    }
                 }
                 if (Root_LeftTetherPickup != null)
                 {
@@ -74,6 +67,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                     if (LeftTetherPickup != null)
                     {
                         LeftTetherPickup.PickupController.ForceComponent = true;
+                        LeftTetherPickup.PickupController.EditMode = true;
                         LeftTetherPickup.PickupController.MomentumTransferMethod = ForceMode.Force;
                         LeftTetherPickup.PickupController.DisallowTheft = false;
                         LeftTetherPickup.PickupController.ExactGun = Root_LeftTetherPickup;
@@ -131,10 +125,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                 if (Root_RightTetherPickup_Forward_Controller != null)
                 {
                     RightController = Root_RightTetherPickup_Forward_Controller.GetOrAddComponent<TetherController>();
-                    if (RightController != null)
-                    {
-                        RightController.properties = Properties;
-                    }
                 }
                 if (Root_RightTetherPickup != null)
                 {
@@ -142,6 +132,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                     if (RightTetherPickup != null)
                     {
                         RightTetherPickup.PickupController.ForceComponent = true;
+                        RightTetherPickup.PickupController.EditMode = true;
                         RightTetherPickup.PickupController.MomentumTransferMethod = ForceMode.Force;
                         RightTetherPickup.PickupController.DisallowTheft = false;
                         RightTetherPickup.PickupController.ExactGun = Root_RightTetherPickup;

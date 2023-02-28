@@ -1,3 +1,4 @@
+using AstroClient.AstroMonos.Prefabs.SwingerTether.Tether;
 using AstroClient.ClientActions;
 using AstroClient.Spawnables;
 using AstroClient.xAstroBoy.Utility;
@@ -68,7 +69,7 @@ namespace AstroClient.ClientUI.ActionMenu
                             // currently not implemented .
                         }
                     }, null);
-                    CustomSubMenu.AddToggle("Pickup Tether Grab", Grapple.ManipulateRigidbodies, value => Grapple.ManipulateRigidbodies = value);
+                    CustomSubMenu.AddToggle("Pickup Tether Grab", TetherProperties.manipulatesRigidbodies, value => TetherProperties.manipulatesRigidbodies = value);
 
 
                 });
