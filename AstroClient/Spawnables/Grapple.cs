@@ -11,7 +11,19 @@ namespace AstroClient.Spawnables
         private static VRTetherPrefabController VRTether { get; set; } = null;
         private static GameObject VRTetherObject { get; set; } = null;
 
-        internal static bool ManipulateRigidbodies { get; set; } = false;
+        private static bool _ManipulateRigidbodies = false;
+        internal static bool ManipulateRigidbodies
+        {
+            get => _ManipulateRigidbodies;
+            set
+            {
+                _ManipulateRigidbodies = value;
+                if (VRTether != null)
+                {
+                    VRTether.Properties.manipulatesRigidbodies = value;
+                }
+            }   
+        } 
         internal static void SpawnVR()
         {
             if (VRTetherObject != null)
