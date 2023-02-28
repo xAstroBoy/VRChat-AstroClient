@@ -72,7 +72,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
 
                 });
-            }, ClientResources.Loaders.Icons.shuttle);
+            });
 
             Log.Write("Spawnable Module is ready!", Color.Green);
         }
