@@ -263,7 +263,19 @@
                 return _buttonandsliders;
             }
         }
-
+        private static AssetBundle _Grapple;
+        internal static AssetBundle Grapple
+        {
+            get
+            {
+                if (_Grapple == null)
+                {
+                    _Grapple = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}Grapple.assetbundle"), 0u);
+                    _Grapple.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _Grapple;
+            }
+        }
         //private static AssetBundle _EightBall;
         //internal static AssetBundle EightBall
         //{

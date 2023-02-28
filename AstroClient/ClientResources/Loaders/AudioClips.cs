@@ -105,6 +105,76 @@
 
         #endregion WorldButton_clickUpAudioClip      
 
+        #region Grapple_hit
 
+        private static AudioClip _Grapple_hit;
+
+        /// <summary>
+        ///     Loads Grapple hit bundle in resources as AudioClip Object
+        /// </summary>
+        internal static AudioClip Grapple_hit
+        {
+            get
+            {
+                if (_Grapple_hit == null)
+                {
+                    _Grapple_hit = Bundles.Grapple.LoadAsset_Internal("assets/tether/assets/audio/hit.ogg", Il2CppType.Of<AudioClip>()).Cast<AudioClip>();
+                    _Grapple_hit.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Grapple_hit;
+                }
+
+                return _Grapple_hit;
+            }
+        }
+
+        #endregion Grapple_hit      
+
+        #region Grapple_lock
+
+        private static AudioClip _Grapple_lock;
+
+        /// <summary>
+        ///     Loads Grapple lock bundle in resources as AudioClip Object
+        /// </summary>
+        internal static AudioClip Grapple_lock
+        {
+            get
+            {
+                if (_Grapple_lock == null)
+                {
+                    _Grapple_lock = Bundles.Grapple.LoadAsset_Internal("assets/tether/assets/audio/lock.ogg", Il2CppType.Of<AudioClip>()).Cast<AudioClip>();
+                    _Grapple_lock.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Grapple_lock;
+                }
+
+                return _Grapple_lock;
+            }
+        }
+
+        #endregion Grapple_lock      
+
+        #region Grapple_unwind2
+
+        private static AudioClip _Grapple_unwind2;
+
+        /// <summary>
+        ///     Loads Grapple unwind2 bundle in resources as AudioClip Object
+        /// </summary>
+        internal static AudioClip Grapple_unwind2
+        {
+            get
+            {
+                if (_Grapple_unwind2 == null)
+                {
+                    _Grapple_unwind2 = Bundles.Grapple.LoadAsset_Internal("assets/tether/assets/audio/unwind2.ogg", Il2CppType.Of<AudioClip>()).Cast<AudioClip>();
+                    _Grapple_unwind2.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Grapple_unwind2;
+                }
+
+                return _Grapple_unwind2;
+            }
+        }
+
+        #endregion Grapple_unwind2      
     }
 }

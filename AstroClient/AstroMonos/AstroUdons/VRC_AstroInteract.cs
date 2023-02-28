@@ -131,7 +131,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 _InteractionText = value;
                 if (UdonBehaviour != null)
                 {
-                    UdonBehaviour.InteractionText = value                    ;
+                    UdonBehaviour.InteractionText = value;
                 }
             }
         }

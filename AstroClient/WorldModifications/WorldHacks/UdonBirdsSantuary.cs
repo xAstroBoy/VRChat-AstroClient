@@ -1,4 +1,5 @@
-﻿using AstroClient.ClientActions;
+﻿using System.Collections;
+using AstroClient.ClientActions;
 using AstroClient.CustomClasses;
 using AstroClient.Tools.Extensions;
 using AstroClient.Tools.Skybox;
@@ -17,7 +18,7 @@ namespace AstroClient.WorldModifications.WorldHacks
     using xAstroBoy;
     using xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 
-    internal class Udon_Bird_Santuary : AstroEvents
+    internal class UdonBirdsSantuary : AstroEvents
     {
         internal override void RegisterToEvents()
         {
@@ -28,6 +29,7 @@ namespace AstroClient.WorldModifications.WorldHacks
         {
             if (id.Equals(WorldIds.Udon_Bird_Santuary))
             {
+                isCurrentWorld = true;
                 SceneUtils.Set_Scene_RespawnHeightY(-150f); 
                 PlayerCameraEditor.PlayerCamera.farClipPlane = 5000f;
                 RenderSettings.fog = false;
@@ -35,6 +37,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 FixMoss();
                 GetRidOftrash();
             }
+            isCurrentWorld = false;
         }
         private static string[] Trash = new[]
         {
@@ -52,6 +55,8 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         }
 
+        
+
         private static void GetRidOftrash()
         {
             foreach (var item in Trash)
@@ -63,24 +68,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
         }
-        private static void FixWater()
-        {
-            var water = Finder.Find("Water");
-            if (water != null)
-            {
-                // expand it first .
-                var scale = water.transform.localScale;
-                scale.y = 999999f;
-                scale.x = 999999f;
-                water.transform.localScale = scale;
-            }
-
-        }
 
         private static void FixMoss()
         {
-            var moss = Finder.Find("Mossy Ground");
-            if (moss != null)
+            var MossyGround = Finder.Find("Mossy Ground");
+            if (MossyGround != null)
             {
                 var MossExpander = Finder.Find("Moss Expander");
                 if (MossExpander == null)
@@ -90,13 +82,10 @@ namespace AstroClient.WorldModifications.WorldHacks
                     MossExpander.name = "Moss Expander";
                 }
                 MossExpander.transform.position = new Vector3(0f, -1.238f, -1.23f);
-                var expansion = 150f;
-                var scale = moss.transform.localScale;
-                scale.x = expansion;
-                scale.z = expansion;
-                moss.transform.localScale = scale;
+                MossExpander.transform.localScale = MossExpander.transform.localScale.SetX(MossExpanderExpansion);
+                MossExpander.transform.localScale = MossExpander.transform.localScale.SetZ(MossExpanderExpansion);
                 // get both renderers
-                var mossRenderer = moss.GetComponent<MeshRenderer>();
+                var mossRenderer = MossyGround.GetComponent<MeshRenderer>();
                 var planeRenderer = MossExpander.GetComponent<MeshRenderer>();
                 // copy the material
                 planeRenderer.material = mossRenderer.material;
@@ -106,5 +95,10 @@ namespace AstroClient.WorldModifications.WorldHacks
         }
 
 
+
+
+        private static float MossExpanderExpansion { get; } = 150f;
+
+        private static bool isCurrentWorld{ get; set; }
     }
 }

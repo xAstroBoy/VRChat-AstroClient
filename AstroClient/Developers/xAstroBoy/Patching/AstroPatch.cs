@@ -461,11 +461,11 @@ namespace AstroClient.xAstroBoy.Patching
             {
                 if (isMethodInfoPatch)
                 {
-                    DoPatch_info(this);
+                    this.DoPatch_info(this);
                 }
                 else
                 {
-                    DoPatch_base(this);
+                    this.DoPatch_base(this);
                 }
             }
         }

@@ -200,6 +200,45 @@
                 return _WorldButton_Squared;
             }
         }
+        private static GameObject _Grapple_VR;
+
+        /// <summary>
+        ///     Loads Grapple VR bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject Grapple_VR
+        {
+            get
+            {
+                if (_Grapple_VR == null)
+                {
+                    _Grapple_VR = Bundles.Grapple.LoadAsset_Internal("assets/tether/tethervr.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _Grapple_VR.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Grapple_VR;
+                }
+
+                return _Grapple_VR;
+            }
+        }
+
+        private static GameObject _Grapple_Desktop;
+
+        /// <summary>
+        ///     Loads Grapple Desktop bundle in resources as Prefab Object
+        /// </summary>
+        internal static GameObject Grapple_Desktop
+        {
+            get
+            {
+                if (_Grapple_Desktop == null)
+                {
+                    _Grapple_Desktop = Bundles.Grapple.LoadAsset_Internal("assets/tether/tetherdesktop.prefab", Il2CppType.Of<GameObject>()).Cast<GameObject>();
+                    _Grapple_Desktop.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Grapple_Desktop;
+                }
+
+                return _Grapple_Desktop;
+            }
+        }
 
         //private static GameObject _EightBall;
 

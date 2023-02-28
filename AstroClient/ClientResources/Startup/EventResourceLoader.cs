@@ -24,6 +24,8 @@
             LoadClassResources(typeof(AudioClips));
             LoadClassResources(typeof(LoadScreenPrefabs));
             LoadClassResources(typeof(Icons));
+            LoadClassResources(typeof(Shaders));
+
         }
 
         private void LoadClassResources(Type classtype)
