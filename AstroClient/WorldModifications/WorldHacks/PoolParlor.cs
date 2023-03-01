@@ -855,6 +855,7 @@ namespace AstroClient.WorldModifications.WorldHacks
             GuidelineOriginalLenght = 0f;
             GuidelineOriginalLenghtPos = 0f;
             LongerGuideline = false;
+            BlockCallbackProcessor = false;
             HasEditedWorldConfig = false;
         }
 
