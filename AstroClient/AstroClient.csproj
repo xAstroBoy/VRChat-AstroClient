@@ -313,6 +313,7 @@
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMTabMenu.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\QuickMenuAPI\QMToggleButton.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\AstroButtonAPI\Tools\StyleElementExt.cs" />
+    <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\MeshExt.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Extensions\VRCHandGrasperExtensions.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\RoomUtils.cs" />
     <Compile Include="Developers\xAstroBoy\AstroLibrary\Utility\SceneUtils.cs" />

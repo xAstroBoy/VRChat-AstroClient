@@ -1,4 +1,5 @@
-﻿using VRC.SDKBase;
+﻿using AstroClient.xAstroBoy.Utility;
+using VRC.SDKBase;
 
 namespace AstroClient.Tools.Extensions
 {
@@ -45,6 +46,19 @@ namespace AstroClient.Tools.Extensions
                 }
             }
         }
+        /// <summary>
+        /// Teleports Current Player to Gameobject
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="useRotation"></param>
+        internal static void TeleportTo(this GameObject obj, bool useRotation = true)
+        {
+            if (obj != null)
+            {
+                GameInstances.LocalPlayer.TeleportTo(obj, useRotation);
+            }
+        }
+
 
         internal static void TeleportToTarget(this List<GameObject> list)
         {

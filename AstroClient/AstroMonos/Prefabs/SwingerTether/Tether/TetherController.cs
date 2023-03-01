@@ -42,12 +42,12 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                     RaycastHit hit = new RaycastHit();
 
                     // auto aim in incremental sizes
-                    detected = Physics.Raycast(transform.position, transform.forward, out hit, TetherProperties.tetherMaximumLength, TetherProperties.tetherDetectionMask);
+                    detected = Physics.Raycast(transform.position, transform.forward, out hit, TetherProperties.tetherMaximumRange, TetherProperties.tetherDetectionMask);
                     if (!detected)
                     {
                         for (int i = TetherProperties.tetherDetectionIncrements; detected == false && i > 0; i--)
                         {
-                            detected = Physics.SphereCast(transform.position, TetherProperties.tetherDetectionSize / i, transform.forward, out hit, TetherProperties.tetherMaximumLength, TetherProperties.tetherDetectionMask);
+                            detected = Physics.SphereCast(transform.position, TetherProperties.tetherDetectionSize / i, transform.forward, out hit, TetherProperties.tetherMaximumRange, TetherProperties.tetherDetectionMask);
                         }
                     }
 

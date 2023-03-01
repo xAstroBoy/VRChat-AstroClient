@@ -985,14 +985,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             if (Vents != null)
             {
-                var trigger = Vents.FindObject($"{VentName}/Teleport Trigger/Trigger");
-                if (trigger != null)
+                var TeleportPoint = Vents.FindObject($"{VentName}/Teleport Point");
+                if (TeleportPoint != null)
                 {
-                    var interact = trigger.FindUdonEvent("_interact");
-                    if (interact != null)
-                    {
-                        interact.Invoke();
-                    }
+                    TeleportPoint.TeleportTo(false);
+
                 }
             }
         }
@@ -1006,14 +1003,11 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             if (Vents != null)
             {
-                var trigger = Floor_Vents.FindObject($"{VentName}/Vent Enter/VentMesh");
-                if (trigger != null)
+                var teleportPoint = Floor_Vents.FindObject($"{VentName}/Teleport Point In");
+                if (teleportPoint != null)
                 {
-                    var interact = trigger.FindUdonEvent("_interact");
-                    if (interact != null)
-                    {
-                        interact.Invoke();
-                    }
+
+                    teleportPoint.TeleportTo(false);
                 }
             }
         }

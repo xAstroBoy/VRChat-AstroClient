@@ -48,16 +48,19 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
         }
 
         /// <summary>
-        /// "Tether"
-        /// "Maximum length of a grapple. Also determines how far the grapple gun can shoot."
+        /// "Maximum length of a grapple."
         /// </summary>
-        internal static float tetherMaximumLength { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 20.0f;
+        internal static float tetherMaximumLength { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10.0f;
+        /// <summary>
+        /// "Maximum Range for how far the grapple gun can shoot."
+        /// </summary>
+        internal static float tetherMaximumRange { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 20.0f;
 
         /// <summary>
         /// "Force"
         /// "Force to tug the player back to center with. Gives the grapple a bungee-like springiness."
         /// </summary>
-        internal static float tetherSpringFactor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 45.0f;
+        internal static float tetherSpringFactor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 45.0f; // 45.0f
 
         /// <summary>
         /// "Maximum amount of force the tether will tug the player back to the center with. Use this to prevent the grapple from pulling the player too fast."

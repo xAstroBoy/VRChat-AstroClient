@@ -319,6 +319,29 @@ namespace AstroClient.WorldModifications.WorldHacks
                             DecoderModule.outputString = DecoderModule.outputString.Replace(line, newLine);
                         }
                     }
+                    // contributor-table	ToastersPlease	6
+                    // replace the name of the contributor table with the current player name
+                    if (line.StartsWith("contributor-table"))
+                    {
+                        // get ToastersPlease from the line
+                        var contributorName = line.Split('\t')[1];
+                        // replace any name with the current player name
+                        var newline = line.Replace(contributorName, PlayerName);
+                        DecoderModule.outputString = DecoderModule.outputString.Replace(line, newline);
+                        Log.Debug("Patched Contributor Table Line"!);
+                    }
+                    // contributor-table	ToastersPlease	6
+                    // replace the name of the contributor table with the current player name
+                    if (line.StartsWith("contributor-cue"))
+                    {
+                        // get ToastersPlease from the line
+                        var contributorName = line.Split('\t')[1];
+                        // replace any name with the current player name
+                        var newline = line.Replace(contributorName, PlayerName);
+                        DecoderModule.outputString = DecoderModule.outputString.Replace(line, newline);
+                        Log.Debug("Patched Contributor Cue Line"!);
+                    }
+
 
                     // do the same thing with cues
                     if (line.StartsWith("cue	0	~"))
