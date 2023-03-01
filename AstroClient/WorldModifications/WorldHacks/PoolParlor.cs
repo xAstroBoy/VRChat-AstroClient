@@ -169,6 +169,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                         if (!HasEditedWorldConfig)
                         {
                             PatchOutputString();
+                            BlockCallbackProcessor = false;
                         }
                     }
                 }
@@ -704,29 +705,36 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal static void SelectTableModel(int value)
+        internal static void SelectTableSkin(int value)
         {
             PoolParlorModule.selectedTableSkin = value;
             PoolParlorModule.inSkin = value;
             PoolParlorModule.__0_skin__param = value;
-            PoolParlorModule.selectedTableModel = value;
 
             BilliardsModule.__0_newTableSkin__param = value;
             BilliardsModule.__0_skin__param = (byte)value;
             BilliardsModule.tableSkinLocal = value;
             BilliardsModule.__0_tableSkinSynced__param = (byte)value;
 
+            NetworkingManager.Two.__0_newTableSkin__param = (byte)value;
+            NetworkingManager.Two.tableSkinSynced = (byte)value;
+            UpdateSettings();
+            RefreshTableSkin();
+        }
+        
+        internal static void SelectTableModel(int value)
+        {
+            PoolParlorModule.selectedTableModel = value;
+
             BilliardsModule.__0_newTableModel__param = value;
             BilliardsModule.__0_tableModelSynced__param = (byte)value;
             BilliardsModule.tableModelLocal = value;
 
-
-            NetworkingManager.Two.__0_newTableSkin__param = (byte)value;
-            NetworkingManager.Two.tableSkinSynced = (byte)value;
             NetworkingManager.Two.__0_newTableModel__param = (byte)value;
             NetworkingManager.Two.tableModelSynced = (byte)value;
             UpdateSettings();
             RefreshTableSkin();
+
         }
 
         internal static void SetCueSkin(int value)
@@ -808,7 +816,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         internal enum CueSkins
         {
-            DefaultDark = 0,
+            DarkWood = 0,
             TournamentWinner = 1,
             Trickshotter = 2,
             Toaster = 3,
@@ -821,24 +829,24 @@ namespace AstroClient.WorldModifications.WorldHacks
             Tumeski = 10,
             Sezuha = 11,
             Shigamin = 12,
-            cue_13 = 13,
-            cue_14 = 14,
-            cue_15 = 15,
-            cue_16 = 16,
-            cue_17 = 17,
-            cue_18 = 18,
-            cue_19 = 19,
-            cue_20 = 20,
-            cue_21 = 21,
-            cue_22 = 22,
-            cue_23 = 23,
+            YearOfTheDragon = 13,
+            PurpleFade = 14,
+            RedMist = 15,
+            PinkCamo = 16,
+            LiquidGreen = 17,
+            LiquidFlame = 18,
+            Peacock = 19,
+            White = 20,
+            Black = 21,
+            DarkBlue = 22,
+            Purple = 23,
             Totally_Not_Tim = 24,
             TheLoneCone = 25,
             blahaj = 26,
             referee = 27,
-            cue_28 = 28,
-            cue_29 = 29,
-            cue_30 = 30,
+            RedWood = 28,
+            LightWood = 29,
+            Saryn = 30,
         }
 
         private static void OnRoomLeft()
@@ -896,13 +904,13 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     TableSkinBtn.SetButtonText(value.ToString());
                 }
-                SelectTableModel((int)value);
+                SelectTableSkin((int)value);
             }
         }
 
         internal static QMSingleButton TableSkinBtn { get; set; }
 
-        private static CueSkins _CurrentCueSkin = CueSkins.DefaultDark;
+        private static CueSkins _CurrentCueSkin = CueSkins.DarkWood;
 
         internal static CueSkins CurrentCueSkin
         {
@@ -916,11 +924,11 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (CueSkins)(-1))
                     {
-                        value = CueSkins.cue_30;
+                        value = CueSkins.Saryn;
                     }
                     else
                     {
-                        value = CueSkins.DefaultDark;
+                        value = CueSkins.DarkWood;
                     }
                 }
                 if (CueSkinBtn != null)
