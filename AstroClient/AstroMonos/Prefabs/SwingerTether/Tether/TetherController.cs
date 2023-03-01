@@ -83,7 +83,7 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
                     else if(TetherProperties.AllowReel && !TetherProperties.ReelOut && !IsInputHeld())
                     {
                         tetherUnwindRate = TetherProperties.unwindRate * (1.0f - ((tetherInput - TetherProperties.tetherInputDeadzone) / (TetherProperties.tetherHoldDeadzone - TetherProperties.tetherInputDeadzone)));
-                        tetherLength = Mathf.Clamp(tetherLength - tetherUnwindRate * Time.deltaTime, TetherProperties.TetherMininumLenght, 0.0f);
+                        tetherLength = Mathf.Clamp(tetherLength - tetherUnwindRate * Time.deltaTime, 0.0f, TetherProperties.tetherMaximumLength);
 
                     }
 
