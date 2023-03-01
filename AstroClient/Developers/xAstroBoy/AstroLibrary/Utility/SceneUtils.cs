@@ -329,10 +329,6 @@ namespace AstroClient.xAstroBoy.Utility
         }
 
 
-        internal static bool isSDK2 => SDKVersion == 2;
-
-        internal static bool isSDK3 => SDKVersion == 3;
-
         internal static QMToggleButton ToggleNoFallHeightLimiter;
         internal static Action OnNoFallHeightLimitToggled { get; set; }
     }

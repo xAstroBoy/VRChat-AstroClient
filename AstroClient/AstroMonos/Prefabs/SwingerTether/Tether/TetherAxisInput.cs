@@ -1,6 +1,9 @@
+using System;
+using System.Collections.Generic;
 using AstroClient.ClientAttributes;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 {
@@ -10,6 +13,13 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
     [RegisterComponent]
     public class TetherAxisInput : MonoBehaviour
     {
+        private List<Object> AntiGarbageCollection = new();
+
+        public TetherAxisInput(IntPtr ptr) : base(ptr)
+        {
+            AntiGarbageCollection.Add(this);
+        }
+
         /// <summary>
         /// "TetherController script."
         /// </summary>

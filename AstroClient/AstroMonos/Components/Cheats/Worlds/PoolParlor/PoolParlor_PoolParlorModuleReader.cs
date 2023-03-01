@@ -164,19 +164,26 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_16 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_16");
             Private___gintnl_SystemUInt32_36 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_36");
             Private___gintnl_SystemUInt32_26 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_26");
+            Private___intnl_UnityEngineTransform_213 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_213");
+            Private___intnl_UnityEngineTransform_203 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_203");
             Private___intnl_SystemInt32_15 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_15");
             Private___intnl_SystemInt32_35 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_35");
             Private___intnl_SystemInt32_25 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_25");
             Private___intnl_SystemInt32_45 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_45");
             Private___const_SystemInt64_0 = new AstroUdonVariable<long>(PoolParlorModule, "__const_SystemInt64_0");
-            Private___lcl_tableCount_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_tableCount_SystemInt32_0");
             Private___1_accept__param = new AstroUdonVariable<bool>(PoolParlorModule, "__1_accept__param");
             Private_selectedTableModel = new AstroUdonVariable<int>(PoolParlorModule, "selectedTableModel");
             Private___lcl_saoTableModelsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTableModelsRoot_UnityEngineTransform_0");
+            Private___intnl_UnityEngineTransform_190 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_190");
+            Private___intnl_UnityEngineTransform_180 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_180");
             Private___intnl_UnityEngineTransform_130 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_130");
             Private___intnl_UnityEngineTransform_120 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_120");
             Private___intnl_UnityEngineTransform_110 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_110");
             Private___intnl_UnityEngineTransform_100 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_100");
+            Private___intnl_UnityEngineTransform_170 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_170");
+            Private___intnl_UnityEngineTransform_160 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_160");
+            Private___intnl_UnityEngineTransform_150 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_150");
+            Private___intnl_UnityEngineTransform_140 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_140");
             Private___const_SystemString_167 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_167");
             Private___const_SystemString_177 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_177");
             Private___const_SystemString_147 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_147");
@@ -192,6 +199,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemDateTimeOffset_0 = new AstroUdonVariable<System.DateTimeOffset>(PoolParlorModule, "__intnl_SystemDateTimeOffset_0");
             Private_ping = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "ping");
             Private___2_active__param = new AstroUdonVariable<bool>(PoolParlorModule, "__2_active__param");
+            Private___intnl_UnityEngineUIText_10 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_10");
+            Private___intnl_UnityEngineUIText_20 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_20");
             Private___intnl_TMProTextMeshProUGUI_9 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_9");
             Private___const_SystemString_46 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_46");
             Private___const_SystemString_47 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_47");
@@ -205,17 +214,32 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_49 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_49");
             Private___intnl_SystemSingle_0 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_0");
             Private___intnl_TMProTextMeshProUGUI_2 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_2");
+            Private___const_SystemChar_2 = new AstroUdonVariable<char>(PoolParlorModule, "__const_SystemChar_2");
             Private___intnl_SystemObject_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_0");
+            Private___lcl_me_SystemString_0 = new AstroUdonVariable<string>(PoolParlorModule, "__lcl_me_SystemString_0");
             Private___1_id__param = new AstroUdonVariable<int>(PoolParlorModule, "__1_id__param");
             Private_outCanUse = new AstroUdonVariable<bool>(PoolParlorModule, "outCanUse");
+            Private___intnl_TMProTextMeshProUGUI_61 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_61");
             Private___intnl_TMProTextMeshProUGUI_60 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_60");
+            Private___intnl_TMProTextMeshProUGUI_63 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_63");
+            Private___intnl_TMProTextMeshProUGUI_62 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_62");
+            Private___intnl_TMProTextMeshProUGUI_65 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_65");
+            Private___intnl_TMProTextMeshProUGUI_64 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_64");
+            Private___intnl_TMProTextMeshProUGUI_67 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_67");
+            Private___intnl_TMProTextMeshProUGUI_66 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_66");
+            Private___intnl_TMProTextMeshProUGUI_69 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_69");
+            Private___intnl_TMProTextMeshProUGUI_68 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_68");
+            Private___const_SystemString_267 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_267");
+            Private___const_SystemString_277 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_277");
             Private___const_SystemString_247 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_247");
             Private___const_SystemString_257 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_257");
             Private___const_SystemString_227 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_227");
             Private___const_SystemString_237 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_237");
             Private___const_SystemString_207 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_207");
             Private___const_SystemString_217 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_217");
+            Private___const_SystemString_287 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_287");
             Private_liftModule = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "liftModule");
+            Private_table2Skins = new AstroUdonVariable<int[]>(PoolParlorModule, "table2Skins");
             Private___0_accept__param = new AstroUdonVariable<bool>(PoolParlorModule, "__0_accept__param");
             Private___0_id__param = new AstroUdonVariable<int>(PoolParlorModule, "__0_id__param");
             Private___const_SystemString_0 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_0");
@@ -247,8 +271,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_11 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_11");
             Private___const_SystemInt32_31 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_31");
             Private___const_SystemInt32_21 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_21");
+            Private___const_SystemInt32_41 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_41");
             Private_saoToggleCamera = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoToggleCamera");
+            Private___0_cueSkin__param = new AstroUdonVariable<int>(PoolParlorModule, "__0_cueSkin__param");
             Private___intnl_SystemObject_15 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_15");
+            Private___intnl_SystemObject_14 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_14");
+            Private___intnl_SystemObject_13 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_13");
+            Private___intnl_SystemObject_12 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_12");
+            Private___intnl_SystemObject_11 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_11");
+            Private___intnl_SystemObject_10 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_10");
             Private___intnl_SystemObject_18 = new AstroUdonVariable<UnityEngine.Texture2D[]>(PoolParlorModule, "__intnl_SystemObject_18");
             Private___intnl_SystemSingle_10 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_10");
             Private___intnl_SystemSingle_11 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_11");
@@ -259,6 +290,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_22 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_22");
             Private___intnl_SystemInt32_52 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_52");
             Private___intnl_SystemInt32_42 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_42");
+            Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoModernTableSkinsRoot_UnityEngineTransform_0");
             Private_saoCameras = new AstroUdonVariable<TMPro.TextMeshProUGUI[]>(PoolParlorModule, "saoCameras");
             Private___intnl_SystemSingle_8 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_8");
             Private___gintnl_SystemUInt32_9 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_9");
@@ -286,26 +318,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_98 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_98");
             Private___const_SystemString_99 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_99");
             Private___0_newPhysicsMode__param = new AstroUdonVariable<int>(PoolParlorModule, "__0_newPhysicsMode__param");
+            Private___intnl_VRCUdonUdonBehaviour_28 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_28");
+            Private___intnl_VRCUdonUdonBehaviour_21 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_21");
             Private___intnl_VRCUdonUdonBehaviour_20 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_20");
-            Private___intnl_VRCUdonUdonBehaviour_25 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_25");
+            Private___intnl_VRCUdonUdonBehaviour_22 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_22");
+            Private___intnl_VRCUdonUdonBehaviour_27 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_27");
             Private___lcl_cueCount_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_cueCount_SystemInt32_0");
             Private___intnl_TMProTextMeshProUGUI_7 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_7");
             Private_saoToggleHologram = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoToggleHologram");
+            Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTable4SkinsRoot_UnityEngineTransform_0");
             Private_cueButtonToSkin = new AstroUdonVariable<int[]>(PoolParlorModule, "cueButtonToSkin");
             Private___intnl_VRCUdonUdonBehaviour_7 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_7");
+            Private___const_SystemString_268 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_268");
+            Private___const_SystemString_278 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_278");
             Private___const_SystemString_248 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_248");
             Private___const_SystemString_258 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_258");
             Private___const_SystemString_228 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_228");
             Private___const_SystemString_238 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_238");
             Private___const_SystemString_208 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_208");
             Private___const_SystemString_218 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_218");
-            Private___lcl_tableId_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_tableId_SystemInt32_0");
+            Private___const_SystemString_288 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_288");
             Private___0_usColors__param = new AstroUdonVariable<bool>(PoolParlorModule, "__0_usColors__param");
             Private___intnl_UnityEngineColor_6 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_6");
             Private___1_enabled__param = new AstroUdonVariable<bool>(PoolParlorModule, "__1_enabled__param");
             Private___const_SystemString_5 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_5");
             Private___gintnl_SystemCharArray_1 = new AstroUdonVariable<char[]>(PoolParlorModule, "__gintnl_SystemCharArray_1");
-            Private___1_skin__param = new AstroUdonVariable<int>(PoolParlorModule, "__1_skin__param");
             Private_selectedCamera = new AstroUdonVariable<int>(PoolParlorModule, "selectedCamera");
             Private___intnl_UnityEngineTransform_49 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_49");
             Private___intnl_UnityEngineTransform_48 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_48");
@@ -318,6 +355,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_45 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_45");
             Private___intnl_UnityEngineTransform_44 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_44");
             Private___const_SystemInt32_19 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_19");
+            Private___const_SystemInt32_39 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_39");
             Private___const_SystemInt32_29 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_29");
             Private___gintnl_SystemUInt32_93 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_93");
             Private___gintnl_SystemUInt32_83 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_83");
@@ -328,12 +366,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_13 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_13");
             Private___gintnl_SystemUInt32_33 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_33");
             Private___gintnl_SystemUInt32_23 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_23");
+            Private___intnl_UnityEngineTransform_214 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_214");
+            Private___intnl_UnityEngineTransform_204 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_204");
             Private_inMode = new AstroUdonVariable<int>(PoolParlorModule, "inMode");
             Private___lcl_tableSkinId_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_tableSkinId_SystemInt32_0");
+            Private___intnl_UnityEngineObject_2 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_UnityEngineObject_2");
+            Private___intnl_UnityEngineObject_0 = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "__intnl_UnityEngineObject_0");
             Private_isPolling = new AstroUdonVariable<bool>(PoolParlorModule, "isPolling");
+            Private___intnl_UnityEngineTransform_197 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_197");
+            Private___intnl_UnityEngineTransform_187 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_187");
+            Private___intnl_UnityEngineTransform_137 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_137");
             Private___intnl_UnityEngineTransform_127 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_127");
             Private___intnl_UnityEngineTransform_117 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_117");
             Private___intnl_UnityEngineTransform_107 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_107");
+            Private___intnl_UnityEngineTransform_177 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_177");
+            Private___intnl_UnityEngineTransform_167 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_167");
+            Private___intnl_UnityEngineTransform_157 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_157");
+            Private___intnl_UnityEngineTransform_147 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_147");
             Private_metaverse = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "metaverse");
             Private___intnl_UnityEngineTransform_99 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_99");
             Private___intnl_UnityEngineTransform_98 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_98");
@@ -349,6 +398,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_36 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_36");
             Private___const_SystemInt32_26 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_26");
             Private_physicsMode = new AstroUdonVariable<int>(PoolParlorModule, "physicsMode");
+            Private_table4Skins = new AstroUdonVariable<int[]>(PoolParlorModule, "table4Skins");
+            Private___intnl_UnityEngineTransform_219 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_219");
+            Private___intnl_UnityEngineTransform_209 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_209");
             Private___const_SystemString_162 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_162");
             Private___const_SystemString_172 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_172");
             Private___const_SystemString_142 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_142");
@@ -360,7 +412,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_182 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_182");
             Private___const_SystemString_192 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_192");
             Private_tables = new AstroUdonVariable<UnityEngine.Component[]>(PoolParlorModule, "tables");
-            Private___lcl_renderer_UnityEngineMeshRenderer_0 = new AstroUdonVariable<UnityEngine.MeshRenderer>(PoolParlorModule, "__lcl_renderer_UnityEngineMeshRenderer_0");
             Private___intnl_SystemTimeSpan_0 = new AstroUdonVariable<System.TimeSpan>(PoolParlorModule, "__intnl_SystemTimeSpan_0");
             Private___const_SystemString_169 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_169");
             Private___const_SystemString_179 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_179");
@@ -372,8 +423,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_119 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_119");
             Private___const_SystemString_189 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_189");
             Private___const_SystemString_199 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_199");
+            Private___0_renderer__param = new AstroUdonVariable<UnityEngine.SkinnedMeshRenderer>(PoolParlorModule, "__0_renderer__param");
+            Private___intnl_UnityEngineUIText_15 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_15");
             Private_modModule = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "modModule");
             Private___lcl_saoTableSettings_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTableSettings_UnityEngineTransform_0");
+            Private___lcl_lines_SystemStringArray_1 = new AstroUdonVariable<string[]>(PoolParlorModule, "__lcl_lines_SystemStringArray_1");
             Private___0_enabled__param = new AstroUdonVariable<bool>(PoolParlorModule, "__0_enabled__param");
             Private___const_SystemString_16 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_16");
             Private___const_SystemString_17 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_17");
@@ -386,6 +440,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_18 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_18");
             Private___const_SystemString_19 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_19");
             Private___intnl_SystemSingle_7 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_7");
+            Private___intnl_VRCSDKBaseVRCPlayerApi_0 = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PoolParlorModule, "__intnl_VRCSDKBaseVRCPlayerApi_0");
+            Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0 = new AstroUdonVariable<UnityEngine.SkinnedMeshRenderer>(PoolParlorModule, "__lcl_renderer_UnityEngineSkinnedMeshRenderer_0");
             Private___refl_typeid = new AstroUdonVariable<long>(PoolParlorModule, "__refl_typeid");
             Private___intnl_SystemObject_7 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_7");
             Private_toaster = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "toaster");
@@ -400,23 +456,35 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_39 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_39");
             Private___intnl_TMProTextMeshProUGUI_38 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_38");
             Private___const_SystemString_260 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_260");
+            Private___const_SystemString_270 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_270");
             Private___const_SystemString_240 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_240");
             Private___const_SystemString_250 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_250");
             Private___const_SystemString_220 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_220");
             Private___const_SystemString_230 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_230");
             Private___const_SystemString_200 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_200");
             Private___const_SystemString_210 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_210");
+            Private___const_SystemString_280 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_280");
+            Private___const_SystemString_290 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_290");
             Private___intnl_VRCUdonUdonBehaviour_19 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_19");
+            Private___intnl_VRCUdonUdonBehaviour_18 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_18");
+            Private___intnl_VRCUdonUdonBehaviour_11 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_11");
+            Private___intnl_VRCUdonUdonBehaviour_10 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_10");
+            Private___intnl_VRCUdonUdonBehaviour_12 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_12");
+            Private___intnl_VRCUdonUdonBehaviour_15 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_15");
+            Private___intnl_VRCUdonUdonBehaviour_17 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_17");
+            Private___intnl_VRCUdonUdonBehaviour_16 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_16");
             Private___intnl_VRCUdonUdonBehaviour_2 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_2");
             Private_SAO_COLOR_ENABLED = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "SAO_COLOR_ENABLED");
             Private___1_active__param = new AstroUdonVariable<bool>(PoolParlorModule, "__1_active__param");
             Private___intnl_UnityEngineTransform_5 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_5");
             Private_inSkin = new AstroUdonVariable<int>(PoolParlorModule, "inSkin");
+            Private___intnl_VRCUdonUdonBehaviour_9 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_9");
             Private___intnl_UnityEngineColor_5 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_5");
             Private_decoder = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "decoder");
-            Private___2_owner__param = new AstroUdonVariable<string>(PoolParlorModule, "__2_owner__param");
             Private___const_SystemUInt32_0 = new AstroUdonVariable<uint>(PoolParlorModule, "__const_SystemUInt32_0");
+            Private_deniedPlayers = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "deniedPlayers");
             Private___4_value__param = new AstroUdonVariable<float>(PoolParlorModule, "__4_value__param");
+            Private___intnl_UnityEngineComponent_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_UnityEngineComponent_0");
             Private___intnl_SystemBoolean_81 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_81");
             Private___intnl_SystemBoolean_91 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_91");
             Private___intnl_SystemBoolean_11 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_11");
@@ -445,18 +513,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_14 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_14");
             Private___gintnl_SystemUInt32_34 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_34");
             Private___gintnl_SystemUInt32_24 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_24");
+            Private___intnl_UnityEngineTransform_211 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_211");
+            Private___intnl_UnityEngineTransform_201 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_201");
             Private___const_UnityEngineVector3_0 = new AstroUdonVariable<UnityEngine.Vector3>(PoolParlorModule, "__const_UnityEngineVector3_0");
             Private___intnl_SystemInt32_17 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_17");
             Private___intnl_SystemInt32_37 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_37");
             Private___intnl_SystemInt32_27 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_27");
             Private___intnl_SystemInt32_47 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_47");
+            Private___intnl_UnityEngineTransform_192 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_192");
+            Private___intnl_UnityEngineTransform_182 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_182");
+            Private___intnl_UnityEngineTransform_132 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_132");
             Private___intnl_UnityEngineTransform_122 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_122");
             Private___intnl_UnityEngineTransform_112 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_112");
             Private___intnl_UnityEngineTransform_102 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_102");
+            Private___intnl_UnityEngineTransform_172 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_172");
+            Private___intnl_UnityEngineTransform_162 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_162");
+            Private___intnl_UnityEngineTransform_152 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_152");
+            Private___intnl_UnityEngineTransform_142 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_142");
             Private_outSuccessful = new AstroUdonVariable<bool>(PoolParlorModule, "outSuccessful");
+            Private___intnl_UnityEngineTransform_199 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_199");
+            Private___intnl_UnityEngineTransform_189 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_189");
+            Private___intnl_UnityEngineTransform_139 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_139");
             Private___intnl_UnityEngineTransform_129 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_129");
             Private___intnl_UnityEngineTransform_119 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_119");
             Private___intnl_UnityEngineTransform_109 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_109");
+            Private___intnl_UnityEngineTransform_179 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_179");
+            Private___intnl_UnityEngineTransform_169 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_169");
+            Private___intnl_UnityEngineTransform_159 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_159");
+            Private___intnl_UnityEngineTransform_149 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_149");
             Private___const_SystemString_161 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_161");
             Private___const_SystemString_171 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_171");
             Private___const_SystemString_141 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_141");
@@ -469,8 +553,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_191 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_191");
             Private_SAO_COLOR_DISABLED = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "SAO_COLOR_DISABLED");
             Private_props = new AstroUdonVariable<UnityEngine.GameObject[]>(PoolParlorModule, "props");
+            Private___lcl_Players_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_Players_UnityEngineTransform_0");
             Private___0__intnlparam = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__0__intnlparam");
+            Private___lcl_data_SystemString_0 = new AstroUdonVariable<string>(PoolParlorModule, "__lcl_data_SystemString_0");
             Private_moderators = new AstroUdonVariable<string[]>(PoolParlorModule, "moderators");
+            Private___intnl_UnityEngineUIText_16 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_16");
             Private___const_SystemString_66 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_66");
             Private___const_SystemString_67 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_67");
             Private___const_SystemString_64 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_64");
@@ -497,14 +584,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_44 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_44");
             Private___intnl_TMProTextMeshProUGUI_47 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_47");
             Private___intnl_TMProTextMeshProUGUI_46 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_46");
+            Private___intnl_TMProTextMeshProUGUI_49 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_49");
+            Private___intnl_TMProTextMeshProUGUI_48 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_48");
+            Private___const_SystemString_265 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_265");
+            Private___const_SystemString_275 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_275");
             Private___const_SystemString_245 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_245");
             Private___const_SystemString_255 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_255");
             Private___const_SystemString_225 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_225");
             Private___const_SystemString_235 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_235");
             Private___const_SystemString_205 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_205");
             Private___const_SystemString_215 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_215");
+            Private___const_SystemString_285 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_285");
+            Private___intnl_SystemObject_9 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_9");
             Private___intnl_VRCUdonUdonBehaviour_1 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_1");
             Private___const_SystemString_2 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_2");
+            Private___intnl_SystemBoolean_129 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_129");
+            Private___intnl_SystemBoolean_128 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_128");
             Private___intnl_SystemBoolean_121 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_121");
             Private___intnl_SystemBoolean_120 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_120");
             Private___intnl_SystemBoolean_123 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_123");
@@ -518,6 +613,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___0_tournament__param = new AstroUdonVariable<System.DateTime>(PoolParlorModule, "__0_tournament__param");
             Private___gintnl_SystemCharArray_4 = new AstroUdonVariable<char[]>(PoolParlorModule, "__gintnl_SystemCharArray_4");
             Private___const_SystemSingle_2 = new AstroUdonVariable<float>(PoolParlorModule, "__const_SystemSingle_2");
+            Private___lcl_parts_SystemStringArray_0 = new AstroUdonVariable<string[]>(PoolParlorModule, "__lcl_parts_SystemStringArray_0");
             Private___intnl_UnityEngineColor_0 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_0");
             Private_shouldBlahaj = new AstroUdonVariable<bool>(PoolParlorModule, "shouldBlahaj");
             Private_saoToggleProps = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoToggleProps");
@@ -532,7 +628,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_79 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_79");
             Private_saoCueSkins = new AstroUdonVariable<TMPro.TextMeshProUGUI[]>(PoolParlorModule, "saoCueSkins");
             Private___0_active__param = new AstroUdonVariable<bool>(PoolParlorModule, "__0_active__param");
+            Private___intnl_SystemString_20 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_20");
+            Private___intnl_SystemString_21 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_21");
+            Private___intnl_UnityEngineGameObject_1 = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "__intnl_UnityEngineGameObject_1");
             Private___intnl_UnityEngineGameObject_0 = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "__intnl_UnityEngineGameObject_0");
+            Private_table1Skins = new AstroUdonVariable<int[]>(PoolParlorModule, "table1Skins");
             Private___lcl_playerId_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_playerId_SystemInt32_0");
             Private___intnl_SystemBoolean_84 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_84");
             Private___intnl_SystemBoolean_94 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_94");
@@ -548,15 +648,24 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_23 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_23");
             Private___lcl_hours_SystemSingle_0 = new AstroUdonVariable<float>(PoolParlorModule, "__lcl_hours_SystemSingle_0");
             Private___intnl_UnityEngineComponentArray_1 = new AstroUdonVariable<UnityEngine.Component[]>(PoolParlorModule, "__intnl_UnityEngineComponentArray_1");
+            Private___intnl_UnityEngineTransform_212 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_212");
+            Private___intnl_UnityEngineTransform_202 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_202");
             Private___intnl_SystemInt32_14 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_14");
             Private___intnl_SystemInt32_34 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_34");
             Private___intnl_SystemInt32_24 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_24");
+            Private___intnl_SystemInt32_54 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_54");
             Private___intnl_SystemInt32_44 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_44");
             Private___lcl_saoCamerasRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoCamerasRoot_UnityEngineTransform_0");
+            Private___intnl_UnityEngineTransform_191 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_191");
+            Private___intnl_UnityEngineTransform_181 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_181");
             Private___intnl_UnityEngineTransform_131 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_131");
             Private___intnl_UnityEngineTransform_121 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_121");
             Private___intnl_UnityEngineTransform_111 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_111");
             Private___intnl_UnityEngineTransform_101 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_101");
+            Private___intnl_UnityEngineTransform_171 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_171");
+            Private___intnl_UnityEngineTransform_161 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_161");
+            Private___intnl_UnityEngineTransform_151 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_151");
+            Private___intnl_UnityEngineTransform_141 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_141");
             Private___intnl_SystemInt32_19 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_19");
             Private___intnl_SystemInt32_39 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_39");
             Private___intnl_SystemInt32_29 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_29");
@@ -572,9 +681,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_114 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_114");
             Private___const_SystemString_184 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_184");
             Private___const_SystemString_194 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_194");
+            Private___1_owner__param = new AstroUdonVariable<string>(PoolParlorModule, "__1_owner__param");
             Private_activeYoutubeSearchAttempts = new AstroUdonVariable<int>(PoolParlorModule, "activeYoutubeSearchAttempts");
+            Private___intnl_UnityEngineUIText_13 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_13");
             Private___intnl_TMProTextMeshProUGUI_8 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_8");
             Private___intnl_SystemSingle_1 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_1");
+            Private___intnl_VRCUdonUdonBehaviour_40 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_40");
             Private___intnl_UnityEngineMaterialArray_0 = new AstroUdonVariable<UnityEngine.Material[]>(PoolParlorModule, "__intnl_UnityEngineMaterialArray_0");
             Private_worldUpdate = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "worldUpdate");
             Private___intnl_TMProTextMeshProUGUI_5 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_5");
@@ -582,12 +694,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemObject_1 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_1");
             Private_inOwner = new AstroUdonVariable<string>(PoolParlorModule, "inOwner");
             Private_cueSkinAllowed = new AstroUdonVariable<System.Object[]>(PoolParlorModule, "cueSkinAllowed");
+            Private___const_SystemString_266 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_266");
+            Private___const_SystemString_276 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_276");
             Private___const_SystemString_246 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_246");
             Private___const_SystemString_256 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_256");
             Private___const_SystemString_226 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_226");
             Private___const_SystemString_236 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_236");
             Private___const_SystemString_206 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_206");
             Private___const_SystemString_216 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_216");
+            Private___const_SystemString_286 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_286");
             Private_nameColorMap = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "nameColorMap");
             Private_propsEnabled = new AstroUdonVariable<bool>(PoolParlorModule, "propsEnabled");
             Private___0___0_isTournamentRunning__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0___0_isTournamentRunning__ret");
@@ -630,6 +745,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_10 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_10");
             Private___const_SystemInt32_30 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_30");
             Private___const_SystemInt32_20 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_20");
+            Private___const_SystemInt32_40 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_40");
             Private_chat = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "chat");
             Private___intnl_SystemInt32_11 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_11");
             Private___intnl_SystemInt32_31 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_31");
@@ -649,7 +765,18 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_38 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_38");
             Private___const_SystemString_39 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_39");
             Private___intnl_SystemSingle_9 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_9");
+            Private___gintnl_SystemUInt32_118 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_118");
+            Private___gintnl_SystemUInt32_119 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_119");
+            Private___gintnl_SystemUInt32_114 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_114");
+            Private___gintnl_SystemUInt32_115 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_115");
+            Private___gintnl_SystemUInt32_116 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_116");
+            Private___gintnl_SystemUInt32_117 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_117");
+            Private___gintnl_SystemUInt32_110 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_110");
+            Private___gintnl_SystemUInt32_111 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_111");
+            Private___gintnl_SystemUInt32_112 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_112");
+            Private___gintnl_SystemUInt32_113 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_113");
             Private_saoSaveLoadInput = new AstroUdonVariable<UnityEngine.UI.InputField>(PoolParlorModule, "saoSaveLoadInput");
+            Private_leaderboardElos = new AstroUdonVariable<UnityEngine.UI.Text[]>(PoolParlorModule, "leaderboardElos");
             Private___const_SystemString_86 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_86");
             Private___const_SystemString_87 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_87");
             Private___const_SystemString_84 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_84");
@@ -670,10 +797,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_16 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_16");
             Private___intnl_TMProTextMeshProUGUI_19 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_19");
             Private___intnl_TMProTextMeshProUGUI_18 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_18");
-            Private___intnl_VRCUdonUdonBehaviour_38 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_38");
             Private___intnl_SystemInt64_1 = new AstroUdonVariable<long>(PoolParlorModule, "__intnl_SystemInt64_1");
             Private___intnl_SystemInt64_0 = new AstroUdonVariable<long>(PoolParlorModule, "__intnl_SystemInt64_0");
             Private___intnl_TMProTextMeshProUGUI_6 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_6");
+            Private___intnl_UnityEngineUIText_4 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_4");
+            Private___intnl_UnityEngineUIText_5 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_5");
+            Private___intnl_UnityEngineUIText_6 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_6");
+            Private___intnl_UnityEngineUIText_7 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_7");
+            Private___intnl_UnityEngineUIText_0 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_0");
+            Private___intnl_UnityEngineUIText_1 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_1");
+            Private___intnl_UnityEngineUIText_2 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_2");
+            Private___intnl_UnityEngineUIText_3 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_3");
+            Private___intnl_UnityEngineUIText_8 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_8");
+            Private___intnl_UnityEngineUIText_9 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_9");
+            Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTable1SkinsRoot_UnityEngineTransform_0");
             Private___lcl_utcNow_SystemDateTime_0 = new AstroUdonVariable<System.DateTime>(PoolParlorModule, "__lcl_utcNow_SystemDateTime_0");
             Private___intnl_VRCUdonUdonBehaviour_4 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_4");
             Private___intnl_returnJump_SystemUInt32_0 = new AstroUdonVariable<uint>(PoolParlorModule, "__intnl_returnJump_SystemUInt32_0");
@@ -715,10 +852,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_12 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_12");
             Private___gintnl_SystemUInt32_32 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_32");
             Private___gintnl_SystemUInt32_22 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_22");
+            Private___intnl_UnityEngineTransform_217 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_217");
+            Private___intnl_UnityEngineTransform_207 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_207");
             Private_saoWalkSpeedSlider = new AstroUdonVariable<UnityEngine.UI.Slider>(PoolParlorModule, "saoWalkSpeedSlider");
+            Private___intnl_UnityEngineTransform_194 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_194");
+            Private___intnl_UnityEngineTransform_184 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_184");
+            Private___intnl_UnityEngineTransform_134 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_134");
             Private___intnl_UnityEngineTransform_124 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_124");
             Private___intnl_UnityEngineTransform_114 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_114");
             Private___intnl_UnityEngineTransform_104 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_104");
+            Private___intnl_UnityEngineTransform_174 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_174");
+            Private___intnl_UnityEngineTransform_164 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_164");
+            Private___intnl_UnityEngineTransform_154 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_154");
+            Private___intnl_UnityEngineTransform_144 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_144");
             Private___intnl_UnityEngineTransform_89 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_89");
             Private___intnl_UnityEngineTransform_88 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_88");
             Private___intnl_UnityEngineTransform_83 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_83");
@@ -729,6 +875,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_86 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_86");
             Private___intnl_UnityEngineTransform_85 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_85");
             Private___intnl_UnityEngineTransform_84 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_84");
+            Private___lcl_i_SystemInt32_9 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_i_SystemInt32_9");
             Private___lcl_i_SystemInt32_8 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_i_SystemInt32_8");
             Private___lcl_i_SystemInt32_1 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_i_SystemInt32_1");
             Private___lcl_i_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_i_SystemInt32_0");
@@ -743,6 +890,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_35 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_35");
             Private___const_SystemInt32_25 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_25");
             Private___lcl_behaviour_VRCUdonUdonBehaviour_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__lcl_behaviour_VRCUdonUdonBehaviour_0");
+            Private___intnl_UnityEngineTransform_218 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_218");
+            Private___intnl_UnityEngineTransform_208 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_208");
             Private___const_SystemString_163 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_163");
             Private___const_SystemString_173 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_173");
             Private___const_SystemString_143 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_143");
@@ -753,9 +902,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_113 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_113");
             Private___const_SystemString_183 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_183");
             Private___const_SystemString_193 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_193");
+            Private___intnl_UnityEngineUIText_14 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_14");
             Private_inLocalVersion = new AstroUdonVariable<int>(PoolParlorModule, "inLocalVersion");
             Private___intnl_SystemSingle_4 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_4");
+            Private___gintnl_SystemUInt32_124 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_124");
+            Private___gintnl_SystemUInt32_125 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_125");
+            Private___gintnl_SystemUInt32_126 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_126");
+            Private___gintnl_SystemUInt32_127 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_127");
+            Private___gintnl_SystemUInt32_120 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_120");
+            Private___gintnl_SystemUInt32_121 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_121");
+            Private___gintnl_SystemUInt32_122 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_122");
+            Private___gintnl_SystemUInt32_123 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_123");
             Private___1__intnlparam = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__1__intnlparam");
+            Private___intnl_VRCSDKBaseVRCPlayerApi_3 = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PoolParlorModule, "__intnl_VRCSDKBaseVRCPlayerApi_3");
+            Private___intnl_UnityEngineUIText_19 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_19");
             Private___intnl_SystemObject_4 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_4");
             Private_saoTogglePens = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoTogglePens");
             Private_tournamentDate = new AstroUdonVariable<System.DateTime>(PoolParlorModule, "tournamentDate");
@@ -770,14 +930,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_29 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_29");
             Private___intnl_TMProTextMeshProUGUI_28 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_28");
             Private___const_SystemString_263 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_263");
+            Private___const_SystemString_273 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_273");
             Private___const_SystemString_243 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_243");
             Private___const_SystemString_253 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_253");
             Private___const_SystemString_223 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_223");
             Private___const_SystemString_233 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_233");
             Private___const_SystemString_203 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_203");
             Private___const_SystemString_213 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_213");
+            Private___const_SystemString_283 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_283");
             Private_shouldToaster = new AstroUdonVariable<bool>(PoolParlorModule, "shouldToaster");
             Private___const_UnityEngineSpace_0 = new AstroUdonVariable<UnityEngine.Space>(PoolParlorModule, "__const_UnityEngineSpace_0");
+            Private_allowedPlayers = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "allowedPlayers");
             Private___intnl_VRCUdonUdonBehaviour_3 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_3");
             Private___intnl_SystemBoolean_109 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_109");
             Private___intnl_SystemBoolean_108 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_108");
@@ -790,12 +953,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_107 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_107");
             Private___intnl_SystemBoolean_106 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_106");
             Private___intnl_UnityEngineTransform_4 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_4");
-            Private___0___0_canUseTableSkin__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0___0_canUseTableSkin__ret");
             Private___gintnl_SystemCharArray_6 = new AstroUdonVariable<char[]>(PoolParlorModule, "__gintnl_SystemCharArray_6");
             Private___intnl_UnityEngineColor_2 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_2");
             Private___const_SystemString_9 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_9");
             Private___intnl_UnityEngineTexture2DArray_0 = new AstroUdonVariable<UnityEngine.Texture2D[]>(PoolParlorModule, "__intnl_UnityEngineTexture2DArray_0");
             Private___intnl_UnityEngineTransform_9 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_9");
+            Private___intnl_SystemString_47 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_47");
             Private___intnl_SystemBoolean_82 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_82");
             Private___intnl_SystemBoolean_92 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_92");
             Private___intnl_SystemBoolean_12 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_12");
@@ -815,15 +978,25 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_17 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_17");
             Private___gintnl_SystemUInt32_37 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_37");
             Private___gintnl_SystemUInt32_27 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_27");
+            Private___intnl_UnityEngineTransform_220 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_220");
+            Private___intnl_UnityEngineTransform_210 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_210");
+            Private___intnl_UnityEngineTransform_200 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_200");
             Private___intnl_SystemInt32_16 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_16");
             Private___intnl_SystemInt32_36 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_36");
             Private___intnl_SystemInt32_26 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_26");
             Private___intnl_SystemInt32_46 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_46");
-            Private___intnl_UnityEngineTransform_133 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_133");
+            Private___intnl_UnityEngineTransform_193 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_193");
+            Private___intnl_UnityEngineTransform_183 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_183");
+            Private___intnl_UnityEngineTransform_133 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_133");
             Private___intnl_UnityEngineTransform_123 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_123");
             Private___intnl_UnityEngineTransform_113 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_113");
             Private___intnl_UnityEngineTransform_103 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_103");
+            Private___intnl_UnityEngineTransform_173 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_173");
+            Private___intnl_UnityEngineTransform_163 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_163");
+            Private___intnl_UnityEngineTransform_153 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_153");
+            Private___intnl_UnityEngineTransform_143 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_143");
             Private___refl_typename = new AstroUdonVariable<string>(PoolParlorModule, "__refl_typename");
+            Private_table3Skins = new AstroUdonVariable<int[]>(PoolParlorModule, "table3Skins");
             Private___gintnl_SystemObjectArray_0 = new AstroUdonVariable<System.Object[]>(PoolParlorModule, "__gintnl_SystemObjectArray_0");
             Private___const_SystemString_166 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_166");
             Private___const_SystemString_176 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_176");
@@ -835,6 +1008,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_116 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_116");
             Private___const_SystemString_186 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_186");
             Private___const_SystemString_196 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_196");
+            Private___0_owner__param = new AstroUdonVariable<string>(PoolParlorModule, "__0_owner__param");
             Private___intnl_SystemInt32_1 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_1");
             Private___intnl_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_0");
             Private___intnl_SystemInt32_3 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_3");
@@ -846,7 +1020,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_9 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_9");
             Private___intnl_SystemInt32_8 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_8");
             Private_tableButtonToSkin = new AstroUdonVariable<int[]>(PoolParlorModule, "tableButtonToSkin");
+            Private_leaderboardPlayers = new AstroUdonVariable<UnityEngine.UI.Text[]>(PoolParlorModule, "leaderboardPlayers");
             Private___intnl_SystemDateTime_0 = new AstroUdonVariable<System.DateTime>(PoolParlorModule, "__intnl_SystemDateTime_0");
+            Private___intnl_UnityEngineUIText_11 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_11");
+            Private___intnl_UnityEngineUIText_21 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_21");
             Private___const_SystemString_56 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_56");
             Private___const_SystemString_57 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_57");
             Private___const_SystemString_54 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_54");
@@ -861,23 +1038,43 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemSingle_3 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_3");
             Private___intnl_TMProTextMeshProUGUI_3 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_3");
             Private___intnl_SystemObject_3 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_3");
+            Private___intnl_TMProTextMeshProUGUI_71 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_71");
+            Private___intnl_TMProTextMeshProUGUI_70 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_70");
+            Private___intnl_TMProTextMeshProUGUI_73 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_73");
+            Private___intnl_TMProTextMeshProUGUI_72 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_72");
+            Private___intnl_TMProTextMeshProUGUI_75 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_75");
+            Private___intnl_TMProTextMeshProUGUI_74 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_74");
+            Private___intnl_TMProTextMeshProUGUI_77 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_77");
+            Private___intnl_TMProTextMeshProUGUI_76 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_76");
+            Private___intnl_TMProTextMeshProUGUI_79 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_79");
+            Private___intnl_TMProTextMeshProUGUI_78 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_78");
             Private___const_SystemString_264 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_264");
+            Private___const_SystemString_274 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_274");
             Private___const_SystemString_244 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_244");
             Private___const_SystemString_254 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_254");
             Private___const_SystemString_224 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_224");
             Private___const_SystemString_234 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_234");
             Private___const_SystemString_204 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_204");
             Private___const_SystemString_214 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_214");
+            Private___const_SystemString_284 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_284");
             Private___lcl_saoWorldSettings_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoWorldSettings_UnityEngineTransform_0");
             Private___lcl_targetID_SystemInt64_0 = new AstroUdonVariable<long>(PoolParlorModule, "__lcl_targetID_SystemInt64_0");
+            Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTable2SkinsRoot_UnityEngineTransform_0");
             Private___const_SystemString_1 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_1");
+            Private___intnl_SystemBoolean_131 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_131");
+            Private___intnl_SystemBoolean_130 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_130");
+            Private___intnl_SystemBoolean_133 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_133");
+            Private___intnl_SystemBoolean_132 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_132");
+            Private___intnl_SystemBoolean_134 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_134");
             Private___intnl_UnityEngineTransform_1 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_1");
             Private___gintnl_SystemCharArray_5 = new AstroUdonVariable<char[]>(PoolParlorModule, "__gintnl_SystemCharArray_5");
             Private___const_SystemSingle_3 = new AstroUdonVariable<float>(PoolParlorModule, "__const_SystemSingle_3");
             Private___intnl_SystemDouble_0 = new AstroUdonVariable<double>(PoolParlorModule, "__intnl_SystemDouble_0");
             Private___lcl_idValue_SystemObject_0 = new AstroUdonVariable<long>(PoolParlorModule, "__lcl_idValue_SystemObject_0");
             Private___intnl_UnityEngineColor_1 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_1");
-            Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTableSkinsRoot_UnityEngineTransform_0");
+            Private___intnl_SystemString_18 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_18");
+            Private___intnl_SystemString_19 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_19");
+            Private___intnl_SystemString_17 = new AstroUdonVariable<string>(PoolParlorModule, "__intnl_SystemString_17");
             Private___intnl_SystemBoolean_85 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_85");
             Private___intnl_SystemBoolean_95 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_95");
             Private___intnl_SystemBoolean_15 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_15");
@@ -896,6 +1093,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_13 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_13");
             Private___intnl_SystemInt32_33 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_33");
             Private___intnl_SystemInt32_23 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_23");
+            Private___intnl_SystemInt32_53 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_53");
             Private___intnl_SystemInt32_43 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_43");
             Private___lcl_cueId_SystemInt32_0 = new AstroUdonVariable<int>(PoolParlorModule, "__lcl_cueId_SystemInt32_0");
             Private___intnl_SystemInt32_18 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_18");
@@ -916,17 +1114,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemByte_0 = new AstroUdonVariable<byte>(PoolParlorModule, "__intnl_SystemByte_0");
             Private___0_mode__param = new AstroUdonVariable<int>(PoolParlorModule, "__0_mode__param");
             Private_saoTableModels = new AstroUdonVariable<TMPro.TextMeshProUGUI[]>(PoolParlorModule, "saoTableModels");
+            Private___intnl_UnityEngineUIText_12 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_12");
             Private_saoTogglePlayer = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoTogglePlayer");
             Private___intnl_TMProTextMeshProUGUI_4 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_4");
             Private___const_SystemChar_0 = new AstroUdonVariable<char>(PoolParlorModule, "__const_SystemChar_0");
             Private___lcl_ch_SystemChar_0 = new AstroUdonVariable<char>(PoolParlorModule, "__lcl_ch_SystemChar_0");
             Private___intnl_VRCUdonUdonBehaviour_6 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_6");
+            Private___const_SystemString_269 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_269");
+            Private___const_SystemString_279 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_279");
             Private___const_SystemString_249 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_249");
             Private___const_SystemString_259 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_259");
             Private___const_SystemString_229 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_229");
             Private___const_SystemString_239 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_239");
             Private___const_SystemString_209 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_209");
             Private___const_SystemString_219 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_219");
+            Private___const_SystemString_289 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_289");
+            Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__lcl_saoTable3SkinsRoot_UnityEngineTransform_0");
             Private_outColor = new AstroUdonVariable<string>(PoolParlorModule, "outColor");
             Private___intnl_UnityEngineColor_9 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_9");
             Private___const_SystemString_6 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_6");
@@ -952,10 +1155,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_10 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_10");
             Private___gintnl_SystemUInt32_30 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_30");
             Private___gintnl_SystemUInt32_20 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_20");
+            Private___intnl_UnityEngineTransform_215 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_215");
+            Private___intnl_UnityEngineTransform_205 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_205");
             Private___0___0_canUseCueSkin__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0___0_canUseCueSkin__ret");
+            Private___intnl_UnityEngineTransform_196 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_196");
+            Private___intnl_UnityEngineTransform_186 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_186");
+            Private___intnl_UnityEngineTransform_136 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_136");
             Private___intnl_UnityEngineTransform_126 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_126");
             Private___intnl_UnityEngineTransform_116 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_116");
             Private___intnl_UnityEngineTransform_106 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_106");
+            Private___intnl_UnityEngineTransform_176 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_176");
+            Private___intnl_UnityEngineTransform_166 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_166");
+            Private___intnl_UnityEngineTransform_156 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_156");
+            Private___intnl_UnityEngineTransform_146 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_146");
             Private___const_SystemInt32_17 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_17");
             Private___const_SystemInt32_37 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_37");
             Private___const_SystemInt32_27 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_27");
@@ -966,6 +1178,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_50 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_50");
             Private___intnl_SystemInt32_40 = new AstroUdonVariable<int>(PoolParlorModule, "__intnl_SystemInt32_40");
             Private_tournamentRefs = new AstroUdonVariable<string[]>(PoolParlorModule, "tournamentRefs");
+            Private_promptedPlayers = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "promptedPlayers");
             Private_saoStrafeSpeedSlider = new AstroUdonVariable<UnityEngine.UI.Slider>(PoolParlorModule, "saoStrafeSpeedSlider");
             Private___const_SystemString_168 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_168");
             Private___const_SystemString_178 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_178");
@@ -993,26 +1206,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_28 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_28");
             Private___const_SystemString_29 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_29");
             Private___intnl_SystemSingle_6 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_6");
+            Private___gintnl_SystemUInt32_108 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_108");
+            Private___gintnl_SystemUInt32_109 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_109");
+            Private___gintnl_SystemUInt32_104 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_104");
+            Private___gintnl_SystemUInt32_105 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_105");
+            Private___gintnl_SystemUInt32_106 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_106");
+            Private___gintnl_SystemUInt32_107 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_107");
             Private___gintnl_SystemUInt32_100 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_100");
             Private___gintnl_SystemUInt32_101 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_101");
             Private___gintnl_SystemUInt32_102 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_102");
             Private___gintnl_SystemUInt32_103 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_103");
+            Private___intnl_VRCSDKBaseVRCPlayerApi_1 = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PoolParlorModule, "__intnl_VRCSDKBaseVRCPlayerApi_1");
             Private_saoLoliLifterSlider = new AstroUdonVariable<UnityEngine.UI.Slider>(PoolParlorModule, "saoLoliLifterSlider");
             Private___intnl_SystemObject_6 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_6");
             Private_INITIALIZED = new AstroUdonVariable<bool>(PoolParlorModule, "INITIALIZED");
             Private___const_SystemString_261 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_261");
+            Private___const_SystemString_271 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_271");
             Private___const_SystemString_241 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_241");
             Private___const_SystemString_251 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_251");
             Private___const_SystemString_221 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_221");
             Private___const_SystemString_231 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_231");
             Private___const_SystemString_201 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_201");
             Private___const_SystemString_211 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_211");
+            Private___const_SystemString_281 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_281");
             Private_selectedCueSkin = new AstroUdonVariable<int>(PoolParlorModule, "selectedCueSkin");
             Private___intnl_VRCUdonUdonBehaviour_5 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_5");
             Private___0_hasPendingRequest__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0_hasPendingRequest__ret");
             Private___intnl_UnityEngineTransform_6 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_6");
             Private_inRemoteVersion = new AstroUdonVariable<int>(PoolParlorModule, "inRemoteVersion");
             Private_activeYoutubeSearch = new AstroUdonVariable<System.Guid>(PoolParlorModule, "activeYoutubeSearch");
+            Private___intnl_VRCUdonUdonBehaviour_8 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_8");
             Private___intnl_UnityEngineColor_4 = new AstroUdonVariable<UnityEngine.Color>(PoolParlorModule, "__intnl_UnityEngineColor_4");
             Private___gintnl_SystemUInt32_98 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_98");
             Private___gintnl_SystemUInt32_88 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_88");
@@ -1023,6 +1246,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_18 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_18");
             Private___gintnl_SystemUInt32_38 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_38");
             Private___gintnl_SystemUInt32_28 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_28");
+            Private___const_SystemSingle_5 = new AstroUdonVariable<float>(PoolParlorModule, "__const_SystemSingle_5");
             Private_selectedTableSkin = new AstroUdonVariable<int>(PoolParlorModule, "selectedTableSkin");
             Private_DEPENDENCIES = new AstroUdonVariable<string[]>(PoolParlorModule, "DEPENDENCIES");
             Private___intnl_UnityEngineComponent_1 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_UnityEngineComponent_1");
@@ -1045,6 +1269,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_26 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_26");
             Private___intnl_UnityEngineTransform_25 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_25");
             Private___intnl_UnityEngineTransform_24 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_24");
+            Private_leaderboard = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "leaderboard");
             Private___gintnl_SystemUInt32_95 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_95");
             Private___gintnl_SystemUInt32_85 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_85");
             Private___gintnl_SystemUInt32_55 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_55");
@@ -1054,11 +1279,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_15 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_15");
             Private___gintnl_SystemUInt32_35 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_35");
             Private___gintnl_SystemUInt32_25 = new AstroUdonVariable<uint>(PoolParlorModule, "__gintnl_SystemUInt32_25");
+            Private___intnl_UnityEngineTransform_216 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_216");
+            Private___intnl_UnityEngineTransform_206 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_206");
             Private___0__SelectCueSkinContributor__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0__SelectCueSkinContributor__ret");
             Private_tableSkinAllowed = new AstroUdonVariable<System.Object[]>(PoolParlorModule, "tableSkinAllowed");
+            Private___intnl_UnityEngineTransform_195 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_195");
+            Private___intnl_UnityEngineTransform_185 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_185");
+            Private___intnl_UnityEngineTransform_135 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_135");
             Private___intnl_UnityEngineTransform_125 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_125");
             Private___intnl_UnityEngineTransform_115 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_115");
             Private___intnl_UnityEngineTransform_105 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_105");
+            Private___intnl_UnityEngineTransform_175 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_175");
+            Private___intnl_UnityEngineTransform_165 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_165");
+            Private___intnl_UnityEngineTransform_155 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_155");
+            Private___intnl_UnityEngineTransform_145 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_145");
             Private___const_SystemInt32_9 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_9");
             Private___const_SystemInt32_8 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_8");
             Private___const_SystemInt32_1 = new AstroUdonVariable<int>(PoolParlorModule, "__const_SystemInt32_1");
@@ -1084,9 +1318,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_5 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_5");
             Private___intnl_SystemBoolean_6 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_6");
             Private___intnl_SystemBoolean_7 = new AstroUdonVariable<bool>(PoolParlorModule, "__intnl_SystemBoolean_7");
+            Private___intnl_UnityEngineTransform_198 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_198");
+            Private___intnl_UnityEngineTransform_188 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_188");
+            Private___intnl_UnityEngineTransform_138 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_138");
             Private___intnl_UnityEngineTransform_128 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_128");
             Private___intnl_UnityEngineTransform_118 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_118");
-            Private___intnl_UnityEngineTransform_108 = new AstroUdonVariable<UnityEngine.Transform>(PoolParlorModule, "__intnl_UnityEngineTransform_108");
+            Private___intnl_UnityEngineTransform_108 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_108");
+            Private___intnl_UnityEngineTransform_178 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_178");
+            Private___intnl_UnityEngineTransform_168 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_168");
+            Private___intnl_UnityEngineTransform_158 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_158");
+            Private___intnl_UnityEngineTransform_148 = new AstroUdonVariable<UnityEngine.RectTransform>(PoolParlorModule, "__intnl_UnityEngineTransform_148");
             Private___const_SystemString_160 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_160");
             Private___const_SystemString_170 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_170");
             Private___const_SystemString_140 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_140");
@@ -1097,6 +1338,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_110 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_110");
             Private___const_SystemString_180 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_180");
             Private___const_SystemString_190 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_190");
+            Private___intnl_UnityEngineUIText_17 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_17");
             Private___const_SystemString_76 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_76");
             Private___const_SystemString_77 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_77");
             Private___const_SystemString_74 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_74");
@@ -1107,20 +1349,38 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_71 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_71");
             Private___const_SystemString_78 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_78");
             Private___const_SystemString_79 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_79");
+            Private_modernTableSkins = new AstroUdonVariable<int[]>(PoolParlorModule, "modernTableSkins");
             Private___intnl_SystemSingle_5 = new AstroUdonVariable<float>(PoolParlorModule, "__intnl_SystemSingle_5");
+            Private___intnl_TMProTextMeshProUGUI_81 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_81");
+            Private___intnl_TMProTextMeshProUGUI_80 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_80");
+            Private___intnl_TMProTextMeshProUGUI_83 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_83");
+            Private___intnl_TMProTextMeshProUGUI_82 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_82");
+            Private___intnl_VRCSDKBaseVRCPlayerApi_2 = new AstroUdonVariable<VRC.SDKBase.VRCPlayerApi>(PoolParlorModule, "__intnl_VRCSDKBaseVRCPlayerApi_2");
             Private_saoToggleUSColors = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "saoToggleUSColors");
+            Private___intnl_UnityEngineUIText_18 = new AstroUdonVariable<UnityEngine.UI.Text>(PoolParlorModule, "__intnl_UnityEngineUIText_18");
             Private___0___0_onChatCommand__ret = new AstroUdonVariable<bool>(PoolParlorModule, "__0___0_onChatCommand__ret");
             Private___intnl_TMProTextMeshProUGUI_1 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_1");
             Private___intnl_SystemObject_5 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_5");
+            Private___intnl_TMProTextMeshProUGUI_51 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_51");
+            Private___intnl_TMProTextMeshProUGUI_50 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_50");
+            Private___intnl_TMProTextMeshProUGUI_53 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_53");
+            Private___intnl_TMProTextMeshProUGUI_52 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_52");
+            Private___intnl_TMProTextMeshProUGUI_55 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_55");
+            Private___intnl_TMProTextMeshProUGUI_54 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_54");
             Private___intnl_TMProTextMeshProUGUI_57 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_57");
+            Private___intnl_TMProTextMeshProUGUI_56 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_56");
+            Private___intnl_TMProTextMeshProUGUI_59 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_59");
             Private___intnl_TMProTextMeshProUGUI_58 = new AstroUdonVariable<TMPro.TextMeshProUGUI>(PoolParlorModule, "__intnl_TMProTextMeshProUGUI_58");
             Private___const_SystemString_262 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_262");
+            Private___const_SystemString_272 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_272");
             Private___const_SystemString_242 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_242");
             Private___const_SystemString_252 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_252");
             Private___const_SystemString_222 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_222");
             Private___const_SystemString_232 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_232");
             Private___const_SystemString_202 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_202");
             Private___const_SystemString_212 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_212");
+            Private___const_SystemString_282 = new AstroUdonVariable<string>(PoolParlorModule, "__const_SystemString_282");
+            Private___intnl_SystemObject_8 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_SystemObject_8");
             Private_saoJumpImpulseSlider = new AstroUdonVariable<UnityEngine.UI.Slider>(PoolParlorModule, "saoJumpImpulseSlider");
             Private___intnl_VRCUdonUdonBehaviour_0 = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(PoolParlorModule, "__intnl_VRCUdonUdonBehaviour_0");
             Private_saoMenu = new AstroUdonVariable<UnityEngine.GameObject>(PoolParlorModule, "saoMenu");
@@ -1177,19 +1437,26 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_16 = null;
             Private___gintnl_SystemUInt32_36 = null;
             Private___gintnl_SystemUInt32_26 = null;
+            Private___intnl_UnityEngineTransform_213 = null;
+            Private___intnl_UnityEngineTransform_203 = null;
             Private___intnl_SystemInt32_15 = null;
             Private___intnl_SystemInt32_35 = null;
             Private___intnl_SystemInt32_25 = null;
             Private___intnl_SystemInt32_45 = null;
             Private___const_SystemInt64_0 = null;
-            Private___lcl_tableCount_SystemInt32_0 = null;
             Private___1_accept__param = null;
             Private_selectedTableModel = null;
             Private___lcl_saoTableModelsRoot_UnityEngineTransform_0 = null;
+            Private___intnl_UnityEngineTransform_190 = null;
+            Private___intnl_UnityEngineTransform_180 = null;
             Private___intnl_UnityEngineTransform_130 = null;
             Private___intnl_UnityEngineTransform_120 = null;
             Private___intnl_UnityEngineTransform_110 = null;
             Private___intnl_UnityEngineTransform_100 = null;
+            Private___intnl_UnityEngineTransform_170 = null;
+            Private___intnl_UnityEngineTransform_160 = null;
+            Private___intnl_UnityEngineTransform_150 = null;
+            Private___intnl_UnityEngineTransform_140 = null;
             Private___const_SystemString_167 = null;
             Private___const_SystemString_177 = null;
             Private___const_SystemString_147 = null;
@@ -1205,6 +1472,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemDateTimeOffset_0 = null;
             Private_ping = null;
             Private___2_active__param = null;
+            Private___intnl_UnityEngineUIText_10 = null;
+            Private___intnl_UnityEngineUIText_20 = null;
             Private___intnl_TMProTextMeshProUGUI_9 = null;
             Private___const_SystemString_46 = null;
             Private___const_SystemString_47 = null;
@@ -1218,17 +1487,32 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_49 = null;
             Private___intnl_SystemSingle_0 = null;
             Private___intnl_TMProTextMeshProUGUI_2 = null;
+            Private___const_SystemChar_2 = null;
             Private___intnl_SystemObject_0 = null;
+            Private___lcl_me_SystemString_0 = null;
             Private___1_id__param = null;
             Private_outCanUse = null;
+            Private___intnl_TMProTextMeshProUGUI_61 = null;
             Private___intnl_TMProTextMeshProUGUI_60 = null;
+            Private___intnl_TMProTextMeshProUGUI_63 = null;
+            Private___intnl_TMProTextMeshProUGUI_62 = null;
+            Private___intnl_TMProTextMeshProUGUI_65 = null;
+            Private___intnl_TMProTextMeshProUGUI_64 = null;
+            Private___intnl_TMProTextMeshProUGUI_67 = null;
+            Private___intnl_TMProTextMeshProUGUI_66 = null;
+            Private___intnl_TMProTextMeshProUGUI_69 = null;
+            Private___intnl_TMProTextMeshProUGUI_68 = null;
+            Private___const_SystemString_267 = null;
+            Private___const_SystemString_277 = null;
             Private___const_SystemString_247 = null;
             Private___const_SystemString_257 = null;
             Private___const_SystemString_227 = null;
             Private___const_SystemString_237 = null;
             Private___const_SystemString_207 = null;
             Private___const_SystemString_217 = null;
+            Private___const_SystemString_287 = null;
             Private_liftModule = null;
+            Private_table2Skins = null;
             Private___0_accept__param = null;
             Private___0_id__param = null;
             Private___const_SystemString_0 = null;
@@ -1260,8 +1544,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_11 = null;
             Private___const_SystemInt32_31 = null;
             Private___const_SystemInt32_21 = null;
+            Private___const_SystemInt32_41 = null;
             Private_saoToggleCamera = null;
+            Private___0_cueSkin__param = null;
             Private___intnl_SystemObject_15 = null;
+            Private___intnl_SystemObject_14 = null;
+            Private___intnl_SystemObject_13 = null;
+            Private___intnl_SystemObject_12 = null;
+            Private___intnl_SystemObject_11 = null;
+            Private___intnl_SystemObject_10 = null;
             Private___intnl_SystemObject_18 = null;
             Private___intnl_SystemSingle_10 = null;
             Private___intnl_SystemSingle_11 = null;
@@ -1272,6 +1563,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_22 = null;
             Private___intnl_SystemInt32_52 = null;
             Private___intnl_SystemInt32_42 = null;
+            Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0 = null;
             Private_saoCameras = null;
             Private___intnl_SystemSingle_8 = null;
             Private___gintnl_SystemUInt32_9 = null;
@@ -1299,26 +1591,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_98 = null;
             Private___const_SystemString_99 = null;
             Private___0_newPhysicsMode__param = null;
+            Private___intnl_VRCUdonUdonBehaviour_28 = null;
+            Private___intnl_VRCUdonUdonBehaviour_21 = null;
             Private___intnl_VRCUdonUdonBehaviour_20 = null;
-            Private___intnl_VRCUdonUdonBehaviour_25 = null;
+            Private___intnl_VRCUdonUdonBehaviour_22 = null;
+            Private___intnl_VRCUdonUdonBehaviour_27 = null;
             Private___lcl_cueCount_SystemInt32_0 = null;
             Private___intnl_TMProTextMeshProUGUI_7 = null;
             Private_saoToggleHologram = null;
+            Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0 = null;
             Private_cueButtonToSkin = null;
             Private___intnl_VRCUdonUdonBehaviour_7 = null;
+            Private___const_SystemString_268 = null;
+            Private___const_SystemString_278 = null;
             Private___const_SystemString_248 = null;
             Private___const_SystemString_258 = null;
             Private___const_SystemString_228 = null;
             Private___const_SystemString_238 = null;
             Private___const_SystemString_208 = null;
             Private___const_SystemString_218 = null;
-            Private___lcl_tableId_SystemInt32_0 = null;
+            Private___const_SystemString_288 = null;
             Private___0_usColors__param = null;
             Private___intnl_UnityEngineColor_6 = null;
             Private___1_enabled__param = null;
             Private___const_SystemString_5 = null;
             Private___gintnl_SystemCharArray_1 = null;
-            Private___1_skin__param = null;
             Private_selectedCamera = null;
             Private___intnl_UnityEngineTransform_49 = null;
             Private___intnl_UnityEngineTransform_48 = null;
@@ -1331,6 +1628,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_45 = null;
             Private___intnl_UnityEngineTransform_44 = null;
             Private___const_SystemInt32_19 = null;
+            Private___const_SystemInt32_39 = null;
             Private___const_SystemInt32_29 = null;
             Private___gintnl_SystemUInt32_93 = null;
             Private___gintnl_SystemUInt32_83 = null;
@@ -1341,12 +1639,23 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_13 = null;
             Private___gintnl_SystemUInt32_33 = null;
             Private___gintnl_SystemUInt32_23 = null;
+            Private___intnl_UnityEngineTransform_214 = null;
+            Private___intnl_UnityEngineTransform_204 = null;
             Private_inMode = null;
             Private___lcl_tableSkinId_SystemInt32_0 = null;
+            Private___intnl_UnityEngineObject_2 = null;
+            Private___intnl_UnityEngineObject_0 = null;
             Private_isPolling = null;
+            Private___intnl_UnityEngineTransform_197 = null;
+            Private___intnl_UnityEngineTransform_187 = null;
+            Private___intnl_UnityEngineTransform_137 = null;
             Private___intnl_UnityEngineTransform_127 = null;
             Private___intnl_UnityEngineTransform_117 = null;
             Private___intnl_UnityEngineTransform_107 = null;
+            Private___intnl_UnityEngineTransform_177 = null;
+            Private___intnl_UnityEngineTransform_167 = null;
+            Private___intnl_UnityEngineTransform_157 = null;
+            Private___intnl_UnityEngineTransform_147 = null;
             Private_metaverse = null;
             Private___intnl_UnityEngineTransform_99 = null;
             Private___intnl_UnityEngineTransform_98 = null;
@@ -1362,6 +1671,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_36 = null;
             Private___const_SystemInt32_26 = null;
             Private_physicsMode = null;
+            Private_table4Skins = null;
+            Private___intnl_UnityEngineTransform_219 = null;
+            Private___intnl_UnityEngineTransform_209 = null;
             Private___const_SystemString_162 = null;
             Private___const_SystemString_172 = null;
             Private___const_SystemString_142 = null;
@@ -1373,7 +1685,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_182 = null;
             Private___const_SystemString_192 = null;
             Private_tables = null;
-            Private___lcl_renderer_UnityEngineMeshRenderer_0 = null;
             Private___intnl_SystemTimeSpan_0 = null;
             Private___const_SystemString_169 = null;
             Private___const_SystemString_179 = null;
@@ -1385,8 +1696,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_119 = null;
             Private___const_SystemString_189 = null;
             Private___const_SystemString_199 = null;
+            Private___0_renderer__param = null;
+            Private___intnl_UnityEngineUIText_15 = null;
             Private_modModule = null;
             Private___lcl_saoTableSettings_UnityEngineTransform_0 = null;
+            Private___lcl_lines_SystemStringArray_1 = null;
             Private___0_enabled__param = null;
             Private___const_SystemString_16 = null;
             Private___const_SystemString_17 = null;
@@ -1399,6 +1713,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_18 = null;
             Private___const_SystemString_19 = null;
             Private___intnl_SystemSingle_7 = null;
+            Private___intnl_VRCSDKBaseVRCPlayerApi_0 = null;
+            Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0 = null;
             Private___refl_typeid = null;
             Private___intnl_SystemObject_7 = null;
             Private_toaster = null;
@@ -1413,23 +1729,35 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_39 = null;
             Private___intnl_TMProTextMeshProUGUI_38 = null;
             Private___const_SystemString_260 = null;
+            Private___const_SystemString_270 = null;
             Private___const_SystemString_240 = null;
             Private___const_SystemString_250 = null;
             Private___const_SystemString_220 = null;
             Private___const_SystemString_230 = null;
             Private___const_SystemString_200 = null;
             Private___const_SystemString_210 = null;
+            Private___const_SystemString_280 = null;
+            Private___const_SystemString_290 = null;
             Private___intnl_VRCUdonUdonBehaviour_19 = null;
+            Private___intnl_VRCUdonUdonBehaviour_18 = null;
+            Private___intnl_VRCUdonUdonBehaviour_11 = null;
+            Private___intnl_VRCUdonUdonBehaviour_10 = null;
+            Private___intnl_VRCUdonUdonBehaviour_12 = null;
+            Private___intnl_VRCUdonUdonBehaviour_15 = null;
+            Private___intnl_VRCUdonUdonBehaviour_17 = null;
+            Private___intnl_VRCUdonUdonBehaviour_16 = null;
             Private___intnl_VRCUdonUdonBehaviour_2 = null;
             Private_SAO_COLOR_ENABLED = null;
             Private___1_active__param = null;
             Private___intnl_UnityEngineTransform_5 = null;
             Private_inSkin = null;
+            Private___intnl_VRCUdonUdonBehaviour_9 = null;
             Private___intnl_UnityEngineColor_5 = null;
             Private_decoder = null;
-            Private___2_owner__param = null;
             Private___const_SystemUInt32_0 = null;
+            Private_deniedPlayers = null;
             Private___4_value__param = null;
+            Private___intnl_UnityEngineComponent_0 = null;
             Private___intnl_SystemBoolean_81 = null;
             Private___intnl_SystemBoolean_91 = null;
             Private___intnl_SystemBoolean_11 = null;
@@ -1458,18 +1786,34 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_14 = null;
             Private___gintnl_SystemUInt32_34 = null;
             Private___gintnl_SystemUInt32_24 = null;
+            Private___intnl_UnityEngineTransform_211 = null;
+            Private___intnl_UnityEngineTransform_201 = null;
             Private___const_UnityEngineVector3_0 = null;
             Private___intnl_SystemInt32_17 = null;
             Private___intnl_SystemInt32_37 = null;
             Private___intnl_SystemInt32_27 = null;
             Private___intnl_SystemInt32_47 = null;
+            Private___intnl_UnityEngineTransform_192 = null;
+            Private___intnl_UnityEngineTransform_182 = null;
+            Private___intnl_UnityEngineTransform_132 = null;
             Private___intnl_UnityEngineTransform_122 = null;
             Private___intnl_UnityEngineTransform_112 = null;
             Private___intnl_UnityEngineTransform_102 = null;
+            Private___intnl_UnityEngineTransform_172 = null;
+            Private___intnl_UnityEngineTransform_162 = null;
+            Private___intnl_UnityEngineTransform_152 = null;
+            Private___intnl_UnityEngineTransform_142 = null;
             Private_outSuccessful = null;
+            Private___intnl_UnityEngineTransform_199 = null;
+            Private___intnl_UnityEngineTransform_189 = null;
+            Private___intnl_UnityEngineTransform_139 = null;
             Private___intnl_UnityEngineTransform_129 = null;
             Private___intnl_UnityEngineTransform_119 = null;
             Private___intnl_UnityEngineTransform_109 = null;
+            Private___intnl_UnityEngineTransform_179 = null;
+            Private___intnl_UnityEngineTransform_169 = null;
+            Private___intnl_UnityEngineTransform_159 = null;
+            Private___intnl_UnityEngineTransform_149 = null;
             Private___const_SystemString_161 = null;
             Private___const_SystemString_171 = null;
             Private___const_SystemString_141 = null;
@@ -1482,8 +1826,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_191 = null;
             Private_SAO_COLOR_DISABLED = null;
             Private_props = null;
+            Private___lcl_Players_UnityEngineTransform_0 = null;
             Private___0__intnlparam = null;
+            Private___lcl_data_SystemString_0 = null;
             Private_moderators = null;
+            Private___intnl_UnityEngineUIText_16 = null;
             Private___const_SystemString_66 = null;
             Private___const_SystemString_67 = null;
             Private___const_SystemString_64 = null;
@@ -1510,14 +1857,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_44 = null;
             Private___intnl_TMProTextMeshProUGUI_47 = null;
             Private___intnl_TMProTextMeshProUGUI_46 = null;
+            Private___intnl_TMProTextMeshProUGUI_49 = null;
+            Private___intnl_TMProTextMeshProUGUI_48 = null;
+            Private___const_SystemString_265 = null;
+            Private___const_SystemString_275 = null;
             Private___const_SystemString_245 = null;
             Private___const_SystemString_255 = null;
             Private___const_SystemString_225 = null;
             Private___const_SystemString_235 = null;
             Private___const_SystemString_205 = null;
             Private___const_SystemString_215 = null;
+            Private___const_SystemString_285 = null;
+            Private___intnl_SystemObject_9 = null;
             Private___intnl_VRCUdonUdonBehaviour_1 = null;
             Private___const_SystemString_2 = null;
+            Private___intnl_SystemBoolean_129 = null;
+            Private___intnl_SystemBoolean_128 = null;
             Private___intnl_SystemBoolean_121 = null;
             Private___intnl_SystemBoolean_120 = null;
             Private___intnl_SystemBoolean_123 = null;
@@ -1531,6 +1886,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___0_tournament__param = null;
             Private___gintnl_SystemCharArray_4 = null;
             Private___const_SystemSingle_2 = null;
+            Private___lcl_parts_SystemStringArray_0 = null;
             Private___intnl_UnityEngineColor_0 = null;
             Private_shouldBlahaj = null;
             Private_saoToggleProps = null;
@@ -1545,7 +1901,11 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_79 = null;
             Private_saoCueSkins = null;
             Private___0_active__param = null;
+            Private___intnl_SystemString_20 = null;
+            Private___intnl_SystemString_21 = null;
+            Private___intnl_UnityEngineGameObject_1 = null;
             Private___intnl_UnityEngineGameObject_0 = null;
+            Private_table1Skins = null;
             Private___lcl_playerId_SystemInt32_0 = null;
             Private___intnl_SystemBoolean_84 = null;
             Private___intnl_SystemBoolean_94 = null;
@@ -1561,15 +1921,24 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_23 = null;
             Private___lcl_hours_SystemSingle_0 = null;
             Private___intnl_UnityEngineComponentArray_1 = null;
+            Private___intnl_UnityEngineTransform_212 = null;
+            Private___intnl_UnityEngineTransform_202 = null;
             Private___intnl_SystemInt32_14 = null;
             Private___intnl_SystemInt32_34 = null;
             Private___intnl_SystemInt32_24 = null;
+            Private___intnl_SystemInt32_54 = null;
             Private___intnl_SystemInt32_44 = null;
             Private___lcl_saoCamerasRoot_UnityEngineTransform_0 = null;
+            Private___intnl_UnityEngineTransform_191 = null;
+            Private___intnl_UnityEngineTransform_181 = null;
             Private___intnl_UnityEngineTransform_131 = null;
             Private___intnl_UnityEngineTransform_121 = null;
             Private___intnl_UnityEngineTransform_111 = null;
             Private___intnl_UnityEngineTransform_101 = null;
+            Private___intnl_UnityEngineTransform_171 = null;
+            Private___intnl_UnityEngineTransform_161 = null;
+            Private___intnl_UnityEngineTransform_151 = null;
+            Private___intnl_UnityEngineTransform_141 = null;
             Private___intnl_SystemInt32_19 = null;
             Private___intnl_SystemInt32_39 = null;
             Private___intnl_SystemInt32_29 = null;
@@ -1585,9 +1954,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_114 = null;
             Private___const_SystemString_184 = null;
             Private___const_SystemString_194 = null;
+            Private___1_owner__param = null;
             Private_activeYoutubeSearchAttempts = null;
+            Private___intnl_UnityEngineUIText_13 = null;
             Private___intnl_TMProTextMeshProUGUI_8 = null;
             Private___intnl_SystemSingle_1 = null;
+            Private___intnl_VRCUdonUdonBehaviour_40 = null;
             Private___intnl_UnityEngineMaterialArray_0 = null;
             Private_worldUpdate = null;
             Private___intnl_TMProTextMeshProUGUI_5 = null;
@@ -1595,12 +1967,15 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemObject_1 = null;
             Private_inOwner = null;
             Private_cueSkinAllowed = null;
+            Private___const_SystemString_266 = null;
+            Private___const_SystemString_276 = null;
             Private___const_SystemString_246 = null;
             Private___const_SystemString_256 = null;
             Private___const_SystemString_226 = null;
             Private___const_SystemString_236 = null;
             Private___const_SystemString_206 = null;
             Private___const_SystemString_216 = null;
+            Private___const_SystemString_286 = null;
             Private_nameColorMap = null;
             Private_propsEnabled = null;
             Private___0___0_isTournamentRunning__ret = null;
@@ -1643,6 +2018,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_10 = null;
             Private___const_SystemInt32_30 = null;
             Private___const_SystemInt32_20 = null;
+            Private___const_SystemInt32_40 = null;
             Private_chat = null;
             Private___intnl_SystemInt32_11 = null;
             Private___intnl_SystemInt32_31 = null;
@@ -1662,7 +2038,18 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_38 = null;
             Private___const_SystemString_39 = null;
             Private___intnl_SystemSingle_9 = null;
+            Private___gintnl_SystemUInt32_118 = null;
+            Private___gintnl_SystemUInt32_119 = null;
+            Private___gintnl_SystemUInt32_114 = null;
+            Private___gintnl_SystemUInt32_115 = null;
+            Private___gintnl_SystemUInt32_116 = null;
+            Private___gintnl_SystemUInt32_117 = null;
+            Private___gintnl_SystemUInt32_110 = null;
+            Private___gintnl_SystemUInt32_111 = null;
+            Private___gintnl_SystemUInt32_112 = null;
+            Private___gintnl_SystemUInt32_113 = null;
             Private_saoSaveLoadInput = null;
+            Private_leaderboardElos = null;
             Private___const_SystemString_86 = null;
             Private___const_SystemString_87 = null;
             Private___const_SystemString_84 = null;
@@ -1683,10 +2070,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_16 = null;
             Private___intnl_TMProTextMeshProUGUI_19 = null;
             Private___intnl_TMProTextMeshProUGUI_18 = null;
-            Private___intnl_VRCUdonUdonBehaviour_38 = null;
             Private___intnl_SystemInt64_1 = null;
             Private___intnl_SystemInt64_0 = null;
             Private___intnl_TMProTextMeshProUGUI_6 = null;
+            Private___intnl_UnityEngineUIText_4 = null;
+            Private___intnl_UnityEngineUIText_5 = null;
+            Private___intnl_UnityEngineUIText_6 = null;
+            Private___intnl_UnityEngineUIText_7 = null;
+            Private___intnl_UnityEngineUIText_0 = null;
+            Private___intnl_UnityEngineUIText_1 = null;
+            Private___intnl_UnityEngineUIText_2 = null;
+            Private___intnl_UnityEngineUIText_3 = null;
+            Private___intnl_UnityEngineUIText_8 = null;
+            Private___intnl_UnityEngineUIText_9 = null;
+            Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0 = null;
             Private___lcl_utcNow_SystemDateTime_0 = null;
             Private___intnl_VRCUdonUdonBehaviour_4 = null;
             Private___intnl_returnJump_SystemUInt32_0 = null;
@@ -1728,10 +2125,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_12 = null;
             Private___gintnl_SystemUInt32_32 = null;
             Private___gintnl_SystemUInt32_22 = null;
+            Private___intnl_UnityEngineTransform_217 = null;
+            Private___intnl_UnityEngineTransform_207 = null;
             Private_saoWalkSpeedSlider = null;
+            Private___intnl_UnityEngineTransform_194 = null;
+            Private___intnl_UnityEngineTransform_184 = null;
+            Private___intnl_UnityEngineTransform_134 = null;
             Private___intnl_UnityEngineTransform_124 = null;
             Private___intnl_UnityEngineTransform_114 = null;
             Private___intnl_UnityEngineTransform_104 = null;
+            Private___intnl_UnityEngineTransform_174 = null;
+            Private___intnl_UnityEngineTransform_164 = null;
+            Private___intnl_UnityEngineTransform_154 = null;
+            Private___intnl_UnityEngineTransform_144 = null;
             Private___intnl_UnityEngineTransform_89 = null;
             Private___intnl_UnityEngineTransform_88 = null;
             Private___intnl_UnityEngineTransform_83 = null;
@@ -1742,6 +2148,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_86 = null;
             Private___intnl_UnityEngineTransform_85 = null;
             Private___intnl_UnityEngineTransform_84 = null;
+            Private___lcl_i_SystemInt32_9 = null;
             Private___lcl_i_SystemInt32_8 = null;
             Private___lcl_i_SystemInt32_1 = null;
             Private___lcl_i_SystemInt32_0 = null;
@@ -1756,6 +2163,8 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemInt32_35 = null;
             Private___const_SystemInt32_25 = null;
             Private___lcl_behaviour_VRCUdonUdonBehaviour_0 = null;
+            Private___intnl_UnityEngineTransform_218 = null;
+            Private___intnl_UnityEngineTransform_208 = null;
             Private___const_SystemString_163 = null;
             Private___const_SystemString_173 = null;
             Private___const_SystemString_143 = null;
@@ -1766,9 +2175,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_113 = null;
             Private___const_SystemString_183 = null;
             Private___const_SystemString_193 = null;
+            Private___intnl_UnityEngineUIText_14 = null;
             Private_inLocalVersion = null;
             Private___intnl_SystemSingle_4 = null;
+            Private___gintnl_SystemUInt32_124 = null;
+            Private___gintnl_SystemUInt32_125 = null;
+            Private___gintnl_SystemUInt32_126 = null;
+            Private___gintnl_SystemUInt32_127 = null;
+            Private___gintnl_SystemUInt32_120 = null;
+            Private___gintnl_SystemUInt32_121 = null;
+            Private___gintnl_SystemUInt32_122 = null;
+            Private___gintnl_SystemUInt32_123 = null;
             Private___1__intnlparam = null;
+            Private___intnl_VRCSDKBaseVRCPlayerApi_3 = null;
+            Private___intnl_UnityEngineUIText_19 = null;
             Private___intnl_SystemObject_4 = null;
             Private_saoTogglePens = null;
             Private_tournamentDate = null;
@@ -1783,14 +2203,17 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_TMProTextMeshProUGUI_29 = null;
             Private___intnl_TMProTextMeshProUGUI_28 = null;
             Private___const_SystemString_263 = null;
+            Private___const_SystemString_273 = null;
             Private___const_SystemString_243 = null;
             Private___const_SystemString_253 = null;
             Private___const_SystemString_223 = null;
             Private___const_SystemString_233 = null;
             Private___const_SystemString_203 = null;
             Private___const_SystemString_213 = null;
+            Private___const_SystemString_283 = null;
             Private_shouldToaster = null;
             Private___const_UnityEngineSpace_0 = null;
+            Private_allowedPlayers = null;
             Private___intnl_VRCUdonUdonBehaviour_3 = null;
             Private___intnl_SystemBoolean_109 = null;
             Private___intnl_SystemBoolean_108 = null;
@@ -1803,12 +2226,12 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_107 = null;
             Private___intnl_SystemBoolean_106 = null;
             Private___intnl_UnityEngineTransform_4 = null;
-            Private___0___0_canUseTableSkin__ret = null;
             Private___gintnl_SystemCharArray_6 = null;
             Private___intnl_UnityEngineColor_2 = null;
             Private___const_SystemString_9 = null;
             Private___intnl_UnityEngineTexture2DArray_0 = null;
             Private___intnl_UnityEngineTransform_9 = null;
+            Private___intnl_SystemString_47 = null;
             Private___intnl_SystemBoolean_82 = null;
             Private___intnl_SystemBoolean_92 = null;
             Private___intnl_SystemBoolean_12 = null;
@@ -1828,15 +2251,25 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_17 = null;
             Private___gintnl_SystemUInt32_37 = null;
             Private___gintnl_SystemUInt32_27 = null;
+            Private___intnl_UnityEngineTransform_220 = null;
+            Private___intnl_UnityEngineTransform_210 = null;
+            Private___intnl_UnityEngineTransform_200 = null;
             Private___intnl_SystemInt32_16 = null;
             Private___intnl_SystemInt32_36 = null;
             Private___intnl_SystemInt32_26 = null;
             Private___intnl_SystemInt32_46 = null;
+            Private___intnl_UnityEngineTransform_193 = null;
+            Private___intnl_UnityEngineTransform_183 = null;
             Private___intnl_UnityEngineTransform_133 = null;
             Private___intnl_UnityEngineTransform_123 = null;
             Private___intnl_UnityEngineTransform_113 = null;
             Private___intnl_UnityEngineTransform_103 = null;
+            Private___intnl_UnityEngineTransform_173 = null;
+            Private___intnl_UnityEngineTransform_163 = null;
+            Private___intnl_UnityEngineTransform_153 = null;
+            Private___intnl_UnityEngineTransform_143 = null;
             Private___refl_typename = null;
+            Private_table3Skins = null;
             Private___gintnl_SystemObjectArray_0 = null;
             Private___const_SystemString_166 = null;
             Private___const_SystemString_176 = null;
@@ -1848,6 +2281,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_116 = null;
             Private___const_SystemString_186 = null;
             Private___const_SystemString_196 = null;
+            Private___0_owner__param = null;
             Private___intnl_SystemInt32_1 = null;
             Private___intnl_SystemInt32_0 = null;
             Private___intnl_SystemInt32_3 = null;
@@ -1859,7 +2293,10 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_9 = null;
             Private___intnl_SystemInt32_8 = null;
             Private_tableButtonToSkin = null;
+            Private_leaderboardPlayers = null;
             Private___intnl_SystemDateTime_0 = null;
+            Private___intnl_UnityEngineUIText_11 = null;
+            Private___intnl_UnityEngineUIText_21 = null;
             Private___const_SystemString_56 = null;
             Private___const_SystemString_57 = null;
             Private___const_SystemString_54 = null;
@@ -1874,23 +2311,43 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemSingle_3 = null;
             Private___intnl_TMProTextMeshProUGUI_3 = null;
             Private___intnl_SystemObject_3 = null;
+            Private___intnl_TMProTextMeshProUGUI_71 = null;
+            Private___intnl_TMProTextMeshProUGUI_70 = null;
+            Private___intnl_TMProTextMeshProUGUI_73 = null;
+            Private___intnl_TMProTextMeshProUGUI_72 = null;
+            Private___intnl_TMProTextMeshProUGUI_75 = null;
+            Private___intnl_TMProTextMeshProUGUI_74 = null;
+            Private___intnl_TMProTextMeshProUGUI_77 = null;
+            Private___intnl_TMProTextMeshProUGUI_76 = null;
+            Private___intnl_TMProTextMeshProUGUI_79 = null;
+            Private___intnl_TMProTextMeshProUGUI_78 = null;
             Private___const_SystemString_264 = null;
+            Private___const_SystemString_274 = null;
             Private___const_SystemString_244 = null;
             Private___const_SystemString_254 = null;
             Private___const_SystemString_224 = null;
             Private___const_SystemString_234 = null;
             Private___const_SystemString_204 = null;
             Private___const_SystemString_214 = null;
+            Private___const_SystemString_284 = null;
             Private___lcl_saoWorldSettings_UnityEngineTransform_0 = null;
             Private___lcl_targetID_SystemInt64_0 = null;
+            Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0 = null;
             Private___const_SystemString_1 = null;
+            Private___intnl_SystemBoolean_131 = null;
+            Private___intnl_SystemBoolean_130 = null;
+            Private___intnl_SystemBoolean_133 = null;
+            Private___intnl_SystemBoolean_132 = null;
+            Private___intnl_SystemBoolean_134 = null;
             Private___intnl_UnityEngineTransform_1 = null;
             Private___gintnl_SystemCharArray_5 = null;
             Private___const_SystemSingle_3 = null;
             Private___intnl_SystemDouble_0 = null;
             Private___lcl_idValue_SystemObject_0 = null;
             Private___intnl_UnityEngineColor_1 = null;
-            Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0 = null;
+            Private___intnl_SystemString_18 = null;
+            Private___intnl_SystemString_19 = null;
+            Private___intnl_SystemString_17 = null;
             Private___intnl_SystemBoolean_85 = null;
             Private___intnl_SystemBoolean_95 = null;
             Private___intnl_SystemBoolean_15 = null;
@@ -1909,6 +2366,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_13 = null;
             Private___intnl_SystemInt32_33 = null;
             Private___intnl_SystemInt32_23 = null;
+            Private___intnl_SystemInt32_53 = null;
             Private___intnl_SystemInt32_43 = null;
             Private___lcl_cueId_SystemInt32_0 = null;
             Private___intnl_SystemInt32_18 = null;
@@ -1929,17 +2387,22 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemByte_0 = null;
             Private___0_mode__param = null;
             Private_saoTableModels = null;
+            Private___intnl_UnityEngineUIText_12 = null;
             Private_saoTogglePlayer = null;
             Private___intnl_TMProTextMeshProUGUI_4 = null;
             Private___const_SystemChar_0 = null;
             Private___lcl_ch_SystemChar_0 = null;
             Private___intnl_VRCUdonUdonBehaviour_6 = null;
+            Private___const_SystemString_269 = null;
+            Private___const_SystemString_279 = null;
             Private___const_SystemString_249 = null;
             Private___const_SystemString_259 = null;
             Private___const_SystemString_229 = null;
             Private___const_SystemString_239 = null;
             Private___const_SystemString_209 = null;
             Private___const_SystemString_219 = null;
+            Private___const_SystemString_289 = null;
+            Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0 = null;
             Private_outColor = null;
             Private___intnl_UnityEngineColor_9 = null;
             Private___const_SystemString_6 = null;
@@ -1965,10 +2428,19 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_10 = null;
             Private___gintnl_SystemUInt32_30 = null;
             Private___gintnl_SystemUInt32_20 = null;
+            Private___intnl_UnityEngineTransform_215 = null;
+            Private___intnl_UnityEngineTransform_205 = null;
             Private___0___0_canUseCueSkin__ret = null;
+            Private___intnl_UnityEngineTransform_196 = null;
+            Private___intnl_UnityEngineTransform_186 = null;
+            Private___intnl_UnityEngineTransform_136 = null;
             Private___intnl_UnityEngineTransform_126 = null;
             Private___intnl_UnityEngineTransform_116 = null;
             Private___intnl_UnityEngineTransform_106 = null;
+            Private___intnl_UnityEngineTransform_176 = null;
+            Private___intnl_UnityEngineTransform_166 = null;
+            Private___intnl_UnityEngineTransform_156 = null;
+            Private___intnl_UnityEngineTransform_146 = null;
             Private___const_SystemInt32_17 = null;
             Private___const_SystemInt32_37 = null;
             Private___const_SystemInt32_27 = null;
@@ -1979,6 +2451,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_50 = null;
             Private___intnl_SystemInt32_40 = null;
             Private_tournamentRefs = null;
+            Private_promptedPlayers = null;
             Private_saoStrafeSpeedSlider = null;
             Private___const_SystemString_168 = null;
             Private___const_SystemString_178 = null;
@@ -2006,26 +2479,36 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_28 = null;
             Private___const_SystemString_29 = null;
             Private___intnl_SystemSingle_6 = null;
+            Private___gintnl_SystemUInt32_108 = null;
+            Private___gintnl_SystemUInt32_109 = null;
+            Private___gintnl_SystemUInt32_104 = null;
+            Private___gintnl_SystemUInt32_105 = null;
+            Private___gintnl_SystemUInt32_106 = null;
+            Private___gintnl_SystemUInt32_107 = null;
             Private___gintnl_SystemUInt32_100 = null;
             Private___gintnl_SystemUInt32_101 = null;
             Private___gintnl_SystemUInt32_102 = null;
             Private___gintnl_SystemUInt32_103 = null;
+            Private___intnl_VRCSDKBaseVRCPlayerApi_1 = null;
             Private_saoLoliLifterSlider = null;
             Private___intnl_SystemObject_6 = null;
             Private_INITIALIZED = null;
             Private___const_SystemString_261 = null;
+            Private___const_SystemString_271 = null;
             Private___const_SystemString_241 = null;
             Private___const_SystemString_251 = null;
             Private___const_SystemString_221 = null;
             Private___const_SystemString_231 = null;
             Private___const_SystemString_201 = null;
             Private___const_SystemString_211 = null;
+            Private___const_SystemString_281 = null;
             Private_selectedCueSkin = null;
             Private___intnl_VRCUdonUdonBehaviour_5 = null;
             Private___0_hasPendingRequest__ret = null;
             Private___intnl_UnityEngineTransform_6 = null;
             Private_inRemoteVersion = null;
             Private_activeYoutubeSearch = null;
+            Private___intnl_VRCUdonUdonBehaviour_8 = null;
             Private___intnl_UnityEngineColor_4 = null;
             Private___gintnl_SystemUInt32_98 = null;
             Private___gintnl_SystemUInt32_88 = null;
@@ -2036,6 +2519,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_18 = null;
             Private___gintnl_SystemUInt32_38 = null;
             Private___gintnl_SystemUInt32_28 = null;
+            Private___const_SystemSingle_5 = null;
             Private_selectedTableSkin = null;
             Private_DEPENDENCIES = null;
             Private___intnl_UnityEngineComponent_1 = null;
@@ -2058,6 +2542,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_UnityEngineTransform_26 = null;
             Private___intnl_UnityEngineTransform_25 = null;
             Private___intnl_UnityEngineTransform_24 = null;
+            Private_leaderboard = null;
             Private___gintnl_SystemUInt32_95 = null;
             Private___gintnl_SystemUInt32_85 = null;
             Private___gintnl_SystemUInt32_55 = null;
@@ -2067,11 +2552,20 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___gintnl_SystemUInt32_15 = null;
             Private___gintnl_SystemUInt32_35 = null;
             Private___gintnl_SystemUInt32_25 = null;
+            Private___intnl_UnityEngineTransform_216 = null;
+            Private___intnl_UnityEngineTransform_206 = null;
             Private___0__SelectCueSkinContributor__ret = null;
             Private_tableSkinAllowed = null;
+            Private___intnl_UnityEngineTransform_195 = null;
+            Private___intnl_UnityEngineTransform_185 = null;
+            Private___intnl_UnityEngineTransform_135 = null;
             Private___intnl_UnityEngineTransform_125 = null;
             Private___intnl_UnityEngineTransform_115 = null;
             Private___intnl_UnityEngineTransform_105 = null;
+            Private___intnl_UnityEngineTransform_175 = null;
+            Private___intnl_UnityEngineTransform_165 = null;
+            Private___intnl_UnityEngineTransform_155 = null;
+            Private___intnl_UnityEngineTransform_145 = null;
             Private___const_SystemInt32_9 = null;
             Private___const_SystemInt32_8 = null;
             Private___const_SystemInt32_1 = null;
@@ -2097,9 +2591,16 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_5 = null;
             Private___intnl_SystemBoolean_6 = null;
             Private___intnl_SystemBoolean_7 = null;
+            Private___intnl_UnityEngineTransform_198 = null;
+            Private___intnl_UnityEngineTransform_188 = null;
+            Private___intnl_UnityEngineTransform_138 = null;
             Private___intnl_UnityEngineTransform_128 = null;
             Private___intnl_UnityEngineTransform_118 = null;
             Private___intnl_UnityEngineTransform_108 = null;
+            Private___intnl_UnityEngineTransform_178 = null;
+            Private___intnl_UnityEngineTransform_168 = null;
+            Private___intnl_UnityEngineTransform_158 = null;
+            Private___intnl_UnityEngineTransform_148 = null;
             Private___const_SystemString_160 = null;
             Private___const_SystemString_170 = null;
             Private___const_SystemString_140 = null;
@@ -2110,6 +2611,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_110 = null;
             Private___const_SystemString_180 = null;
             Private___const_SystemString_190 = null;
+            Private___intnl_UnityEngineUIText_17 = null;
             Private___const_SystemString_76 = null;
             Private___const_SystemString_77 = null;
             Private___const_SystemString_74 = null;
@@ -2120,20 +2622,38 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___const_SystemString_71 = null;
             Private___const_SystemString_78 = null;
             Private___const_SystemString_79 = null;
+            Private_modernTableSkins = null;
             Private___intnl_SystemSingle_5 = null;
+            Private___intnl_TMProTextMeshProUGUI_81 = null;
+            Private___intnl_TMProTextMeshProUGUI_80 = null;
+            Private___intnl_TMProTextMeshProUGUI_83 = null;
+            Private___intnl_TMProTextMeshProUGUI_82 = null;
+            Private___intnl_VRCSDKBaseVRCPlayerApi_2 = null;
             Private_saoToggleUSColors = null;
+            Private___intnl_UnityEngineUIText_18 = null;
             Private___0___0_onChatCommand__ret = null;
             Private___intnl_TMProTextMeshProUGUI_1 = null;
             Private___intnl_SystemObject_5 = null;
+            Private___intnl_TMProTextMeshProUGUI_51 = null;
+            Private___intnl_TMProTextMeshProUGUI_50 = null;
+            Private___intnl_TMProTextMeshProUGUI_53 = null;
+            Private___intnl_TMProTextMeshProUGUI_52 = null;
+            Private___intnl_TMProTextMeshProUGUI_55 = null;
+            Private___intnl_TMProTextMeshProUGUI_54 = null;
             Private___intnl_TMProTextMeshProUGUI_57 = null;
+            Private___intnl_TMProTextMeshProUGUI_56 = null;
+            Private___intnl_TMProTextMeshProUGUI_59 = null;
             Private___intnl_TMProTextMeshProUGUI_58 = null;
             Private___const_SystemString_262 = null;
+            Private___const_SystemString_272 = null;
             Private___const_SystemString_242 = null;
             Private___const_SystemString_252 = null;
             Private___const_SystemString_222 = null;
             Private___const_SystemString_232 = null;
             Private___const_SystemString_202 = null;
             Private___const_SystemString_212 = null;
+            Private___const_SystemString_282 = null;
+            Private___intnl_SystemObject_8 = null;
             Private_saoJumpImpulseSlider = null;
             Private___intnl_VRCUdonUdonBehaviour_0 = null;
             Private_saoMenu = null;
@@ -2643,6 +3163,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_213
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_213 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_213.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_213 != null)
+                {
+                    Private___intnl_UnityEngineTransform_213.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_203
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_203 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_203.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_203 != null)
+                {
+                    Private___intnl_UnityEngineTransform_203.Value = value;
+                }
+            }
+        }
+
         internal int? __intnl_SystemInt32_15
         {
             [HideFromIl2Cpp]
@@ -2768,31 +3332,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal int? __lcl_tableCount_SystemInt32_0
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___lcl_tableCount_SystemInt32_0 != null)
-                {
-                    return Private___lcl_tableCount_SystemInt32_0.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___lcl_tableCount_SystemInt32_0 != null)
-                    {
-                        Private___lcl_tableCount_SystemInt32_0.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal bool? __1_accept__param
         {
             [HideFromIl2Cpp]
@@ -2861,6 +3400,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___lcl_saoTableModelsRoot_UnityEngineTransform_0 != null)
                 {
                     Private___lcl_saoTableModelsRoot_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_190
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_190 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_190.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_190 != null)
+                {
+                    Private___intnl_UnityEngineTransform_190.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_180
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_180 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_180.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_180 != null)
+                {
+                    Private___intnl_UnityEngineTransform_180.Value = value;
                 }
             }
         }
@@ -2949,6 +3532,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_100 != null)
                 {
                     Private___intnl_UnityEngineTransform_100.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_170
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_170 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_170.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_170 != null)
+                {
+                    Private___intnl_UnityEngineTransform_170.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_160
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_160 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_160.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_160 != null)
+                {
+                    Private___intnl_UnityEngineTransform_160.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_150
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_150 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_150.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_150 != null)
+                {
+                    Private___intnl_UnityEngineTransform_150.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_140
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_140 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_140.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_140 != null)
+                {
+                    Private___intnl_UnityEngineTransform_140.Value = value;
                 }
             }
         }
@@ -3292,6 +3963,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_10 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_10 != null)
+                {
+                    Private___intnl_UnityEngineUIText_10.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_20
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_20 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_20.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_20 != null)
+                {
+                    Private___intnl_UnityEngineUIText_20.Value = value;
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_9
         {
             [HideFromIl2Cpp]
@@ -3581,6 +4296,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal char? __const_SystemChar_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemChar_2 != null)
+                {
+                    return Private___const_SystemChar_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemChar_2 != null)
+                    {
+                        Private___const_SystemChar_2.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __intnl_SystemObject_0
         {
             [HideFromIl2Cpp]
@@ -3599,6 +4339,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_SystemObject_0 != null)
                 {
                     Private___intnl_SystemObject_0.Value = value;
+                }
+            }
+        }
+
+        internal string __lcl_me_SystemString_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_me_SystemString_0 != null)
+                {
+                    return Private___lcl_me_SystemString_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_me_SystemString_0 != null)
+                {
+                    Private___lcl_me_SystemString_0.Value = value;
                 }
             }
         }
@@ -3653,6 +4415,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_61
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_61 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_61.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_61 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_61.Value = value;
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_60
         {
             [HideFromIl2Cpp]
@@ -3671,6 +4455,226 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_TMProTextMeshProUGUI_60 != null)
                 {
                     Private___intnl_TMProTextMeshProUGUI_60.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_63
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_63 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_63.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_63 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_63.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_62
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_62 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_62.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_62 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_62.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_65
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_65 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_65.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_65 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_65.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_64
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_64 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_64.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_64 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_64.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_67
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_67 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_67.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_67 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_67.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_66
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_66 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_66.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_66 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_66.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_69
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_69 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_69.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_69 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_69.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_68
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_68 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_68.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_68 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_68.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_267
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_267 != null)
+                {
+                    return Private___const_SystemString_267.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_267 != null)
+                {
+                    Private___const_SystemString_267.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_277
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_277 != null)
+                {
+                    return Private___const_SystemString_277.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_277 != null)
+                {
+                    Private___const_SystemString_277.Value = value;
                 }
             }
         }
@@ -3807,6 +4811,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_287
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_287 != null)
+                {
+                    return Private___const_SystemString_287.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_287 != null)
+                {
+                    Private___const_SystemString_287.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour liftModule
         {
             [HideFromIl2Cpp]
@@ -3825,6 +4851,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_liftModule != null)
                 {
                     Private_liftModule.Value = value;
+                }
+            }
+        }
+
+        internal int[] table2Skins
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_table2Skins != null)
+                {
+                    return Private_table2Skins.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_table2Skins != null)
+                {
+                    Private_table2Skins.Value = value;
                 }
             }
         }
@@ -4565,6 +5613,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int? __const_SystemInt32_41
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_41 != null)
+                {
+                    return Private___const_SystemInt32_41.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_41 != null)
+                    {
+                        Private___const_SystemInt32_41.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI saoToggleCamera
         {
             [HideFromIl2Cpp]
@@ -4587,6 +5660,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int? __0_cueSkin__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_cueSkin__param != null)
+                {
+                    return Private___0_cueSkin__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___0_cueSkin__param != null)
+                    {
+                        Private___0_cueSkin__param.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __intnl_SystemObject_15
         {
             [HideFromIl2Cpp]
@@ -4605,6 +5703,116 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_SystemObject_15 != null)
                 {
                     Private___intnl_SystemObject_15.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_14 != null)
+                {
+                    return Private___intnl_SystemObject_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_14 != null)
+                {
+                    Private___intnl_SystemObject_14.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_13
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_13 != null)
+                {
+                    return Private___intnl_SystemObject_13.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_13 != null)
+                {
+                    Private___intnl_SystemObject_13.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_12
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_12 != null)
+                {
+                    return Private___intnl_SystemObject_12.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_12 != null)
+                {
+                    Private___intnl_SystemObject_12.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_11 != null)
+                {
+                    return Private___intnl_SystemObject_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_11 != null)
+                {
+                    Private___intnl_SystemObject_11.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_10 != null)
+                {
+                    return Private___intnl_SystemObject_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_10 != null)
+                {
+                    Private___intnl_SystemObject_10.Value = value;
                 }
             }
         }
@@ -4852,6 +6060,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___intnl_SystemInt32_42.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __lcl_saoModernTableSkinsRoot_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0.Value = value;
                 }
             }
         }
@@ -5498,6 +6728,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_28
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_28 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_28.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_28 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_28.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_21
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_21 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_21 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_21.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_20
         {
             [HideFromIl2Cpp]
@@ -5520,14 +6794,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_25
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_22
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___intnl_VRCUdonUdonBehaviour_25 != null)
+                if (Private___intnl_VRCUdonUdonBehaviour_22 != null)
                 {
-                    return Private___intnl_VRCUdonUdonBehaviour_25.Value;
+                    return Private___intnl_VRCUdonUdonBehaviour_22.Value;
                 }
 
                 return null;
@@ -5535,9 +6809,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             [HideFromIl2Cpp]
             set
             {
-                if (Private___intnl_VRCUdonUdonBehaviour_25 != null)
+                if (Private___intnl_VRCUdonUdonBehaviour_22 != null)
                 {
-                    Private___intnl_VRCUdonUdonBehaviour_25.Value = value;
+                    Private___intnl_VRCUdonUdonBehaviour_22.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_27
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_27 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_27.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_27 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_27.Value = value;
                 }
             }
         }
@@ -5611,6 +6907,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __lcl_saoTable4SkinsRoot_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
         internal int[] cueButtonToSkin
         {
             [HideFromIl2Cpp]
@@ -5651,6 +6969,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_VRCUdonUdonBehaviour_7 != null)
                 {
                     Private___intnl_VRCUdonUdonBehaviour_7.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_268
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_268 != null)
+                {
+                    return Private___const_SystemString_268.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_268 != null)
+                {
+                    Private___const_SystemString_268.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_278
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_278 != null)
+                {
+                    return Private___const_SystemString_278.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_278 != null)
+                {
+                    Private___const_SystemString_278.Value = value;
                 }
             }
         }
@@ -5787,14 +7149,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal int? __lcl_tableId_SystemInt32_0
+        internal string __const_SystemString_288
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___lcl_tableId_SystemInt32_0 != null)
+                if (Private___const_SystemString_288 != null)
                 {
-                    return Private___lcl_tableId_SystemInt32_0.Value;
+                    return Private___const_SystemString_288.Value;
                 }
 
                 return null;
@@ -5802,12 +7164,9 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             [HideFromIl2Cpp]
             set
             {
-                if (value.HasValue)
+                if (Private___const_SystemString_288 != null)
                 {
-                    if (Private___lcl_tableId_SystemInt32_0 != null)
-                    {
-                        Private___lcl_tableId_SystemInt32_0.Value = value.Value;
-                    }
+                    Private___const_SystemString_288.Value = value;
                 }
             }
         }
@@ -5927,31 +7286,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___gintnl_SystemCharArray_1 != null)
                 {
                     Private___gintnl_SystemCharArray_1.Value = value;
-                }
-            }
-        }
-
-        internal int? __1_skin__param
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___1_skin__param != null)
-                {
-                    return Private___1_skin__param.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___1_skin__param != null)
-                    {
-                        Private___1_skin__param.Value = value.Value;
-                    }
                 }
             }
         }
@@ -6226,6 +7560,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int? __const_SystemInt32_39
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_39 != null)
+                {
+                    return Private___const_SystemInt32_39.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_39 != null)
+                    {
+                        Private___const_SystemInt32_39.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal int? __const_SystemInt32_29
         {
             [HideFromIl2Cpp]
@@ -6476,6 +7835,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_214
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_214 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_214.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_214 != null)
+                {
+                    Private___intnl_UnityEngineTransform_214.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_204
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_204 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_204.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_204 != null)
+                {
+                    Private___intnl_UnityEngineTransform_204.Value = value;
+                }
+            }
+        }
+
         internal int? inMode
         {
             [HideFromIl2Cpp]
@@ -6526,6 +7929,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __intnl_UnityEngineObject_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineObject_2 != null)
+                {
+                    return Private___intnl_UnityEngineObject_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineObject_2 != null)
+                {
+                    Private___intnl_UnityEngineObject_2.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __intnl_UnityEngineObject_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineObject_0 != null)
+                {
+                    return Private___intnl_UnityEngineObject_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineObject_0 != null)
+                {
+                    Private___intnl_UnityEngineObject_0.Value = value;
+                }
+            }
+        }
+
         internal bool? isPolling
         {
             [HideFromIl2Cpp]
@@ -6547,6 +7994,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private_isPolling.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_197
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_197 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_197.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_197 != null)
+                {
+                    Private___intnl_UnityEngineTransform_197.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_187
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_187 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_187.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_187 != null)
+                {
+                    Private___intnl_UnityEngineTransform_187.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_137
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_137 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_137.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_137 != null)
+                {
+                    Private___intnl_UnityEngineTransform_137.Value = value;
                 }
             }
         }
@@ -6613,6 +8126,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_107 != null)
                 {
                     Private___intnl_UnityEngineTransform_107.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_177
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_177 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_177.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_177 != null)
+                {
+                    Private___intnl_UnityEngineTransform_177.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_167
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_167 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_167.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_167 != null)
+                {
+                    Private___intnl_UnityEngineTransform_167.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_157
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_157 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_157.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_157 != null)
+                {
+                    Private___intnl_UnityEngineTransform_157.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_147
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_147 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_147.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_147 != null)
+                {
+                    Private___intnl_UnityEngineTransform_147.Value = value;
                 }
             }
         }
@@ -6959,6 +8560,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int[] table4Skins
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_table4Skins != null)
+                {
+                    return Private_table4Skins.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_table4Skins != null)
+                {
+                    Private_table4Skins.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_219
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_219 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_219.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_219 != null)
+                {
+                    Private___intnl_UnityEngineTransform_219.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_209
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_209 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_209.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_209 != null)
+                {
+                    Private___intnl_UnityEngineTransform_209.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_162
         {
             [HideFromIl2Cpp]
@@ -7197,28 +8864,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_tables != null)
                 {
                     Private_tables.Value = value;
-                }
-            }
-        }
-
-        internal UnityEngine.MeshRenderer __lcl_renderer_UnityEngineMeshRenderer_0
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___lcl_renderer_UnityEngineMeshRenderer_0 != null)
-                {
-                    return Private___lcl_renderer_UnityEngineMeshRenderer_0.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___lcl_renderer_UnityEngineMeshRenderer_0 != null)
-                {
-                    Private___lcl_renderer_UnityEngineMeshRenderer_0.Value = value;
                 }
             }
         }
@@ -7468,6 +9113,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.SkinnedMeshRenderer __0_renderer__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_renderer__param != null)
+                {
+                    return Private___0_renderer__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_renderer__param != null)
+                {
+                    Private___0_renderer__param.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_15 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_15 != null)
+                {
+                    Private___intnl_UnityEngineUIText_15.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour modModule
         {
             [HideFromIl2Cpp]
@@ -7508,6 +9197,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___lcl_saoTableSettings_UnityEngineTransform_0 != null)
                 {
                     Private___lcl_saoTableSettings_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
+        internal string[] __lcl_lines_SystemStringArray_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_lines_SystemStringArray_1 != null)
+                {
+                    return Private___lcl_lines_SystemStringArray_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_lines_SystemStringArray_1 != null)
+                {
+                    Private___lcl_lines_SystemStringArray_1.Value = value;
                 }
             }
         }
@@ -7778,6 +9489,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___intnl_SystemSingle_7.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __intnl_VRCSDKBaseVRCPlayerApi_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_0 != null)
+                {
+                    return Private___intnl_VRCSDKBaseVRCPlayerApi_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_0 != null)
+                {
+                    Private___intnl_VRCSDKBaseVRCPlayerApi_0.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.SkinnedMeshRenderer __lcl_renderer_UnityEngineSkinnedMeshRenderer_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0 != null)
+                {
+                    return Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0 != null)
+                {
+                    Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0.Value = value;
                 }
             }
         }
@@ -8093,6 +9848,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_270
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_270 != null)
+                {
+                    return Private___const_SystemString_270.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_270 != null)
+                {
+                    Private___const_SystemString_270.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_240
         {
             [HideFromIl2Cpp]
@@ -8225,6 +10002,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_280
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_280 != null)
+                {
+                    return Private___const_SystemString_280.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_280 != null)
+                {
+                    Private___const_SystemString_280.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_290
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_290 != null)
+                {
+                    return Private___const_SystemString_290.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_290 != null)
+                {
+                    Private___const_SystemString_290.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_19
         {
             [HideFromIl2Cpp]
@@ -8243,6 +10064,160 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_VRCUdonUdonBehaviour_19 != null)
                 {
                     Private___intnl_VRCUdonUdonBehaviour_19.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_18 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_18.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_18 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_18.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_11 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_11 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_11.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_10
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_10 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_10.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_10 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_10.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_12
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_12 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_12.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_12 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_12.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_15
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_15 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_15.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_15 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_15.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_17 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_17 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_17.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_16
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_16 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_16 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_16.Value = value;
                 }
             }
         }
@@ -8366,6 +10341,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_9 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_9 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_9.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.Color? __intnl_UnityEngineColor_5
         {
             [HideFromIl2Cpp]
@@ -8413,28 +10410,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal string __2_owner__param
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___2_owner__param != null)
-                {
-                    return Private___2_owner__param.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___2_owner__param != null)
-                {
-                    Private___2_owner__param.Value = value;
-                }
-            }
-        }
-
         internal uint? __const_SystemUInt32_0
         {
             [HideFromIl2Cpp]
@@ -8460,6 +10435,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal VRC.Udon.UdonBehaviour deniedPlayers
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_deniedPlayers != null)
+                {
+                    return Private_deniedPlayers.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_deniedPlayers != null)
+                {
+                    Private_deniedPlayers.Value = value;
+                }
+            }
+        }
+
         internal float? __4_value__param
         {
             [HideFromIl2Cpp]
@@ -8481,6 +10478,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___4_value__param.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_UnityEngineComponent_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineComponent_0 != null)
+                {
+                    return Private___intnl_UnityEngineComponent_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineComponent_0 != null)
+                {
+                    Private___intnl_UnityEngineComponent_0.Value = value;
                 }
             }
         }
@@ -9155,6 +11174,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_211
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_211 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_211.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_211 != null)
+                {
+                    Private___intnl_UnityEngineTransform_211.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_201
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_201 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_201.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_201 != null)
+                {
+                    Private___intnl_UnityEngineTransform_201.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.Vector3? __const_UnityEngineVector3_0
         {
             [HideFromIl2Cpp]
@@ -9280,6 +11343,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_192
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_192 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_192.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_192 != null)
+                {
+                    Private___intnl_UnityEngineTransform_192.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_182
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_182 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_182.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_182 != null)
+                {
+                    Private___intnl_UnityEngineTransform_182.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_132
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_132 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_132.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_132 != null)
+                {
+                    Private___intnl_UnityEngineTransform_132.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.RectTransform __intnl_UnityEngineTransform_122
         {
             [HideFromIl2Cpp]
@@ -9346,6 +11475,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_172
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_172 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_172.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_172 != null)
+                {
+                    Private___intnl_UnityEngineTransform_172.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_162
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_162 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_162.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_162 != null)
+                {
+                    Private___intnl_UnityEngineTransform_162.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_152
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_152 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_152.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_152 != null)
+                {
+                    Private___intnl_UnityEngineTransform_152.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_142
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_142 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_142.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_142 != null)
+                {
+                    Private___intnl_UnityEngineTransform_142.Value = value;
+                }
+            }
+        }
+
         internal bool? outSuccessful
         {
             [HideFromIl2Cpp]
@@ -9367,6 +11584,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private_outSuccessful.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_199
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_199 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_199.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_199 != null)
+                {
+                    Private___intnl_UnityEngineTransform_199.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_189
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_189 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_189.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_189 != null)
+                {
+                    Private___intnl_UnityEngineTransform_189.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_139
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_139 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_139.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_139 != null)
+                {
+                    Private___intnl_UnityEngineTransform_139.Value = value;
                 }
             }
         }
@@ -9433,6 +11716,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_109 != null)
                 {
                     Private___intnl_UnityEngineTransform_109.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_179
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_179 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_179.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_179 != null)
+                {
+                    Private___intnl_UnityEngineTransform_179.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_169
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_169 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_169.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_169 != null)
+                {
+                    Private___intnl_UnityEngineTransform_169.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_159
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_159 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_159.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_159 != null)
+                {
+                    Private___intnl_UnityEngineTransform_159.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_149
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_149 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_149.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_149 != null)
+                {
+                    Private___intnl_UnityEngineTransform_149.Value = value;
                 }
             }
         }
@@ -9704,6 +12075,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __lcl_Players_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_Players_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_Players_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_Players_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_Players_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __0__intnlparam
         {
             [HideFromIl2Cpp]
@@ -9726,6 +12119,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __lcl_data_SystemString_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_data_SystemString_0 != null)
+                {
+                    return Private___lcl_data_SystemString_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_data_SystemString_0 != null)
+                {
+                    Private___lcl_data_SystemString_0.Value = value;
+                }
+            }
+        }
+
         internal string[] moderators
         {
             [HideFromIl2Cpp]
@@ -9744,6 +12159,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_moderators != null)
                 {
                     Private_moderators.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_16
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_16 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_16.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_16 != null)
+                {
+                    Private___intnl_UnityEngineUIText_16.Value = value;
                 }
             }
         }
@@ -10007,6 +12444,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 if (value.HasValue)
                 {
+
                     if (Private___intnl_SystemGuid_0 != null)
                     {
                         Private___intnl_SystemGuid_0.Value = value.Value;
@@ -10326,6 +12764,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_49
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_49 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_49.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_49 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_49.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_48
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_48 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_48.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_48 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_48.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_265
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_265 != null)
+                {
+                    return Private___const_SystemString_265.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_265 != null)
+                {
+                    Private___const_SystemString_265.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_275
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_275 != null)
+                {
+                    return Private___const_SystemString_275.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_275 != null)
+                {
+                    Private___const_SystemString_275.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_245
         {
             [HideFromIl2Cpp]
@@ -10458,6 +12984,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_285
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_285 != null)
+                {
+                    return Private___const_SystemString_285.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_285 != null)
+                {
+                    Private___const_SystemString_285.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_9 != null)
+                {
+                    return Private___intnl_SystemObject_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_9 != null)
+                {
+                    Private___intnl_SystemObject_9.Value = value;
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_1
         {
             [HideFromIl2Cpp]
@@ -10498,6 +13068,56 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_2 != null)
                 {
                     Private___const_SystemString_2.Value = value;
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_129
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_129 != null)
+                {
+                    return Private___intnl_SystemBoolean_129.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_129 != null)
+                    {
+                        Private___intnl_SystemBoolean_129.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_128
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_128 != null)
+                {
+                    return Private___intnl_SystemBoolean_128.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_128 != null)
+                    {
+                        Private___intnl_SystemBoolean_128.Value = value.Value;
+                    }
                 }
             }
         }
@@ -10814,6 +13434,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___const_SystemSingle_2.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal string[] __lcl_parts_SystemStringArray_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_parts_SystemStringArray_0 != null)
+                {
+                    return Private___lcl_parts_SystemStringArray_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_parts_SystemStringArray_0 != null)
+                {
+                    Private___lcl_parts_SystemStringArray_0.Value = value;
                 }
             }
         }
@@ -11162,6 +13804,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __intnl_SystemString_20
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemString_20 != null)
+                {
+                    return Private___intnl_SystemString_20.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_20 != null)
+                {
+                    Private___intnl_SystemString_20.Value = value;
+                }
+            }
+        }
+
+        internal string __intnl_SystemString_21
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemString_21 != null)
+                {
+                    return Private___intnl_SystemString_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_21 != null)
+                {
+                    Private___intnl_SystemString_21.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.GameObject __intnl_UnityEngineGameObject_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineGameObject_1 != null)
+                {
+                    return Private___intnl_UnityEngineGameObject_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineGameObject_1 != null)
+                {
+                    Private___intnl_UnityEngineGameObject_1.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.GameObject __intnl_UnityEngineGameObject_0
         {
             [HideFromIl2Cpp]
@@ -11180,6 +13888,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineGameObject_0 != null)
                 {
                     Private___intnl_UnityEngineGameObject_0.Value = value;
+                }
+            }
+        }
+
+        internal int[] table1Skins
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_table1Skins != null)
+                {
+                    return Private_table1Skins.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_table1Skins != null)
+                {
+                    Private_table1Skins.Value = value;
                 }
             }
         }
@@ -11556,6 +14286,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_212
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_212 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_212.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_212 != null)
+                {
+                    Private___intnl_UnityEngineTransform_212.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_202
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_202 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_202.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_202 != null)
+                {
+                    Private___intnl_UnityEngineTransform_202.Value = value;
+                }
+            }
+        }
+
         internal int? __intnl_SystemInt32_14
         {
             [HideFromIl2Cpp]
@@ -11631,6 +14405,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int? __intnl_SystemInt32_54
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_54 != null)
+                {
+                    return Private___intnl_SystemInt32_54.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_54 != null)
+                    {
+                        Private___intnl_SystemInt32_54.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal int? __intnl_SystemInt32_44
         {
             [HideFromIl2Cpp]
@@ -11674,6 +14473,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___lcl_saoCamerasRoot_UnityEngineTransform_0 != null)
                 {
                     Private___lcl_saoCamerasRoot_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_191
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_191 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_191.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_191 != null)
+                {
+                    Private___intnl_UnityEngineTransform_191.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_181
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_181 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_181.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_181 != null)
+                {
+                    Private___intnl_UnityEngineTransform_181.Value = value;
                 }
             }
         }
@@ -11762,6 +14605,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_101 != null)
                 {
                     Private___intnl_UnityEngineTransform_101.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_171
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_171 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_171.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_171 != null)
+                {
+                    Private___intnl_UnityEngineTransform_171.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_161
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_161 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_161.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_161 != null)
+                {
+                    Private___intnl_UnityEngineTransform_161.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_151
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_151 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_151.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_151 != null)
+                {
+                    Private___intnl_UnityEngineTransform_151.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_141
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_141 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_141.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_141 != null)
+                {
+                    Private___intnl_UnityEngineTransform_141.Value = value;
                 }
             }
         }
@@ -12111,6 +15042,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __1_owner__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___1_owner__param != null)
+                {
+                    return Private___1_owner__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___1_owner__param != null)
+                {
+                    Private___1_owner__param.Value = value;
+                }
+            }
+        }
+
         internal int? activeYoutubeSearchAttempts
         {
             [HideFromIl2Cpp]
@@ -12132,6 +15085,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private_activeYoutubeSearchAttempts.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_13
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_13 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_13.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_13 != null)
+                {
+                    Private___intnl_UnityEngineUIText_13.Value = value;
                 }
             }
         }
@@ -12179,6 +15154,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___intnl_SystemSingle_1.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_40
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_40 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_40.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_40 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_40.Value = value;
                 }
             }
         }
@@ -12340,6 +15337,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_266
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_266 != null)
+                {
+                    return Private___const_SystemString_266.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_266 != null)
+                {
+                    Private___const_SystemString_266.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_276
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_276 != null)
+                {
+                    return Private___const_SystemString_276.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_276 != null)
+                {
+                    Private___const_SystemString_276.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_246
         {
             [HideFromIl2Cpp]
@@ -12468,6 +15509,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_216 != null)
                 {
                     Private___const_SystemString_216.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_286
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_286 != null)
+                {
+                    return Private___const_SystemString_286.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_286 != null)
+                {
+                    Private___const_SystemString_286.Value = value;
                 }
             }
         }
@@ -13477,6 +16540,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int? __const_SystemInt32_40
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemInt32_40 != null)
+                {
+                    return Private___const_SystemInt32_40.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemInt32_40 != null)
+                    {
+                        Private___const_SystemInt32_40.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal VRC.Udon.UdonBehaviour chat
         {
             [HideFromIl2Cpp]
@@ -13913,6 +17001,256 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal uint? __gintnl_SystemUInt32_118
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_118 != null)
+                {
+                    return Private___gintnl_SystemUInt32_118.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_118 != null)
+                    {
+                        Private___gintnl_SystemUInt32_118.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_119
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_119 != null)
+                {
+                    return Private___gintnl_SystemUInt32_119.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_119 != null)
+                    {
+                        Private___gintnl_SystemUInt32_119.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_114
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_114 != null)
+                {
+                    return Private___gintnl_SystemUInt32_114.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_114 != null)
+                    {
+                        Private___gintnl_SystemUInt32_114.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_115
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_115 != null)
+                {
+                    return Private___gintnl_SystemUInt32_115.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_115 != null)
+                    {
+                        Private___gintnl_SystemUInt32_115.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_116
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_116 != null)
+                {
+                    return Private___gintnl_SystemUInt32_116.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_116 != null)
+                    {
+                        Private___gintnl_SystemUInt32_116.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_117
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_117 != null)
+                {
+                    return Private___gintnl_SystemUInt32_117.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_117 != null)
+                    {
+                        Private___gintnl_SystemUInt32_117.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_110
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_110 != null)
+                {
+                    return Private___gintnl_SystemUInt32_110.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_110 != null)
+                    {
+                        Private___gintnl_SystemUInt32_110.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_111
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_111 != null)
+                {
+                    return Private___gintnl_SystemUInt32_111.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_111 != null)
+                    {
+                        Private___gintnl_SystemUInt32_111.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_112
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_112 != null)
+                {
+                    return Private___gintnl_SystemUInt32_112.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_112 != null)
+                    {
+                        Private___gintnl_SystemUInt32_112.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_113
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_113 != null)
+                {
+                    return Private___gintnl_SystemUInt32_113.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_113 != null)
+                    {
+                        Private___gintnl_SystemUInt32_113.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal UnityEngine.UI.InputField saoSaveLoadInput
         {
             [HideFromIl2Cpp]
@@ -13931,6 +17269,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_saoSaveLoadInput != null)
                 {
                     Private_saoSaveLoadInput.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text[] leaderboardElos
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_leaderboardElos != null)
+                {
+                    return Private_leaderboardElos.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_leaderboardElos != null)
+                {
+                    Private_leaderboardElos.Value = value;
                 }
             }
         }
@@ -14375,28 +17735,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_38
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___intnl_VRCUdonUdonBehaviour_38 != null)
-                {
-                    return Private___intnl_VRCUdonUdonBehaviour_38.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (Private___intnl_VRCUdonUdonBehaviour_38 != null)
-                {
-                    Private___intnl_VRCUdonUdonBehaviour_38.Value = value;
-                }
-            }
-        }
-
         internal long? __intnl_SystemInt64_1
         {
             [HideFromIl2Cpp]
@@ -14465,6 +17803,248 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_TMProTextMeshProUGUI_6 != null)
                 {
                     Private___intnl_TMProTextMeshProUGUI_6.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_4
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_4 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_4.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_4 != null)
+                {
+                    Private___intnl_UnityEngineUIText_4.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_5 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_5 != null)
+                {
+                    Private___intnl_UnityEngineUIText_5.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_6
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_6 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_6.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_6 != null)
+                {
+                    Private___intnl_UnityEngineUIText_6.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_7
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_7 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_7.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_7 != null)
+                {
+                    Private___intnl_UnityEngineUIText_7.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_0 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_0 != null)
+                {
+                    Private___intnl_UnityEngineUIText_0.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_1 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_1 != null)
+                {
+                    Private___intnl_UnityEngineUIText_1.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_2 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_2 != null)
+                {
+                    Private___intnl_UnityEngineUIText_2.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_3 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_3 != null)
+                {
+                    Private___intnl_UnityEngineUIText_3.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_8 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_8 != null)
+                {
+                    Private___intnl_UnityEngineUIText_8.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_9 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_9 != null)
+                {
+                    Private___intnl_UnityEngineUIText_9.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __lcl_saoTable1SkinsRoot_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0.Value = value;
                 }
             }
         }
@@ -14652,6 +18232,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 if (value.HasValue)
                 {
+
                     if (Private___const_UnityEngineKeyCode_0 != null)
                     {
                         Private___const_UnityEngineKeyCode_0.Value = value.Value;
@@ -15455,6 +19036,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_217
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_217 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_217.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_217 != null)
+                {
+                    Private___intnl_UnityEngineTransform_217.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_207
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_207 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_207.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_207 != null)
+                {
+                    Private___intnl_UnityEngineTransform_207.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.UI.Slider saoWalkSpeedSlider
         {
             [HideFromIl2Cpp]
@@ -15473,6 +19098,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_saoWalkSpeedSlider != null)
                 {
                     Private_saoWalkSpeedSlider.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_194
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_194 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_194.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_194 != null)
+                {
+                    Private___intnl_UnityEngineTransform_194.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_184
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_184 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_184.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_184 != null)
+                {
+                    Private___intnl_UnityEngineTransform_184.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_134
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_134 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_134.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_134 != null)
+                {
+                    Private___intnl_UnityEngineTransform_134.Value = value;
                 }
             }
         }
@@ -15539,6 +19230,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_104 != null)
                 {
                     Private___intnl_UnityEngineTransform_104.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_174
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_174 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_174.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_174 != null)
+                {
+                    Private___intnl_UnityEngineTransform_174.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_164
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_164 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_164.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_164 != null)
+                {
+                    Private___intnl_UnityEngineTransform_164.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_154
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_154 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_154.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_154 != null)
+                {
+                    Private___intnl_UnityEngineTransform_154.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_144
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_144 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_144.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_144 != null)
+                {
+                    Private___intnl_UnityEngineTransform_144.Value = value;
                 }
             }
         }
@@ -15759,6 +19538,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_84 != null)
                 {
                     Private___intnl_UnityEngineTransform_84.Value = value;
+                }
+            }
+        }
+
+        internal int? __lcl_i_SystemInt32_9
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_i_SystemInt32_9 != null)
+                {
+                    return Private___lcl_i_SystemInt32_9.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___lcl_i_SystemInt32_9 != null)
+                    {
+                        Private___lcl_i_SystemInt32_9.Value = value.Value;
+                    }
                 }
             }
         }
@@ -16110,6 +19914,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_218
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_218 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_218.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_218 != null)
+                {
+                    Private___intnl_UnityEngineTransform_218.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_208
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_208 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_208.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_208 != null)
+                {
+                    Private___intnl_UnityEngineTransform_208.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_163
         {
             [HideFromIl2Cpp]
@@ -16330,6 +20178,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_14
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_14 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_14.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_14 != null)
+                {
+                    Private___intnl_UnityEngineUIText_14.Value = value;
+                }
+            }
+        }
+
         internal int? inLocalVersion
         {
             [HideFromIl2Cpp]
@@ -16380,6 +20250,206 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal uint? __gintnl_SystemUInt32_124
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_124 != null)
+                {
+                    return Private___gintnl_SystemUInt32_124.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_124 != null)
+                    {
+                        Private___gintnl_SystemUInt32_124.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_125
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_125 != null)
+                {
+                    return Private___gintnl_SystemUInt32_125.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_125 != null)
+                    {
+                        Private___gintnl_SystemUInt32_125.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_126
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_126 != null)
+                {
+                    return Private___gintnl_SystemUInt32_126.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_126 != null)
+                    {
+                        Private___gintnl_SystemUInt32_126.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_127
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_127 != null)
+                {
+                    return Private___gintnl_SystemUInt32_127.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_127 != null)
+                    {
+                        Private___gintnl_SystemUInt32_127.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_120
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_120 != null)
+                {
+                    return Private___gintnl_SystemUInt32_120.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_120 != null)
+                    {
+                        Private___gintnl_SystemUInt32_120.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_121
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_121 != null)
+                {
+                    return Private___gintnl_SystemUInt32_121.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_121 != null)
+                    {
+                        Private___gintnl_SystemUInt32_121.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_122
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_122 != null)
+                {
+                    return Private___gintnl_SystemUInt32_122.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_122 != null)
+                    {
+                        Private___gintnl_SystemUInt32_122.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_123
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_123 != null)
+                {
+                    return Private___gintnl_SystemUInt32_123.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_123 != null)
+                    {
+                        Private___gintnl_SystemUInt32_123.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal UnityEngine.Transform __1__intnlparam
         {
             [HideFromIl2Cpp]
@@ -16398,6 +20468,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___1__intnlparam != null)
                 {
                     Private___1__intnlparam.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __intnl_VRCSDKBaseVRCPlayerApi_3
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_3 != null)
+                {
+                    return Private___intnl_VRCSDKBaseVRCPlayerApi_3.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_3 != null)
+                {
+                    Private___intnl_VRCSDKBaseVRCPlayerApi_3.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_19
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_19 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_19.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_19 != null)
+                {
+                    Private___intnl_UnityEngineUIText_19.Value = value;
                 }
             }
         }
@@ -16713,6 +20827,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_273
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_273 != null)
+                {
+                    return Private___const_SystemString_273.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_273 != null)
+                {
+                    Private___const_SystemString_273.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_243
         {
             [HideFromIl2Cpp]
@@ -16845,6 +20981,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_283
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_283 != null)
+                {
+                    return Private___const_SystemString_283.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_283 != null)
+                {
+                    Private___const_SystemString_283.Value = value;
+                }
+            }
+        }
+
         internal bool? shouldToaster
         {
             [HideFromIl2Cpp]
@@ -16887,10 +21045,33 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 if (value.HasValue)
                 {
+
                     if (Private___const_UnityEngineSpace_0 != null)
                     {
                         Private___const_UnityEngineSpace_0.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour allowedPlayers
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_allowedPlayers != null)
+                {
+                    return Private_allowedPlayers.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_allowedPlayers != null)
+                {
+                    Private_allowedPlayers.Value = value;
                 }
             }
         }
@@ -17189,31 +21370,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal bool? __0___0_canUseTableSkin__ret
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___0___0_canUseTableSkin__ret != null)
-                {
-                    return Private___0___0_canUseTableSkin__ret.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___0___0_canUseTableSkin__ret != null)
-                    {
-                        Private___0___0_canUseTableSkin__ret.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal char[] __gintnl_SystemCharArray_6
         {
             [HideFromIl2Cpp]
@@ -17323,6 +21479,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_9 != null)
                 {
                     Private___intnl_UnityEngineTransform_9.Value = value;
+                }
+            }
+        }
+
+        internal string __intnl_SystemString_47
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemString_47 != null)
+                {
+                    return Private___intnl_SystemString_47.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_47 != null)
+                {
+                    Private___intnl_SystemString_47.Value = value;
                 }
             }
         }
@@ -17799,6 +21977,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_220
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_220 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_220.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_220 != null)
+                {
+                    Private___intnl_UnityEngineTransform_220.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_210
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_210 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_210.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_210 != null)
+                {
+                    Private___intnl_UnityEngineTransform_210.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_200
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_200 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_200.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_200 != null)
+                {
+                    Private___intnl_UnityEngineTransform_200.Value = value;
+                }
+            }
+        }
+
         internal int? __intnl_SystemInt32_16
         {
             [HideFromIl2Cpp]
@@ -17899,7 +22143,51 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal UnityEngine.Transform __intnl_UnityEngineTransform_133
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_193
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_193 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_193.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_193 != null)
+                {
+                    Private___intnl_UnityEngineTransform_193.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_183
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_183 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_183.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_183 != null)
+                {
+                    Private___intnl_UnityEngineTransform_183.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_133
         {
             [HideFromIl2Cpp]
             get
@@ -17987,6 +22275,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_173
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_173 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_173.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_173 != null)
+                {
+                    Private___intnl_UnityEngineTransform_173.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_163
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_163 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_163.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_163 != null)
+                {
+                    Private___intnl_UnityEngineTransform_163.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_153
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_153 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_153.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_153 != null)
+                {
+                    Private___intnl_UnityEngineTransform_153.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_143
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_143 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_143.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_143 != null)
+                {
+                    Private___intnl_UnityEngineTransform_143.Value = value;
+                }
+            }
+        }
+
         internal string __refl_typename
         {
             [HideFromIl2Cpp]
@@ -18005,6 +22381,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___refl_typename != null)
                 {
                     Private___refl_typename.Value = value;
+                }
+            }
+        }
+
+        internal int[] table3Skins
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_table3Skins != null)
+                {
+                    return Private_table3Skins.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_table3Skins != null)
+                {
+                    Private_table3Skins.Value = value;
                 }
             }
         }
@@ -18247,6 +22645,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_196 != null)
                 {
                     Private___const_SystemString_196.Value = value;
+                }
+            }
+        }
+
+        internal string __0_owner__param
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___0_owner__param != null)
+                {
+                    return Private___0_owner__param.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___0_owner__param != null)
+                {
+                    Private___0_owner__param.Value = value;
                 }
             }
         }
@@ -18523,6 +22943,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.UI.Text[] leaderboardPlayers
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_leaderboardPlayers != null)
+                {
+                    return Private_leaderboardPlayers.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_leaderboardPlayers != null)
+                {
+                    Private_leaderboardPlayers.Value = value;
+                }
+            }
+        }
+
         internal System.DateTime? __intnl_SystemDateTime_0
         {
             [HideFromIl2Cpp]
@@ -18544,6 +22986,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___intnl_SystemDateTime_0.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_11
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_11 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_11.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_11 != null)
+                {
+                    Private___intnl_UnityEngineUIText_11.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_21
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_21 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_21.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_21 != null)
+                {
+                    Private___intnl_UnityEngineUIText_21.Value = value;
                 }
             }
         }
@@ -18785,6 +23271,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 if (value.HasValue)
                 {
+
                     if (Private___intnl_SystemGuid_1 != null)
                     {
                         Private___intnl_SystemGuid_1.Value = value.Value;
@@ -18862,6 +23349,226 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_71
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_71 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_71.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_71 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_71.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_70
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_70 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_70.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_70 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_70.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_73
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_73 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_73.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_73 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_73.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_72
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_72 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_72.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_72 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_72.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_75
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_75 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_75.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_75 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_75.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_74
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_74 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_74.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_74 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_74.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_77
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_77 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_77.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_77 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_77.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_76
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_76 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_76.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_76 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_76.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_79
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_79 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_79.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_79 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_79.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_78
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_78 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_78.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_78 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_78.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_264
         {
             [HideFromIl2Cpp]
@@ -18880,6 +23587,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_264 != null)
                 {
                     Private___const_SystemString_264.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_274
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_274 != null)
+                {
+                    return Private___const_SystemString_274.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_274 != null)
+                {
+                    Private___const_SystemString_274.Value = value;
                 }
             }
         }
@@ -19016,6 +23745,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal string __const_SystemString_284
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_284 != null)
+                {
+                    return Private___const_SystemString_284.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_284 != null)
+                {
+                    Private___const_SystemString_284.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.RectTransform __lcl_saoWorldSettings_UnityEngineTransform_0
         {
             [HideFromIl2Cpp]
@@ -19063,6 +23814,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __lcl_saoTable2SkinsRoot_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_1
         {
             [HideFromIl2Cpp]
@@ -19081,6 +23854,131 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_1 != null)
                 {
                     Private___const_SystemString_1.Value = value;
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_131
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_131 != null)
+                {
+                    return Private___intnl_SystemBoolean_131.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_131 != null)
+                    {
+                        Private___intnl_SystemBoolean_131.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_130
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_130 != null)
+                {
+                    return Private___intnl_SystemBoolean_130.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_130 != null)
+                    {
+                        Private___intnl_SystemBoolean_130.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_133
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_133 != null)
+                {
+                    return Private___intnl_SystemBoolean_133.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_133 != null)
+                    {
+                        Private___intnl_SystemBoolean_133.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_132
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_132 != null)
+                {
+                    return Private___intnl_SystemBoolean_132.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_132 != null)
+                    {
+                        Private___intnl_SystemBoolean_132.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal bool? __intnl_SystemBoolean_134
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemBoolean_134 != null)
+                {
+                    return Private___intnl_SystemBoolean_134.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemBoolean_134 != null)
+                    {
+                        Private___intnl_SystemBoolean_134.Value = value.Value;
+                    }
                 }
             }
         }
@@ -19229,14 +24127,14 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal UnityEngine.RectTransform __lcl_saoTableSkinsRoot_UnityEngineTransform_0
+        internal string __intnl_SystemString_18
         {
             [HideFromIl2Cpp]
             get
             {
-                if (Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0 != null)
+                if (Private___intnl_SystemString_18 != null)
                 {
-                    return Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0.Value;
+                    return Private___intnl_SystemString_18.Value;
                 }
 
                 return null;
@@ -19244,9 +24142,53 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             [HideFromIl2Cpp]
             set
             {
-                if (Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0 != null)
+                if (Private___intnl_SystemString_18 != null)
                 {
-                    Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0.Value = value;
+                    Private___intnl_SystemString_18.Value = value;
+                }
+            }
+        }
+
+        internal string __intnl_SystemString_19
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemString_19 != null)
+                {
+                    return Private___intnl_SystemString_19.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_19 != null)
+                {
+                    Private___intnl_SystemString_19.Value = value;
+                }
+            }
+        }
+
+        internal string __intnl_SystemString_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemString_17 != null)
+                {
+                    return Private___intnl_SystemString_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemString_17 != null)
+                {
+                    Private___intnl_SystemString_17.Value = value;
                 }
             }
         }
@@ -19693,6 +24635,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     if (Private___intnl_SystemInt32_23 != null)
                     {
                         Private___intnl_SystemInt32_23.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal int? __intnl_SystemInt32_53
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemInt32_53 != null)
+                {
+                    return Private___intnl_SystemInt32_53.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___intnl_SystemInt32_53 != null)
+                    {
+                        Private___intnl_SystemInt32_53.Value = value.Value;
                     }
                 }
             }
@@ -20165,6 +25132,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_12
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_12 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_12.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_12 != null)
+                {
+                    Private___intnl_UnityEngineUIText_12.Value = value;
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI saoTogglePlayer
         {
             [HideFromIl2Cpp]
@@ -20277,6 +25266,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_VRCUdonUdonBehaviour_6 != null)
                 {
                     Private___intnl_VRCUdonUdonBehaviour_6.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_269
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_269 != null)
+                {
+                    return Private___const_SystemString_269.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_269 != null)
+                {
+                    Private___const_SystemString_269.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_279
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_279 != null)
+                {
+                    return Private___const_SystemString_279.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_279 != null)
+                {
+                    Private___const_SystemString_279.Value = value;
                 }
             }
         }
@@ -20409,6 +25442,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_219 != null)
                 {
                     Private___const_SystemString_219.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_289
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_289 != null)
+                {
+                    return Private___const_SystemString_289.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_289 != null)
+                {
+                    Private___const_SystemString_289.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __lcl_saoTable3SkinsRoot_UnityEngineTransform_0
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    return Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0 != null)
+                {
+                    Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0.Value = value;
                 }
             }
         }
@@ -20999,6 +26076,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_215
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_215 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_215.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_215 != null)
+                {
+                    Private___intnl_UnityEngineTransform_215.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_205
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_205 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_205.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_205 != null)
+                {
+                    Private___intnl_UnityEngineTransform_205.Value = value;
+                }
+            }
+        }
+
         internal bool? __0___0_canUseCueSkin__ret
         {
             [HideFromIl2Cpp]
@@ -21020,6 +26141,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     {
                         Private___0___0_canUseCueSkin__ret.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_196
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_196 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_196.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_196 != null)
+                {
+                    Private___intnl_UnityEngineTransform_196.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_186
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_186 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_186.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_186 != null)
+                {
+                    Private___intnl_UnityEngineTransform_186.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_136
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_136 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_136.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_136 != null)
+                {
+                    Private___intnl_UnityEngineTransform_136.Value = value;
                 }
             }
         }
@@ -21086,6 +26273,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_106 != null)
                 {
                     Private___intnl_UnityEngineTransform_106.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_176
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_176 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_176.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_176 != null)
+                {
+                    Private___intnl_UnityEngineTransform_176.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_166
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_166 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_166.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_166 != null)
+                {
+                    Private___intnl_UnityEngineTransform_166.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_156
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_156 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_156.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_156 != null)
+                {
+                    Private___intnl_UnityEngineTransform_156.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __intnl_UnityEngineTransform_146
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_146 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_146.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_146 != null)
+                {
+                    Private___intnl_UnityEngineTransform_146.Value = value;
                 }
             }
         }
@@ -21330,6 +26605,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_tournamentRefs != null)
                 {
                     Private_tournamentRefs.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour promptedPlayers
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_promptedPlayers != null)
+                {
+                    return Private_promptedPlayers.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_promptedPlayers != null)
+                {
+                    Private_promptedPlayers.Value = value;
                 }
             }
         }
@@ -21934,6 +27231,156 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal uint? __gintnl_SystemUInt32_108
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_108 != null)
+                {
+                    return Private___gintnl_SystemUInt32_108.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_108 != null)
+                    {
+                        Private___gintnl_SystemUInt32_108.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_109
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_109 != null)
+                {
+                    return Private___gintnl_SystemUInt32_109.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_109 != null)
+                    {
+                        Private___gintnl_SystemUInt32_109.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_104
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_104 != null)
+                {
+                    return Private___gintnl_SystemUInt32_104.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_104 != null)
+                    {
+                        Private___gintnl_SystemUInt32_104.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_105
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_105 != null)
+                {
+                    return Private___gintnl_SystemUInt32_105.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_105 != null)
+                    {
+                        Private___gintnl_SystemUInt32_105.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_106
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_106 != null)
+                {
+                    return Private___gintnl_SystemUInt32_106.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_106 != null)
+                    {
+                        Private___gintnl_SystemUInt32_106.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal uint? __gintnl_SystemUInt32_107
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___gintnl_SystemUInt32_107 != null)
+                {
+                    return Private___gintnl_SystemUInt32_107.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___gintnl_SystemUInt32_107 != null)
+                    {
+                        Private___gintnl_SystemUInt32_107.Value = value.Value;
+                    }
+                }
+            }
+        }
+
         internal uint? __gintnl_SystemUInt32_100
         {
             [HideFromIl2Cpp]
@@ -22034,6 +27481,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal VRC.SDKBase.VRCPlayerApi __intnl_VRCSDKBaseVRCPlayerApi_1
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_1 != null)
+                {
+                    return Private___intnl_VRCSDKBaseVRCPlayerApi_1.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_1 != null)
+                {
+                    Private___intnl_VRCSDKBaseVRCPlayerApi_1.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.UI.Slider saoLoliLifterSlider
         {
             [HideFromIl2Cpp]
@@ -22121,6 +27590,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_261 != null)
                 {
                     Private___const_SystemString_261.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_271
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_271 != null)
+                {
+                    return Private___const_SystemString_271.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_271 != null)
+                {
+                    Private___const_SystemString_271.Value = value;
                 }
             }
         }
@@ -22253,6 +27744,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_211 != null)
                 {
                     Private___const_SystemString_211.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_281
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_281 != null)
+                {
+                    return Private___const_SystemString_281.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_281 != null)
+                {
+                    Private___const_SystemString_281.Value = value;
                 }
             }
         }
@@ -22393,10 +27906,33 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 if (value.HasValue)
                 {
+
                     if (Private_activeYoutubeSearch != null)
                     {
                         Private_activeYoutubeSearch.Value = value.Value;
                     }
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_VRCUdonUdonBehaviour_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_8 != null)
+                {
+                    return Private___intnl_VRCUdonUdonBehaviour_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCUdonUdonBehaviour_8 != null)
+                {
+                    Private___intnl_VRCUdonUdonBehaviour_8.Value = value;
                 }
             }
         }
@@ -22646,6 +28182,31 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     if (Private___gintnl_SystemUInt32_28 != null)
                     {
                         Private___gintnl_SystemUInt32_28.Value = value.Value;
+                    }
+                }
+            }
+        }
+
+        internal float? __const_SystemSingle_5
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemSingle_5 != null)
+                {
+                    return Private___const_SystemSingle_5.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (value.HasValue)
+                {
+                    if (Private___const_SystemSingle_5 != null)
+                    {
+                        Private___const_SystemSingle_5.Value = value.Value;
                     }
                 }
             }
@@ -23165,6 +28726,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.GameObject leaderboard
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_leaderboard != null)
+                {
+                    return Private_leaderboard.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_leaderboard != null)
+                {
+                    Private_leaderboard.Value = value;
+                }
+            }
+        }
+
         internal uint? __gintnl_SystemUInt32_95
         {
             [HideFromIl2Cpp]
@@ -23390,6 +28973,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_216
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_216 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_216.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_216 != null)
+                {
+                    Private___intnl_UnityEngineTransform_216.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_206
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_206 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_206.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_206 != null)
+                {
+                    Private___intnl_UnityEngineTransform_206.Value = value;
+                }
+            }
+        }
+
         internal bool? __0__SelectCueSkinContributor__ret
         {
             [HideFromIl2Cpp]
@@ -23433,6 +29060,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_tableSkinAllowed != null)
                 {
                     Private_tableSkinAllowed.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.Transform __intnl_UnityEngineTransform_195
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_195 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_195.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_195 != null)
+                {
+                    Private___intnl_UnityEngineTransform_195.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_185
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_185 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_185.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_185 != null)
+                {
+                    Private___intnl_UnityEngineTransform_185.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_135
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_135 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_135.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_135 != null)
+                {
+                    Private___intnl_UnityEngineTransform_135.Value = value;
                 }
             }
         }
@@ -23499,6 +29192,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_105 != null)
                 {
                     Private___intnl_UnityEngineTransform_105.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_175
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_175 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_175.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_175 != null)
+                {
+                    Private___intnl_UnityEngineTransform_175.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_165
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_165 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_165.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_165 != null)
+                {
+                    Private___intnl_UnityEngineTransform_165.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_155
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_155 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_155.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_155 != null)
+                {
+                    Private___intnl_UnityEngineTransform_155.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_145
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_145 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_145.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_145 != null)
+                {
+                    Private___intnl_UnityEngineTransform_145.Value = value;
                 }
             }
         }
@@ -24125,6 +29906,72 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_198
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_198 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_198.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_198 != null)
+                {
+                    Private___intnl_UnityEngineTransform_198.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_188
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_188 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_188.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_188 != null)
+                {
+                    Private___intnl_UnityEngineTransform_188.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_138
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_138 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_138.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_138 != null)
+                {
+                    Private___intnl_UnityEngineTransform_138.Value = value;
+                }
+            }
+        }
+
         internal UnityEngine.RectTransform __intnl_UnityEngineTransform_128
         {
             [HideFromIl2Cpp]
@@ -24169,7 +30016,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal UnityEngine.Transform __intnl_UnityEngineTransform_108
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_108
         {
             [HideFromIl2Cpp]
             get
@@ -24187,6 +30034,94 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_UnityEngineTransform_108 != null)
                 {
                     Private___intnl_UnityEngineTransform_108.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_178
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_178 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_178.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_178 != null)
+                {
+                    Private___intnl_UnityEngineTransform_178.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_168
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_168 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_168.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_168 != null)
+                {
+                    Private___intnl_UnityEngineTransform_168.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_158
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_158 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_158.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_158 != null)
+                {
+                    Private___intnl_UnityEngineTransform_158.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.RectTransform __intnl_UnityEngineTransform_148
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineTransform_148 != null)
+                {
+                    return Private___intnl_UnityEngineTransform_148.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineTransform_148 != null)
+                {
+                    Private___intnl_UnityEngineTransform_148.Value = value;
                 }
             }
         }
@@ -24411,6 +30346,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_17
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_17 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_17.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_17 != null)
+                {
+                    Private___intnl_UnityEngineUIText_17.Value = value;
+                }
+            }
+        }
+
         internal string __const_SystemString_76
         {
             [HideFromIl2Cpp]
@@ -24631,6 +30588,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal int[] modernTableSkins
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private_modernTableSkins != null)
+                {
+                    return Private_modernTableSkins.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private_modernTableSkins != null)
+                {
+                    Private_modernTableSkins.Value = value;
+                }
+            }
+        }
+
         internal float? __intnl_SystemSingle_5
         {
             [HideFromIl2Cpp]
@@ -24656,6 +30635,116 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_81
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_81 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_81.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_81 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_81.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_80
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_80 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_80.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_80 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_80.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_83
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_83 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_83.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_83 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_83.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_82
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_82 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_82.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_82 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_82.Value = value;
+                }
+            }
+        }
+
+        internal VRC.SDKBase.VRCPlayerApi __intnl_VRCSDKBaseVRCPlayerApi_2
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_2 != null)
+                {
+                    return Private___intnl_VRCSDKBaseVRCPlayerApi_2.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_VRCSDKBaseVRCPlayerApi_2 != null)
+                {
+                    Private___intnl_VRCSDKBaseVRCPlayerApi_2.Value = value;
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI saoToggleUSColors
         {
             [HideFromIl2Cpp]
@@ -24674,6 +30763,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private_saoToggleUSColors != null)
                 {
                     Private_saoToggleUSColors.Value = value;
+                }
+            }
+        }
+
+        internal UnityEngine.UI.Text __intnl_UnityEngineUIText_18
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_UnityEngineUIText_18 != null)
+                {
+                    return Private___intnl_UnityEngineUIText_18.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_UnityEngineUIText_18 != null)
+                {
+                    Private___intnl_UnityEngineUIText_18.Value = value;
                 }
             }
         }
@@ -24747,6 +30858,138 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_51
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_51 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_51.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_51 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_51.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_50
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_50 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_50.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_50 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_50.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_53
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_53 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_53.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_53 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_53.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_52
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_52 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_52.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_52 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_52.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_55
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_55 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_55.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_55 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_55.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_54
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_54 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_54.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_54 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_54.Value = value;
+                }
+            }
+        }
+
         internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_57
         {
             [HideFromIl2Cpp]
@@ -24765,6 +31008,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___intnl_TMProTextMeshProUGUI_57 != null)
                 {
                     Private___intnl_TMProTextMeshProUGUI_57.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_56
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_56 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_56.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_56 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_56.Value = value;
+                }
+            }
+        }
+
+        internal TMPro.TextMeshProUGUI __intnl_TMProTextMeshProUGUI_59
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_59 != null)
+                {
+                    return Private___intnl_TMProTextMeshProUGUI_59.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_TMProTextMeshProUGUI_59 != null)
+                {
+                    Private___intnl_TMProTextMeshProUGUI_59.Value = value;
                 }
             }
         }
@@ -24809,6 +31096,28 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_262 != null)
                 {
                     Private___const_SystemString_262.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_272
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_272 != null)
+                {
+                    return Private___const_SystemString_272.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_272 != null)
+                {
+                    Private___const_SystemString_272.Value = value;
                 }
             }
         }
@@ -24941,6 +31250,50 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                 if (Private___const_SystemString_212 != null)
                 {
                     Private___const_SystemString_212.Value = value;
+                }
+            }
+        }
+
+        internal string __const_SystemString_282
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___const_SystemString_282 != null)
+                {
+                    return Private___const_SystemString_282.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___const_SystemString_282 != null)
+                {
+                    Private___const_SystemString_282.Value = value;
+                }
+            }
+        }
+
+        internal VRC.Udon.UdonBehaviour __intnl_SystemObject_8
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (Private___intnl_SystemObject_8 != null)
+                {
+                    return Private___intnl_SystemObject_8.Value;
+                }
+
+                return null;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                if (Private___intnl_SystemObject_8 != null)
+                {
+                    Private___intnl_SystemObject_8.Value = value;
                 }
             }
         }
@@ -25736,2023 +32089,1275 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         #region AstroUdonVariables  of PoolParlorModule
 
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_83 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_93 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_hologramSystem { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_96 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_86 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_213 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_203 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<long> Private___const_SystemInt64_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<int> Private___lcl_tableCount_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___1_accept__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_selectedTableModel { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTableModelsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_190 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_180 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_130 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_120 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_110 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_100 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_170 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_160 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_150 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_140 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_167 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_177 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_147 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_157 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_127 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_137 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_107 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_117 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_187 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_197 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Material> Private___intnl_UnityEngineMaterial_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0__SelectTableSkinContributor__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.DateTimeOffset> Private___intnl_SystemDateTimeOffset_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_ping { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___2_active__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<char> Private___const_SystemChar_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___lcl_me_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___1_id__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_outCanUse { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_267 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_277 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_247 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_257 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_227 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_237 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_207 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_217 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_287 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_liftModule { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int[]> Private_table2Skins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0_accept__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0_id__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___3_id__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0_shadowsDisabled__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___const_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___2_id__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_79 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_86 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_96 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___const_SystemInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___0_cueSkin__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Texture2D[]> Private___intnl_SystemObject_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoModernTableSkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI[]> Private_saoCameras { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___const_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___const_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_cueSkinId_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___0_value__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_96 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_97 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_94 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_95 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_92 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_93 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_90 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_91 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_98 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_99 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0_newPhysicsMode__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___lcl_cueCount_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleHologram { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTable4SkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int[]> Private_cueButtonToSkin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_268 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_278 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_248 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_258 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_228 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_238 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_208 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_218 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<int> Private___lcl_tableId_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_288 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0_usColors__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___1_enabled__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<int> Private___1_skin__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_selectedCamera { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___const_SystemInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___const_SystemInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_93 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_83 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_214 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_204 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_inMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_tableSkinId_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineObject_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_isPolling { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_197 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_187 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_137 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_127 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_117 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_107 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_177 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_167 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_157 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_147 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_metaverse { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_99 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_98 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_93 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_92 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_91 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_90 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_97 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_96 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_95 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_94 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_physicsMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int[]> Private_table4Skins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_219 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_209 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_162 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_172 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_142 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_152 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_122 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_132 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_102 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_112 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_182 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_192 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Component[]> Private_tables { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<UnityEngine.MeshRenderer> Private___lcl_renderer_UnityEngineMeshRenderer_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.TimeSpan> Private___intnl_SystemTimeSpan_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_169 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_179 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_149 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_159 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_129 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_139 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_109 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_119 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_189 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_199 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.SkinnedMeshRenderer> Private___0_renderer__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_modModule { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTableSettings_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string[]> Private___lcl_lines_SystemStringArray_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0_enabled__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___intnl_VRCSDKBaseVRCPlayerApi_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.SkinnedMeshRenderer> Private___lcl_renderer_UnityEngineSkinnedMeshRenderer_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<long> Private___refl_typeid { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_toaster { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_260 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_270 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_240 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_250 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_220 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_230 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_200 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_210 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_280 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_290 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private_SAO_COLOR_ENABLED { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___1_active__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_inSkin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_decoder { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<string> Private___2_owner__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___const_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_deniedPlayers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___4_value__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineComponent_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_81 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_91 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_94 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_84 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_211 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_201 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Vector3> Private___const_UnityEngineVector3_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_192 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_182 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_132 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_122 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_112 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_102 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_172 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_162 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_152 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_142 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_outSuccessful { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_199 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_189 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_139 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_129 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_119 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_109 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_179 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_169 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_159 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_149 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_161 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_171 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_141 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_151 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_121 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_131 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_101 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_111 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_181 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_191 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private_SAO_COLOR_DISABLED { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject[]> Private_props { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_Players_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0__intnlparam { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___lcl_data_SystemString_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string[]> Private_moderators { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_penModule { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.Guid> Private___intnl_SystemGuid_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoCueSkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___0___0_getNameColor__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___lcl_objectsModule_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_265 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_275 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_245 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_255 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_225 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_235 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_205 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_215 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_285 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_129 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_128 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_121 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_120 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_123 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_122 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_125 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_124 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_127 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_126 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Texture2D> Private___intnl_UnityEngineTexture_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.DateTime> Private___0_tournament__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___const_SystemSingle_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string[]> Private___lcl_parts_SystemStringArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_shouldBlahaj { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleProps { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_89 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_99 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_79 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI[]> Private_saoCueSkins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0_active__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___intnl_SystemString_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___intnl_SystemString_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.GameObject> Private___intnl_UnityEngineGameObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int[]> Private_table1Skins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___lcl_playerId_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_84 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_94 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___lcl_hours_SystemSingle_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Component[]> Private___intnl_UnityEngineComponentArray_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_212 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_202 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_44 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoCamerasRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_191 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_181 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_131 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_121 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_111 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_101 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_171 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_161 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_151 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_141 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private_SAO_COLOR_LOCKED { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_164 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_174 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_144 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_154 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_124 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_134 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_104 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_114 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_184 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_194 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___1_owner__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_activeYoutubeSearchAttempts { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Material[]> Private___intnl_UnityEngineMaterialArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_worldUpdate { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char> Private___const_SystemChar_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private_inOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.Object[]> Private_cueSkinAllowed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_266 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_276 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_246 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_256 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_226 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_236 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_206 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_216 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_286 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_nameColorMap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_propsEnabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0___0_isTournamentRunning__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0_skin__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___const_SystemSingle_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_63 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_66 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_64 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoPlayerSettings_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_91 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_81 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_61 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___3_value__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_87 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_97 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_popcat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___const_SystemInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_chat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_41 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.UI.Slider> Private_saoRunSpeedSlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private_VERSION { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_118 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_119 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_114 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_115 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_116 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_117 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_110 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_111 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_112 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_113 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.UI.InputField> Private_saoSaveLoadInput { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text[]> Private_leaderboardElos { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_86 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_87 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_84 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_85 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_82 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_83 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_80 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_81 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_88 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_89 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<long> Private___intnl_SystemInt64_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<long> Private___intnl_SystemInt64_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTable1SkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<System.DateTime> Private___lcl_utcNow_SystemDateTime_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___intnl_returnJump_SystemUInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.KeyCode> Private___const_UnityEngineKeyCode_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_99 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_89 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_49 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_79 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_69 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___const_SystemSingle_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_39 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_31 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0_physicsMode___param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_92 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_82 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_217 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_207 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.UI.Slider> Private_saoWalkSpeedSlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_194 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_184 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_134 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_124 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_114 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_104 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_174 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_164 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_154 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_144 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_89 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_88 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_83 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_82 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_81 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_80 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_87 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_86 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_85 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_84 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___lcl_i_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_i_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_shouldPing { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___lcl_behaviour_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_218 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_208 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_163 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_173 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_143 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_153 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_123 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_133 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_103 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_113 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_183 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_193 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_inLocalVersion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_124 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_125 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_126 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_127 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_120 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_121 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_122 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_123 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___1__intnlparam { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___intnl_VRCSDKBaseVRCPlayerApi_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoTogglePens { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.DateTime> Private_tournamentDate { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_263 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_273 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_243 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_253 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_223 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_233 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_203 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_213 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_283 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private_shouldToaster { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Space> Private___const_UnityEngineSpace_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_allowedPlayers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_109 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_108 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_101 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_100 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_103 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_102 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_105 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_104 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_107 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_106 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<bool> Private___0___0_canUseTableSkin__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Texture2D[]> Private___intnl_UnityEngineTexture2DArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___intnl_SystemString_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_82 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_92 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_42 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_62 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleTableTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_97 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_87 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_67 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_220 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_210 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_200 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_16 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_36 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_46 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_133 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_193 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_183 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_133 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_123 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_113 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_103 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_173 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_163 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_153 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_143 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___refl_typename { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int[]> Private_table3Skins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<System.Object[]> Private___gintnl_SystemObjectArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_166 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_176 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_146 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_156 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_126 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_136 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_106 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_116 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_186 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_196 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___0_owner__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int[]> Private_tableButtonToSkin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text[]> Private_leaderboardPlayers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<System.DateTime> Private___intnl_SystemDateTime_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_11 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.Guid> Private___intnl_SystemGuid_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_79 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_264 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_274 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_244 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_254 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_224 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_234 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_204 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_214 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_284 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoWorldSettings_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<long> Private___lcl_targetID_SystemInt64_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTable2SkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_131 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_130 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_133 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_132 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_134 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___const_SystemSingle_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<double> Private___intnl_SystemDouble_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<long> Private___lcl_idValue_SystemObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTableSkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___intnl_SystemString_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___intnl_SystemString_19 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___intnl_SystemString_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_85 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_95 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_previewCue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_32 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0_tableTimer__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___2_value__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_13 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_33 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int> Private___intnl_SystemInt32_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___intnl_SystemInt32_43 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___lcl_cueId_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_165 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_175 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_145 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_155 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_125 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_135 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_105 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_115 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_185 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_195 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_shouldPopcat { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<byte> Private___intnl_SystemByte_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0_mode__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI[]> Private_saoTableModels { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_12 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoTogglePlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char> Private___const_SystemChar_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char> Private___lcl_ch_SystemChar_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_269 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<string> Private___const_SystemString_279 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_249 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_259 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_229 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_239 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_209 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_219 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_289 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___lcl_saoTable3SkinsRoot_UnityEngineTransform_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private_outColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<char[]> Private___gintnl_SystemCharArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_outSetting { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___0___0_getPenSocialSetting__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_90 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_80 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_215 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_205 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0___0_canUseCueSkin__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_196 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_186 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_136 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_126 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_116 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_106 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_176 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_166 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_156 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_146 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___const_SystemInt32_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_37 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Texture2D> Private___intnl_UnityEngineTexture2D_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___intnl_SystemInt32_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string[]> Private_tournamentRefs { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private_promptedPlayers { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.UI.Slider> Private_saoStrafeSpeedSlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_168 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_178 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_148 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_158 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_128 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_138 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_108 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_118 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_188 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_198 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleBallShadow { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private___this_UnityEngineGameObject_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___1_value__param { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleLegacyPhysics { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_blahaj { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private___intnl_SystemSingle_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_108 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_109 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_104 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_105 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_106 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_107 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_100 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_101 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_102 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_103 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___intnl_VRCSDKBaseVRCPlayerApi_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.UI.Slider> Private_saoLoliLifterSlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private_INITIALIZED { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_261 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_271 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_241 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_251 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_221 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_231 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_201 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_211 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_281 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_selectedCueSkin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___0_hasPendingRequest__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private_inRemoteVersion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.Guid> Private_activeYoutubeSearch { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_98 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_88 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<float> Private___const_SystemSingle_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private_selectedTableSkin { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string[]> Private_DEPENDENCIES { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_UnityEngineComponent_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_80 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_90 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_10 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_30 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_40 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_60 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_29 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_23 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_22 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_21 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_20 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_26 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.GameObject> Private_leaderboard { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_95 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_85 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_65 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_15 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___gintnl_SystemUInt32_25 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_216 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_206 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0__SelectCueSkinContributor__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<System.Object[]> Private_tableSkinAllowed { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_195 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_185 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_135 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_125 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_115 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_105 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_175 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_165 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_155 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_145 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<int> Private___const_SystemInt32_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_14 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_34 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<int> Private___const_SystemInt32_24 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Component[]> Private___lcl_udonBehaviours_UnityEngineComponentArray_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<float> Private_lastPoll { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_9 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_7 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_198 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_188 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_138 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_128 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_118 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<UnityEngine.Transform> Private___intnl_UnityEngineTransform_108 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_108 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_178 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_168 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_158 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_148 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_160 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_170 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_140 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_150 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_120 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_130 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_100 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_110 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_180 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_190 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_17 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_76 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_77 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_74 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_75 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_72 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_73 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_70 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_71 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_79 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<int[]> Private_modernTableSkins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<float> Private___intnl_SystemSingle_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_81 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_80 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_83 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_82 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.SDKBase.VRCPlayerApi> Private___intnl_VRCSDKBaseVRCPlayerApi_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private_saoToggleUSColors { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<UnityEngine.UI.Text> Private___intnl_UnityEngineUIText_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<bool> Private___0___0_onChatCommand__ret { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_5 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_51 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_50 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_53 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_52 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_54 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_57 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_56 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_59 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<TMPro.TextMeshProUGUI> Private___intnl_TMProTextMeshProUGUI_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_262 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_272 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<string> Private___const_SystemString_242 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_252 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_222 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_232 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_202 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_212 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
+        private AstroUdonVariable<string> Private___const_SystemString_282 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_SystemObject_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
         private AstroUdonVariable<UnityEngine.UI.Slider> Private_saoJumpImpulseSlider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___intnl_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.GameObject> Private_saoMenu { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_2 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_1 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_0 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___this_VRCUdonUdonBehaviour_4 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<TMPro.TextMeshProUGUI[]> Private_saoTableSkins { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_119 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_118 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_111 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_110 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_113 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_112 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_115 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_114 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_117 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_116 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.Color> Private___intnl_UnityEngineColor_3 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<string> Private___const_SystemString_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_88 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_98 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_18 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_28 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_38 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_48 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_58 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_68 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_78 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<UnityEngine.RectTransform> Private___intnl_UnityEngineTransform_8 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         #endregion AstroUdonVariables  of PoolParlorModule
+
     }
 }

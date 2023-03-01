@@ -48,6 +48,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         //Event Key : __0__OnLoadGameState
         //Event Key : _EncodeGameState
         //
+        //
 
         private List<Object> AntiGarbageCollection = new();
 
@@ -67,6 +68,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         {
             Initialize();
         }
+
         internal void Initialize()
         {
             if (WorldUtils.WorldID.Equals(WorldIds.PoolParlor))
@@ -91,7 +93,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 Destroy(this);
             }
-
         }
 
         private void OnDestroy()
@@ -281,7 +282,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_17 = new AstroUdonVariable<int>(NetworkingManager, "__intnl_SystemInt32_17");
             Private___intnl_SystemInt32_37 = new AstroUdonVariable<int>(NetworkingManager, "__intnl_SystemInt32_37");
             Private___intnl_SystemInt32_27 = new AstroUdonVariable<int>(NetworkingManager, "__intnl_SystemInt32_27");
-            Private___intnl_SystemInt32_47 = new AstroUdonVariable<int>(NetworkingManager, "__intnl_SystemInt32_47");
             Private___intnl_SystemUInt32_6 = new AstroUdonVariable<uint>(NetworkingManager, "__intnl_SystemUInt32_6");
             Private___0__intnlparam = new AstroUdonVariable<VRC.Udon.UdonBehaviour>(NetworkingManager, "__0__intnlparam");
             Private___1_ballsPocketed__param = new AstroUdonVariable<uint>(NetworkingManager, "__1_ballsPocketed__param");
@@ -508,7 +508,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_25 = new AstroUdonVariable<bool>(NetworkingManager, "__intnl_SystemBoolean_25");
             Private___intnl_SystemBoolean_35 = new AstroUdonVariable<bool>(NetworkingManager, "__intnl_SystemBoolean_35");
             Private___intnl_SystemBoolean_45 = new AstroUdonVariable<bool>(NetworkingManager, "__intnl_SystemBoolean_45");
-            Private___intnl_SystemBoolean_55 = new AstroUdonVariable<bool>(NetworkingManager, "__intnl_SystemBoolean_55");
             Private_teamsSynced = new AstroUdonVariable<bool>(NetworkingManager, "teamsSynced");
             Private___const_SystemInt32_12 = new AstroUdonVariable<int>(NetworkingManager, "__const_SystemInt32_12");
             Private___const_SystemInt32_32 = new AstroUdonVariable<int>(NetworkingManager, "__const_SystemInt32_32");
@@ -822,7 +821,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemInt32_17 = null;
             Private___intnl_SystemInt32_37 = null;
             Private___intnl_SystemInt32_27 = null;
-            Private___intnl_SystemInt32_47 = null;
             Private___intnl_SystemUInt32_6 = null;
             Private___0__intnlparam = null;
             Private___1_ballsPocketed__param = null;
@@ -1049,7 +1047,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             Private___intnl_SystemBoolean_25 = null;
             Private___intnl_SystemBoolean_35 = null;
             Private___intnl_SystemBoolean_45 = null;
-            Private___intnl_SystemBoolean_55 = null;
             Private_teamsSynced = null;
             Private___const_SystemInt32_12 = null;
             Private___const_SystemInt32_32 = null;
@@ -5555,31 +5552,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                     if (Private___intnl_SystemInt32_27 != null)
                     {
                         Private___intnl_SystemInt32_27.Value = value.Value;
-                    }
-                }
-            }
-        }
-
-        internal int? __intnl_SystemInt32_47
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___intnl_SystemInt32_47 != null)
-                {
-                    return Private___intnl_SystemInt32_47.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___intnl_SystemInt32_47 != null)
-                    {
-                        Private___intnl_SystemInt32_47.Value = value.Value;
                     }
                 }
             }
@@ -11172,31 +11144,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             }
         }
 
-        internal bool? __intnl_SystemBoolean_55
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Private___intnl_SystemBoolean_55 != null)
-                {
-                    return Private___intnl_SystemBoolean_55.Value;
-                }
-
-                return null;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                if (value.HasValue)
-                {
-                    if (Private___intnl_SystemBoolean_55 != null)
-                    {
-                        Private___intnl_SystemBoolean_55.Value = value.Value;
-                    }
-                }
-            }
-        }
-
         internal bool? teamsSynced
         {
             [HideFromIl2Cpp]
@@ -14798,8 +14745,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
 
         private AstroUdonVariable<int> Private___intnl_SystemInt32_27 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-        private AstroUdonVariable<int> Private___intnl_SystemInt32_47 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
         private AstroUdonVariable<uint> Private___intnl_SystemUInt32_6 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private AstroUdonVariable<VRC.Udon.UdonBehaviour> Private___0__intnlparam { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
@@ -15251,8 +15196,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_35 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private AstroUdonVariable<bool> Private___intnl_SystemBoolean_45 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
-
-        private AstroUdonVariable<bool> Private___intnl_SystemBoolean_55 { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
         private AstroUdonVariable<bool> Private_teamsSynced { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 

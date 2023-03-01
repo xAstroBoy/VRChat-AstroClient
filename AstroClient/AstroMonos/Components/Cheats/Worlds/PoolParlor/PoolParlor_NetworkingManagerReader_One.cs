@@ -55,7 +55,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         Initialize_NetworkingManager();
                         Two = NetworkingManager.udonBehaviour.GetOrAddComponent<PoolParlor_NetworkingManagerReader_Two>();
-                        if(Two != null)
+                        if (Two != null)
                         {
                             Two.Initialize();
                         }
@@ -71,7 +71,6 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PoolParlor
             {
                 Destroy(this);
             }
-
         }
 
         private void OnDestroy()

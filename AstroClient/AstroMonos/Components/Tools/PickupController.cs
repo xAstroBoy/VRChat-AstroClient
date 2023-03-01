@@ -1,7 +1,6 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.PlayerList.Entries;
 using AstroClient.xAstroBoy.Extensions;
-using UnityEngine.SceneManagement;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -194,7 +193,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     PlayerHands.SetPickup_RightHand(SDK2_Pickup);
                 }
-                else if(SDK3_Pickup != null)
+                else if (SDK3_Pickup != null)
                 {
                     PlayerHands.SetPickup_RightHand(SDK3_Pickup);
                 }
@@ -330,7 +329,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void SyncProperties(bool isFromUpdate)
         {
             if (isFromUpdate && _EditMode) _EditMode = false; // Disable this so it goes on Sync Mode.
-             if (SDK2_Pickup != null)
+            if (SDK2_Pickup != null)
             {
                 CurrentHeldStatus = SDK2_Pickup.IsHeld;
 
@@ -1116,10 +1115,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (SceneUtils.isSDK2)
-                {
-                    if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-                }
+                if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
                 return _SDK2_Pickup;
             }
             [HideFromIl2Cpp]
@@ -1133,10 +1129,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (SceneUtils.isSDK3)
-                {
-                    if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
-                }
+                if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
                 return _SDK3_Pickup;
             }
             [HideFromIl2Cpp]

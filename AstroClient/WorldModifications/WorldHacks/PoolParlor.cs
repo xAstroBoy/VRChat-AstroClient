@@ -380,13 +380,22 @@ namespace AstroClient.WorldModifications.WorldHacks
                     PoolParlorCheats.SetInteractable(true);
                     PoolParlorCheats.SetTextColor(Color.green);
                 }
-
                 Log.Write($"Recognized {Name} World, Patching Skins....");
                 Log.Write("Use the Customization Menu to Access Table and Cue skins!");
                 PlayerCameraEditor.PlayerCamera.farClipPlane = 5000f;
                 foreach (var occluder in Resources.FindObjectsOfTypeAll<OcclusionArea>())
                 {
                     occluder.DestroyMeLocal();
+                }
+                var Terrain = Finder.Find("Pool Parlour/Static/Terrain");
+                if (Terrain != null)
+                {
+                    Terrain.RemoveComponents<BoxCollider>();
+                }
+                var bansystem = Finder.Find("Blacklist System");
+                if (bansystem != null)
+                {
+                    bansystem.DestroyMeLocal();
                 }
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 SetGuidelineCheat();
@@ -551,7 +560,7 @@ namespace AstroClient.WorldModifications.WorldHacks
 
         private static void Initialize_BilliardModule()
         {
-            var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "__0__CanUseTableSkin");
+            var BilliardsModuleEvent = UdonSearch.FindUdonEvent("BilliardsModule", "__0__CanUseCueSkin");
             if (BilliardsModuleEvent != null)
             {
                 BilliardsModule = BilliardsModuleEvent.gameObject.GetOrAddComponent<PoolParlor_BilliardsModuleReader>();
@@ -695,20 +704,27 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        internal static void SetTableSkin(int value)
+        internal static void SelectTableModel(int value)
         {
             PoolParlorModule.selectedTableSkin = value;
             PoolParlorModule.inSkin = value;
-            PoolParlorModule.__1_skin__param = value;
+            PoolParlorModule.__0_skin__param = value;
+            PoolParlorModule.selectedTableModel = value;
 
             BilliardsModule.__0_newTableSkin__param = value;
             BilliardsModule.__0_skin__param = (byte)value;
             BilliardsModule.tableSkinLocal = value;
             BilliardsModule.__0_tableSkinSynced__param = (byte)value;
 
+            BilliardsModule.__0_newTableModel__param = value;
+            BilliardsModule.__0_tableModelSynced__param = (byte)value;
+            BilliardsModule.tableModelLocal = value;
+
+
             NetworkingManager.Two.__0_newTableSkin__param = (byte)value;
             NetworkingManager.Two.tableSkinSynced = (byte)value;
-
+            NetworkingManager.Two.__0_newTableModel__param = (byte)value;
+            NetworkingManager.Two.tableModelSynced = (byte)value;
             UpdateSettings();
             RefreshTableSkin();
         }
@@ -784,6 +800,10 @@ namespace AstroClient.WorldModifications.WorldHacks
             table_23 = 23,
             table_24 = 24,
             table_25 = 25,
+            table_26 = 26,
+            table_27 = 27,
+            table_28 = 28,
+            table_29 = 29,
         }
 
         internal enum CueSkins
@@ -816,6 +836,9 @@ namespace AstroClient.WorldModifications.WorldHacks
             TheLoneCone = 25,
             blahaj = 26,
             referee = 27,
+            cue_28 = 28,
+            cue_29 = 29,
+            cue_30 = 30,
         }
 
         private static void OnRoomLeft()
@@ -861,7 +884,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (TableSkins)(-1))
                     {
-                        value = TableSkins.table_25;
+                        value = TableSkins.table_29;
                     }
                     else
                     {
@@ -873,7 +896,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     TableSkinBtn.SetButtonText(value.ToString());
                 }
-                SetTableSkin((int)value);
+                SelectTableModel((int)value);
             }
         }
 
@@ -893,7 +916,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     if (value == (CueSkins)(-1))
                     {
-                        value = CueSkins.referee;
+                        value = CueSkins.cue_30;
                     }
                     else
                     {
