@@ -31,7 +31,7 @@ namespace AstroClient.Tools.Extensions
         {
             if (obj != null)
             {
-                obj.TeleportTo(target, useRotation);
+                obj.TeleportTo(target.transform, useRotation);
             }
         }
 
