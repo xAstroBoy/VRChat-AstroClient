@@ -1,19 +1,16 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.PlayerList.Entries;
-using AstroClient.Startup.Hooks;
 using AstroClient.xAstroBoy.Extensions;
-using VRC.Core;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
-    using System;
-    using System.Linq;
     using AstroClient.Tools.Extensions;
     using AstroClient.Tools.Extensions.Components_exts;
     using AstroClient.Tools.ObjectEditor.Online;
     using AstroClient.Tools.Player;
     using ClientAttributes;
     using Il2CppSystem.Collections.Generic;
+    using System;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDK3.Components;
@@ -21,12 +18,13 @@ namespace AstroClient.AstroMonos.Components.Tools
     using xAstroBoy.Utility;
 
     [RegisterComponent]
-    public class  PickupController : MonoBehaviour
+    public class PickupController : MonoBehaviour
     {
         internal Action OnPickupHeld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal Action OnPickupDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _CurrentHeldStatus = false;
+
         private bool CurrentHeldStatus
         {
             get => _CurrentHeldStatus;
@@ -47,7 +45,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _CurrentHeldStatus = value;
             }
         }
-        
+
         public List<MonoBehaviour> AntiGcList;
 
         public PickupController(IntPtr obj0) : base(obj0)
@@ -55,7 +53,9 @@ namespace AstroClient.AstroMonos.Components.Tools
             AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
+
         private bool _EventsAreEnabled = false;
+
         private bool EventsAreEnabled
         {
             [HideFromIl2Cpp]
@@ -63,35 +63,31 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             set
             {
-                if(_EventsAreEnabled != value)
+                if (_EventsAreEnabled != value)
                 {
-                    if(value)
+                    if (value)
                     {
-
                         ClientEventActions.OnRoomLeft += OnRoomLeft;
                         ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
                         ClientEventActions.OnQuickMenuOpen += OnQuickMenuOpen;
                         ClientEventActions.OnBigMenuOpen += OnBigMenuOpen;
                         ClientEventActions.OnBigMenuClose += OnBigMenuClose;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnRoomLeft -= OnRoomLeft;
                         ClientEventActions.OnQuickMenuClose -= OnQuickMenuClose;
                         ClientEventActions.OnQuickMenuOpen -= OnQuickMenuOpen;
                         ClientEventActions.OnBigMenuOpen -= OnBigMenuOpen;
                         ClientEventActions.OnBigMenuClose -= OnBigMenuClose;
-
                     }
                 }
                 _EventsAreEnabled = value;
             }
         }
 
-
         private bool _EnableInputEvents = false;
+
         private bool EnableInputEvents
         {
             [HideFromIl2Cpp]
@@ -103,17 +99,13 @@ namespace AstroClient.AstroMonos.Components.Tools
                 {
                     if (value)
                     {
-
                         ClientEventActions.OnInput_UseRight += OnInput_UseRight;
                         ClientEventActions.OnInput_UseLeft += OnInput_UseLeft;
-
                     }
                     else
                     {
-
                         ClientEventActions.OnInput_UseRight -= OnInput_UseRight;
                         ClientEventActions.OnInput_UseLeft -= OnInput_UseLeft;
-
                     }
                 }
                 _EnableInputEvents = value;
@@ -135,7 +127,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
             InvokeRepeating(nameof(PickupProtection), 0.1f, 0.1f);
-
         }
 
         //private void Update()
@@ -147,7 +138,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (!isActiveAndEnabled) return;
             if (gameObject != null)
             {
-                
                 CurrentHeldStatus = this.IsHeld;
                 Run_onPickupUpdate();
                 if (!EditMode)
@@ -155,13 +145,12 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-
-        private  void OnRoomLeft()
+        private void OnRoomLeft()
         {
             Destroy(this);
         }
 
-        private  void OnQuickMenuClose()
+        private void OnQuickMenuClose()
         {
             isUsingUI = false;
             if (AntiTheft)
@@ -188,7 +177,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        private  void OnBigMenuClose()
+        private void OnBigMenuClose()
         {
             isUsingUI = false;
             if (AntiTheft)
@@ -196,6 +185,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                 EnableInputEvents = true;
             }
         }
+
         internal void GrabItem(VRC_Pickup.PickupHand Hand)
         {
             if (Hand == VRC_Pickup.PickupHand.Right)
@@ -207,7 +197,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 PlayerHands.SetPickup_LeftHand(SDKBase_Pickup);
             }
         }
-
 
         private void OnInput_UseRight(bool isClicked, bool isDown, bool isUp)
         {
@@ -239,7 +228,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                                 }
                             }
                         //gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
-
                     }
                     catch
                     {
@@ -247,7 +235,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        private  void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
+        private void OnInput_UseLeft(bool isClicked, bool isDown, bool isUp)
         {
             if (AntiTheft)
             {
@@ -277,7 +265,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                                 }
                             }
                         //gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
-
                     }
                     catch
                     {
@@ -296,7 +283,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             if (CurrentHolder.isLocal) return;
             if (AllowOnlySelfToGrab)
             {
-                if (!CurrentHolder.isLocal) 
+                if (!CurrentHolder.isLocal)
                     OnlineEditor.TakeObjectOwnership(gameObject);
                 gameObject.SetPosition(gameObject.transform.position);
                 gameObject.SetRotation(gameObject.transform.rotation);
@@ -492,7 +479,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             EventsAreEnabled = false;
             OnPickupDrop = null;
@@ -594,7 +581,7 @@ namespace AstroClient.AstroMonos.Components.Tools
                     if (SDK2_Pickup != null) return SDK2_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
                     else if (SDK3_Pickup != null) return SDK3_Pickup.currentlyHeldBy.TryCast<VRCHandGrasper>();
                 }
-                catch{}
+                catch { }
                 return null;
             }
         }
@@ -1152,117 +1139,32 @@ namespace AstroClient.AstroMonos.Components.Tools
 
             if (!hasRequiredComponentBeenAdded)
             {
-                SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
-                SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-                SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
-                if (!HasTriedWithSDKBase_Pickup)
-                    if (SDKBase_Pickup == null)
-                    {
-                       // Log.Debug("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                        SDKBase_Pickup = gameObject.AddComponent<VRC_Pickup>();
-                        if (SDKBase_Pickup == null)
-                        {
-                            //Log.Debug("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                            HasTriedWithSDKBase_Pickup = true;
-                        }
-                        else
-                        {
-                            //Log.Debug("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                            if (SDKBase_Pickup.ExactGrip == null)
-                            {
-                                SDKBase_Pickup.ExactGrip = gameObject.transform;
-                                //Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
-                            }
-
-                            if (SDKBase_Pickup.ExactGun == null)
-                            {
-                                SDKBase_Pickup.ExactGun = gameObject.transform;
-                                //Log.Debug("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
-                            }
-
-                            hasRequiredComponentBeenAdded = true;
-                            HasTriedWithSDKBase_Pickup = true;
-                            return;
-                        }
-                    }
-
-                if (!HasTriedWithSDK2_Pickup)
-                    if (SDK2_Pickup == null)
-                    {
-                        //Log.Debug("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                        SDK2_Pickup = gameObject.AddComponent<VRCSDK2.VRC_Pickup>();
-                        if (SDK2_Pickup == null)
-                        {
-                            //Log.Debug("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                            HasTriedWithSDK2_Pickup = true;
-                        }
-                        else
-                        {
-                           // Log.Debug("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                            if (SDK2_Pickup.ExactGrip == null)
-                            {
-                                SDK2_Pickup.ExactGrip = gameObject.transform;
-                             //   Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
-                            }
-
-                            if (SDK2_Pickup.ExactGun == null)
-                            {
-                                SDK2_Pickup.ExactGun = gameObject.transform;
-                                //Log.Debug("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
-                            }
-
-                            hasRequiredComponentBeenAdded = true;
-                            HasTriedWithSDK2_Pickup = true;
-                            return;
-                        }
-                    }
-
-                if (!HasTriedWithSDK3_Pickup)
-                    if (SDK3_Pickup == null)
-                    {
-                       // Log.Debug("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                        SDK3_Pickup = gameObject.AddComponent<VRCPickup>();
-                        if (SDK3_Pickup == null)
-                        {
-                            //Log.Debug("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                            HasTriedWithSDK3_Pickup = true;
-                        }
-                        else
-                        {
-                          //  Log.Debug("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                            if (SDK3_Pickup.ExactGrip == null)
-                            {
-                                SDK3_Pickup.ExactGrip = gameObject.transform;
-                              //  Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
-                            }
-
-                            if (SDK3_Pickup.ExactGun == null)
-                            {
-                                SDK3_Pickup.ExactGun = gameObject.transform;
-                               // Log.Debug("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
-                            }
-
-                            hasRequiredComponentBeenAdded = true;
-                            HasTriedWithSDK3_Pickup = true;
-                            return;
-                        }
-                    }
-
-                if (!hasRequiredComponentBeenAdded && HasTriedWithSDKBase_Pickup && HasTriedWithSDK2_Pickup && HasTriedWithSDK3_Pickup)
+                switch (SceneUtils.SDKVersion)
                 {
-                    //Log.Warn("Failed to add A Pickup Component to the object : " + gameObject.name);
-                    ForceComponent = false;
-                    HasTriedWithSDKBase_Pickup = false;
-                    HasTriedWithSDK2_Pickup = false;
-                    HasTriedWithSDK3_Pickup = false;
-                    hasRequiredComponentBeenAdded = false;
+                    case 3:
+                        SDK3_Pickup = gameObject.GetOrAddComponent<VRCPickup>();
+                        // verify if the pickup is added
+                        if (SDK3_Pickup != null)
+                        {
+                            hasRequiredComponentBeenAdded = true;
+                        }
+                        break;
+
+                    default:
+                        SDK2_Pickup = gameObject.GetOrAddComponent<VRCSDK2.VRC_Pickup>();
+                        if (SDK2_Pickup != null)
+                        {
+                            hasRequiredComponentBeenAdded = true;
+                        }
+                        break;
                 }
+            }
+            if (!hasRequiredComponentBeenAdded)
+            {
+                ForceComponent = false;
             }
         }
 
-        private bool HasTriedWithSDKBase_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool HasTriedWithSDK2_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
-        private bool HasTriedWithSDK3_Pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool HasSetRigidbodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool hasRequiredComponentBeenAdded { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
