@@ -1,6 +1,7 @@
 ﻿using AstroClient.ClientActions;
 using AstroClient.PlayerList.Entries;
 using AstroClient.xAstroBoy.Extensions;
+using UnityEngine.SceneManagement;
 
 namespace AstroClient.AstroMonos.Components.Tools
 {
@@ -117,7 +118,6 @@ namespace AstroClient.AstroMonos.Components.Tools
         // Use this for initialization
         internal void Start()
         {
-            SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
             SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
@@ -190,11 +190,25 @@ namespace AstroClient.AstroMonos.Components.Tools
         {
             if (Hand == VRC_Pickup.PickupHand.Right)
             {
-                PlayerHands.SetPickup_RightHand(this.SDKBase_Pickup);
+                if (SDK2_Pickup != null)
+                {
+                    PlayerHands.SetPickup_RightHand(SDK2_Pickup);
+                }
+                else if(SDK3_Pickup != null)
+                {
+                    PlayerHands.SetPickup_RightHand(SDK3_Pickup);
+                }
             }
             else
             {
-                PlayerHands.SetPickup_LeftHand(SDKBase_Pickup);
+                if (SDK2_Pickup != null)
+                {
+                    PlayerHands.SetPickup_LeftHand(SDK2_Pickup);
+                }
+                else if (SDK3_Pickup != null)
+                {
+                    PlayerHands.SetPickup_LeftHand(SDK3_Pickup);
+                }
             }
         }
 
@@ -209,19 +223,13 @@ namespace AstroClient.AstroMonos.Components.Tools
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == null)
                             {
-                                if (SDKBase_Pickup != null)
-                                {
-                                    PlayerHands.SetPickup_RightHand(SDKBase_Pickup);
-
-                                    return;
-                                }
                                 if (SDK2_Pickup != null)
                                 {
                                     PlayerHands.SetPickup_RightHand(SDK2_Pickup);
 
                                     return;
                                 }
-                                if (SDK3_Pickup != null)
+                                else if (SDK3_Pickup != null)
                                 {
                                     PlayerHands.SetPickup_RightHand(SDK3_Pickup);
                                     return;
@@ -246,22 +254,13 @@ namespace AstroClient.AstroMonos.Components.Tools
                         if (CurrentHolder == null && !IsHeld || CurrentHolder is { isLocal: false })
                             if (GameInstances.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == null)
                             {
-                                if (SDKBase_Pickup != null)
-                                {
-                                    PlayerHands.SetPickup_LeftHand(SDKBase_Pickup);
-
-                                    return;
-                                }
                                 if (SDK2_Pickup != null)
                                 {
                                     PlayerHands.SetPickup_LeftHand(SDK2_Pickup);
-
-                                    return;
                                 }
-                                if (SDK3_Pickup != null)
+                                else if (SDK3_Pickup != null)
                                 {
                                     PlayerHands.SetPickup_LeftHand(SDK3_Pickup);
-                                    return;
                                 }
                             }
                         //gameObject.TeleportToMeWithRot(HumanBodyBones.RightHand, false);
@@ -331,55 +330,7 @@ namespace AstroClient.AstroMonos.Components.Tools
         private void SyncProperties(bool isFromUpdate)
         {
             if (isFromUpdate && _EditMode) _EditMode = false; // Disable this so it goes on Sync Mode.
-            if (SDKBase_Pickup != null)
-            {
-                CurrentHeldStatus = SDKBase_Pickup.IsHeld;
-                Original_currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
-                Original_UseDownEventName = SDKBase_Pickup.UseDownEventName;
-                Original_currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
-                Original_ThrowVelocityBoostScale = SDKBase_Pickup.ThrowVelocityBoostScale;
-                Original_ThrowVelocityBoostMinSpeed = SDKBase_Pickup.ThrowVelocityBoostMinSpeed;
-                Original_DropEventName = SDKBase_Pickup.DropEventName;
-                Original_PickupEventName = SDKBase_Pickup.PickupEventName;
-                Original_pickupable = SDKBase_Pickup.pickupable;
-                Original_UseUpEventName = SDKBase_Pickup.UseUpEventName;
-                Original_useEventBroadcastType = SDKBase_Pickup.useEventBroadcastType;
-                Original_orientation = SDKBase_Pickup.orientation;
-                Original_InteractionText = SDKBase_Pickup.InteractionText;
-                Original_AutoHold = SDKBase_Pickup.AutoHold;
-                Original_proximity = SDKBase_Pickup.proximity;
-                Original_allowManipulationWhenEquipped = SDKBase_Pickup.allowManipulationWhenEquipped;
-                Original_ExactGrip = SDKBase_Pickup.ExactGrip;
-                Original_ExactGun = SDKBase_Pickup.ExactGun;
-                Original_DisallowTheft = SDKBase_Pickup.DisallowTheft;
-                Original_MomentumTransferMethod = SDKBase_Pickup.MomentumTransferMethod;
-                Original_UseText = SDKBase_Pickup.UseText;
-                Original_pickupDropEventBroadcastType = SDKBase_Pickup.pickupDropEventBroadcastType;
-
-                // Sync Properties as well
-
-                UseDownEventName = SDKBase_Pickup.UseDownEventName;
-                currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
-                ThrowVelocityBoostScale = SDKBase_Pickup.ThrowVelocityBoostScale;
-                ThrowVelocityBoostMinSpeed = SDKBase_Pickup.ThrowVelocityBoostMinSpeed;
-                DropEventName = SDKBase_Pickup.DropEventName;
-                PickupEventName = SDKBase_Pickup.PickupEventName;
-                pickupable = SDKBase_Pickup.pickupable;
-                UseUpEventName = SDKBase_Pickup.UseUpEventName;
-                useEventBroadcastType = SDKBase_Pickup.useEventBroadcastType;
-                orientation = SDKBase_Pickup.orientation;
-                InteractionText = SDKBase_Pickup.InteractionText;
-                AutoHold = SDKBase_Pickup.AutoHold;
-                proximity = SDKBase_Pickup.proximity;
-                allowManipulationWhenEquipped = SDKBase_Pickup.allowManipulationWhenEquipped;
-                ExactGrip = SDKBase_Pickup.ExactGrip;
-                ExactGun = SDKBase_Pickup.ExactGun;
-                DisallowTheft = SDKBase_Pickup.DisallowTheft;
-                MomentumTransferMethod = SDKBase_Pickup.MomentumTransferMethod;
-                UseText = SDKBase_Pickup.UseText;
-                pickupDropEventBroadcastType = SDKBase_Pickup.pickupDropEventBroadcastType;
-            }
-            else if (SDK2_Pickup != null)
+             if (SDK2_Pickup != null)
             {
                 CurrentHeldStatus = SDK2_Pickup.IsHeld;
 
@@ -596,7 +547,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _UseDownEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.UseDownEventName = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.UseDownEventName = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.UseDownEventName = value;
                     Run_OnOnPickupPropertyChanged();
@@ -614,7 +564,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _currentLocalPlayer = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.currentLocalPlayer = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.currentLocalPlayer = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.currentLocalPlayer = value;
                     Run_OnOnPickupPropertyChanged();
@@ -632,7 +581,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _ThrowVelocityBoostScale = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.ThrowVelocityBoostScale = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.ThrowVelocityBoostScale = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.ThrowVelocityBoostScale = value;
                     Run_OnOnPickupPropertyChanged();
@@ -650,7 +598,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _ThrowVelocityBoostMinSpeed = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.ThrowVelocityBoostMinSpeed = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.ThrowVelocityBoostMinSpeed = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.ThrowVelocityBoostMinSpeed = value;
                     Run_OnOnPickupPropertyChanged();
@@ -668,7 +615,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _DropEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.DropEventName = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.DropEventName = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.DropEventName = value;
                     Run_OnOnPickupPropertyChanged();
@@ -686,7 +632,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _PickupEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.PickupEventName = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.PickupEventName = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.PickupEventName = value;
                     Run_OnOnPickupPropertyChanged();
@@ -704,7 +649,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _pickupable = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.pickupable = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.pickupable = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.pickupable = value;
                     Run_OnOnPickupPropertyChanged();
@@ -722,7 +666,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _UseUpEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.UseUpEventName = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.UseUpEventName = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.UseUpEventName = value;
                     Run_OnOnPickupPropertyChanged();
@@ -740,7 +683,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _useEventBroadcastType = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.useEventBroadcastType = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.useEventBroadcastType = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.useEventBroadcastType = value;
                     Run_OnOnPickupPropertyChanged();
@@ -758,7 +700,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _orientation = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.orientation = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.orientation = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.orientation = value;
                     Run_OnOnPickupPropertyChanged();
@@ -774,7 +715,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             set
             {
                 _InteractionText = value;
-                if (SDKBase_Pickup != null) SDKBase_Pickup.InteractionText = value;
                 if (SDK2_Pickup != null) SDK2_Pickup.InteractionText = value;
                 if (SDK3_Pickup != null) SDK3_Pickup.InteractionText = value;
                 if (EditMode) Run_OnOnPickupPropertyChanged();
@@ -789,7 +729,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             set
             {
                 _AutoHold = value;
-                if (SDKBase_Pickup != null) SDKBase_Pickup.AutoHold = value;
                 if (SDK2_Pickup != null) SDK2_Pickup.AutoHold = value;
                 if (SDK3_Pickup != null) SDK3_Pickup.AutoHold = value;
                 if (EditMode) Run_OnOnPickupPropertyChanged();
@@ -806,7 +745,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _proximity = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.proximity = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.proximity = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.proximity = value;
                     Run_OnOnPickupPropertyChanged();
@@ -824,7 +762,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _allowManipulationWhenEquipped = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.allowManipulationWhenEquipped = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.allowManipulationWhenEquipped = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.allowManipulationWhenEquipped = value;
                     Run_OnOnPickupPropertyChanged();
@@ -842,7 +779,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _ExactGrip = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.ExactGrip = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.ExactGrip = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.ExactGrip = value;
                     Run_OnOnPickupPropertyChanged();
@@ -860,7 +796,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _ExactGun = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.ExactGun = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.ExactGun = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.ExactGun = value;
                     Run_OnOnPickupPropertyChanged();
@@ -878,7 +813,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _DisallowTheft = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.DisallowTheft = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.DisallowTheft = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.DisallowTheft = value;
                     Run_OnOnPickupPropertyChanged();
@@ -896,7 +830,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _MomentumTransferMethod = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.MomentumTransferMethod = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.MomentumTransferMethod = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.MomentumTransferMethod = value;
                     Run_OnOnPickupPropertyChanged();
@@ -912,7 +845,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             set
             {
                 _UseText = value;
-                if (SDKBase_Pickup != null) SDKBase_Pickup.UseText = value;
                 if (SDK2_Pickup != null) SDK2_Pickup.UseText = value;
                 if (SDK3_Pickup != null) SDK3_Pickup.UseText = value;
                 if (EditMode) Run_OnOnPickupPropertyChanged();
@@ -929,7 +861,6 @@ namespace AstroClient.AstroMonos.Components.Tools
                 _pickupDropEventBroadcastType = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null) SDKBase_Pickup.pickupDropEventBroadcastType = value;
                     if (SDK2_Pickup != null) SDK2_Pickup.pickupDropEventBroadcastType = value;
                     if (SDK3_Pickup != null) SDK3_Pickup.pickupDropEventBroadcastType = value;
                     Run_OnOnPickupPropertyChanged();
@@ -946,7 +877,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (SDKBase_Pickup != null) return SDKBase_Pickup.IsHeld;
                 if (SDK2_Pickup != null) return SDK2_Pickup.IsHeld;
                 if (SDK3_Pickup != null) return SDK3_Pickup.IsHeld;
                 return false;
@@ -958,7 +888,6 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (SDKBase_Pickup != null) return SDKBase_Pickup.currentHand;
                 if (SDK2_Pickup != null) return SDK2_Pickup.currentHand;
                 if (SDK3_Pickup != null) return SDK3_Pickup.currentHand;
                 return VRC_Pickup.PickupHand.None;
@@ -972,12 +901,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             {
                 try
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        var user = SDKBase_Pickup.currentPlayer;
-                        if (user != null) return user;
-                    }
-                    else if (SDK2_Pickup != null)
+                    if (SDK2_Pickup != null)
                     {
                         var user = SDK2_Pickup.currentPlayer;
                         if (user != null) return user;
@@ -1040,12 +964,7 @@ namespace AstroClient.AstroMonos.Components.Tools
             {
                 try
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        var user = SDKBase_Pickup.currentPlayer;
-                        if (user != null) return user;
-                    }
-                    else if (SDK2_Pickup != null)
+                    if (SDK2_Pickup != null)
                     {
                         var user = SDK2_Pickup.currentPlayer;
                         if (user != null) return user;
@@ -1066,7 +985,7 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         internal bool HasPickupComponent()
         {
-            if (SDKBase_Pickup != null || SDK2_Pickup != null || SDK3_Pickup != null) return true;
+            if (SDK2_Pickup != null || SDK3_Pickup != null) return true;
             return false;
         }
 
@@ -1190,20 +1109,6 @@ namespace AstroClient.AstroMonos.Components.Tools
 
         #region essentials
 
-        private VRC_Pickup _SDKBase_Pickup;
-
-        internal VRC_Pickup SDKBase_Pickup
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (_SDKBase_Pickup == null) return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
-                return _SDKBase_Pickup;
-            }
-            [HideFromIl2Cpp]
-            private set => _SDKBase_Pickup = value;
-        }
-
         private VRCSDK2.VRC_Pickup _SDK2_Pickup;
 
         internal VRCSDK2.VRC_Pickup SDK2_Pickup
@@ -1211,7 +1116,10 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
+                if (SceneUtils.isSDK2)
+                {
+                    if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
+                }
                 return _SDK2_Pickup;
             }
             [HideFromIl2Cpp]
@@ -1225,7 +1133,10 @@ namespace AstroClient.AstroMonos.Components.Tools
             [HideFromIl2Cpp]
             get
             {
-                if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
+                if (SceneUtils.isSDK3)
+                {
+                    if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRCPickup>();
+                }
                 return _SDK3_Pickup;
             }
             [HideFromIl2Cpp]

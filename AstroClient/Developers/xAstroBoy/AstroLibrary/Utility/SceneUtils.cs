@@ -24,7 +24,6 @@ namespace AstroClient.xAstroBoy.Utility
             HasRespawnHeightYModified = false;
             OriginalRespawnHeightY = -100f;
             NoFallHeightLimit = false;
-            _SDK_Base = null;
             _SDK_2 = null;
             _SDK_3 = null;
         }
@@ -269,20 +268,6 @@ namespace AstroClient.xAstroBoy.Utility
             }
         }
 
-        private static VRC_SceneDescriptor _SDK_Base = null;
-
-        internal static VRC_SceneDescriptor SDK_Base
-        {
-            get
-            {
-                if (_SDK_Base == null)
-                {
-                    return _SDK_Base = UnityEngine.Object.FindObjectOfType<VRC_SceneDescriptor>();
-                }
-                return _SDK_Base;
-            }
-        }
-
         private static VRCSDK2.VRC_SceneDescriptor _SDK_2 = null;
 
         internal static VRCSDK2.VRC_SceneDescriptor SDK_2
@@ -342,6 +327,11 @@ namespace AstroClient.xAstroBoy.Utility
                 OnNoFallHeightLimitToggled.SafetyRaise();
             }
         }
+
+
+        internal static bool isSDK2 => SDKVersion == 2;
+
+        internal static bool isSDK3 => SDKVersion == 3;
 
         internal static QMToggleButton ToggleNoFallHeightLimiter;
         internal static Action OnNoFallHeightLimitToggled { get; set; }
