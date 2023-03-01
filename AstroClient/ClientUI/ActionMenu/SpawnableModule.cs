@@ -70,7 +70,8 @@ namespace AstroClient.ClientUI.ActionMenu
                         }
                     }, null);
                     CustomSubMenu.AddToggle("Pickup Tether Grab", TetherProperties.manipulatesRigidbodies, value => TetherProperties.manipulatesRigidbodies = value);
-
+                    CustomSubMenu.AddToggle("Reel Out (disable this to Reel stuff In!)", !TetherProperties.ReelOut, value => TetherProperties.ReelOut = value);
+                    CustomSubMenu.AddToggle("Enable Reeling", TetherProperties.AllowReel, value => TetherProperties.AllowReel = value);
 
                 });
             });

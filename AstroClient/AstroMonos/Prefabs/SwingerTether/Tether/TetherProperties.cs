@@ -50,12 +50,14 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
         /// <summary>
         /// "Maximum length of a grapple."
         /// </summary>
-        internal static float tetherMaximumLength { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 10.0f;
+        internal static float tetherMaximumLength { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 20.0f;
         /// <summary>
         /// "Maximum Range for how far the grapple gun can shoot."
         /// </summary>
         internal static float tetherMaximumRange { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 20.0f;
 
+
+        internal static float TetherMininumLenght { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.5f;
         /// <summary>
         /// "Force"
         /// "Force to tug the player back to center with. Gives the grapple a bungee-like springiness."
@@ -127,9 +129,14 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
         /// <summary>
         /// "Whether to allow a tether to unwind if the trigger is pressed only half-way (below tetherHoldDeadzone)"
+        /// "Setting this to false, will wind the tether back in"
         /// </summary>
-        internal static bool allowUnwinding { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
+        internal static bool ReelOut { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
 
+        /// <summary>
+        /// Allows the winding of the tether to be toggled.
+        /// </summary>
+        internal static bool AllowReel { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
         /// <summary>
         /// "Maximum speed at which the tether unwinds."
         /// </summary>

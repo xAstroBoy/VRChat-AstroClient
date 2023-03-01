@@ -71,11 +71,20 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Tether
 
                 if (tethering)
                 {
+
+                    
                     // unreeling
-                    if (TetherProperties.allowUnwinding && !IsInputHeld())
+                    
+                    if (TetherProperties.AllowReel && TetherProperties.ReelOut && !IsInputHeld())
                     {
                         tetherUnwindRate = TetherProperties.unwindRate * (1.0f - ((tetherInput - TetherProperties.tetherInputDeadzone) / (TetherProperties.tetherHoldDeadzone - TetherProperties.tetherInputDeadzone)));
                         tetherLength = Mathf.Clamp(tetherLength + tetherUnwindRate * Time.deltaTime, 0.0f, TetherProperties.tetherMaximumLength);
+                    }
+                    else if(TetherProperties.AllowReel && !TetherProperties.ReelOut && !IsInputHeld())
+                    {
+                        tetherUnwindRate = TetherProperties.unwindRate * (1.0f - ((tetherInput - TetherProperties.tetherInputDeadzone) / (TetherProperties.tetherHoldDeadzone - TetherProperties.tetherInputDeadzone)));
+                        tetherLength = Mathf.Clamp(tetherLength - tetherUnwindRate * Time.deltaTime, TetherProperties.TetherMininumLenght, 0.0f);
+
                     }
 
                     Vector3 worldTetherPoint = GetTetherPoint();
