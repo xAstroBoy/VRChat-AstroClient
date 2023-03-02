@@ -95,7 +95,7 @@ namespace AstroClient.AstroMonos.Components.Cheats.Worlds.PrisonEscapeComponents
             TurnPower_On_Event.Invoke();
         }
 
-        internal void Reset()
+        internal void ResetPower()
         {
             ResetPowerEvent.Invoke();
         }

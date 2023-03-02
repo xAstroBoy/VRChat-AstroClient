@@ -253,6 +253,29 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             Prison.FindObject("Building/Back Area/Colliders/Collider (2)").DestroyMeLocal(true);
         }
 
+        private static string[] Blockers = new[]
+        {
+            "Prison/Guard Objects/Guard Blockers",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (12)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (13)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (9)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (6)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (5)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (11)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (14)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (4)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (8)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (10)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (7)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (1)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (16)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (15)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (2)",
+            "Prison/Guard Objects/Guard Blockers/Guard Blocker (3)",
+        };
+
+
         private static void AdjustWorld()
         {
             //var AprilFoolsPatcher = GameObjectFinder.FindRootSceneObject("April Fools");
@@ -291,6 +314,15 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             //    }
             //}
 
+            foreach(var block in Blockers)
+            {
+                var obj = Finder.Find(block);
+                if (obj != null)
+                {
+                    obj.RemoveColliders();
+                }
+            }
+
             var heightlimiter = Finder.Find("Scripts/Avatar Height Checker");
             if (heightlimiter != null)
             {
@@ -315,27 +347,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
             if (Dark_Yard != null)
             {
                 PatchYard(Dark_Yard);
-            }
-
-            if (PrisonRoot != null)
-            {
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (1)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (2)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (3)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (4)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (5)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (6)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (7)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (8)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (9)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (10)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (11)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (12)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (13)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (14)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (15)").IgnoreLocalPlayerCollision(true, true, false);
-                PrisonRoot.FindObject("Guard Objects/Guard Blocker (16)").IgnoreLocalPlayerCollision(true, true, false);
             }
 
             if (Lit_Prison != null)
@@ -1927,8 +1938,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         {
             if (PowerControl != null)
             {
-                PowerControl.Reset();
                 PowerControl.TurnPowerOn();
+                PowerControl.ResetPower();
             }
         }
 
