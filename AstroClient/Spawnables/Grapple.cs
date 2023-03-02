@@ -59,25 +59,20 @@ namespace AstroClient.Spawnables
 
         private static void Spawn()
         {
-            if(GrappleObject= null)
+            if(GrappleObject == null)
             {
-                Vector3? Pos = GameInstances.LocalPlayer.GetPlayer().Get_Center_Of_Player();
-                Quaternion? Rot = GameInstances.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-                if (Pos.HasValue && Rot.HasValue)
+                if (GameInstances.LocalPlayer.IsUserInVR())
                 {
-                    if (GameInstances.LocalPlayer.IsUserInVR())
-                    {
-                        GrappleObject = Object.Instantiate(ClientResources.Loaders.Prefabs.Grapple_VR, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
-                        GrappleObject.GetOrAddComponent<Grapple_VR_Controller>();
-                    }
-                    else
-                    {
-                        GrappleObject = Object.Instantiate(ClientResources.Loaders.Prefabs.Grapple_Desktop, Pos.GetValueOrDefault(), Rot.GetValueOrDefault(), null);
-                        GrappleObject.GetOrAddComponent<Grapple_Desktop_Controller>();
-
-                    }
-                    GrappleObject.AddToWorldUtilsMenu();
+                    GrappleObject = Object.Instantiate(ClientResources.Loaders.Prefabs.Grapple_VR);
+                    GrappleObject.GetOrAddComponent<Grapple_VR_Controller>();
                 }
+                else
+                {
+                    GrappleObject = Object.Instantiate(ClientResources.Loaders.Prefabs.Grapple_Desktop);
+                    GrappleObject.GetOrAddComponent<Grapple_Desktop_Controller>();
+
+                }
+                GrappleObject.AddToWorldUtilsMenu();
             }
         }
 
