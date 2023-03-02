@@ -17,6 +17,8 @@
 /* Note: This is also an issue with the official menu    */
 /* Note: While loading a 400KiB string isn't really a    */
 /*       problem, trying to render that to a texture is. */
+using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
+using AvatarParameterType = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique.EnumNPublicSealedvaUnBoInFl5vUnique;
 
 
 namespace AstroClient.HookedBehemoth.WorldCleanup

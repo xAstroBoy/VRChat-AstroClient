@@ -29,7 +29,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal Action OnOpenAction { get; set; }
 
         internal GameObject Title_Header { get; set; }
-        internal TextMeshProUGUIPublicBoUnique TitleText { get; set; }
+        internal TextMeshProUGUIEx TitleText { get; set; }
 
 
         internal QMGridTab(int index, string btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, Sprite icon = null)
@@ -61,7 +61,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             Header = NestedPart.FindObject("Header_Camera");
             Header.name = "Header";
             Title_Header = Header.FindObject("LeftItemContainer/Text_Title");
-            TitleText = Title_Header.GetComponent<TextMeshProUGUIPublicBoUnique>();
+            TitleText = Title_Header.GetComponent<TextMeshProUGUIEx>();
             TitleText.text = Title;
             NestedPart.SetActive(false);
             mainButton = new QMTabButton(index, () =>

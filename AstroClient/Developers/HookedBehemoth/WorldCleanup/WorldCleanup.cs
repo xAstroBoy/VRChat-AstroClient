@@ -33,7 +33,8 @@ using VRC.SDK3.Avatars.ScriptableObjects;
 using VRC.SDKBase;
 using static AstroClient.HookedBehemoth.WorldCleanup.Polyfill;
 
-using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
+using AvatarParameterType = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique.EnumNPublicSealedvaUnBoInFl5vUnique;
 using Color = System.Drawing.Color;
 
 //using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;

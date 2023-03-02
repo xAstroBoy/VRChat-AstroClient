@@ -25,7 +25,7 @@ namespace AstroClient.xAstroBoy.Extensions
                 tooltip.field_Public_String_1 = text;
             }
         }
-        internal static void SetButtonToolTip(this UIToggleTooltip tooltip, string text)
+        internal static void SetButtonToolTip(this UiToggleTooltip tooltip, string text)
         {
             if (tooltip != null)
             {

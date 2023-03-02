@@ -9,6 +9,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using VRC.Core;
+    using AvatarLoadingBar = MonoBehaviourPublicSiTeReGrObCoCoObUnique;
 
     [RegisterComponent] 
     public class EntryBase : MonoBehaviour

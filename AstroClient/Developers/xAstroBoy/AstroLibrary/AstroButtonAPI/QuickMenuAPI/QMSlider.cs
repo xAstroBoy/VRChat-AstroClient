@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using VRC.UI.Elements.Controls;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using System;
     using TMPro;
@@ -12,9 +14,9 @@
     public class QMSlider
     {
         public readonly GameObject gameObject;
-        private readonly TextMeshProUGUIPublicBoUnique sliderPercentText;
+        private readonly TextMeshProUGUIEx sliderPercentText;
         private readonly Slider sliderSlider;
-        private readonly TextMeshProUGUIPublicBoUnique sliderText;
+        private readonly TextMeshProUGUIEx sliderText;
         private readonly UiTooltip sliderTooltip;
         private bool _floor;
         private bool _percent;
@@ -23,9 +25,9 @@
         {
             var slider = this;
             gameObject = Object.Instantiate(QuickMenuTools.SliderTemplate.gameObject, parent);
-            sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUIPublicBoUnique>(true);
+            sliderText = gameObject.transform.GetChild(0).GetComponentInChildren<TextMeshProUGUIEx>(true);
             sliderText.text = text;
-            sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUIPublicBoUnique>(true);
+            sliderPercentText = gameObject.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUIEx>(true);
             sliderPercentText.text = "0" + (percent ? "%" : "");
             sliderSlider = gameObject.GetComponentInChildren<Slider>();
             sliderSlider.onValueChanged = new Slider.SliderEvent();

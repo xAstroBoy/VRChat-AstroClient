@@ -20,8 +20,8 @@ using System.Linq;
 using MelonLoader;
 using Newtonsoft.Json;
 using UnityEngine;
-//using AvatarParameterAccess = AvatarParameterAccess;
-using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
+using AvatarParameterType = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique.EnumNPublicSealedvaUnBoInFl5vUnique;
 
 namespace AstroClient.HookedBehemoth.WorldCleanup
 {

@@ -1,4 +1,5 @@
 ﻿using VRC.UI.Core.Styles;
+using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Tooltips;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
@@ -39,7 +40,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal Button Button { get; set; }
         internal GameObject ButtonObject { get; set; }
         internal RectTransform ButtonRect { get; set; }
-        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
+        internal TextMeshProUGUIEx ButtonText { get; set; }
         internal string BtnText { get; set; }
         internal string CurrentBtnColor { get; set; }
         internal string ToolTipText { get; set; }
@@ -56,7 +57,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -85,7 +86,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -109,7 +110,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -160,7 +161,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -183,7 +184,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -197,7 +198,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -214,7 +215,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             {
                 ButtonRect.sizeDelta = new Vector2(ButtonRect.sizeDelta.x, ButtonRect.sizeDelta.y / 2 - 10f);
                 ButtonRect.anchoredPosition -= new Vector2(0, ButtonRect.sizeDelta.y / 2 + 10);
-                ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>().rectTransform.anchoredPosition -= new Vector2(0, 50);
+                ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>().rectTransform.anchoredPosition -= new Vector2(0, 50);
             }
         }
 
@@ -271,7 +272,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             var TextRoot  = ButtonObject.FindObject("Text_H4");
             if(TextRoot != null)
             {
-                ButtonText = TextRoot.GetComponent<TextMeshProUGUIPublicBoUnique>();
+                ButtonText = TextRoot.GetComponent<TextMeshProUGUIEx>();
                 ButtonText.RemoveComponents<StyleElement>();
             }
             ButtonObject.SetActive(true);

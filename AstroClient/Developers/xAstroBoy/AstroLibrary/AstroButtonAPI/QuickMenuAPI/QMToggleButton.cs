@@ -1,6 +1,7 @@
 ﻿using AstroClient.xAstroBoy.Utility;
 using Cinemachine;
 using VRC.UI.Core.Styles;
+using VRC.UI.Elements.Controls;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
@@ -166,22 +167,22 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal string CurrentColor { get; set; }
         internal string ButtonText_On { get; set; }
         internal string ButtonText_Off { get; set; }
-        private UIToggleTooltip _ButtonToolTip;
+        private UiToggleTooltip _ButtonToolTip;
         internal GameObject ButtonObject { get; set; }
-        private UIToggleTooltip _toolTipCache;
-        public UIToggleTooltip ButtonToolTip
+        private UiToggleTooltip _toolTipCache;
+        public UiToggleTooltip ButtonToolTip
         {
             get
             {
                 if (_toolTipCache != null) return _toolTipCache;
-                var attempt1 = (ButtonObject.GetComponent<UIToggleTooltip>() ?? ButtonObject.GetComponentInChildren<UIToggleTooltip>(true)) ?? ButtonObject.AddComponent<UIToggleTooltip>();
+                var attempt1 = (ButtonObject.GetComponent<UiToggleTooltip>() ?? ButtonObject.GetComponentInChildren<UiToggleTooltip>(true)) ?? ButtonObject.AddComponent<UiToggleTooltip>();
                 return attempt1 != null ? _toolTipCache = attempt1 : _toolTipCache;
             }
         }
         internal string ToolTipText { get; set; }
 
-        internal TextMeshProUGUIPublicBoUnique ButtonTitleMesh { get; set; }
-        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
+        internal TextMeshProUGUIEx ButtonTitleMesh { get; set; }
+        internal TextMeshProUGUIEx ButtonText { get; set; }
 
         internal void initButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnOnColor = null, Color? btnOffColor = null, string Title = "", bool DefaultState = false)
         {
@@ -199,7 +200,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
             ButtonTitleMesh.text = Title;
             ButtonTitleMesh.RemoveComponents<StyleElement>();
             ButtonObject.name = id;
-            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>();
             ButtonToggle = ButtonObject.GetComponentInChildren<Toggle>();
             btnOn = ButtonObject.FindUIObject("Icon_On");
             btnOff = ButtonObject.FindUIObject("Icon_Off");

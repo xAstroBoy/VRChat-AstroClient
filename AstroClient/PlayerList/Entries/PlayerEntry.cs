@@ -27,6 +27,7 @@ namespace AstroClient.PlayerList.Entries
     using Utilities;
     using VRC.Core;
     using Player = VRC.Player;
+    using AvatarLoadingBar = MonoBehaviourPublicSiTeReGrObCoCoObUnique;
 
     [RegisterComponent]
     public class PlayerEntry : EntryBase

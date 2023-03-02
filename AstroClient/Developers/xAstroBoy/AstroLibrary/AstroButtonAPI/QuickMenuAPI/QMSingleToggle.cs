@@ -1,4 +1,5 @@
 ﻿using AstroClient.xAstroBoy.Utility;
+using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Tooltips;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
@@ -79,7 +80,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
         internal Action OffAction { get; set; }
         internal Action OnAction { get; set; }
         internal GameObject ButtonsMenu { get; set; }
-        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
+        internal TextMeshProUGUIEx ButtonText { get; set; }
         internal GameObject ButtonObject { get; set; }
 
         private VRC.UI.Elements.Tooltips.UiTooltip _ButtonToolTip;
@@ -142,7 +143,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
                 UnityEngine.Object.DestroyImmediate(analytics);
             }
             ButtonObject.transform.Find("Icon").GetComponentInChildren<UIWidgets.ImageAdvanced>().gameObject.SetActive(false);
-            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>();
+            ButtonText = ButtonObject.GetComponentInChildren<TextMeshProUGUIEx>();
             SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;
             OffText = btnOffText;

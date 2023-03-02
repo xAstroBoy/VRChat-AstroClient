@@ -1,6 +1,7 @@
 ﻿using AstroClient.xAstroBoy.AstroButtonAPI.PageGenerators;
 using AstroClient.xAstroBoy.Utility;
 using VRC.UI.Elements.Controls;
+using VRC.UI.Elements.Wings;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
 {
@@ -24,8 +25,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
         internal Button OpenButton { get; set; }
 
         internal GameObject backbuttonObject { get; set; }
-        internal TextMeshProUGUIPublicBoUnique ButtonText { get; set; }
-        internal TextMeshProUGUIPublicBoUnique ButtonText_Title { get; set; }
+        internal TextMeshProUGUIEx ButtonText { get; set; }
+        internal TextMeshProUGUIEx ButtonText_Title { get; set; }
         internal UIPage CurrentPage { get; set; }
         internal string MenuName { get; set; }
         internal string menuName { get; set; }
@@ -376,7 +377,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.WingsAPI
                     CurrentPage.gameObject.SetActive(true);
                 });
             }
-            CurrentPage.RemoveComponents<MonoBehaviourPublicObBuGaTeGaOb1ILGaObUnique>();
+            CurrentPage.RemoveComponents<WingMenuFriends>();
             ButtonObject.LoadSprite(icon, "Icon");
             CurrentPage.gameObject.ToggleScrollRectOnExistingMenu(true);
             CurrentPage.gameObject.SetActive(false);

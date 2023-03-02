@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using MelonLoader;
+using VRC.UI.Buttons;
 using VRC.UI.Elements.Analytics;
+using VRC.UI.Elements.Controls;
+using VRC.UI.Elements.Wings;
 
 namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 {
@@ -172,16 +175,17 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
         internal static void ShowWingPage(this WingMenu instance, string pagename)
         {
-            instance.field_Private_UIMenu_0.prop_MenuStateController_0.ShowTabContent(pagename);
+            instance.field_Private_ObjectPublicSiEaSeReCaGrMeReReUnique_0.field_Private_MenuStateController_0.ShowTabContent(pagename);
+            //instance.field_Private_UIMenu_0.prop_MenuStateController_0.ShowTabContent(pagename);
         }
 
-        internal static Player GetSelectedPlayer(this MonoBehaviourPublicTeSlGrSlImObSiUnique instance)
+        internal static Player GetSelectedPlayer(this UserVolumeSliders instance)
         {
             return instance.field_Private_IUser_0.ToAPIUser().GetPlayer();
             //return instance.field_Private_Player_0;
         }
 
-        internal static APIUser GetSelectedApiUser(this MonoBehaviourPublicTeSlGrSlImObSiUnique instance)
+        internal static APIUser GetSelectedApiUser(this UserVolumeSliders instance)
         {
             return instance.field_Private_IUser_0.ToAPIUser();
             //return instance.field_Private_Player_0;
@@ -244,11 +248,11 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             parent.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>();
             parent.RemoveComponents<CameraMenu>();
             parent.RemoveComponents<AnalyticsController>();
-            parent.RemoveComponents<MonoBehaviourPublicLi1ObUnique>();
-            parent.RemoveComponents<MonoBehaviourPublicBuAcUnique>();
-            parent.RemoveComponents<MonoBehaviourPublicObBuGaTeGaOb1ILGaObUnique>();
-            parent.RemoveComponents<UiTooltip>(); // Votekick handler
-            parent.RemoveComponents<UIToggleTooltip>();
+            parent.RemoveComponents<CloneAvatarController>();
+            parent.RemoveComponents<MenuBackButton>();
+            parent.RemoveComponents<WingMenuFriends>();
+            parent.RemoveComponents<UiTooltip>(); 
+            parent.RemoveComponents<UiToggleTooltip>();
 
 
             #region Button
@@ -347,13 +351,13 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             }
             #endregion
             #region TextMeshProUGUI
-            var TextMeshProUGUIPublicBoUnique = parent.GetComponent<TextMeshProUGUIPublicBoUnique>();
+            var TextMeshProUGUIPublicBoUnique = parent.GetComponent<TextMeshProUGUIEx>();
             if (TextMeshProUGUIPublicBoUnique != null)
             {
                 TextMeshProUGUIPublicBoUnique.enabled = true;
             }
 
-            var TextMeshProUGUIPublicBoUnique_List = parent.GetComponentsInChildren<TextMeshProUGUIPublicBoUnique>(true);
+            var TextMeshProUGUIPublicBoUnique_List = parent.GetComponentsInChildren<TextMeshProUGUIEx>(true);
             for (var i = 0; i < TextMeshProUGUIPublicBoUnique_List.Count; i++)
             {
                 var item = TextMeshProUGUIPublicBoUnique_List[i];
@@ -455,14 +459,14 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         }
 
 
-        public static TextMeshProUGUIPublicBoUnique NewText(this GameObject Parent, string search)
+        public static TextMeshProUGUIEx NewText(this GameObject Parent, string search)
         {
-            var text = new TextMeshProUGUIPublicBoUnique();
+            var text = new TextMeshProUGUIEx();
 
-            var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUIPublicBoUnique>();
+            var TextTop = Parent.GetComponentsInChildren<TextMeshProUGUIEx>();
             for (int i = 0; i < TextTop.Count; i++)
             {
-                TextMeshProUGUIPublicBoUnique texto = TextTop[i];
+                TextMeshProUGUIEx texto = TextTop[i];
                 if (texto.name == search)
                     text = texto;
             }

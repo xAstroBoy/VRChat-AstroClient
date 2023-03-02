@@ -1,4 +1,6 @@
-﻿namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
+﻿using VRC.UI.Elements.Controls;
+
+namespace AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI
 {
     using AstroClient.Tools.Extensions;
     using TMPro;
@@ -9,7 +11,7 @@
     {
         internal GameObject Header { get; set; }
         internal GameObject QuickActions { get; set; }
-        internal TextMeshProUGUIPublicBoUnique HeaderText { get; set; }
+        internal TextMeshProUGUIEx HeaderText { get; set; }
 
         internal string menuName { get; set; }
         internal string btnType { get; set; }

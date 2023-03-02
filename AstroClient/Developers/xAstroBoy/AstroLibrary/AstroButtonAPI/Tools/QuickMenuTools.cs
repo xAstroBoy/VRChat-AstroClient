@@ -47,7 +47,7 @@
         private static GameObject _WingButtonTemplate_Left { get; set; }
         private static GameObject _WingPageButtonTemplate { get; set; }
         private static MenuStateController _QuickMenuController { get; set; }
-        private static MonoBehaviourPublicTeSlGrSlImObSiUnique _SelectedUserMenuQM { get; set; }
+        private static UserVolumeSliders _SelectedUserMenuQM { get; set; }
         private static UIPage _QuickMenuPage { get; set; }
 
         private static GameObject _DebugPanelTemplate { get; set; }
@@ -348,11 +348,11 @@
             }
         }
 
-        internal static MonoBehaviourPublicTeSlGrSlImObSiUnique SelectedUserMenuQM
+        internal static UserVolumeSliders SelectedUserMenuQM
         {
             get
             {
-                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = Canvas_QuickMenu.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<MonoBehaviourPublicTeSlGrSlImObSiUnique>();
+                if (_SelectedUserMenuQM == null) _SelectedUserMenuQM = Canvas_QuickMenu.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<UserVolumeSliders>();
                 return _SelectedUserMenuQM;
             }
         }

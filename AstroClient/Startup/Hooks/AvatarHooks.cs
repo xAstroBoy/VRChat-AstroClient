@@ -12,6 +12,7 @@ namespace AstroClient.Startup.Hooks
     using VRC;
     using VRC.SDKBase;
     using xAstroBoy.Utility;
+    using AvatarLoadingBar = MonoBehaviourPublicSiTeReGrObCoCoObUnique;
 
     [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class AvatarHooks : AstroEvents
