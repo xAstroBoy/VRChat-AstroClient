@@ -101,10 +101,10 @@ namespace AstroClient
                         {
                             if (!SuppressExceptions)
                             {
-                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue;
-                                }
+                                //if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                //{
+                                //    continue;
+                                //}
 
                                 Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 Log.Exception(invokeexc.InnerException);
@@ -123,10 +123,10 @@ namespace AstroClient
                         {
                             if (!SuppressExceptions)
                             {
-                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue;
-                                }
+                                //if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                //{
+                                //    continue;
+                                //}
 
                                 Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 Log.Exception(invokeexc.InnerException);
@@ -183,10 +183,10 @@ namespace AstroClient
                         {
                             if (!SuppressExceptions)
                             {
-                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue;
-                                }
+                                //if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                //{
+                                //    continue;
+                                //}
 
                                 Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 Log.Exception(invokeexc.InnerException);
@@ -205,10 +205,10 @@ namespace AstroClient
                         {
                             if (!SuppressExceptions)
                             {
-                                if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
-                                {
-                                    continue;
-                                }
+                                //if (invokeexc.InnerException.Message.Contains("Object was garbage collected"))
+                                //{
+                                //    continue;
+                                //}
 
                                 Log.Error($"Error in the Handler : {handler.Method.DeclaringType.FullName + "." + handler.Method.Name}");
                                 Log.Exception(invokeexc.InnerException);

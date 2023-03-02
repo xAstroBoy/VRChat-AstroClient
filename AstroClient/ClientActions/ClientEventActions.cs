@@ -116,6 +116,11 @@ namespace AstroClient.ClientActions
         /// </summary>
         internal static Action<Player> OnPlayerJoin { get; set; }
 
+        /// <summary>
+        /// This Gets called when Player Component Awakes.
+        /// <para>Params : VRC.Player player</para>
+        /// </summary>
+        internal static Action<VRCPlayer> OnVRCPlayerAwake { get; set; }
 
         /// <summary>
         /// This Gets called when Player Component Starts.
@@ -150,7 +155,7 @@ namespace AstroClient.ClientActions
         /// This Gets called when a UdonBehaviour Gets Loaded.
         /// <para>Params : UdonBehaviour instance</para>
         /// </summary>
-        internal static Action<UdonBehaviour> Udon_OnBehaviourLoaded;
+        internal static Action<UdonBehaviour> Udon_OnBehaviourLoaded{ get; set; }
 
         /// <summary>
         /// This Gets called when a UdonBehaviour OnPickup method gets invoked.
@@ -335,12 +340,6 @@ namespace AstroClient.ClientActions
 
         internal static Action<string> OnUnityError { get; set; }
 
-        /// <summary>
-        /// This is VRChat Big menu ?.
-        /// <para>Params : VRCUiPage page</para>
-        /// </summary>
-
-        internal static Action<VRCUiPage> OnShowScreen { get; set; }
 
         /// <summary>
         /// This is when a Photon Player joins (it will trigger before OnPlayerJoin)

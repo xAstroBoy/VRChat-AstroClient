@@ -53,7 +53,7 @@ namespace AstroClient.Startup.Hooks
             string fadeType = __0;
             float duration = __1;
 
-           // Log.Debug("FadeType Called : " + fadeType + " With duration : " + duration);
+            Log.Debug("FadeType Called : " + fadeType + " With duration : " + duration);
             if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                 RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
             {

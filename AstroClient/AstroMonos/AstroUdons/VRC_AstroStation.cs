@@ -38,23 +38,16 @@ namespace AstroClient.AstroMonos.AstroUdons
                     {
                         ClientEventActions.OnStationEnter += OnStationEnter;
                         ClientEventActions.OnStationExit += OnStationExit;
-                        SceneUtils.OnNoFallHeightLimitToggled += NoFallHeightLimitToggled;
 
                     }
                     else
                     {
                         ClientEventActions.OnStationEnter -= OnStationEnter;
                         ClientEventActions.OnStationExit -= OnStationExit;
-                        SceneUtils.OnNoFallHeightLimitToggled -= NoFallHeightLimitToggled;
                     }
                 }
                 _HasSubscribed = value;
             }
-        }
-
-        private void NoFallHeightLimitToggled()
-        {
-            RespawnHeight = SceneUtils.RespawnHeightY;
         }
 
         private bool HasInitialized { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
@@ -62,7 +55,6 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
             if (!HasInitialized)
             {
-                RespawnHeight = SceneUtils.RespawnHeightY;
                 Identifier = "AstroStation_" + Guid.NewGuid();
                 if (SceneUtils.SDKVersion == 2)
                 {
@@ -145,7 +137,7 @@ namespace AstroClient.AstroMonos.AstroUdons
             if (isActiveAndEnabled)
             {
                 // Makes the chair act as a normal item as the height limit has been reached, aka eject the player, avoiding some bugs as well.
-                if (transform.position.y < RespawnHeight)
+                if (transform.position.y < SceneUtils.RespawnHeightY)
                 {
                     if (isSeated)
                     {
@@ -235,6 +227,5 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal string Identifier { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal float RespawnHeight { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = -100f;
     }
 }

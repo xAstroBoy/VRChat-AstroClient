@@ -329,6 +329,8 @@
     <Compile Include="Startup\Fixes\RemoveAds.cs" />
     <Compile Include="Startup\Fixes\KillCringeNewButtonOnBigUI.cs" />
     <Compile Include="Startup\Hooks\ApiUserPatches.cs" />
+    <Compile Include="Startup\Hooks\RoomManagerHooks.cs" />
+    <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\VRCStationEventHooks.cs" />
     <Compile Include="LocalAvatar\ColliderAdjuster\AvatarRealHeigh.cs" />
     <Compile Include="AstroMonos\Components\Tools\Avatars\AvatarScaleAdjuster.cs" />
@@ -700,7 +702,6 @@
     <Compile Include="ClientUI\QuickMenuGUI\Menus\UserMenu\UserInteractMenuBtns.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\ESP\VRChat_Map_ESP_Menu.cs" />
     <Compile Include="ClientUI\QuickMenuGUI\Menus\Quickmenu\WorldPickupsBtn.cs" />
-    <Compile Include="Developers\Cheetos\Cheetos\CheetosHooks.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AstroInput.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\AvatarHider.cs" />
     <Compile Include="Developers\Cheetos\Cheetos\ForceClone.cs" />
@@ -766,7 +767,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Tools\Skybox\SkyboxEditor.cs" />
     <Compile Include="AstroMonos\ComponentHelper.cs" />
-    <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
+    <Compile Include="Startup\Hooks\AvatarHooks.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Target\TargetSelector.cs" />
     <Compile Include="Tools\ColliderViewer\ColliderDisplay.cs" />

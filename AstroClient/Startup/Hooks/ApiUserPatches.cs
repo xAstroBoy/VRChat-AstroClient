@@ -1,25 +1,22 @@
-﻿using System.Reflection;
+﻿using System;
 using AstroClient.ClientActions;
 using AstroClient.xAstroBoy.Patching;
 using AstroClient.xAstroBoy.Utility;
 using HarmonyLib;
+using System.Reflection;
 using VRC;
 using VRC.Core;
 
 namespace AstroClient.Startup.Hooks
 {
-    #region Imports
-
-    #endregion Imports
-
     [Obfuscation(Feature = "HarmonyRenamer")]
     internal class ApiUserPatches : AstroEvents
     {
         internal override void RegisterToEvents()
         {
             ClientEventActions.OnPlayerJoin += PlayerJoin;
+            ClientEventActions.OnPlayerAwake += PlayerAwake;
         }
-
 
         [Obfuscation(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -32,11 +29,12 @@ namespace AstroClient.Startup.Hooks
             InitPatch();
         }
 
-
         private void InitPatch()
         {
             new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).GetMethod, GetPatch(nameof(ForceAllow_Get)));
             new AstroPatch(AccessTools.Property(typeof(APIUser), nameof(APIUser.allowAvatarCopying)).SetMethod, GetPatch(nameof(ForceAllow_Set)));
+            new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
+            new AstroPatch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
 
         }
 
@@ -66,9 +64,16 @@ namespace AstroClient.Startup.Hooks
             }
             return true;
         }
+        private static void OnFriended(ref APIUser __0) => ClientEventActions.OnFriended?.SafetyRaiseWithParams(__0);
+
+        private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2) => ClientEventActions.OnUnfriended?.SafetyRaiseWithParams(__0);
 
 
-        private void PlayerJoin(Player player)
+        private void PlayerJoin(Player player) => SetPlayerAPIUser(player);
+
+        private void PlayerAwake(Player player) => SetPlayerAPIUser(player);
+
+        internal static void SetPlayerAPIUser(Player player)
         {
             if (player != null)
             {
@@ -81,23 +86,5 @@ namespace AstroClient.Startup.Hooks
                 }
             }
         }
-
-        //private void Setusers()
-        //{
-        //    foreach (var user in Resources.FindObjectsOfTypeAll<VRC.Player>())
-        //    {
-        //        if (user != null)
-        //        {
-        //            if(user.field_Private_APIUser_0 != null)
-        //            {
-        //                if (user.prop_APIUser_0.IsSelf) continue;
-        //                user.prop_APIUser_0._allowAvatarCopying_k__BackingField = true;
-        //                user.prop_APIUser_0.allowAvatarCopying = true;
-        //            }
-        //        }
-        //    }
-        //}
-
-
     }
 }

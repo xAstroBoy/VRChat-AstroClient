@@ -15,7 +15,9 @@ using AstroClient.Tools.ObjectEditor;
 using AstroClient.WorldModifications;
 using AstroClient.xAstroBoy.AstroButtonAPI.QuickMenuAPI;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
+using AstroClient.xAstroBoy.Utility;
 using MelonLoader;
+using UnityEngine;
 
 namespace AstroClient.ClientUI.QuickMenuGUI
 {
@@ -44,9 +46,8 @@ namespace AstroClient.ClientUI.QuickMenuGUI
                 yield return null;
             while (QuickMenuTools.SingleButtonTemplate == null)
                 yield return null;
-            while (QuickMenuTools.SingleButtonTemplate.GetComponentInChildren<TextMeshProUGUIPublicBoUnique>() == null)
+            while (QuickMenuTools.QM_Wing_Right == null)
                 yield return null;
-
             code();
         }
 
