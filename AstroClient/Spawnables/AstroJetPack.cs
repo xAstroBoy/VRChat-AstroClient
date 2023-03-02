@@ -99,7 +99,6 @@ namespace AstroClient.Spawnables
                             VR_Jetpack_Controller.CurrentChair.EnterStation();
                         }
                     });
-                    ComponentUtils.GetOrAddComponent<RegisterAsPrefab>(VR_Jetpack_Object);
                 }
             }
 

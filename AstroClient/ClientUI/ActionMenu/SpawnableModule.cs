@@ -58,17 +58,7 @@ namespace AstroClient.ClientUI.ActionMenu
 
                 CustomSubMenu.AddSubMenu("Grapples", () =>
                 {
-                    CustomSubMenu.AddButton("Spawn Grapple", () =>
-                    {
-                        if (GameInstances.LocalPlayer.IsInVR())
-                        {
-                            Grapple.SpawnVR();
-                        }
-                        else
-                        {
-                            // currently not implemented .
-                        }
-                    }, null);
+                    CustomSubMenu.AddToggle("Enable Grappling System", GrappleSpawner.IsGrappleEnabled, value => GrappleSpawner.IsGrappleEnabled = value);
                     CustomSubMenu.AddToggle("Pickup Tether Grab", TetherProperties.manipulatesRigidbodies, value => TetherProperties.manipulatesRigidbodies = value);
                     CustomSubMenu.AddToggle("Reel Out (disable this to Reel stuff In!)", TetherProperties.ReelOut, value => TetherProperties.ReelOut = value);
                     CustomSubMenu.AddToggle("Enable Reeling", TetherProperties.AllowReel, value => TetherProperties.AllowReel = value);

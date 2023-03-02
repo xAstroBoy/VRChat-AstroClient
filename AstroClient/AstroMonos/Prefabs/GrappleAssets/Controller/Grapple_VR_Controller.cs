@@ -14,10 +14,10 @@ using VRC.SDKBase;
 namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
 {
     [RegisterComponent]
-    internal class VRTetherPrefabController : MonoBehaviour
+    internal class Grapple_VR_Controller : MonoBehaviour
     {
         internal Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new();
-        public VRTetherPrefabController(IntPtr ptr) : base(ptr)
+        public Grapple_VR_Controller(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -115,8 +115,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                                 LeftAnimator.hitSound = Root_LeftTetherPickup_Forward_HitSpark.GetComponent<AudioSource>();
                                 LeftAnimator.heldSound = Root_LeftTetherPickup_Forward_TetherRing_Lock.GetComponent<AudioSource>();
                                 LeftAnimator.unwindSound = Root_LeftTetherPickup_Forward_TetherRing_Unwind.GetComponent<AudioSource>();
-                                LeftAnimator.unwindPitchLow = 0.5f;
-                                LeftAnimator.unwindPitchHigh = 1f;
                             }
                         }
 
@@ -179,8 +177,6 @@ namespace AstroClient.AstroMonos.Prefabs.SwingerTether.Controller
                                 RightAnimator.hitSound = Root_RightTetherPickup_Forward_HitSpark.GetComponent<AudioSource>();
                                 RightAnimator.heldSound = Root_RightTetherPickup_Forward_TetherRing_Lock.GetComponent<AudioSource>();
                                 RightAnimator.unwindSound = Root_RightTetherPickup_Forward_TetherRing_Unwind.GetComponent<AudioSource>();
-                                RightAnimator.unwindPitchLow = 0.5f;
-                                RightAnimator.unwindPitchHigh = 1f;
                             }
                         }
 
