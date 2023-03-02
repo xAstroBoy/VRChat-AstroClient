@@ -54,30 +54,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Intera
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
-
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, x, y, "Internal VRC_Interactable", "Interact with Internal VRC_Interactables", null, null, null, null, btnHalf);
@@ -145,7 +121,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Intera
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isGlobalTrigger = false;
             isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
@@ -163,18 +138,9 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.VRC_Intera
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                    OnCloseMenu();
-        }
 
         private static void InitWingPage()
         {

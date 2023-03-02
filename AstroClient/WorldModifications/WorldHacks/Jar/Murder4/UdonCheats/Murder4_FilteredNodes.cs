@@ -24,29 +24,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             ClientEventActions.OnBigMenuClose += OnCloseMenu;
             ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
-        //private static bool _IsUIPageListenerActive = false;
-        //private static bool IsUIPageListenerActive
-        //{
-        //    get => _IsUIPageListenerActive;
-        //    set
-        //    {
-        //        if (_IsUIPageListenerActive != value)
-        //        {
-        //            if (value)
-        //            {
-        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-        //            }
-        //            else
-        //            {
-        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-        //            }
-
-        //        }
-        //        _IsUIPageListenerActive = value;
-        //    }
-        //}
+        
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
         private static List<ScrollMenuListener> Listeners = new List<ScrollMenuListener>();
@@ -192,24 +170,12 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-           // IsUIPageListenerActive = true;
             if (!isGenerating)
             {
                 Regenerate();
             }
         }
 
-        // private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        //{
-        //    if (!isOpen) return;
-        //    if (Page != null)
-        //    {
-        //        if (!Page.isPage(CurrentScrollMenu.GetPage()) && GeneratedPages.ContainsPage(Page))
-        //        {
-        //            OnCloseMenu();
-        //        }
-        //    }
-        //}
 
         private static void InitWingPage()
         {

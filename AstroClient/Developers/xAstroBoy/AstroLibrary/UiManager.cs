@@ -46,9 +46,6 @@ namespace AstroClient.xAstroBoy
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnEnable)),  null,GetPatch(nameof(OnQuickMenuOpen_Event)));
             new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.OnDisable)), null,GetPatch(nameof(OnQuickMenuClose_Event)));
 
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Public_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
-            new AstroPatch(typeof(UIPage).GetMethod(nameof(UIPage.Method_Protected_Void_Boolean_TransitionType_0)), GetPatch(nameof(OnUIPageToggle)));
-
             new AstroPatch(typeof(VRC.UI.Elements.MainMenu).GetMethod(nameof(VRC.UI.Elements.MainMenu.OnEnable)), null, GetPatch(nameof(OnBigMenuOpen_Event)));
             new AstroPatch(typeof(VRC.UI.Elements.MainMenu).GetMethod(nameof(VRC.UI.Elements.MainMenu.OnDisable)), null, GetPatch(nameof(OnBigMenuClose_Event)));
 
@@ -84,11 +81,6 @@ namespace AstroClient.xAstroBoy
 
         private static void OnQuickMenuClose_Event() => ClientEventActions.OnQuickMenuClose.SafetyRaise();
 
-        private static void OnUIPageToggle(UIPage __instance, bool __0, UIPage.TransitionType __1)
-        {
-            if (__instance == null) return;
-            ClientEventActions.OnUiPageToggled.SafetyRaiseWithParams(__instance, __0, __1);
-        }
 
         /// <summary>
         /// Opens given user in the QuickMenu.

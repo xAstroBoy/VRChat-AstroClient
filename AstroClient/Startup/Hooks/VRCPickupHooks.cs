@@ -58,7 +58,7 @@ namespace AstroClient.Startup.Hooks
         internal override void ExecutePriorityPatches()
         {
             new AstroPatch(AccessTools.Property(typeof(VRC_Pickup), nameof(VRC_Pickup.IsHeld)).GetMethod, null, GetPatch(nameof(IsHeldListener)));
-            new AstroPatch(typeof(VRC_Pickup).GetMethod(nameof(VRC_Pickup.Awake)), GetPatch(nameof(SDK1_Pickup)), showErrorOnConsole: false);
+            new AstroPatch(typeof(VRC_Pickup).GetMethod(nameof(VRC_Pickup.Awake)), null, GetPatch(nameof(SDK1_Pickup)));
 
         }
 

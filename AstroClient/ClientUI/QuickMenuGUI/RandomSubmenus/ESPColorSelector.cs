@@ -76,30 +76,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
                 }
             }
         }
-
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "ESP Color Selection", "Edit Current ESPs Colors ");
@@ -269,7 +245,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isOpen = false;
             if (WingMenu != null)
             {
@@ -286,17 +261,8 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
-        }
+         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                    OnCloseMenu();
-        }
 
         private static void InitWingPage()
         {

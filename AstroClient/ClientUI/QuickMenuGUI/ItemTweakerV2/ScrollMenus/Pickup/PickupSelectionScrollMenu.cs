@@ -60,29 +60,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Pickup
         private static QMWingToggleButton AntiTheftInteractor;
         private static QMWingToggleButton ProtectionInteractor;
 
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
 
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -136,7 +113,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Pickup
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
@@ -148,18 +124,9 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Pickup
         private static void OnOpenMenu()
         {
             isOpen = true;
-            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()))
-                    OnCloseMenu();
-        }
 
         private static void InitWingPage()
         {

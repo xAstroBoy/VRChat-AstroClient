@@ -7,11 +7,11 @@ namespace AstroClient.Constants
 
     internal class Bools
     {
-        internal static bool AntiPortal;
+        internal static bool AntiPortal{ get; set; }
 
-        internal static bool BlockRPC;
+        internal static bool BlockRPC{ get; set; }
 
-        internal static bool BlockUdon;
+        internal static bool BlockUdon{ get; set; }
 
         internal static bool IsDeveloperAndDebug
         {
@@ -21,9 +21,9 @@ namespace AstroClient.Constants
             }
         }
 
-        internal static bool IsDeveloper;
+        internal static bool IsDeveloper { get; set; } = true;
 
-        internal static bool IsBetaTester;
+        internal static bool IsBetaTester{ get; set; }
 
         internal static bool IsDebugMode
         {

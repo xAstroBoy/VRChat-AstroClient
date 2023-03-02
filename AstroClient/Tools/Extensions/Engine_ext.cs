@@ -778,5 +778,29 @@ namespace AstroClient.Tools.Extensions
             return sb.ToString();
         }
 
+        internal static void SetActiveFull(this GameObject obj, bool Active)
+        {
+            while (true)
+            {
+                if (obj != null)
+                {
+                    obj.gameObject.SetActive(Active);
+                    obj = obj.transform.parent.gameObject;
+                    continue;
+                }
+
+                break;
+            }
+        }
+
+        internal static void SetActiveFull(this Transform obj, bool Active)
+        {
+            if (obj != null)
+            {
+                obj.gameObject.SetActiveFull(Active);
+            }
+        }
+
+
     }
 }

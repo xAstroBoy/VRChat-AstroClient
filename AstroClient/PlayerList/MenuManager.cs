@@ -28,29 +28,6 @@ namespace AstroClient.PlayerList
             ClientEventActions.OnQuickMenuClose += OnQuickMenuClose;
         }
         //public static List<SubMenu> playerListMenus { get; set; } = new List<SubMenu>();
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
         public static GameObject playerList
         {
             get
@@ -129,27 +106,6 @@ namespace AstroClient.PlayerList
         }
 
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (Page != null)
-            {
-                //Log.Debug("Page: " + page.name + " State: " + state.ToString());
-
-                if (Page == PlayerList_Constants.qmDashboard)
-                {
-                    curMenuState.dashboard = Toggle;
-                }
-                else if (Page == PlayerList_Constants.selectedUserLocal)
-                {
-                    curMenuState.userLocal = Toggle;
-                }
-                else if (Page == PlayerList_Constants.selectedUserRemote)
-                {
-                    curMenuState.userRemote = Toggle;
-                }
-
-            }
-        }
 
         private void OnQuickMenuOpen()
         {
@@ -159,13 +115,11 @@ namespace AstroClient.PlayerList
             curMenuState.sort = false;
             curMenuState.userLocal = false;
             curMenuState.userRemote = false;
-            IsUIPageListenerActive = true;
         }
 
         private void OnQuickMenuClose()
         {
             PlayerListConfig.SaveEntries();
-            IsUIPageListenerActive = false;
         }
 
 

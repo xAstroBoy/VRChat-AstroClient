@@ -14,7 +14,7 @@ namespace AstroClient.Startup.Hooks
     {
         internal override void ExecutePriorityPatches()
         {
-            typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_")).ToList().ForEach(m => new AstroPatch(m, GetPatch(nameof(OnEnterWorldEvent))));
+            typeof(RoomManager).GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name.StartsWith("Method_Public_Static_Boolean_ApiWorld_ApiWorldInstance_String_Int32_")).ToList().ForEach(m => new AstroPatch(m, null, GetPatch(nameof(OnEnterWorldEvent))));
         }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]

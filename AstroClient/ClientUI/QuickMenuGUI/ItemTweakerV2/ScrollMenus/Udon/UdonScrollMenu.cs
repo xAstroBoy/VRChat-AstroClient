@@ -77,29 +77,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon
             ClientEventActions.OnBigMenuClose += OnCloseMenu;
             ClientEventActions.OnBigMenuOpen += OnCloseMenu;
         }
-        //private static bool _IsUIPageListenerActive = false;
-        //private static bool IsUIPageListenerActive
-        //{
-        //    get => _IsUIPageListenerActive;
-        //    set
-        //    {
-        //        if (_IsUIPageListenerActive != value)
-        //        {
-        //            if (value)
-        //            {
-        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-        //            }
-        //            else
-        //            {
-        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-        //            }
-
-        //        }
-        //        _IsUIPageListenerActive = value;
-        //    }
-        //}
         private void OnRoomLeft()
         {
             if (CleanOnRoomLeave)
@@ -303,17 +280,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Udon
         }
 
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-            if (Page != null)
-            {
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) && GeneratedPages.ContainsPage(Page))
-                {
-                    OnCloseMenu();
-                }
-            }
-        }
 
         private static void InitWingPage()
         {

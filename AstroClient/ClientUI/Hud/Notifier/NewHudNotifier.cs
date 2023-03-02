@@ -1,24 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using AstroClient.ClientActions;
-using AstroClient.febucci;
-using AstroClient.xAstroBoy;
 using AstroClient.xAstroBoy.AstroButtonAPI.Tools;
-using AstroClient.xAstroBoy.Utility;
-using MelonLoader;
-using TMPro;
-using UnhollowerBaseLib.Attributes;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
-
+using HudComponent = MonoBehaviourPublicObnoObmousCaObhuGaCaUnique;
 using UserEventCarousel = MonoBehaviourPublicObusQu1VaObQu12StUnique;
-using UserEventCell = MonoBehaviourPublicTMteCaSiImdiCoUnique;
-
 
 namespace AstroClient.ClientUI.Hud.Notifier
 {
-
     internal class NewHudNotifier : AstroEvents
     {
         private static UserEventCarousel _ActiveCarousel { get; set; }
@@ -31,48 +18,83 @@ namespace AstroClient.ClientUI.Hud.Notifier
                 {
                     foreach (var carousel in Resources.FindObjectsOfTypeAll<UserEventCarousel>())
                     {
-                        if(carousel != null)
+                        if (carousel != null)
                         {
-                            if(carousel.field_Private_List_1_MonoBehaviourPublicTMteCaSiImdiCoUnique_1.Count != 0)
+                            if (carousel.field_Private_List_1_MonoBehaviourPublicTMteCaSiImdiCoUnique_1.Count != 0)
                             {
                                 return _ActiveCarousel = carousel;
                             }
                         }
                     }
-
                 }
                 return _ActiveCarousel;
             }
         }
-        private static Transform _User_Event_Carousel { get; set; }
 
-        internal static Transform User_Event_Carousel
+        private static HudComponent _instance;
+
+        public static HudComponent Instance
         {
             get
             {
-                if(_User_Event_Carousel == null)
+                if (_instance == null)
                 {
-                    return _User_Event_Carousel = ActiveCarousel.transform;
+                    var found = Resources.FindObjectsOfTypeAll<HudComponent>();
+                    if (found != null && found.Any()) _instance = found.First();
                 }
-                return _User_Event_Carousel;
+                return _instance;
             }
         }
 
+        private static Transform _self;
 
-
-        //private void EnlargeCarousels(GameObject Carousel)
-        //{
-            
-        //}
-
-        internal  static void WriteHudMessage(string Text)
+        public static Transform HudMenu
         {
-            if(ActiveCarousel != null)
+            get
             {
-                ActiveCarousel.Method_Private_Void_String_Sprite_0(Text, ClientResources.Loaders.Icons.planet_sprite);
+                if (_self == null)
+                {
+                    _self = Instance?.transform;
+                }
+                return _self;
             }
         }
 
+        private static Transform _vrCanvas;
 
+        public static Transform VRCanvas
+        {
+            get
+            {
+                if (_vrCanvas == null)
+                {
+                    _vrCanvas = HudMenu?.gameObject.FindUIObject("VR Canvas").transform;
+                }
+                return _vrCanvas;
+            }
+        }
+
+        private static Transform _userEventCarousel;
+
+        public static Transform UserEventCarousel
+        {
+            get
+            {
+                if (_userEventCarousel == null)
+                {
+                    _userEventCarousel = VRCanvas?.gameObject.FindUIObject("User Event Carousel").transform;
+                }
+                return _userEventCarousel;
+            }
+        }
+
+        internal static void WriteHudMessage(string Text)
+        {
+            if (ActiveCarousel != null)
+            {
+                VRCanvas.gameObject.SetActive(true);
+                ActiveCarousel.Method_Public_Void_String_Sprite_0(Text, ClientResources.Loaders.Icons.planet_sprite);
+            }
+        }
     }
 }

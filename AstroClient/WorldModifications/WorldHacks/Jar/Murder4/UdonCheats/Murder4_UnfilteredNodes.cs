@@ -27,29 +27,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
         }
 
 
-        //private static bool _IsUIPageListenerActive = false;
-        //private static bool IsUIPageListenerActive
-        //{
-        //    get => _IsUIPageListenerActive;
-        //    set
-        //    {
-        //        if(_IsUIPageListenerActive != value)
-        //        {
-        //            if(value)
-        //            {
-        //                ClientEventActions.OnUiPageToggled += OnUiPageToggled;
 
-        //            }
-        //            else
-        //            {
-        //                ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-        //            }
-
-        //        }
-        //        _IsUIPageListenerActive = value;
-        //    }
-        //}
 
         private static QMWings WingMenu;
         private static QMNestedGridMenu CurrentScrollMenu;
@@ -192,7 +170,6 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
 
         private static void OnCloseMenu()
         {
-            //IsUIPageListenerActive = false;
             isOpen = false;
             if (DestroyOnMenuClose)
             {
@@ -217,20 +194,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Jar.Murder4.UdonCheats
             {
                 Regenerate();
             }
-            //IsUIPageListenerActive = true;
         }
-
-        //private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        //{
-        //    if (!isOpen) return;
-        //    if (Page != null)
-        //    {
-        //        if (!Page.isPage(CurrentScrollMenu.GetPage()) && GeneratedPages.ContainsPage(Page))
-        //        {
-        //            OnCloseMenu();
-        //        }
-        //    }
-        //}
 
         private static void InitWingPage()
         {

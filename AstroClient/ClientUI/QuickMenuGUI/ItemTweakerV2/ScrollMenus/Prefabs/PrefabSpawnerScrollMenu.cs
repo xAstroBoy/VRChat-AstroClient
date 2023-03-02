@@ -39,29 +39,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
         internal static void InitButtons(QMNestedGridMenu menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "Spawn Prefabs", "Spawn World Prefabs");
@@ -123,7 +100,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs
 
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isOpen = false;			
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
@@ -140,18 +116,9 @@ namespace AstroClient.ClientUI.QuickMenuGUI.ItemTweakerV2.ScrollMenus.Prefabs
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                    OnCloseMenu();
-        }
 
     }
 }

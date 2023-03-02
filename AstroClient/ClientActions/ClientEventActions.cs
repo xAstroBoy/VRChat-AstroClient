@@ -277,12 +277,6 @@ namespace AstroClient.ClientActions
         /// </summary>
 
         internal static Action OnUserInfoMenuClose { get; set; }
-        /// <summary>
-        /// This listens to VRChat UIPage system for Switching between Menu pages.
-        /// <para>Params : UIPage Page, bool Toggle, UIPage.TransitionType TransitionType</para>
-        /// </summary>
-
-        internal static Action<UIPage, bool, UIPage.TransitionType> OnUiPageToggled { get; set; }
 
         /// <summary>
         /// This listens to VRChat input system for Jump event.

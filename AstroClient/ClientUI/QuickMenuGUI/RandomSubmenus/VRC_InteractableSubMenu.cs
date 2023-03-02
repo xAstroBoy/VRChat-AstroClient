@@ -39,29 +39,6 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
             if (CleanOnRoomLeave) DestroyGeneratedButtons();
         }
 
-        private static bool _IsUIPageListenerActive = false;
-        private static bool IsUIPageListenerActive
-        {
-            get => _IsUIPageListenerActive;
-            set
-            {
-                if (_IsUIPageListenerActive != value)
-                {
-                    if (value)
-                    {
-                        ClientEventActions.OnUiPageToggled += OnUiPageToggled;
-
-                    }
-                    else
-                    {
-                        ClientEventActions.OnUiPageToggled -= OnUiPageToggled;
-
-                    }
-
-                }
-                _IsUIPageListenerActive = value;
-            }
-        }
         internal static void InitButtons(QMGridTab menu)
         {
             CurrentScrollMenu = new QMNestedGridMenu(menu, "VRC_Interactables", "Interact VRC_Interactable");
@@ -98,19 +75,12 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
                     Object.DestroyImmediate(item);
         }
 
-        private void OnQuickMenuClose()
-        {
-            OnCloseMenu();
-        }
-
         private static void OnCloseMenu()
         {
-            IsUIPageListenerActive = false;
             isOpen = false;
             if (DestroyOnMenuClose) DestroyGeneratedButtons();
             if (WingMenu != null)
             {
-                
                 WingMenu.SetActive(false);
             }
         }
@@ -123,19 +93,9 @@ namespace AstroClient.ClientUI.QuickMenuGUI.RandomSubmenus
                 WingMenu.SetActive(true);
                 WingMenu.ShowWingsPage();
             }
-            IsUIPageListenerActive = true;
             Regenerate();
         }
 
-        private static void OnUiPageToggled(UIPage Page, bool Toggle, UIPage.TransitionType TransitionType)
-        {
-            if (!isOpen) return;
-
-
-            if (Page != null)
-                if (!Page.isPage(CurrentScrollMenu.GetPage()) )
-                    OnCloseMenu();
-        }
 
         private static void InitWingPage()
         {
