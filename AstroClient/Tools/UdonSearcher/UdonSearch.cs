@@ -19,7 +19,7 @@ namespace AstroClient.Tools.UdonSearcher
         internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction, bool Debug = false)
         {
             var gameobjects = WorldUtils.UdonScripts;
-
+            subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
             var udonBehaviours = behaviours as UdonBehaviour[] ?? behaviours.ToArray();
@@ -39,7 +39,8 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
                     {
                         var key = eventkeys[eventkey];
-                        if (key == subaction)
+
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                         {
                             if (Debug)
                             {
@@ -160,6 +161,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
+            subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             var gameobjects = WorldUtils.UdonScripts;
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
@@ -175,7 +177,7 @@ namespace AstroClient.Tools.UdonSearcher
                     {
                         var key = eventKeys[UdonKeys];
 
-                        if (key.Equals(subaction))
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix().Equals(subaction))
                         {
                             if (Debug)
                             {
@@ -198,6 +200,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject parent, string action, string subaction, bool Debug = false, bool ShowError = false)
         {
+            subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             var gameobjects = parent.GetComponentsInChildren<UdonBehaviour>(true);
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
@@ -212,7 +215,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int eventkey = 0; eventkey < eventkeys.Length; eventkey++)
                     {
                         var key = eventkeys[eventkey];
-                        if (key == subaction)
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                         {
                             Log.Debug($"Found subaction {key} bound in {behaviour.gameObject.name}");
                             return new UdonBehaviour_Cached(behaviour, key);
@@ -231,12 +234,13 @@ namespace AstroClient.Tools.UdonSearcher
         {
             if (obj != null)
             {
+                subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
                 var eventKeys = obj.Get_EventKeys();
                 if (eventKeys == null) return null;
                 for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                 {
                     var key = eventKeys[UdonKeys];
-                    if (key == subaction)
+                    if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                     {
                         if (Debug)
                         {
@@ -272,6 +276,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static bool HasUdonEvent(GameObject obj, string subaction)
         {
+            subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
             for (int i = 0; i < actionObjects.Count; i++)
@@ -284,7 +289,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
                         var key = eventKeys[UdonKeys];
-                        if (key == subaction)
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                         {
                             return true;
                         }
@@ -297,6 +302,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction, bool Debug = false)
         {
+            subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
             for (int i = 0; i < actionObjects.Count; i++)
@@ -308,8 +314,9 @@ namespace AstroClient.Tools.UdonSearcher
                     if (eventKeys == null) continue;
                     for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
+
                         var key = eventKeys[UdonKeys];
-                        if (key == subaction)
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                         {
                             if (Debug)
                             {
@@ -326,6 +333,7 @@ namespace AstroClient.Tools.UdonSearcher
 
         internal static List<UdonBehaviour_Cached> FindUdonEvents(GameObject obj, string subaction, bool Debug = false)
         {
+            subaction = subaction.RemoveDoubleUnderscoreWithNumberPrefix();
             var result = new List<UdonBehaviour_Cached>();
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
@@ -339,7 +347,7 @@ namespace AstroClient.Tools.UdonSearcher
                     for (int UdonKeys = 0; UdonKeys < eventKeys.Length; UdonKeys++)
                     {
                         var key = eventKeys[UdonKeys];
-                        if (key == subaction)
+                        if (key.RemoveDoubleUnderscoreWithNumberPrefix() == subaction)
                         {
                             if (Debug)
                             {

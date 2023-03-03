@@ -22,9 +22,9 @@ namespace AstroClient.Startup.Hooks
         {
             new AstroPatch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
             new AstroPatch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
-            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), GetPatch(nameof(OnMasterClientSwitchedPatch)));
-            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
-            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
+            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), null, GetPatch(nameof(OnMasterClientSwitchedPatch)));
+            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), null, GetPatch(nameof(OnRoomLeftPatch)));
+            new AstroPatch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.Method_Public_Void_PDM_0)), null, GetPatch(nameof(OnRoomJoinedPatch)));
 
         }
 

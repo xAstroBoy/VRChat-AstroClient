@@ -18,7 +18,6 @@ namespace AstroClient.PlayerList
     using VRC.Core;
     using VRC.DataModel;
     using Object = UnityEngine.Object;
-    using AvatarLoadingBar = MonoBehaviourPublicSiTeReGrObCoCoObUnique;
 
 
     internal class EntryManager : AstroEvents

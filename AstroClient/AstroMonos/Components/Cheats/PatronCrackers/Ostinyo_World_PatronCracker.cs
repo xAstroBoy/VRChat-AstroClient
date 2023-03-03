@@ -212,7 +212,10 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
     {
         if (WorldUtils.WorldID.Equals(WorldIds.PuttPuttPond) || WorldUtils.WorldID.Equals(WorldIds.PuttPuttQuest) || WorldUtils.WorldID.Equals(WorldIds.PuttPuttQuest_Night) || WorldUtils.WorldID.Equals(WorldIds.PrisonEscape))
         {
-            RefreshPatronList = gameObject.FindUdonEvent("_UpdatePatronList");
+            if(RefreshPatronList == null)
+            {
+                RefreshPatronList = gameObject.FindUdonEvent("_UpdatePatronList");
+            }
             if (RefreshPatronList != null)
             {
                 HasSubscribed = true;

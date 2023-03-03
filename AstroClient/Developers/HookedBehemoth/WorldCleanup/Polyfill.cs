@@ -18,9 +18,7 @@ using Il2CppSystem.Collections.Generic;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;
-using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
-using AvatarParameterType = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique.EnumNPublicSealedvaUnBoInFl5vUnique;
-
+using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
 namespace AstroClient.HookedBehemoth.WorldCleanup;
 
 public static class Polyfill {
@@ -38,7 +36,7 @@ public static class Polyfill {
 
     //field_Private_Dictionary_2_Int32_AvatarParameterAccess_0
     public static Dictionary<int, AvatarParameterAccess> GetParameters(this AvatarPlayableController _this) {
-        return _this.field_Private_Dictionary_2_Int32_ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique_0;
+        return _this.field_Private_Dictionary_2_Int32_AvatarParameterAccess_0;
     }
 
     public static AvatarParameterType GetAvatarParameterType(this AvatarParameterAccess _this) {

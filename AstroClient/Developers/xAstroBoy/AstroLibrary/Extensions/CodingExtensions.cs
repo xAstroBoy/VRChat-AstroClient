@@ -91,5 +91,17 @@ namespace AstroClient.xAstroBoy.Extensions
             return "{" + string.Join(",", dictionary.Select(kv => kv.Key + "=" + kv.Value).ToArray()) + "}";
         }
 
+        /// <summary>
+        /// Used to strip any local events that could contain __0_ or __1_ etc. from the event name in UdonSearch
+        /// </summary>
+        /// <param name="inputString"></param>
+        /// <returns></returns>
+        internal  static string RemoveDoubleUnderscoreWithNumberPrefix(this string inputString)
+        {
+            return Regex.Replace(inputString, @"^__[0-9]+_?", "_");
+
+        }
+
+
     }
 }

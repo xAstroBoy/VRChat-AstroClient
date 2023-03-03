@@ -8,7 +8,7 @@ using VRC.Networking;
 using VRC.SDKBase;
 using VRC.Udon;
 using VRC.UI.Elements;
-using AvatarLoadingBar = MonoBehaviourPublicSiTeReGrObCoCoObUnique;
+
 namespace AstroClient.ClientActions
 {
     // Put all actions here .
