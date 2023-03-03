@@ -322,6 +322,15 @@
     <Compile Include="Developers\xAstroBoy\Patching\idk..cs" />
     <Compile Include="Developers\xAstroBoy\Patching\DynamicTools.cs" />
     <Compile Include="Developers\xAstroBoy\WorldButton_Squared.cs" />
+    <Compile Include="HighlightFXv2\HighlightEffect.cs" />
+    <Compile Include="HighlightFXv2\HighlightEffectActions.cs" />
+    <Compile Include="HighlightFXv2\HighlightEffectOccluderManager.cs" />
+    <Compile Include="HighlightFXv2\HighlightManager.cs" />
+    <Compile Include="HighlightFXv2\HighlightProfile.cs" />
+    <Compile Include="HighlightFXv2\HighlightSeeThroughOccluder.cs" />
+    <Compile Include="HighlightFXv2\HighlightTrigger.cs" />
+    <Compile Include="HighlightFXv2\InputProxy.cs" />
+    <Compile Include="HighlightFXv2\ShaderParams.cs" />
     <Compile Include="Spawnables\Grapple.cs" />
     <Compile Include="Spawnables\AstroJetPack.cs" />
     <Compile Include="Spawnables\RespawnerSphere.cs" />

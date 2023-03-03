@@ -35,6 +35,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         internal static Action<bool> OnShowRolesPropertyChanged { get; set; }
         internal static Action OnForceWantedEnabled { get; set; }
 
+        private static GameObject PatronMechanism { get; set; }
         private static bool _ShowRoles = false;
 
         internal static bool ShowRoles
@@ -107,6 +108,8 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
                     PatronController = null;
                     ToggleDoublePoints = null;
                     TogglePatronGuns = null;
+                    PatronMechanism = null;
+                    _PatronController = null;
                     foreach (var crate in Large_Crates)
                     {
                         var renderer = crate.GetGetInChildrens<Renderer>(true);
@@ -715,6 +718,7 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
 
                 if (item.name.Equals("Patron Control"))
                 {
+                    PatronMechanism = item.gameObject;
                     PatronController = item.GetOrAddComponent<Ostinyo_World_PatronCracker>(); // Fuck u Ostinyo
                     TogglePatronGuns = item.FindUdonEvent("_TogglePatronGuns");
                     ToggleDoublePoints = item.FindUdonEvent("_ToggleDoublePoints");
@@ -2056,7 +2060,23 @@ namespace AstroClient.WorldModifications.WorldHacks.Ostinyo.Prison_Escape
         }
         internal static PrisonEscape_PowerControlReader PowerControl { get; set; }
 
-        internal static Ostinyo_World_PatronCracker PatronController { get; set; }
+        internal static Ostinyo_World_PatronCracker _PatronController;
+        internal static Ostinyo_World_PatronCracker PatronController
+        {
+            get
+            {
+                if (!isCurrentWorld) return null;
+                if (_PatronController == null)
+                {
+                    if(PatronMechanism != null)
+                    {
+                        return  _PatronController = PatronMechanism.GetOrAddComponent<Ostinyo_World_PatronCracker>();
+                    }
+                }
+                return _PatronController;
+            }
+            set => _PatronController = value;
+        }
 
         private static GameObject _Spawn_Area;
 

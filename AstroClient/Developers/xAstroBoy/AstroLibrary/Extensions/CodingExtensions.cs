@@ -98,7 +98,22 @@ namespace AstroClient.xAstroBoy.Extensions
         /// <returns></returns>
         internal  static string RemoveExtraUdonChars(this string inputString)
         {
-            return Regex.Replace(inputString, @"^__\d+__", "_");
+            if (!inputString.StartsWith("__"))
+            {
+                return inputString;
+            }
+
+
+            // First try to remove "__0__" prefix
+            string outputString = Regex.Replace(inputString, @"^__\d+__", "_");
+
+            // If the first regex didn't match, try to remove "__0_" prefix
+            if (outputString == inputString)
+            {
+                outputString = Regex.Replace(inputString, @"^__\d+_?", "_");
+            }
+
+            return outputString;
 
         }
 
