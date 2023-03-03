@@ -96,9 +96,9 @@ namespace AstroClient.xAstroBoy.Extensions
         /// </summary>
         /// <param name="inputString"></param>
         /// <returns></returns>
-        internal  static string RemoveDoubleUnderscoreWithNumberPrefix(this string inputString)
+        internal  static string RemoveExtraUdonChars(this string inputString)
         {
-            return Regex.Replace(inputString, @"^__[0-9]+_?", "_");
+            return Regex.Replace(inputString, @"^__\d+__", "_");
 
         }
 

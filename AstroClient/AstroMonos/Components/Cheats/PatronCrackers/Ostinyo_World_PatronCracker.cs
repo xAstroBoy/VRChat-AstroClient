@@ -216,6 +216,10 @@ public class Ostinyo_World_PatronCracker : MonoBehaviour
             {
                 RefreshPatronList = gameObject.FindUdonEvent("_UpdatePatronList");
             }
+            if (RefreshPatronList == null)
+            {
+                RefreshPatronList = gameObject.FindUdonEvent("__0__UpdatePatronList");
+            }
             if (RefreshPatronList != null)
             {
                 HasSubscribed = true;
