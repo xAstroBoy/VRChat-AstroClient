@@ -290,6 +290,23 @@
                 return _Shaders;
             }
         }
+        private static AssetBundle _highlightfx;
+
+        internal static AssetBundle highlightfx
+        {
+            get
+            {
+                if (_highlightfx == null)
+                {
+                    _highlightfx = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}highlightfx.assetbundle"), 0u);
+                    _highlightfx.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+
+                }
+
+                return _highlightfx;
+            }
+        }
+
         //private static AssetBundle _EightBall;
         //internal static AssetBundle EightBall
         //{

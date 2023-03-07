@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace HighlightPlus
+namespace AstroClient.HighlightFXv2
 {
-    public static class InputProxy
+    internal static class InputProxy
     {
-        public static void Init()
+        internal static void Init()
         { }
 
-        public static Vector3 mousePosition
+        internal static Vector3 mousePosition
         {
             get
             {
@@ -15,22 +15,22 @@ namespace HighlightPlus
             }
         }
 
-        public static bool GetMouseButtonDown(int buttonIndex)
+        internal static bool GetMouseButtonDown(int buttonIndex)
         {
             return Input.GetMouseButtonDown(buttonIndex);
         }
 
-        public static int touchCount
+        internal static int touchCount
         {
             get { return Input.touchCount; }
         }
 
-        public static int GetFingerIdFromTouch(int touchIndex)
+        internal static int GetFingerIdFromTouch(int touchIndex)
         {
             return Input.GetTouch(touchIndex).fingerId;
         }
 
-        public static bool GetKeyDown(string name)
+        internal static bool GetKeyDown(string name)
         {
             return Input.GetKeyDown(name);
         }

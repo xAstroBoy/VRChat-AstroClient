@@ -840,6 +840,7 @@
     <EmbeddedResource Include="ClientResources\BundlesArchive\buttonandsliders.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\Grapple.assetbundle" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\Shaders.assetbundle" />
+    <EmbeddedResource Include="ClientResources\BundlesArchive\highlightfx.assetbundle" />
     <None Include="packages.config" />
     <EmbeddedResource Include="ClientResources\BundlesArchive\playerlistmod.assetbundle" />
     <None Include="PlayerList\PlayerListUI.unitypackage" />

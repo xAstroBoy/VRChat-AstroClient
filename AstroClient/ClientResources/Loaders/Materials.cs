@@ -413,5 +413,83 @@
 
         #endregion 3d_fractal_trees
 
+
+        private static Material _highlightglow;
+
+        internal static Material highlightglow
+        {
+            get
+            {
+                if (_highlightglow == null)
+                {
+                    _highlightglow = Bundles.highlightfx.LoadAsset_Internal("assets/highlightplus/resources/highlightplus/highlightglow.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _highlightglow.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+
+                return _highlightglow;
+            }
+        }
+        private static Material _highlightoutline;
+
+        internal static Material highlightoutline
+        {
+            get
+            {
+                if (_highlightoutline == null)
+                {
+                    _highlightoutline = Bundles.highlightfx.LoadAsset_Internal("assets/highlightplus/resources/highlightplus/highlightoutline.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _highlightoutline.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+
+                return _highlightoutline;
+            }
+        }
+        private static Material _highlightplusdepthclipcomp;
+
+        internal static Material highlightplusdepthclipcomp
+        {
+            get
+            {
+                if (_highlightplusdepthclipcomp == null)
+                {
+                    _highlightplusdepthclipcomp = Bundles.highlightfx.LoadAsset_Internal("assets/highlightplus/resources/highlightplus/highlightplusdepthclipcomp.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _highlightplusdepthclipcomp.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+
+                return _highlightplusdepthclipcomp;
+            }
+        }
+        private static Material _highlightplusdepthwrite;
+
+        internal static Material highlightplusdepthwrite
+        {
+            get
+            {
+                if (_highlightplusdepthwrite == null)
+                {
+                    _highlightplusdepthwrite = Bundles.highlightfx.LoadAsset_Internal("assets/highlightplus/resources/highlightplus/highlightplusdepthwrite.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _highlightplusdepthwrite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+
+                return _highlightplusdepthwrite;
+            }
+        }
+        private static Material _highlightuimask;
+
+        internal static Material highlightuimask
+        {
+            get
+            {
+                if (_highlightuimask == null)
+                {
+                    _highlightuimask = Bundles.highlightfx.LoadAsset_Internal("assets/highlightplus/resources/highlightplus/highlightuimask.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _highlightuimask.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+
+                return _highlightuimask;
+            }
+        }
+
+
     }
 }

@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Threading;
+using System.Runtime.CompilerServices;
+using uei = UnityEngine.Internal;
 
 namespace Cheetah.Math
 {
     public static class Mathf
     {
+
+        // The infamous ''3.14159265358979...'' value (RO).
+        public const float PI = (float)System.Math.PI;
+
+
         /// <summary>
         /// Clamps a value between a minimum and maximum value
         /// </summary>

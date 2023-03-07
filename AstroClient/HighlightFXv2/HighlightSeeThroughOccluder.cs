@@ -1,25 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using AstroClient.ClientAttributes;
+using AstroClient.HighlightFXv2.Enums;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 
-namespace HighlightPlus
+namespace AstroClient.HighlightFXv2
 {
-    public struct MeshData
-    {
-        public Renderer renderer;
-        public int subMeshCount;
-    }
-
-    public enum DetectionMethod
-    {
-        Stencil = 0,
-        RayCast = 1
-    }
-
+    [RegisterComponent]
     public class HighlightSeeThroughOccluder : MonoBehaviour
     {
-        public DetectionMethod detectionMethod = DetectionMethod.Stencil;
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
 
-        public MeshData[] meshData;
+        public HighlightSeeThroughOccluder(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList.Add(this);
+        }
+
+
+        internal DetectionMethod detectionMethod = DetectionMethod.Stencil;
+
+        internal MeshData[] meshData;
 
         private Il2CppSystem.Collections.Generic.List<Renderer> rr;
 

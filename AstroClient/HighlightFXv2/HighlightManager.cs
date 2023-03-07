@@ -1,84 +1,97 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using AstroClient.ClientAttributes;
+using AstroClient.HighlightFXv2.Enums;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace HighlightPlus
+namespace AstroClient.HighlightFXv2
 {
-    public delegate bool OnObjectSelectionEvent(GameObject obj);
+    internal delegate bool OnObjectSelectionEvent(GameObject obj);
 
     //[RequireComponent(typeof(HighlightEffect))]
     //[DefaultExecutionOrder(100)]
     //[HelpURL("https://www.dropbox.com/s/v9qgn68ydblqz8x/Documentation.pdf?dl=0
     /// </summary>
+    [RegisterComponent]
     public class HighlightManager : MonoBehaviour
     {
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+
+        public HighlightManager(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList.Add(this);
+        }
+
         /// <summary>
         /// Enables highlight when pointer is over this object.
         /// </summary>
-        public bool highlightOnHover = true;
+        internal bool highlightOnHover = true;
 
-        public LayerMask layerMask = -1;
-        public Camera raycastCamera;
-        public RayCastSource raycastSource = RayCastSource.MousePosition;
+        internal LayerMask layerMask = -1;
+        internal Camera raycastCamera;
+        internal RayCastSource raycastSource = RayCastSource.MousePosition;
 
         /// <summary>
         /// Minimum distance for target.
         /// </summary>
-        public float minDistance;
+        internal float minDistance;
 
         /// <summary>
         /// Maximum distance for target. 0 = infinity
         /// </summary>
-        public float maxDistance;
+        internal float maxDistance;
 
         /// <summary>
         /// Blocks interaction if pointer is over an UI element
         /// </summary>
-        public bool respectUI = true;
+        internal bool respectUI = true;
 
         /// <summary>
         /// If the object will be selected by clicking with mouse or tapping on it.
         /// </summary>
-        public bool selectOnClick;
+        internal bool selectOnClick;
 
         /// <summary>
         /// Optional profile for objects selected by clicking on them
         /// </summary>
-        public HighlightProfile selectedProfile;
+        internal HighlightProfile selectedProfile;
 
         /// <summary>
         /// Profile to use whtn object is selected and highlighted.
         /// </summary>
-        public HighlightProfile selectedAndHighlightedProfile;
+        internal HighlightProfile selectedAndHighlightedProfile;
 
         /// <summary>
         /// Automatically deselects other previously selected objects
         /// </summary>
-        public bool singleSelection;
+        internal bool singleSelection;
 
         /// <summary>
         /// Toggles selection on/off when clicking object
         /// </summary>
-        public bool toggle;
+        internal bool toggle;
 
         private HighlightEffect baseEffect, currentEffect;
         private Transform currentObject;
 
-        public static readonly List<HighlightEffect> selectedObjects = new List<HighlightEffect>();
+        internal static readonly List<HighlightEffect> selectedObjects = new List<HighlightEffect>();
 
-        public event OnObjectSelectionEvent OnObjectSelected;
+        internal event OnObjectSelectionEvent OnObjectSelected;
 
-        public event OnObjectSelectionEvent OnObjectUnSelected;
+        internal event OnObjectSelectionEvent OnObjectUnSelected;
 
-        public event OnObjectHighlightEvent OnObjectHighlightStart;
+        internal event OnObjectHighlightEvent OnObjectHighlightStart;
 
-        public event OnObjectHighlightEvent OnObjectHighlightEnd;
+        internal event OnObjectHighlightEvent OnObjectHighlightEnd;
 
-        public static int lastTriggerTime;
+        internal static int lastTriggerTime;
 
         private static HighlightManager _instance;
 
-        public static HighlightManager instance
+        internal static HighlightManager instance
         {
             get
             {
@@ -372,7 +385,7 @@ namespace HighlightPlus
             currentEffect.SetHighlighted(state);
         }
 
-        public static Camera GetCamera()
+        internal static Camera GetCamera()
         {
             Camera raycastCamera = Camera.main;
             if (raycastCamera == null)
@@ -400,7 +413,7 @@ namespace HighlightPlus
             selectedObjects.Clear();
         }
 
-        public static void DeselectAll()
+        internal static void DeselectAll()
         {
             foreach (HighlightEffect hb in selectedObjects)
             {
@@ -423,7 +436,7 @@ namespace HighlightPlus
         /// <summary>
         /// Manually causes highlight manager to select an object
         /// </summary>
-        public void SelectObject(Transform t)
+        internal void SelectObject(Transform t)
         {
             ToggleSelection(t, true);
         }
@@ -431,7 +444,7 @@ namespace HighlightPlus
         /// <summary>
         /// Manually causes highlight manager to toggle selection on an object
         /// </summary>
-        public void ToggleObject(Transform t)
+        internal void ToggleObject(Transform t)
         {
             ToggleSelection(t, false);
         }
@@ -439,7 +452,7 @@ namespace HighlightPlus
         /// <summary>
         /// Manually causes highlight manager to unselect an object
         /// </summary>
-        public void UnselectObject(Transform t)
+        internal void UnselectObject(Transform t)
         {
             if (t == null) return;
             HighlightEffect hb = t.GetComponent<HighlightEffect>();

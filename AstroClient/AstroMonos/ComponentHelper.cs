@@ -1,5 +1,7 @@
 ﻿using AstroClient.ClientActions;
-
+using UnityEngine;
+using VRC.Udon.Common.Interfaces;
+using static UnhollowerRuntimeLib.ClassInjector;
 namespace AstroClient.AstroMonos
 {
     #region Imports
@@ -41,6 +43,19 @@ namespace AstroClient.AstroMonos
             catch (Exception e)
             {
                 Log.Error($"Failed to Register: {type.FullName}");
+                Log.Exception(e);
+            }
+        }
+
+        internal static void RegisterComponentAs<T>(params Type[] interfaces) where T : Il2CppSystem.Object
+        {
+            try
+            {
+                UnhollowerRuntimeLib.ClassInjector.RegisterTypeInIl2CppWithInterfaces<T>(true, interfaces);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Failed to Register: {typeof(T).FullName}");
                 Log.Exception(e);
             }
         }

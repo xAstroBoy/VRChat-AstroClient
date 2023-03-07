@@ -1,101 +1,102 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using AstroClient.ClientAttributes;
+using AstroClient.HighlightFXv2.Enums;
+using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace HighlightPlus
+namespace AstroClient.HighlightFXv2
 {
-    public enum TriggerMode
-    {
-        ColliderEventsOnlyOnThisObject = 0,
-        RaycastOnThisObjectAndChildren = 1,
-        Volume = 2
-    }
-
-    public enum RayCastSource
-    {
-        MousePosition = 0,
-        CameraDirection = 1
-    }
-
     //[RequireComponent(typeof(HighlightEffect))]
     //[ExecuteInEditMode]
     //[HelpURL("https://www.dropbox.com/s/v9qgn68ydblqz8x/Documentation.pdf?dl=0
     /// </summary>
+
+    [RegisterComponent]
     public class HighlightTrigger : MonoBehaviour
     {
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+
+        public HighlightTrigger(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList.Add(this);
+        }
+
         /// <summary>
         /// Enables highlight when pointer is over this object.
         /// </summary>
-        public bool highlightOnHover = true;
+        internal bool highlightOnHover = true;
 
         /// <summary>
         /// Used to trigger automatic highlighting including children objects.
         /// </summary>
-        public TriggerMode triggerMode = TriggerMode.ColliderEventsOnlyOnThisObject;
+        internal TriggerMode triggerMode = TriggerMode.ColliderEventsOnlyOnThisObject;
 
-        public Camera raycastCamera;
-        public RayCastSource raycastSource = RayCastSource.MousePosition;
+        internal Camera raycastCamera;
+        internal RayCastSource raycastSource = RayCastSource.MousePosition;
 
         /// <summary>
         /// Minimum distance for target.
         /// </summary>
-        public float minDistance;
+        internal float minDistance;
 
         /// <summary>
         /// Maximum distance for target. 0 = infinity
         /// </summary>
-        public float maxDistance;
+        internal float maxDistance;
 
         /// <summary>
         /// Blocks interaction if pointer is over an UI element
         /// </summary>
-        public bool respectUI = true;
+        internal bool respectUI = true;
 
-        public LayerMask volumeLayerMask;
+        internal LayerMask volumeLayerMask;
 
         private const int MAX_RAYCAST_HITS = 100;
 
         /// <summary>
         /// If the object will be selected by clicking with mouse or tapping on it.
         /// </summary>
-        public bool selectOnClick;
+        internal bool selectOnClick;
 
         /// <summary>
         /// Profile to use when object is selected by clicking on it.
         /// </summary>
-        public HighlightProfile selectedProfile;
+        internal HighlightProfile selectedProfile;
 
         /// <summary>
         /// Profile to use whtn object is selected and highlighted.
         /// </summary>
-        public HighlightProfile selectedAndHighlightedProfile;
+        internal HighlightProfile selectedAndHighlightedProfile;
 
         /// <summary>
         /// Automatically deselects any other selected object prior selecting this one
         /// </summary>
-        public bool singleSelection;
+        internal bool singleSelection;
 
         /// <summary>
         /// Toggles selection on/off when clicking object
         /// </summary>
-        public bool toggle;
+        internal bool toggle;
 
-        public Collider[] colliders;
+        internal Collider[] colliders;
 
         private Collider currentCollider;
         private static RaycastHit[] hits;
         private HighlightEffect hb;
 
-        public HighlightEffect highlightEffect
+        internal HighlightEffect highlightEffect
         { get { return hb; } }
 
-        public event OnObjectSelectionEvent OnObjectSelected;
+        internal event OnObjectSelectionEvent OnObjectSelected;
 
-        public event OnObjectSelectionEvent OnObjectUnSelected;
+        internal event OnObjectSelectionEvent OnObjectUnSelected;
 
-        public event OnObjectHighlightEvent OnObjectHighlightStart;
+        internal event OnObjectHighlightEvent OnObjectHighlightStart;
 
-        public event OnObjectHighlightEvent OnObjectHighlightEnd;
+        internal event OnObjectHighlightEvent OnObjectHighlightEnd;
 
         private TriggerMode currentTriggerMode;
 
@@ -134,7 +135,7 @@ namespace HighlightPlus
             }
         }
 
-        public void Init()
+        internal void Init()
         {
             if (raycastCamera == null)
             {
@@ -416,7 +417,7 @@ namespace HighlightPlus
             Highlight(true);
         }
 
-        public void OnTriggerEnter(Collider other)
+        internal void OnTriggerEnter(Collider other)
         {
             if (triggerMode == TriggerMode.Volume)
             {
@@ -427,7 +428,7 @@ namespace HighlightPlus
             }
         }
 
-        public void OnTriggerExit(Collider other)
+        internal void OnTriggerExit(Collider other)
         {
             if (triggerMode == TriggerMode.Volume)
             {

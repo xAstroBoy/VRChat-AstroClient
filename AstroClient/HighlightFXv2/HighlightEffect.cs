@@ -1,446 +1,391 @@
-/// <summary>
-/// Highlight Plus - (c) 2018-2021 Kronnect Technologies SL
-/// </summary>
-
+using AstroClient.ClientAttributes;
+using AstroClient.HighlightFXv2.Enums;
+using AstroClient.HighlightFXv2.Events;
+using AstroClient.HighlightFXv2.Extensions;
 using System;
 using System.Collections.Generic;
+using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using UnityEngine.Rendering;
+using QualityLevel = AstroClient.HighlightFXv2.Enums.QualityLevel;
 
-namespace HighlightPlus
+namespace AstroClient.HighlightFXv2
 {
-    public delegate bool OnObjectHighlightEvent(GameObject obj);
-
-    public delegate bool OnRendererHighlightEvent(Renderer renderer);
-
-    /// <summary>
-    /// Triggers when target effect animation occurs
-    /// </summary>
-    /// <param name="t">A value from 0 to 1 that represent the animation time from start to end, based on target duration and start time</param>
-    public delegate void OnTargetAnimatesEvent(ref Vector3 center, ref Quaternion rotation, ref Vector3 scale, float t);
-
-    public enum NormalsOption
-    {
-        Smooth = 0,
-        PreserveOriginal = 1,
-        Reorient = 2,
-        Planar = 3
-    }
-
-    public enum SeeThroughMode
-    {
-        WhenHighlighted = 0,
-        AlwaysWhenOccluded = 1,
-        Never = 2
-    }
-
-    public enum QualityLevel
-    {
-        Fastest = 0,
-        High = 1,
-        Highest = 2,
-        Medium = 3
-    }
-
-    public static class QualityLevelExtensions
-    {
-        public static bool UsesMultipleOffsets(this QualityLevel qualityLevel)
-        {
-            return qualityLevel == QualityLevel.Medium || qualityLevel == QualityLevel.High;
-        }
-    }
-
-    public enum TargetOptions
-    {
-        Children,
-        OnlyThisObject,
-        RootToChildren,
-        LayerInScene,
-        LayerInChildren,
-        Scripting
-    }
-
-    public enum Visibility
-    {
-        Normal,
-        AlwaysOnTop,
-        OnlyWhenOccluded
-    }
-
-    public enum GlowBlendMode
-    {
-        Additive,
-        AlphaBlending
-    }
-
-    public struct GlowPassData
-    {
-        public float offset;
-        public float alpha;
-        public Color color;
-    }
-
     //https://www.dropbox.com/s/v9qgn68ydblqz8x/Documentation.pdf?dl=0
-    public partial class HighlightEffect : MonoBehaviour
+    [RegisterComponent]
+    public class HighlightEffect : MonoBehaviour
     {
+        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+
+        public HighlightEffect(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList.Add(this);
+        }
+
+
         /// <summary>
         /// Gets or sets the current profile. To load a profile and apply its settings at runtime, please use ProfileLoad() method.
         /// The current profile (optional). A profile let you store Highlight Plus settings and apply those settings easily to many objects. You can also load a profile and apply its settings at runtime, using the ProfileLoad() method of the Highlight Effect component.
         /// </summary>
-        public HighlightProfile profile;
+        internal HighlightProfile profile;
 
         /// <summary>
         /// Sets if changes to the original profile should propagate to this effect.
         /// If enabled, settings from the profile will be applied to this component automatically when game starts or when any profile setting is updated.
         /// </summary>
-        public bool profileSync;
+        internal bool profileSync;
 
         /// <summary>
         /// Makes the effects visible in the SceneView.
         /// If enabled, effects will be visible also when not in Play mode.
         /// </summary>
-        public bool previewInEditor = true;
+        internal bool previewInEditor = true;
 
         /// <summary>
         /// Which cameras can render the effects
-        /// Which cameras can render the effect.
         /// </summary>
-        public LayerMask camerasLayerMask = -1;
+        internal LayerMask camerasLayerMask = -1;
 
         /// <summary>
         /// Specifies which objects are affected by this effect.
         /// Different options to specify which objects are affected by this Highlight Effect component.
         /// </summary>
-        public TargetOptions effectGroup = TargetOptions.Children;
+        internal TargetOptions effectGroup = TargetOptions.Children;
 
         /// <summary>
         /// The layer that contains the affected objects by this effect when effectGroup is set to LayerMask.
         /// The layer that contains the affected objects by this effect when effectGroup is set to LayerMask.
         /// </summary>
-        public LayerMask effectGroupLayer = -1;
+        internal LayerMask effectGroupLayer = -1;
 
         /// <summary>
         /// Optional object name filter
         /// Only include objects whose names contains this text.
         /// </summary>
-        public string effectNameFilter;
+        internal string effectNameFilter;
 
         /// <summary>
         /// Combine objects into a single mesh
         /// Combine meshes of all objects in this group affected by Highlight Effect reducing draw calls.
         /// </summary>
-        public bool combineMeshes;
+        internal bool combineMeshes;
 
         /// <summary>
         /// The alpha threshold for transparent cutout objects. Pixels with alpha below this value will be discarded.
         /// The alpha threshold for transparent cutout objects. Pixels with alpha below this value will be discarded.
         /// </summary>
 
-        public float alphaCutOff;
+        internal float alphaCutOff;
 
         /// <summary>
         /// If back facing triangles are ignored. Backfaces triangles are not visible but you may set this property to false to force highlight effects to act on those triangles as well.
         /// If back facing triangles are ignored.Backfaces triangles are not visible but you may set this property to false to force highlight effects to act on those triangles as well.
         /// </summary>
-        public bool cullBackFaces = true;
+        internal bool cullBackFaces = true;
 
         /// <summary>
         /// Show highlight effects even if the object is currently not visible. This option is useful if the affected objects are rendered using GPU instancing tools which render directly to the GPU without creating real game object geometry in CPU.
         /// Show highlight effects even if the object is not visible. If this object or its children use GPU Instancing tools, the MeshRenderer can be disabled although the object is visible. In this case, this option is useful to enable highlighting.
         /// </summary>
-        public bool ignoreObjectVisibility;
+        internal bool ignoreObjectVisibility;
 
         /// <summary>
         /// Enable to support reflection probes
         /// Support reflection probes. Enable only if you want the effects to be visible in reflections.
         /// </summary>
-        public bool reflectionProbes;
+        internal bool reflectionProbes;
 
         /// <summary>
         /// Enable to support reflection probes
         /// Enables GPU instancing. Reduces draw calls in outline and outer glow effects on platforms that support GPU instancing. Should be enabled by default.
         /// </summary>
-        public bool GPUInstancing = true;
+        internal bool GPUInstancing = true;
 
         /// <summary>
         /// Enabled depth buffer flip in HQ
         /// Enables depth buffer clipping. Only applies to outline or outer glow in High Quality mode.
         /// </summary>
-        public bool depthClip;
+        internal bool depthClip;
 
         /// <summary>
         /// Fades out effects based on distance to camera
         /// </summary>
-        public bool cameraDistanceFade;
+        internal bool cameraDistanceFade;
 
         /// <summary>
         /// The closest distance particles can get to the camera before they fade from the camera’s view.
         /// </summary>
-        public float cameraDistanceFadeNear;
+        internal float cameraDistanceFadeNear;
 
         /// <summary>
         /// The farthest distance particles can get away from the camera before they fade from the camera’s view.
         /// </summary>
-        public float cameraDistanceFadeFar = 1000;
+        internal float cameraDistanceFadeFar = 1000;
 
         /// <summary>
         /// Normals handling option:\nPreserve original: use original mesh normals.\nSmooth: average normals to produce a smoother outline/glow mesh based effect.\nReorient: recomputes normals based on vertex direction to centroid.\nPlanar: same than reorient but renders outline and glow in an optimized way for 2D or planar meshes like quads or planes.
         /// </summary>
-        public NormalsOption normalsOption;
+        internal NormalsOption normalsOption;
 
         /// <summary>
         /// Ignores highlight effects on this object.
         /// Ignore highlighting on this object.
         /// </summary>
-        public bool ignore;
+        internal bool ignore;
 
         private bool _highlighted;
 
-        public bool highlighted
-        { get { return _highlighted; } set { SetHighlighted(value); } }
+        internal bool highlighted
+        {
+            [HideFromIl2Cpp]
+            get { return _highlighted; }
+            [HideFromIl2Cpp]
+            set { SetHighlighted(value); }
+        }
 
-        public float fadeInDuration;
-        public float fadeOutDuration;
-        public bool flipY;
+        internal float fadeInDuration;
+        internal float fadeOutDuration;
+        internal bool flipY;
 
         /// <summary>
         /// Keeps the outline/glow size unaffected by object distance.
         /// </summary>
-        public bool constantWidth = true;
+        internal bool constantWidth = true;
 
         /// <summary>
         /// Mask to include or exclude certain submeshes. By default, all submeshes are included.
         /// </summary>
-        public int subMeshMask = -1;
+        internal int subMeshMask = -1;
 
         /// <summary>
         /// Intensity of the overlay effect. A value of 0 disables the overlay completely.
         /// </summary>
-        public float overlay;
+        internal float overlay;
 
-        public Color overlayColor = Color.yellow;
-        public float overlayAnimationSpeed = 1f;
-        public float overlayMinIntensity = 0.5f;
+        internal Color overlayColor = Color.yellow;
+        internal float overlayAnimationSpeed = 1f;
+        internal float overlayMinIntensity = 0.5f;
 
         /// <summary>
         /// Controls the blending or mix of the overlay color with the natural colors of the object.
         /// </summary>
-        public float overlayBlending = 1.0f;
+        internal float overlayBlending = 1.0f;
 
         /// <summary>
         /// Optional overlay texture.
         /// </summary>
-        public Texture2D overlayTexture;
+        internal Texture2D overlayTexture;
 
-        public float overlayTextureScale = 1f;
+        internal float overlayTextureScale = 1f;
 
         /// <summary>
         /// Intensity of the outline. A value of 0 disables the outline completely.
         /// </summary>
-        public float outline = 1f;
+        internal float outline = 1f;
 
-        public Color outlineColor = Color.black;
-        public float outlineWidth = 0.45f;
-        public QualityLevel outlineQuality = QualityLevel.Medium;
+        internal Color outlineColor = Color.black;
+        internal float outlineWidth = 0.45f;
+        internal QualityLevel outlineQuality = QualityLevel.Medium;
 
         /// <summary>
         /// Reduces the quality of the outline but improves performance a bit.
         /// </summary>
-        public int outlineDownsampling = 2;
+        internal int outlineDownsampling = 2;
 
-        public Visibility outlineVisibility = Visibility.Normal;
-        public GlowBlendMode glowBlendMode = GlowBlendMode.Additive;
-        public bool outlineOptimalBlit = true;
-        public bool outlineBlitDebug;
+        internal Visibility outlineVisibility = Visibility.Normal;
+        internal GlowBlendMode glowBlendMode = GlowBlendMode.Additive;
+        internal bool outlineOptimalBlit = true;
+        internal bool outlineBlitDebug;
 
         /// <summary>
         /// If enabled, this object won't combine the outline with other objects.
         /// </summary>
-        public bool outlineIndependent;
+        internal bool outlineIndependent;
 
         /// <summary>
         /// The intensity of the outer glow effect. A value of 0 disables the glow completely.
         /// </summary>
-        public float glow;
+        internal float glow;
 
-        public float glowWidth = 0.4f;
-        public QualityLevel glowQuality = QualityLevel.Medium;
+        internal float glowWidth = 0.4f;
+        internal QualityLevel glowQuality = QualityLevel.Medium;
 
         /// <summary>
         /// Reduces the quality of the glow but improves performance a bit.
         /// </summary>
-        public int glowDownsampling = 2;
+        internal int glowDownsampling = 2;
 
-        public Color glowHQColor = new Color(0.64f, 1f, 0f, 1f);
+        internal Color glowHQColor = new Color(0.64f, 1f, 0f, 1f);
 
         /// <summary>
         /// When enabled, outer glow renders with dithering. When disabled, glow appears as a solid color.
         /// </summary>
-        public bool glowDithering = true;
+        internal bool glowDithering = true;
 
         /// <summary>
         /// Seed for the dithering effect
         /// </summary>
-        public float glowMagicNumber1 = 0.75f;
+        internal float glowMagicNumber1 = 0.75f;
 
         /// <summary>
         /// Another seed for the dithering effect that combines with first seed to create different patterns
         /// </summary>
-        public float glowMagicNumber2 = 0.5f;
+        internal float glowMagicNumber2 = 0.5f;
 
-        public float glowAnimationSpeed = 1f;
-        public Visibility glowVisibility = Visibility.Normal;
+        internal float glowAnimationSpeed = 1f;
+        internal Visibility glowVisibility = Visibility.Normal;
 
         /// <summary>
         /// Performs a blit to screen only over the affected area, instead of a full-screen pass
         /// </summary>
-        public bool glowOptimalBlit = true;
+        internal bool glowOptimalBlit = true;
 
-        public bool glowBlitDebug;
+        internal bool glowBlitDebug;
 
         /// <summary>
         /// Blends glow passes one after another. If this option is disabled, glow passes won't overlap (in this case, make sure the glow pass 1 has a smaller offset than pass 2, etc.)
         /// </summary>
-        public bool glowBlendPasses = true;
+        internal bool glowBlendPasses = true;
 
-        public GlowPassData[] glowPasses;
+        internal GlowPassData[] glowPasses;
 
         /// <summary>
         /// If enabled, glow effect will not use a stencil mask. This can be used to render the glow effect alone.
         /// </summary>
-        public bool glowIgnoreMask;
+        internal bool glowIgnoreMask;
 
         /// <summary>
         /// The intensity of the inner glow effect. A value of 0 disables the glow completely.
         /// </summary>
-        public float innerGlow;
+        internal float innerGlow;
 
-        public float innerGlowWidth = 1f;
-        public Color innerGlowColor = Color.white;
-        public Visibility innerGlowVisibility = Visibility.Normal;
+        internal float innerGlowWidth = 1f;
+        internal Color innerGlowColor = Color.white;
+        internal Visibility innerGlowVisibility = Visibility.Normal;
 
         /// <summary>
         /// Enables the targetFX effect. This effect draws an animated sprite over the object.
         /// </summary>
-        public bool targetFX;
+        internal bool targetFX;
 
-        public Texture2D targetFXTexture;
-        public Color targetFXColor = Color.white;
-        public Transform targetFXCenter;
-        public float targetFXRotationSpeed = 50f;
-        public float targetFXInitialScale = 4f;
-        public float targetFXEndScale = 1.5f;
+        internal Texture2D targetFXTexture;
+        internal Color targetFXColor = Color.white;
+        internal Transform targetFXCenter;
+        internal float targetFXRotationSpeed = 50f;
+        internal float targetFXInitialScale = 4f;
+        internal float targetFXEndScale = 1.5f;
 
         /// <summary>
         /// Makes target scale relative to object renderer bounds
         /// </summary>
-        public bool targetFXScaleToRenderBounds = true;
+        internal bool targetFXScaleToRenderBounds = true;
 
         /// <summary>
         /// Places target FX sprite at the bottom of the highlighted object.
         /// </summary>
-        public bool targetFXAlignToGround;
+        internal bool targetFXAlignToGround;
 
         /// <summary>
         /// Fade out effect with altitude
         /// </summary>
-        public float targetFXFadePower = 32;
+        internal float targetFXFadePower = 32;
 
-        public float targetFXGroundMaxDistance = 10f;
-        public LayerMask targetFXGroundLayerMask = -1;
-        public float targetFXTransitionDuration = 0.5f;
+        internal float targetFXGroundMaxDistance = 10f;
+        internal LayerMask targetFXGroundLayerMask = -1;
+        internal float targetFXTransitionDuration = 0.5f;
 
         /// <summary>
         /// The duration of the effect. A value of 0 will keep the target sprite on screen while object is highlighted.
         /// </summary>
-        public float targetFXStayDuration = 1.5f;
+        internal float targetFXStayDuration = 1.5f;
 
-        public Visibility targetFXVisibility = Visibility.AlwaysOnTop;
+        internal Visibility targetFXVisibility = Visibility.AlwaysOnTop;
 
-        public event OnObjectHighlightEvent OnObjectHighlightStart;
+        internal event OnObjectHighlightEvent OnObjectHighlightStart;
 
-        public event OnObjectHighlightEvent OnObjectHighlightEnd;
+        internal event OnObjectHighlightEvent OnObjectHighlightEnd;
 
-        public event OnRendererHighlightEvent OnRendererHighlightStart;
+        internal event OnRendererHighlightEvent OnRendererHighlightStart;
 
-        public event OnTargetAnimatesEvent OnTargetAnimates;
+        internal event OnTargetAnimatesEvent OnTargetAnimates;
 
         /// <summary>
         /// See-through mode for this Highlight Effect component.
         /// </summary>
-        public SeeThroughMode seeThrough = SeeThroughMode.Never;
+        internal SeeThroughMode seeThrough = SeeThroughMode.Never;
 
         /// <summary>
         /// This mask setting let you specify which objects will be considered as occluders and cause the see-through effect for this Highlight Effect component. For example, you assign your walls to a different layer and specify that layer here, so only walls and not other objects, like ground or ceiling, will trigger the see-through effect.
         /// </summary>
-        public LayerMask seeThroughOccluderMask = -1;
+        internal LayerMask seeThroughOccluderMask = -1;
 
         /// <summary>
         /// A multiplier for the occluder volume size which can be used to reduce the actual size of occluders when Highlight Effect checks if they're occluding this object.
         /// </summary>
-        public float seeThroughOccluderThreshold = 0.3f;
+        internal float seeThroughOccluderThreshold = 0.3f;
 
         /// <summary>
         /// Uses stencil buffers to ensure pixel-accurate occlusion test. If this option is disabled, only physics raycasting is used to test for occlusion.
         /// </summary>
-        public bool seeThroughOccluderMaskAccurate;
+        internal bool seeThroughOccluderMaskAccurate;
 
         /// <summary>
         /// The interval of time between occlusion tests.
         /// </summary>
-        public float seeThroughOccluderCheckInterval = 1f;
+        internal float seeThroughOccluderCheckInterval = 1f;
 
         /// <summary>
         /// If enabled, occlusion test is performed for each children element. If disabled, the bounds of all children is combined and a single occlusion test is performed for the combined bounds.
         /// </summary>
-        public bool seeThroughOccluderCheckIndividualObjects;
+        internal bool seeThroughOccluderCheckIndividualObjects;
 
         /// <summary>
         /// Shows the see-through effect only if the occluder if at this 'offset' distance from the object.
         /// </summary>
-        public float seeThroughDepthOffset;
+        internal float seeThroughDepthOffset;
 
         /// <summary>
         /// Hides the see-through effect if the occluder is further than this distance from the object (0 = infinite)
         /// </summary>
-        public float seeThroughMaxDepth;
+        internal float seeThroughMaxDepth;
 
-        public float seeThroughIntensity = 0.8f;
-        public float seeThroughTintAlpha = 0.5f;
-        public Color seeThroughTintColor = Color.red;
-        public float seeThroughNoise = 1f;
-        public float seeThroughBorder;
-        public Color seeThroughBorderColor = Color.black;
+        internal float seeThroughIntensity = 0.8f;
+        internal float seeThroughTintAlpha = 0.5f;
+        internal Color seeThroughTintColor = Color.red;
+        internal float seeThroughNoise = 1f;
+        internal float seeThroughBorder;
+        internal Color seeThroughBorderColor = Color.black;
 
         /// <summary>
         /// Only display the border instead of the full see-through effect.
         /// </summary>
-        public bool seeThroughBorderOnly;
+        internal bool seeThroughBorderOnly;
 
-        public float seeThroughBorderWidth = 0.45f;
+        internal float seeThroughBorderWidth = 0.45f;
 
         /// <summary>
         /// Renders see-through effect on overlapping objects in a sequence that's relative to the distance to the camera
         /// </summary>
-        public bool seeThroughOrdered;
+        internal bool seeThroughOrdered;
 
         private struct ModelMaterials
         {
-            public bool render; // if this object can render this frame
-            public Transform transform;
-            public bool bakedTransform;
-            public Vector3 currentPosition, currentRotation, currentScale;
-            public bool renderWasVisibleDuringSetup;
-            public Mesh mesh, originalMesh;
-            public Renderer renderer;
-            public bool isSkinnedMesh;
-            public NormalsOption normalsOption;
-            public Material[] fxMatMask, fxMatSolidColor, fxMatSeeThroughInner, fxMatSeeThroughBorder, fxMatOverlay, fxMatInnerGlow;
-            public Matrix4x4 renderingMatrix;
-            public bool isCombined;
-            public bool preserveOriginalMesh { get { return !isCombined && normalsOption == NormalsOption.PreserveOriginal; } }
+            internal bool render; // if this object can render this frame
+            internal Transform transform;
+            internal bool bakedTransform;
+            internal Vector3 currentPosition, currentRotation, currentScale;
+            internal bool renderWasVisibleDuringSetup;
+            internal Mesh mesh, originalMesh;
+            internal Renderer renderer;
+            internal bool isSkinnedMesh;
+            internal NormalsOption normalsOption;
+            internal Material[] fxMatMask, fxMatSolidColor, fxMatSeeThroughInner, fxMatSeeThroughBorder, fxMatOverlay, fxMatInnerGlow;
+            internal Matrix4x4 renderingMatrix;
+            internal bool isCombined;
+            internal bool preserveOriginalMesh { get { return !isCombined && normalsOption == NormalsOption.PreserveOriginal; } }
 
-            public void Init()
+            internal void Init()
             {
                 render = false;
                 transform = null;
@@ -467,33 +412,31 @@ namespace HighlightPlus
         /// <summary>
         /// Number of objects affected by this highlight effect script
         /// </summary>
-        public int includedObjectsCount => rmsCount;
+        internal int includedObjectsCount => rmsCount;
 
-        [NonSerialized]
-        public Transform target;
+        internal Transform target;
 
         /// <summary>
         /// Time in which the highlight started
         /// </summary>
-        [NonSerialized]
-        public float highlightStartTime;
+
+        internal float highlightStartTime;
 
         /// <summary>
         /// Time in which the target fx started
         /// </summary>
-        [NonSerialized]
-        public float targetFxStartTime;
+
+        internal float targetFxStartTime;
 
         /// <summary>
         /// True if this object is selected (if selectOnClick is used)
         /// </summary>
-        [NonSerialized]
-        public bool isSelected;
 
-        [NonSerialized]
-        public HighlightProfile previousSettings;
+        internal bool isSelected;
 
-        public void RestorePreviousHighlightEffectSettings()
+        internal HighlightProfile previousSettings;
+
+        internal void RestorePreviousHighlightEffectSettings()
         {
             previousSettings.Load(this);
         }
@@ -582,45 +525,6 @@ namespace HighlightPlus
                 return _fxMatBlurOutline;
             }
         }
-
-        private static Vector4[] offsets;
-
-        private float fadeStartTime;
-        private FadingState fading = FadingState.NoFading;
-        private CommandBuffer cbMask, cbSeeThrough, cbGlow, cbOutline, cbOverlay, cbInnerGlow;
-        private CommandBuffer cbSmoothBlend;
-        private int[] mipGlowBuffers, mipOutlineBuffers;
-        private int glowRT, outlineRT;
-        private static Mesh quadMesh, cubeMesh;
-        private int sourceRT;
-        private Matrix4x4 quadGlowMatrix, quadOutlineMatrix;
-        private Vector3[] corners;
-        private RenderTextureDescriptor sourceDesc;
-        private Color debugColor, blackColor;
-        private Visibility lastOutlineVisibility;
-        private bool requireUpdateMaterial;
-        private bool usingPipeline = false; // set to false to avoid editor warning due to conditional code
-        private float occlusionCheckLastTime;
-        private int occlusionRenderFrame;
-        private bool lastOcclusionTestResult;
-        private bool useGPUInstancing;
-
-        private MaterialPropertyBlock glowPropertyBlock, outlinePropertyBlock;
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataDirection = new Il2CppSystem.Collections.Generic.List<Vector4>();
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataGlow = new Il2CppSystem.Collections.Generic.List<Vector4>();
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataColor = new Il2CppSystem.Collections.Generic.List<Vector4>();
-        private static Matrix4x4[] matrices;
-        public static readonly List<HighlightEffect> effects = new List<HighlightEffect>();
-        public static bool customSorting;
-        private static int customSortingFrame;
-        private static Camera customSortingCamera;
-
-        private int skipThisFrame = -1;
-        private int outlineOffsetsMin, outlineOffsetsMax;
-        private int glowOffsetsMin, glowOffsetsMax;
-        private static CombineInstance[] combineInstances;
-        private Matrix4x4 matrix4X4Identity = Matrix4x4.identity;
-        private bool maskRequired;
 
         private void OnEnable()
         {
@@ -749,7 +653,7 @@ namespace HighlightPlus
             }
         }
 
-        public static void DrawEffectsNow(Camera cam = null)
+        internal static void DrawEffectsNow(Camera cam = null)
         {
             if (cam == null)
             {
@@ -778,7 +682,7 @@ namespace HighlightPlus
         /// <summary>
         /// Loads a profile into this effect
         /// </summary>
-        public void ProfileLoad(HighlightProfile profile)
+        internal void ProfileLoad(HighlightProfile profile)
         {
             if (profile != null)
             {
@@ -790,7 +694,7 @@ namespace HighlightPlus
         /// <summary>
         /// Reloads currently assigned profile
         /// </summary>
-        public void ProfileReload()
+        internal void ProfileReload()
         {
             if (profile != null)
             {
@@ -801,7 +705,7 @@ namespace HighlightPlus
         /// <summary>
         /// Save current settings into given profile
         /// </summary>
-        public void ProfileSaveChanges(HighlightProfile profile)
+        internal void ProfileSaveChanges(HighlightProfile profile)
         {
             if (profile != null)
             {
@@ -812,7 +716,7 @@ namespace HighlightPlus
         /// <summary>
         /// Save current settings into current profile
         /// </summary>
-        public void ProfileSaveChanges()
+        internal void ProfileSaveChanges()
         {
             if (profile != null)
             {
@@ -820,7 +724,7 @@ namespace HighlightPlus
             }
         }
 
-        public void Refresh()
+        internal void Refresh()
         {
             if (enabled)
             {
@@ -1594,7 +1498,7 @@ namespace HighlightPlus
                             {
                                 normalizedTime = 1f;
                             }
-                            scaleT = Mathf.Sin(normalizedTime * Mathf.PI * 0.5f);
+                            scaleT = Mathf.Sin(normalizedTime * Cheetah.Math.Mathf.PI * 0.5f);
                             time = Time.time;
                         }
                         else
@@ -2087,7 +1991,7 @@ namespace HighlightPlus
         /// <summary>
         /// Sets target for highlight effects
         /// </summary>
-        public void SetTarget(Transform transform)
+        internal void SetTarget(Transform transform)
         {
             if (transform == target || transform == null)
                 return;
@@ -2104,7 +2008,7 @@ namespace HighlightPlus
         /// <summary>
         /// Sets target for highlight effects and also specify a list of renderers to be included as well
         /// </summary>
-        public void SetTargets(Transform transform, Renderer[] renderers)
+        internal void SetTargets(Transform transform, Renderer[] renderers)
         {
             if (transform == null)
                 return;
@@ -2122,7 +2026,7 @@ namespace HighlightPlus
         /// <summary>
         /// Start or finish highlight on the object
         /// </summary>
-        public void SetHighlighted(bool state)
+        internal void SetHighlighted(bool state)
         {
             if (!Application.isPlaying)
             {
@@ -2203,10 +2107,6 @@ namespace HighlightPlus
 
         private void SetupMaterial()
         {
-#if UNITY_EDITOR
-            staticChildren = false;
-#endif
-
             if (target == null || fxMatMask == null)
                 return;
 
@@ -2567,7 +2467,7 @@ namespace HighlightPlus
             rms[objIndex].currentScale = t.lossyScale;
         }
 
-        public void UpdateMaterialProperties(bool forceNow = false)
+        internal void UpdateMaterialProperties(bool forceNow = false)
         {
             if (forceNow || !Application.isPlaying)
             {
@@ -3094,7 +2994,7 @@ namespace HighlightPlus
         /// <summary>
         /// Returns true if a given transform is included in this effect
         /// </summary>
-        public bool Includes(Transform transform)
+        internal bool Includes(Transform transform)
         {
             for (int k = 0; k < rmsCount; k++)
             {
@@ -3106,7 +3006,7 @@ namespace HighlightPlus
         /// <summary>
         /// Updates profile glow color
         /// </summary>
-        public void SetGlowColor(Color color)
+        internal void SetGlowColor(Color color)
         {
             if (glowPasses != null)
             {
@@ -3320,5 +3220,432 @@ namespace HighlightPlus
         }
 
         #endregion Normals handling
+
+        #region HighlightEffectActions
+
+        /// <summary>
+        /// Performs a hit effect using default values
+        /// </summary>
+        internal void HitFX()
+        {
+            HitFX(hitFxColor, hitFxFadeOutDuration, hitFxInitialIntensity);
+        }
+
+        /// <summary>
+        /// Performs a hit effect localized at hit position and radius with default values
+        /// </summary>
+        internal void HitFX(Vector3 position)
+        {
+            HitFX(hitFxColor, hitFxFadeOutDuration, hitFxInitialIntensity, position, hitFxRadius);
+        }
+
+        /// <summary>
+        /// Performs a hit effect using desired color, fade out duration and optionally initial intensity (0-1)
+        /// </summary>
+        internal void HitFX(Color color, float fadeOutDuration, float initialIntensity = 1f)
+        {
+            hitInitialIntensity = initialIntensity;
+            hitFadeOutDuration = fadeOutDuration;
+            hitColor = color;
+            hitStartTime = Time.time;
+            hitActive = true;
+            if (overlay == 0)
+            {
+                UpdateMaterialProperties();
+            }
+        }
+
+        /// <summary>
+        /// Performs a hit effect using desired color, fade out duration, initial intensity (0-1), hit position and radius of effect
+        /// </summary>
+        internal void HitFX(Color color, float fadeOutDuration, float initialIntensity, Vector3 position, float radius)
+        {
+            hitInitialIntensity = initialIntensity;
+            hitFadeOutDuration = fadeOutDuration;
+            hitColor = color;
+            hitStartTime = Time.time;
+            hitActive = true;
+            hitPosition = position;
+            hitRadius = radius;
+            if (overlay == 0)
+            {
+                UpdateMaterialProperties();
+            }
+        }
+
+        /// <summary>
+        /// Initiates the target FX on demand using predefined configuration (see targetFX... properties)
+        /// </summary>
+        internal void TargetFX()
+        {
+            targetFxStartTime = Time.time;
+            if (!targetFX)
+            {
+                targetFX = true;
+                UpdateMaterialProperties();
+            }
+        }
+
+        #endregion HighlightEffectActions
+
+        #region OccluderManager
+
+        /// <summary>
+        /// True if the see-through is cancelled by an occluder using raycast method
+        /// </summary>
+        internal bool IsSeeThroughOccluded(Camera cam)
+        {
+            // Compute bounds
+            Bounds bounds = new Bounds();
+            for (int r = 0; r < rms.Length; r++)
+            {
+                if (rms[r].renderer != null)
+                {
+                    if (bounds.size.x == 0)
+                    {
+                        bounds = rms[r].renderer.bounds;
+                    }
+                    else
+                    {
+                        bounds.Encapsulate(rms[r].renderer.bounds);
+                    }
+                }
+            }
+            Vector3 pos = bounds.center;
+            Vector3 camPos = cam.transform.position;
+            Vector3 offset = pos - camPos;
+            float maxDistance = Vector3.Distance(pos, camPos);
+            if (hits == null || hits.Length == 0)
+            {
+                hits = new RaycastHit[64];
+            }
+            int occludersCount = occluders.Count;
+            int hitCount = Physics.BoxCastNonAlloc(pos - offset, bounds.extents * 0.9f, offset.normalized, hits, Quaternion.identity, maxDistance);
+            for (int k = 0; k < hitCount; k++)
+            {
+                for (int j = 0; j < occludersCount; j++)
+                {
+                    if (hits[k].collider.transform == occluders[j].transform)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        internal static void RegisterOccluder(HighlightSeeThroughOccluder occluder)
+        {
+            if (!occluders.Contains(occluder))
+            {
+                occluders.Add(occluder);
+            }
+        }
+
+        internal static void UnregisterOccluder(HighlightSeeThroughOccluder occluder)
+        {
+            if (occluders.Contains(occluder))
+            {
+                occluders.Remove(occluder);
+            }
+        }
+
+        /// <summary>
+        /// Test see-through occluders.
+        /// </summary>
+        /// <param name="cam">The camera to be tested</param>
+        /// <returns>Returns true if there's no raycast-based occluder cancelling the see-through effect</returns>
+        internal bool RenderSeeThroughOccluders(Camera cam)
+        {
+            int occludersCount = occluders.Count;
+            if (occludersCount == 0 || rmsCount == 0) return true;
+
+            bool useRayCastCheck = false;
+            // Check if raycast method is needed
+            for (int k = 0; k < occludersCount; k++)
+            {
+                HighlightSeeThroughOccluder occluder = occluders[k];
+                if (occluder == null || !occluder.isActiveAndEnabled) continue;
+                if (occluder.detectionMethod == DetectionMethod.RayCast)
+                {
+                    useRayCastCheck = true;
+                    break;
+                }
+            }
+            if (useRayCastCheck)
+            {
+                if (IsSeeThroughOccluded(cam)) return false;
+            }
+
+            // do not render see-through occluders more than once this frame per camera (there can be many highlight effect scripts in the scene, we only need writing to stencil once)
+            int lastFrameCount;
+            occludersFrameCount.TryGetValue(cam, out lastFrameCount);
+            int currentFrameCount = Time.frameCount;
+            if (currentFrameCount == lastFrameCount) return true;
+            occludersFrameCount[cam] = currentFrameCount;
+
+            if (cbOccluder == null)
+            {
+                cbOccluder = new CommandBuffer();
+                cbOccluder.name = "Occluder";
+            }
+
+            if (fxMatOccluder == null)
+            {
+                InitMaterial(ref fxMatOccluder, "HighlightPlus/Geometry/SeeThroughOccluder");
+                if (fxMatOccluder == null) return true;
+            }
+
+            cbOccluder.Clear();
+            for (int k = 0; k < occludersCount; k++)
+            {
+                HighlightSeeThroughOccluder occluder = occluders[k];
+                if (occluder == null || !occluder.isActiveAndEnabled) continue;
+                if (occluder.detectionMethod == DetectionMethod.Stencil)
+                {
+                    if (occluder.meshData == null || occluder.meshData.Length == 0) continue;
+                    // Per renderer
+                    for (int m = 0; m < occluder.meshData.Length; m++)
+                    {
+                        // Per submesh
+                        Renderer renderer = occluder.meshData[m].renderer;
+                        if (renderer.isVisible)
+                        {
+                            for (int s = 0; s < occluder.meshData[m].subMeshCount; s++)
+                            {
+                                cbOccluder.DrawRenderer(renderer, fxMatOccluder, s);
+                            }
+                        }
+                    }
+                }
+            }
+            Graphics.ExecuteCommandBuffer(cbOccluder);
+
+            return true;
+        }
+
+        private bool CheckOcclusion(Camera cam)
+        {
+            float now = Time.time;
+            int frameCount = Time.frameCount; // ensure all cameras are checked this frame
+
+            if (Time.time - occlusionCheckLastTime < seeThroughOccluderCheckInterval && Application.isPlaying && occlusionRenderFrame != frameCount) return lastOcclusionTestResult;
+            occlusionCheckLastTime = now;
+            occlusionRenderFrame = frameCount;
+
+            if (rms.Length == 0 || rms[0].renderer == null) return false;
+
+            Vector3 camPos = cam.transform.position;
+
+            if (seeThroughOccluderCheckIndividualObjects)
+            {
+                for (int r = 0; r < rms.Length; r++)
+                {
+                    if (rms[r].renderer != null)
+                    {
+                        Bounds bounds = rms[r].renderer.bounds;
+                        Vector3 pos = bounds.center;
+                        float maxDistance = Vector3.Distance(pos, camPos);
+                        if (Physics.BoxCast(pos, bounds.extents * seeThroughOccluderThreshold, (camPos - pos).normalized, Quaternion.identity, maxDistance, seeThroughOccluderMask))
+                        {
+                            lastOcclusionTestResult = true;
+                            return true;
+                        }
+                    }
+                }
+                lastOcclusionTestResult = false;
+                return false;
+            }
+            else
+            {
+                // Compute bounds
+                Bounds bounds = rms[0].renderer.bounds;
+                for (int r = 1; r < rms.Length; r++)
+                {
+                    if (rms[r].renderer != null)
+                    {
+                        bounds.Encapsulate(rms[r].renderer.bounds);
+                    }
+                }
+                Vector3 pos = bounds.center;
+                float maxDistance = Vector3.Distance(pos, camPos);
+                lastOcclusionTestResult = Physics.BoxCast(pos, bounds.extents * seeThroughOccluderThreshold, (camPos - pos).normalized, Quaternion.identity, maxDistance, seeThroughOccluderMask);
+                return lastOcclusionTestResult;
+            }
+        }
+
+        private const int MAX_OCCLUDER_HITS = 50;
+        private static RaycastHit[] occluderHits;
+        private readonly Dictionary<Camera, Il2CppSystem.Collections.Generic.List<Renderer>> cachedOccludersPerCamera = new Dictionary<Camera, Il2CppSystem.Collections.Generic.List<Renderer>>();
+
+        private void AddWithoutRepetition<T>(Il2CppSystem.Collections.Generic.List<T> target, Il2CppSystem.Collections.Generic.List<T> source)
+        {
+            int sourceCount = source.Count;
+            for (int k = 0; k < sourceCount; k++)
+            {
+                T entry = source[k];
+                if (entry != null && !target.Contains(entry))
+                {
+                    target.Add(entry);
+                }
+            }
+        }
+
+        private void CheckOcclusionAccurate(Camera cam)
+        {
+            Il2CppSystem.Collections.Generic.List<Renderer> occluderRenderers;
+            if (!cachedOccludersPerCamera.TryGetValue(cam, out occluderRenderers))
+            {
+                occluderRenderers = new Il2CppSystem.Collections.Generic.List<Renderer>();
+                cachedOccludersPerCamera[cam] = occluderRenderers;
+            }
+
+            float now = Time.time;
+            int frameCount = Time.frameCount; // ensure all cameras are checked this frame
+            bool reuse = Time.time - occlusionCheckLastTime < seeThroughOccluderCheckInterval && Application.isPlaying && occlusionRenderFrame != frameCount;
+
+            if (!reuse)
+            {
+                if (rms.Length == 0 || rms[0].renderer == null) return;
+
+                occlusionCheckLastTime = now;
+                occlusionRenderFrame = frameCount;
+                Quaternion quaternionIdentity = Quaternion.identity;
+                Vector3 camPos = cam.transform.position;
+
+                occluderRenderers.Clear();
+
+                if (occluderHits == null || occluderHits.Length < MAX_OCCLUDER_HITS)
+                {
+                    occluderHits = new RaycastHit[MAX_OCCLUDER_HITS];
+                }
+
+                if (seeThroughOccluderCheckIndividualObjects)
+                {
+                    for (int r = 0; r < rms.Length; r++)
+                    {
+                        if (rms[r].renderer != null)
+                        {
+                            Bounds bounds = rms[r].renderer.bounds;
+                            Vector3 pos = bounds.center;
+                            float maxDistance = Vector3.Distance(pos, camPos);
+                            int numOccluderHits = Physics.BoxCastNonAlloc(pos, bounds.extents * seeThroughOccluderThreshold, (camPos - pos).normalized, occluderHits, quaternionIdentity, maxDistance, seeThroughOccluderMask);
+                            for (int k = 0; k < numOccluderHits; k++)
+                            {
+                                occluderHits[k].collider.transform.root.GetComponentsInChildren(tempRR);
+                                AddWithoutRepetition(occluderRenderers, tempRR);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // Compute combined bounds
+                    Bounds bounds = rms[0].renderer.bounds;
+                    for (int r = 1; r < rms.Length; r++)
+                    {
+                        if (rms[r].renderer != null)
+                        {
+                            bounds.Encapsulate(rms[r].renderer.bounds);
+                        }
+                    }
+                    Vector3 pos = bounds.center;
+                    float maxDistance = Vector3.Distance(pos, camPos);
+                    int numOccluderHits = Physics.BoxCastNonAlloc(pos, bounds.extents * seeThroughOccluderThreshold, (camPos - pos).normalized, occluderHits, quaternionIdentity, maxDistance, seeThroughOccluderMask);
+                    for (int k = 0; k < numOccluderHits; k++)
+                    {
+                        occluderHits[k].collider.transform.root.GetComponentsInChildren(tempRR);
+                        AddWithoutRepetition(occluderRenderers, tempRR);
+                    }
+                }
+            }
+
+            // render occluders
+            int occluderRenderersCount = occluderRenderers.Count;
+            if (occluderRenderersCount > 0)
+            {
+                cbSeeThrough.Clear();
+                for (int k = 0; k < occluderRenderersCount; k++)
+                {
+                    Renderer r = occluderRenderers[k];
+                    if (r != null)
+                    {
+                        cbSeeThrough.DrawRenderer(r, fxMatSeeThroughMask);
+                    }
+                }
+                Graphics.ExecuteCommandBuffer(cbSeeThrough);
+            }
+        }
+
+        internal Il2CppSystem.Collections.Generic.List<Renderer> GetOccluders(Camera camera)
+        {
+            Il2CppSystem.Collections.Generic.List<Renderer> occluders = null;
+            if (cachedOccludersPerCamera != null)
+            {
+                cachedOccludersPerCamera.TryGetValue(camera, out occluders);
+            }
+            return occluders;
+        }
+
+        #endregion OccluderManager
+
+        internal float hitFxInitialIntensity;
+        internal HitFxMode hitFxMode = HitFxMode.Overlay;
+        internal float hitFxFadeOutDuration = 0.25f;
+        internal Color hitFxColor = Color.white;
+        internal float hitFxRadius = 0.5f;
+
+        private float hitInitialIntensity;
+        private float hitStartTime;
+        private float hitFadeOutDuration;
+        private Color hitColor;
+        private bool hitActive;
+        private Vector3 hitPosition;
+        private float hitRadius;
+
+        private static readonly List<HighlightSeeThroughOccluder> occluders = new List<HighlightSeeThroughOccluder>();
+        private static readonly Dictionary<Camera, int> occludersFrameCount = new Dictionary<Camera, int>();
+        private static CommandBuffer cbOccluder;
+        private static Material fxMatOccluder;
+        private static RaycastHit[] hits;
+
+        private static Vector4[] offsets;
+
+        private float fadeStartTime;
+        private FadingState fading = FadingState.NoFading;
+        private CommandBuffer cbMask, cbSeeThrough, cbGlow, cbOutline, cbOverlay, cbInnerGlow;
+        private CommandBuffer cbSmoothBlend;
+        private int[] mipGlowBuffers, mipOutlineBuffers;
+        private int glowRT, outlineRT;
+        private static Mesh quadMesh, cubeMesh;
+        private int sourceRT;
+        private Matrix4x4 quadGlowMatrix, quadOutlineMatrix;
+        private Vector3[] corners;
+        private RenderTextureDescriptor sourceDesc;
+        private Color debugColor, blackColor;
+        private Visibility lastOutlineVisibility;
+        private bool requireUpdateMaterial;
+        private bool usingPipeline = false; // set to false to avoid editor warning due to conditional code
+        private float occlusionCheckLastTime;
+        private int occlusionRenderFrame;
+        private bool lastOcclusionTestResult;
+        private bool useGPUInstancing;
+
+        private MaterialPropertyBlock glowPropertyBlock, outlinePropertyBlock;
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataDirection = new Il2CppSystem.Collections.Generic.List<Vector4>();
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataGlow = new Il2CppSystem.Collections.Generic.List<Vector4>();
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataColor = new Il2CppSystem.Collections.Generic.List<Vector4>();
+        private static Matrix4x4[] matrices;
+        internal static readonly System.Collections.Generic.List<HighlightEffect> effects = new System.Collections.Generic.List<HighlightEffect>();
+        internal static bool customSorting;
+        private static int customSortingFrame;
+        private static Camera customSortingCamera;
+
+        private int skipThisFrame = -1;
+        private int outlineOffsetsMin, outlineOffsetsMax;
+        private int glowOffsetsMin, glowOffsetsMax;
+        private static CombineInstance[] combineInstances;
+        private Matrix4x4 matrix4X4Identity = Matrix4x4.identity;
+        private bool maskRequired;
     }
 }
