@@ -755,6 +755,24 @@ internal class WorldCheatsModule : AstroEvents
             }
 
             #endregion VRWare
+
+            #region TreeHouseInTheShade
+
+            if (WorldUtils.WorldID == WorldIds.TreeHouseInTheShade)
+            {
+                CustomSubMenu.AddButton("Set 3DCellular", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.cellular_tiling); });
+                CustomSubMenu.AddButton("Set Fractal Land", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.fractal_Land); });
+                CustomSubMenu.AddButton("Set Fractal Trees", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.fractal_trees); });
+                CustomSubMenu.AddButton("Set Happy Jumping", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.happy_jumping); });
+                CustomSubMenu.AddButton("Set Reef and Waves", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.reef_and_waves); });
+                CustomSubMenu.AddButton("Set Rough Seas", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.rough_seas); });
+                CustomSubMenu.AddButton("Set Woods Forestry", () => { TreeHouseInTheShade.SetShaderSphereMat(Materials.Woods_Forestry); });
+
+
+            }
+
+            #endregion VRWare
+
         }, Icons.thief);
 
         Log.Write("World Module is ready!", Color.Green);

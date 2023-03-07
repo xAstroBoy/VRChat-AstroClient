@@ -276,6 +276,20 @@
                 return _Grapple;
             }
         }
+
+        private static AssetBundle _Shaders;
+        internal static AssetBundle Shaders
+        {
+            get
+            {
+                if (_Shaders == null)
+                {
+                    _Shaders = AssetBundle.LoadFromMemory(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), $"{ResourcePaths.BundlesPath}Shaders.assetbundle"), 0u);
+                    _Shaders.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                }
+                return _Shaders;
+            }
+        }
         //private static AssetBundle _EightBall;
         //internal static AssetBundle EightBall
         //{

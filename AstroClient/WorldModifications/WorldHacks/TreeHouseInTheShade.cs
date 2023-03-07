@@ -1,6 +1,7 @@
 ﻿using AstroClient.ClientActions;
 using System.Text;
 using AstroClient.xAstroBoy.UIPaths;
+using UnhollowerBaseLib;
 
 namespace AstroClient.WorldModifications.WorldHacks
 {
@@ -51,9 +52,9 @@ namespace AstroClient.WorldModifications.WorldHacks
             }
         }
 
-        private static Renderer _ShaderSphereRenderer;
+        private static MeshRenderer _ShaderSphereRenderer;
 
-        internal static Renderer ShaderSphereRenderer
+        internal static MeshRenderer ShaderSphereRenderer
         {
             get
             {
@@ -61,7 +62,7 @@ namespace AstroClient.WorldModifications.WorldHacks
                 if (ShaderSphere == null) return null;
                 if (_ShaderSphereRenderer == null)
                 {
-                    return _ShaderSphereRenderer = ShaderSphere.GetComponent<Renderer>();
+                    return _ShaderSphereRenderer = ShaderSphere.GetComponent<MeshRenderer>();
                 }
 
                 return _ShaderSphereRenderer;
@@ -216,20 +217,6 @@ namespace AstroClient.WorldModifications.WorldHacks
                 }
             }
 
-        }
-
-        private static IEnumerator FixRenderSphere()
-        {
-            if (!isCurrentWorld) yield return null;
-            while (ShaderSphereRenderer == null) yield return null;
-            while (isCurrentWorld)
-            {
-                ShaderSphereRenderer.bounds.Expand(float.MaxValue);
-                Log.Debug("Forcing Bounds to be higher than 2000f...");
-                yield return null;
-            }
-
-            yield return null;
         }
 
         private static float FarClipPlane { get; } =  9999999f;
@@ -397,6 +384,25 @@ namespace AstroClient.WorldModifications.WorldHacks
                 {
                     CurrentMenu.SetInteractable(false);
                     CurrentMenu.SetTextColor(Color.red);
+                }
+            }
+        }
+
+
+        internal static void SetShaderSphereMat(Material mat)
+        {
+            if(mat != null)
+            {
+                if(ShaderSphere != null)
+                {
+                    if(ShaderSphereRenderer != null)
+                    {
+                        ShaderSphereRenderer.material = mat;
+                        ShaderSphereRenderer.materials = new Material[]
+                        {
+                            mat
+                        };
+                    }
                 }
             }
         }

@@ -244,6 +244,174 @@
         }
 
         #endregion waffle
+        #region 3d_cellular_tiling
+
+        private static Material _cellular_tiling;
+
+        /// <summary>
+        ///     Loads 3d_cellular_tiling bundle in resources as Material
+        /// </summary>
+        internal static Material cellular_tiling
+        {
+            get
+            {
+                if (_cellular_tiling == null)
+                {
+                    _cellular_tiling = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/3dcellular/3d cellular tiling.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _cellular_tiling.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _cellular_tiling;
+                }
+
+                return _cellular_tiling;
+            }
+        }
+
+        #endregion 3d_cellular_tiling
+
+
+        #region 3d_fractal_Land
+
+        private static Material _fractal_Land;
+
+        /// <summary>
+        ///     Loads 3d_fractal_Land bundle in resources as Material
+        /// </summary>
+        internal static Material fractal_Land
+        {
+            get
+            {
+                if (_fractal_Land == null)
+                {
+                    _fractal_Land = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/fractal land/fractal land.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _fractal_Land.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _fractal_Land;
+                }
+
+                return _fractal_Land;
+            }
+        }
+
+        #endregion 3d_fractal_Land
+
+        #region 3d_happy_jumping
+
+        private static Material _happy_jumping;
+
+        /// <summary>
+        ///     Loads 3d_happy_jumping bundle in resources as Material
+        /// </summary>
+        internal static Material happy_jumping
+        {
+            get
+            {
+                if (_happy_jumping == null)
+                {
+                    _happy_jumping = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/happy jumping/happy jumping.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _happy_jumping.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _happy_jumping;
+                }
+
+                return _happy_jumping;
+            }
+        }
+
+        #endregion 3d_happy_jumping
+
+        #region 3d_reef_and_waves
+
+        private static Material _reef_and_waves;
+
+        /// <summary>
+        ///     Loads 3d_reef_and_waves bundle in resources as Material
+        /// </summary>
+        internal static Material reef_and_waves
+        {
+            get
+            {
+                if (_reef_and_waves == null)
+                {
+                    _reef_and_waves = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/reef and waves/reef and waves 4.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _reef_and_waves.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _reef_and_waves;
+                }
+
+                return _reef_and_waves;
+            }
+        }
+
+        #endregion 3d_reef_and_waves
+
+        #region 3d_rough_seas
+
+        private static Material _rough_seas;
+
+        /// <summary>
+        ///     Loads 3d_rough_seas bundle in resources as Material
+        /// </summary>
+        internal static Material rough_seas
+        {
+            get
+            {
+                if (_rough_seas == null)
+                {
+                    _rough_seas = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/rough seas/rough seas .mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _rough_seas.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _rough_seas;
+                }
+
+                return _rough_seas;
+            }
+        }
+
+        #endregion 3d_rough_seas
+
+        #region 3d_Woods_Forestry
+
+        private static Material _Woods_Forestry;
+
+        /// <summary>
+        ///     Loads 3d_Woods_Forestry bundle in resources as Material
+        /// </summary>
+        internal static Material Woods_Forestry
+        {
+            get
+            {
+                if (_Woods_Forestry == null)
+                {
+                    _Woods_Forestry = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/woods/woods.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _Woods_Forestry.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _Woods_Forestry;
+                }
+
+                return _Woods_Forestry;
+            }
+        }
+
+        #endregion 3d_Woods_Forestry
+
+        #region 3d_fractal_trees
+
+        private static Material _fractal_trees;
+
+        /// <summary>
+        ///     Loads 3d_fractal_trees bundle in resources as Material
+        /// </summary>
+        internal static Material fractal_trees
+        {
+            get
+            {
+                if (_fractal_trees == null)
+                {
+                    _fractal_trees = Bundles.Shaders.LoadAsset_Internal("assets/shader experiments/fractal trees/fractal trees gif.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    _fractal_trees.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    return _fractal_trees;
+                }
+
+                return _fractal_trees;
+            }
+        }
+
+        #endregion 3d_fractal_trees
 
     }
 }
