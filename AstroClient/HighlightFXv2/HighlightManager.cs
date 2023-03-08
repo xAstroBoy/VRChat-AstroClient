@@ -264,14 +264,14 @@ namespace AstroClient.HighlightFXv2
                     hb = parentEffect;
                     if (hb.previousSettings == null)
                     {
-                        hb.previousSettings = ScriptableObject.CreateInstance<HighlightProfile>();
+                        hb.previousSettings = new HighlightProfile();
                     }
                     hb.previousSettings.Save(hb);
                 }
                 else
                 {
                     hb = t.gameObject.AddComponent<HighlightEffect>();
-                    hb.previousSettings = ScriptableObject.CreateInstance<HighlightProfile>();
+                    hb.previousSettings = new HighlightProfile();
                     // copy default highlight effect settings from this manager into this highlight plus component
                     hb.previousSettings.Save(baseEffect);
                     hb.previousSettings.Load(hb);
@@ -304,7 +304,7 @@ namespace AstroClient.HighlightFXv2
             {
                 if (currentEffect.previousSettings == null)
                 {
-                    currentEffect.previousSettings = ScriptableObject.CreateInstance<HighlightProfile>();
+                    currentEffect.previousSettings = new HighlightProfile();
                 }
                 hb.previousSettings.Save(hb);
 

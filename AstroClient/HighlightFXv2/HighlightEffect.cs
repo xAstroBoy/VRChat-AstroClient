@@ -4,6 +4,8 @@ using AstroClient.HighlightFXv2.Events;
 using AstroClient.HighlightFXv2.Extensions;
 using System;
 using System.Collections.Generic;
+using AstroClient.Tools.Extensions;
+using AstroClient.xAstroBoy.Extensions;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -15,11 +17,11 @@ namespace AstroClient.HighlightFXv2
     [RegisterComponent]
     public class HighlightEffect : MonoBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public List<MonoBehaviour> AntiGcList;
 
         public HighlightEffect(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new List<MonoBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -139,9 +141,9 @@ namespace AstroClient.HighlightFXv2
         internal bool highlighted
         {
             [HideFromIl2Cpp]
-            get { return _highlighted; }
+            get => _highlighted;
             [HideFromIl2Cpp]
-            set { SetHighlighted(value); }
+            set => SetHighlighted(value);
         }
 
         internal float fadeInDuration;
@@ -369,42 +371,6 @@ namespace AstroClient.HighlightFXv2
         /// </summary>
         internal bool seeThroughOrdered;
 
-        private struct ModelMaterials
-        {
-            internal bool render; // if this object can render this frame
-            internal Transform transform;
-            internal bool bakedTransform;
-            internal Vector3 currentPosition, currentRotation, currentScale;
-            internal bool renderWasVisibleDuringSetup;
-            internal Mesh mesh, originalMesh;
-            internal Renderer renderer;
-            internal bool isSkinnedMesh;
-            internal NormalsOption normalsOption;
-            internal Material[] fxMatMask, fxMatSolidColor, fxMatSeeThroughInner, fxMatSeeThroughBorder, fxMatOverlay, fxMatInnerGlow;
-            internal Matrix4x4 renderingMatrix;
-            internal bool isCombined;
-            internal bool preserveOriginalMesh { get { return !isCombined && normalsOption == NormalsOption.PreserveOriginal; } }
-
-            internal void Init()
-            {
-                render = false;
-                transform = null;
-                bakedTransform = false;
-                currentPosition = currentRotation = currentScale = Vector3.zero;
-                mesh = originalMesh = null;
-                renderer = null;
-                isSkinnedMesh = false;
-                normalsOption = NormalsOption.Smooth;
-                isCombined = false;
-            }
-        }
-
-        private enum FadingState
-        {
-            FadingOut = -1,
-            NoFading = 0,
-            FadingIn = 1
-        }
 
         private ModelMaterials[] rms;
         private int rmsCount;
@@ -764,11 +730,6 @@ namespace AstroClient.HighlightFXv2
             if (!reflectionProbes && cam.cameraType == CameraType.Reflection)
                 return;
 
-#if UNITY_EDITOR
-            if (!previewInEditor && !Application.isPlaying)
-                return;
-#endif
-
             if (requireUpdateMaterial)
             {
                 requireUpdateMaterial = false;
@@ -839,11 +800,6 @@ namespace AstroClient.HighlightFXv2
             }
             Visibility smoothGlowVisibility = glowVisibility;
             Visibility smoothOutlineVisibility = outlineVisibility;
-#if UNITY_EDITOR
-            if (useSmoothBlend && cam.cameraType == CameraType.SceneView) {
-                smoothGlowVisibility = smoothOutlineVisibility = Visibility.AlwaysOnTop;
-            }
-#endif
             if (useSmoothBlend)
             {
                 if (depthClip)
@@ -1932,7 +1888,7 @@ namespace AstroClient.HighlightFXv2
             {
                 Material matComposeOutline = fxMatComposeOutline;
                 matComposeOutline.SetVector(ShaderParams.Flip, (UnityEngine.XR.XRSettings.enabled && flipY) ? new Vector3(1, -1, 0) : new Vector3(0, 1, 0));
-                Debug.Log(Camera.current.name + " " + smoothOutlineVisibility);
+                Log.Debug(Camera.current.name + " " + smoothOutlineVisibility);
                 if (outlineOptimalBlit)
                 {
                     if (Application.isMobilePlatform && smoothOutlineVisibility != Visibility.AlwaysOnTop)
@@ -1977,10 +1933,16 @@ namespace AstroClient.HighlightFXv2
         {
             if (material == null)
             {
-                Shader shaderFX = Shader.Find(shaderName);
+                // check first if shader is in ClientResources.shaders
+                var shaderFX = ClientResources.Loaders.Shaders.LoadedShaders.Find(s => s.name == shaderName);
+                if(shaderFX == null)
+                {
+                    shaderFX = Shader.Find(shaderName);
+                }
+
                 if (shaderFX == null)
                 {
-                    Debug.LogError("Shader " + shaderName + " not found.");
+                    Log.Debug("Shader " + shaderName + " not found.");
                     enabled = false;
                     return;
                 }
@@ -2299,14 +2261,13 @@ namespace AstroClient.HighlightFXv2
             UpdateMaterialPropertiesNow();
         }
 
-        private Il2CppSystem.Collections.Generic.List<Renderer> tempRR;
 
         private Renderer[] FindRenderersWithLayerInScene(LayerMask layer)
         {
             Renderer[] rr = FindObjectsOfType<Renderer>();
             if (tempRR == null)
             {
-                tempRR = new Il2CppSystem.Collections.Generic.List<Renderer>();
+                tempRR = new();
             }
             else
             {
@@ -2328,7 +2289,7 @@ namespace AstroClient.HighlightFXv2
             Renderer[] rr = target.GetComponentsInChildren<Renderer>();
             if (tempRR == null)
             {
-                tempRR = new Il2CppSystem.Collections.Generic.List<Renderer>();
+                tempRR = new();
             }
             else
             {
@@ -3029,7 +2990,7 @@ namespace AstroClient.HighlightFXv2
         private static readonly Dictionary<int, Mesh> smoothMeshes = new Dictionary<int, Mesh>();
         private static readonly Dictionary<int, Mesh> reorientedMeshes = new Dictionary<int, Mesh>();
         private static readonly Dictionary<int, Mesh> combinedMeshes = new Dictionary<int, Mesh>();
-        private static readonly Il2CppSystem.Collections.Generic.List<Material> rendererSharedMaterials = new Il2CppSystem.Collections.Generic.List<Material>();
+        private static readonly Il2CppSystem.Collections.Generic.List<Material> rendererSharedMaterials = new();
         private int combinedMeshesHashId;
 
         private void AverageNormals(int objIndex)
@@ -3044,7 +3005,7 @@ namespace AstroClient.HighlightFXv2
                 if (!mesh.isReadable) return;
                 if (normals == null)
                 {
-                    normals = new Il2CppSystem.Collections.Generic.List<Vector3>();
+                    normals = new();
                 }
                 else
                 {
@@ -3056,7 +3017,7 @@ namespace AstroClient.HighlightFXv2
                     return;
                 if (vertices == null)
                 {
-                    vertices = new Il2CppSystem.Collections.Generic.List<Vector3>();
+                    vertices = new();
                 }
                 else
                 {
@@ -3127,7 +3088,7 @@ namespace AstroClient.HighlightFXv2
                 if (!mesh.isReadable) return;
                 if (normals == null)
                 {
-                    normals = new Il2CppSystem.Collections.Generic.List<Vector3>();
+                    normals = new();
                 }
                 else
                 {
@@ -3135,7 +3096,7 @@ namespace AstroClient.HighlightFXv2
                 }
                 if (vertices == null)
                 {
-                    vertices = new Il2CppSystem.Collections.Generic.List<Vector3>();
+                    vertices = new();
                 }
                 else
                 {
@@ -3476,27 +3437,15 @@ namespace AstroClient.HighlightFXv2
 
         private const int MAX_OCCLUDER_HITS = 50;
         private static RaycastHit[] occluderHits;
-        private readonly Dictionary<Camera, Il2CppSystem.Collections.Generic.List<Renderer>> cachedOccludersPerCamera = new Dictionary<Camera, Il2CppSystem.Collections.Generic.List<Renderer>>();
+        private readonly Dictionary<Camera, List<Renderer>> cachedOccludersPerCamera = new Dictionary<Camera, List<Renderer>>();
 
-        private void AddWithoutRepetition<T>(Il2CppSystem.Collections.Generic.List<T> target, Il2CppSystem.Collections.Generic.List<T> source)
-        {
-            int sourceCount = source.Count;
-            for (int k = 0; k < sourceCount; k++)
-            {
-                T entry = source[k];
-                if (entry != null && !target.Contains(entry))
-                {
-                    target.Add(entry);
-                }
-            }
-        }
 
         private void CheckOcclusionAccurate(Camera cam)
         {
-            Il2CppSystem.Collections.Generic.List<Renderer> occluderRenderers;
+            List<Renderer> occluderRenderers;
             if (!cachedOccludersPerCamera.TryGetValue(cam, out occluderRenderers))
             {
-                occluderRenderers = new Il2CppSystem.Collections.Generic.List<Renderer>();
+                occluderRenderers = new List<Renderer>();
                 cachedOccludersPerCamera[cam] = occluderRenderers;
             }
 
@@ -3533,7 +3482,7 @@ namespace AstroClient.HighlightFXv2
                             for (int k = 0; k < numOccluderHits; k++)
                             {
                                 occluderHits[k].collider.transform.root.GetComponentsInChildren(tempRR);
-                                AddWithoutRepetition(occluderRenderers, tempRR);
+                                occluderRenderers.AddWithoutRepetition(tempRR.ToManaged());
                             }
                         }
                     }
@@ -3555,7 +3504,7 @@ namespace AstroClient.HighlightFXv2
                     for (int k = 0; k < numOccluderHits; k++)
                     {
                         occluderHits[k].collider.transform.root.GetComponentsInChildren(tempRR);
-                        AddWithoutRepetition(occluderRenderers, tempRR);
+                        occluderRenderers.AddWithoutRepetition(tempRR.ToManaged());
                     }
                 }
             }
@@ -3577,9 +3526,9 @@ namespace AstroClient.HighlightFXv2
             }
         }
 
-        internal Il2CppSystem.Collections.Generic.List<Renderer> GetOccluders(Camera camera)
+        internal List<Renderer> GetOccluders(Camera camera)
         {
-            Il2CppSystem.Collections.Generic.List<Renderer> occluders = null;
+            List<Renderer> occluders = null;
             if (cachedOccludersPerCamera != null)
             {
                 cachedOccludersPerCamera.TryGetValue(camera, out occluders);
@@ -3632,11 +3581,11 @@ namespace AstroClient.HighlightFXv2
         private bool useGPUInstancing;
 
         private MaterialPropertyBlock glowPropertyBlock, outlinePropertyBlock;
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataDirection = new Il2CppSystem.Collections.Generic.List<Vector4>();
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataGlow = new Il2CppSystem.Collections.Generic.List<Vector4>();
-        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataColor = new Il2CppSystem.Collections.Generic.List<Vector4>();
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataDirection = new();
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataGlow = new();
+        private static readonly Il2CppSystem.Collections.Generic.List<Vector4> matDataColor = new();
         private static Matrix4x4[] matrices;
-        internal static readonly System.Collections.Generic.List<HighlightEffect> effects = new System.Collections.Generic.List<HighlightEffect>();
+        internal static readonly System.Collections.Generic.List<HighlightEffect> effects = new();
         internal static bool customSorting;
         private static int customSortingFrame;
         private static Camera customSortingCamera;
@@ -3647,5 +3596,8 @@ namespace AstroClient.HighlightFXv2
         private static CombineInstance[] combineInstances;
         private Matrix4x4 matrix4X4Identity = Matrix4x4.identity;
         private bool maskRequired;
+
+        private Il2CppSystem.Collections.Generic.List<Renderer> tempRR;
+
     }
 }

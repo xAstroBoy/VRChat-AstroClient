@@ -85,6 +85,18 @@ namespace AstroClient.xAstroBoy.Extensions
                 return value.Substring(0, max_length) + "…";
             return value;
         }
+        internal static void AddWithoutRepetition<T>(this List<T> target, List<T> source)
+        {
+            int sourceCount = source.Count;
+            for (int k = 0; k < sourceCount; k++)
+            {
+                T entry = source[k];
+                if (entry != null && !target.Contains(entry))
+                {
+                    target.Add(entry);
+                }
+            }
+        }
 
         internal static string ConvertToString<TKey, TValue>(this IDictionary<TKey, TValue> dictionary)
         {

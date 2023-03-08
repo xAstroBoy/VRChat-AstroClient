@@ -53,5 +53,27 @@ namespace AstroClient.Tools.Extensions
 
             return Result.ToArray();
         }
+
+        internal static List<T> ToManaged<T>(this Il2CppSystem.Collections.Generic.List<T> item)
+        {
+            var Result = new List<T>();
+            foreach (var entry in item)
+            {
+                Result.Add(entry);
+            }
+
+            return Result;
+        }
+        internal static Il2CppSystem.Collections.Generic.List<T> ToIl2cpp<T>(this List<T> item)
+        {
+            var Result = new Il2CppSystem.Collections.Generic.List<T>();
+            foreach (var entry in item)
+            {
+                Result.Add(entry);
+            }
+
+            return Result;
+        }
+
     }
 }

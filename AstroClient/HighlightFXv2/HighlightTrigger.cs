@@ -405,7 +405,7 @@ namespace AstroClient.HighlightFXv2
             {
                 if (hb.previousSettings == null)
                 {
-                    hb.previousSettings = ScriptableObject.CreateInstance<HighlightProfile>();
+                    hb.previousSettings = new HighlightProfile();
                 }
                 hb.previousSettings.Save(hb);
             }

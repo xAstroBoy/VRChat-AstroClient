@@ -6,7 +6,7 @@ namespace AstroClient.HighlightFXv2
 {
     //[CreateAssetMenu(menuName = "Highlight Plus Profile", fileName = "Highlight Plus Profile", order = 100)]
     //[HelpURL("https://www.dropbox.com/s/v9qgn68ydblqz8x/Documentation.pdf?dl=0
-    internal class HighlightProfile : ScriptableObject
+    internal class HighlightProfile 
     {
         //internal HighlightProfile(System.IntPtr handle) : base(handle) { }
         //internal HighlightProfile() : base(ClassInjector.DerivedConstructorPointer<HighlightProfile>()) => ClassInjector.DerivedConstructorBody(this);
