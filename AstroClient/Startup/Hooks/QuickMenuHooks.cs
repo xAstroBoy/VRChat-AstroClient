@@ -33,7 +33,7 @@ namespace AstroClient.Startup.Hooks
         {
             //QuickMenu.Method_Public_Virtual_Void_Boolean_IUser_0
         //MonoBehaviourPublicObBoAuGaBoTrGaObReAnUnique
-        new AstroPatch(typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.Method_Public_Virtual_Void_Boolean_IUser_0)), null, GetPatch(nameof(OnSelectedPlayerPatch)));
+        new AstroPatch(typeof(VRC.UI.Elements.QuickMenu).GetMethod(nameof(VRC.UI.Elements.QuickMenu.Method_Public_Virtual_New_Void_Boolean_0)), null, GetPatch(nameof(OnSelectedPlayerPatch)));
         }
 
 

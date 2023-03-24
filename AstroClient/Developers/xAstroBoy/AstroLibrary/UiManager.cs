@@ -70,7 +70,7 @@ namespace AstroClient.xAstroBoy
         /// <param name="user">The user to open</param>
         internal static void OpenUserInUserInfoPage(IUser user)
         {// Method_Public_Void_IUser_0
-            UIManagerPublicBoObBoAc1BoAcGa1MeUnique.prop_UIManagerPublicBoObBoAc1BoAcGa1MeUnique_0.Method_Public_Void_IUser_Boolean_0(user);
+            UIManagerPublicBoObBoAc1BoAcGa1MeUnique.prop_UIManagerPublicBoObBoAc1BoAcGa1MeUnique_0.Method_Private_Boolean_byref_ValueTypeNPrivateSealedObObObUnique_0(user);
         }
 
         private static void OnUserInfoOpen_event() => ClientEventActions.OnUserInfoMenuOpen.SafetyRaise();

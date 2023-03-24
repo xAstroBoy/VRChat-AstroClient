@@ -21,6 +21,8 @@
 
 namespace AstroClient.HookedBehemoth.WorldCleanup
 {
+    using VRC.Playables;
+
     public static class ZipBombExtend
     {
         public static string Truncate(this string value, int max_length)
@@ -42,7 +44,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
         public static string TruncatedName(this VRC.SDK3.Avatars.ScriptableObjects.VRCExpressionsMenu.Control.Label label)
             => label.name?.Truncate(32);
 
-        public static string TruncatedName(this AvatarParameterAccess param)
-            => param.field_Private_String_0?.Truncate(32);
+        public static string TruncatedName(this AvatarParameter param)
+            => param.field_Protected_String_0?.Truncate(32);
     }
 }

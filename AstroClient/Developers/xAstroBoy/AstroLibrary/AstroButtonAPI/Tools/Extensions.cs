@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using MelonLoader;
-using VRC.UI.Buttons;
 using VRC.UI.Elements.Analytics;
 using VRC.UI.Elements.Controls;
 using VRC.UI.Elements.Wings;
@@ -19,7 +18,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
     using VRC;
     using VRC.Core;
     using VRC.DataModel;
-    using VRC.DataModel.Core;
     using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
     using VRC.UI.Elements.Buttons;
@@ -158,7 +156,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         public static IUser ToIUser(this APIUser value)
         {
             return ((Object)UiMethods._apiUserToIUser.Invoke(MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique.field_Private_Static_MonoBehaviourPublicObLiOb1AcLi1AcObLiUnique_0.field_Private_ObjectPublicDi2StObUnique_0, new object[3] { value.id, value, false })).Cast<IUser>();
-           // return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
+            // return ((Object)UiMethods._apiUserToIUser.Invoke(DataModelManager.field_Private_Static_DataModelManager_0.field_Private_DataModelCache_0, new object[3] { value.id, value, false })).Cast<IUser>();
 
         }
 
@@ -170,7 +168,7 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         /// <returns></returns>
         public static APIUser ToAPIUser(this IUser value)
         {
-            return value.Cast<DataModel<APIUser>>().field_Protected_TYPE_0;
+            return value.Cast<APIUser>();
         }
 
         internal static void ShowWingPage(this WingMenu instance, string pagename)
@@ -178,24 +176,64 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
             instance.field_Private_ObjectPublicSiEaSeReCaGrMeReReUnique_0.field_Private_MenuStateController_0.ShowTabContent(pagename);
             //instance.field_Private_UIMenu_0.prop_MenuStateController_0.ShowTabContent(pagename);
         }
-
-        internal static Player GetSelectedPlayer(this UserVolumeSliders instance)
+        private static QuickMenu _instance;
+        private static Transform _interface;
+        internal static QuickMenu Instance
         {
-            return instance.field_Private_IUser_0.ToAPIUser().GetPlayer();
-            //return instance.field_Private_Player_0;
+            get
+            {
+                if (_instance == null)
+                {
+                    var found = Resources.FindObjectsOfTypeAll<QuickMenu>();
+                    if (found != null && found.Any()) _instance = found.First();
+                    if (_instance != null)
+                    {
+                        Log.Write($"Found: QuickMenu -> {_instance.name}");
+                    }
+                    else
+                    {
+                        Log.Error("Not Found: QuickMenu");
+                    }
+                }
+                return _instance;
+            }
         }
 
-        internal static APIUser GetSelectedApiUser(this UserVolumeSliders instance)
+        private static SelectedUserMenuQM _selectedUserMenuQM;
+        internal static SelectedUserMenuQM SelectedUserMenuQM
         {
-            return instance.field_Private_IUser_0.ToAPIUser();
-            //return instance.field_Private_Player_0;
+            get
+            {
+                if (_selectedUserMenuQM == null) _selectedUserMenuQM = Instance.gameObject.FindUIObject("Menu_SelectedUser_Local").GetComponentInChildren<SelectedUserMenuQM>();
+                if (_interface != null)
+                {
+                    Log.Write("Found: QuickMenu SelectedUserMenuQM");
+                }
+                else
+                {
+                    _instance = null;
+                    Log.Error("Not Found: QuickMenu SelectedUserMenuQM");
+                }
+                return _selectedUserMenuQM;
+            }
         }
-
-        public static Player GetPlayer(this IUser Instance)
+        internal static PlayerManager Manager => PlayerManager.field_Private_Static_PlayerManager_0;
+        internal static List<Player> CurrentPlayers => Manager.field_Private_List_1_Player_0.ToArray().ToList();
+        public static Player SelectedPlayer
         {
-            foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.GetAllPlayers())
-                if (player.GetAPIUser().id == Instance.prop_String_0)
-                    return player;
+            get
+            {
+                SelectedUserMenuQM selected = Instance.field_Private_UIPage_1.GetComponent<SelectedUserMenuQM>();
+                return GetPlayerByUserID(selected.field_Private_InterfacePublicAbstractStCoStBoObSt1BoSi1Unique_0.prop_String_0);
+            }
+        }
+        internal static Player GetPlayerByUserID(string id)
+        {
+            foreach (var player in CurrentPlayers.Where(player => player.GetAPIUser().GetUserID() == id))
+            {
+                return player;
+            }
+
             return null;
         }
 
@@ -241,14 +279,13 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
 
             return false;
         }
-
         public static void EnableUIComponents(this GameObject parent)
         {
 
-            parent.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>();
+            //parent.RemoveComponents<MonoBehaviourPublic28Bu16VoStVo1649Vo49Unique>();
             parent.RemoveComponents<CameraMenu>();
             parent.RemoveComponents<AnalyticsController>();
-            parent.RemoveComponents<CloneAvatarController>();
+            parent.RemoveComponents<AvatarClone>();
             parent.RemoveComponents<MenuBackButton>();
             parent.RemoveComponents<WingMenuFriends>();
             parent.RemoveComponents<UiTooltip>(); 

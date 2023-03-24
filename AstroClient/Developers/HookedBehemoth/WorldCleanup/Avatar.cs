@@ -20,9 +20,10 @@ using System.Linq;
 using MelonLoader;
 using Newtonsoft.Json;
 using UnityEngine;
+using VRC.Playables;
 //using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
 //using AvatarParameterType = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique.EnumNPublicSealedvaUnBoInFl5vUnique;
-using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+using AvatarParameterType = VRC.Playables.AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique;
 
 namespace AstroClient.HookedBehemoth.WorldCleanup
 {
@@ -55,13 +56,13 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             "VRCFaceBlendV",
         };
 
-        public static List<AvatarParameterAccess> FilterDefaultParameters(IEnumerable<AvatarParameterAccess> src)
-            => src.Where(param => !DefaultParameterNames.Contains(param.field_Private_String_0)).ToList();
+        public static List<AvatarParameter> FilterDefaultParameters(IEnumerable<AvatarParameter> src)
+            => src.Where(param => !DefaultParameterNames.Contains(param.field_Protected_String_0)).ToList();
 
         class Parameter
         {
             public Parameter() { }
-            public Parameter(AvatarParameterAccess src)
+            public Parameter(AvatarParameter src)
             {
                 type = src.GetAvatarParameterType();
                 switch (type)
@@ -79,7 +80,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                         break;
                 }
             }
-            public void Apply(AvatarParameterAccess dst)
+            public void Apply(AvatarParameter dst)
             {
                 switch (type)
                 {
@@ -114,7 +115,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
 
         static private Dictionary<string, AvatarSettings> settings;
 
-        public static IEnumerable<AvatarParameterAccess> GetAllAvatarParameters(this VRCAvatarManager manager)
+        public static IEnumerable<AvatarParameter> GetAllAvatarParameters(this VRCAvatarManager manager)
         {
             var parameters = manager.GetAvatarPlayableController()?
                                     .GetParameters();
@@ -126,7 +127,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                 yield return param.value;
         }
 
-        public static List<AvatarParameterAccess> GetAvatarParameters(this VRCAvatarManager manager)
+        public static List<AvatarParameter> GetAvatarParameters(this VRCAvatarManager manager)
             => FilterDefaultParameters(manager.GetAllAvatarParameters());
 
         public static bool HasCustomExpressions(this VRCAvatarManager manager)
@@ -173,7 +174,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             /* Apply parameters */
             if (config.parameters != null)
                 foreach (var parameter in manager.GetAvatarParameters())
-                    config.parameters[parameter.field_Private_String_0].Apply(parameter);
+                    config.parameters[parameter.field_Protected_String_0].Apply(parameter);
 
             /* Apply Meshes */
             if (config.renderers != null)
@@ -193,7 +194,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             {
                 name = api_avatar.name,
                 version = api_avatar.version,
-                parameters = manager.GetAvatarParameters()?.ToDictionary(o => o.field_Private_String_0, o => new Parameter(o)),
+                parameters = manager.GetAvatarParameters()?.ToDictionary(o => o.field_Protected_String_0, o => new Parameter(o)),
                 renderers = manager.GetAvatarRenderers().Select(o => o.gameObject.active && o.enabled).ToList(),
             };
 
@@ -212,7 +213,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                 parameter.Lock();
         }
 
-        public static void SetValue(this AvatarParameterAccess parameter, float value)
+        public static void SetValue(this AvatarParameter parameter, float value)
         {
             if (parameter == null) return;
             /* Call original delegate to avoid self MITM */
@@ -232,7 +233,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             }
         }
 
-        public static float GetValue(this AvatarParameterAccess parameter)
+        public static float GetValue(this AvatarParameter parameter)
         {
             if (parameter == null) return 0f;
             return parameter.GetAvatarParameterType() switch
@@ -244,19 +245,19 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             };
         }
 
-        public static void SetBoolProperty(this AvatarParameterAccess parameter, bool value)
+        public static void SetBoolProperty(this AvatarParameter parameter, bool value)
         {
             if (parameter == null) return;
             _boolPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        public static void SetIntProperty(this AvatarParameterAccess parameter, int value)
+        public static void SetIntProperty(this AvatarParameter parameter, int value)
         {
             if (parameter == null) return;
             _intPropertySetterDelegate(parameter.Pointer, value);
         }
 
-        public static void SetFloatProperty(this AvatarParameterAccess parameter, float value)
+        public static void SetFloatProperty(this AvatarParameter parameter, float value)
         {
             if (parameter == null) return;
             _floatPropertySetterDelegate(parameter.Pointer, value);
@@ -277,28 +278,28 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                                   .expressionParameters;
             foreach (var parameter in manager.GetAvatarParameters())
             {
-                parameter.SetValue(defaults.FindParameter(parameter.field_Private_String_0).defaultValue);
+                parameter.SetValue(defaults.FindParameter(parameter.field_Protected_String_0).defaultValue);
                 parameter.Unlock();
             }
         }
 
         private static readonly HashSet<IntPtr> s_ParameterOverrideList = new();
 
-        public static void Unlock(this AvatarParameterAccess parameter)
+        public static void Unlock(this AvatarParameter parameter)
         {
             /* Reenable parameter override */
             if (parameter.IsLocked())
                 s_ParameterOverrideList.Remove(parameter.Pointer);
         }
 
-        public static void Lock(this AvatarParameterAccess parameter)
+        public static void Lock(this AvatarParameter parameter)
         {
             /* Disable override parameters */
             if (!parameter.IsLocked())
                 s_ParameterOverrideList.Add(parameter.Pointer);
         }
 
-        public static bool IsLocked(this AvatarParameterAccess parameter)
+        public static bool IsLocked(this AvatarParameter parameter)
         {
             return s_ParameterOverrideList.Contains(parameter.Pointer);
         }
@@ -309,7 +310,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
         internal static void BoolPropertySetter(IntPtr @this, bool value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameterAccess(@this);
+            var param = new AvatarParameter(@this);
             if (param.IsLocked())
                 return;
 
@@ -323,7 +324,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
         internal static void IntPropertySetter(IntPtr @this, int value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameterAccess(@this);
+            var param = new AvatarParameter(@this);
             if (param.IsLocked())
                 return;
 
@@ -337,7 +338,7 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
         internal static void FloatPropertySetter(IntPtr @this, float value)
         {
             /* Block manually overwritten parameters */
-            var param = new AvatarParameterAccess(@this);
+            var param = new AvatarParameter(@this);
             if (param.IsLocked())
                 return;
 

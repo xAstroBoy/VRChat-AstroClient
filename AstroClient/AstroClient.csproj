@@ -1360,6 +1360,10 @@
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\MonoMod.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="msvcp140, Version=0.5.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\msvcp140.dll</HintPath>
+    </Reference>
     <Reference Include="netstandard">
       <HintPath>D:\SteamLibrary\steamapps\common\VRChat\MelonLoader\Managed\netstandard.dll</HintPath>
       <Private>False</Private>

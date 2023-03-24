@@ -36,7 +36,7 @@ using static AstroClient.HookedBehemoth.WorldCleanup.Polyfill;
 using Color = System.Drawing.Color;
 
 //using AvatarParameterAccess = ObjectPublicIAnimParameterAccessAnStInObLi1BoObSiAcUnique;
-using AvatarParameterType = AvatarParameterAccess.EnumNPublicSealedvaUnBoInFl5vUnique;
+using AvatarParameterType = VRC.Playables.AvatarParameter.EnumNPublicSealedvaUnBoInFl5vUnique;
 
 namespace AstroClient.HookedBehemoth.WorldCleanup
 {
@@ -76,15 +76,15 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
             /* Hook into setter for parameter properties */
             unsafe
             {
-                var param_prop_bool_set = (IntPtr)typeof(AvatarParameterAccess).GetField("NativeMethodInfoPtr_set_boolVal_Public_Virtual_Final_New_set_Void_Boolean_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                var param_prop_bool_set = (IntPtr)typeof(VRC.Playables.AvatarParameter).GetField("NativeMethodInfoPtr_set_boolVal_Public_Virtual_Final_New_set_Void_Boolean_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
                 MelonUtils.NativeHookAttach(param_prop_bool_set, new Action<IntPtr, bool>(Parameters.BoolPropertySetter).Method.MethodHandle.GetFunctionPointer());
                 Parameters._boolPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.BoolPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_bool_set);
 
-                var param_prop_int_set = (IntPtr)typeof(AvatarParameterAccess).GetField("NativeMethodInfoPtr_set_intVal_Public_Virtual_Final_New_set_Void_Int32_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                var param_prop_int_set = (IntPtr)typeof(VRC.Playables.AvatarParameter).GetField("NativeMethodInfoPtr_set_intVal_Public_Virtual_Final_New_set_Void_Int32_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
                 MelonUtils.NativeHookAttach(param_prop_int_set, new Action<IntPtr, int>(Parameters.IntPropertySetter).Method.MethodHandle.GetFunctionPointer());
                 Parameters._intPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.IntPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_int_set);
 
-                var param_prop_float_set = (IntPtr)typeof(AvatarParameterAccess).GetField("NativeMethodInfoPtr_set_floatVal_Public_Virtual_Final_New_set_Void_Single_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                var param_prop_float_set = (IntPtr)typeof(VRC.Playables.AvatarParameter).GetField("NativeMethodInfoPtr_set_floatVal_Public_Virtual_Final_New_set_Void_Single_0", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
                 MelonUtils.NativeHookAttach(param_prop_float_set, new Action<IntPtr, float>(Parameters.FloatPropertySetter).Method.MethodHandle.GetFunctionPointer());
                 Parameters._floatPropertySetterDelegate = Marshal.GetDelegateForFunctionPointer<Parameters.FloatPropertySetterDelegate>(*(IntPtr*)(void*)param_prop_float_set);
             }
@@ -131,10 +131,10 @@ namespace AstroClient.HookedBehemoth.WorldCleanup
                         CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked), (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); }, icon: UiExpansion.LockClosedIcon);
                         CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager), icon: UiExpansion.SaveIcon);
 
-                        AvatarParameterAccess FindParameter(string name)
+                        VRC.Playables.AvatarParameter FindParameter(string name)
                         {
                             foreach (var parameter in parameters)
-                                if (parameter.field_Private_String_0 == name)
+                                if (parameter.field_Protected_String_0 == name)
                                     return parameter;
                             return null;
                         }

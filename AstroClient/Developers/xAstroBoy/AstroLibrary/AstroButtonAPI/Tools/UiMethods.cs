@@ -10,7 +10,6 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
     using UnityEngine;
     using VRC.Core;
     using VRC.DataModel;
-    using VRC.DataModel.Core;
 
     internal class UiMethods : AstroEvents
     {
@@ -23,8 +22,8 @@ namespace AstroClient.xAstroBoy.AstroButtonAPI.Tools
         {
             // This fixes the frame drops because it seems calling `GetMethods` on a type calls it static constructor
             Type iUserImpl = typeof(VRCPlayer).Assembly.GetTypes()
-                .First(type => typeof(DataModel<APIUser>).IsAssignableFrom(type) &&
-                    Il2CppType.From(typeof(DataModel<APIUser>)).IsAssignableFrom(Il2CppType.From(type)) &&
+                .First(type => typeof(APIUser).IsAssignableFrom(type) &&
+                    Il2CppType.From(typeof(APIUser)).IsAssignableFrom(Il2CppType.From(type)) &&
                     Il2CppType.Of<IUser>().IsAssignableFrom(Il2CppType.From(type)));
 
             _apiUserToIUser = typeof(ObjectPublicDi2StObUnique).GetMethod("Method_Public_TYPE_String_TYPE2_Boolean_0").MakeGenericMethod(iUserImpl, typeof(APIUser));
